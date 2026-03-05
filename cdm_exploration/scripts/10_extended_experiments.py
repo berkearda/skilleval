@@ -13,14 +13,11 @@ Usage:
     python 10_extended_experiments.py --device mps --epochs 15
 """
 
-import sys
 import json
 import argparse
 import numpy as np
 import pandas as pd
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -30,14 +27,15 @@ from sklearn.metrics import roc_auc_score, accuracy_score, mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import NearestNeighbors
 from sklearn.decomposition import PCA
-from torch.utils.data import TensorDataset, DataLoader
 from tqdm import tqdm
-
-# Add EduCDM to path
-REPO_DIR = Path(__file__).resolve().parent.parent / "repos" / "EduCDM"
-sys.path.insert(0, str(REPO_DIR))
 from EduCDM import NCDM
-from EduCDM.NCDM.NCDM import PosLinear
+
+from cdmeval.utils.device import resolve_device, seed_everything
+from cdmeval.data.response_matrix import load_response_matrix, load_q_matrix, build_triplets
+from cdmeval.data.dataloader import make_dataloader, make_text_dataloader
+from cdmeval.modeling.text_conditioned import TextConditionedNet
+from cdmeval.evaluation.metrics import eval_id_model, eval_text_model
+from cdmeval.evaluation.training import train_id_model, train_text_model
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "cdm_ready"
 MODEL_DIR = Path(__file__).resolve().parent.parent / "models"
@@ -48,64 +46,8 @@ TEXT_DIM = 768  # all-mpnet-base-v2 output dimension
 
 
 # ============================================================
-# Model & helpers (from script 09)
+# Helper: raw predictions
 # ============================================================
-
-class TextConditionedNet(nn.Module):
-    """NCDM variant that derives item difficulty from text embeddings."""
-
-    def __init__(self, knowledge_n, student_n, text_dim=768):
-        super().__init__()
-        self.knowledge_dim = knowledge_n
-        self.stu_dim = knowledge_n
-        self.prednet_input_len = knowledge_n
-        self.prednet_len1, self.prednet_len2 = 512, 256
-
-        self.student_emb = nn.Embedding(student_n, self.stu_dim)
-        self.k_difficulty_proj = nn.Linear(text_dim, knowledge_n)
-        self.e_difficulty_proj = nn.Linear(text_dim, 1)
-
-        self.prednet_full1 = PosLinear(self.prednet_input_len, self.prednet_len1)
-        self.drop_1 = nn.Dropout(p=0.5)
-        self.prednet_full2 = PosLinear(self.prednet_len1, self.prednet_len2)
-        self.drop_2 = nn.Dropout(p=0.5)
-        self.prednet_full3 = PosLinear(self.prednet_len2, 1)
-
-        for name, param in self.named_parameters():
-            if 'weight' in name:
-                nn.init.xavier_normal_(param)
-
-    def forward(self, stu_id, text_emb, input_knowledge_point):
-        stu_emb = self.student_emb(stu_id)
-        stat_emb = torch.sigmoid(stu_emb)
-        k_difficulty = torch.sigmoid(self.k_difficulty_proj(text_emb))
-        e_difficulty = torch.sigmoid(self.e_difficulty_proj(text_emb))
-        input_x = e_difficulty * (stat_emb - k_difficulty) * input_knowledge_point
-        input_x = self.drop_1(torch.sigmoid(self.prednet_full1(input_x)))
-        input_x = self.drop_2(torch.sigmoid(self.prednet_full2(input_x)))
-        output_1 = torch.sigmoid(self.prednet_full3(input_x))
-        return output_1.view(-1)
-
-
-def make_text_dataloader(triplets, text_embeddings, q_matrix, batch_size=64, shuffle=True):
-    user_ids = torch.tensor(triplets[:, 0], dtype=torch.int64)
-    scores = torch.tensor(triplets[:, 2], dtype=torch.float32)
-    item_indices = triplets[:, 1].astype(int)
-    text_embs = torch.tensor(text_embeddings[item_indices], dtype=torch.float32)
-    knowledge_embs = torch.tensor(q_matrix[item_indices], dtype=torch.float32)
-    dataset = TensorDataset(user_ids, text_embs, knowledge_embs, scores)
-    return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
-
-
-def make_id_dataloader(triplets, q_matrix, batch_size=64, shuffle=True):
-    user_ids = torch.tensor(triplets[:, 0], dtype=torch.int64)
-    item_ids = torch.tensor(triplets[:, 1], dtype=torch.int64)
-    scores = torch.tensor(triplets[:, 2], dtype=torch.float32)
-    item_indices = triplets[:, 1].astype(int)
-    knowledge_embs = torch.tensor(q_matrix[item_indices], dtype=torch.float32)
-    dataset = TensorDataset(user_ids, item_ids, knowledge_embs, scores)
-    return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
-
 
 def exercise_level_split(triplets, n_items, holdout_ratio=0.2):
     all_items = np.arange(n_items)
@@ -116,116 +58,6 @@ def exercise_level_split(triplets, n_items, holdout_ratio=0.2):
     train_idx, val_idx = train_test_split(all_idx, test_size=0.1, random_state=42)
     return (train_val_triplets[train_idx], train_val_triplets[val_idx],
             test_triplets, train_items, test_items)
-
-
-def train_text_model(net, train_loader, val_loader, epochs=15, lr=0.002, device="cpu"):
-    net = net.to(device)
-    optimizer = torch.optim.Adam(net.parameters(), lr=lr)
-    loss_fn = nn.BCELoss()
-    best_auc = 0
-    best_state = None
-    for epoch in range(epochs):
-        net.train()
-        losses = []
-        for user_id, text_emb, knowledge_emb, y in tqdm(
-            train_loader, desc=f"  Epoch {epoch+1}/{epochs}", leave=False
-        ):
-            user_id = user_id.to(device)
-            text_emb = text_emb.to(device)
-            knowledge_emb = knowledge_emb.to(device)
-            y = y.to(device)
-            pred = net(user_id, text_emb, knowledge_emb)
-            loss = loss_fn(pred, y)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            losses.append(loss.item())
-        avg_loss = np.mean(losses)
-        val_auc, val_acc, val_rmse = eval_text_model(net, val_loader, device)
-        print(f"    loss={avg_loss:.4f}, val_auc={val_auc:.4f}, val_acc={val_acc:.4f}, val_rmse={val_rmse:.4f}")
-        if val_auc > best_auc:
-            best_auc = val_auc
-            best_state = {k: v.cpu().clone() for k, v in net.state_dict().items()}
-    if best_state:
-        net.load_state_dict(best_state)
-        print(f"  Restored best model (val_auc={best_auc:.4f})")
-    return net
-
-
-def eval_text_model(net, dataloader, device="cpu"):
-    net.eval()
-    net = net.to(device)
-    y_true, y_pred = [], []
-    with torch.no_grad():
-        for user_id, text_emb, knowledge_emb, y in dataloader:
-            user_id = user_id.to(device)
-            text_emb = text_emb.to(device)
-            knowledge_emb = knowledge_emb.to(device)
-            pred = net(user_id, text_emb, knowledge_emb)
-            y_pred.extend(pred.cpu().tolist())
-            y_true.extend(y.tolist())
-    y_true = np.array(y_true)
-    y_pred = np.array(y_pred)
-    auc = roc_auc_score(y_true, y_pred)
-    acc = accuracy_score(y_true, (y_pred >= 0.5).astype(int))
-    rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-    return auc, acc, rmse
-
-
-def train_id_model(train_loader, val_loader, n_skills, n_items, n_llms,
-                   epochs=15, lr=0.002, device="cpu"):
-    model = NCDM(n_skills, n_items, n_llms)
-    model.ncdm_net = model.ncdm_net.to(device)
-    optimizer = torch.optim.Adam(model.ncdm_net.parameters(), lr=lr)
-    loss_fn = nn.BCELoss()
-    best_auc = 0
-    best_state = None
-    for epoch in range(epochs):
-        model.ncdm_net.train()
-        losses = []
-        for user_id, item_id, knowledge_emb, y in tqdm(
-            train_loader, desc=f"  Epoch {epoch+1}/{epochs}", leave=False
-        ):
-            user_id = user_id.to(device)
-            item_id = item_id.to(device)
-            knowledge_emb = knowledge_emb.to(device)
-            y = y.to(device)
-            pred = model.ncdm_net(user_id, item_id, knowledge_emb)
-            loss = loss_fn(pred, y)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            losses.append(loss.item())
-        avg_loss = np.mean(losses)
-        val_auc, val_acc, val_rmse = eval_id_model(model, val_loader, device)
-        print(f"    loss={avg_loss:.4f}, val_auc={val_auc:.4f}, val_acc={val_acc:.4f}, val_rmse={val_rmse:.4f}")
-        if val_auc > best_auc:
-            best_auc = val_auc
-            best_state = {k: v.cpu().clone() for k, v in model.ncdm_net.state_dict().items()}
-    if best_state:
-        model.ncdm_net.load_state_dict(best_state)
-        print(f"  Restored best model (val_auc={best_auc:.4f})")
-    return model
-
-
-def eval_id_model(model, dataloader, device="cpu"):
-    model.ncdm_net.eval()
-    model.ncdm_net = model.ncdm_net.to(device)
-    y_true, y_pred = [], []
-    with torch.no_grad():
-        for user_id, item_id, knowledge_emb, y in dataloader:
-            user_id = user_id.to(device)
-            item_id = item_id.to(device)
-            knowledge_emb = knowledge_emb.to(device)
-            pred = model.ncdm_net(user_id, item_id, knowledge_emb)
-            y_pred.extend(pred.cpu().tolist())
-            y_true.extend(y.tolist())
-    y_true = np.array(y_true)
-    y_pred = np.array(y_pred)
-    auc = roc_auc_score(y_true, y_pred)
-    acc = accuracy_score(y_true, (y_pred >= 0.5).astype(int))
-    rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-    return auc, acc, rmse
 
 
 def predict_text_model_raw(net, triplets, text_embeddings, q_matrix, device="cpu", batch_size=256):
@@ -247,7 +79,7 @@ def predict_id_model_raw(model, triplets, q_matrix, device="cpu", batch_size=256
     """Return (y_true, y_pred) arrays for a set of triplets using ID model."""
     model.ncdm_net.eval()
     model.ncdm_net = model.ncdm_net.to(device)
-    loader = make_id_dataloader(triplets, q_matrix, batch_size=batch_size, shuffle=False)
+    loader = make_dataloader(triplets, q_matrix, batch_size=batch_size, shuffle=False)
     y_true, y_pred = [], []
     with torch.no_grad():
         for user_id, item_id, knowledge_emb, y in loader:
@@ -278,7 +110,7 @@ def experiment_1_skill_correlation(data_dir, fig_dir):
 
     # Clustermap heatmap
     fig = plt.figure(figsize=(14, 12))
-    plt.close(fig)  # seaborn clustermap creates its own figure
+    plt.close(fig)
 
     short_names = [s[:25] + "..." if len(s) > 28 else s for s in skill_names]
     corr_df = pd.DataFrame(corr_matrix, index=short_names, columns=short_names)
@@ -368,13 +200,9 @@ def experiment_2_difficulty_stratified(triplets, text_embeddings, q_matrix,
     print("EXPERIMENT 2: Difficulty-Stratified Evaluation")
     print("=" * 70)
 
-    # Set deterministic seed for reproducible training
-    torch.manual_seed(42)
-    np.random.seed(42)
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed_all(42)
+    seed_everything(42)
 
-    # Exercise-level split (same as script 09)
+    # Exercise-level split
     train_trip, val_trip, test_trip, train_items, test_items = \
         exercise_level_split(triplets, n_items, holdout_ratio=0.2)
     print(f"  Train items: {len(train_items)}, Test items: {len(test_items)}")
@@ -386,7 +214,6 @@ def experiment_2_difficulty_stratified(triplets, text_embeddings, q_matrix,
     id_ckpt = MODEL_DIR / "ncdm_id_protocolB.pt"
 
     if text_ckpt.exists() and id_ckpt.exists():
-        # --- Load saved models ---
         print(f"\n  Loading saved text model from {text_ckpt}")
         net_text = TextConditionedNet(n_skills, n_llms, TEXT_DIM)
         net_text.load_state_dict(torch.load(str(text_ckpt), map_location="cpu"))
@@ -400,7 +227,6 @@ def experiment_2_difficulty_stratified(triplets, text_embeddings, q_matrix,
         id_model.ncdm_net.eval()
         print("  Both models loaded from checkpoints.")
     else:
-        # --- Train text model ---
         print("\n  Training TextConditionedNet...")
         train_loader_t = make_text_dataloader(train_trip, text_embeddings, q_matrix, args.batch_size)
         val_loader_t = make_text_dataloader(val_trip, text_embeddings, q_matrix, args.batch_size, shuffle=False)
@@ -409,22 +235,20 @@ def experiment_2_difficulty_stratified(triplets, text_embeddings, q_matrix,
         net_text = train_text_model(net_text, train_loader_t, val_loader_t,
                                     epochs=args.epochs, lr=args.lr, device=args.device)
 
-        # --- Train ID model ---
         print("\n  Training ID-based NCDM...")
-        train_loader_id = make_id_dataloader(train_trip, q_matrix, args.batch_size)
-        val_loader_id = make_id_dataloader(val_trip, q_matrix, args.batch_size, shuffle=False)
+        train_loader_id = make_dataloader(train_trip, q_matrix, args.batch_size)
+        val_loader_id = make_dataloader(val_trip, q_matrix, args.batch_size, shuffle=False)
 
         id_model = train_id_model(train_loader_id, val_loader_id, n_skills, n_items, n_llms,
                                   epochs=args.epochs, lr=args.lr, device=args.device)
 
-        # --- Save models for reproducibility ---
         torch.save(net_text.state_dict(), str(text_ckpt))
         print(f"  Saved text model: {text_ckpt}")
         torch.save(id_model.ncdm_net.state_dict(), str(id_ckpt))
         print(f"  Saved ID model: {id_ckpt}")
 
-    # --- Compute item difficulty (mean accuracy across 235 LLMs) ---
-    response_matrix = response_df.values  # (235, 2643)
+    # --- Compute item difficulty ---
+    response_matrix = response_df.values
     item_difficulty = {}
     for item_id in test_items:
         item_difficulty[int(item_id)] = float(response_matrix[:, item_id].mean())
@@ -451,13 +275,10 @@ def experiment_2_difficulty_stratified(triplets, text_embeddings, q_matrix,
             print(f"    {bucket_name}: too few triplets ({len(bucket_triplets)}), skipping")
             continue
 
-        # Text model predictions
         yt_text, yp_text = predict_text_model_raw(net_text, bucket_triplets,
                                                    text_embeddings, q_matrix, args.device)
-        # ID model predictions
         yt_id, yp_id = predict_id_model_raw(id_model, bucket_triplets, q_matrix, args.device)
 
-        # Check for label diversity
         if len(np.unique(yt_text)) < 2:
             print(f"    {bucket_name}: only one class in test set, skipping AUC")
             results[bucket_name] = {
@@ -487,7 +308,6 @@ def experiment_2_difficulty_stratified(triplets, text_embeddings, q_matrix,
     text_aucs = [results.get(b, {}).get("text_auc") for b in bucket_names]
     id_aucs = [results.get(b, {}).get("id_auc") for b in bucket_names]
 
-    # Filter out None values
     valid = [(b, t, i) for b, t, i in zip(bucket_names, text_aucs, id_aucs)
              if t is not None and i is not None]
 
@@ -535,31 +355,27 @@ def experiment_3_routing_accuracy(net_text, response_df, test_items, text_embedd
     print("EXPERIMENT 3: Routing Accuracy with Ground Truth")
     print("=" * 70)
 
-    response_matrix = response_df.values  # (235, 2643)
+    response_matrix = response_df.values
     llm_names = list(response_df.index)
     net_text.eval()
     net_text = net_text.to(device)
 
     all_llm_ids = torch.arange(n_llms, device=device)
 
-    # Nearest-neighbor for Q-row approximation
     nn_model = NearestNeighbors(n_neighbors=1, metric="cosine")
     nn_model.fit(text_embeddings)
 
     ks = [1, 3, 5, 10]
-    # Per-item results
     item_results = []
 
-    # Global best LLM (majority baseline)
-    global_acc = response_matrix.mean(axis=1)  # (235,)
+    global_acc = response_matrix.mean(axis=1)
     best_global_llm = np.argmax(global_acc)
     print(f"  Global best LLM: {llm_names[best_global_llm]} (acc={global_acc[best_global_llm]:.4f})")
 
     for item_id in tqdm(test_items, desc="  Routing items"):
         item_id = int(item_id)
-        ground_truth = response_matrix[:, item_id]  # (235,) binary
+        ground_truth = response_matrix[:, item_id]
 
-        # Text-conditioned model: predict P(correct) for all 235 LLMs
         text_emb = torch.tensor(text_embeddings[item_id], dtype=torch.float32, device=device)
         text_emb_batch = text_emb.unsqueeze(0).expand(n_llms, -1)
         q_row = torch.tensor(q_matrix[item_id], dtype=torch.float32, device=device)
@@ -568,7 +384,7 @@ def experiment_3_routing_accuracy(net_text, response_df, test_items, text_embedd
         with torch.no_grad():
             preds = net_text(all_llm_ids, text_emb_batch, q_row_batch).cpu().numpy()
 
-        ranking = np.argsort(-preds)  # descending
+        ranking = np.argsort(-preds)
 
         item_res = {"item_id": item_id, "n_correct_llms": int(ground_truth.sum())}
         for k_val in ks:
@@ -576,23 +392,18 @@ def experiment_3_routing_accuracy(net_text, response_df, test_items, text_embedd
             hit = int(ground_truth[top_k].max())
             item_res[f"acc_at_{k_val}"] = hit
 
-        # Random baseline: probability that at least one of k random LLMs got it right
         n_correct = ground_truth.sum()
         for k_val in ks:
             if n_correct == 0:
                 item_res[f"random_at_{k_val}"] = 0.0
             else:
-                # P(at least 1 correct in k draws from 235 without replacement)
                 from scipy.special import comb
                 n_total = n_llms
                 p_none = comb(n_total - n_correct, k_val, exact=True) / comb(n_total, k_val, exact=True) \
                     if k_val <= n_total - n_correct else 0.0
                 item_res[f"random_at_{k_val}"] = 1.0 - p_none
 
-        # Majority baseline: does the globally best LLM get it right?
         item_res["majority_correct"] = int(ground_truth[best_global_llm])
-
-        # Oracle: does at least one LLM get it right?
         item_res["oracle"] = int(n_correct > 0)
 
         item_results.append(item_res)
@@ -662,7 +473,6 @@ def experiment_4_per_skill_breakdown(net_text, id_model, test_trip, text_embeddi
     print("EXPERIMENT 4: Per-Skill AUC Breakdown")
     print("=" * 70)
 
-    # Get predictions for all test triplets
     yt_text, yp_text = predict_text_model_raw(net_text, test_trip, text_embeddings,
                                                q_matrix, device)
     yt_id, yp_id = predict_id_model_raw(id_model, test_trip, q_matrix, device)
@@ -671,7 +481,6 @@ def experiment_4_per_skill_breakdown(net_text, id_model, test_trip, text_embeddi
 
     results = {}
     for skill_idx, skill_name in enumerate(skill_names):
-        # Find triplets where this skill is required
         mask = q_matrix[item_indices, skill_idx] == 1
         if mask.sum() < 20:
             continue
@@ -692,7 +501,6 @@ def experiment_4_per_skill_breakdown(net_text, id_model, test_trip, text_embeddi
             "auc_gap": float(auc_text - auc_id),
         }
 
-    # Sort by AUC gap (text advantage)
     sorted_skills = sorted(results.items(), key=lambda x: x[1]["auc_gap"], reverse=True)
 
     print(f"\n  Skills evaluated: {len(results)}/{len(skill_names)}")
@@ -703,7 +511,7 @@ def experiment_4_per_skill_breakdown(net_text, id_model, test_trip, text_embeddi
     for name, r in sorted_skills[-5:]:
         print(f"    {name[:40]:<42} text={r['text_auc']:.4f}  id={r['id_auc']:.4f}  gap={r['auc_gap']:+.4f}")
 
-    # --- Figure: horizontal bar chart of AUC gap ---
+    # --- Figure ---
     if sorted_skills:
         names = [s[0] for s in sorted_skills]
         gaps = [s[1]["auc_gap"] for s in sorted_skills]
@@ -715,7 +523,6 @@ def experiment_4_per_skill_breakdown(net_text, id_model, test_trip, text_embeddi
         fig, axes = plt.subplots(1, 2, figsize=(14, max(6, len(names) * 0.28)),
                                  gridspec_kw={"width_ratios": [1, 1.5]})
 
-        # Left panel: AUC gap bar chart
         colors = ["#2196F3" if g >= 0 else "#FF9800" for g in gaps]
         axes[0].barh(range(len(gaps)), gaps, color=colors, height=0.7)
         axes[0].set_yticks(range(len(gaps)))
@@ -725,7 +532,6 @@ def experiment_4_per_skill_breakdown(net_text, id_model, test_trip, text_embeddi
         axes[0].axvline(0, color="black", linewidth=0.5)
         axes[0].invert_yaxis()
 
-        # Right panel: paired AUC comparison
         y = np.arange(len(names))
         axes[1].scatter(text_aucs, y, color="#2196F3", marker="o", s=30, label="Text", zorder=3)
         axes[1].scatter(id_aucs, y, color="#FF9800", marker="s", s=30, label="ID", zorder=3)
@@ -774,16 +580,13 @@ def experiment_5_qrow_approximation(net_text, text_embeddings, q_matrix,
     print("EXPERIMENT 5: Q-Row Approximation Quality")
     print("=" * 70)
 
-    # Build NN index from training items only
-    train_embeddings = text_embeddings[train_items]  # (n_train, 768)
+    train_embeddings = text_embeddings[train_items]
     nn_model = NearestNeighbors(n_neighbors=1, metric="cosine")
     nn_model.fit(train_embeddings)
 
-    # For each test item, find nearest training item
-    test_embeddings = text_embeddings[test_items]  # (n_test, 768)
+    test_embeddings = text_embeddings[test_items]
     distances, indices = nn_model.kneighbors(test_embeddings)
 
-    # Compute Jaccard similarity between true and NN-approximated Q-rows
     jaccard_scores = []
     exact_matches = 0
 
@@ -792,7 +595,6 @@ def experiment_5_qrow_approximation(net_text, text_embeddings, q_matrix,
         nn_train_item = train_items[indices[i, 0]]
         approx_q = q_matrix[nn_train_item]
 
-        # Jaccard: |intersection| / |union|
         intersection = np.sum((true_q == 1) & (approx_q == 1))
         union = np.sum((true_q == 1) | (approx_q == 1))
         jaccard = intersection / union if union > 0 else 1.0
@@ -810,17 +612,13 @@ def experiment_5_qrow_approximation(net_text, text_embeddings, q_matrix,
     print(f"  Cosine distance to NN: mean={distances.mean():.4f}, "
           f"median={np.median(distances):.4f}")
 
-    # --- Evaluate text model with true Q-rows vs NN-approximated Q-rows ---
-    # Build mapping: test_item -> approx Q-row
     approx_q_matrix = q_matrix.copy()
     for i, test_item in enumerate(test_items):
         nn_train_item = train_items[indices[i, 0]]
         approx_q_matrix[test_item] = q_matrix[nn_train_item]
 
-    # Predictions with true Q-rows
     yt_true, yp_true = predict_text_model_raw(net_text, test_trip, text_embeddings,
                                                q_matrix, device)
-    # Predictions with NN-approximated Q-rows
     yt_nn, yp_nn = predict_text_model_raw(net_text, test_trip, text_embeddings,
                                            approx_q_matrix, device)
 
@@ -884,34 +682,20 @@ def main():
     FIG_DIR.mkdir(parents=True, exist_ok=True)
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-    if args.device == "mps" and not torch.backends.mps.is_available():
-        args.device = "cpu"
-    if args.device == "cuda" and not torch.cuda.is_available():
-        args.device = "cpu"
+    args.device = resolve_device(args.device)
     print(f"Device: {args.device}")
 
     # ── Load data ──
-    response_df = pd.read_csv(DATA_DIR / "response_matrix.csv", index_col=0)
-    n_llms = response_df.shape[0]
-    n_items = response_df.shape[1]
-    llm_names = list(response_df.index)
+    response_df, n_llms, n_items, llm_names = load_response_matrix(
+        DATA_DIR / "response_matrix.csv"
+    )
     print(f"Response matrix: {n_llms} LLMs x {n_items} items")
 
-    q_df = pd.read_csv(DATA_DIR / "q_matrix_hac50.csv")
-    meta_cols = [c for c in ["item_idx", "source"] if c in q_df.columns]
-    skill_cols = [c for c in q_df.columns if c not in meta_cols]
-    q_matrix = q_df[skill_cols].values.astype(float)
+    q_matrix, skill_names = load_q_matrix(DATA_DIR / "q_matrix_hac50.csv")
     n_skills = q_matrix.shape[1]
-    skill_names = skill_cols
     print(f"Q-matrix (HAC-50): {n_items} items x {n_skills} skills")
 
-    # Build triplets
-    triplets = []
-    for llm_id in range(n_llms):
-        row = response_df.iloc[llm_id].values
-        for item_id in range(n_items):
-            triplets.append((llm_id, item_id, float(row[item_id])))
-    triplets = np.array(triplets)
+    triplets = build_triplets(response_df)
     print(f"Total triplets: {len(triplets):,}")
 
     # Load text embeddings
@@ -925,15 +709,14 @@ def main():
 
     summary = {}
 
-    # --- Experiment 1: Skill Correlation Analysis ---
+    # --- Experiment 1 ---
     res1 = experiment_1_skill_correlation(DATA_DIR, FIG_DIR)
     summary["experiment_1"] = {
         "mean_correlation": res1["correlation_stats"]["mean"],
         "pca_90pct_components": res1["pca"]["n_components_90pct"],
     }
 
-    # --- Experiment 2: Difficulty-Stratified Evaluation ---
-    # (also trains models that experiments 3, 4, 5 reuse)
+    # --- Experiment 2 (also trains models for 3, 4, 5) ---
     res2, net_text, id_model, test_trip, test_items, train_items = \
         experiment_2_difficulty_stratified(
             triplets, text_embeddings, q_matrix, response_df,
@@ -944,7 +727,7 @@ def main():
         for b in ["easy", "medium", "hard"] if b in res2
     }
 
-    # --- Experiment 3: Routing Accuracy ---
+    # --- Experiment 3 ---
     res3 = experiment_3_routing_accuracy(
         net_text, response_df, test_items, text_embeddings,
         q_matrix, n_llms, args.device, FIG_DIR, DATA_DIR
@@ -953,7 +736,7 @@ def main():
         f"acc_at_{k}": res3[f"text_model_acc_at_{k}"] for k in [1, 3, 5, 10]
     }
 
-    # --- Experiment 4: Per-Skill AUC Breakdown ---
+    # --- Experiment 4 ---
     res4 = experiment_4_per_skill_breakdown(
         net_text, id_model, test_trip, text_embeddings,
         q_matrix, skill_names, args.device, FIG_DIR, DATA_DIR
@@ -964,7 +747,7 @@ def main():
         "mean_auc_gap": res4["mean_auc_gap"],
     }
 
-    # --- Experiment 5: Q-Row Approximation ---
+    # --- Experiment 5 ---
     res5 = experiment_5_qrow_approximation(
         net_text, text_embeddings, q_matrix,
         test_trip, train_items, test_items,

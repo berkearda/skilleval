@@ -15,28 +15,22 @@ Usage:
     python 09_text_conditioned_ncdm.py --device cpu --epochs 15
 """
 
-import sys
 import json
 import argparse
 import numpy as np
 import pandas as pd
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from pathlib import Path
-from collections import Counter
-from sklearn.cluster import AgglomerativeClustering
-from sklearn.metrics import roc_auc_score, accuracy_score, mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import NearestNeighbors
-from torch.utils.data import TensorDataset, DataLoader
-from tqdm import tqdm
-
-# Add EduCDM to path
-REPO_DIR = Path(__file__).resolve().parent.parent / "repos" / "EduCDM"
-sys.path.insert(0, str(REPO_DIR))
 from EduCDM import NCDM
-from EduCDM.NCDM.NCDM import PosLinear
+
+from cdmeval.utils.device import resolve_device
+from cdmeval.data.response_matrix import load_response_matrix, load_q_matrix, build_triplets
+from cdmeval.data.dataloader import make_dataloader, make_text_dataloader
+from cdmeval.modeling.text_conditioned import TextConditionedNet
+from cdmeval.evaluation.metrics import eval_id_model, eval_text_model
+from cdmeval.evaluation.training import train_id_model, train_text_model
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "cdm_ready"
 MODEL_DIR = Path(__file__).resolve().parent.parent / "models"
@@ -46,7 +40,7 @@ TEXT_DIM = 768  # all-mpnet-base-v2 output dimension
 
 
 # ============================================================
-# 2A. Pre-compute item text embeddings
+# Pre-compute item text embeddings
 # ============================================================
 
 def precompute_item_embeddings():
@@ -76,236 +70,7 @@ def precompute_item_embeddings():
 
 
 # ============================================================
-# 2B. TextConditionedNet
-# ============================================================
-
-class TextConditionedNet(nn.Module):
-    """NCDM variant that derives item difficulty from text embeddings
-    instead of ID-based nn.Embedding lookups.
-
-    Student embeddings remain ID-based (we know all 235 LLMs).
-    """
-
-    def __init__(self, knowledge_n, student_n, text_dim=768):
-        super().__init__()
-        self.knowledge_dim = knowledge_n
-        self.stu_dim = knowledge_n
-        self.prednet_input_len = knowledge_n
-        self.prednet_len1, self.prednet_len2 = 512, 256
-
-        # Student embedding (ID-based — all LLMs are known)
-        self.student_emb = nn.Embedding(student_n, self.stu_dim)
-
-        # Text-conditioned item projections (replaces nn.Embedding)
-        self.k_difficulty_proj = nn.Linear(text_dim, knowledge_n)
-        self.e_difficulty_proj = nn.Linear(text_dim, 1)
-
-        # Prediction sub-net (identical to original NCDM)
-        self.prednet_full1 = PosLinear(self.prednet_input_len, self.prednet_len1)
-        self.drop_1 = nn.Dropout(p=0.5)
-        self.prednet_full2 = PosLinear(self.prednet_len1, self.prednet_len2)
-        self.drop_2 = nn.Dropout(p=0.5)
-        self.prednet_full3 = PosLinear(self.prednet_len2, 1)
-
-        # Initialize
-        for name, param in self.named_parameters():
-            if 'weight' in name:
-                nn.init.xavier_normal_(param)
-
-    def forward(self, stu_id, text_emb, input_knowledge_point):
-        """
-        Args:
-            stu_id: (batch,) LLM index
-            text_emb: (batch, 768) frozen SBERT embedding for the question
-            input_knowledge_point: (batch, K) Q-matrix row
-        """
-        stu_emb = self.student_emb(stu_id)
-        stat_emb = torch.sigmoid(stu_emb)
-        k_difficulty = torch.sigmoid(self.k_difficulty_proj(text_emb))
-        e_difficulty = torch.sigmoid(self.e_difficulty_proj(text_emb))
-
-        input_x = e_difficulty * (stat_emb - k_difficulty) * input_knowledge_point
-        input_x = self.drop_1(torch.sigmoid(self.prednet_full1(input_x)))
-        input_x = self.drop_2(torch.sigmoid(self.prednet_full2(input_x)))
-        output_1 = torch.sigmoid(self.prednet_full3(input_x))
-
-        return output_1.view(-1)
-
-
-# ============================================================
-# 2C. DataLoader helpers
-# ============================================================
-
-def make_text_dataloader(triplets, text_embeddings, q_matrix, batch_size=64, shuffle=True):
-    """Build DataLoader: (user_id, text_emb, knowledge_emb, score)."""
-    user_ids = torch.tensor(triplets[:, 0], dtype=torch.int64)
-    scores = torch.tensor(triplets[:, 2], dtype=torch.float32)
-
-    item_indices = triplets[:, 1].astype(int)
-    text_embs = torch.tensor(text_embeddings[item_indices], dtype=torch.float32)
-    knowledge_embs = torch.tensor(q_matrix[item_indices], dtype=torch.float32)
-
-    dataset = TensorDataset(user_ids, text_embs, knowledge_embs, scores)
-    return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
-
-
-def make_id_dataloader(triplets, q_matrix, batch_size=64, shuffle=True):
-    """Build DataLoader for ID-based NCDM: (user_id, item_id, knowledge_emb, score)."""
-    user_ids = torch.tensor(triplets[:, 0], dtype=torch.int64)
-    item_ids = torch.tensor(triplets[:, 1], dtype=torch.int64)
-    scores = torch.tensor(triplets[:, 2], dtype=torch.float32)
-
-    item_indices = triplets[:, 1].astype(int)
-    knowledge_embs = torch.tensor(q_matrix[item_indices], dtype=torch.float32)
-
-    dataset = TensorDataset(user_ids, item_ids, knowledge_embs, scores)
-    return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
-
-
-# ============================================================
-# Training / Evaluation
-# ============================================================
-
-def train_text_model(net, train_loader, val_loader, epochs=15, lr=0.002, device="cpu"):
-    """Train TextConditionedNet with validation early-stop."""
-    net = net.to(device)
-    optimizer = torch.optim.Adam(net.parameters(), lr=lr)
-    loss_fn = nn.BCELoss()
-
-    best_auc = 0
-    best_state = None
-
-    for epoch in range(epochs):
-        net.train()
-        losses = []
-
-        for user_id, text_emb, knowledge_emb, y in tqdm(
-            train_loader, desc=f"  Epoch {epoch+1}/{epochs}", leave=False
-        ):
-            user_id = user_id.to(device)
-            text_emb = text_emb.to(device)
-            knowledge_emb = knowledge_emb.to(device)
-            y = y.to(device)
-
-            pred = net(user_id, text_emb, knowledge_emb)
-            loss = loss_fn(pred, y)
-
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            losses.append(loss.item())
-
-        avg_loss = np.mean(losses)
-        val_auc, val_acc, val_rmse = eval_text_model(net, val_loader, device)
-        print(f"    loss={avg_loss:.4f}, val_auc={val_auc:.4f}, val_acc={val_acc:.4f}, val_rmse={val_rmse:.4f}")
-
-        if val_auc > best_auc:
-            best_auc = val_auc
-            best_state = {k: v.cpu().clone() for k, v in net.state_dict().items()}
-
-    if best_state:
-        net.load_state_dict(best_state)
-        print(f"  Restored best model (val_auc={best_auc:.4f})")
-
-    return net
-
-
-def eval_text_model(net, dataloader, device="cpu"):
-    """Evaluate TextConditionedNet."""
-    net.eval()
-    net = net.to(device)
-
-    y_true, y_pred = [], []
-    with torch.no_grad():
-        for user_id, text_emb, knowledge_emb, y in dataloader:
-            user_id = user_id.to(device)
-            text_emb = text_emb.to(device)
-            knowledge_emb = knowledge_emb.to(device)
-            pred = net(user_id, text_emb, knowledge_emb)
-            y_pred.extend(pred.cpu().tolist())
-            y_true.extend(y.tolist())
-
-    y_true = np.array(y_true)
-    y_pred = np.array(y_pred)
-
-    auc = roc_auc_score(y_true, y_pred)
-    acc = accuracy_score(y_true, (y_pred >= 0.5).astype(int))
-    rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-    return auc, acc, rmse
-
-
-def train_id_model(train_loader, val_loader, n_skills, n_items, n_llms,
-                   epochs=15, lr=0.002, device="cpu"):
-    """Train standard ID-based NCDM, return model."""
-    model = NCDM(n_skills, n_items, n_llms)
-    model.ncdm_net = model.ncdm_net.to(device)
-    optimizer = torch.optim.Adam(model.ncdm_net.parameters(), lr=lr)
-    loss_fn = nn.BCELoss()
-
-    best_auc = 0
-    best_state = None
-
-    for epoch in range(epochs):
-        model.ncdm_net.train()
-        losses = []
-
-        for user_id, item_id, knowledge_emb, y in tqdm(
-            train_loader, desc=f"  Epoch {epoch+1}/{epochs}", leave=False
-        ):
-            user_id = user_id.to(device)
-            item_id = item_id.to(device)
-            knowledge_emb = knowledge_emb.to(device)
-            y = y.to(device)
-
-            pred = model.ncdm_net(user_id, item_id, knowledge_emb)
-            loss = loss_fn(pred, y)
-
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            losses.append(loss.item())
-
-        avg_loss = np.mean(losses)
-        val_auc, val_acc, val_rmse = eval_id_model(model, val_loader, device)
-        print(f"    loss={avg_loss:.4f}, val_auc={val_auc:.4f}, val_acc={val_acc:.4f}, val_rmse={val_rmse:.4f}")
-
-        if val_auc > best_auc:
-            best_auc = val_auc
-            best_state = {k: v.cpu().clone() for k, v in model.ncdm_net.state_dict().items()}
-
-    if best_state:
-        model.ncdm_net.load_state_dict(best_state)
-        print(f"  Restored best model (val_auc={best_auc:.4f})")
-
-    return model
-
-
-def eval_id_model(model, dataloader, device="cpu"):
-    """Evaluate standard ID-based NCDM."""
-    model.ncdm_net.eval()
-    model.ncdm_net = model.ncdm_net.to(device)
-
-    y_true, y_pred = [], []
-    with torch.no_grad():
-        for user_id, item_id, knowledge_emb, y in dataloader:
-            user_id = user_id.to(device)
-            item_id = item_id.to(device)
-            knowledge_emb = knowledge_emb.to(device)
-            pred = model.ncdm_net(user_id, item_id, knowledge_emb)
-            y_pred.extend(pred.cpu().tolist())
-            y_true.extend(y.tolist())
-
-    y_true = np.array(y_true)
-    y_pred = np.array(y_pred)
-
-    auc = roc_auc_score(y_true, y_pred)
-    acc = accuracy_score(y_true, (y_pred >= 0.5).astype(int))
-    rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-    return auc, acc, rmse
-
-
-# ============================================================
-# 2D. Splits
+# Splits
 # ============================================================
 
 def standard_triplet_split(triplets):
@@ -321,13 +86,10 @@ def exercise_level_split(triplets, n_items, holdout_ratio=0.2):
     Remaining 80% items split 90/10 train/val by triplet."""
     all_items = np.arange(n_items)
     train_items, test_items = train_test_split(all_items, test_size=holdout_ratio, random_state=42)
-    train_items_set = set(train_items)
-    test_items_set = set(test_items)
 
     train_val_triplets = triplets[np.isin(triplets[:, 1].astype(int), train_items)]
     test_triplets = triplets[np.isin(triplets[:, 1].astype(int), test_items)]
 
-    # Split train_val into train/val
     all_idx = np.arange(len(train_val_triplets))
     train_idx, val_idx = train_test_split(all_idx, test_size=0.1, random_state=42)
 
@@ -336,7 +98,7 @@ def exercise_level_split(triplets, n_items, holdout_ratio=0.2):
 
 
 # ============================================================
-# 2E. Routing demonstration
+# Routing demonstration
 # ============================================================
 
 def routing_demo(net, text_embeddings, q_matrix, llm_names, n_items, device="cpu"):
@@ -345,7 +107,6 @@ def routing_demo(net, text_embeddings, q_matrix, llm_names, n_items, device="cpu
     print("ROUTING DEMONSTRATION")
     print("=" * 70)
 
-    # Example new queries (not in the dataset)
     example_queries = [
         "What is the derivative of x^3 * sin(x)? Use the product rule and show your work.",
         "A train leaves Chicago at 8am traveling at 60mph. Another train leaves New York "
@@ -357,12 +118,10 @@ def routing_demo(net, text_embeddings, q_matrix, llm_names, n_items, device="cpu
         "def fibonacci(n): return n if n <= 1 else fibonacci(n-1) + fibonacci(n-2)",
     ]
 
-    # Encode queries with SBERT
     from sentence_transformers import SentenceTransformer
     sbert = SentenceTransformer("all-mpnet-base-v2")
     query_embeddings = sbert.encode(example_queries, normalize_embeddings=True)
 
-    # Nearest-neighbor item lookup for Q-matrix approximation
     nn_model = NearestNeighbors(n_neighbors=1, metric="cosine")
     nn_model.fit(text_embeddings)
 
@@ -374,13 +133,11 @@ def routing_demo(net, text_embeddings, q_matrix, llm_names, n_items, device="cpu
         print(f"\n{'─' * 60}")
         print(f"Query {i+1}: {query[:100]}...")
 
-        # Find nearest item for Q-matrix row
         dists, indices = nn_model.kneighbors(query_embeddings[i:i+1])
         nn_item_idx = indices[0, 0]
         nn_dist = dists[0, 0]
         print(f"  Nearest item: #{nn_item_idx} (cosine dist={nn_dist:.4f})")
 
-        # Prepare inputs
         query_emb_t = torch.tensor(query_embeddings[i], dtype=torch.float32, device=device)
         query_emb_batch = query_emb_t.unsqueeze(0).expand(len(llm_names), -1)
         q_row = torch.tensor(q_matrix[nn_item_idx], dtype=torch.float32, device=device)
@@ -389,7 +146,6 @@ def routing_demo(net, text_embeddings, q_matrix, llm_names, n_items, device="cpu
         with torch.no_grad():
             preds = net(all_llm_ids, query_emb_batch, q_row_batch).cpu().numpy()
 
-        # Rank LLMs
         ranking = np.argsort(-preds)
         print(f"\n  Top 5 LLMs (highest P(correct)):")
         for rank, idx in enumerate(ranking[:5]):
@@ -413,44 +169,28 @@ def main():
     args = parser.parse_args()
 
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
-
-    if args.device == "mps" and not torch.backends.mps.is_available():
-        args.device = "cpu"
-    if args.device == "cuda" and not torch.cuda.is_available():
-        args.device = "cpu"
+    args.device = resolve_device(args.device)
     print(f"Device: {args.device}")
 
     # ── Load data ──
     with open(DATA_DIR / "skills_extracted.json") as f:
         items_data = json.load(f)
 
-    response_df = pd.read_csv(DATA_DIR / "response_matrix.csv", index_col=0)
-    n_llms = response_df.shape[0]
-    n_items = response_df.shape[1]
-    llm_names = list(response_df.index)
+    response_df, n_llms, n_items, llm_names = load_response_matrix(
+        DATA_DIR / "response_matrix.csv"
+    )
     print(f"Response matrix: {n_llms} LLMs x {n_items} items")
 
-    # Load HAC-50 Q-matrix from step 08
-    q_df = pd.read_csv(DATA_DIR / "q_matrix_hac50.csv")
-    meta_cols = [c for c in ["item_idx", "source"] if c in q_df.columns]
-    skill_cols = [c for c in q_df.columns if c not in meta_cols]
-    q_matrix = q_df[skill_cols].values.astype(float)
+    q_matrix, skill_cols = load_q_matrix(DATA_DIR / "q_matrix_hac50.csv")
     n_skills = q_matrix.shape[1]
     print(f"Q-matrix (HAC-50): {n_items} items x {n_skills} skills")
 
-    # Build triplets
-    triplets = []
-    for llm_id in range(n_llms):
-        row = response_df.iloc[llm_id].values
-        for item_id in range(n_items):
-            triplets.append((llm_id, item_id, float(row[item_id])))
-    triplets = np.array(triplets)
+    triplets = build_triplets(response_df)
     print(f"Total triplets: {len(triplets):,}")
 
     # ── Pre-compute item text embeddings ──
     text_embeddings = precompute_item_embeddings()  # (2643, 768)
 
-    # Collect all results
     all_metrics = {}
 
     # ================================================================
@@ -481,7 +221,6 @@ def main():
         "test_auc": float(auc_a), "test_accuracy": float(acc_a), "test_rmse": float(rmse_a),
     }
 
-    # Save the text-conditioned model (trained on full standard split)
     model_path = MODEL_DIR / "ncdm_text_conditioned.pt"
     torch.save(net_a.state_dict(), str(model_path))
     print(f"Model saved: {model_path}")
@@ -519,14 +258,14 @@ def main():
         "n_train_items": int(len(train_items)), "n_test_items": int(len(test_items)),
     }
 
-    # --- B2: ID-based NCDM on same exercise split (negative control) ---
+    # --- B2: ID-based NCDM on same exercise split ---
     print(f"\n--- B2: ID-based NCDM (cold-start — negative control) ---")
-    train_loader_b2 = make_id_dataloader(train_trip_b, q_matrix,
-                                         args.batch_size, shuffle=True)
-    val_loader_b2 = make_id_dataloader(val_trip_b, q_matrix,
-                                       args.batch_size, shuffle=False)
-    test_loader_b2 = make_id_dataloader(test_trip_b, q_matrix,
-                                        args.batch_size, shuffle=False)
+    train_loader_b2 = make_dataloader(train_trip_b, q_matrix,
+                                      args.batch_size, shuffle=True)
+    val_loader_b2 = make_dataloader(val_trip_b, q_matrix,
+                                    args.batch_size, shuffle=False)
+    test_loader_b2 = make_dataloader(test_trip_b, q_matrix,
+                                     args.batch_size, shuffle=False)
 
     id_model_b2 = train_id_model(train_loader_b2, val_loader_b2,
                                  n_skills, n_items, n_llms,
@@ -555,7 +294,6 @@ def main():
         ("B2: Cold-start (ID, neg ctrl)", "ID-based NCDM", "Exercise-level", auc_b2, acc_b2, rmse_b2),
     ]
 
-    # Include HAC-50 baseline if metrics exist
     hac50_path = DATA_DIR / "ncdm_metrics_hac50.json"
     if hac50_path.exists():
         with open(hac50_path) as f:
@@ -582,7 +320,7 @@ def main():
     print(f"\nAll metrics saved: ncdm_text_conditioned_metrics.json")
 
     # ================================================================
-    # 2E. Routing demonstration
+    # Routing demonstration
     # ================================================================
     routing_demo(net_a, text_embeddings, q_matrix, llm_names, n_items, args.device)
 
