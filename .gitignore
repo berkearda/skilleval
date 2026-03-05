@@ -1,23 +1,60 @@
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 .eggs/
 *.egg-info/
+*.egg
+dist/
+build/
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Package / install
+*.egg-info/
+.installed.cfg
+pip-wheel-metadata/
 
 # IDE
 .vscode/
 .idea/
 *.swp
+*.swo
+*~
+.project
+.settings/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Testing / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Experiment tracking
+wandb/
+outputs/
+multirun/
+mlruns/
 
 # Claude Code
 .claude/
 
 # External repos (cloned separately)
+repos/
 cdm_exploration/repos/
 
 # Data (regenerable via pipeline scripts)
@@ -26,7 +63,7 @@ cdm_exploration/data/
 # Trained models
 cdm_exploration/models/
 
-# Figures (regenerable via 06_generate_figures.py)
+# Figures (regenerable via scripts)
 cdm_exploration/figures/
 
 # Reports (local LaTeX documents)
