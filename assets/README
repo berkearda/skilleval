@@ -1,0 +1,7 @@
+Place pipeline.png here.
+
+This directory holds static assets referenced by the project README.
+The pipeline figure should illustrate the three-layer CDMEval architecture:
+  Layer 1: Q-matrix construction (LLM skill extraction + HAC clustering)
+  Layer 2: NCDM-based skill profiling
+  Layer 3: Skill-aware routing
