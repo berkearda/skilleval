@@ -1,0 +1,14 @@
+# Embedding model comparison experiment.
+# Each entry: model name (HuggingFace ID) and its output dimensionality.
+#
+# Usage:
+#   python tools/embedding_comparison.py
+#   python tools/embedding_comparison.py device=mps model.epochs=15
+
+embedding_models:
+  - name: all-mpnet-base-v2
+    dim: 768
+  - name: BAAI/bge-large-en-v1.5
+    dim: 1024
+  - name: intfloat/e5-large-v2
+    dim: 1024

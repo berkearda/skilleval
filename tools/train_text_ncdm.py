@@ -16,9 +16,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import NearestNeighbors
 
 
-TEXT_DIM = 768  # all-mpnet-base-v2 output dimension
-
-
 def precompute_item_embeddings(data_dir: Path) -> np.ndarray:
     """Encode all question texts with frozen SBERT. Caches to item_text_embeddings.npz."""
     cache_path = data_dir / "item_text_embeddings.npz"
@@ -149,6 +146,7 @@ def main(cfg: DictConfig) -> None:
     print(f"Total triplets: {len(triplets):,}")
 
     text_embeddings = precompute_item_embeddings(data_dir)
+    text_dim = text_embeddings.shape[1]
 
     all_metrics = {}
     bs = cfg.model.batch_size
@@ -165,7 +163,7 @@ def main(cfg: DictConfig) -> None:
     val_loader_a = make_text_dataloader(val_trip, text_embeddings, q_matrix, bs, shuffle=False)
     test_loader_a = make_text_dataloader(test_trip, text_embeddings, q_matrix, bs, shuffle=False)
 
-    net_a = TextConditionedNet(n_skills, n_llms, TEXT_DIM)
+    net_a = TextConditionedNet(n_skills, n_llms, text_dim)
     net_a = train_text_model(net_a, train_loader_a, val_loader_a,
                              epochs=cfg.model.epochs, lr=cfg.model.lr, device=device)
 
@@ -194,7 +192,7 @@ def main(cfg: DictConfig) -> None:
     val_loader_b1 = make_text_dataloader(val_trip_b, text_embeddings, q_matrix, bs, shuffle=False)
     test_loader_b1 = make_text_dataloader(test_trip_b, text_embeddings, q_matrix, bs, shuffle=False)
 
-    net_b1 = TextConditionedNet(n_skills, n_llms, TEXT_DIM)
+    net_b1 = TextConditionedNet(n_skills, n_llms, text_dim)
     net_b1 = train_text_model(net_b1, train_loader_b1, val_loader_b1,
                               epochs=cfg.model.epochs, lr=cfg.model.lr, device=device)
 

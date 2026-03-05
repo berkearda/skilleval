@@ -31,7 +31,6 @@ from sklearn.neighbors import NearestNeighbors
 from tqdm import tqdm
 
 
-TEXT_DIM = 768
 K = 50
 
 
@@ -92,6 +91,7 @@ def main(cfg: DictConfig) -> None:
 
     text_emb_data = np.load(data_dir / "item_text_embeddings.npz")
     text_embeddings = text_emb_data["embeddings"]
+    text_dim = text_embeddings.shape[1]
 
     bs = cfg.model.batch_size
 
@@ -113,7 +113,7 @@ def main(cfg: DictConfig) -> None:
     tr_txt = make_text_dataloader(train_trip, text_embeddings, q_matrix, bs, shuffle=True)
     va_txt = make_text_dataloader(val_trip, text_embeddings, q_matrix, bs, shuffle=False)
     te_txt = make_text_dataloader(test_triplets, text_embeddings, q_matrix, bs, shuffle=False)
-    net = TextConditionedNet(n_skills, n_llms, TEXT_DIM)
+    net = TextConditionedNet(n_skills, n_llms, text_dim)
     net = train_text_model(net, tr_txt, va_txt,
                            epochs=cfg.model.epochs, lr=cfg.model.lr, device=device)
 

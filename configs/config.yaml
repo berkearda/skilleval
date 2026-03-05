@@ -10,6 +10,7 @@ model:
   epochs: 15
   lr: 0.002
   batch_size: 64
+  text_dim: 768
 
 device: mps
 
