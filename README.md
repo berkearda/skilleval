@@ -7,7 +7,7 @@ using Cognitive Diagnostic Models (CDMs). CDMEval moves beyond aggregate accurac
 scores by decomposing LLM competence into interpretable skill mastery profiles,
 enabling skill-aware routing of queries to the most suitable model.
 
-![Pipeline](assets/pipeline.png)
+<!-- TODO: Add pipeline diagram -->
 
 ## Overview
 
@@ -90,7 +90,7 @@ completely unseen items, outperforming both the always-pick-best-LLM baseline
 ## Installation
 
 ```bash
-git clone https://github.com/berkearda/cdmeval.git
+git clone https://github.com/berkearda/cdm-llm-evaluation.git
 cd cdmeval
 pip install -e .
 
