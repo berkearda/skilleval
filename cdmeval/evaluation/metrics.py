@@ -1,4 +1,4 @@
-"""Evaluation helpers: metrics computation and model evaluation loops."""
+"""Evaluation helpers: metrics computation, model evaluation loops, mastery extraction."""
 
 from __future__ import annotations
 
@@ -58,6 +58,34 @@ def eval_id_model(
             y_true.extend(y.tolist())
 
     return compute_metrics(np.array(y_true), np.array(y_pred))
+
+
+def extract_mastery_profiles(
+    model,
+    n_students: int,
+    n_skills: int,
+    device: str = "cpu",
+) -> np.ndarray:
+    """Extract the learned skill mastery profile for each student/LLM.
+
+    Args:
+        model: An :class:`EduCDM.NCDM` instance.
+        n_students: Number of students (LLMs).
+        n_skills: Number of skills.
+        device: Torch device string.
+
+    Returns:
+        Array of shape ``(n_students, n_skills)`` with mastery probabilities.
+    """
+    model.ncdm_net.eval()
+    model.ncdm_net = model.ncdm_net.to(device)
+
+    with torch.no_grad():
+        all_ids = torch.arange(n_students, device=device)
+        raw_emb = model.ncdm_net.student_emb(all_ids)
+        mastery = torch.sigmoid(raw_emb).cpu().numpy()
+
+    return mastery
 
 
 def eval_text_model(

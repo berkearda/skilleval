@@ -1,0 +1,21 @@
+paths:
+  data_dir: cdm_exploration/data
+  cdm_ready: ${paths.data_dir}/cdm_ready
+  combined: ${paths.data_dir}/combined
+  routereval: ${paths.data_dir}/routereval
+  models: cdm_exploration/models
+  figures: ${paths.data_dir}/../figures/report
+
+model:
+  epochs: 15
+  lr: 0.002
+  batch_size: 64
+
+device: mps
+
+skills:
+  api: mock
+  llm_model: null
+  sbert_model: all-mpnet-base-v2
+  min_cluster_sizes: [3, 5, 8, 10, 15, 20]
+  n_clusters: 50
