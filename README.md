@@ -7,7 +7,7 @@ using Cognitive Diagnostic Models (CDMs). CDMEval moves beyond aggregate accurac
 scores by decomposing LLM competence into interpretable skill mastery profiles,
 enabling skill-aware routing of queries to the most suitable model.
 
-<!-- TODO: Add pipeline diagram -->
+![Pipeline](assets/pipeline.png)
 
 ## Overview
 
