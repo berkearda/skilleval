@@ -30,12 +30,11 @@ def evaluate_rankings(
         Dict with ``accuracy@k`` for each k, plus ``n_items``.
     """
     accs = {k: 0 for k in ks}
-    total = 0
+    total = len(rankings)  # denominator = ALL test items (incl. unsolvable)
     for item_idx, ranking in rankings.items():
         gt = response_matrix[:, int(item_idx)]
         if gt.sum() == 0:
             continue
-        total += 1
         for k in ks:
             if gt[ranking[:k]].sum() > 0:
                 accs[k] += 1
