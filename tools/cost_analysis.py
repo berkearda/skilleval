@@ -105,12 +105,12 @@ def main(cfg: DictConfig) -> None:
         net, text_embeddings, q_matrix, test_items, device, fig_dir,
     )
 
-    print(f"\n{'Budget(B)':>10} {'Pool':>6} {'Acc@1':>8} {'Acc@5':>8} {'Majority':>10}")
+    print(f"\n{'Budget(B)':>10} {'Pool':>6} {'Acc@1':>8} {'Acc@5':>8} {'Strongest':>10}")
     print("-" * 50)
     for _, row in curve_df.iterrows():
         print(
             f"{row['budget']:10.1f} {int(row['pool_size']):6d} "
-            f"{row['acc1']:8.3f} {row['acc5']:8.3f} {row['majority']:10.3f}"
+            f"{row['acc1']:8.3f} {row['acc5']:8.3f} {row['strongest']:10.3f}"
         )
 
     # ══════════════════════════════════════════════════════════════
@@ -140,24 +140,24 @@ def main(cfg: DictConfig) -> None:
         net, text_embeddings, q_matrix, test_items, device, fig_dir,
     )
 
-    print(f"\n{'Budget($/M)':>12} {'Pool':>6} {'Acc@1':>8} {'Acc@5':>8} {'Majority':>10}")
+    print(f"\n{'Budget($/M)':>12} {'Pool':>6} {'Acc@1':>8} {'Acc@5':>8} {'Strongest':>10}")
     print("-" * 52)
     for _, row in price_curve_df.iterrows():
         print(
             f"${row['budget']:<11.2f} {int(row['pool_size']):6d} "
-            f"{row['acc1']:8.3f} {row['acc5']:8.3f} {row['majority']:10.3f}"
+            f"{row['acc1']:8.3f} {row['acc5']:8.3f} {row['strongest']:10.3f}"
         )
 
     # ── Key finding ──
-    # Find cheapest budget where CDM acc@5 beats the most expensive majority
-    most_expensive_maj = price_curve_df.iloc[-1]["majority"]
+    # Find cheapest budget where CDM acc@5 beats the most expensive strongest model
+    strongest_acc = price_curve_df.iloc[-1]["strongest"]
     for _, row in price_curve_df.iterrows():
-        if row["acc5"] >= most_expensive_maj:
+        if row["acc5"] >= strongest_acc:
             print(
                 f"\nKey finding: CDM acc@5 at ${row['budget']:.2f}/M "
-                f"({row['acc5']:.3f}) >= majority at "
+                f"({row['acc5']:.3f}) >= strongest model at "
                 f"${price_curve_df.iloc[-1]['budget']:.2f}/M "
-                f"({most_expensive_maj:.3f})"
+                f"({strongest_acc:.3f})"
             )
             break
 

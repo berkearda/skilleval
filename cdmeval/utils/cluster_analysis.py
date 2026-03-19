@@ -21,64 +21,73 @@ from .visualization import SAVE_KW, setup_style
 def plot_k_vs_metrics(sweep_df: pd.DataFrame, fig_dir: Path) -> None:
     """Four-panel figure: AUC, routing, clustering quality, Q-matrix density."""
     setup_style()
-    fig, axes = plt.subplots(2, 2, figsize=(10, 7.5))
+    fig, axes = plt.subplots(2, 2, figsize=(10, 7), constrained_layout=True)
     ks = sweep_df["K"].values
+
+    SELECTED_K = 50
+    TITLE_SIZE = 12
+    LABEL_SIZE = 11
+    TICK_SIZE = 9
+    GRID_ALPHA = 0.3
+
+    def _style_ax(ax):
+        ax.grid(True, alpha=GRID_ALPHA, linewidth=0.5)
+        ax.tick_params(labelsize=TICK_SIZE)
+        ax.axvline(SELECTED_K, ls="--", color="#C44E52", alpha=0.45, lw=1, zorder=0)
 
     # ── Panel 1: K vs downstream AUC (Protocol A) ──
     ax = axes[0, 0]
     ax.plot(ks, sweep_df["proto_a_auc"], "o-", color="#4C72B0", lw=2, markersize=5)
-    best_idx = sweep_df["proto_a_auc"].idxmax()
-    best_k = sweep_df.loc[best_idx, "K"]
-    best_auc = sweep_df.loc[best_idx, "proto_a_auc"]
-    ax.axvline(best_k, ls="--", color="#C44E52", alpha=0.6, lw=1)
-    k_range = ks.max() - ks.min() if len(ks) > 1 else 10
-    text_offset = k_range * 0.1 if best_k < ks.max() else -k_range * 0.15
-    ax.annotate(
-        f"K={int(best_k)}\nAUC={best_auc:.4f}",
-        xy=(best_k, best_auc), xytext=(best_k + text_offset, best_auc - 0.003),
-        fontsize=8, color="#C44E52",
-        arrowprops=dict(arrowstyle="->", color="#C44E52", lw=0.8),
+    _style_ax(ax)
+    # Label the K=50 line at the top of the subplot
+    ax.text(
+        SELECTED_K + 3, ax.get_ylim()[1] - 0.0003,
+        "K=50 (selected)", fontsize=8, color="#C44E52", va="top",
     )
-    ax.set_xlabel("K (number of skill clusters)")
-    ax.set_ylabel("Test AUC")
-    ax.set_title("(a) Protocol A: ID-based NCDM", fontsize=10, fontweight="bold", loc="left")
+    ax.set_xlabel("K (number of skill clusters)", fontsize=LABEL_SIZE)
+    ax.set_ylabel("Test AUC", fontsize=LABEL_SIZE)
+    ax.set_title("(a) Protocol A: ID-based NCDM", fontsize=TITLE_SIZE, fontweight="bold", loc="left")
 
     # ── Panel 2: K vs routing acc@1 and acc@5 ──
     ax = axes[0, 1]
     ax.plot(ks, sweep_df["routing_acc1"], "s-", color="#55A868", lw=2, markersize=5, label="Acc@1")
     ax.plot(ks, sweep_df["routing_acc5"], "D-", color="#DD8452", lw=2, markersize=5, label="Acc@5")
-    ax.set_xlabel("K (number of skill clusters)")
-    ax.set_ylabel("Routing Accuracy")
-    ax.set_title("(b) Protocol B: Routing accuracy", fontsize=10, fontweight="bold", loc="left")
-    ax.legend(frameon=False, fontsize=8)
+    _style_ax(ax)
+    ax.set_xlabel("K (number of skill clusters)", fontsize=LABEL_SIZE)
+    ax.set_ylabel("Routing Accuracy", fontsize=LABEL_SIZE)
+    ax.set_title("(b) Protocol B: Routing accuracy", fontsize=TITLE_SIZE, fontweight="bold", loc="left")
+    ax.legend(frameon=False, fontsize=9, loc="lower right")
 
     # ── Panel 3: K vs silhouette and intra-cluster similarity (dual y-axis) ──
     ax = axes[1, 0]
     color1, color2 = "#8172B2", "#CCB974"
-    ax.plot(ks, sweep_df["silhouette"], "o-", color=color1, lw=2, markersize=5, label="Silhouette")
-    ax.set_xlabel("K (number of skill clusters)")
-    ax.set_ylabel("Silhouette score", color=color1)
-    ax.tick_params(axis="y", labelcolor=color1)
+    ln1 = ax.plot(ks, sweep_df["silhouette"], "o-", color=color1, lw=2, markersize=5, label="Silhouette")
+    ax.set_xlabel("K (number of skill clusters)", fontsize=LABEL_SIZE)
+    ax.set_ylabel("Silhouette score", color=color1, fontsize=LABEL_SIZE)
+    ax.tick_params(axis="y", labelcolor=color1, labelsize=TICK_SIZE)
+    ax.tick_params(axis="x", labelsize=TICK_SIZE)
+    ax.grid(True, alpha=GRID_ALPHA, linewidth=0.5)
+    ax.axvline(SELECTED_K, ls="--", color="#C44E52", alpha=0.45, lw=1, zorder=0)
 
     ax2 = ax.twinx()
-    ax2.plot(ks, sweep_df["mean_intra_cosine_sim"], "^-", color=color2, lw=2, markersize=5, label="Intra-sim")
-    ax2.set_ylabel("Mean intra-cluster cosine sim", color=color2)
-    ax2.tick_params(axis="y", labelcolor=color2)
+    ln2 = ax2.plot(ks, sweep_df["mean_intra_cosine_sim"], "^-", color=color2, lw=2, markersize=5, label="Intra-cluster sim")
+    ax2.set_ylabel("Mean intra-cluster cosine sim", color=color2, fontsize=LABEL_SIZE)
+    ax2.tick_params(axis="y", labelcolor=color2, labelsize=TICK_SIZE)
     ax2.spines["top"].set_visible(False)
 
-    lines1, labels1 = ax.get_legend_handles_labels()
-    lines2, labels2 = ax2.get_legend_handles_labels()
-    ax.legend(lines1 + lines2, labels1 + labels2, frameon=False, fontsize=8, loc="upper right")
-    ax.set_title("(c) Intrinsic clustering quality", fontsize=10, fontweight="bold", loc="left")
+    # Separate legends to avoid overlap
+    ax.legend(ln1, ["Silhouette"], frameon=False, fontsize=9, loc="upper left")
+    ax2.legend(ln2, ["Intra-cluster sim"], frameon=False, fontsize=9, loc="lower right")
+    ax.set_title("(c) Intrinsic clustering quality", fontsize=TITLE_SIZE, fontweight="bold", loc="left")
 
     # ── Panel 4: K vs mean skills per item (Q-matrix row sum) ──
     ax = axes[1, 1]
     ax.plot(ks, sweep_df["mean_skills_per_item"], "o-", color="#64B5CD", lw=2, markersize=5)
-    ax.set_xlabel("K (number of skill clusters)")
-    ax.set_ylabel("Mean skills per item")
-    ax.set_title("(d) Q-matrix density", fontsize=10, fontweight="bold", loc="left")
+    _style_ax(ax)
+    ax.set_xlabel("K (number of skill clusters)", fontsize=LABEL_SIZE)
+    ax.set_ylabel("Mean skills per item", fontsize=LABEL_SIZE)
+    ax.set_title("(d) Q-matrix density", fontsize=TITLE_SIZE, fontweight="bold", loc="left")
 
-    fig.tight_layout(h_pad=2.5, w_pad=2.0)
     out = fig_dir / "fig_cluster_sweep.pdf"
     fig.savefig(out, **SAVE_KW)
     plt.close()

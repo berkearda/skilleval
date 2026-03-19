@@ -98,7 +98,7 @@ def cost_constrained_routing_curve(
     in the candidate pool.  The CDM model ranks them and we measure acc@k.
 
     Returns a DataFrame with columns
-    ``[budget, acc1, acc3, acc5, majority, oracle, pool_size]``.
+    ``[budget, acc1, acc3, acc5, strongest, oracle, pool_size]``.
     """
     if budgets is None:
         budgets = DEFAULT_BUDGETS
@@ -116,17 +116,17 @@ def cost_constrained_routing_curve(
 
         if pool_size == 0:
             rows.append(dict(budget=budget, acc1=0, acc3=0, acc5=0,
-                             majority=0, oracle=0, pool_size=0))
+                             strongest=0, oracle=0, pool_size=0))
             continue
 
         pool_ids = torch.tensor(pool_indices, dtype=torch.long, device=device)
 
-        # Majority baseline: best single model in pool by overall accuracy
+        # Strongest model: best single model in pool by overall accuracy
         pool_response = response_vals[pool_indices]
         best_in_pool = pool_indices[pool_response.mean(axis=1).argmax()]
 
         accs_at = {1: 0, 3: 0, 5: 0}
-        majority_correct = 0
+        strongest_correct = 0
         oracle_correct = 0
         total = 0
 
@@ -142,9 +142,9 @@ def cost_constrained_routing_curve(
             if gt_pool.sum() > 0:
                 oracle_correct += 1
 
-            # Majority baseline
+            # Strongest model
             if gt[best_in_pool] > 0:
-                majority_correct += 1
+                strongest_correct += 1
 
             # CDM routing within pool
             emb = torch.tensor(
@@ -166,7 +166,7 @@ def cost_constrained_routing_curve(
 
         if total == 0:
             rows.append(dict(budget=budget, acc1=0, acc3=0, acc5=0,
-                             majority=0, oracle=0, pool_size=pool_size))
+                             strongest=0, oracle=0, pool_size=pool_size))
             continue
 
         rows.append(dict(
@@ -174,14 +174,14 @@ def cost_constrained_routing_curve(
             acc1=accs_at[1] / total,
             acc3=accs_at[3] / total,
             acc5=accs_at[5] / total,
-            majority=majority_correct / total,
+            strongest=strongest_correct / total,
             oracle=oracle_correct / total,
             pool_size=pool_size,
         ))
         print(
             f"  Budget {budget:5.1f}B  pool={pool_size:3d}  "
             f"acc@1={rows[-1]['acc1']:.3f}  acc@5={rows[-1]['acc5']:.3f}  "
-            f"majority={rows[-1]['majority']:.3f}  oracle={rows[-1]['oracle']:.3f}"
+            f"strongest={rows[-1]['strongest']:.3f}  oracle={rows[-1]['oracle']:.3f}"
         )
 
     return pd.DataFrame(rows)
@@ -204,7 +204,7 @@ def plot_routing_curve(curve_df: pd.DataFrame, fig_dir) -> None:
             color="#4C72B0", markersize=5, linewidth=2)
     ax.plot(curve_df["budget"], curve_df["acc5"], "s-", label="CDM acc@5",
             color="#55A868", markersize=5, linewidth=2)
-    ax.plot(curve_df["budget"], curve_df["majority"], "^--", label="Majority baseline",
+    ax.plot(curve_df["budget"], curve_df["strongest"], "^--", label="Strongest model",
             color="#DD8452", markersize=5, linewidth=1.5)
     ax.plot(curve_df["budget"], curve_df["oracle"], "d:", label="Oracle (any in pool)",
             color="#8172B3", markersize=5, linewidth=1.5)
@@ -262,7 +262,7 @@ def cost_constrained_routing_by_price(
 
     Returns:
         DataFrame with columns
-        ``[budget, acc1, acc3, acc5, majority, oracle, pool_size]``.
+        ``[budget, acc1, acc3, acc5, strongest, oracle, pool_size]``.
     """
     if budgets is None:
         budgets = DEFAULT_PRICE_BUDGETS
@@ -278,7 +278,7 @@ def cost_constrained_routing_by_price(
 
         if pool_size == 0:
             rows.append(dict(budget=budget, acc1=0, acc3=0, acc5=0,
-                             majority=0, oracle=0, pool_size=0))
+                             strongest=0, oracle=0, pool_size=0))
             continue
 
         pool_ids = torch.tensor(pool_indices, dtype=torch.long, device=device)
@@ -287,7 +287,7 @@ def cost_constrained_routing_by_price(
         best_in_pool = pool_indices[pool_response.mean(axis=1).argmax()]
 
         accs_at = {1: 0, 3: 0, 5: 0}
-        majority_correct = 0
+        strongest_correct = 0
         oracle_correct = 0
         total = 0
 
@@ -302,7 +302,7 @@ def cost_constrained_routing_by_price(
             if gt_pool.sum() > 0:
                 oracle_correct += 1
             if gt[best_in_pool] > 0:
-                majority_correct += 1
+                strongest_correct += 1
 
             emb = torch.tensor(
                 text_embeddings[int(item_idx)], dtype=torch.float32, device=device
@@ -323,7 +323,7 @@ def cost_constrained_routing_by_price(
 
         if total == 0:
             rows.append(dict(budget=budget, acc1=0, acc3=0, acc5=0,
-                             majority=0, oracle=0, pool_size=pool_size))
+                             strongest=0, oracle=0, pool_size=pool_size))
             continue
 
         rows.append(dict(
@@ -331,14 +331,14 @@ def cost_constrained_routing_by_price(
             acc1=accs_at[1] / total,
             acc3=accs_at[3] / total,
             acc5=accs_at[5] / total,
-            majority=majority_correct / total,
+            strongest=strongest_correct / total,
             oracle=oracle_correct / total,
             pool_size=pool_size,
         ))
         print(
             f"  Budget ${budget:<6.2f}/M  pool={pool_size:3d}  "
             f"acc@1={rows[-1]['acc1']:.3f}  acc@5={rows[-1]['acc5']:.3f}  "
-            f"majority={rows[-1]['majority']:.3f}"
+            f"strongest={rows[-1]['strongest']:.3f}"
         )
 
     return pd.DataFrame(rows)
@@ -361,7 +361,7 @@ def plot_routing_curve_price(curve_df: pd.DataFrame, fig_dir) -> None:
             color="#4C72B0", markersize=5, linewidth=2)
     ax.plot(curve_df["budget"], curve_df["acc5"], "s-", label="CDM acc@5",
             color="#55A868", markersize=5, linewidth=2)
-    ax.plot(curve_df["budget"], curve_df["majority"], "^--", label="Majority baseline",
+    ax.plot(curve_df["budget"], curve_df["strongest"], "^--", label="Strongest model",
             color="#DD8452", markersize=5, linewidth=1.5)
     ax.plot(curve_df["budget"], curve_df["oracle"], "d:", label="Oracle (any in pool)",
             color="#8172B3", markersize=5, linewidth=1.5)

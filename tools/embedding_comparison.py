@@ -60,7 +60,7 @@ def encode_items(sbert_name: str, texts: list[str], cache_dir: Path) -> np.ndarr
 
 def routing_eval(net, text_embeddings, q_matrix, response_vals, test_items,
                  n_llms, device):
-    """Compute routing acc@1/3/5 and majority baseline."""
+    """Compute routing acc@1/3/5 and strongest model baseline."""
     net.eval()
     net = net.to(device)
     all_llm_ids = torch.arange(n_llms, device=device)
@@ -92,7 +92,7 @@ def routing_eval(net, text_embeddings, q_matrix, response_vals, test_items,
                 accs_at[k] += 1
 
     best_llm = response_vals.mean(axis=1).argmax()
-    majority = sum(
+    strongest = sum(
         response_vals[best_llm, int(i)]
         for i in test_items if response_vals[:, int(i)].sum() > 0
     ) / total
@@ -101,7 +101,7 @@ def routing_eval(net, text_embeddings, q_matrix, response_vals, test_items,
         "acc@1": accs_at[1] / total,
         "acc@3": accs_at[3] / total,
         "acc@5": accs_at[5] / total,
-        "majority": majority,
+        "strongest": strongest,
         "n_items": total,
     }
 
@@ -216,7 +216,7 @@ def main(cfg: DictConfig) -> None:
             "routing_acc1": routing["acc@1"],
             "routing_acc3": routing["acc@3"],
             "routing_acc5": routing["acc@5"],
-            "majority": routing["majority"],
+            "strongest": routing["strongest"],
         })
 
     # ── Comparison table ──
@@ -225,7 +225,7 @@ def main(cfg: DictConfig) -> None:
     print("=" * 100)
     header = (
         f"{'Model':<30} {'Dim':>5} {'AUC':>8} {'Acc':>8} {'RMSE':>8} "
-        f"{'Rt@1':>8} {'Rt@3':>8} {'Rt@5':>8} {'Majority':>10}"
+        f"{'Rt@1':>8} {'Rt@3':>8} {'Rt@5':>8} {'Strongest':>10}"
     )
     print(header)
     print("-" * len(header))
@@ -233,7 +233,7 @@ def main(cfg: DictConfig) -> None:
         print(
             f"{r['model']:<30} {r['dim']:>5d} {r['auc']:>8.4f} {r['acc']:>8.4f} "
             f"{r['rmse']:>8.4f} {r['routing_acc1']:>8.4f} {r['routing_acc3']:>8.4f} "
-            f"{r['routing_acc5']:>8.4f} {r['majority']:>10.4f}"
+            f"{r['routing_acc5']:>8.4f} {r['strongest']:>10.4f}"
         )
 
     # Best per metric

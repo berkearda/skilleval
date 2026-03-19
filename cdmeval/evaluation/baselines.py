@@ -65,7 +65,7 @@ def random_router(
     return rankings
 
 
-def majority_router(
+def strongest_model_router(
     test_items: np.ndarray,
     response_matrix: np.ndarray,
     train_items: np.ndarray,

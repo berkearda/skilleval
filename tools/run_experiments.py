@@ -225,16 +225,16 @@ def main(cfg: DictConfig) -> None:
     routing_results = {f"accuracy@{k}": accs_at[k] / total for k in accs_at}
     routing_results["n_items"] = total
     best_llm = response_vals.mean(axis=1).argmax()
-    majority_correct = sum(response_vals[best_llm, int(i)] for i in test_items if response_vals[:, int(i)].sum() > 0)
-    routing_results["majority_baseline"] = majority_correct / total
+    strongest_correct = sum(response_vals[best_llm, int(i)] for i in test_items if response_vals[:, int(i)].sum() > 0)
+    routing_results["strongest_baseline"] = strongest_correct / total
     print(f"  Routing: acc@1={routing_results['accuracy@1']:.4f}, acc@3={routing_results['accuracy@3']:.4f}, acc@5={routing_results['accuracy@5']:.4f}")
-    print(f"  Majority baseline: {routing_results['majority_baseline']:.4f}")
+    print(f"  Strongest model baseline: {routing_results['strongest_baseline']:.4f}")
 
     fig, ax = plt.subplots(figsize=(5, 3.5))
     ks = [1, 3, 5]
     vals = [routing_results[f"accuracy@{k}"] for k in ks]
     ax.bar(range(len(ks)), vals, color="#4C72B0", tick_label=[f"@{k}" for k in ks])
-    ax.axhline(routing_results["majority_baseline"], ls="--", color="red", label="Majority")
+    ax.axhline(routing_results["strongest_baseline"], ls="--", color="red", label="Strongest model")
     ax.set_ylabel("Accuracy")
     ax.set_title("Routing Accuracy (Cold-Start Items)")
     ax.legend()

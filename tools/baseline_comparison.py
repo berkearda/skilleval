@@ -25,7 +25,7 @@ def main(cfg: DictConfig) -> None:
         cdm_router,
         evaluate_rankings,
         irt_2pl_router,
-        majority_router,
+        strongest_model_router,
         random_router,
         sbert_nearest_neighbor_router,
         text_similarity_router,
@@ -76,14 +76,14 @@ def main(cfg: DictConfig) -> None:
     results["Random"]["type"] = "naive"
     print(f"  Acc@1={results['Random']['accuracy@1']:.4f}")
 
-    # ── 2. Majority baseline ──
+    # ── 2. Strongest model baseline ──
     print("\n" + "=" * 60)
-    print("Baseline 2: Majority Router (best LLM)")
+    print("Baseline 2: Strongest Model Router")
     print("=" * 60)
-    rankings = majority_router(test_items, response_vals, train_items)
-    results["Majority (best LLM)"] = evaluate_rankings(rankings, response_vals, ks)
-    results["Majority (best LLM)"]["type"] = "naive"
-    print(f"  Acc@1={results['Majority (best LLM)']['accuracy@1']:.4f}")
+    rankings = strongest_model_router(test_items, response_vals, train_items)
+    results["Strongest model"] = evaluate_rankings(rankings, response_vals, ks)
+    results["Strongest model"]["type"] = "naive"
+    print(f"  Acc@1={results['Strongest model']['accuracy@1']:.4f}")
 
     # ── 3. SBERT k-NN ──
     print("\n" + "=" * 60)
@@ -159,7 +159,7 @@ def main(cfg: DictConfig) -> None:
 
     order = [
         "Random",
-        "Majority (best LLM)",
+        "Strongest model",
         "SBERT k-NN (k=5)",
         "Text similarity (k=5)",
         "IRT 2PL",

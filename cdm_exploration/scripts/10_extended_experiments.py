@@ -403,7 +403,7 @@ def experiment_3_routing_accuracy(net_text, response_df, test_items, text_embedd
                     if k_val <= n_total - n_correct else 0.0
                 item_res[f"random_at_{k_val}"] = 1.0 - p_none
 
-        item_res["majority_correct"] = int(ground_truth[best_global_llm])
+        item_res["strongest_correct"] = int(ground_truth[best_global_llm])
         item_res["oracle"] = int(n_correct > 0)
 
         item_results.append(item_res)
@@ -423,11 +423,11 @@ def experiment_3_routing_accuracy(net_text, response_df, test_items, text_embedd
         results[f"random_acc_at_{k_val}"] = float(random_hits)
         print(f"  Accuracy@{k_val}: text_model={model_hits:.4f}, random={random_hits:.4f}")
 
-    majority_acc = np.mean([r["majority_correct"] for r in item_results])
+    strongest_acc = np.mean([r["strongest_correct"] for r in item_results])
     oracle_acc = np.mean([r["oracle"] for r in item_results])
-    results["majority_acc"] = float(majority_acc)
+    results["strongest_acc"] = float(strongest_acc)
     results["oracle_acc"] = float(oracle_acc)
-    print(f"  Majority baseline: {majority_acc:.4f}")
+    print(f"  Strongest model baseline: {strongest_acc:.4f}")
     print(f"  Oracle: {oracle_acc:.4f}")
 
     # --- Figure ---
@@ -438,7 +438,7 @@ def experiment_3_routing_accuracy(net_text, response_df, test_items, text_embedd
 
     ax.plot(ks, model_vals, "o-", linewidth=2, markersize=8, label="Text-Conditioned NCDM", color="#2196F3")
     ax.plot(ks, random_vals, "s--", linewidth=1.5, markersize=6, label="Random Routing", color="#9E9E9E")
-    ax.axhline(majority_acc, color="#FF9800", linestyle=":", linewidth=1.5, label=f"Majority (best LLM)")
+    ax.axhline(strongest_acc, color="#FF9800", linestyle=":", linewidth=1.5, label=f"Strongest model")
     ax.axhline(oracle_acc, color="#4CAF50", linestyle="-.", linewidth=1.5, label="Oracle")
 
     ax.set_xlabel("k (top-k)")
