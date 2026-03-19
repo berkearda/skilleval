@@ -77,6 +77,52 @@ def get_model_sizes(llm_names: list[str]) -> tuple[np.ndarray, np.ndarray]:
     return sizes, valid_mask
 
 
+def compute_flops_cost(
+    model_names: list[str],
+    seq_length: int = 512,
+) -> dict[str, float]:
+    """Compute approximate inference FLOPs for each model.
+
+    Uses the standard transformer FLOPs estimate:
+    ``FLOPs = 2 * N * L`` where *N* is the parameter count and *L* is the
+    sequence length.  Embedding parameters are a small fraction (<2%) for
+    models above 1B, so we approximate *N* as total params.
+
+    For models whose size cannot be parsed from the name, the median FLOPs
+    of all parseable models is assigned.
+
+    Args:
+        model_names: List of HuggingFace-style model name strings.
+        seq_length: Input sequence length (default 512 tokens).
+
+    Returns:
+        Dict mapping ``model_name -> GFLOPs``.
+    """
+    flops = {}
+    parsed_gflops = []
+
+    for name in model_names:
+        size_b = extract_model_size(name)
+        if size_b is not None:
+            gflops = 2.0 * size_b * 1e9 * seq_length / 1e9  # = 2 * N * L in GFLOPs
+            flops[name] = gflops
+            parsed_gflops.append(gflops)
+
+    median_gflops = float(np.median(parsed_gflops)) if parsed_gflops else 0.0
+    n_missing = 0
+    for name in model_names:
+        if name not in flops:
+            flops[name] = median_gflops
+            n_missing += 1
+
+    n_parsed = len(model_names) - n_missing
+    print(
+        f"FLOPs coverage: {n_parsed}/{len(model_names)} parsed, "
+        f"{n_missing} assigned median ({median_gflops:.0f} GFLOPs)"
+    )
+    return flops
+
+
 DEFAULT_BUDGETS = [0.5, 1, 2, 3, 5, 7, 8, 10, 13, 15, 20, 34, 50, 70]
 
 
