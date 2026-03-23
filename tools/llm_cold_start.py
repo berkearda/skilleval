@@ -41,7 +41,7 @@ def main(cfg: DictConfig) -> None:
         cal_sizes = list(cfg.cold_start.calibration_sizes)
         n_repeats = cfg.cold_start.n_repeats
     else:
-        cal_sizes = [10, 25, 50, 100, 200, 500]
+        cal_sizes = [0, 1, 3, 5, 10, 25, 50, 100, 200, 500]
         n_repeats = 5
     print(f"Calibration sizes: {cal_sizes}")
     print(f"Repeats per size: {n_repeats}")
@@ -119,14 +119,15 @@ def main(cfg: DictConfig) -> None:
     print("Cold-Start Evaluation on Held-Out LLMs")
     print("=" * 60)
 
-    # Use all items for calibration/evaluation of cold-start LLMs
+    # Calibrate on training items only, evaluate on test items only
     results_df = evaluate_llm_cold_start(
         trained_net=net,
         test_llm_indices=test_llms,
         response_matrix=response_vals,
         q_matrix=q_matrix,
         text_embeddings=text_embeddings,
-        all_items=all_items,
+        calibration_pool=train_items,
+        eval_items=test_item_set,
         calibration_sizes=cal_sizes,
         device=device,
         n_repeats=n_repeats,

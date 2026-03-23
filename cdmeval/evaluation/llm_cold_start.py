@@ -160,7 +160,8 @@ def evaluate_llm_cold_start(
     response_matrix: np.ndarray,
     q_matrix: np.ndarray,
     text_embeddings: np.ndarray,
-    all_items: np.ndarray,
+    calibration_pool: np.ndarray,
+    eval_items: np.ndarray,
     calibration_sizes: list[int],
     device: str = "cpu",
     n_repeats: int = 5,
@@ -170,13 +171,20 @@ def evaluate_llm_cold_start(
 ) -> pd.DataFrame:
     """Evaluate cold-start LLM profiling across calibration sizes.
 
+    Calibration items are sampled from *calibration_pool* (training items).
+    AUC is always evaluated on *eval_items* (held-out test items) to avoid
+    data leakage.
+
     Args:
         trained_net: Trained ``TextConditionedNet`` (frozen for this eval).
         test_llm_indices: Held-out LLM indices.
         response_matrix: ``(n_llms, n_items)`` binary matrix.
         q_matrix: ``(n_items, K)`` binary Q-matrix.
         text_embeddings: ``(n_items, text_dim)`` SBERT embeddings.
-        all_items: Item indices available for calibration/evaluation.
+        calibration_pool: Item indices to sample calibration items from
+            (should be training items only).
+        eval_items: Item indices to evaluate AUC on (should be held-out
+            test items only, disjoint from calibration_pool).
         calibration_sizes: List of N values to test.
         device: Torch device.
         n_repeats: Number of random calibration samples per LLM per N.
@@ -197,23 +205,28 @@ def evaluate_llm_cold_start(
 
         for N in calibration_sizes:
             for rep in range(n_repeats):
-                # Sample calibration items
-                if N >= len(all_items):
-                    cal = all_items.copy()
+                if N == 0:
+                    # No calibration — use default theta
+                    cal = np.array([], dtype=int)
+                elif N >= len(calibration_pool):
+                    cal = calibration_pool.copy()
                 else:
-                    cal = rng.choice(all_items, size=N, replace=False)
-                eval_items = np.setdiff1d(all_items, cal)
+                    cal = rng.choice(calibration_pool, size=N, replace=False)
 
                 if len(eval_items) < 10:
                     continue
 
-                # Fit theta on calibration set
-                mastery = fit_new_llm_profile(
-                    trained_net, responses, cal, q_matrix,
-                    text_embeddings, device, lr=lr, epochs=fit_epochs,
-                )
+                # Fit theta on calibration set (or use default for N=0)
+                if N == 0:
+                    K = trained_net.knowledge_dim
+                    mastery = np.full(K, 0.5)
+                else:
+                    mastery = fit_new_llm_profile(
+                        trained_net, responses, cal, q_matrix,
+                        text_embeddings, device, lr=lr, epochs=fit_epochs,
+                    )
 
-                # Evaluate on remaining items
+                # Evaluate on held-out test items (never seen during cal)
                 preds = _predict_with_theta(
                     trained_net, mastery, eval_items,
                     q_matrix, text_embeddings, device,
