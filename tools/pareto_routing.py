@@ -409,6 +409,19 @@ def main(cfg: DictConfig) -> None:
         json.dump(save_data, f, indent=2)
     print(f"Saved {out_json}")
 
+    # ── Verify and log ──
+    from cdmeval.utils.experiment import verify_splits, log_experiment
+    verified = verify_splits(train_items, test_items, label="pareto_routing")
+    log_experiment(
+        name="pareto_routing",
+        config={"K": K, "epochs": cfg.model.epochs, "lr": cfg.model.lr,
+                "device": device, "seed": 42, "thresholds": thresholds},
+        results={"cdm_sweep": cdm_sweep, "strongest": strongest_point,
+                 "cheapest": cheapest_point, "oracle": oracle_point},
+        split_info={"n_train_items": len(train_items),
+                    "n_test_items": len(test_items), "n_llms": n_llms},
+        verified=verified,
+    )
     print("\nDone.")
 
 

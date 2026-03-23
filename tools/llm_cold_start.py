@@ -190,6 +190,28 @@ def main(cfg: DictConfig) -> None:
 
     # ── Figure ──
     plot_cold_start_curve(results_df, full_auc, fig_dir)
+
+    # ── Verify and log ──
+    from cdmeval.utils.experiment import verify_splits, log_experiment
+    verified = verify_splits(
+        train_items, test_item_set,
+        eval_items=test_item_set,
+        calibration_items=train_items,
+        label="cold_start",
+    )
+    log_experiment(
+        name="llm_cold_start",
+        config={"K": K, "epochs": cfg.model.epochs, "lr": cfg.model.lr,
+                "device": device, "seed": 42, "cal_sizes": cal_sizes,
+                "n_repeats": n_repeats},
+        results={"full_auc": float(full_auc),
+                 "summary": agg.to_dict(orient="records")},
+        split_info={"n_train_items": len(train_items),
+                    "n_test_items": len(test_item_set),
+                    "n_train_llms": len(train_llms),
+                    "n_test_llms": len(test_llms)},
+        verified=verified,
+    )
     print("\nDone.")
 
 

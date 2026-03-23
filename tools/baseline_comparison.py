@@ -223,6 +223,20 @@ def main(cfg: DictConfig) -> None:
     fig.savefig(fig_path, **SAVE_KW)
     plt.close()
     print(f"Saved {fig_path}")
+
+    # ── Verify and log ──
+    from cdmeval.utils.experiment import verify_splits, log_experiment
+    verified = verify_splits(train_items, test_items, label="baseline_comparison")
+    log_experiment(
+        name="baseline_comparison",
+        config={"K": K, "epochs": cfg.model.epochs, "lr": cfg.model.lr,
+                "device": device, "seed": 42},
+        results={n: {k: v for k, v in r.items() if k != "type"}
+                 for n, r in results.items()},
+        split_info={"n_train_items": len(train_items),
+                    "n_test_items": len(test_items), "n_llms": n_llms},
+        verified=verified,
+    )
     print("\nDone.")
 
 

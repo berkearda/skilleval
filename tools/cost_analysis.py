@@ -161,6 +161,18 @@ def main(cfg: DictConfig) -> None:
             )
             break
 
+    # ── Verify and log ──
+    from cdmeval.utils.experiment import verify_splits, log_experiment
+    verified = verify_splits(train_items, test_items, label="cost_analysis")
+    log_experiment(
+        name="cost_analysis",
+        config={"K": K, "epochs": cfg.model.epochs, "lr": cfg.model.lr,
+                "device": device, "seed": 42},
+        results={"price_sweep": price_curve_df.to_dict(orient="records")},
+        split_info={"n_train_items": len(train_items),
+                    "n_test_items": len(test_items), "n_llms": n_llms},
+        verified=verified,
+    )
     print("\nDone.")
 
 
