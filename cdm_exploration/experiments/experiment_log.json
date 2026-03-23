@@ -1,0 +1,33 @@
+[
+  {
+    "timestamp": "2026-03-23T20:55:35.153053",
+    "experiment": "cluster_expanded",
+    "git_commit": "16a1848",
+    "config": {
+      "K": 50,
+      "metric": "cosine",
+      "linkage": "average",
+      "sbert_model": "all-mpnet-base-v2",
+      "n_unique_skills": 13040
+    },
+    "split_info": {
+      "n_items": 7039,
+      "n_math": 1278,
+      "n_bbh": 5761
+    },
+    "results": {
+      "silhouette": 0.05441351607441902,
+      "q_matrix_shape": [
+        7039,
+        50
+      ],
+      "mean_skills_per_item": 2.278022446370223,
+      "mean_items_per_skill": 320.7,
+      "density": 0.04556044892740446,
+      "shared_clusters": 26,
+      "math_only_clusters": 12,
+      "bbh_only_clusters": 12
+    },
+    "verified": true
+  }
+]
