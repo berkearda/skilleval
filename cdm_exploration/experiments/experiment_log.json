@@ -29,5 +29,34 @@
       "bbh_only_clusters": 12
     },
     "verified": true
+  },
+  {
+    "timestamp": "2026-03-23T21:30:57.354271",
+    "experiment": "train_expanded",
+    "git_commit": "b821f63",
+    "config": {
+      "K": 50,
+      "n_llms": 381,
+      "n_items": 7039,
+      "epochs": 15,
+      "lr": 0.002,
+      "device": "cpu"
+    },
+    "split_info": {
+      "n_train_items": 5631,
+      "n_test_items": 1408,
+      "n_llms": 381
+    },
+    "results": {
+      "test_auc": 0.7411316656420096,
+      "test_acc": 0.6782278990694345,
+      "test_rmse": 0.46092982048643755,
+      "acc@1": 0.6782670454545454,
+      "acc@3": 0.8039772727272727,
+      "acc@5": 0.8529829545454546,
+      "acc@10": 0.8934659090909091,
+      "strongest_acc1": 0.6811079545454546
+    },
+    "verified": true
   }
 ]
