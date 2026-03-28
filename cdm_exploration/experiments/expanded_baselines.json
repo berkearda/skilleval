@@ -1,0 +1,24 @@
+{
+  "n_test_items": 1408,
+  "n_llms": 3811,
+  "oracle_solvable": 1.0,
+  "grand_mean_accuracy": 0.4093065304382052,
+  "strongest_model_idx": 2880,
+  "strongest_model_acc": 0.6910511363636364,
+  "random_baselines": {
+    "random_at1": 0.42045454545454547,
+    "random_at3": 0.6676136363636364,
+    "random_at5": 0.7485795454545454,
+    "random_at10": 0.8458806818181818
+  },
+  "cdmeval_results": {
+    "test_auc": 0.7269,
+    "routing_at1": 0.6754,
+    "routing_at3": 0.8395,
+    "routing_at5": 0.8743,
+    "routing_at10": 0.9148
+  },
+  "split_random_state": 42,
+  "train_items_count": 5631,
+  "test_items_count": 1408
+}
