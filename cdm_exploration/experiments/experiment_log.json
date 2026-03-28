@@ -60,31 +60,25 @@
     "verified": true
   },
   {
-    "timestamp": "2026-03-24T12:42:58.045703",
-    "experiment": "train_expanded",
+    "timestamp": "2026-03-26T16:31:10.810445",
+    "experiment": "export_mastery_profiles",
     "git_commit": "52fe15d",
     "config": {
-      "K": 50,
-      "n_llms": 3811,
-      "n_items": 7039,
-      "epochs": 15,
-      "lr": 0.002,
-      "device": "cuda"
+      "n_llms": 381,
+      "n_skills": 50,
+      "checkpoint": "cdm_exploration/checkpoints/expanded/text_conditioned_protocolB.pt"
     },
     "split_info": {
-      "n_train_items": 5631,
-      "n_test_items": 1408,
-      "n_llms": 3811
+      "n_llms": 381,
+      "subset": true
     },
     "results": {
-      "test_auc": 0.7269293236213585,
-      "test_acc": 0.6717395145034708,
-      "test_rmse": 0.4735312881865695,
-      "acc@1": 0.6754261363636364,
-      "acc@3": 0.8394886363636364,
-      "acc@5": 0.8742897727272727,
-      "acc@10": 0.9147727272727273,
-      "strongest_acc1": 0.6882102272727273
+      "mastery_mean": 0.39275696873664856,
+      "mastery_std": 0.28311246633529663,
+      "shape": [
+        381,
+        50
+      ]
     },
     "verified": true
   }
