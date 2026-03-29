@@ -76,14 +76,14 @@ def main(cfg: DictConfig) -> None:
 
     # ── Load expanded data ──
     # Support v2 full dataset via config overrides:
-    #   data.response_matrix, data.qmatrix, data.text_embeddings, data.llm_names, data.items
+    #   data.response_matrix, data.qmatrix, data.text_embeddings, data.llm_names, data.item_metadata
     print("\nLoading expanded dataset...")
     if hasattr(cfg, "data") and hasattr(cfg.data, "response_matrix"):
         R = np.load(data_dir / cfg.data.response_matrix)
         q_matrix = np.load(data_dir / cfg.data.qmatrix).copy()
         with open(data_dir / cfg.data.llm_names) as f:
             llm_names = json.load(f)
-        with open(data_dir / cfg.data.items) as f:
+        with open(data_dir / cfg.data.item_metadata) as f:
             items_data = json.load(f)
         text_emb_path = data_dir / cfg.data.text_embeddings
     else:
