@@ -132,5 +132,34 @@
       "zero_skill_items": 0
     },
     "verified": true
+  },
+  {
+    "timestamp": "2026-03-29T15:15:39.611389",
+    "experiment": "train_expanded",
+    "git_commit": "e47def6",
+    "config": {
+      "K": 100,
+      "n_llms": 3811,
+      "n_items": 9523,
+      "epochs": 15,
+      "lr": 0.002,
+      "device": "cuda"
+    },
+    "split_info": {
+      "n_train_items": 7618,
+      "n_test_items": 1905,
+      "n_llms": 3811
+    },
+    "results": {
+      "test_auc": 0.7170448230889644,
+      "test_acc": 0.6737300713296432,
+      "test_rmse": 0.4728711382270028,
+      "acc@1": 0.6566929133858268,
+      "acc@3": 0.7795275590551181,
+      "acc@5": 0.8293963254593176,
+      "acc@10": 0.8750656167979003,
+      "strongest_acc1": 0.6157480314960629
+    },
+    "verified": true
   }
 ]
