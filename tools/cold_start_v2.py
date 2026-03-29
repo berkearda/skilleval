@@ -126,7 +126,7 @@ def main(cfg: DictConfig) -> None:
         responses = R[llm_idx]
         # Use the trained embedding for this LLM
         with torch.no_grad():
-            raw = net.student_emb(torch.tensor([llm_idx])).numpy()
+            raw = net.student_emb(torch.tensor([llm_idx], device=device)).cpu().numpy()
             mastery = 1.0 / (1.0 + np.exp(-raw.squeeze()))
         preds = predict_with_theta(net, mastery, test_items, q_matrix, text_embs, device)
         y_true = responses[test_items.astype(int)]
