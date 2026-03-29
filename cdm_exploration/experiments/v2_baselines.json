@@ -1,0 +1,23 @@
+{
+  "dataset": "v2_full",
+  "n_llms": 3811,
+  "n_items": 9523,
+  "n_test_items": 1905,
+  "n_train_items": 7618,
+  "random_seed": 42,
+  "random_acc1": 0.4047244094488189,
+  "strongest_model": "MaziyarPanahi__calme-3.2-instruct-78b",
+  "strongest_acc1": 0.6157480314960629,
+  "oracle_solvability": 1.0,
+  "grand_mean_accuracy": 0.39967422158723953,
+  "test_mean_accuracy": 0.3946344020038692,
+  "cdmeval": {
+    "K": 100,
+    "epochs": 15,
+    "test_auc": 0.717,
+    "acc1": 0.6567,
+    "acc3": 0.7795,
+    "acc5": 0.8294,
+    "acc10": 0.8751
+  }
+}
