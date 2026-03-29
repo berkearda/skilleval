@@ -1,0 +1,20 @@
+{
+  "dataset": "v2_full",
+  "model": "IRT_2PL",
+  "n_llms": 3811,
+  "n_items": 9523,
+  "n_test_items": 1905,
+  "epochs": 15,
+  "lr": 0.002,
+  "test_auc": 0.6045758242933198,
+  "test_acc": 0.579747119644681,
+  "test_rmse": 0.5112547237947547,
+  "routing_acc@1": 0.6110236220472441,
+  "routing_acc@3": 0.7774278215223097,
+  "routing_acc@5": 0.8194225721784777,
+  "routing_acc@10": 0.8593175853018372,
+  "strongest_model": "MaziyarPanahi__calme-3.2-instruct-78b",
+  "strongest_acc1": 0.6157480314960629,
+  "cdmeval_acc1": 0.6567,
+  "advantage_over_irt": 0.04567637795275581
+}
