@@ -75,23 +75,33 @@ def main(cfg: DictConfig) -> None:
     print(f"Device: {device}")
 
     # ── Load expanded data ──
+    # Support v2 full dataset via config overrides:
+    #   data.response_matrix, data.qmatrix, data.text_embeddings, data.llm_names, data.items
     print("\nLoading expanded dataset...")
-    R = np.load(data_dir / "response_matrix_expanded.npy")
-    q_matrix = np.load(data_dir / "qmatrix_expanded.npy").copy()
-
-    with open(data_dir / "response_matrix_expanded_llms.json") as f:
-        llm_names = json.load(f)
-    with open(data_dir / "response_matrix_expanded_items.json") as f:
-        items_data = json.load(f)
+    if hasattr(cfg, "data") and hasattr(cfg.data, "response_matrix"):
+        R = np.load(data_dir / cfg.data.response_matrix)
+        q_matrix = np.load(data_dir / cfg.data.qmatrix).copy()
+        with open(data_dir / cfg.data.llm_names) as f:
+            llm_names = json.load(f)
+        with open(data_dir / cfg.data.items) as f:
+            items_data = json.load(f)
+        text_emb_path = data_dir / cfg.data.text_embeddings
+    else:
+        R = np.load(data_dir / "response_matrix_expanded.npy")
+        q_matrix = np.load(data_dir / "qmatrix_expanded.npy").copy()
+        with open(data_dir / "response_matrix_expanded_llms.json") as f:
+            llm_names = json.load(f)
+        with open(data_dir / "response_matrix_expanded_items.json") as f:
+            items_data = json.load(f)
+        text_emb_path = data_dir / "item_text_embeddings_expanded.npz"
 
     n_llms, n_items = R.shape
     n_skills = q_matrix.shape[1]
     print(f"  Response matrix: {n_llms} LLMs x {n_items} items")
     print(f"  Q-matrix: {q_matrix.shape}")
+    print(f"  Evaluating on N_test test items, N_train train items (see split below)")
 
     # ── Fix zero-skill items ──
-    # Need item text embeddings for the expanded dataset
-    text_emb_path = data_dir / "item_text_embeddings_expanded.npz"
     if not text_emb_path.exists():
         print("\n  Encoding item texts with SBERT...")
         from sentence_transformers import SentenceTransformer
@@ -105,10 +115,15 @@ def main(cfg: DictConfig) -> None:
         text_embeddings = np.load(text_emb_path)["embeddings"]
         print(f"  Item text embeddings: {text_embeddings.shape}")
 
-    q_matrix = fix_zero_skill_items(
-        q_matrix, data_dir / "skill_embeddings_expanded.npz",
-        items_data, text_emb_path,
-    )
+    # Only fix if there are zero-skill items
+    if (q_matrix.sum(axis=1) == 0).sum() > 0:
+        skill_emb_name = cfg.data.skill_embeddings if (hasattr(cfg, "data") and hasattr(cfg.data, "skill_embeddings")) else "skill_embeddings_expanded.npz"
+        q_matrix = fix_zero_skill_items(
+            q_matrix, data_dir / skill_emb_name,
+            items_data, text_emb_path,
+        )
+    else:
+        print(f"  No zero-skill items to fix")
     text_dim = text_embeddings.shape[1]
 
     # ── Optional LLM subset ──

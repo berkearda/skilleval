@@ -1,11 +1,11 @@
-"""LLM-based skill extraction from math problems."""
+"""LLM-based skill extraction from math and reasoning problems."""
 
 from __future__ import annotations
 
 import json
 import time
 from collections import Counter
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 import pandas as pd
 from tqdm import tqdm
@@ -207,3 +207,109 @@ def analyze_extracted_skills(results_df: pd.DataFrame) -> Counter:
         print(f"\n{source}: {len(set(source_skills))} unique skills from {len(source_df)} problems")
 
     return skill_counts
+
+
+# ════════════════════════════════════════════════════════════════════
+#  Benchmark-aware extraction (v2 prompt)
+# ════════════════════════════════════════════════════════════════════
+
+QMATRIX_SYSTEM_PROMPT = """You are a psychometrician designing a Q-matrix for cognitive diagnostic assessment of AI systems. Your task: identify the specific cognitive skills each test item measures.
+
+RULES:
+1. Each skill must be a compound phrase (5-10 words): [specific_cognitive_process] + [specific_content_domain]
+2. Extract 2-4 skills per item. At least one must be domain-specific.
+3. FORBIDDEN generic labels (will be rejected):
+   - "reading comprehension", "logical reasoning", "critical thinking"
+   - "mathematical reasoning", "problem solving", "analytical thinking"
+   - "scientific knowledge", "attention to detail", "numerical reasoning"
+   - Any label that would apply to >15% of items in the benchmark
+4. Specificity test: would fewer than 100 items in a 10,000-item test share this exact skill? If not, decompose further.
+5. Use lowercase snake_case labels.
+
+GOOD examples by benchmark type:
+
+MATH: "factoring_higher_degree_polynomials_over_integers", "applying_pigeonhole_principle_to_combinatorial_bounds", "computing_modular_arithmetic_in_residue_classes"
+
+BBH: "tracing_boolean_operator_precedence_in_nested_expressions", "identifying_causal_direction_from_correlational_evidence", "tracking_object_positions_through_spatial_transformations"
+
+GPQA: "applying_gauss_law_to_cylindrical_charge_distributions", "predicting_reaction_products_via_retrosynthetic_analysis", "interpreting_phylogenetic_trees_from_molecular_sequence_data"
+
+MuSR: "integrating_alibis_and_motives_to_identify_suspects", "tracking_object_locations_across_sequential_room_transfers", "resolving_team_allocation_under_mutual_exclusion_constraints"
+
+IFEval: "enforcing_exact_word_count_in_structured_output", "maintaining_consistent_formatting_across_nested_lists", "embedding_required_keywords_while_preserving_coherence"
+
+BAD examples (too generic, rejected):
+- "problem solving" -> decompose to "applying_substitution_to_solve_nonlinear_systems"
+- "reading comprehension" -> decompose to "extracting_temporal_ordering_from_narrative_clues"
+- "scientific knowledge" -> decompose to "applying_conservation_of_angular_momentum_to_rotating_bodies"
+"""
+
+QMATRIX_USER_TEMPLATE = """Benchmark: {benchmark} | Subtask: {subtask}
+
+Item:
+{question_text}
+
+Respond in JSON:
+{{
+  "skills": [
+    {{
+      "label": "5-10 word compound skill in snake_case",
+      "process": "the specific cognitive operation",
+      "domain": "the specific content area"
+    }}
+  ],
+  "primary_skill": "label of the single most important skill"
+}}"""
+
+
+FORBIDDEN_LABELS = {
+    "reading comprehension", "logical reasoning", "critical thinking",
+    "mathematical reasoning", "problem solving", "analytical thinking",
+    "scientific knowledge", "attention to detail", "numerical reasoning",
+    "reading_comprehension", "logical_reasoning", "critical_thinking",
+    "mathematical_reasoning", "problem_solving", "analytical_thinking",
+    "scientific_knowledge", "attention_to_detail", "numerical_reasoning",
+}
+
+
+def extract_skills_v2_openai(
+    question_text: str,
+    benchmark: str,
+    subtask: str,
+    model: str = "gpt-4o-mini",
+) -> Dict:
+    """Extract skills using the benchmark-aware v2 prompt via OpenAI."""
+    from openai import OpenAI
+
+    client = OpenAI()
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": QMATRIX_SYSTEM_PROMPT},
+            {"role": "user", "content": QMATRIX_USER_TEMPLATE.format(
+                benchmark=benchmark, subtask=subtask,
+                question_text=question_text[:1500],
+            )},
+        ],
+        temperature=0.0,
+        response_format={"type": "json_object"},
+    )
+    result = json.loads(response.choices[0].message.content)
+
+    # Normalise: extract just the label strings
+    skills = result.get("skills", [])
+    labels = []
+    for s in skills:
+        if isinstance(s, dict):
+            labels.append(s.get("label", ""))
+        elif isinstance(s, str):
+            labels.append(s)
+
+    # Filter forbidden
+    labels = [l for l in labels if l.lower().replace("_", " ") not in FORBIDDEN_LABELS]
+
+    return {
+        "skills": labels,
+        "primary_skill": result.get("primary_skill", labels[0] if labels else ""),
+        "raw": result,
+    }

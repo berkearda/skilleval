@@ -81,5 +81,56 @@
       ]
     },
     "verified": true
+  },
+  {
+    "timestamp": "2026-03-28T15:33:21.325487",
+    "experiment": "cluster_v2_full",
+    "git_commit": "003125e",
+    "config": {
+      "K": 50,
+      "metric": "cosine",
+      "linkage": "average",
+      "n_unique_skills": 18785
+    },
+    "split_info": {
+      "n_items": 9523,
+      "n_skills": 18785
+    },
+    "results": {
+      "silhouette": 0.008017283864319324,
+      "q_shape": [
+        9523,
+        50
+      ],
+      "mean_skills_per_item": 1.8423816024362072,
+      "density": 0.03684763204872414,
+      "zero_skill_items": 0
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-29T11:39:02.516003",
+    "experiment": "cluster_v2_new_prompt",
+    "git_commit": "003125e",
+    "config": {
+      "K": 300,
+      "prompt": "v2_benchmark_aware",
+      "n_unique_skills": 13276
+    },
+    "split_info": {
+      "n_items": 9523,
+      "n_skills": 13276
+    },
+    "results": {
+      "silhouette": 0.09110734611749649,
+      "q_shape": [
+        9523,
+        300
+      ],
+      "mean_skills_per_item": 1.627953376036963,
+      "largest_cluster_pct": 11.739997899821484,
+      "zero_skill_items": 0
+    },
+    "verified": true
   }
 ]
