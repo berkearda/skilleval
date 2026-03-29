@@ -117,6 +117,8 @@ def main(cfg: DictConfig) -> None:
     print(f"\nLoading checkpoint: {ckpt_path}", flush=True)
     net = TextConditionedNet(K, n_llms, 768)
     load_checkpoint(ckpt_path, net, device)
+    net = net.to(device)
+    net.eval()
 
     # ── Full-training baseline AUC ──
     # Evaluate the trained model on train LLMs + test items
