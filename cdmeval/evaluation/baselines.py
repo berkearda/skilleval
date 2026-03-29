@@ -234,7 +234,8 @@ def _train_irt(
 
         avg_loss = np.mean(losses)
         print(
-            f"    loss={avg_loss:.4f}, val_auc={va_auc:.4f}"
+            f"    Epoch {epoch+1}/{epochs}: loss={avg_loss:.4f}, val_auc={va_auc:.4f}",
+            flush=True,
         )
         if va_auc > best_auc:
             best_auc = va_auc
@@ -242,7 +243,7 @@ def _train_irt(
 
     if best_state:
         model.load_state_dict(best_state)
-        print(f"  Restored best IRT model (val_auc={best_auc:.4f})")
+        print(f"  Restored best IRT model (val_auc={best_auc:.4f})", flush=True)
     return model
 
 

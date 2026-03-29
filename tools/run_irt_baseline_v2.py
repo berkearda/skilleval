@@ -8,6 +8,7 @@ Usage:
 """
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -15,6 +16,9 @@ import torch
 import hydra
 from omegaconf import DictConfig
 from sklearn.model_selection import train_test_split
+
+# Force unbuffered output for SLURM logs
+sys.stdout.reconfigure(line_buffering=True) if hasattr(sys.stdout, 'reconfigure') else None
 
 
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
@@ -45,15 +49,13 @@ def main(cfg: DictConfig) -> None:
     print(f"  Evaluating on {len(test_items)} test items, {len(train_items)} train items")
 
     # ── Build triplets from training items only ──
-    print("\nBuilding training triplets...")
+    print("\nBuilding training triplets...", flush=True)
     student_ids = np.repeat(np.arange(n_llms), len(train_items))
     item_ids = np.tile(train_items.astype(int), n_llms)
-    scores = R[
-        np.repeat(np.arange(n_llms), len(train_items)),
-        np.tile(train_items.astype(int), n_llms),
-    ].astype(float)
+    print(f"  Building score array...", flush=True)
+    scores = R[student_ids, item_ids].astype(float)
     triplets = np.column_stack([student_ids, item_ids, scores])
-    print(f"  Training triplets: {len(triplets):,}")
+    print(f"  Training triplets: {len(triplets):,}", flush=True)
 
     # Train/val split
     idx = np.arange(len(triplets))
