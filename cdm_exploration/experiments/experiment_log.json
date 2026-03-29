@@ -200,5 +200,51 @@
       "advantage_over_irt": 0.04567637795275581
     },
     "verified": true
+  },
+  {
+    "timestamp": "2026-03-29T20:33:54.627249",
+    "experiment": "pareto_routing_v2",
+    "git_commit": "6774c08",
+    "config": {
+      "n_llms": 3811,
+      "n_items": 9523,
+      "K": 100,
+      "thresholds": [
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95
+      ],
+      "device": "cpu"
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "sweet_spot": {
+        "t": 0.55,
+        "cost_pct": 17.6996709065214,
+        "acc_pct": 91.04859335038364
+      },
+      "strongest_acc": 0.6157480314960629,
+      "cdm_acc1_at_t50": 0.5490813648293963,
+      "irt_acc1_at_t50": 0.4561679790026247
+    },
+    "verified": true
   }
 ]
