@@ -781,5 +781,63 @@
       "wbs_items": 723
     },
     "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T15:27:28.243344",
+    "experiment": "per_benchmark_routing_v2",
+    "git_commit": "c738f86",
+    "config": {
+      "n_llms": 3811,
+      "K": 100,
+      "device": "cpu"
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "MATH": {
+        "n_items": 264,
+        "cdm_acc1": 0.5416666666666666,
+        "irt_acc1": 0.5303030303030303,
+        "strongest_acc1": 0.375,
+        "random_acc1": 0.15151515151515152
+      },
+      "BBH": {
+        "n_items": 1159,
+        "cdm_acc1": 0.7351164797238999,
+        "irt_acc1": 0.6902502157031924,
+        "strongest_acc1": 0.7161345987920621,
+        "random_acc1": 0.4710957722174288
+      },
+      "GPQA": {
+        "n_items": 246,
+        "cdm_acc1": 0.4065040650406504,
+        "irt_acc1": 0.4024390243902439,
+        "strongest_acc1": 0.3699186991869919,
+        "random_acc1": 0.2804878048780488
+      },
+      "MuSR": {
+        "n_items": 136,
+        "cdm_acc1": 0.5441176470588235,
+        "irt_acc1": 0.41911764705882354,
+        "strongest_acc1": 0.5294117647058824,
+        "random_acc1": 0.3014705882352941
+      },
+      "IFEval": {
+        "n_items": 100,
+        "cdm_acc1": 0.82,
+        "irt_acc1": 0.68,
+        "strongest_acc1": 0.81,
+        "random_acc1": 0.45
+      },
+      "Overall": {
+        "n_items": 1905,
+        "cdm_acc1": 0.6566929133858268,
+        "irt_acc1": 0.6110236220472441,
+        "strongest_acc1": 0.6157480314960629
+      }
+    },
+    "verified": true
   }
 ]
