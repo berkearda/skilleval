@@ -1,0 +1,29 @@
+{
+  "dataset": "v2_full",
+  "n_llms": 3811,
+  "K": 100,
+  "major_families": {
+    "Llama": 708,
+    "Qwen": 610,
+    "Gemma": 229,
+    "Mistral": 151,
+    "Phi": 86,
+    "Falcon": 45,
+    "Yi": 33,
+    "SOLAR": 17,
+    "OpenChat": 15,
+    "Zephyr": 12
+  },
+  "weak_beats_strong": {
+    "n_items": 723,
+    "pct": 37.95275590551181,
+    "by_benchmark": {
+      "GPQA": 155,
+      "BBH": 329,
+      "MuSR": 64,
+      "MATH": 156,
+      "IFEval": 19
+    }
+  },
+  "skills_with_wbs": 41
+}

@@ -327,5 +327,459 @@
       ]
     },
     "verified": true
+  },
+  {
+    "timestamp": "2026-03-29T22:05:37.537237",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811,
+      "device": "cpu"
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723,
+      "above_diagonal": 41
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-29T22:16:25.094898",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811,
+      "device": "cpu"
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723,
+      "skills_with_wbs": 41
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T11:05:43.668092",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T11:13:09.905998",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T11:20:49.635316",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T11:28:57.577680",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T11:32:22.398947",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T11:36:47.779636",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T11:44:26.210806",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T11:53:13.780647",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T12:02:54.403998",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T12:24:27.322576",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T12:31:30.363620",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T12:38:59.687992",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T12:59:30.183720",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T13:12:56.051942",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T13:18:28.881732",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T13:23:39.178779",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T13:28:48.297971",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T14:27:48.740816",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T14:30:54.950481",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T14:32:27.969557",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T14:35:33.490986",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T14:45:25.349150",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-03-30T14:47:26.541874",
+    "experiment": "interpretability_v2",
+    "git_commit": "2a394c3",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_train": 7618,
+      "n_test": 1905
+    },
+    "results": {
+      "wbs_pct": 37.95275590551181,
+      "wbs_items": 723
+    },
+    "verified": true
   }
 ]
