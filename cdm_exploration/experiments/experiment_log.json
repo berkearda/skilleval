@@ -963,5 +963,73 @@
       "epochs": 15
     },
     "verified": true
+  },
+  {
+    "timestamp": "2026-04-01T17:08:19.335236",
+    "experiment": "cross_benchmark_transfer",
+    "git_commit": "11cb5b9",
+    "config": {
+      "K": 100,
+      "epochs": 15,
+      "lr": 0.002,
+      "device": "cuda",
+      "train_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA"
+      ],
+      "test_benchmarks": [
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    "split_info": {
+      "n_train_items": 8231,
+      "n_test_items": 1292,
+      "n_llms": 3811
+    },
+    "results": {
+      "experiment": "cross_benchmark_transfer",
+      "train_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA"
+      ],
+      "test_benchmarks": [
+        "MuSR",
+        "IFEval"
+      ],
+      "n_train_items": 8231,
+      "n_test_items": 1292,
+      "K": 100,
+      "epochs": 15,
+      "n_llms": 3811,
+      "combined_auc": 0.46882767331615693,
+      "combined_acc": 0.4598855520885038,
+      "combined_routing": {
+        "n_items": 1292,
+        "cdm_acc1": 0.44504643962848295,
+        "strongest_acc1": 0.576625386996904,
+        "random_acc1": 0.4001547987616099
+      },
+      "musr": {
+        "n_items": 756,
+        "cdm_acc1": 0.4695767195767196,
+        "strongest_acc1": 0.4669312169312169,
+        "random_acc1": 0.41534391534391535
+      },
+      "ifeval": {
+        "n_items": 536,
+        "cdm_acc1": 0.41044776119402987,
+        "strongest_acc1": 0.7313432835820896,
+        "random_acc1": 0.43656716417910446
+      },
+      "full_training_reference": {
+        "musr_acc1": 0.5441,
+        "ifeval_acc1": 0.82,
+        "auc": 0.717
+      }
+    },
+    "verified": true
   }
 ]
