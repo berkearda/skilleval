@@ -1,0 +1,39 @@
+{
+  "n_llms": 3811,
+  "K": 100,
+  "best_fit_counts": {
+    "sigmoid": 65,
+    "linear": 27,
+    "power": 8
+  },
+  "n_sigmoid_fits": 88,
+  "median_inflection_B": 3.0477619337508495,
+  "median_steepness": 2.6424655519504485,
+  "top5_steepest": [
+    {
+      "skill": "Triangle ratios",
+      "steepness": 19.999999999939956,
+      "threshold_B": 5.682702334255233
+    },
+    {
+      "skill": "Sunni-Shia history",
+      "steepness": 19.999999999710248,
+      "threshold_B": 1.4384439269385993
+    },
+    {
+      "skill": "Maxwell equations",
+      "steepness": 19.999999998429786,
+      "threshold_B": 5.810375004034357
+    },
+    {
+      "skill": "Number interpretation",
+      "steepness": 19.99999999748419,
+      "threshold_B": 5.711885737103942
+    },
+    {
+      "skill": "Interpolation",
+      "steepness": 19.999999996056477,
+      "threshold_B": 5.527107479139081
+    }
+  ]
+}

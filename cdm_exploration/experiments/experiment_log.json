@@ -1118,5 +1118,535 @@
       ]
     },
     "verified": true
+  },
+  {
+    "timestamp": "2026-04-02T11:16:42.114015",
+    "experiment": "scaling_laws",
+    "git_commit": "e15d5cd",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_llms": 3811,
+      "n_items": 9523
+    },
+    "results": {
+      "n_llms": 3811,
+      "K": 100,
+      "best_fit_counts": {
+        "sigmoid": 65,
+        "linear": 27,
+        "power": 8
+      },
+      "n_sigmoid_fits": 88,
+      "median_inflection_B": 3.0477619337508495,
+      "median_steepness": 2.6424655519504485,
+      "top5_steepest": [
+        {
+          "skill": "Ratios Of Segments In ",
+          "steepness": 19.999999999939956,
+          "threshold_B": 5.682702334255233
+        },
+        {
+          "skill": "Historical Context Of ",
+          "steepness": 19.999999999710248,
+          "threshold_B": 1.4384439269385993
+        },
+        {
+          "skill": "Maxwell Equations To E",
+          "steepness": 19.999999998429786,
+          "threshold_B": 5.810375004034357
+        },
+        {
+          "skill": "Numerical Values In Co",
+          "steepness": 19.99999999748419,
+          "threshold_B": 5.711885737103942
+        },
+        {
+          "skill": "Interpolation To Estim",
+          "steepness": 19.999999996056477,
+          "threshold_B": 5.527107479139081
+        }
+      ]
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-04-02T11:25:18.704875",
+    "experiment": "scaling_laws",
+    "git_commit": "e15d5cd",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_llms": 3811,
+      "n_items": 9523
+    },
+    "results": {
+      "n_llms": 3811,
+      "K": 100,
+      "best_fit_counts": {
+        "sigmoid": 65,
+        "linear": 27,
+        "power": 8
+      },
+      "n_sigmoid_fits": 88,
+      "median_inflection_B": 3.0477619337508495,
+      "median_steepness": 2.6424655519504485,
+      "top5_steepest": [
+        {
+          "skill": "Ratios Of Segments In ",
+          "steepness": 19.999999999939956,
+          "threshold_B": 5.682702334255233
+        },
+        {
+          "skill": "Historical Context Of ",
+          "steepness": 19.999999999710248,
+          "threshold_B": 1.4384439269385993
+        },
+        {
+          "skill": "Maxwell Equations To E",
+          "steepness": 19.999999998429786,
+          "threshold_B": 5.810375004034357
+        },
+        {
+          "skill": "Numerical Values In Co",
+          "steepness": 19.99999999748419,
+          "threshold_B": 5.711885737103942
+        },
+        {
+          "skill": "Interpolation To Estim",
+          "steepness": 19.999999996056477,
+          "threshold_B": 5.527107479139081
+        }
+      ]
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-04-02T11:33:58.074286",
+    "experiment": "scaling_laws",
+    "git_commit": "e15d5cd",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_llms": 3811,
+      "n_items": 9523
+    },
+    "results": {
+      "n_llms": 3811,
+      "K": 100,
+      "best_fit_counts": {
+        "sigmoid": 65,
+        "linear": 27,
+        "power": 8
+      },
+      "n_sigmoid_fits": 88,
+      "median_inflection_B": 3.0477619337508495,
+      "median_steepness": 2.6424655519504485,
+      "top5_steepest": [
+        {
+          "skill": "Triangle ratios",
+          "steepness": 19.999999999939956,
+          "threshold_B": 5.682702334255233
+        },
+        {
+          "skill": "Sunni-Shia history",
+          "steepness": 19.999999999710248,
+          "threshold_B": 1.4384439269385993
+        },
+        {
+          "skill": "Maxwell equations",
+          "steepness": 19.999999998429786,
+          "threshold_B": 5.810375004034357
+        },
+        {
+          "skill": "Number interpretation",
+          "steepness": 19.99999999748419,
+          "threshold_B": 5.711885737103942
+        },
+        {
+          "skill": "Interpolation",
+          "steepness": 19.999999996056477,
+          "threshold_B": 5.527107479139081
+        }
+      ]
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-04-02T11:41:53.907693",
+    "experiment": "scaling_laws",
+    "git_commit": "e15d5cd",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_llms": 3811,
+      "n_items": 9523
+    },
+    "results": {
+      "n_llms": 3811,
+      "K": 100,
+      "best_fit_counts": {
+        "sigmoid": 65,
+        "linear": 27,
+        "power": 8
+      },
+      "n_sigmoid_fits": 88,
+      "median_inflection_B": 3.0477619337508495,
+      "median_steepness": 2.6424655519504485,
+      "top5_steepest": [
+        {
+          "skill": "Triangle ratios",
+          "steepness": 19.999999999939956,
+          "threshold_B": 5.682702334255233
+        },
+        {
+          "skill": "Sunni-Shia history",
+          "steepness": 19.999999999710248,
+          "threshold_B": 1.4384439269385993
+        },
+        {
+          "skill": "Maxwell equations",
+          "steepness": 19.999999998429786,
+          "threshold_B": 5.810375004034357
+        },
+        {
+          "skill": "Number interpretation",
+          "steepness": 19.99999999748419,
+          "threshold_B": 5.711885737103942
+        },
+        {
+          "skill": "Interpolation",
+          "steepness": 19.999999996056477,
+          "threshold_B": 5.527107479139081
+        }
+      ]
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-04-02T11:47:23.412640",
+    "experiment": "scaling_laws",
+    "git_commit": "e15d5cd",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_llms": 3811,
+      "n_items": 9523
+    },
+    "results": {
+      "n_llms": 3811,
+      "K": 100,
+      "best_fit_counts": {
+        "sigmoid": 65,
+        "linear": 27,
+        "power": 8
+      },
+      "n_sigmoid_fits": 88,
+      "median_inflection_B": 3.0477619337508495,
+      "median_steepness": 2.6424655519504485,
+      "top5_steepest": [
+        {
+          "skill": "Triangle ratios",
+          "steepness": 19.999999999939956,
+          "threshold_B": 5.682702334255233
+        },
+        {
+          "skill": "Sunni-Shia history",
+          "steepness": 19.999999999710248,
+          "threshold_B": 1.4384439269385993
+        },
+        {
+          "skill": "Maxwell equations",
+          "steepness": 19.999999998429786,
+          "threshold_B": 5.810375004034357
+        },
+        {
+          "skill": "Number interpretation",
+          "steepness": 19.99999999748419,
+          "threshold_B": 5.711885737103942
+        },
+        {
+          "skill": "Interpolation",
+          "steepness": 19.999999996056477,
+          "threshold_B": 5.527107479139081
+        }
+      ]
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-04-02T11:49:08.642039",
+    "experiment": "scaling_laws",
+    "git_commit": "e15d5cd",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_llms": 3811,
+      "n_items": 9523
+    },
+    "results": {
+      "n_llms": 3811,
+      "K": 100,
+      "best_fit_counts": {
+        "sigmoid": 65,
+        "linear": 27,
+        "power": 8
+      },
+      "n_sigmoid_fits": 88,
+      "median_inflection_B": 3.0477619337508495,
+      "median_steepness": 2.6424655519504485,
+      "top5_steepest": [
+        {
+          "skill": "Triangle ratios",
+          "steepness": 19.999999999939956,
+          "threshold_B": 5.682702334255233
+        },
+        {
+          "skill": "Sunni-Shia history",
+          "steepness": 19.999999999710248,
+          "threshold_B": 1.4384439269385993
+        },
+        {
+          "skill": "Maxwell equations",
+          "steepness": 19.999999998429786,
+          "threshold_B": 5.810375004034357
+        },
+        {
+          "skill": "Number interpretation",
+          "steepness": 19.99999999748419,
+          "threshold_B": 5.711885737103942
+        },
+        {
+          "skill": "Interpolation",
+          "steepness": 19.999999996056477,
+          "threshold_B": 5.527107479139081
+        }
+      ]
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-04-02T11:52:24.273871",
+    "experiment": "scaling_laws",
+    "git_commit": "e15d5cd",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_llms": 3811,
+      "n_items": 9523
+    },
+    "results": {
+      "n_llms": 3811,
+      "K": 100,
+      "best_fit_counts": {
+        "sigmoid": 65,
+        "linear": 27,
+        "power": 8
+      },
+      "n_sigmoid_fits": 88,
+      "median_inflection_B": 3.0477619337508495,
+      "median_steepness": 2.6424655519504485,
+      "top5_steepest": [
+        {
+          "skill": "Triangle ratios",
+          "steepness": 19.999999999939956,
+          "threshold_B": 5.682702334255233
+        },
+        {
+          "skill": "Sunni-Shia history",
+          "steepness": 19.999999999710248,
+          "threshold_B": 1.4384439269385993
+        },
+        {
+          "skill": "Maxwell equations",
+          "steepness": 19.999999998429786,
+          "threshold_B": 5.810375004034357
+        },
+        {
+          "skill": "Number interpretation",
+          "steepness": 19.99999999748419,
+          "threshold_B": 5.711885737103942
+        },
+        {
+          "skill": "Interpolation",
+          "steepness": 19.999999996056477,
+          "threshold_B": 5.527107479139081
+        }
+      ]
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-04-02T11:58:53.735759",
+    "experiment": "scaling_laws",
+    "git_commit": "e15d5cd",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_llms": 3811,
+      "n_items": 9523
+    },
+    "results": {
+      "n_llms": 3811,
+      "K": 100,
+      "best_fit_counts": {
+        "sigmoid": 65,
+        "linear": 27,
+        "power": 8
+      },
+      "n_sigmoid_fits": 88,
+      "median_inflection_B": 3.0477619337508495,
+      "median_steepness": 2.6424655519504485,
+      "top5_steepest": [
+        {
+          "skill": "Triangle ratios",
+          "steepness": 19.999999999939956,
+          "threshold_B": 5.682702334255233
+        },
+        {
+          "skill": "Sunni-Shia history",
+          "steepness": 19.999999999710248,
+          "threshold_B": 1.4384439269385993
+        },
+        {
+          "skill": "Maxwell equations",
+          "steepness": 19.999999998429786,
+          "threshold_B": 5.810375004034357
+        },
+        {
+          "skill": "Number interpretation",
+          "steepness": 19.99999999748419,
+          "threshold_B": 5.711885737103942
+        },
+        {
+          "skill": "Interpolation",
+          "steepness": 19.999999996056477,
+          "threshold_B": 5.527107479139081
+        }
+      ]
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-04-02T12:13:19.231025",
+    "experiment": "scaling_laws",
+    "git_commit": "e15d5cd",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_llms": 3811,
+      "n_items": 9523
+    },
+    "results": {
+      "n_llms": 3811,
+      "K": 100,
+      "best_fit_counts": {
+        "sigmoid": 65,
+        "linear": 27,
+        "power": 8
+      },
+      "n_sigmoid_fits": 88,
+      "median_inflection_B": 3.0477619337508495,
+      "median_steepness": 2.6424655519504485,
+      "top5_steepest": [
+        {
+          "skill": "Triangle ratios",
+          "steepness": 19.999999999939956,
+          "threshold_B": 5.682702334255233
+        },
+        {
+          "skill": "Sunni-Shia history",
+          "steepness": 19.999999999710248,
+          "threshold_B": 1.4384439269385993
+        },
+        {
+          "skill": "Maxwell equations",
+          "steepness": 19.999999998429786,
+          "threshold_B": 5.810375004034357
+        },
+        {
+          "skill": "Number interpretation",
+          "steepness": 19.99999999748419,
+          "threshold_B": 5.711885737103942
+        },
+        {
+          "skill": "Interpolation",
+          "steepness": 19.999999996056477,
+          "threshold_B": 5.527107479139081
+        }
+      ]
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-04-02T12:26:27.457788",
+    "experiment": "scaling_laws",
+    "git_commit": "e15d5cd",
+    "config": {
+      "K": 100,
+      "n_llms": 3811
+    },
+    "split_info": {
+      "n_llms": 3811,
+      "n_items": 9523
+    },
+    "results": {
+      "n_llms": 3811,
+      "K": 100,
+      "best_fit_counts": {
+        "sigmoid": 65,
+        "linear": 27,
+        "power": 8
+      },
+      "n_sigmoid_fits": 88,
+      "median_inflection_B": 3.0477619337508495,
+      "median_steepness": 2.6424655519504485,
+      "top5_steepest": [
+        {
+          "skill": "Triangle ratios",
+          "steepness": 19.999999999939956,
+          "threshold_B": 5.682702334255233
+        },
+        {
+          "skill": "Sunni-Shia history",
+          "steepness": 19.999999999710248,
+          "threshold_B": 1.4384439269385993
+        },
+        {
+          "skill": "Maxwell equations",
+          "steepness": 19.999999998429786,
+          "threshold_B": 5.810375004034357
+        },
+        {
+          "skill": "Number interpretation",
+          "steepness": 19.99999999748419,
+          "threshold_B": 5.711885737103942
+        },
+        {
+          "skill": "Interpolation",
+          "steepness": 19.999999996056477,
+          "threshold_B": 5.527107479139081
+        }
+      ]
+    },
+    "verified": true
   }
 ]
