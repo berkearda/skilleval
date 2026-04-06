@@ -250,7 +250,7 @@ def main(cfg: DictConfig) -> None:
     # ── Experiment ──
     cal_sizes = [10, 50, 100, 200, 500]
     n_repeats = 1
-    n_eval = 50
+    n_eval = 20
     eval_llms = test_llms[:n_eval]
     criteria = ["random", "heuristic", "trace", "doptimal"]
 
