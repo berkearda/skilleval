@@ -1,11 +1,7 @@
-"""CD-CAT v2: Theoretically grounded adaptive testing with three item selection criteria.
+"""CD-CAT v2: Optimized adaptive testing with pre-filtering + MAP theta.
 
-Criteria:
-  a) Heuristic: p(1-p) * sum(q_j)
-  b) Trace: p(1-p) * ||grad_theta z_j||^2
-  c) D-optimal: c_j * g_j^T @ I_cum_inv @ g_j with Sherman-Morrison updates
-
-Theta update: MAP on full history (15 Adam steps on cumulative loss + L2 prior).
+Criteria: Random, Heuristic, Trace, D-optimal
+Pre-filter: fast heuristic scores all candidates, expensive gradients only for top 200.
 
 Usage:
     python tools/run_adaptive_testing_v2.py device=cuda
@@ -14,6 +10,7 @@ Usage:
 
 import json
 import sys
+import time
 from pathlib import Path
 
 import matplotlib
@@ -29,9 +26,10 @@ from sklearn.model_selection import train_test_split
 
 sys.stdout.reconfigure(line_buffering=True) if hasattr(sys.stdout, "reconfigure") else None
 
+TOP_K_PREFILTER = 200
+
 
 def predict_with_theta(net, mastery, items, q_matrix, text_embs, device):
-    """Predict P(correct) for one LLM on items."""
     idx = items.astype(int)
     te = torch.tensor(text_embs[idx], dtype=torch.float32, device=device)
     qr = torch.tensor(q_matrix[idx], dtype=torch.float32, device=device)
@@ -44,6 +42,52 @@ def predict_with_theta(net, mastery, items, q_matrix, text_embs, device):
         h2 = torch.sigmoid(net.prednet_full2(h1))
         pred = torch.sigmoid(net.prednet_full3(h2)).squeeze(-1)
     return pred.cpu().numpy()
+
+
+def heuristic_scores(net, theta_raw, candidates, q_matrix, text_embs, device):
+    """Fast heuristic scores for ALL candidates: p(1-p) * |q|_1."""
+    idx = candidates.astype(int)
+    mastery = torch.sigmoid(theta_raw).detach().cpu().numpy().squeeze()
+    p = predict_with_theta(net, mastery, candidates, q_matrix, text_embs, device)
+    c = p * (1 - p)
+    n_skills = q_matrix[idx].sum(axis=1)
+    return c * np.maximum(n_skills, 1), p
+
+
+def compute_grads_subset(net, theta_raw, subset_items, q_matrix, text_embs, device):
+    """Compute autograd gradients for a SMALL subset of items."""
+    idx = subset_items.astype(int)
+    n = len(idx)
+    K = theta_raw.shape[1]
+
+    te = torch.tensor(text_embs[idx], dtype=torch.float32, device=device)
+    qr = torch.tensor(q_matrix[idx], dtype=torch.float32, device=device)
+
+    with torch.no_grad():
+        k_d = torch.sigmoid(net.k_difficulty_proj(te))
+        e_d = torch.sigmoid(net.e_difficulty_proj(te))
+
+    grads = np.zeros((n, K))
+    preds = np.zeros(n)
+
+    for i in range(n):
+        theta_raw.requires_grad_(True)
+        if theta_raw.grad is not None:
+            theta_raw.grad.zero_()
+
+        stat = torch.sigmoid(theta_raw)
+        x = e_d[i:i+1] * (stat - k_d[i:i+1]) * qr[i:i+1]
+        h1 = torch.sigmoid(net.prednet_full1(x))
+        h2 = torch.sigmoid(net.prednet_full2(h1))
+        z = net.prednet_full3(h2).squeeze()
+
+        g = torch.autograd.grad(z, theta_raw, retain_graph=False)[0].squeeze()
+        grads[i] = g.detach().cpu().numpy()
+        preds[i] = torch.sigmoid(z).detach().cpu().item()
+
+        theta_raw.requires_grad_(False)
+
+    return grads, preds
 
 
 def map_update(net, items_seen, responses_seen, q_matrix, text_embs, device, K,
@@ -79,87 +123,64 @@ def map_update(net, items_seen, responses_seen, q_matrix, text_embs, device, K,
     return torch.sigmoid(theta_raw).detach().cpu().numpy().squeeze()
 
 
-def compute_gradients_and_preds(net, theta_raw, candidate_items, q_matrix, text_embs, device):
-    """Compute g_j = grad(z_j, theta_raw) and p_j for each candidate item.
+def prefilter_and_select(net, theta_raw, candidates, q_matrix, text_embs, device,
+                         criterion, I_cum_inv=None):
+    """Pre-filter with heuristic, then apply expensive criterion on top-K.
 
-    Returns: grads (n_candidates, K), preds (n_candidates,)
+    Returns: (selected_item, updated_I_cum_inv or None)
     """
-    idx = candidate_items.astype(int)
-    n = len(idx)
-    K = theta_raw.shape[1]
+    # Step 1: fast heuristic on all candidates
+    h_scores, _ = heuristic_scores(net, theta_raw, candidates, q_matrix, text_embs, device)
 
-    te = torch.tensor(text_embs[idx], dtype=torch.float32, device=device)
-    qr = torch.tensor(q_matrix[idx], dtype=torch.float32, device=device)
+    if criterion == "heuristic":
+        best = int(candidates[np.argmax(h_scores)])
+        return best, I_cum_inv
 
-    with torch.no_grad():
-        k_d = torch.sigmoid(net.k_difficulty_proj(te))
-        e_d = torch.sigmoid(net.e_difficulty_proj(te))
+    # Step 2: take top-K by heuristic
+    top_k = min(TOP_K_PREFILTER, len(candidates))
+    top_idx = np.argsort(-h_scores)[:top_k]
+    subset = candidates[top_idx]
 
-    grads = torch.zeros(n, K, device=device)
-    preds = torch.zeros(n, device=device)
-
-    for i in range(n):
-        theta_raw.requires_grad_(True)
-        if theta_raw.grad is not None:
-            theta_raw.grad.zero_()
-
-        stat = torch.sigmoid(theta_raw)
-        x = e_d[i:i+1] * (stat - k_d[i:i+1]) * qr[i:i+1]
-        h1 = torch.sigmoid(net.prednet_full1(x))
-        h2 = torch.sigmoid(net.prednet_full2(h1))
-        z = net.prednet_full3(h2).squeeze()  # pre-sigmoid logit
-
-        g = torch.autograd.grad(z, theta_raw, retain_graph=False)[0].squeeze()
-        grads[i] = g.detach()
-        preds[i] = torch.sigmoid(z).detach()
-
-        theta_raw.requires_grad_(False)
-
-    return grads.cpu().numpy(), preds.cpu().numpy()
-
-
-def select_heuristic(net, theta_raw, candidates, q_matrix, text_embs, device):
-    """Heuristic: p(1-p) * sum(q_j)."""
-    idx = candidates.astype(int)
-    mastery = torch.sigmoid(theta_raw).detach().cpu().numpy().squeeze()
-    p = predict_with_theta(net, mastery, candidates, q_matrix, text_embs, device)
-    info = p * (1 - p)
-    n_skills = q_matrix[idx].sum(axis=1)
-    scores = info * np.maximum(n_skills, 1)
-    return int(candidates[np.argmax(scores)])
-
-
-def select_trace(net, theta_raw, candidates, q_matrix, text_embs, device):
-    """Trace criterion: p(1-p) * ||g_j||^2."""
-    grads, preds = compute_gradients_and_preds(net, theta_raw, candidates, q_matrix, text_embs, device)
-    c = preds * (1 - preds)
-    grad_norm_sq = (grads ** 2).sum(axis=1)
-    scores = c * grad_norm_sq
-    return int(candidates[np.argmax(scores)])
-
-
-def select_doptimal(net, theta_raw, candidates, q_matrix, text_embs, device, I_cum_inv):
-    """D-optimal: c_j * g_j^T @ I_cum_inv @ g_j. Returns (selected_item, updated_I_cum_inv)."""
-    grads, preds = compute_gradients_and_preds(net, theta_raw, candidates, q_matrix, text_embs, device)
+    # Step 3: compute expensive gradients on subset only
+    grads, preds = compute_grads_subset(net, theta_raw, subset, q_matrix, text_embs, device)
     c = preds * (1 - preds)
 
-    # Score each candidate
-    scores = np.zeros(len(candidates))
-    for i in range(len(candidates)):
-        g = grads[i]
-        scores[i] = c[i] * (g @ I_cum_inv @ g)
+    # Check for NaN
+    if np.isnan(grads).any() or np.isnan(c).any():
+        print("    WARN: NaN in gradients or predictions, falling back to heuristic", flush=True)
+        best = int(candidates[np.argmax(h_scores)])
+        return best, I_cum_inv
 
-    best = np.argmax(scores)
-    best_item = int(candidates[best])
+    if criterion == "trace":
+        grad_norm_sq = (grads ** 2).sum(axis=1)
+        scores = c * grad_norm_sq
+        if (scores < 0).any():
+            print("    WARN: negative trace scores", flush=True)
+        best_local = np.argmax(scores)
+        return int(subset[best_local]), I_cum_inv
 
-    # Sherman-Morrison update
-    g_best = grads[best]
-    c_best = c[best]
-    Ig = I_cum_inv @ g_best
-    denom = 1.0 + c_best * (g_best @ Ig)
-    I_cum_inv = I_cum_inv - (c_best * np.outer(Ig, Ig)) / denom
+    elif criterion == "doptimal":
+        scores = np.zeros(len(subset))
+        for i in range(len(subset)):
+            g = grads[i]
+            scores[i] = c[i] * (g @ I_cum_inv @ g)
+        if np.isnan(scores).any() or (scores < 0).any():
+            print("    WARN: NaN/negative D-optimal scores", flush=True)
 
-    return best_item, I_cum_inv
+        best_local = np.argmax(scores)
+        best_item = int(subset[best_local])
+
+        # Sherman-Morrison update
+        g_best = grads[best_local]
+        c_best = c[best_local]
+        Ig = I_cum_inv @ g_best
+        denom = 1.0 + c_best * (g_best @ Ig)
+        if abs(denom) > 1e-10:
+            I_cum_inv = I_cum_inv - (c_best * np.outer(Ig, Ig)) / denom
+
+        return best_item, I_cum_inv
+
+    raise ValueError(f"Unknown criterion: {criterion}")
 
 
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
@@ -168,7 +189,7 @@ def main(cfg: DictConfig) -> None:
     from cdmeval.utils.device import resolve_device, seed_everything
     from cdmeval.utils.experiment import load_checkpoint, log_experiment
     from cdmeval.utils.visualization import SAVE_KW, setup_style
-    from cdmeval.validation import validate_data
+    from cdmeval.validation import validate_data, validate_metrics
 
     seed_everything(42)
     data_dir = Path(cfg.paths.cdm_ready)
@@ -197,7 +218,6 @@ def main(cfg: DictConfig) -> None:
     train_llms, test_llms = train_test_split(all_llms, test_size=0.2, random_state=42)
     print(f"  {n_llms} LLMs, K={K}, {len(test_items)} test items", flush=True)
 
-    # ── Load model ──
     ckpt_path = Path("cdm_exploration/checkpoints/expanded/text_conditioned_protocolB.pt")
     net = TextConditionedNet(K, n_llms, 768)
     load_checkpoint(ckpt_path, net, device)
@@ -205,75 +225,89 @@ def main(cfg: DictConfig) -> None:
     for p in net.parameters():
         p.requires_grad = False
 
+    # ── Sanity check: pre-filter covers true top items ──
+    print("\nSanity check: pre-filter quality...", flush=True)
+    test_llm = test_llms[0]
+    theta_raw = nn.Parameter(torch.zeros(1, K, device=device))
+
+    # Full gradient computation on first 1000 items
+    small_pool = train_items[:1000]
+    h_scores_full, _ = heuristic_scores(net, theta_raw, small_pool, q_matrix, text_embs, device)
+    top200_h = set(small_pool[np.argsort(-h_scores_full)[:200]].tolist())
+
+    grads_full, preds_full = compute_grads_subset(net, theta_raw, small_pool, q_matrix, text_embs, device)
+    c_full = preds_full * (1 - preds_full)
+    trace_scores_full = c_full * (grads_full ** 2).sum(axis=1)
+    top10_trace = set(small_pool[np.argsort(-trace_scores_full)[:10]].tolist())
+
+    overlap = len(top200_h & top10_trace)
+    print(f"  Top-200 heuristic captures {overlap}/10 true top-10 trace items", flush=True)
+    if overlap < 8:
+        print(f"  WARN: pre-filter misses {10-overlap} items. Consider increasing TOP_K_PREFILTER.", flush=True)
+    else:
+        print(f"  PASS: pre-filter quality OK", flush=True)
+
     # ── Experiment ──
     cal_sizes = [10, 50, 100, 200, 500]
-    n_repeats = 3
-    n_eval = min(100, len(test_llms))
+    n_repeats = 1
+    n_eval = 50
     eval_llms = test_llms[:n_eval]
     criteria = ["random", "heuristic", "trace", "doptimal"]
 
     print(f"\nCD-CAT v2: {n_eval} LLMs, N={cal_sizes}, repeats={n_repeats}", flush=True)
-    print(f"  Criteria: {criteria}", flush=True)
+    print(f"  Pre-filter: top {TOP_K_PREFILTER} by heuristic", flush=True)
 
     results = {crit: {N: [] for N in cal_sizes} for crit in criteria}
 
     for li, llm_idx in enumerate(eval_llms):
-        if (li + 1) % 10 == 0 or li == 0:
-            print(f"  LLM {li+1}/{n_eval}", flush=True)
+        t0 = time.time()
         responses = R[llm_idx]
         y_test = responses[test_items.astype(int)]
         if len(np.unique(y_test)) < 2:
             continue
 
         for N in cal_sizes:
-            for rep in range(n_repeats):
-                rng = np.random.RandomState(42 + rep)
+            rng = np.random.RandomState(42)
 
-                # ── Random ──
-                cal = rng.choice(train_items, size=min(N, len(train_items)), replace=False)
-                mastery = map_update(net, cal.tolist(), responses[cal].tolist(),
-                                     q_matrix, text_embs, device, K)
+            # ── Random ──
+            cal = rng.choice(train_items, size=min(N, len(train_items)), replace=False)
+            mastery = map_update(net, cal.tolist(), responses[cal].tolist(),
+                                 q_matrix, text_embs, device, K)
+            preds = predict_with_theta(net, mastery, test_items, q_matrix, text_embs, device)
+            results["random"][N].append(roc_auc_score(y_test, preds))
+
+            # ── Adaptive criteria ──
+            for crit in ["heuristic", "trace", "doptimal"]:
+                theta_raw = nn.Parameter(torch.zeros(1, K, device=device))
+                remaining = train_items.copy()
+                items_seen, responses_seen = [], []
+                I_cum_inv = (1.0 / 0.01) * np.eye(K) if crit == "doptimal" else None
+
+                for step in range(min(N, len(train_items))):
+                    chosen, I_cum_inv = prefilter_and_select(
+                        net, theta_raw, remaining, q_matrix, text_embs, device,
+                        crit, I_cum_inv)
+
+                    items_seen.append(chosen)
+                    responses_seen.append(float(responses[chosen]))
+                    remaining = remaining[remaining != chosen]
+
+                    mastery = map_update(net, items_seen, responses_seen,
+                                         q_matrix, text_embs, device, K)
+                    theta_raw = nn.Parameter(
+                        torch.log(torch.tensor(
+                            np.clip(mastery, 1e-6, 1-1e-6) / (1 - np.clip(mastery, 1e-6, 1-1e-6)),
+                            dtype=torch.float32, device=device)).unsqueeze(0))
+
                 preds = predict_with_theta(net, mastery, test_items, q_matrix, text_embs, device)
-                results["random"][N].append(roc_auc_score(y_test, preds))
+                auc = roc_auc_score(y_test, preds)
+                results[crit][N].append(auc)
 
-                # ── Adaptive criteria ──
-                for crit in ["heuristic", "trace", "doptimal"]:
-                    theta_raw = nn.Parameter(torch.zeros(1, K, device=device))
-                    remaining = set(train_items.tolist())
-                    remaining_arr = train_items.copy()
-                    items_seen, responses_seen = [], []
-
-                    if crit == "doptimal":
-                        I_cum_inv = (1.0 / 0.01) * np.eye(K)
-
-                    for step in range(min(N, len(train_items))):
-                        # Select item
-                        if crit == "heuristic":
-                            chosen = select_heuristic(net, theta_raw, remaining_arr,
-                                                       q_matrix, text_embs, device)
-                        elif crit == "trace":
-                            chosen = select_trace(net, theta_raw, remaining_arr,
-                                                   q_matrix, text_embs, device)
-                        elif crit == "doptimal":
-                            chosen, I_cum_inv = select_doptimal(
-                                net, theta_raw, remaining_arr,
-                                q_matrix, text_embs, device, I_cum_inv)
-
-                        # Observe and accumulate
-                        items_seen.append(chosen)
-                        responses_seen.append(float(responses[chosen]))
-                        remaining.discard(chosen)
-                        remaining_arr = np.array(sorted(remaining))
-
-                        # MAP update on full history
-                        mastery = map_update(net, items_seen, responses_seen,
-                                             q_matrix, text_embs, device, K)
-                        theta_raw = nn.Parameter(
-                            torch.log(torch.tensor(mastery / (1 - np.clip(mastery, 1e-6, 1-1e-6)),
-                                                    dtype=torch.float32, device=device)).unsqueeze(0))
-
-                    preds = predict_with_theta(net, mastery, test_items, q_matrix, text_embs, device)
-                    results[crit][N].append(roc_auc_score(y_test, preds))
+        elapsed = time.time() - t0
+        if (li + 1) % 5 == 0 or li == 0:
+            remaining_est = elapsed * (n_eval - li - 1)
+            print(f"  LLM {li+1}/{n_eval}: {elapsed:.1f}s, est. remaining: {remaining_est/60:.0f}min",
+                  flush=True)
 
     # ── Summary ──
     print(f"\n{'='*80}", flush=True)
@@ -281,7 +315,7 @@ def main(cfg: DictConfig) -> None:
     print(f"{'='*80}", flush=True)
     hdr = f"{'N':>6}"
     for crit in criteria:
-        hdr += f"  {crit:>14}"
+        hdr += f"  {crit:>12}"
     print(hdr, flush=True)
     print("-" * 80, flush=True)
 
@@ -292,11 +326,18 @@ def main(cfg: DictConfig) -> None:
         for crit in criteria:
             vals = results[crit][N]
             m, s = np.mean(vals), np.std(vals)
-            line += f"  {m:>7.4f}+/-{s:.4f}"
+            line += f"  {m:>7.4f}±{s:.3f}"
             row[f"{crit}_mean"] = float(m)
             row[f"{crit}_std"] = float(s)
         print(line, flush=True)
         summary.append(row)
+
+    # Validate
+    for crit in criteria:
+        for N in cal_sizes:
+            m = np.mean(results[crit][N])
+            if m < 0.5:
+                print(f"  WARN: {crit} N={N} AUC={m:.4f} < 0.5", flush=True)
 
     # ── Figure ──
     print("\nGenerating figure...", flush=True)
@@ -305,7 +346,7 @@ def main(cfg: DictConfig) -> None:
 
     colors = {"random": "#888888", "heuristic": "#DD8452", "trace": "#4C72B0", "doptimal": "#22C55E"}
     styles = {"random": ("s", "--"), "heuristic": ("^", "-."), "trace": ("o", "-"), "doptimal": ("D", "-")}
-    labels = {"random": "Random", "heuristic": "Heuristic", "trace": "Trace", "doptimal": "D-optimal"}
+    labels_map = {"random": "Random", "heuristic": "Heuristic", "trace": "Trace", "doptimal": "D-optimal"}
 
     for crit in criteria:
         means = [np.mean(results[crit][N]) for N in cal_sizes]
@@ -315,7 +356,7 @@ def main(cfg: DictConfig) -> None:
                         [m+s for m, s in zip(means, stds)],
                         alpha=0.08 if crit == "random" else 0.12, color=colors[crit])
         ax.plot(cal_sizes, means, f"{marker}{ls}", color=colors[crit], lw=2,
-                markersize=7, label=labels[crit], alpha=0.85 if crit != "random" else 0.6)
+                markersize=7, label=labels_map[crit], alpha=0.85 if crit != "random" else 0.6)
 
     ax.set_xscale("log")
     ax.set_xlabel("Number of calibration items", fontsize=13)
@@ -339,6 +380,7 @@ def main(cfg: DictConfig) -> None:
         "experiment": "adaptive_testing_v2",
         "n_eval_llms": n_eval, "n_repeats": n_repeats, "K": K,
         "cal_sizes": cal_sizes, "criteria": criteria,
+        "top_k_prefilter": TOP_K_PREFILTER,
         "summary": summary,
     }
     out_json = Path("cdm_exploration/experiments/v2_adaptive_testing_v2.json")
@@ -349,7 +391,8 @@ def main(cfg: DictConfig) -> None:
     log_experiment(
         name="adaptive_testing_v2",
         config={"n_eval": n_eval, "K": K, "n_repeats": n_repeats,
-                "cal_sizes": cal_sizes, "criteria": criteria, "device": device},
+                "cal_sizes": cal_sizes, "criteria": criteria,
+                "top_k_prefilter": TOP_K_PREFILTER, "device": device},
         results={"summary": summary},
         split_info={"n_train_items": len(train_items), "n_test_items": len(test_items),
                     "n_train_llms": len(train_llms), "n_test_llms": len(test_llms)},
