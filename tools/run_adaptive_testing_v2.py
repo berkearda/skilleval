@@ -91,17 +91,21 @@ def compute_grads_subset(net, theta_raw, subset_items, q_matrix, text_embs, devi
 
 
 def map_update(net, items_seen, responses_seen, q_matrix, text_embs, device, K,
-               lr=0.01, steps=15, lam=0.01):
-    """MAP estimate of theta from full observation history."""
+               init_theta_raw=None, lr=0.01, steps=15, lam=0.01):
+    """MAP estimate of theta from full observation history (warm-started)."""
     if len(items_seen) == 0:
-        return np.full(K, 0.5)
+        zero = nn.Parameter(torch.zeros(1, K, device=device))
+        return np.full(K, 0.5), zero
 
     idx = np.array(items_seen, dtype=int)
     y = torch.tensor(np.array(responses_seen, dtype=np.float32), device=device)
     te = torch.tensor(text_embs[idx], dtype=torch.float32, device=device)
     qr = torch.tensor(q_matrix[idx], dtype=torch.float32, device=device)
 
-    theta_raw = nn.Parameter(torch.zeros(1, K, device=device))
+    if init_theta_raw is None:
+        theta_raw = nn.Parameter(torch.zeros(1, K, device=device))
+    else:
+        theta_raw = nn.Parameter(init_theta_raw.detach().clone())
     optimizer = torch.optim.Adam([theta_raw], lr=lr)
     loss_fn = nn.BCELoss()
 
@@ -120,7 +124,7 @@ def map_update(net, items_seen, responses_seen, q_matrix, text_embs, device, K,
         loss.backward()
         optimizer.step()
 
-    return torch.sigmoid(theta_raw).detach().cpu().numpy().squeeze()
+    return torch.sigmoid(theta_raw).detach().cpu().numpy().squeeze(), theta_raw
 
 
 def prefilter_and_select(net, theta_raw, candidates, q_matrix, text_embs, device,
@@ -271,8 +275,8 @@ def main(cfg: DictConfig) -> None:
 
             # ── Random ──
             cal = rng.choice(train_items, size=min(N, len(train_items)), replace=False)
-            mastery = map_update(net, cal.tolist(), responses[cal].tolist(),
-                                 q_matrix, text_embs, device, K)
+            mastery, _ = map_update(net, cal.tolist(), responses[cal].tolist(),
+                                    q_matrix, text_embs, device, K)
             preds = predict_with_theta(net, mastery, test_items, q_matrix, text_embs, device)
             results["random"][N].append(roc_auc_score(y_test, preds))
 
@@ -292,12 +296,10 @@ def main(cfg: DictConfig) -> None:
                     responses_seen.append(float(responses[chosen]))
                     remaining = remaining[remaining != chosen]
 
-                    mastery = map_update(net, items_seen, responses_seen,
-                                         q_matrix, text_embs, device, K)
-                    theta_raw = nn.Parameter(
-                        torch.log(torch.tensor(
-                            np.clip(mastery, 1e-6, 1-1e-6) / (1 - np.clip(mastery, 1e-6, 1-1e-6)),
-                            dtype=torch.float32, device=device)).unsqueeze(0))
+                    mastery, theta_raw = map_update(
+                        net, items_seen, responses_seen,
+                        q_matrix, text_embs, device, K,
+                        init_theta_raw=theta_raw)
 
                 preds = predict_with_theta(net, mastery, test_items, q_matrix, text_embs, device)
                 auc = roc_auc_score(y_test, preds)
