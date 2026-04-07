@@ -33,6 +33,45 @@ import hydra
 from omegaconf import DictConfig
 from sklearn.model_selection import train_test_split
 from scipy.stats import pearsonr
+from torch.utils.data import DataLoader, Dataset
+
+
+class LazyTripletDataset(Dataset):
+    """Generate (student, text_emb, q_row, score) on the fly.
+
+    Stores only the dense response matrix once (n_llms x n_items) plus the
+    item-id list for this split, and looks up text/Q rows by item id at
+    __getitem__ time. Avoids the n_llms*n_items_per_split copy of the SBERT
+    embedding (the actual OOM source on Euler).
+
+    Memory: ~R + text_embs + q_matrix shared across all splits, regardless of
+    how many (student, item) pairs the split contains.
+    """
+
+    def __init__(self, R, item_ids, text_embs_t, q_t):
+        # R: float32 numpy (n_llms, n_items_total)
+        # item_ids: int array of items participating in this split
+        # text_embs_t: torch.float32 (n_items_total, text_dim)
+        # q_t: torch.float32 (n_items_total, K)
+        self.R = R
+        self.item_ids = np.ascontiguousarray(item_ids, dtype=np.int64)
+        self.text = text_embs_t
+        self.q = q_t
+        self.n_llms = R.shape[0]
+        self.n_local = int(len(self.item_ids))
+
+    def __len__(self):
+        return self.n_llms * self.n_local
+
+    def __getitem__(self, idx):
+        s, li = divmod(idx, self.n_local)
+        i = int(self.item_ids[li])
+        return (
+            torch.tensor(s, dtype=torch.int64),
+            self.text[i],
+            self.q[i],
+            torch.tensor(float(self.R[s, i]), dtype=torch.float32),
+        )
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(line_buffering=True)
@@ -76,7 +115,6 @@ def select_held_out(cfg) -> str:
 
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
 def main(cfg: DictConfig) -> None:
-    from cdmeval.data.dataloader import make_text_dataloader
     from cdmeval.evaluation.metrics import eval_text_model
     from cdmeval.evaluation.training import train_text_model
     from cdmeval.modeling.text_conditioned import TextConditionedNet
@@ -133,14 +171,20 @@ def main(cfg: DictConfig) -> None:
           f"{len(held_items)} held-out items, overlap=0  PASS",
           flush=True)
 
-    # Within the 4 training benchmarks, carve a test split (same 80/20 as main
-    # run) so we can also report numbers on the *training* benchmarks for a
-    # sanity check that this fold's model is not broken.
-    in_dist_train_items, in_dist_test_items = train_test_split(
+    # Within the 4 training benchmarks, carve item-level splits for in-dist
+    # test (20%) and val (10% of the remaining 80%, i.e. 8% of the pool).
+    # NOTE: val is item-level (not triplet-level) to keep the dataset lazy and
+    # avoid materialising any per-triplet index array. For early stopping this
+    # is sufficient and matches Protocol B semantics.
+    in_dist_pool, in_dist_test_items = train_test_split(
         train_pool_items, test_size=0.2, random_state=42,
     )
-    print(f"  In-distribution split: {len(in_dist_train_items)} train, "
-          f"{len(in_dist_test_items)} in-dist test", flush=True)
+    in_dist_train_items, in_dist_val_items = train_test_split(
+        in_dist_pool, test_size=0.1, random_state=42,
+    )
+    print(f"  In-distribution split: {len(in_dist_train_items)} train items, "
+          f"{len(in_dist_val_items)} val items, "
+          f"{len(in_dist_test_items)} in-dist test items", flush=True)
 
     # Per-benchmark in-dist test items (for the comparison row).
     in_dist_test_set = set(in_dist_test_items.tolist())
@@ -149,40 +193,34 @@ def main(cfg: DictConfig) -> None:
         for b in BENCHMARKS if b != held_out
     }
 
-    # ── Build triplets ──
-    print("\nBuilding triplets...", flush=True)
-    student_ids = np.repeat(np.arange(n_llms), n_items)
-    item_ids = np.tile(np.arange(n_items), n_llms)
-    scores = R.ravel().astype(float)
-    triplets = np.column_stack([student_ids, item_ids, scores])
-
-    in_dist_train_set = set(in_dist_train_items.tolist())
-    train_mask = np.array(
-        [int(i) in in_dist_train_set for i in triplets[:, 1]],
-        dtype=bool,
-    )
-    train_triplets = triplets[train_mask]
-
-    tv_idx = np.arange(len(train_triplets))
-    tr_idx, va_idx = train_test_split(tv_idx, test_size=0.1, random_state=42)
-    print(f"  Train triplets: {len(train_triplets[tr_idx]):,}, "
-          f"Val: {len(train_triplets[va_idx]):,}", flush=True)
-
-    # Sanity check: zero held-out item ids in training triplets.
+    # Sanity check: zero overlap between training items and held-out items.
     held_set = set(held_items.tolist())
-    in_train = sum(1 for i in train_triplets[tr_idx][:, 1] if int(i) in held_set)
-    assert in_train == 0, (
-        f"FAIL: {in_train} training triplets reference held-out items. Leakage!"
-    )
-    print(f"  Held-out leakage check: 0 / {len(train_triplets[tr_idx])} PASS",
+    leak = sum(1 for i in in_dist_train_items if int(i) in held_set)
+    assert leak == 0, f"FAIL: {leak} training items overlap held-out. Leakage!"
+    print(f"  Leakage check: 0 / {len(in_dist_train_items)} train items in held-out  PASS",
           flush=True)
 
+    # ── Build lazy datasets (no triplet materialisation) ──
+    # R is already loaded as float; cast to float32 to halve memory.
+    R_f32 = R.astype(np.float32, copy=False)
+    text_t = torch.from_numpy(text_embs.astype(np.float32, copy=False))
+    q_t = torch.from_numpy(q_matrix.astype(np.float32, copy=False))
+
     bs = cfg.model.batch_size
-    train_loader = make_text_dataloader(
-        train_triplets[tr_idx], text_embs, q_matrix, bs, shuffle=True,
+    n_workers = int(getattr(cfg.model, "num_workers", 4))
+
+    train_ds = LazyTripletDataset(R_f32, in_dist_train_items, text_t, q_t)
+    val_ds = LazyTripletDataset(R_f32, in_dist_val_items, text_t, q_t)
+    print(f"  Train pairs (lazy): {len(train_ds):,}, "
+          f"Val pairs (lazy): {len(val_ds):,}", flush=True)
+
+    train_loader = DataLoader(
+        train_ds, batch_size=bs, shuffle=True,
+        num_workers=n_workers, pin_memory=True, drop_last=False,
     )
-    val_loader = make_text_dataloader(
-        train_triplets[va_idx], text_embs, q_matrix, bs, shuffle=False,
+    val_loader = DataLoader(
+        val_ds, batch_size=bs, shuffle=False,
+        num_workers=n_workers, pin_memory=True,
     )
 
     # ── Train ──
@@ -199,9 +237,10 @@ def main(cfg: DictConfig) -> None:
 
     # ── Evaluate on held-out benchmark ──
     print(f"\nEvaluating on held-out benchmark ({held_out})...", flush=True)
-    held_triplets = triplets[np.isin(triplets[:, 1].astype(int), held_items)]
-    held_loader = make_text_dataloader(
-        held_triplets, text_embs, q_matrix, bs, shuffle=False,
+    held_ds = LazyTripletDataset(R_f32, held_items, text_t, q_t)
+    held_loader = DataLoader(
+        held_ds, batch_size=bs, shuffle=False,
+        num_workers=n_workers, pin_memory=True,
     )
     held_auc, held_acc, held_rmse = eval_text_model(net, held_loader, device)
     print(f"  Held-out AUC={held_auc:.4f}, Acc={held_acc:.4f}, "
@@ -210,11 +249,10 @@ def main(cfg: DictConfig) -> None:
     # ── Evaluate on in-distribution test items (for sanity) ──
     print("\nEvaluating on in-distribution test items "
           "(4 training benchmarks)...", flush=True)
-    in_dist_triplets = triplets[
-        np.isin(triplets[:, 1].astype(int), in_dist_test_items)
-    ]
-    in_dist_loader = make_text_dataloader(
-        in_dist_triplets, text_embs, q_matrix, bs, shuffle=False,
+    in_dist_ds = LazyTripletDataset(R_f32, in_dist_test_items, text_t, q_t)
+    in_dist_loader = DataLoader(
+        in_dist_ds, batch_size=bs, shuffle=False,
+        num_workers=n_workers, pin_memory=True,
     )
     in_dist_auc, in_dist_acc, _ = eval_text_model(net, in_dist_loader, device)
     print(f"  In-dist AUC={in_dist_auc:.4f}, Acc={in_dist_acc:.4f}", flush=True)
