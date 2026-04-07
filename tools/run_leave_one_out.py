@@ -227,7 +227,7 @@ def main(cfg: DictConfig) -> None:
     epochs = cfg.model.epochs
     lr = cfg.model.lr
     print(f"\nTraining (K={K}, {n_llms} LLMs, hold out {held_out})", flush=True)
-    print(f"  {len(train_triplets[tr_idx])//bs:,} batches/epoch, {epochs} epochs",
+    print(f"  {len(train_ds)//bs:,} batches/epoch, {epochs} epochs",
           flush=True)
 
     net = TextConditionedNet(K, n_llms, text_dim)
