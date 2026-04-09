@@ -69,10 +69,11 @@ def main(cfg: DictConfig) -> None:
     from cdmeval.utils.device import resolve_device, seed_everything
     from cdmeval.utils.experiment import log_experiment, save_checkpoint, verify_splits
 
-    seed_everything(42)
+    seed = int(cfg.seed) if hasattr(cfg, "seed") else 42
+    seed_everything(seed)
     data_dir = Path(cfg.paths.cdm_ready)
     device = resolve_device(cfg.device)
-    print(f"Device: {device}")
+    print(f"Device: {device}, Seed: {seed}")
 
     # ── Load expanded data ──
     # Support v2 full dataset via config overrides:
@@ -223,11 +224,18 @@ def main(cfg: DictConfig) -> None:
     print(f"  Strongest Acc@1: {strongest_acc1:.4f}")
 
     # ── Save checkpoint ──
+    # If a non-default seed is used (e.g. multi-seed stability runs),
+    # save to a seed-specific path so checkpoints don't collide.
     ckpt_dir = Path("cdm_exploration/checkpoints/expanded")
+    if seed != 42:
+        ckpt_dir = Path("cdm_exploration/checkpoints/multi_seed")
+    ckpt_dir.mkdir(parents=True, exist_ok=True)
+    ckpt_name = f"seed_{seed}.pt" if seed != 42 else "text_conditioned_protocolB.pt"
     save_checkpoint(
-        net, ckpt_dir / "text_conditioned_protocolB.pt",
+        net, ckpt_dir / ckpt_name,
         config={"K": n_skills, "n_llms": n_llms, "n_items": n_items,
-                "epochs": cfg.model.epochs, "lr": cfg.model.lr, "text_dim": text_dim},
+                "epochs": cfg.model.epochs, "lr": cfg.model.lr, "text_dim": text_dim,
+                "seed": seed},
         train_items=train_items, test_items=test_items,
         val_auc=auc, epoch=cfg.model.epochs,
     )
@@ -235,9 +243,10 @@ def main(cfg: DictConfig) -> None:
     # ── Verify and log ──
     verified = verify_splits(train_items, test_items, label="train_expanded")
     log_experiment(
-        name="train_expanded",
+        name=f"train_expanded_seed{seed}",
         config={"K": n_skills, "n_llms": n_llms, "n_items": n_items,
-                "epochs": cfg.model.epochs, "lr": cfg.model.lr, "device": device},
+                "epochs": cfg.model.epochs, "lr": cfg.model.lr, "device": device,
+                "seed": seed},
         results={"test_auc": float(auc), "test_acc": float(acc),
                  "test_rmse": float(rmse), **routing,
                  "strongest_acc1": float(strongest_acc1)},
