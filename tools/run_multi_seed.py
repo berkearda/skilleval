@@ -38,13 +38,48 @@ if hasattr(sys.stdout, "reconfigure"):
 SEEDS = [42, 43, 44, 45, 46]
 
 
-class LazyTripletDataset(Dataset):
-    """Lazy (student, text_emb, q_row, score) generator. See run_leave_one_out.py."""
+class TripletIndexedDataset(Dataset):
+    """Lazy dataset over an explicit (student, item, score) triplet array.
 
-    def __init__(self, R, item_ids, text_embs_t, q_t):
+    Avoids the per-triplet text/q materialisation that caused the OOM in
+    make_text_dataloader: stores only the (s, i, r) columns of the triplet
+    array, plus shared text and Q tensors that are indexed at __getitem__
+    time.
+    """
+
+    def __init__(self, triplets, text_t, q_t):
+        # triplets: (N, 3) array with [student_id, item_id, score]
+        self.s = triplets[:, 0].astype(np.int32, copy=False)
+        self.i = triplets[:, 1].astype(np.int32, copy=False)
+        self.r = triplets[:, 2].astype(np.float32, copy=False)
+        self.text = text_t
+        self.q = q_t
+
+    def __len__(self):
+        return len(self.s)
+
+    def __getitem__(self, idx):
+        item = int(self.i[idx])
+        return (
+            torch.tensor(int(self.s[idx]), dtype=torch.int64),
+            self.text[item],
+            self.q[item],
+            torch.tensor(float(self.r[idx]), dtype=torch.float32),
+        )
+
+
+class ItemEvalDataset(Dataset):
+    """Lazy (student, text, q, score) over a held-out item set, for evaluation.
+
+    Used only for the test loader where we want every (student, item) pair on
+    the test items but no triplet array — same shape as TripletIndexedDataset
+    output.
+    """
+
+    def __init__(self, R, item_ids, text_t, q_t):
         self.R = R
         self.item_ids = np.ascontiguousarray(item_ids, dtype=np.int64)
-        self.text = text_embs_t
+        self.text = text_t
         self.q = q_t
         self.n_llms = R.shape[0]
         self.n_local = int(len(self.item_ids))
@@ -205,27 +240,55 @@ def main(cfg: DictConfig) -> None:
     text_dim = text_embs.shape[1]
     validate_data(R, q_matrix, text_embs, items_data, llm_names)
 
-    # ── Item-level 80/20 split (same as main run; deterministic, NOT seeded
-    # by the per-run seed — we want every seed to use the same items so theta
-    # comparisons are apples-to-apples). ──
-    all_items = np.arange(n_items)
-    train_pool, test_items = train_test_split(all_items, test_size=0.2, random_state=42)
-    train_items, val_items = train_test_split(train_pool, test_size=0.1, random_state=42)
-    print(f"  Train items: {len(train_items)}, Val: {len(val_items)}, "
-          f"Test: {len(test_items)}", flush=True)
-
     R_f32 = R.astype(np.float32, copy=False)
     text_t = torch.from_numpy(text_embs.astype(np.float32, copy=False))
     q_t = torch.from_numpy(q_matrix.astype(np.float32, copy=False))
 
+    # ─────────────────────────────────────────────────────────────────────
+    # SPLIT PROTOCOL: copied verbatim from tools/train_expanded.py so that
+    # this script's main-run results match the published numbers when
+    # seed=42. The val split is at the TRIPLET level (90/10 of train_triplets)
+    # NOT at the item level — every train item is seen by the model during
+    # training. The 80/20 outer item split AND the 90/10 inner triplet split
+    # both use random_state=42, independent of the per-run seed; only model
+    # init / shuffle / dropout are reseeded by `seed`.
+    # ─────────────────────────────────────────────────────────────────────
+
+    # ── Build triplets ──
+    print("\nBuilding triplets...", flush=True)
+    student_ids = np.repeat(np.arange(n_llms), n_items)
+    item_ids = np.tile(np.arange(n_items), n_llms)
+    scores = R.ravel().astype(float)
+    triplets = np.column_stack([student_ids, item_ids, scores])
+    print(f"  Total triplets: {len(triplets):,}", flush=True)
+
+    # ── Protocol B split ──
+    all_items = np.arange(n_items)
+    train_items, test_items = train_test_split(all_items, test_size=0.2, random_state=42)
+    print(f"  Train items: {len(train_items)}, Test items: {len(test_items)}",
+          flush=True)
+
+    train_mask = np.isin(triplets[:, 1].astype(int), train_items)
+    train_triplets = triplets[train_mask]
+    test_triplets = triplets[~train_mask]
+
+    tv_idx = np.arange(len(train_triplets))
+    tr_idx, va_idx = train_test_split(tv_idx, test_size=0.1, random_state=42)
+    print(f"  Train triplets: {len(train_triplets[tr_idx]):,}, "
+          f"Val: {len(train_triplets[va_idx]):,}, "
+          f"Test: {len(test_triplets):,}", flush=True)
+
     bs = cfg.model.batch_size
     n_workers = int(getattr(cfg.model, "num_workers", 4))
 
-    train_ds = LazyTripletDataset(R_f32, train_items, text_t, q_t)
-    val_ds = LazyTripletDataset(R_f32, val_items, text_t, q_t)
-    test_ds = LazyTripletDataset(R_f32, test_items, text_t, q_t)
-    print(f"  Train pairs: {len(train_ds):,}, Val: {len(val_ds):,}, "
-          f"Test: {len(test_ds):,}", flush=True)
+    train_ds = TripletIndexedDataset(train_triplets[tr_idx], text_t, q_t)
+    val_ds = TripletIndexedDataset(train_triplets[va_idx], text_t, q_t)
+    test_ds = TripletIndexedDataset(test_triplets, text_t, q_t)
+
+    # Free the large intermediate arrays now that the datasets own slim
+    # int32/float32 columns.
+    del student_ids, item_ids, scores, triplets, train_triplets, test_triplets
+    del train_mask, tv_idx, tr_idx, va_idx
 
     train_loader = DataLoader(train_ds, batch_size=bs, shuffle=True,
                               num_workers=n_workers, pin_memory=True)
@@ -285,6 +348,27 @@ def main(cfg: DictConfig) -> None:
     print(f"  CDM @1={routing_acc1:.4f}, Strongest={strongest_acc1:.4f}, "
           f"Random={random_acc1:.4f}", flush=True)
 
+    # ── Sanity check: seed=42 must reproduce main-paper numbers ──
+    if seed == 42:
+        MAIN_AUC = 0.717
+        MAIN_ACC1 = 0.657
+        TOL = 0.005
+        d_auc = abs(test_auc - MAIN_AUC)
+        d_acc = abs(routing_acc1 - MAIN_ACC1)
+        if d_auc > TOL or d_acc > TOL:
+            print("\n  WARNING: seed=42 does not match main-paper numbers", flush=True)
+            print(f"           AUC    : got {test_auc:.4f}, expected {MAIN_AUC:.4f} "
+                  f"(|delta|={d_auc:.4f}, tol={TOL})", flush=True)
+            print(f"           Acc@1  : got {routing_acc1:.4f}, expected {MAIN_ACC1:.4f} "
+                  f"(|delta|={d_acc:.4f}, tol={TOL})", flush=True)
+            print("           Investigate the val protocol or RNG state before "
+                  "trusting the multi-seed aggregate.", flush=True)
+        else:
+            print(f"\n  seed=42 sanity check PASS: "
+                  f"AUC {test_auc:.4f} (target {MAIN_AUC:.4f}, |d|={d_auc:.4f}), "
+                  f"Acc@1 {routing_acc1:.4f} (target {MAIN_ACC1:.4f}, |d|={d_acc:.4f})",
+                  flush=True)
+
     # ── Extract theta = sigmoid(student_emb.weight) ──
     with torch.no_grad():
         theta = torch.sigmoid(net.student_emb.weight.detach()).cpu().numpy()
@@ -301,8 +385,8 @@ def main(cfg: DictConfig) -> None:
         "K": int(K), "n_llms": int(n_llms), "n_items": int(n_items),
         "epochs": int(epochs), "lr": float(lr),
         "n_train_items": int(len(train_items)),
-        "n_val_items": int(len(val_items)),
         "n_test_items": int(len(test_items)),
+        "val_protocol": "triplet_level_90_10",
         "test_auc": float(test_auc),
         "test_acc": float(test_acc),
         "test_rmse": float(test_rmse),
