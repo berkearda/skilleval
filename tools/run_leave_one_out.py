@@ -133,7 +133,7 @@ def main(cfg: DictConfig) -> None:
     # ── Load data ──
     print("\nLoading v2 data...", flush=True)
     R = np.load(data_dir / "response_matrix_v2_full.npy")
-    q_matrix = np.load(data_dir / "qmatrix_v2_K100.npy")
+    q_matrix = np.load(data_dir / "qmatrix_v2_K100.npy").copy()
     text_embs = np.load(data_dir / "item_text_embeddings_v2_full.npz")["embeddings"]
     with open(data_dir / "response_matrix_v2_full_llms.json") as f:
         llm_names = json.load(f)
@@ -145,6 +145,19 @@ def main(cfg: DictConfig) -> None:
     text_dim = text_embs.shape[1]
 
     validate_data(R, q_matrix, text_embs, items_data, llm_names)
+
+    # ── Fix zero-skill items (copied from train_expanded.py) ──
+    text_emb_path = data_dir / "item_text_embeddings_v2_full.npz"
+    skill_emb_path = data_dir / "skill_embeddings_v2_K100.npz"
+    n_zero = int((q_matrix.sum(axis=1) == 0).sum())
+    if n_zero > 0:
+        from tools.train_expanded import fix_zero_skill_items
+        q_matrix = fix_zero_skill_items(
+            q_matrix, skill_emb_path, items_data, text_emb_path,
+        )
+        print(f"  Fixed {n_zero} zero-skill items in Q-matrix", flush=True)
+    else:
+        print(f"  No zero-skill items to fix", flush=True)
 
     # ── Per-benchmark item indices ──
     bench_items = {b: np.array(
