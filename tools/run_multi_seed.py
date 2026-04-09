@@ -294,7 +294,6 @@ def main(cfg: DictConfig) -> None:
           f"Test: {len(test_triplets):,}", flush=True)
 
     bs = cfg.model.batch_size
-    n_workers = int(getattr(cfg.model, "num_workers", 4))
 
     train_ds = TripletIndexedDataset(train_triplets[tr_idx], text_t, q_t)
     val_ds = TripletIndexedDataset(train_triplets[va_idx], text_t, q_t)
@@ -305,12 +304,14 @@ def main(cfg: DictConfig) -> None:
     del student_ids, item_ids, scores, triplets, train_triplets, test_triplets
     del train_mask, tv_idx, tr_idx, va_idx
 
-    train_loader = DataLoader(train_ds, batch_size=bs, shuffle=True,
-                              num_workers=n_workers, pin_memory=True)
-    val_loader = DataLoader(val_ds, batch_size=bs, shuffle=False,
-                            num_workers=n_workers, pin_memory=True)
-    test_loader = DataLoader(test_ds, batch_size=bs, shuffle=False,
-                             num_workers=n_workers, pin_memory=True)
+    # IMPORTANT: num_workers=0 to match make_text_dataloader's default in
+    # train_expanded.py. With num_workers>0, worker RNG states diverge from
+    # the single-threaded path, producing different batch orderings and a
+    # model with similar AUC but different per-item rankings (Acc@1 drops
+    # from 0.657 to 0.617).
+    train_loader = DataLoader(train_ds, batch_size=bs, shuffle=True)
+    val_loader = DataLoader(val_ds, batch_size=bs, shuffle=False)
+    test_loader = DataLoader(test_ds, batch_size=bs, shuffle=False)
 
     # ── Train ──
     epochs = cfg.model.epochs
