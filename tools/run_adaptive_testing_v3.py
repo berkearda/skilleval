@@ -725,7 +725,12 @@ def main(cfg: DictConfig) -> None:
     MAX_ITEMS = checkpoints[-1]
     MAX_ROUNDS = MAX_ITEMS // BATCH_SIZE  # 50 rounds of 10
 
-    methods = ["random", "stratified", "a_optimal", "a_optimal_batchbald", "a_optimal_balanced"]
+    all_methods = ["random", "stratified", "a_optimal", "a_optimal_batchbald", "a_optimal_balanced"]
+    # Allow subset via config: +methods='random,a_optimal_batchbald,a_optimal_balanced'
+    if hasattr(cfg, "methods"):
+        methods = [m.strip() for m in str(cfg.methods).split(",")]
+    else:
+        methods = all_methods
 
     print(f"\n  Batch size: {BATCH_SIZE}, checkpoints: {checkpoints}", flush=True)
     print(f"  Max rounds: {MAX_ROUNDS} ({MAX_ITEMS} items total)", flush=True)
