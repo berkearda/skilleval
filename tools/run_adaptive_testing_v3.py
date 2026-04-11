@@ -309,6 +309,134 @@ def select_adaptive_batch(net, theta_raw, Sigma, remaining_items, q_matrix,
     return np.array(selected)
 
 
+def select_batchbald_batch(net, theta_raw, Sigma, remaining_items, q_matrix,
+                           text_embs, device, batch_size=10, cos_penalty=0.8):
+    """BatchBALD-style selection: update Sigma within the batch after each pick.
+
+    After selecting item j, its Fisher information is folded into Sigma so
+    item j+1 is scored against the *residual* uncertainty. This prevents
+    redundant selection of items that target the same skill dimensions.
+    """
+    M, K = theta_raw.shape
+    pool = remaining_items.copy()
+    M_eff = min(M, 50)
+
+    Sigma_diag = np.diag(Sigma).copy() if Sigma.ndim == 2 else Sigma[:M_eff].mean(axis=0)
+    if Sigma_diag.ndim > 1:
+        Sigma_diag = np.diag(Sigma_diag)
+
+    # Precompute gradient proxies and predictions (same as select_adaptive_batch)
+    theta_sig = torch.sigmoid(theta_raw.detach())
+    preds = batched_forward(net, theta_sig[:M_eff], pool, q_matrix, text_embs, device)
+    p_mean = preds.mean(axis=0)
+    c = p_mean * (1 - p_mean) + 1e-8
+
+    idx = pool.astype(int)
+    with torch.no_grad():
+        te = torch.tensor(text_embs[idx], dtype=torch.float32, device=device)
+        qr = torch.tensor(q_matrix[idx], dtype=torch.float32, device=device)
+        e_d = torch.sigmoid(net.e_difficulty_proj(te)).squeeze(-1)  # (pool,)
+
+    # g_approx[j, k] = q[j,k] * e_d[j] — gradient direction proxy
+    g_sq = (qr * e_d.unsqueeze(1)).cpu().numpy() ** 2  # (pool, K)
+
+    # Q-row cosine for diversity penalty
+    Q_pool = q_matrix[idx].astype(np.float32)
+    Q_norms = np.linalg.norm(Q_pool, axis=1, keepdims=True) + 1e-8
+    Q_normed = Q_pool / Q_norms
+
+    selected = []
+    mask = np.ones(len(pool), dtype=bool)
+    running_sigma = Sigma_diag.copy()  # (K,) — diagonal posterior variance
+
+    for _ in range(batch_size):
+        # A-optimality: score_j = sum_k g_sq[j,k] * sigma_k / c[j]
+        a_scores = (g_sq * running_sigma[np.newaxis, :]).sum(axis=1) / c
+        a_scores[~mask] = -np.inf
+
+        # Diversity penalty on Q-rows
+        if selected:
+            last_idx_in_pool = np.where(pool == selected[-1])[0]
+            if len(last_idx_in_pool) > 0:
+                sim = Q_normed @ Q_normed[last_idx_in_pool[0]]
+                a_scores *= (1.0 - 0.8 * (sim > cos_penalty).astype(float))
+
+        best = int(np.argmax(a_scores))
+        selected.append(int(pool[best]))
+        mask[best] = False
+
+        # ── BatchBALD: update Sigma with Fisher from selected item ──
+        # f_k = g_sq[best, k] * c[best]  (diagonal Fisher contribution)
+        f_k = g_sq[best] * c[best]
+        # Sherman-Morrison diagonal: 1/sigma_new_k = 1/sigma_old_k + f_k
+        running_sigma = 1.0 / (1.0 / running_sigma + f_k)
+
+    return np.array(selected)
+
+
+def select_balanced_batch(net, theta_raw, Sigma, remaining_items, q_matrix,
+                          text_embs, device, batch_size=10, max_per_cluster=2):
+    """A-optimal selection with content balancing: max items per skill cluster.
+
+    Enforces that at most `max_per_cluster` items per batch come from the same
+    primary skill cluster (the cluster with highest Q-weight for each item).
+    """
+    M, K = theta_raw.shape
+    pool = remaining_items.copy()
+    M_eff = min(M, 50)
+
+    Sigma_mean = np.diag(Sigma) if Sigma.ndim == 2 else Sigma[:M_eff].mean(axis=0)
+    if Sigma_mean.ndim > 1:
+        Sigma_mean = np.diag(Sigma_mean)
+
+    # Precompute
+    theta_sig = torch.sigmoid(theta_raw.detach())
+    preds = batched_forward(net, theta_sig[:M_eff], pool, q_matrix, text_embs, device)
+    p_mean = preds.mean(axis=0)
+    c = p_mean * (1 - p_mean) + 1e-8
+
+    idx = pool.astype(int)
+    with torch.no_grad():
+        te = torch.tensor(text_embs[idx], dtype=torch.float32, device=device)
+        qr = torch.tensor(q_matrix[idx], dtype=torch.float32, device=device)
+        e_d = torch.sigmoid(net.e_difficulty_proj(te)).squeeze(-1)
+
+    g_sq = (qr * e_d.unsqueeze(1)).cpu().numpy() ** 2
+    a_scores = (g_sq * Sigma_mean[np.newaxis, :]).sum(axis=1) / c
+
+    # Primary cluster for each item: argmax of Q-row
+    primary_cluster = q_matrix[idx].argmax(axis=1)  # (pool,)
+
+    selected = []
+    cluster_count = {}
+    mask = np.ones(len(pool), dtype=bool)
+
+    for _ in range(batch_size):
+        scores = a_scores.copy()
+        scores[~mask] = -np.inf
+
+        # Mask items from over-represented clusters
+        for i in range(len(pool)):
+            if mask[i]:
+                cl = int(primary_cluster[i])
+                if cluster_count.get(cl, 0) >= max_per_cluster:
+                    scores[i] = -np.inf
+
+        # Sample from top-5 (randomesque, like ATLAS)
+        top5 = np.argsort(-scores)[:5]
+        top5 = top5[scores[top5] > -np.inf]
+        if len(top5) == 0:
+            top5 = np.where(mask)[0][:1]
+        best = int(np.random.choice(top5))
+
+        selected.append(int(pool[best]))
+        mask[best] = False
+        cl = int(primary_cluster[best])
+        cluster_count[cl] = cluster_count.get(cl, 0) + 1
+
+    return np.array(selected)
+
+
 def select_random_batch(train_items, seen, batch_size, rng):
     """Random baseline: uniform random from unseen items."""
     remaining = np.setdiff1d(train_items, seen)
@@ -597,7 +725,7 @@ def main(cfg: DictConfig) -> None:
     MAX_ITEMS = checkpoints[-1]
     MAX_ROUNDS = MAX_ITEMS // BATCH_SIZE  # 50 rounds of 10
 
-    methods = ["random", "stratified", "a_optimal"]
+    methods = ["random", "stratified", "a_optimal", "a_optimal_batchbald", "a_optimal_balanced"]
 
     print(f"\n  Batch size: {BATCH_SIZE}, checkpoints: {checkpoints}", flush=True)
     print(f"  Max rounds: {MAX_ROUNDS} ({MAX_ITEMS} items total)", flush=True)
@@ -693,6 +821,22 @@ def main(cfg: DictConfig) -> None:
                         net, theta_raw,
                         np.stack([Sigma] * min(M, 50)) if Sigma.ndim == 2 else Sigma,
                         remaining, q_matrix, text_embs, device, BATCH_SIZE)
+            elif method == "a_optimal_batchbald":
+                if rnd == 0:
+                    batch = select_initial_batch(q_matrix, train_items, BATCH_SIZE, rng)
+                else:
+                    remaining = np.setdiff1d(train_items, items_seen)
+                    batch = select_batchbald_batch(
+                        net, theta_raw, Sigma, remaining,
+                        q_matrix, text_embs, device, BATCH_SIZE)
+            elif method == "a_optimal_balanced":
+                if rnd == 0:
+                    batch = select_initial_batch(q_matrix, train_items, BATCH_SIZE, rng)
+                else:
+                    remaining = np.setdiff1d(train_items, items_seen)
+                    batch = select_balanced_batch(
+                        net, theta_raw, Sigma, remaining,
+                        q_matrix, text_embs, device, BATCH_SIZE)
             else:
                 raise ValueError(f"Unknown method: {method}")
 
@@ -776,9 +920,12 @@ def main(cfg: DictConfig) -> None:
     setup_style()
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
-    colors = {"random": "#888888", "stratified": "#DD8452", "a_optimal": "#4C72B0"}
-    labels_map = {"random": "Random", "stratified": "Stratified", "a_optimal": "A-optimal"}
-    markers = {"random": "s", "stratified": "^", "a_optimal": "o"}
+    colors = {"random": "#888888", "stratified": "#DD8452", "a_optimal": "#4C72B0",
+              "a_optimal_batchbald": "#22C55E", "a_optimal_balanced": "#9333EA"}
+    labels_map = {"random": "Random", "stratified": "Stratified", "a_optimal": "A-optimal (greedy)",
+                  "a_optimal_batchbald": "A-opt + BatchBALD", "a_optimal_balanced": "A-opt + balanced"}
+    markers = {"random": "s", "stratified": "^", "a_optimal": "o",
+               "a_optimal_batchbald": "D", "a_optimal_balanced": "v"}
 
     for ax, (metric, ylabel) in zip(axes, [("rmse", "RMSE vs ground-truth theta"),
                                             ("auc_mean", "AUC on test items")]):
