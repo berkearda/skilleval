@@ -692,7 +692,11 @@ def main(cfg: DictConfig) -> None:
     train_items, test_items = train_test_split(all_items, test_size=0.2, random_state=42)
     all_llms = np.arange(n_llms)
     _, test_llms = train_test_split(all_llms, test_size=0.2, random_state=42)
-    eval_llms = test_llms[:n_eval]
+    if n_eval <= 0 or n_eval >= len(test_llms):
+        eval_llms = test_llms
+        n_eval = len(test_llms)
+    else:
+        eval_llms = test_llms[:n_eval]
     M = len(eval_llms)
     print(f"  {n_llms} LLMs total, evaluating {M}, K={K}", flush=True)
     print(f"  {len(train_items)} train items (pool), {len(test_items)} test items", flush=True)
