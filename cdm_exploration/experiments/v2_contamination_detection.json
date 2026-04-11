@@ -1,0 +1,322 @@
+{
+  "experiment": "contamination_detection",
+  "n_llms": 3811,
+  "n_items": 9523,
+  "K": 100,
+  "lz_threshold": -2.0,
+  "overall": {
+    "mean_lz": -7.273224830627441,
+    "std_lz": 3.5740416049957275,
+    "n_flagged": 3522,
+    "pct_flagged": 92.4166885331934
+  },
+  "train_items": {
+    "mean_lz": 0.481469064950943,
+    "std_lz": 5.127354621887207,
+    "n_flagged": 1217
+  },
+  "test_items": {
+    "mean_lz": -17.052797317504883,
+    "std_lz": 4.169985771179199,
+    "n_flagged": 3811
+  },
+  "per_benchmark": {
+    "MATH": {
+      "mean_lz": 1.8091039657592773,
+      "std_lz": 5.1916303634643555,
+      "n_flagged": 842,
+      "n_benchmark_specific": 23
+    },
+    "BBH": {
+      "mean_lz": -5.961289882659912,
+      "std_lz": 4.0428080558776855,
+      "n_flagged": 3064,
+      "n_benchmark_specific": 18
+    },
+    "GPQA": {
+      "mean_lz": -3.8197789192199707,
+      "std_lz": 2.9845340251922607,
+      "n_flagged": 2687,
+      "n_benchmark_specific": 20
+    },
+    "MuSR": {
+      "mean_lz": -5.480488300323486,
+      "std_lz": 3.337184429168701,
+      "n_flagged": 3316,
+      "n_benchmark_specific": 28
+    },
+    "IFEval": {
+      "mean_lz": -3.267162561416626,
+      "std_lz": 2.5243117809295654,
+      "n_flagged": 2619,
+      "n_benchmark_specific": 48
+    }
+  },
+  "inconsistency": {
+    "mean": -0.34005519008619645,
+    "n_positive": 0,
+    "pct_positive": 0.0
+  },
+  "size_lz_correlation": 0.2717876883477916,
+  "top_aberrant": [
+    {
+      "rank": 1,
+      "name": "EpistemeAI__Fireball-R1-Llama-3.1-8B",
+      "lz_all": -22.202009201049805,
+      "accuracy": 0.34085896611213684,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "Triangle104__DS-R1-Llama-8B-Harmony",
+      "lz_all": -19.537317276000977,
+      "accuracy": 0.37960726022720337,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR"
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "LGAI-EXAONE__EXAONE-3.5-7.8B-Instruct",
+      "lz_all": -19.070804595947266,
+      "accuracy": 0.4497532248497009,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR"
+      ]
+    },
+    {
+      "rank": 4,
+      "name": "AI4free__Dhanishtha",
+      "lz_all": -18.952539443969727,
+      "accuracy": 0.31072139739990234,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR"
+      ]
+    },
+    {
+      "rank": 5,
+      "name": "kms7530__chemeng_qwen-math-7b_24_1_100_1_nonmath",
+      "lz_all": -18.698040008544922,
+      "accuracy": 0.3528299927711487,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 6,
+      "name": "3rd-Degree-Burn__Llama-3.1-8B-Squareroot",
+      "lz_all": -18.270523071289062,
+      "accuracy": 0.30242571234703064,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 7,
+      "name": "SicariusSicariiStuff__Phi-Line_14B",
+      "lz_all": -17.98939323425293,
+      "accuracy": 0.5381707549095154,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 8,
+      "name": "Spestly__Atlas-Pro-7B-Preview",
+      "lz_all": -17.86129379272461,
+      "accuracy": 0.4232909679412842,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 9,
+      "name": "tiiuae__Falcon3-Mamba-7B-Instruct",
+      "lz_all": -17.78073501586914,
+      "accuracy": 0.42633622884750366,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 10,
+      "name": "prithivMLmods__Qwen-7B-Distill-Reasoner",
+      "lz_all": -17.62921142578125,
+      "accuracy": 0.38191747665405273,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 11,
+      "name": "prithivMLmods__Llama-8B-Distill-CoT",
+      "lz_all": -17.346088409423828,
+      "accuracy": 0.38170745968818665,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR"
+      ]
+    },
+    {
+      "rank": 12,
+      "name": "bunnycore__Qwen2.5-7B-RRP-1M-Thinker",
+      "lz_all": -17.238584518432617,
+      "accuracy": 0.31975218653678894,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR"
+      ]
+    },
+    {
+      "rank": 13,
+      "name": "bunnycore__Qwen2.5-7B-MixStock-Sce-V0.3",
+      "lz_all": -17.155141830444336,
+      "accuracy": 0.31618186831474304,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR"
+      ]
+    },
+    {
+      "rank": 14,
+      "name": "SicariusSicariiStuff__Qwen2.5-14B_Uncensored_Instruct",
+      "lz_all": -17.023090362548828,
+      "accuracy": 0.485456258058548,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 15,
+      "name": "iFaz__llama32_1B_en_emo_v1",
+      "lz_all": -16.90061378479004,
+      "accuracy": 0.28488922119140625,
+      "flagged_benchmarks": [
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 16,
+      "name": "LGAI-EXAONE__EXAONE-3.5-2.4B-Instruct",
+      "lz_all": -16.68063735961914,
+      "accuracy": 0.39924392104148865,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 17,
+      "name": "Triangle104__Distilled-DarkPlanet-Allades-8B",
+      "lz_all": -16.632213592529297,
+      "accuracy": 0.41016486287117004,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR"
+      ]
+    },
+    {
+      "rank": 18,
+      "name": "LiteAI__Hare1.0-Beta",
+      "lz_all": -16.548583984375,
+      "accuracy": 0.31880709528923035,
+      "flagged_benchmarks": [
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 19,
+      "name": "sometimesanotion__IF-reasoning-experiment-80",
+      "lz_all": -16.473552703857422,
+      "accuracy": 0.36228078603744507,
+      "flagged_benchmarks": [
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ]
+    },
+    {
+      "rank": 20,
+      "name": "Triangle104__DS-R1-Distill-Q2.5-7B-RP",
+      "lz_all": -16.460662841796875,
+      "accuracy": 0.39168328046798706,
+      "flagged_benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR"
+      ]
+    }
+  ],
+  "family_flagged": {
+    "other": 1749,
+    "qwen": 585,
+    "llama": 694,
+    "gemma": 159,
+    "mistral": 148,
+    "yi": 38,
+    "phi": 104,
+    "falcon": 45
+  }
+}
