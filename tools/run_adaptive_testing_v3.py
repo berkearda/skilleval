@@ -501,21 +501,67 @@ def main(cfg: DictConfig) -> None:
           flush=True)
 
     # ── Configuration ──
-    N_ROUNDS = 5
     BATCH_SIZE = 10
-    TOTAL_ITEMS = N_ROUNDS * BATCH_SIZE  # 50
+    checkpoints = [10, 20, 50, 100, 200, 500]  # total item counts to evaluate
+    MAX_ITEMS = checkpoints[-1]
+    MAX_ROUNDS = MAX_ITEMS // BATCH_SIZE  # 50 rounds of 10
 
     methods = ["random", "stratified", "a_optimal"]
-    checkpoints = list(range(BATCH_SIZE, TOTAL_ITEMS + 1, BATCH_SIZE))  # [10, 20, 30, 40, 50]
 
-    print(f"\n  {N_ROUNDS} rounds x {BATCH_SIZE} items = {TOTAL_ITEMS} total", flush=True)
+    print(f"\n  Batch size: {BATCH_SIZE}, checkpoints: {checkpoints}", flush=True)
+    print(f"  Max rounds: {MAX_ROUNDS} ({MAX_ITEMS} items total)", flush=True)
     print(f"  Methods: {methods}", flush=True)
-    print(f"  Checkpoints: {checkpoints}", flush=True)
 
     # ── Responses for eval LLMs ──
     R_eval = R[eval_llms]  # (M, n_items)
 
-    # ── Run methods ──
+    # ── Evaluate helper ──
+    def evaluate_theta(theta_raw_eval):
+        """Compute RMSE, cosine sim, dim corr, AUC for current theta."""
+        theta_est = torch.sigmoid(theta_raw_eval.detach()).cpu().numpy()
+        rmse = np.sqrt(((theta_est - theta_full) ** 2).mean())
+        per_llm_rmse = np.sqrt(((theta_est - theta_full) ** 2).mean(axis=1))
+        cos_sim = np.array([
+            np.dot(theta_est[m], theta_full[m]) /
+            (np.linalg.norm(theta_est[m]) * np.linalg.norm(theta_full[m]) + 1e-8)
+            for m in range(M)
+        ])
+        dim_corrs = []
+        for k in range(K):
+            if np.std(theta_full[:, k]) > 1e-6 and np.std(theta_est[:, k]) > 1e-6:
+                r = np.corrcoef(theta_full[:, k], theta_est[:, k])[0, 1]
+                if not np.isnan(r):
+                    dim_corrs.append(r)
+        dim_corr_mean = float(np.mean(dim_corrs)) if dim_corrs else 0.0
+        theta_sig = torch.sigmoid(theta_raw_eval.detach())
+        test_preds = batched_forward(net, theta_sig, test_items, q_matrix,
+                                     text_embs, device)
+        aucs = []
+        for m in range(M):
+            y_true = R_eval[m, test_items.astype(int)]
+            if len(np.unique(y_true)) >= 2:
+                aucs.append(roc_auc_score(y_true, test_preds[m]))
+        auc_mean = float(np.mean(aucs)) if aucs else 0.0
+        return {
+            "rmse": float(rmse), "rmse_std": float(per_llm_rmse.std()),
+            "cos_sim_mean": float(cos_sim.mean()), "cos_sim_std": float(cos_sim.std()),
+            "dim_corr_mean": dim_corr_mean,
+            "auc_mean": auc_mean, "auc_std": float(np.std(aucs)) if aucs else 0.0,
+        }
+
+    # ── Baseline: population mean (zero items) ──
+    theta_init_sig = np.tile(theta_pop_mean, (M, 1))
+    theta_init_raw = np.log(theta_init_sig / (1 - theta_init_sig + 1e-8) + 1e-8)
+    prior_center_raw = torch.tensor(theta_init_raw[0], dtype=torch.float32)
+
+    baseline_theta = nn.Parameter(
+        torch.tensor(theta_init_raw, dtype=torch.float32, device=device)
+    )
+    baseline_metrics = evaluate_theta(baseline_theta)
+    print(f"\n  Baseline (0 items): RMSE={baseline_metrics['rmse']:.4f}, "
+          f"AUC={baseline_metrics['auc_mean']:.4f}", flush=True)
+
+    # ── Run each method ──
     all_results = {}
 
     for method in methods:
@@ -525,26 +571,17 @@ def main(cfg: DictConfig) -> None:
         print(f"{'='*60}", flush=True)
 
         rng = np.random.RandomState(42)
-
-        # Initialize theta_raw to population mean (in logit space)
-        theta_init_sig = np.tile(theta_pop_mean, (M, 1))  # (M, K)
-        theta_init_raw = np.log(theta_init_sig / (1 - theta_init_sig + 1e-8) + 1e-8)
         theta_raw = nn.Parameter(
             torch.tensor(theta_init_raw, dtype=torch.float32, device=device)
         )
-
         items_seen = []
         responses_seen = np.zeros((M, 0))
-        Sigma = np.eye(K) / 0.01  # Prior covariance (lam=0.01)
+        Sigma = np.eye(K) / 0.01
 
-        # Prior center in raw space (for pop-mean-centered regularisation)
-        prior_center_raw = torch.tensor(
-            theta_init_raw[0], dtype=torch.float32  # (K,) — same for all LLMs
-        )
+        method_results = {}
+        checkpoint_set = set(checkpoints)
 
-        method_results = {cp: {} for cp in checkpoints}
-
-        for rnd in range(N_ROUNDS):
+        for rnd in range(MAX_ROUNDS):
             # ── Select batch ──
             if method == "random":
                 batch = select_random_batch(train_items, items_seen, BATCH_SIZE, rng)
@@ -557,14 +594,14 @@ def main(cfg: DictConfig) -> None:
                 else:
                     remaining = np.setdiff1d(train_items, items_seen)
                     batch = select_adaptive_batch(
-                        net, theta_raw, np.stack([Sigma] * min(M, 50))
-                        if Sigma.ndim == 2 else Sigma,
+                        net, theta_raw,
+                        np.stack([Sigma] * min(M, 50)) if Sigma.ndim == 2 else Sigma,
                         remaining, q_matrix, text_embs, device, BATCH_SIZE)
             else:
                 raise ValueError(f"Unknown method: {method}")
 
             # ── Observe responses ──
-            batch_responses = R_eval[:, batch.astype(int)]  # (M, batch_size)
+            batch_responses = R_eval[:, batch.astype(int)]
             items_seen.extend(batch.tolist())
             responses_seen = np.concatenate(
                 [responses_seen, batch_responses], axis=1
@@ -574,87 +611,96 @@ def main(cfg: DictConfig) -> None:
             theta_raw, Sigma = adam_theta_update(
                 net, theta_raw, items_seen, responses_seen,
                 q_matrix, text_embs, device,
-                prior_center=prior_center_raw, lam=0.01, lr=0.01,
-                n_steps=30, patience=5,
+                prior_center=prior_center_raw, lam=0.01, lr=0.005,
+                n_steps=50, patience=5,
             )
 
             # ── Evaluate at checkpoint ──
-            cp = (rnd + 1) * BATCH_SIZE
-            theta_est = torch.sigmoid(theta_raw.detach()).cpu().numpy()  # (M, K)
-
-            # RMSE vs ground truth
-            rmse = np.sqrt(((theta_est - theta_full) ** 2).mean())
-            per_llm_rmse = np.sqrt(((theta_est - theta_full) ** 2).mean(axis=1))
-
-            # Cosine similarity
-            cos_sim = np.array([
-                np.dot(theta_est[m], theta_full[m]) /
-                (np.linalg.norm(theta_est[m]) * np.linalg.norm(theta_full[m]) + 1e-8)
-                for m in range(M)
-            ])
-
-            # Per-dimension correlation (averaged over K)
-            dim_corrs = []
-            for k in range(K):
-                if np.std(theta_full[:, k]) > 1e-6 and np.std(theta_est[:, k]) > 1e-6:
-                    r = np.corrcoef(theta_full[:, k], theta_est[:, k])[0, 1]
-                    if not np.isnan(r):
-                        dim_corrs.append(r)
-            dim_corr_mean = float(np.mean(dim_corrs)) if dim_corrs else 0.0
-
-            # AUC on test items
-            theta_sig = torch.sigmoid(theta_raw.detach())
-            test_preds = batched_forward(net, theta_sig, test_items, q_matrix,
-                                         text_embs, device)  # (M, n_test)
-            aucs = []
-            for m in range(M):
-                y_true = R_eval[m, test_items.astype(int)]
-                if len(np.unique(y_true)) >= 2:
-                    aucs.append(roc_auc_score(y_true, test_preds[m]))
-            auc_mean = float(np.mean(aucs)) if aucs else 0.0
-
-            method_results[cp] = {
-                "rmse": float(rmse),
-                "rmse_std": float(per_llm_rmse.std()),
-                "cos_sim_mean": float(cos_sim.mean()),
-                "cos_sim_std": float(cos_sim.std()),
-                "dim_corr_mean": dim_corr_mean,
-                "auc_mean": auc_mean,
-                "auc_std": float(np.std(aucs)) if aucs else 0.0,
-            }
-
-            print(f"  Round {rnd+1}: {cp} items | RMSE={rmse:.4f} | "
-                  f"cos={cos_sim.mean():.4f} | dim_r={dim_corr_mean:.4f} | "
-                  f"AUC={auc_mean:.4f}", flush=True)
+            n_seen = len(items_seen)
+            if n_seen in checkpoint_set:
+                metrics = evaluate_theta(theta_raw)
+                method_results[n_seen] = metrics
+                print(f"  {n_seen:>3} items | RMSE={metrics['rmse']:.4f} | "
+                      f"cos={metrics['cos_sim_mean']:.4f} | "
+                      f"AUC={metrics['auc_mean']:.4f}", flush=True)
 
         elapsed = time.time() - t0
         print(f"  Wall time: {elapsed:.1f}s ({elapsed/60:.1f}min)", flush=True)
         all_results[method] = {"results": method_results, "wall_time": elapsed}
 
+    # ── Load v2 sequential results for comparison ──
+    v2_path = Path("cdm_exploration/experiments/v2_adaptive_testing_v2.json")
+    v2_data = None
+    if v2_path.exists():
+        v2_data = json.load(open(v2_path))
+        print("\n  Loaded v2 sequential results for comparison", flush=True)
+
+    # ── Summary table ──
+    print(f"\n{'='*80}", flush=True)
+    print(f"SUMMARY: RMSE and AUC at each item count", flush=True)
+    print(f"{'='*80}", flush=True)
+    header = f"{'N':>5} |"
+    for m in methods:
+        header += f" {m:>12} RMSE |"
+    for m in methods:
+        header += f" {m:>12} AUC  |"
+    print(header, flush=True)
+    print("-" * len(header), flush=True)
+
+    # Baseline row
+    line = f"{'0':>5} |"
+    for _ in methods:
+        line += f" {baseline_metrics['rmse']:>12.4f}     |"
+    for _ in methods:
+        line += f" {baseline_metrics['auc_mean']:>12.4f}     |"
+    print(line, flush=True)
+
+    for cp in checkpoints:
+        line = f"{cp:>5} |"
+        for m in methods:
+            r = all_results[m]["results"].get(cp, {})
+            line += f" {r.get('rmse', float('nan')):>12.4f}     |"
+        for m in methods:
+            r = all_results[m]["results"].get(cp, {})
+            line += f" {r.get('auc_mean', float('nan')):>12.4f}     |"
+        print(line, flush=True)
+
+    # v2 comparison if available
+    if v2_data:
+        print(f"\n  v2 sequential comparison (AUC only, different eval LLMs):", flush=True)
+        for row in v2_data.get("summary", []):
+            N = row["N"]
+            print(f"    N={N:>3}: random={row['random_mean']:.4f}, "
+                  f"heuristic={row['heuristic_mean']:.4f}, "
+                  f"trace={row['trace_mean']:.4f}, "
+                  f"doptimal={row['doptimal_mean']:.4f}", flush=True)
+
     # ── Figure ──
     print("\nGenerating figure...", flush=True)
     setup_style()
-    fig, axes = plt.subplots(1, 3, figsize=(14, 4.5))
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
     colors = {"random": "#888888", "stratified": "#DD8452", "a_optimal": "#4C72B0"}
-    labels = {"random": "Random", "stratified": "Stratified Random", "a_optimal": "A-optimal (ours)"}
+    labels_map = {"random": "Random", "stratified": "Stratified", "a_optimal": "A-optimal"}
     markers = {"random": "s", "stratified": "^", "a_optimal": "o"}
 
-    metrics_to_plot = [
-        ("rmse", "RMSE vs ground-truth theta", True),
-        ("cos_sim_mean", "Cosine similarity", False),
-        ("auc_mean", "AUC on test items", False),
-    ]
+    for ax, (metric, ylabel) in zip(axes, [("rmse", "RMSE vs ground-truth theta"),
+                                            ("auc_mean", "AUC on test items")]):
+        # Baseline reference line
+        ax.axhline(baseline_metrics[metric], color="#CCCCCC", ls=":", lw=1.5,
+                    label="Pop mean (0 items)")
 
-    for ax, (metric, ylabel, invert) in zip(axes, metrics_to_plot):
         for method in methods:
-            vals = [all_results[method]["results"][cp][metric] for cp in checkpoints]
-            ax.plot(checkpoints, vals, f"{markers[method]}-", color=colors[method],
-                    lw=2, markersize=7, label=labels[method])
-        ax.set_xlabel("Calibration items")
-        ax.set_ylabel(ylabel)
-        if invert:
-            ax.invert_yaxis()
+            cps = sorted(all_results[method]["results"].keys())
+            vals = [all_results[method]["results"][cp][metric] for cp in cps]
+            ax.plot(cps, vals, f"{markers[method]}-", color=colors[method],
+                    lw=2, markersize=7, label=labels_map[method])
+
+        ax.set_xlabel("Calibration items", fontsize=12)
+        ax.set_ylabel(ylabel, fontsize=12)
+        ax.set_xscale("log")
+        ax.set_xticks(checkpoints)
+        ax.get_xaxis().set_major_formatter(plt.ScalarFormatter())
         ax.legend(frameon=False, fontsize=9)
         for sp in ["top", "right"]:
             ax.spines[sp].set_visible(False)
@@ -670,12 +716,12 @@ def main(cfg: DictConfig) -> None:
         "experiment": "adaptive_testing_v3",
         "n_eval_llms": M,
         "K": K,
-        "n_rounds": N_ROUNDS,
         "batch_size": BATCH_SIZE,
-        "total_items": TOTAL_ITEMS,
         "checkpoints": checkpoints,
         "methods": methods,
-        "results": {m: all_results[m]["results"] for m in methods},
+        "baseline_0_items": baseline_metrics,
+        "results": {m: {str(k): v for k, v in all_results[m]["results"].items()}
+                    for m in methods},
         "wall_times": {m: all_results[m]["wall_time"] for m in methods},
     }
     out_json = Path("cdm_exploration/experiments/v2_adaptive_testing_v3.json")
@@ -685,8 +731,8 @@ def main(cfg: DictConfig) -> None:
 
     log_experiment(
         name="adaptive_testing_v3",
-        config={"n_eval": M, "K": K, "n_rounds": N_ROUNDS,
-                "batch_size": BATCH_SIZE, "methods": methods, "device": device},
+        config={"n_eval": M, "K": K, "batch_size": BATCH_SIZE,
+                "checkpoints": checkpoints, "methods": methods, "device": device},
         results=save_data,
         split_info={"n_train_items": len(train_items), "n_test_items": len(test_items),
                     "n_eval_llms": M},
