@@ -1,0 +1,665 @@
+{
+  "experiment": "benchmark_redundancy",
+  "n_items": 9523,
+  "n_llms": 3811,
+  "K": 100,
+  "benchmarks": [
+    "MATH",
+    "BBH",
+    "GPQA",
+    "MuSR",
+    "IFEval"
+  ],
+  "items_per_benchmark": {
+    "MATH": 1278,
+    "BBH": 5761,
+    "GPQA": 1192,
+    "MuSR": 756,
+    "IFEval": 536
+  },
+  "binary_coverage_count": {
+    "MATH": 62,
+    "BBH": 42,
+    "GPQA": 58,
+    "MuSR": 17,
+    "IFEval": 62
+  },
+  "total_skills_covered": 100,
+  "jaccard_matrix": [
+    [
+      1.0,
+      0.4444444444444444,
+      0.5584415584415584,
+      0.16176470588235295,
+      0.42528735632183906
+    ],
+    [
+      0.4444444444444444,
+      1.0,
+      0.3888888888888889,
+      0.3111111111111111,
+      0.4647887323943662
+    ],
+    [
+      0.5584415584415584,
+      0.3888888888888889,
+      1.0,
+      0.15384615384615385,
+      0.31868131868131866
+    ],
+    [
+      0.16176470588235295,
+      0.3111111111111111,
+      0.15384615384615385,
+      1.0,
+      0.2153846153846154
+    ],
+    [
+      0.42528735632183906,
+      0.4647887323943662,
+      0.31868131868131866,
+      0.2153846153846154,
+      1.0
+    ]
+  ],
+  "coverage_matrix": [
+    [
+      100.0,
+      51.61290322580645,
+      69.35483870967742,
+      17.741935483870968,
+      59.67741935483871
+    ],
+    [
+      76.19047619047619,
+      100.0,
+      66.66666666666667,
+      33.333333333333336,
+      78.57142857142857
+    ],
+    [
+      74.13793103448276,
+      48.275862068965516,
+      100.0,
+      17.24137931034483,
+      50.0
+    ],
+    [
+      64.70588235294117,
+      82.3529411764706,
+      58.8235294117647,
+      100.0,
+      82.3529411764706
+    ],
+    [
+      59.67741935483871,
+      53.225806451612904,
+      46.774193548387096,
+      22.580645161290324,
+      100.0
+    ]
+  ],
+  "weighted_jaccard_matrix": [
+    [
+      1.0,
+      0.04932550715683246,
+      0.0661563696008748,
+      0.02040816326530612,
+      0.029199372056514912
+    ],
+    [
+      0.04932550715683246,
+      1.0,
+      0.024539877300613498,
+      0.11644177911044477,
+      0.046893046893046894
+    ],
+    [
+      0.0661563696008748,
+      0.024539877300613498,
+      1.0,
+      0.020439645198611647,
+      0.023616236162361623
+    ],
+    [
+      0.02040816326530612,
+      0.11644177911044477,
+      0.020439645198611647,
+      1.0,
+      0.1
+    ],
+    [
+      0.029199372056514912,
+      0.046893046893046894,
+      0.023616236162361623,
+      0.1,
+      1.0
+    ]
+  ],
+  "pairwise_details": {
+    "MATH-BBH": {
+      "jaccard": 0.4444444444444444,
+      "intersection": 32,
+      "union": 72,
+      "unique_to_first": 30,
+      "unique_to_second": 10
+    },
+    "MATH-GPQA": {
+      "jaccard": 0.5584415584415584,
+      "intersection": 43,
+      "union": 77,
+      "unique_to_first": 19,
+      "unique_to_second": 15
+    },
+    "MATH-MuSR": {
+      "jaccard": 0.16176470588235295,
+      "intersection": 11,
+      "union": 68,
+      "unique_to_first": 51,
+      "unique_to_second": 6
+    },
+    "MATH-IFEval": {
+      "jaccard": 0.42528735632183906,
+      "intersection": 37,
+      "union": 87,
+      "unique_to_first": 25,
+      "unique_to_second": 25
+    },
+    "BBH-GPQA": {
+      "jaccard": 0.3888888888888889,
+      "intersection": 28,
+      "union": 72,
+      "unique_to_first": 14,
+      "unique_to_second": 30
+    },
+    "BBH-MuSR": {
+      "jaccard": 0.3111111111111111,
+      "intersection": 14,
+      "union": 45,
+      "unique_to_first": 28,
+      "unique_to_second": 3
+    },
+    "BBH-IFEval": {
+      "jaccard": 0.4647887323943662,
+      "intersection": 33,
+      "union": 71,
+      "unique_to_first": 9,
+      "unique_to_second": 29
+    },
+    "GPQA-MuSR": {
+      "jaccard": 0.15384615384615385,
+      "intersection": 10,
+      "union": 65,
+      "unique_to_first": 48,
+      "unique_to_second": 7
+    },
+    "GPQA-IFEval": {
+      "jaccard": 0.31868131868131866,
+      "intersection": 29,
+      "union": 91,
+      "unique_to_first": 29,
+      "unique_to_second": 33
+    },
+    "MuSR-IFEval": {
+      "jaccard": 0.2153846153846154,
+      "intersection": 14,
+      "union": 65,
+      "unique_to_first": 3,
+      "unique_to_second": 48
+    }
+  },
+  "unique_skills": {
+    "MATH": {
+      "count": 6,
+      "indices": [
+        19,
+        57,
+        58,
+        85,
+        86,
+        91
+      ],
+      "names": [
+        "Applying Divisibility Rules To Integer Sets",
+        "Applying Divisibility Rules To Factorials",
+        "Calculating Compound Interest With Quarterly Compo",
+        "Applying Set Theory To Divisor Subsets",
+        "Applying Interpolation To Estimate Values",
+        "Calculating Handshake Combinations In Group Intera"
+      ]
+    },
+    "BBH": {
+      "count": 1,
+      "indices": [
+        70
+      ],
+      "names": [
+        "Analyzing User Access Patterns Over Time"
+      ]
+    },
+    "GPQA": {
+      "count": 9,
+      "indices": [
+        34,
+        44,
+        62,
+        72,
+        80,
+        87,
+        95,
+        98,
+        99
+      ],
+      "names": [
+        "Identifying Interstellar Medium Types In Astronomy",
+        "Applying Molarity Concepts To Solution Mixing",
+        "Applying Maxwell Equations To Electromagnetic Fiel",
+        "Applying Discrete Group Approximations To Gauge Th",
+        "Applying Mutation Rate To Genetic Equilibrium",
+        "Applying Mott Gurney Equation To Device Characteri",
+        "Interpreting Luminescence Behavior In Zinc Silicat",
+        "Analyzing Fragmentation Patterns In Ei Ms",
+        "Identifying Transformations In Quantum Field Theor"
+      ]
+    },
+    "MuSR": {
+      "count": 1,
+      "indices": [
+        79
+      ],
+      "names": [
+        "Coordinating Workflow Between Service Providers"
+      ]
+    },
+    "IFEval": {
+      "count": 13,
+      "indices": [
+        28,
+        33,
+        46,
+        50,
+        53,
+        56,
+        59,
+        61,
+        63,
+        67,
+        75,
+        82,
+        88
+      ],
+      "names": [
+        "Articulating Feature Vs Bug Distinction",
+        "Adapting Tone For Dialogue In Urdu Language",
+        "Crafting Concise Descriptions Of Professional Acti",
+        "Embedding Comments With Security Keywords In Code ",
+        "Avoiding Sensitive Terms In Condolence Messages",
+        "Separating Versions With Specific Delimiters",
+        "Applying Combinatorial Principles To Pet Ownership",
+        "Embedding Asterisk Symbols For Visual Separation",
+        "Applying Synonyms To Replace Restricted Vocabulary",
+        "Ph\u00e2n T\u00edch Ng\u1eef C\u1ea3nh C\u1ee7a Nhi\u1ec7m V\u1ee5 X\u00e3 H\u1ed9i",
+        "Constructing Bash Scripts For File Downloads",
+        "Optimizing User Experience Based On Feedback",
+        "Analyzing Sentiment In Financial Statements"
+      ]
+    }
+  },
+  "multi_way_intersections": [
+    {
+      "benchmarks": [
+        "IFEval"
+      ],
+      "n_skills": 13,
+      "skill_indices": [
+        28,
+        33,
+        46,
+        50,
+        53,
+        56,
+        59,
+        61,
+        63,
+        67,
+        75,
+        82,
+        88
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "IFEval"
+      ],
+      "n_skills": 13,
+      "skill_indices": [
+        1,
+        2,
+        3,
+        10,
+        18,
+        24,
+        27,
+        32,
+        36,
+        52,
+        60,
+        74,
+        78
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH",
+        "GPQA"
+      ],
+      "n_skills": 12,
+      "skill_indices": [
+        4,
+        11,
+        14,
+        16,
+        31,
+        39,
+        49,
+        55,
+        66,
+        73,
+        89,
+        90
+      ]
+    },
+    {
+      "benchmarks": [
+        "GPQA"
+      ],
+      "n_skills": 9,
+      "skill_indices": [
+        34,
+        44,
+        62,
+        72,
+        80,
+        87,
+        95,
+        98,
+        99
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH",
+        "IFEval"
+      ],
+      "n_skills": 7,
+      "skill_indices": [
+        54,
+        65,
+        69,
+        71,
+        84,
+        92,
+        94
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ],
+      "n_skills": 7,
+      "skill_indices": [
+        0,
+        7,
+        12,
+        20,
+        22,
+        47,
+        97
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH"
+      ],
+      "n_skills": 6,
+      "skill_indices": [
+        19,
+        57,
+        58,
+        85,
+        86,
+        91
+      ]
+    },
+    {
+      "benchmarks": [
+        "BBH",
+        "IFEval"
+      ],
+      "n_skills": 5,
+      "skill_indices": [
+        8,
+        29,
+        37,
+        51,
+        83
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA"
+      ],
+      "n_skills": 5,
+      "skill_indices": [
+        9,
+        15,
+        30,
+        42,
+        64
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH",
+        "GPQA",
+        "IFEval"
+      ],
+      "n_skills": 5,
+      "skill_indices": [
+        6,
+        17,
+        35,
+        38,
+        45
+      ]
+    },
+    {
+      "benchmarks": [
+        "GPQA",
+        "IFEval"
+      ],
+      "n_skills": 3,
+      "skill_indices": [
+        25,
+        48,
+        77
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH",
+        "BBH",
+        "MuSR",
+        "IFEval"
+      ],
+      "n_skills": 3,
+      "skill_indices": [
+        5,
+        41,
+        96
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH",
+        "BBH",
+        "IFEval"
+      ],
+      "n_skills": 2,
+      "skill_indices": [
+        43,
+        93
+      ]
+    },
+    {
+      "benchmarks": [
+        "BBH",
+        "MuSR",
+        "IFEval"
+      ],
+      "n_skills": 2,
+      "skill_indices": [
+        13,
+        23
+      ]
+    },
+    {
+      "benchmarks": [
+        "BBH"
+      ],
+      "n_skills": 1,
+      "skill_indices": [
+        70
+      ]
+    },
+    {
+      "benchmarks": [
+        "MuSR"
+      ],
+      "n_skills": 1,
+      "skill_indices": [
+        79
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH",
+        "BBH"
+      ],
+      "n_skills": 1,
+      "skill_indices": [
+        68
+      ]
+    },
+    {
+      "benchmarks": [
+        "BBH",
+        "GPQA"
+      ],
+      "n_skills": 1,
+      "skill_indices": [
+        40
+      ]
+    },
+    {
+      "benchmarks": [
+        "GPQA",
+        "MuSR"
+      ],
+      "n_skills": 1,
+      "skill_indices": [
+        81
+      ]
+    },
+    {
+      "benchmarks": [
+        "MuSR",
+        "IFEval"
+      ],
+      "n_skills": 1,
+      "skill_indices": [
+        21
+      ]
+    },
+    {
+      "benchmarks": [
+        "MATH",
+        "BBH",
+        "GPQA",
+        "MuSR"
+      ],
+      "n_skills": 1,
+      "skill_indices": [
+        26
+      ]
+    },
+    {
+      "benchmarks": [
+        "BBH",
+        "GPQA",
+        "MuSR",
+        "IFEval"
+      ],
+      "n_skills": 1,
+      "skill_indices": [
+        76
+      ]
+    }
+  ],
+  "optimal_subsets": {
+    "1": {
+      "benchmarks": [
+        "MATH"
+      ],
+      "coverage": 62,
+      "coverage_pct": 62.0
+    },
+    "2": {
+      "benchmarks": [
+        "MATH",
+        "IFEval"
+      ],
+      "coverage": 87,
+      "coverage_pct": 87.0
+    },
+    "3": {
+      "benchmarks": [
+        "MATH",
+        "IFEval",
+        "GPQA"
+      ],
+      "coverage": 98,
+      "coverage_pct": 98.0
+    },
+    "4": {
+      "benchmarks": [
+        "MATH",
+        "IFEval",
+        "GPQA",
+        "BBH"
+      ],
+      "coverage": 99,
+      "coverage_pct": 99.0
+    },
+    "5": {
+      "benchmarks": [
+        "MATH",
+        "IFEval",
+        "GPQA",
+        "BBH",
+        "MuSR"
+      ],
+      "coverage": 100,
+      "coverage_pct": 100.0
+    }
+  }
+}
