@@ -349,9 +349,14 @@ def select_stratified_batch(q_matrix, train_items, seen, batch_size, rng):
 # SIMPLE THETA UPDATE (gradient descent, avoids per-LLM Hessian cost)
 # ═══════════════════════════════════════════════════════════════════════
 
-def gd_theta_update(net, theta_raw, items_seen, responses, q_matrix, text_embs,
-                    device, lam=0.1, lr=0.05, n_steps=30):
-    """Update theta via gradient descent on MAP objective (fast, scales to any M).
+def adam_theta_update(net, theta_raw, items_seen, responses, q_matrix, text_embs,
+                      device, prior_center=None, lam=0.01, lr=0.01, n_steps=30,
+                      patience=5, verbose=False):
+    """Update theta via Adam on MAP objective (fast, scales to any M).
+
+    Uses Adam with a prior centered on ``prior_center`` (population mean in
+    raw space) rather than zero, so regularisation pulls toward the known
+    population distribution instead of toward sigmoid(0)=0.5.
 
     Returns:
         theta_raw: (M, K) updated Parameter.
@@ -366,29 +371,63 @@ def gd_theta_update(net, theta_raw, items_seen, responses, q_matrix, text_embs,
         return theta_raw, np.eye(K) / lam
 
     y = torch.tensor(responses, dtype=torch.float32, device=device)  # (M, J)
+    theta_raw = nn.Parameter(theta_raw.detach().clone())
+    optimizer = torch.optim.Adam([theta_raw], lr=lr)
+
+    # Prior center (in raw space)
+    if prior_center is not None:
+        mu = prior_center.to(device).detach()  # (K,) or (1, K)
+        if mu.dim() == 1:
+            mu = mu.unsqueeze(0)
+    else:
+        mu = torch.zeros(1, K, device=device)
+
+    best_loss = float("inf")
+    best_state = theta_raw.data.clone()
+    no_improve = 0
 
     for step in range(n_steps):
-        theta_raw = nn.Parameter(theta_raw.detach().clone())
         pred = batched_forward_with_grad(net, theta_raw, items_arr,
                                          q_matrix, text_embs, device)
         eps = 1e-7
         nll = -(y * torch.log(pred + eps) + (1 - y) * torch.log(1 - pred + eps)).sum(dim=1)
-        prior = 0.5 * lam * (theta_raw ** 2).sum(dim=1)
+        prior = 0.5 * lam * ((theta_raw - mu) ** 2).sum(dim=1)
         loss = (nll + prior).sum()
+
+        optimizer.zero_grad()
         loss.backward()
+        optimizer.step()
 
-        with torch.no_grad():
-            theta_raw.data -= lr * theta_raw.grad
+        loss_val = loss.item()
+        if loss_val < best_loss - 1e-4:
+            best_loss = loss_val
+            best_state = theta_raw.data.clone()
+            no_improve = 0
+        else:
+            no_improve += 1
 
-    # Approximate Sigma from final gradient magnitudes (diagonal approx)
-    # For item selection, this is sufficient since we use average Sigma
+        if no_improve >= patience:
+            if verbose:
+                print(f"      Early stop at step {step+1}, loss={loss_val:.2f}", flush=True)
+            break
+
+    # Restore best
+    theta_raw = nn.Parameter(best_state.clone())
+
+    if verbose:
+        print(f"      Final loss={best_loss:.2f}, steps={step+1}", flush=True)
+
+    # Approximate Sigma (diagonal Fisher)
     with torch.no_grad():
-        p = pred.detach()
-        c = p * (1 - p)
-        # Diagonal Fisher approx: F_kk ≈ sum_j c_mean_j * q_jk^2
+        pred_final = batched_forward(
+            net, torch.sigmoid(theta_raw.detach()), items_arr,
+            q_matrix, text_embs, device,
+        )
+        p_t = torch.tensor(pred_final, dtype=torch.float32, device=device)
+        c = p_t * (1 - p_t)
         c_mean = c.mean(dim=0)  # (J,)
-        qr = torch.tensor(q_matrix[items_arr], dtype=torch.float32, device=device)  # (J, K)
-        diag_F = (c_mean.unsqueeze(1) * qr ** 2).sum(dim=0) + lam  # (K,)
+        qr = torch.tensor(q_matrix[items_arr], dtype=torch.float32, device=device)
+        diag_F = (c_mean.unsqueeze(1) * qr ** 2).sum(dim=0) + lam
         Sigma_diag = 1.0 / diag_F.cpu().numpy()
 
     theta_raw = nn.Parameter(theta_raw.detach().clone())
@@ -496,7 +535,12 @@ def main(cfg: DictConfig) -> None:
 
         items_seen = []
         responses_seen = np.zeros((M, 0))
-        Sigma = np.eye(K) / 0.1  # Prior covariance (lam=0.1)
+        Sigma = np.eye(K) / 0.01  # Prior covariance (lam=0.01)
+
+        # Prior center in raw space (for pop-mean-centered regularisation)
+        prior_center_raw = torch.tensor(
+            theta_init_raw[0], dtype=torch.float32  # (K,) — same for all LLMs
+        )
 
         method_results = {cp: {} for cp in checkpoints}
 
@@ -527,9 +571,11 @@ def main(cfg: DictConfig) -> None:
             ) if responses_seen.shape[1] > 0 else batch_responses
 
             # ── Update theta ──
-            theta_raw, Sigma = gd_theta_update(
+            theta_raw, Sigma = adam_theta_update(
                 net, theta_raw, items_seen, responses_seen,
-                q_matrix, text_embs, device, lam=0.1, lr=0.05, n_steps=30,
+                q_matrix, text_embs, device,
+                prior_center=prior_center_raw, lam=0.01, lr=0.01,
+                n_steps=30, patience=5,
             )
 
             # ── Evaluate at checkpoint ──
