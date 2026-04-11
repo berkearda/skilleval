@@ -346,21 +346,17 @@ def select_stratified_batch(q_matrix, train_items, seen, batch_size, rng):
 
 
 # ═══════════════════════════════════════════════════════════════════════
-# SIMPLE THETA UPDATE (gradient descent, avoids per-LLM Hessian cost)
+# THETA UPDATES
 # ═══════════════════════════════════════════════════════════════════════
 
 def adam_theta_update(net, theta_raw, items_seen, responses, q_matrix, text_embs,
-                      device, prior_center=None, lam=0.01, lr=0.01, n_steps=30,
-                      patience=5, verbose=False):
-    """Update theta via Adam on MAP objective (fast, scales to any M).
+                      device, prior_center=None, lam=0.01, lr=0.005, n_steps=10,
+                      patience=3, verbose=False):
+    """Partial Adam update on MAP objective with pop-mean-centered prior.
 
-    Uses Adam with a prior centered on ``prior_center`` (population mean in
-    raw space) rather than zero, so regularisation pulls toward the known
-    population distribution instead of toward sigmoid(0)=0.5.
-
-    Returns:
-        theta_raw: (M, K) updated Parameter.
-        Sigma_approx: (K, K) approximate posterior covariance (diagonal).
+    Takes a small fixed number of steps (default 10) so theta moves only
+    slightly from the prior at each round, avoiding overfitting to the
+    observed item subset.
     """
     M, K = theta_raw.shape
     items_arr = np.array(items_seen, dtype=int)
@@ -370,17 +366,13 @@ def adam_theta_update(net, theta_raw, items_seen, responses, q_matrix, text_embs
         theta_raw = nn.Parameter(theta_raw.detach().clone())
         return theta_raw, np.eye(K) / lam
 
-    y = torch.tensor(responses, dtype=torch.float32, device=device)  # (M, J)
+    y = torch.tensor(responses, dtype=torch.float32, device=device)
     theta_raw = nn.Parameter(theta_raw.detach().clone())
     optimizer = torch.optim.Adam([theta_raw], lr=lr)
 
-    # Prior center (in raw space)
-    if prior_center is not None:
-        mu = prior_center.to(device).detach()  # (K,) or (1, K)
-        if mu.dim() == 1:
-            mu = mu.unsqueeze(0)
-    else:
-        mu = torch.zeros(1, K, device=device)
+    mu = prior_center.to(device).detach() if prior_center is not None else torch.zeros(K, device=device)
+    if mu.dim() == 1:
+        mu = mu.unsqueeze(0)
 
     best_loss = float("inf")
     best_state = theta_raw.data.clone()
@@ -405,33 +397,132 @@ def adam_theta_update(net, theta_raw, items_seen, responses, q_matrix, text_embs
             no_improve = 0
         else:
             no_improve += 1
-
         if no_improve >= patience:
-            if verbose:
-                print(f"      Early stop at step {step+1}, loss={loss_val:.2f}", flush=True)
             break
 
-    # Restore best
     theta_raw = nn.Parameter(best_state.clone())
 
-    if verbose:
-        print(f"      Final loss={best_loss:.2f}, steps={step+1}", flush=True)
-
-    # Approximate Sigma (diagonal Fisher)
+    # Diagonal Fisher for Sigma
     with torch.no_grad():
-        pred_final = batched_forward(
-            net, torch.sigmoid(theta_raw.detach()), items_arr,
-            q_matrix, text_embs, device,
-        )
-        p_t = torch.tensor(pred_final, dtype=torch.float32, device=device)
+        pred_f = batched_forward(net, torch.sigmoid(theta_raw.detach()), items_arr,
+                                 q_matrix, text_embs, device)
+        p_t = torch.tensor(pred_f, dtype=torch.float32, device=device)
         c = p_t * (1 - p_t)
-        c_mean = c.mean(dim=0)  # (J,)
+        c_mean = c.mean(dim=0)
         qr = torch.tensor(q_matrix[items_arr], dtype=torch.float32, device=device)
         diag_F = (c_mean.unsqueeze(1) * qr ** 2).sum(dim=0) + lam
         Sigma_diag = 1.0 / diag_F.cpu().numpy()
 
     theta_raw = nn.Parameter(theta_raw.detach().clone())
-    Sigma = np.diag(Sigma_diag)
+    return theta_raw, np.diag(Sigma_diag)
+
+
+def bayesian_theta_update(net, theta_raw, items_seen, responses, q_matrix,
+                          text_embs, device, prior_raw, prior_precision_diag):
+    """Closed-form Bayesian update using a Gaussian/Laplace approximation.
+
+    Treats the likelihood as locally Gaussian around the current theta
+    (Laplace approximation) and performs the conjugate update:
+
+        Sigma_post = (Lambda_prior + F_obs)^{-1}
+        mu_post    = Sigma_post @ (Lambda_prior @ mu_prior
+                                   + sum_j g_j * (y_j - p_j))
+
+    where g_j = dp_j/d(theta_raw) is the per-item gradient and
+    F_obs = sum_j c_j * g_j g_j^T is the observed Fisher information.
+
+    This is computed per-LLM with a diagonal + low-rank structure for speed.
+    No learning rate, no step count, no overfitting risk.
+
+    Args:
+        net: Frozen TextConditionedNet.
+        theta_raw: (M, K) current Parameter.
+        items_seen: list of item indices administered so far.
+        responses: (M, J) numpy array of observed responses.
+        q_matrix, text_embs: data arrays.
+        device: torch device.
+        prior_raw: (K,) tensor — prior mean in raw space (population mean).
+        prior_precision_diag: (K,) numpy — diagonal of prior precision
+            (inverse prior variance per dimension). Typical: lam * ones(K).
+
+    Returns:
+        theta_raw: (M, K) updated Parameter.
+        Sigma_post_mean: (K, K) numpy — average posterior covariance for
+            item selection.
+    """
+    M, K = theta_raw.shape
+    items_arr = np.array(items_seen, dtype=int)
+    J = len(items_arr)
+
+    if J == 0:
+        theta_raw = nn.Parameter(theta_raw.detach().clone())
+        Sigma = np.diag(1.0 / prior_precision_diag)
+        return theta_raw, Sigma
+
+    mu_prior = prior_raw.to(device).detach()  # (K,)
+    Lambda_prior = torch.diag(
+        torch.tensor(prior_precision_diag, dtype=torch.float32, device=device)
+    )  # (K, K)
+
+    # Compute predictions and per-item gradients at current theta
+    # We linearise around the current theta per LLM.
+    y = torch.tensor(responses, dtype=torch.float32, device=device)  # (M, J)
+
+    # Batched predictions
+    theta_sig = torch.sigmoid(theta_raw.detach())
+    preds_np = batched_forward(net, theta_sig, items_arr, q_matrix, text_embs, device)
+    preds = torch.tensor(preds_np, dtype=torch.float32, device=device)  # (M, J)
+    c = preds * (1 - preds)  # (M, J)
+    residuals = y - preds     # (M, J)
+
+    # Per-item approximate gradients: g_j ≈ q_j * e_j * sigmoid'(theta)
+    # For the diagonal approximation, we only need g_j element-wise squared.
+    # Full: g_j[k] = d p_j / d theta_raw[k]
+    # Approximation via Q-mask and item discrimination:
+    idx = items_arr.astype(int)
+    te = torch.tensor(text_embs[idx], dtype=torch.float32, device=device)
+    qr = torch.tensor(q_matrix[idx], dtype=torch.float32, device=device)  # (J, K)
+    with torch.no_grad():
+        e_d = torch.sigmoid(net.e_difficulty_proj(te))  # (J, 1)
+    # sigmoid'(theta_raw) = sigmoid(theta_raw) * (1 - sigmoid(theta_raw))
+    sig_deriv = (theta_sig * (1 - theta_sig))  # (M, K)
+
+    # g_j_approx[m, j, k] = e_d[j] * sig_deriv[m, k] * q[j, k]
+    # For diagonal Fisher: F_kk = sum_j c[m,j] * g[m,j,k]^2
+    #                            = sum_j c[m,j] * e_d[j]^2 * sig_deriv[m,k]^2 * q[j,k]^2
+    e_d_sq = (e_d ** 2).squeeze(-1)  # (J,)
+    sig_deriv_sq = sig_deriv ** 2     # (M, K)
+
+    # F_diag[m, k] = sig_deriv_sq[m,k] * sum_j(c[m,j] * e_d_sq[j] * q[j,k]^2)
+    # The sum_j part: (M, J) @ (J, K) element-wise-squared → need careful broadcasting
+    qr_sq = qr ** 2  # (J, K)
+    # c_weighted[m, j] = c[m, j] * e_d_sq[j]
+    c_weighted = c * e_d_sq.unsqueeze(0)  # (M, J)
+    # sum_j: (M, J) @ (J, K) → (M, K)
+    F_sum = c_weighted @ qr_sq  # (M, K)
+    F_diag = sig_deriv_sq * F_sum  # (M, K)
+
+    # Bayesian score: sum_j g[m,j,k] * residual[m,j]
+    # = sig_deriv[m,k] * sum_j(e_d[j] * q[j,k] * residual[m,j])
+    g_q_e = qr * e_d  # (J, K) — q[j,k] * e_d[j]
+    # sum_j(residual[m,j] * g_q_e[j,k]) = residuals (M,J) @ g_q_e (J,K) → (M, K)
+    score_sum = residuals @ g_q_e  # (M, K)
+    bayes_score = sig_deriv * score_sum  # (M, K)
+
+    # Per-LLM posterior update (diagonal approximation for speed):
+    #   Lambda_post[k] = Lambda_prior[k,k] + F_diag[m, k]
+    #   mu_post[m, k]  = (Lambda_prior[k,k] * mu_prior[k] + bayes_score[m,k]) / Lambda_post[m,k]
+    Lambda_prior_diag = torch.diag(Lambda_prior)  # (K,)
+    Lambda_post = Lambda_prior_diag.unsqueeze(0) + F_diag  # (M, K)
+    mu_post = (Lambda_prior_diag.unsqueeze(0) * mu_prior.unsqueeze(0) + bayes_score) / Lambda_post
+
+    # Update theta_raw to posterior mean
+    theta_raw = nn.Parameter(mu_post.detach().clone())
+
+    # Average posterior covariance for item selection
+    Sigma_post_diag = (1.0 / Lambda_post).mean(dim=0).cpu().numpy()  # (K,)
+    Sigma = np.diag(Sigma_post_diag)
+
     return theta_raw, Sigma
 
 
@@ -576,7 +667,12 @@ def main(cfg: DictConfig) -> None:
         )
         items_seen = []
         responses_seen = np.zeros((M, 0))
-        Sigma = np.eye(K) / 0.01
+
+        # Prior: centered at population mean, precision = lam * I
+        lam = 0.01
+        prior_raw_t = torch.tensor(theta_init_raw[0], dtype=torch.float32)
+        prior_precision = np.full(K, lam)
+        Sigma = np.diag(1.0 / prior_precision)
 
         method_results = {}
         checkpoint_set = set(checkpoints)
@@ -607,12 +703,12 @@ def main(cfg: DictConfig) -> None:
                 [responses_seen, batch_responses], axis=1
             ) if responses_seen.shape[1] > 0 else batch_responses
 
-            # ── Update theta ──
+            # ── Theta update: partial Adam (few steps, strong pop-mean prior) ──
             theta_raw, Sigma = adam_theta_update(
                 net, theta_raw, items_seen, responses_seen,
                 q_matrix, text_embs, device,
-                prior_center=prior_center_raw, lam=0.01, lr=0.005,
-                n_steps=50, patience=5,
+                prior_center=prior_raw_t, lam=lam, lr=0.005,
+                n_steps=10, patience=3,
             )
 
             # ── Evaluate at checkpoint ──
