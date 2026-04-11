@@ -1,0 +1,398 @@
+{
+  "experiment": "calibration_analysis",
+  "n_llms": 3811,
+  "n_items": 9523,
+  "K": 100,
+  "n_bins": 20,
+  "prediction_stats": {
+    "mean": 0.3790583312511444,
+    "std": 0.28221145272254944,
+    "min": 0.0480462983250618,
+    "max": 0.965552568435669
+  },
+  "actual_mean": 0.39967422158723953,
+  "overall": {
+    "ece": 0.032875412974023105,
+    "mce": 0.11795490980148315,
+    "brier": 0.17022918164730072
+  },
+  "per_benchmark": {
+    "MATH": {
+      "ece": 0.02311576515207844,
+      "mce": 0.6852401494979858,
+      "brier": 0.06695834547281265
+    },
+    "BBH": {
+      "ece": 0.03391464140400168,
+      "mce": 0.08636856079101562,
+      "brier": 0.18961456418037415
+    },
+    "GPQA": {
+      "ece": 0.0387455157189494,
+      "mce": 0.18171989917755127,
+      "brier": 0.18285910785198212
+    },
+    "MuSR": {
+      "ece": 0.058833941940488674,
+      "mce": 0.2143821120262146,
+      "brier": 0.1851528435945511
+    },
+    "IFEval": {
+      "ece": 0.0403926194061446,
+      "mce": 0.0865015983581543,
+      "brier": 0.15896372497081757
+    }
+  },
+  "per_quartile": {
+    "Q1 (weakest)": {
+      "ece": 0.04810695500217175,
+      "n_llms": 954,
+      "mean_acc": 0.27439316618642146
+    },
+    "Q2": {
+      "ece": 0.032985218235141334,
+      "n_llms": 953,
+      "mean_acc": 0.3767341210361747
+    },
+    "Q3": {
+      "ece": 0.024017365032268582,
+      "n_llms": 953,
+      "mean_acc": 0.4300690689873382
+    },
+    "Q4 (strongest)": {
+      "ece": 0.031040272083953498,
+      "n_llms": 951,
+      "mean_acc": 0.517880060814633
+    }
+  },
+  "per_skill_ece": {
+    "0": {
+      "name": "Inferring Time Intervals From Sequential Events",
+      "ece": 0.0280239842030551,
+      "n_items": 948
+    },
+    "1": {
+      "name": "Applying Inequality Theorems To Minimize Expressio",
+      "ece": 0.023083713959788834,
+      "n_items": 121
+    },
+    "2": {
+      "name": "Analyzing Coordinates To Determine Shape Type",
+      "ece": 0.01929875633559546,
+      "n_items": 648
+    },
+    "3": {
+      "name": "Applying Linear Combination Of Operators In Quantu",
+      "ece": 0.03480255325856687,
+      "n_items": 174
+    },
+    "4": {
+      "name": "Applying Wetting Theory To Liquid Droplets",
+      "ece": 0.0676277436763713,
+      "n_items": 21
+    },
+    "5": {
+      "name": "Evaluating Sporting Event Plausibility Based On Co",
+      "ece": 0.03507351595489373,
+      "n_items": 831
+    },
+    "6": {
+      "name": "Applying Quadratic Formula To Find Roots",
+      "ece": 0.02563952948748484,
+      "n_items": 451
+    },
+    "7": {
+      "name": "Identifying Themes In Science Fiction Movies",
+      "ece": 0.042336937155036086,
+      "n_items": 1359
+    },
+    "8": {
+      "name": "Maintaining Consistent Tone In Creative Writing",
+      "ece": 0.046681370333418785,
+      "n_items": 85
+    },
+    "9": {
+      "name": "Applying Combinatorial Principles To Dice Rolls",
+      "ece": 0.030910917999725077,
+      "n_items": 113
+    },
+    "10": {
+      "name": "Applying Set Theory To Count Unique Items",
+      "ece": 0.03177443613588014,
+      "n_items": 186
+    },
+    "11": {
+      "name": "Applying Trigonometric Identities To Solve Equatio",
+      "ece": 0.02995621313910659,
+      "n_items": 83
+    },
+    "12": {
+      "name": "Evaluating Consistency In League Punishments",
+      "ece": 0.05723165289906458,
+      "n_items": 207
+    },
+    "13": {
+      "name": "Evaluating Conditions For Automated Shutdown",
+      "ece": 0.0624872735364016,
+      "n_items": 25
+    },
+    "14": {
+      "name": "Calculating Decay Length From Energy And Mass",
+      "ece": 0.051863715486688895,
+      "n_items": 112
+    },
+    "15": {
+      "name": "Interpreting Numerical Values In Context",
+      "ece": 0.024505977301017022,
+      "n_items": 69
+    },
+    "16": {
+      "name": "Analyzing Geometric Interpretations Of Matrix Oper",
+      "ece": 0.02374186631813397,
+      "n_items": 56
+    },
+    "17": {
+      "name": "Calculating Ratios Of Segments In Triangles",
+      "ece": 0.03919808522083966,
+      "n_items": 61
+    },
+    "18": {
+      "name": "Identifying Penguin Attributes From Tabular Data",
+      "ece": 0.03316990776537024,
+      "n_items": 127
+    },
+    "19": {
+      "name": "Applying Divisibility Rules To Integer Sets",
+      "ece": 0.02010405260689937,
+      "n_items": 225
+    },
+    "20": {
+      "name": "Inferring Object Locations From Contextual Clues",
+      "ece": 0.03293419884839739,
+      "n_items": 1330
+    },
+    "21": {
+      "name": "Adapting Language For Age Appropriate Audience",
+      "ece": 0.02880271273770112,
+      "n_items": 68
+    },
+    "22": {
+      "name": "Calculating Work Done In Variable Force Scenarios",
+      "ece": 0.02929708527560855,
+      "n_items": 17
+    },
+    "23": {
+      "name": "Maintaining Word Count Constraints In Responses",
+      "ece": 0.036269782653232295,
+      "n_items": 418
+    },
+    "24": {
+      "name": "Analyzing Effects Of Vertical Stretch On Graphs",
+      "ece": 0.009962918355540945,
+      "n_items": 25
+    },
+    "25": {
+      "name": "Calculating Orbital Period Ratio Between Planets",
+      "ece": 0.05133160306850314,
+      "n_items": 134
+    },
+    "26": {
+      "name": "Applying Properties Of Rectangles To Find Dimensio",
+      "ece": 0.03198149078639238,
+      "n_items": 30
+    },
+    "27": {
+      "name": "Manipulating Algebraic Expressions For Variance",
+      "ece": 0.037289902710402174,
+      "n_items": 22
+    },
+    "29": {
+      "name": "Identifying Sarcasm In Verbal Expressions",
+      "ece": 0.047047184749613766,
+      "n_items": 485
+    },
+    "30": {
+      "name": "Applying Relativity To Calculate Velocity Vectors",
+      "ece": 0.060239379047788505,
+      "n_items": 46
+    },
+    "32": {
+      "name": "Identifying Humorous Wordplay In Artist Names",
+      "ece": 0.01860708721790451,
+      "n_items": 123
+    },
+    "33": {
+      "name": "Adapting Tone For Dialogue In Urdu Language",
+      "ece": 0.08395769288536133,
+      "n_items": 20
+    },
+    "34": {
+      "name": "Identifying Interstellar Medium Types In Astronomy",
+      "ece": 0.06739103543628991,
+      "n_items": 19
+    },
+    "35": {
+      "name": "Evaluating Function Values At Specific Points",
+      "ece": 0.02842076948558385,
+      "n_items": 106
+    },
+    "36": {
+      "name": "Interpreting Directional Commands For Navigation",
+      "ece": 0.0639113702703468,
+      "n_items": 298
+    },
+    "38": {
+      "name": "Applying Recursion To Define Number Sequences",
+      "ece": 0.026115509875537107,
+      "n_items": 80
+    },
+    "39": {
+      "name": "Summing Coefficients Of Polynomial Expression",
+      "ece": 0.021644887531111535,
+      "n_items": 45
+    },
+    "40": {
+      "name": "Applying Albedo Concepts To Temperature Difference",
+      "ece": 0.03784700460279234,
+      "n_items": 48
+    },
+    "41": {
+      "name": "Organizing Information Based On Given Clues",
+      "ece": 0.058604805307046745,
+      "n_items": 58
+    },
+    "42": {
+      "name": "Identifying Structural Isomers In Organic Compound",
+      "ece": 0.036539083586544945,
+      "n_items": 488
+    },
+    "44": {
+      "name": "Applying Molarity Concepts To Solution Mixing",
+      "ece": 0.04291556356672762,
+      "n_items": 83
+    },
+    "45": {
+      "name": "Identifying Mutations In Nucleotide Sequences",
+      "ece": 0.03981919157599492,
+      "n_items": 193
+    },
+    "46": {
+      "name": "Crafting Concise Descriptions Of Professional Acti",
+      "ece": 0.12226151130708365,
+      "n_items": 14
+    },
+    "47": {
+      "name": "Tracking Object Trades Among Multiple Participants",
+      "ece": 0.05388921977114249,
+      "n_items": 252
+    },
+    "52": {
+      "name": "Identifying Alphabetical Order Of Names In Table",
+      "ece": 0.026069422907892003,
+      "n_items": 53
+    },
+    "55": {
+      "name": "Applying Edington Limit To Black Hole Mass Ratio",
+      "ece": 0.036241815865135085,
+      "n_items": 11
+    },
+    "57": {
+      "name": "Applying Divisibility Rules To Factorials",
+      "ece": 0.021096666277283856,
+      "n_items": 32
+    },
+    "58": {
+      "name": "Calculating Compound Interest With Quarterly Compo",
+      "ece": 0.013531362535972057,
+      "n_items": 20
+    },
+    "60": {
+      "name": "Extracting Data From Table Headers",
+      "ece": 0.028223123971484354,
+      "n_items": 137
+    },
+    "62": {
+      "name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "ece": 0.03468108965865287,
+      "n_items": 31
+    },
+    "64": {
+      "name": "Recognizing Symmetry In Two Dimensional Figures",
+      "ece": 0.04691114190915918,
+      "n_items": 97
+    },
+    "68": {
+      "name": "Calculating Future Dates From Anniversary Informat",
+      "ece": 0.04979953915695088,
+      "n_items": 254
+    },
+    "70": {
+      "name": "Analyzing User Access Patterns Over Time",
+      "ece": 0.10743635169398988,
+      "n_items": 14
+    },
+    "73": {
+      "name": "Calculating Eigenvalues Of Quantum Operators",
+      "ece": 0.03226836992317839,
+      "n_items": 19
+    },
+    "74": {
+      "name": "Applying De Morgan Laws To Boolean Logic",
+      "ece": 0.02760169140485171,
+      "n_items": 266
+    },
+    "76": {
+      "name": "Analyzing Surface Properties Of Materials",
+      "ece": 0.09501544374841922,
+      "n_items": 24
+    },
+    "77": {
+      "name": "Calculating Oscillation Frequency Of Quantum Parti",
+      "ece": 0.037028461313310806,
+      "n_items": 11
+    },
+    "78": {
+      "name": "Distinguishing Fruits From Non Fruits",
+      "ece": 0.03834437931315645,
+      "n_items": 361
+    },
+    "81": {
+      "name": "Evaluating Possible Storage Options Based On Story",
+      "ece": 0.053300260386231695,
+      "n_items": 12
+    },
+    "84": {
+      "name": "Converting Repeating Decimals To Fractions",
+      "ece": 0.016645820092625687,
+      "n_items": 91
+    },
+    "89": {
+      "name": "Applying Snell'S Law To Light Refraction In Media",
+      "ece": 0.051633021836048086,
+      "n_items": 63
+    },
+    "90": {
+      "name": "Applying Properties Of Complex Numbers In Equation",
+      "ece": 0.021831251570169633,
+      "n_items": 79
+    },
+    "92": {
+      "name": "Applying Fraction Multiplication To Unit Prices",
+      "ece": 0.019167256268542918,
+      "n_items": 13
+    },
+    "97": {
+      "name": "Evaluating Truthfulness Of Nested Statements",
+      "ece": 0.03745012423959547,
+      "n_items": 1880
+    }
+  },
+  "skill_ece_mean": 0.040451090429666194,
+  "skill_ece_median": 0.03565766591001441,
+  "train_test": {
+    "train_ece": 0.0278825897804526,
+    "train_brier": 0.15688100457191467,
+    "test_ece": 0.10790400266697736,
+    "test_brier": 0.22360721230506897
+  }
+}
