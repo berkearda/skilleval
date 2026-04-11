@@ -1,0 +1,97 @@
+{
+  "experiment": "conjunctive_compensatory",
+  "n_llms": 3811,
+  "n_items": 9523,
+  "K": 100,
+  "mastery_threshold": 0.5,
+  "min_group_size": 50,
+  "min_effect": 0.05,
+  "conjunctive_thresh": 0.6,
+  "compensatory_thresh": 0.6,
+  "filter_stats": {
+    "total_multi": 3753,
+    "too_few_in_group": 2916,
+    "no_effect": 227,
+    "analyzed": 610
+  },
+  "overall": {
+    "conjunctive": 336,
+    "compensatory": 175,
+    "additive": 99
+  },
+  "overall_pct": {
+    "conjunctive": 55.08196721311475,
+    "compensatory": 28.688524590163933,
+    "additive": 16.229508196721312
+  },
+  "per_benchmark": {
+    "BBH": {
+      "conjunctive": 121,
+      "compensatory": 43,
+      "additive": 27,
+      "total": 191,
+      "conj_pct": 63.35078534031414,
+      "comp_pct": 22.513089005235603,
+      "add_pct": 14.136125654450261
+    },
+    "GPQA": {
+      "conjunctive": 51,
+      "compensatory": 33,
+      "additive": 14,
+      "total": 98,
+      "conj_pct": 52.04081632653061,
+      "comp_pct": 33.673469387755105,
+      "add_pct": 14.285714285714286
+    },
+    "IFEval": {
+      "conjunctive": 113,
+      "compensatory": 82,
+      "additive": 44,
+      "total": 239,
+      "conj_pct": 47.28033472803347,
+      "comp_pct": 34.30962343096234,
+      "add_pct": 18.410041841004183
+    },
+    "MATH": {
+      "conjunctive": 44,
+      "compensatory": 15,
+      "additive": 11,
+      "total": 70,
+      "conj_pct": 62.857142857142854,
+      "comp_pct": 21.428571428571427,
+      "add_pct": 15.714285714285714
+    },
+    "MuSR": {
+      "conjunctive": 7,
+      "compensatory": 2,
+      "additive": 3,
+      "total": 12,
+      "conj_pct": 58.333333333333336,
+      "comp_pct": 16.666666666666668,
+      "add_pct": 25.0
+    }
+  },
+  "per_skill_count": {
+    "2": {
+      "conjunctive": 292,
+      "compensatory": 143,
+      "additive": 87,
+      "total": 522,
+      "conj_pct": 55.93869731800766
+    },
+    "3": {
+      "conjunctive": 44,
+      "compensatory": 32,
+      "additive": 12,
+      "total": 88,
+      "conj_pct": 50.0
+    }
+  },
+  "conj_index_mean": 0.6326965768696757,
+  "conj_index_median": 0.6547712274905626,
+  "comp_index_mean": 0.3673033883946797,
+  "comp_index_median": 0.3452287585963374,
+  "avg_p_all": 0.6521612453169863,
+  "avg_p_partial": 0.38168865487877374,
+  "avg_p_none": 0.18667814634432464
+}
