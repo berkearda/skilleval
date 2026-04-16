@@ -394,5 +394,33 @@
     "train_brier": 0.15688100457191467,
     "test_ece": 0.10790400266697736,
     "test_brier": 0.22360721230506897
+  },
+  "binning_sensitivity": {
+    "overall_equal_width": 0.031961118120591984,
+    "overall_equal_count": 0.03259224890236975,
+    "test_equal_width": 0.10811829648925186,
+    "test_equal_count": 0.10714097817738852,
+    "per_benchmark": {
+      "MATH": {
+        "equal_width": 0.024129187396092915,
+        "equal_count": 0.022475502405716018
+      },
+      "BBH": {
+        "equal_width": 0.03391467396871925,
+        "equal_count": 0.033844913825280765
+      },
+      "GPQA": {
+        "equal_width": 0.038745488617358985,
+        "equal_count": 0.038585728184103406
+      },
+      "MuSR": {
+        "equal_width": 0.0588462160590424,
+        "equal_count": 0.058841845778017716
+      },
+      "IFEval": {
+        "equal_width": 0.04030088965137084,
+        "equal_count": 0.04027037518316447
+      }
+    }
   }
 }

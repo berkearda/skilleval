@@ -1333,5 +1333,981 @@
     "2": 0.03576108752826951,
     "3": 0.013892358604540649,
     "4": -0.01824116893618295
+  },
+  "statistical_tests": {
+    "n_pairs": 84,
+    "n_significant_raw_005": 36,
+    "n_significant_bonferroni": 16,
+    "per_skill": [
+      {
+        "skill": 0,
+        "name": "Inferring Time Intervals From Sequential Events",
+        "mean_delta": 0.03181547671556473,
+        "sem": 0.010846058216001295,
+        "p_value": 0.005691200162156554,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 1,
+        "name": "Applying Inequality Theorems To Minimize Expressio",
+        "mean_delta": 0.003276150207966566,
+        "sem": 0.009437214498415279,
+        "p_value": 0.48939873001476153,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 2,
+        "name": "Analyzing Coordinates To Determine Shape Type",
+        "mean_delta": 0.00012646225513890386,
+        "sem": 0.014581334733011597,
+        "p_value": 0.7279433579426395,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 3,
+        "name": "Applying Linear Combination Of Operators In Quantu",
+        "mean_delta": -0.03282530978322029,
+        "sem": 0.02204944411451392,
+        "p_value": 0.2021336405520925,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 4,
+        "name": "Applying Wetting Theory To Liquid Droplets",
+        "mean_delta": 0.024556420743465424,
+        "sem": 0.0313878337607371,
+        "p_value": 0.5120897325857746,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 5,
+        "name": "Evaluating Sporting Event Plausibility Based On Co",
+        "mean_delta": 0.031000366434454918,
+        "sem": 0.007081572491195175,
+        "p_value": 1.0092624334473202e-05,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 6,
+        "name": "Applying Quadratic Formula To Find Roots",
+        "mean_delta": -0.01957169733941555,
+        "sem": 0.01136920633786002,
+        "p_value": 0.023477918747304004,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 7,
+        "name": "Identifying Themes In Science Fiction Movies",
+        "mean_delta": -0.008013948798179626,
+        "sem": 0.0032315638057992756,
+        "p_value": 0.018758155285694904,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 8,
+        "name": "Maintaining Consistent Tone In Creative Writing",
+        "mean_delta": 0.23193484544754028,
+        "sem": 0.02972641343600492,
+        "p_value": 2.2060804198554297e-10,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 9,
+        "name": "Applying Combinatorial Principles To Dice Rolls",
+        "mean_delta": -0.009107494726777077,
+        "sem": 0.006042994970252526,
+        "p_value": 0.3287220500066439,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 10,
+        "name": "Applying Set Theory To Count Unique Items",
+        "mean_delta": -0.05013597756624222,
+        "sem": 0.009144231454668654,
+        "p_value": 1.4282664377176119e-06,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 11,
+        "name": "Applying Trigonometric Identities To Solve Equatio",
+        "mean_delta": -0.01862414740025997,
+        "sem": 0.007888941138339274,
+        "p_value": 0.14846692704771797,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 12,
+        "name": "Evaluating Consistency In League Punishments",
+        "mean_delta": 0.03339404985308647,
+        "sem": 0.0126880560074143,
+        "p_value": 0.0026480492041553788,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 13,
+        "name": "Evaluating Conditions For Automated Shutdown",
+        "mean_delta": -0.008923621848225594,
+        "sem": 0.03671536044097752,
+        "p_value": 0.6718000536174613,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 14,
+        "name": "Calculating Decay Length From Energy And Mass",
+        "mean_delta": -0.07237394899129868,
+        "sem": 0.026883151380664883,
+        "p_value": 0.009442857864357215,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 15,
+        "name": "Interpreting Numerical Values In Context",
+        "mean_delta": -0.017174962908029556,
+        "sem": 0.016437157939720125,
+        "p_value": 0.2498875654263495,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 16,
+        "name": "Analyzing Geometric Interpretations Of Matrix Oper",
+        "mean_delta": -0.012936468236148357,
+        "sem": 0.009280962999118665,
+        "p_value": 0.3820549048883338,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 17,
+        "name": "Calculating Ratios Of Segments In Triangles",
+        "mean_delta": 0.004964863881468773,
+        "sem": 0.011913546601268636,
+        "p_value": 0.16007189029216662,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 18,
+        "name": "Identifying Penguin Attributes From Tabular Data",
+        "mean_delta": 0.05113112926483154,
+        "sem": 0.021939139948545842,
+        "p_value": 0.022670266713336204,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 19,
+        "name": "Applying Divisibility Rules To Integer Sets",
+        "mean_delta": -0.00358757097274065,
+        "sem": 0.0041641513536928385,
+        "p_value": 0.5207381936280608,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 20,
+        "name": "Inferring Object Locations From Contextual Clues",
+        "mean_delta": 0.014341352507472038,
+        "sem": 0.003716445516092257,
+        "p_value": 0.00021802897480528756,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 21,
+        "name": "Adapting Language For Age Appropriate Audience",
+        "mean_delta": 0.33104124665260315,
+        "sem": 0.031146928317664427,
+        "p_value": 1.6670966057330443e-12,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 22,
+        "name": "Calculating Work Done In Variable Force Scenarios",
+        "mean_delta": 0.17681290209293365,
+        "sem": 0.029548191013018525,
+        "p_value": 8.29220337745518e-08,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 23,
+        "name": "Maintaining Word Count Constraints In Responses",
+        "mean_delta": 0.2356245368719101,
+        "sem": 0.02216472175556744,
+        "p_value": 2.335208665406987e-14,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 24,
+        "name": "Analyzing Effects Of Vertical Stretch On Graphs",
+        "mean_delta": 0.013719407841563225,
+        "sem": 0.015535042072130993,
+        "p_value": 0.461813931828,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 25,
+        "name": "Calculating Orbital Period Ratio Between Planets",
+        "mean_delta": -0.006087408401072025,
+        "sem": 0.031465191702732875,
+        "p_value": 0.9608734335021373,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 26,
+        "name": "Applying Properties Of Rectangles To Find Dimensio",
+        "mean_delta": -0.007452516350895166,
+        "sem": 0.017526443282729506,
+        "p_value": 0.3582451314069398,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 27,
+        "name": "Manipulating Algebraic Expressions For Variance",
+        "mean_delta": 0.02141224965453148,
+        "sem": 0.022973934929512593,
+        "p_value": 0.0368722526463859,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 28,
+        "name": "Articulating Feature Vs Bug Distinction",
+        "mean_delta": 0.2964511513710022,
+        "sem": 0.03417537956315042,
+        "p_value": 4.621948055887196e-11,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 29,
+        "name": "Identifying Sarcasm In Verbal Expressions",
+        "mean_delta": 0.011077625676989555,
+        "sem": 0.015857880599040045,
+        "p_value": 0.3398850921924186,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 30,
+        "name": "Applying Relativity To Calculate Velocity Vectors",
+        "mean_delta": -0.035186197608709335,
+        "sem": 0.017273371604264773,
+        "p_value": 0.039358686867550126,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 31,
+        "name": "Applying Nernst Equation To Redox Potential",
+        "mean_delta": -0.005861745681613684,
+        "sem": 0.02890411054387969,
+        "p_value": 0.6750560461938717,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 32,
+        "name": "Identifying Humorous Wordplay In Artist Names",
+        "mean_delta": 0.0003365185984876007,
+        "sem": 0.03033297253933084,
+        "p_value": 0.761688031661603,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 33,
+        "name": "Adapting Tone For Dialogue In Urdu Language",
+        "mean_delta": 0.4611250162124634,
+        "sem": 0.038803641174268384,
+        "p_value": 1.0500505754016402e-13,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 34,
+        "name": "Identifying Interstellar Medium Types In Astronomy",
+        "mean_delta": 0.048619430512189865,
+        "sem": 0.027780921351260434,
+        "p_value": 0.1305683443843322,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 35,
+        "name": "Evaluating Function Values At Specific Points",
+        "mean_delta": 0.0015049278736114502,
+        "sem": 0.009963778531079657,
+        "p_value": 0.9928833196247341,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 36,
+        "name": "Interpreting Directional Commands For Navigation",
+        "mean_delta": 0.004224508535116911,
+        "sem": 0.03726664064502104,
+        "p_value": 0.5265453518090609,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 37,
+        "name": "Assessing Causal Relationships In Fertilizer Use",
+        "mean_delta": 0.03558160737156868,
+        "sem": 0.03700515844461549,
+        "p_value": 0.3071175467770785,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 38,
+        "name": "Applying Recursion To Define Number Sequences",
+        "mean_delta": -0.0022157644852995872,
+        "sem": 0.009877864553569956,
+        "p_value": 0.18829682435406814,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 39,
+        "name": "Summing Coefficients Of Polynomial Expression",
+        "mean_delta": -0.04255891591310501,
+        "sem": 0.018892729564192988,
+        "p_value": 0.1387009227845542,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 40,
+        "name": "Applying Albedo Concepts To Temperature Difference",
+        "mean_delta": 0.0008630383526906371,
+        "sem": 0.02476880014296245,
+        "p_value": 0.6620691657239504,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 41,
+        "name": "Organizing Information Based On Given Clues",
+        "mean_delta": 0.20824439823627472,
+        "sem": 0.02855716066178364,
+        "p_value": 4.152871634542893e-09,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 42,
+        "name": "Identifying Structural Isomers In Organic Compound",
+        "mean_delta": -0.015161367133259773,
+        "sem": 0.017371424990641884,
+        "p_value": 0.3724168172627462,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 43,
+        "name": "Evaluating Climate Control System Activation Condi",
+        "mean_delta": 0.05470224842429161,
+        "sem": 0.029839250676240117,
+        "p_value": 0.09891889325446203,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 44,
+        "name": "Applying Molarity Concepts To Solution Mixing",
+        "mean_delta": -0.003723712172359228,
+        "sem": 0.012606105852153139,
+        "p_value": 0.6523950127581262,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 45,
+        "name": "Identifying Mutations In Nucleotide Sequences",
+        "mean_delta": 0.02679009921848774,
+        "sem": 0.01950482468669704,
+        "p_value": 0.40429319190462343,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 46,
+        "name": "Crafting Concise Descriptions Of Professional Acti",
+        "mean_delta": 0.059966761618852615,
+        "sem": 0.029342547004288105,
+        "p_value": 0.06549153681989907,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 47,
+        "name": "Tracking Object Trades Among Multiple Participants",
+        "mean_delta": 0.003492078511044383,
+        "sem": 0.008092590229145592,
+        "p_value": 0.5711275330032572,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 48,
+        "name": "Analyzing Historical Context Of Sunni Shia Split",
+        "mean_delta": 0.030573245137929916,
+        "sem": 0.026276696331737612,
+        "p_value": 0.5120897325857746,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 49,
+        "name": "Applying Properties Of Matrix Norms To Vectors",
+        "mean_delta": -0.022340426221489906,
+        "sem": 0.020560134642697476,
+        "p_value": 0.6491831440606595,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 50,
+        "name": "Embedding Comments With Security Keywords In Code ",
+        "mean_delta": 0.08874191343784332,
+        "sem": 0.021738394625801828,
+        "p_value": 0.0025525358002286584,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 51,
+        "name": "Articulating Customer Rights Under Consumer Protec",
+        "mean_delta": 0.13274621963500977,
+        "sem": 0.0344726564766913,
+        "p_value": 0.00034201828071494454,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 52,
+        "name": "Identifying Alphabetical Order Of Names In Table",
+        "mean_delta": 0.05015631392598152,
+        "sem": 0.025795402465885558,
+        "p_value": 0.0037452784241777974,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 53,
+        "name": "Avoiding Sensitive Terms In Condolence Messages",
+        "mean_delta": 0.05658741667866707,
+        "sem": 0.031234883549822633,
+        "p_value": 0.11959821451860755,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 54,
+        "name": "Analyzing Door Count Distribution In Car Types",
+        "mean_delta": 0.034102197736501694,
+        "sem": 0.018282483033114937,
+        "p_value": 0.3092346881594705,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 55,
+        "name": "Applying Edington Limit To Black Hole Mass Ratio",
+        "mean_delta": 0.003720738459378481,
+        "sem": 0.02424563413675396,
+        "p_value": 0.701318795881303,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 56,
+        "name": "Separating Versions With Specific Delimiters",
+        "mean_delta": 0.0916680321097374,
+        "sem": 0.022402621002029135,
+        "p_value": 0.018984112075791062,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 57,
+        "name": "Applying Divisibility Rules To Factorials",
+        "mean_delta": -0.018604939803481102,
+        "sem": 0.020076447525676486,
+        "p_value": 0.14721820861554602,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 58,
+        "name": "Calculating Compound Interest With Quarterly Compo",
+        "mean_delta": -0.01938566379249096,
+        "sem": 0.017352740722684435,
+        "p_value": 0.9431140808916058,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 59,
+        "name": "Applying Combinatorial Principles To Pet Ownership",
+        "mean_delta": 0.1157744824886322,
+        "sem": 0.029402823766405618,
+        "p_value": 0.00036613524141810937,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 60,
+        "name": "Extracting Data From Table Headers",
+        "mean_delta": 0.04529464989900589,
+        "sem": 0.018265668492633214,
+        "p_value": 0.020633498245388484,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 61,
+        "name": "Embedding Asterisk Symbols For Visual Separation",
+        "mean_delta": 0.20576146245002747,
+        "sem": 0.03212856125602131,
+        "p_value": 2.769333226457282e-06,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 62,
+        "name": "Applying Maxwell Equations To Electromagnetic Fiel",
+        "mean_delta": -0.07694574445486069,
+        "sem": 0.02960071897413663,
+        "p_value": 0.008395692092326351,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 63,
+        "name": "Applying Synonyms To Replace Restricted Vocabulary",
+        "mean_delta": 0.09391635656356812,
+        "sem": 0.027903968929363084,
+        "p_value": 0.0036923510011161852,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 64,
+        "name": "Recognizing Symmetry In Two Dimensional Figures",
+        "mean_delta": 0.004860397428274155,
+        "sem": 0.005920264026433265,
+        "p_value": 0.6653065606434991,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 65,
+        "name": "Analyzing Historical Significance Of Chess Program",
+        "mean_delta": 0.11554224044084549,
+        "sem": 0.02376221365912951,
+        "p_value": 0.00010638571090476849,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 66,
+        "name": "Applying Pattern Recognition To Algorithmic Output",
+        "mean_delta": -0.036724913865327835,
+        "sem": 0.03082023002290548,
+        "p_value": 0.25357750899112896,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 67,
+        "name": "Ph\u00e2n T\u00edch Ng\u1eef C\u1ea3nh C\u1ee7a Nhi\u1ec7m V\u1ee5 X\u00e3 H\u1ed9i",
+        "mean_delta": 0.0005231744726188481,
+        "sem": 0.0008146534203979691,
+        "p_value": 0.36293087024909265,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 68,
+        "name": "Calculating Future Dates From Anniversary Informat",
+        "mean_delta": -0.011766267940402031,
+        "sem": 0.025555939151744162,
+        "p_value": 0.3243241555798484,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 69,
+        "name": "Applying Percentage Rates To Income Segments",
+        "mean_delta": -0.015374251641333103,
+        "sem": 0.009733774412115469,
+        "p_value": 0.1838434814516079,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 70,
+        "name": "Analyzing User Access Patterns Over Time",
+        "mean_delta": -0.06435748934745789,
+        "sem": 0.02743945708699317,
+        "p_value": 0.03266040429105799,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 71,
+        "name": "Applying Random Variable Concepts To Sleep Pattern",
+        "mean_delta": -0.05385706573724747,
+        "sem": 0.022025389664076186,
+        "p_value": 0.00020682200228895633,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 72,
+        "name": "Applying Discrete Group Approximations To Gauge Th",
+        "mean_delta": -0.07461854070425034,
+        "sem": 0.029002441950603197,
+        "p_value": 0.011595075349681797,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 73,
+        "name": "Calculating Eigenvalues Of Quantum Operators",
+        "mean_delta": -0.020221613347530365,
+        "sem": 0.018767641544366824,
+        "p_value": 0.09183514077356264,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 74,
+        "name": "Applying De Morgan Laws To Boolean Logic",
+        "mean_delta": -0.014103539288043976,
+        "sem": 0.00706774707589965,
+        "p_value": 0.3820549048883338,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 75,
+        "name": "Constructing Bash Scripts For File Downloads",
+        "mean_delta": -0.03352116420865059,
+        "sem": 0.0232856380099162,
+        "p_value": 0.0014070522565753463,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 76,
+        "name": "Analyzing Surface Properties Of Materials",
+        "mean_delta": -0.06230663135647774,
+        "sem": 0.02923096817193657,
+        "p_value": 0.0827667873712196,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 77,
+        "name": "Calculating Oscillation Frequency Of Quantum Parti",
+        "mean_delta": 0.012280307710170746,
+        "sem": 0.03462327521873604,
+        "p_value": 0.6750560461938717,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 78,
+        "name": "Distinguishing Fruits From Non Fruits",
+        "mean_delta": -0.03456592932343483,
+        "sem": 0.015134487916230809,
+        "p_value": 0.5620690324203208,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 79,
+        "name": "Coordinating Workflow Between Service Providers",
+        "mean_delta": -0.0006855431711301208,
+        "sem": 0.0009868298661987885,
+        "p_value": 0.6237267241004032,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 80,
+        "name": "Applying Mutation Rate To Genetic Equilibrium",
+        "mean_delta": -0.021803995594382286,
+        "sem": 0.02952718828299117,
+        "p_value": 0.611162615624601,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 81,
+        "name": "Evaluating Possible Storage Options Based On Story",
+        "mean_delta": -0.04869316890835762,
+        "sem": 0.014734751562870008,
+        "p_value": 0.0001642237681511735,
+        "sig_raw": true,
+        "sig_bonferroni": true
+      },
+      {
+        "skill": 82,
+        "name": "Optimizing User Experience Based On Feedback",
+        "mean_delta": 0.021713726222515106,
+        "sem": 0.03334748049539784,
+        "p_value": 0.7890175220809581,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 83,
+        "name": "Incorporating Friends Name In Personalized Message",
+        "mean_delta": 0.053138308227062225,
+        "sem": 0.022715219925771118,
+        "p_value": 0.0730000416563841,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 84,
+        "name": "Converting Repeating Decimals To Fractions",
+        "mean_delta": -0.009791933931410313,
+        "sem": 0.00623028272625874,
+        "p_value": 0.0843593275280644,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 85,
+        "name": "Applying Set Theory To Divisor Subsets",
+        "mean_delta": -0.009821747429668903,
+        "sem": 0.017482338850352053,
+        "p_value": 0.5987119411930857,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 86,
+        "name": "Applying Interpolation To Estimate Values",
+        "mean_delta": -0.0011040689423680305,
+        "sem": 0.01556201980083078,
+        "p_value": 0.6174306758443797,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 87,
+        "name": "Applying Mott Gurney Equation To Device Characteri",
+        "mean_delta": 0.08598309010267258,
+        "sem": 0.029791935190154346,
+        "p_value": 0.012666333345016377,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 88,
+        "name": "Analyzing Sentiment In Financial Statements",
+        "mean_delta": 0.11979874968528748,
+        "sem": 0.03760352326404778,
+        "p_value": 0.005462039898721288,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 89,
+        "name": "Applying Snell'S Law To Light Refraction In Media",
+        "mean_delta": -0.03312784805893898,
+        "sem": 0.012954882376700477,
+        "p_value": 0.011161125788278525,
+        "sig_raw": true,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 90,
+        "name": "Applying Properties Of Complex Numbers In Equation",
+        "mean_delta": -0.01168389618396759,
+        "sem": 0.005962645870758083,
+        "p_value": 0.08042374813557554,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 91,
+        "name": "Calculating Handshake Combinations In Group Intera",
+        "mean_delta": -0.039809368550777435,
+        "sem": 0.02324242129162722,
+        "p_value": 0.34441756831303005,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 92,
+        "name": "Applying Fraction Multiplication To Unit Prices",
+        "mean_delta": -0.016699636355042458,
+        "sem": 0.029973506864097263,
+        "p_value": 0.921840898630454,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 93,
+        "name": "Ensuring Consistent Section Headers In Document St",
+        "mean_delta": 0.007235207594931126,
+        "sem": 0.022956071715794484,
+        "p_value": 0.9537668665500747,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 94,
+        "name": "Iterating Weight Loss Over Multiple Weeks",
+        "mean_delta": -0.01685246080160141,
+        "sem": 0.027181558259941098,
+        "p_value": 0.45102797268065287,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 95,
+        "name": "Interpreting Luminescence Behavior In Zinc Silicat",
+        "mean_delta": 0.00507197855040431,
+        "sem": 0.024196107494696893,
+        "p_value": 0.419539933556229,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 96,
+        "name": "Balancing Instrumentation For Optimal Sound Qualit",
+        "mean_delta": -0.0021086912602186203,
+        "sem": 0.026265947837527146,
+        "p_value": 0.5863776023997398,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 97,
+        "name": "Evaluating Truthfulness Of Nested Statements",
+        "mean_delta": 0.00372931151650846,
+        "sem": 0.0053825425982887256,
+        "p_value": 0.15226162836204613,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 98,
+        "name": "Analyzing Fragmentation Patterns In Ei Ms",
+        "mean_delta": 0.0337902195751667,
+        "sem": 0.023728243149670498,
+        "p_value": 0.18829682435406814,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      },
+      {
+        "skill": 99,
+        "name": "Identifying Transformations In Quantum Field Theor",
+        "mean_delta": -0.02817465551197529,
+        "sem": 0.04048671131731952,
+        "p_value": 0.5149642047486418,
+        "sig_raw": false,
+        "sig_bonferroni": false
+      }
+    ],
+    "per_benchmark_sem": {
+      "MATH": {
+        "mean": -0.004685471300035715,
+        "sem": 0.007981558495311958,
+        "p": 0.9502149256386275
+      },
+      "BBH": {
+        "mean": 0.016419151797890663,
+        "sem": 0.0065054801906237495,
+        "p": 0.002848873572295842
+      },
+      "GPQA": {
+        "mean": -0.011636482551693916,
+        "sem": 0.007019917008295559,
+        "p": 0.09710831312097842
+      },
+      "MuSR": {
+        "mean": -0.017162468284368515,
+        "sem": 0.009834175525862106,
+        "p": 0.13751579813836728
+      },
+      "IFEval": {
+        "mean": 0.12443779408931732,
+        "sem": 0.013353816373096693,
+        "p": 8.095995290978773e-12
+      }
+    },
+    "family_reliability": {
+      "other": {
+        "n": 18,
+        "reliable": true
+      },
+      "mistral": {
+        "n": 4,
+        "reliable": false
+      },
+      "qwen": {
+        "n": 27,
+        "reliable": true
+      },
+      "olmo": {
+        "n": 2,
+        "reliable": false
+      },
+      "solar": {
+        "n": 1,
+        "reliable": false
+      },
+      "llama": {
+        "n": 15,
+        "reliable": true
+      },
+      "falcon": {
+        "n": 2,
+        "reliable": false
+      },
+      "yi": {
+        "n": 5,
+        "reliable": false
+      },
+      "stablelm": {
+        "n": 2,
+        "reliable": false
+      },
+      "gemma": {
+        "n": 8,
+        "reliable": false
+      }
+    }
   }
 }
