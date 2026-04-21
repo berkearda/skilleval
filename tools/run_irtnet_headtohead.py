@@ -117,6 +117,13 @@ def main(cfg: DictConfig) -> None:
     print(f"Device: {device}, seed: {seed}, d_model: {d_model}")
 
     MoEClassifier = import_irtnet_model_class()
+    # IrtNet/src/modules.py has module-level `torch.manual_seed(42)` and
+    # `random.seed(42)` calls that fire on import, silently resetting the
+    # RNG and collapsing all per-seed runs to identical outcomes. Re-seed
+    # AFTER the import so our `seed` wins. Confirmed bug via the first
+    # 7-run sweep (job 64313091): byte-identical results for seeds
+    # {42, 43, 44} at every d_model. See the project log 2026-04-21.
+    seed_everything(seed)
 
     # ── Load v2 data ──
     data_dir = Path(cfg.paths.cdm_ready)
