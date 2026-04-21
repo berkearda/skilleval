@@ -59,40 +59,44 @@ python -m pip install --index-url https://download.pytorch.org/whl/cu128 \
     "torch==2.9.1"
 
 # CDMEval package (reads pyproject.toml from the repo root). We pass --no-deps
-# because pyproject.toml still pins torch==2.4.1 (CUDA 12 era); that pin is
-# correct for local mps runs but would downgrade the Blackwell-compatible torch
-# we just installed. IrtNet's requirements.txt covers the same scientific
-# dependencies (numpy, pandas, scikit-learn, sentence-transformers, tqdm).
+# because pyproject.toml still pins torch==2.4.1 (CUDA 12 era); that pin would
+# downgrade the Blackwell-compatible torch we just installed. We install the
+# actual runtime deps explicitly below.
 cd "${REPO}"
 python -m pip install --no-deps -e .
 
-# IrtNet dependencies. We strip the `torch==2.6.0` line so pip does not revisit
-# torch on the default channel (which would fetch the cu124 build); the torch
-# we installed above already satisfies every downstream package.
-if [[ -f "${IRTNET_REQS}" ]]; then
-    tmp_req=$(mktemp)
-    # Strip torch/torchvision/triton so pip does not downgrade the
-    # Blackwell-compatible torch we just installed, nor pull cu124 wheels.
-    grep -v -E '^(torch|torchvision|triton)==' "${IRTNET_REQS}" > "${tmp_req}"
-    python -m pip install -r "${tmp_req}"
-    rm -f "${tmp_req}"
-    # Also install the cdmeval runtime deps that we skipped with --no-deps,
-    # minus torch (already handled). These are the deps from pyproject.toml
-    # that IrtNet's requirements does not already cover.
-    python -m pip install hydra-core omegaconf EduCDM==0.0.13 \
-        hdbscan==0.8.40 umap-learn==0.5.7
-else
-    echo "[bootstrap] WARNING: ${IRTNET_REQS} not found after clone — aborting."
-    exit 1
-fi
+# Runtime deps — curated list, avoids IrtNet's requirements.txt entirely.
+# IrtNet's requirements.txt pins nvidia-*-cu12==12.4.*, which conflicts with
+# the nvidia-*-cu12==12.8.* libs torch 2.9.1+cu128 brings in. pip's resolver
+# reacts by downgrading torch to 2.6.0+cu124 (no sm_120 kernels — fatal on
+# Pro 6000). IrtNet's code only imports: torch, pandas, sklearn,
+# sentence_transformers, tqdm, torch.nn/optim/utils — all covered below.
+python -m pip install \
+    "numpy>=1.24" "pandas>=2.0" "scipy>=1.10" "scikit-learn>=1.3" \
+    "tqdm" "huggingface-hub" "tokenizers" "safetensors" \
+    "transformers==4.49.0" "sentence-transformers==3.4.1" \
+    "matplotlib" "seaborn" "hydra-core>=1.3,<2.0" "omegaconf>=2.3" \
+    "EduCDM==0.0.13" "hdbscan==0.8.40" "umap-learn==0.5.7" \
+    "anthropic"
 
-# Light sanity check.
+# Strict sanity check. Aborts if torch is not 2.9.1+cu128 (e.g. silently
+# downgraded by a later dep install), so the bootstrap never finishes claiming
+# success with an unusable Blackwell install.
 python - <<'PY'
+import sys
 import torch
-print(f"torch {torch.__version__}, cuda available: {torch.cuda.is_available()}")
+ver = torch.__version__
+print(f"torch {ver}, cuda available: {torch.cuda.is_available()}")
+if not ver.startswith("2.9.1+cu128"):
+    print(f"ERROR: expected torch 2.9.1+cu128, got {ver}", file=sys.stderr)
+    print("       A later install likely downgraded torch. Delete the venv and", file=sys.stderr)
+    print("       re-run the bootstrap after fixing the conflicting pin.", file=sys.stderr)
+    sys.exit(1)
 if torch.cuda.is_available():
     print(f"  cuda version: {torch.version.cuda}")
     print(f"  device: {torch.cuda.get_device_name(0)}")
+else:
+    print("  (cuda_available=False on login node is expected; real check runs on GPU node)")
 PY
 
 echo
