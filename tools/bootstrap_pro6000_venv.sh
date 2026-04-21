@@ -47,14 +47,16 @@ source "${VENV}/bin/activate"
 
 python -m pip install --upgrade pip setuptools wheel
 
-# PyTorch pinned to 2.6.0 from the cu128 index. This is the version IrtNet's
-# requirements.txt asks for, and cu128 wheels include sm_120 kernels needed by
-# RTX Pro 6000 Blackwell (confirmed working in PyTorch Forums threads on sm_120).
-# We install it FIRST so pip sees the requirement as satisfied when it later
-# processes IrtNet's requirements.txt, and does not silently reinstall
-# torch==2.6.0 from the default PyPI channel (which is cu124, missing sm_120).
+# PyTorch from the cu128 index. The cu128 index no longer ships torch 2.6.0
+# (IrtNet's pinned version); it starts at 2.7.0. We use 2.9.1 — stable, full
+# sm_120 / sm_122 kernel support for RTX Pro 6000 Blackwell, backward
+# compatible with IrtNet's training code (standard nn.Module APIs only).
+# torchvision is NOT installed: neither CDMEval nor IrtNet imports it.
+# Install this FIRST so pip sees torch as satisfied when processing IrtNet's
+# requirements.txt (the grep filter below strips torch/torchvision/triton
+# pins so pip doesn't downgrade or pull cu124 wheels from the default index).
 python -m pip install --index-url https://download.pytorch.org/whl/cu128 \
-    "torch==2.6.0" "torchvision==0.21.0"
+    "torch==2.9.1"
 
 # CDMEval package (reads pyproject.toml from the repo root). We pass --no-deps
 # because pyproject.toml still pins torch==2.4.1 (CUDA 12 era); that pin is
@@ -69,7 +71,9 @@ python -m pip install --no-deps -e .
 # we installed above already satisfies every downstream package.
 if [[ -f "${IRTNET_REQS}" ]]; then
     tmp_req=$(mktemp)
-    grep -v -E '^(torch|torchvision)==' "${IRTNET_REQS}" > "${tmp_req}"
+    # Strip torch/torchvision/triton so pip does not downgrade the
+    # Blackwell-compatible torch we just installed, nor pull cu124 wheels.
+    grep -v -E '^(torch|torchvision|triton)==' "${IRTNET_REQS}" > "${tmp_req}"
     python -m pip install -r "${tmp_req}"
     rm -f "${tmp_req}"
     # Also install the cdmeval runtime deps that we skipped with --no-deps,
