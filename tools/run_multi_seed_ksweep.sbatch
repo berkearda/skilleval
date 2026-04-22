@@ -6,9 +6,14 @@
 #SBATCH --array=0-3
 #SBATCH --partition=cuda13pr.24h
 #SBATCH --gpus=nvidia_rtx_pro_6000:1
-#SBATCH --mem-per-cpu=16G
+#SBATCH --mem-per-cpu=32G
 #SBATCH --cpus-per-task=8
 #SBATCH --time=06:00:00
+# mem-per-cpu is doubled vs the IrtNet sbatch because run_k_ablation.py uses
+# make_text_dataloader which materialises the per-triplet Q-row (K floats per
+# row × 36.3M triplets). At K=500 this alone is ~72 GB; total peak crosses
+# the default 128 GB envelope. 32G × 8 CPUs = 256 GB is comfortable for both
+# K=300 and K=500.
 
 # CDMEval multi-seed K-sweep for T-021: close the asymmetric-ablation gap
 # against IrtNet's 3-seed d-sweep. We already have seed-42 results at every
