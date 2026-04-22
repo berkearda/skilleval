@@ -29,12 +29,34 @@ def main(cfg: DictConfig) -> None:
     from cdmeval.utils.device import resolve_device, seed_everything
     from cdmeval.utils.experiment import log_experiment, save_checkpoint, verify_splits
 
-    seed_everything(42)
+    # Seed is optional (default 42 for backward compat with the single-seed
+    # K-ablation runs already committed). Pass `+seed=43` on the CLI or set
+    # SLURM_ARRAY_TASK_ID-derived seed to run multi-seed at a given K. When
+    # seed != 42, output filenames include `_s{seed}` to avoid clobbering the
+    # existing seed-42 K-ablation artifacts (T-021, 2026-04-22).
+    import os as _os
+    _slurm_task_env = _os.environ.get("SLURM_ARRAY_TASK_ID")
+    if hasattr(cfg, "seed"):
+        seed = int(cfg.seed)
+    elif _slurm_task_env is not None:
+        # Used by run_multi_seed_ksweep.sbatch: task index maps to (K, seed).
+        seed = None  # resolved below via explicit config after K is known
+    else:
+        seed = 42
     data_dir = Path(cfg.paths.cdm_ready)
     device = resolve_device(cfg.device)
 
     K = cfg.ablation.K if hasattr(cfg, "ablation") else 100
-    print(f"Device: {device}, K={K}", flush=True)
+
+    # Allow the sbatch to set (K, seed) from SLURM_ARRAY_TASK_ID via cfg.
+    # If seed is still None here, require +seed= from the caller.
+    if seed is None:
+        raise RuntimeError(
+            "SLURM_ARRAY_TASK_ID was set but no seed override was provided. "
+            "Pass `+seed=43` (or similar) on the CLI.",
+        )
+    seed_everything(seed)
+    print(f"Device: {device}, K={K}, seed={seed}", flush=True)
 
     # ── Load data ──
     print("\nLoading v2 data...", flush=True)
@@ -123,11 +145,16 @@ def main(cfg: DictConfig) -> None:
     strongest_acc1 = sum(R[strongest_idx, int(i)] for i in test_items) / n_total
     print(f"  Strongest @1: {strongest_acc1:.4f}", flush=True)
 
+    # Filename suffix: seed 42 uses the legacy naming (no `_s42`) so existing
+    # checkpoints, results, and log entries at K=100/150/200/300/400/500 are
+    # not clobbered. All other seeds get `_s{seed}` appended.
+    seed_suffix = "" if seed == 42 else f"_s{seed}"
+
     # ── Save checkpoint ──
     ckpt_dir = Path("cdm_exploration/checkpoints/expanded")
     save_checkpoint(
-        net, ckpt_dir / f"text_conditioned_K{K}.pt",
-        config={"K": K, "n_llms": n_llms, "n_items": n_items,
+        net, ckpt_dir / f"text_conditioned_K{K}{seed_suffix}.pt",
+        config={"K": K, "seed": seed, "n_llms": n_llms, "n_items": n_items,
                 "epochs": epochs, "lr": lr, "text_dim": text_dim},
         train_items=train_items, test_items=test_items,
         val_auc=auc, epoch=epochs,
@@ -135,22 +162,23 @@ def main(cfg: DictConfig) -> None:
 
     # ── Save results ──
     results = {
-        "K": K, "test_auc": float(auc), "test_acc": float(acc),
+        "K": K, "seed": seed,
+        "test_auc": float(auc), "test_acc": float(acc),
         "test_rmse": float(rmse), **routing,
         "strongest_acc1": float(strongest_acc1),
         "n_llms": n_llms, "n_items": n_items, "epochs": epochs,
     }
-    out = Path(f"cdm_exploration/experiments/v2_K{K}_results.json")
+    out = Path(f"cdm_exploration/experiments/v2_K{K}{seed_suffix}_results.json")
     out.parent.mkdir(parents=True, exist_ok=True)
     with open(out, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nSaved: {out}", flush=True)
 
     # ── Verify and log ──
-    verified = verify_splits(train_items, test_items, label=f"k_ablation_K{K}")
+    verified = verify_splits(train_items, test_items, label=f"k_ablation_K{K}{seed_suffix}")
     log_experiment(
-        name=f"k_ablation_K{K}",
-        config={"K": K, "epochs": epochs, "lr": lr, "device": device},
+        name=f"k_ablation_K{K}{seed_suffix}",
+        config={"K": K, "seed": seed, "epochs": epochs, "lr": lr, "device": device},
         results=results,
         split_info={"n_train": len(train_items), "n_test": len(test_items), "n_llms": n_llms},
         verified=verified,
