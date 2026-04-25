@@ -52,10 +52,28 @@ def collect_per_k(K: int) -> dict:
 
     if K == 100:
         ms = safe_load(EXP / "v2_multi_seed.json")
-        if ms is not None and "per_seed" in ms:
-            for entry in ms["per_seed"]:
-                seed = int(entry.get("seed", -1))
-                if seed >= 0 and seed not in runs:
+        if ms is not None and isinstance(ms, dict) and "per_seed" in ms:
+            per_seed = ms["per_seed"]
+            # Be defensive — per_seed schema has shifted across runs. Only
+            # accept dict entries with an explicit numeric "seed" field; skip
+            # bare seed-id strings or other shapes.
+            if isinstance(per_seed, dict):
+                iterable = list(per_seed.values())
+            elif isinstance(per_seed, list):
+                iterable = per_seed
+            else:
+                iterable = []
+            for entry in iterable:
+                if not isinstance(entry, dict):
+                    continue
+                seed = entry.get("seed")
+                if seed is None:
+                    continue
+                try:
+                    seed = int(seed)
+                except (TypeError, ValueError):
+                    continue
+                if seed not in runs:
                     runs[seed] = entry
 
     return runs
