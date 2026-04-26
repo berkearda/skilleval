@@ -136,15 +136,34 @@ def per_dim_pearson(thetas: list[np.ndarray]) -> tuple[float, float, np.ndarray]
 
 
 def procrustes_align(a: np.ndarray, b: np.ndarray) -> np.ndarray:
-    """Find orthogonal R to minimize ||a - b @ R||_F, return b @ R."""
-    # SVD on b^T a
+    """Orthogonal Procrustes only: rotate b to best match a (no centering/scaling).
+
+    Find orthogonal R minimising ||a - b @ R||_F, return b @ R.
+    """
     U, _, Vt = np.linalg.svd(b.T @ a, full_matrices=False)
     R = U @ Vt
     return b @ R
 
 
+def procrustes_align_full(a: np.ndarray, b: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Full Procrustes (per the 2026-04-26 request): centering + Frobenius
+    normalisation + orthogonal alignment. Returns the standardised, aligned
+    versions of both inputs so a fair value-stability comparison can be done
+    on them.
+
+    This is the standard scipy.spatial.procrustes formulation: subtract the
+    column means of each matrix, scale each to unit Frobenius norm, then find
+    the orthogonal rotation that aligns b to a. Handles all four MIRT-style
+    invariances IrtNet has under the model class (translation via centering,
+    scale via normalisation, rotation + sign-flip via the orthogonal alignment).
+    """
+    from scipy.spatial import procrustes as scipy_procrustes
+    a_std, b_std_aligned, _disparity = scipy_procrustes(a, b)
+    return a_std, b_std_aligned
+
+
 def per_dim_pearson_procrustes(thetas: list[np.ndarray]) -> tuple[float, float]:
-    """Per-dim Pearson after Procrustes-aligning each pair."""
+    """Per-dim Pearson after orthogonal-only Procrustes alignment."""
     pair_means = []
     d = thetas[0].shape[1]
     for a, b in combinations(thetas, 2):
@@ -152,6 +171,20 @@ def per_dim_pearson_procrustes(thetas: list[np.ndarray]) -> tuple[float, float]:
         per_dim = np.zeros(d)
         for k in range(d):
             r, _ = pearsonr(a[:, k], b_aligned[:, k])
+            per_dim[k] = r if not np.isnan(r) else 0.0
+        pair_means.append(per_dim.mean())
+    return float(np.mean(pair_means)), float(np.std(pair_means))
+
+
+def per_dim_pearson_procrustes_full(thetas: list[np.ndarray]) -> tuple[float, float]:
+    """Per-dim Pearson after full Procrustes (centering + scaling + rotation)."""
+    pair_means = []
+    d = thetas[0].shape[1]
+    for a, b in combinations(thetas, 2):
+        a_std, b_std_aligned = procrustes_align_full(a, b)
+        per_dim = np.zeros(d)
+        for k in range(d):
+            r, _ = pearsonr(a_std[:, k], b_std_aligned[:, k])
             per_dim[k] = r if not np.isnan(r) else 0.0
         pair_means.append(per_dim.mean())
     return float(np.mean(pair_means)), float(np.std(pair_means))
@@ -191,7 +224,10 @@ def analyse_irtnet() -> dict:
         print(f"  Per-dim Pearson (raw):      {dim_m:.4f} ± {dim_s:.4f}")
 
         proc_m, proc_s = per_dim_pearson_procrustes(thetas)
-        print(f"  Per-dim Pearson (Procrustes): {proc_m:.4f} ± {proc_s:.4f}")
+        print(f"  Per-dim Pearson (Procrustes orthogonal):  {proc_m:.4f} ± {proc_s:.4f}")
+
+        proc_full_m, proc_full_s = per_dim_pearson_procrustes_full(thetas)
+        print(f"  Per-dim Pearson (Procrustes full):        {proc_full_m:.4f} ± {proc_full_s:.4f}")
 
         results[f"d_model={d}"] = {
             "d_model": d,
@@ -205,6 +241,8 @@ def analyse_irtnet() -> dict:
             "per_dim_pearson_raw_std": dim_s,
             "per_dim_pearson_procrustes_mean": proc_m,
             "per_dim_pearson_procrustes_std": proc_s,
+            "per_dim_pearson_procrustes_full_mean": proc_full_m,
+            "per_dim_pearson_procrustes_full_std": proc_full_s,
         }
     return results
 
