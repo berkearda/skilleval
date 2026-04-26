@@ -127,13 +127,26 @@ def main(cfg: DictConfig) -> None:
     device = resolve_device(cfg.device)
     held_out = select_held_out(cfg)
 
+    # K is optional, default 100 for backward compat with the legacy LOO runs
+    # (existing v2_leave_one_out*.json + exports/llm_skill_profiles_loo_*.csv
+    # are at K=100). Pass `+ablation.K=300` to run the LOO sweep at other K.
+    # When K != 100 the output filenames get a `_K{K}` suffix so they do not
+    # clobber the K=100 artefacts already shared on 2026-04-25.
+    K_target = (
+        int(cfg.ablation.K)
+        if hasattr(cfg, "ablation") and hasattr(cfg.ablation, "K")
+        else 100
+    )
+    K_suffix = "" if K_target == 100 else f"_K{K_target}"
+
     print(f"Device: {device}", flush=True)
     print(f"Held-out benchmark: {held_out}", flush=True)
+    print(f"K (Q-matrix): {K_target}", flush=True)
 
     # ── Load data ──
     print("\nLoading v2 data...", flush=True)
     R = np.load(data_dir / "response_matrix_v2_full.npy")
-    q_matrix = np.load(data_dir / "qmatrix_v2_K100.npy").copy()
+    q_matrix = np.load(data_dir / f"qmatrix_v2_K{K_target}.npy").copy()
     text_embs = np.load(data_dir / "item_text_embeddings_v2_full.npz")["embeddings"]
     with open(data_dir / "response_matrix_v2_full_llms.json") as f:
         llm_names = json.load(f)
@@ -143,14 +156,27 @@ def main(cfg: DictConfig) -> None:
     n_llms, n_items = R.shape
     K = q_matrix.shape[1]
     text_dim = text_embs.shape[1]
+    assert K == K_target, (
+        f"Q-matrix K={K} does not match requested K_target={K_target}"
+    )
 
     validate_data(R, q_matrix, text_embs, items_data, llm_names)
 
     # ── Fix zero-skill items (copied from train_expanded.py) ──
+    # Skill embeddings only exist at K=100 in the data dir. For other K we
+    # only attempt the imputation if a matching skill_embeddings_v2_K{K}.npz
+    # is present; otherwise we require the Q-matrix to have no zero-skill rows.
     text_emb_path = data_dir / "item_text_embeddings_v2_full.npz"
-    skill_emb_path = data_dir / "skill_embeddings_v2_K100.npz"
+    skill_emb_path = data_dir / f"skill_embeddings_v2_K{K_target}.npz"
     n_zero = int((q_matrix.sum(axis=1) == 0).sum())
     if n_zero > 0:
+        if not skill_emb_path.exists():
+            raise FileNotFoundError(
+                f"Q-matrix at K={K_target} has {n_zero} zero-skill rows "
+                f"but {skill_emb_path} is missing — cannot impute. "
+                f"Either add the skill embeddings file or use a K with "
+                f"zero zero-skill rows.",
+            )
         from tools.train_expanded import fix_zero_skill_items
         q_matrix = fix_zero_skill_items(
             q_matrix, skill_emb_path, items_data, text_emb_path,
@@ -388,20 +414,20 @@ def main(cfg: DictConfig) -> None:
 
     out_dir = Path("cdm_exploration/experiments")
     out_dir.mkdir(parents=True, exist_ok=True)
-    fold_path = out_dir / f"v2_leave_one_out_{held_out}.json"
+    fold_path = out_dir / f"v2_leave_one_out{K_suffix}_{held_out}.json"
     with open(fold_path, "w") as f:
         json.dump(fold_result, f, indent=2)
     print(f"\nSaved fold: {fold_path}", flush=True)
 
     # Atomic merge into the combined file (last fold to write wins; race-safe
     # because we re-read whatever exists and overwrite our own slot only).
-    combined_path = out_dir / "v2_leave_one_out.json"
+    combined_path = out_dir / f"v2_leave_one_out{K_suffix}.json"
     if combined_path.exists():
         with open(combined_path) as f:
             combined = json.load(f)
     else:
         combined = {"experiment": "leave_one_benchmark_out",
-                    "benchmarks": BENCHMARKS, "folds": {}}
+                    "K": K, "benchmarks": BENCHMARKS, "folds": {}}
     combined["folds"][held_out] = fold_result
     with open(combined_path, "w") as f:
         json.dump(combined, f, indent=2)
@@ -409,8 +435,9 @@ def main(cfg: DictConfig) -> None:
 
     # ── Checkpoint + log ──
     ckpt_dir = Path("cdm_exploration/checkpoints/leave_one_out")
+    ckpt_path = ckpt_dir / f"text_conditioned_loo{K_suffix}_{held_out}.pt"
     save_checkpoint(
-        net, ckpt_dir / f"text_conditioned_loo_{held_out}.pt",
+        net, ckpt_path,
         config={"K": K, "n_llms": n_llms, "n_items": n_items,
                 "epochs": epochs, "lr": lr, "text_dim": text_dim,
                 "held_out": held_out},
@@ -418,12 +445,12 @@ def main(cfg: DictConfig) -> None:
         val_auc=held_auc, epoch=epochs,
     )
     validate_checkpoint(
-        ckpt_dir / f"text_conditioned_loo_{held_out}.pt",
+        ckpt_path,
         expected_K=K, expected_n_llms=n_llms,
     )
 
     log_experiment(
-        name=f"leave_one_out_{held_out}",
+        name=f"leave_one_out{K_suffix}_{held_out}",
         config={"K": K, "epochs": epochs, "lr": lr, "device": device,
                 "held_out": held_out},
         results=fold_result,
