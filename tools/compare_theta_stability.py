@@ -36,9 +36,13 @@ Inputs
   - IrtNet checkpoints at cdm_exploration/checkpoints/irtnet/d{D}_s{S}.pt
         Three seeds per d_model in {232, 512, 1024}.
         Loads `model_embedder.weight` (the θ matrix, shape n_llms x d).
-  - CDMEval K=100 stability already aggregated in
-    cdm_exploration/experiments/v2_multi_seed.json.
-        We reuse the precomputed flat / per-LLM / per-skill Pearson means.
+  - CDMEval K=100 checkpoints at
+    cdm_exploration/checkpoints/multi_seed/text_conditioned_seed_{S}.pt
+        Five seeds (42-46). Loads `student_emb.weight` and applies sigmoid
+        to recover mastery in [0,1] (matches aggregate_multi_seed.py, which
+        wrote the published v2_multi_seed.json numbers).
+        We re-compute everything from scratch here so CDMEval and IrtNet go
+        through the *same* Procrustes pipeline — symmetric reporting.
 
 Output
 ======
@@ -64,9 +68,12 @@ from scipy.stats import pearsonr
 REPO = Path(__file__).resolve().parent.parent
 EXP = REPO / "cdm_exploration" / "experiments"
 CKPT = REPO / "cdm_exploration" / "checkpoints" / "irtnet"
+CDMEVAL_CKPT = REPO / "cdm_exploration" / "checkpoints" / "multi_seed"
 
 D_MODEL_GRID = [232, 512, 1024]
 SEEDS = [42, 43, 44]
+CDMEVAL_SEEDS = [42, 43, 44, 45, 46]
+CDMEVAL_K = 100
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -85,6 +92,26 @@ def load_irtnet_theta(d_model: int, seed: int) -> np.ndarray | None:
             f"got {list(sd.keys())[:5]}",
         )
     return sd["model_embedder.weight"].numpy()  # (n_llms, d_model)
+
+
+def load_cdmeval_theta(seed: int) -> np.ndarray | None:
+    """Load CDMEval K=100 mastery (sigmoid of student_emb logits) for one seed.
+
+    Matches aggregate_multi_seed.py exactly so the symmetric Procrustes
+    pipeline operates on the same representation that produced the published
+    v2_multi_seed.json numbers.
+    """
+    path = CDMEVAL_CKPT / f"text_conditioned_seed_{seed}.pt"
+    if not path.exists():
+        return None
+    ckpt = torch.load(path, map_location="cpu", weights_only=False)
+    sd = ckpt["model_state_dict"] if "model_state_dict" in ckpt else ckpt
+    if "student_emb.weight" not in sd:
+        raise KeyError(
+            f"Expected 'student_emb.weight' in {path}; "
+            f"got {list(sd.keys())[:5]}",
+        )
+    return torch.sigmoid(sd["student_emb.weight"]).numpy()  # (n_llms, K)
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -247,26 +274,63 @@ def analyse_irtnet() -> dict:
     return results
 
 
-def load_cdmeval_reference() -> dict:
-    """Pull CDMEval K=100 stability from the existing multi-seed JSON."""
-    p = EXP / "v2_multi_seed.json"
-    if not p.exists():
-        return {"error": f"missing {p}"}
-    d = json.load(open(p))
+def analyse_cdmeval() -> dict:
+    """Compute CDMEval K=100 θ stability through the same pipeline as IrtNet.
+
+    Symmetric reporting: same metrics, same Procrustes variants. CDMEval
+    dimensions are anchored to named Q-matrix skills so the raw per-dim
+    Pearson should already be high; the Procrustes rows are reported for
+    fairness, not because rotation invariance is expected to apply.
+    """
+    print(f"\n[ CDMEval K={CDMEVAL_K} ]")
+    thetas = []
+    seeds_loaded = []
+    for s in CDMEVAL_SEEDS:
+        t = load_cdmeval_theta(s)
+        if t is None:
+            print(f"  WARN: missing checkpoint for seed={s}")
+            continue
+        thetas.append(t)
+        seeds_loaded.append(s)
+    if len(thetas) < 2:
+        return {"error": f"only {len(thetas)} CDMEval seeds available"}
+    print(f"  Loaded {len(thetas)} seeds: {seeds_loaded}")
+    print(f"  θ shape per seed: {thetas[0].shape}")
+
+    flat_m, flat_s = flat_pearson(thetas)
+    print(f"  Flat Pearson:               {flat_m:.4f} ± {flat_s:.4f}")
+
+    llm_m, llm_s = per_llm_pearson(thetas)
+    print(f"  Per-LLM Pearson:            {llm_m:.4f} ± {llm_s:.4f}")
+
+    dim_m, dim_s, _ = per_dim_pearson(thetas)
+    print(f"  Per-dim Pearson (raw):      {dim_m:.4f} ± {dim_s:.4f}")
+
+    proc_m, proc_s = per_dim_pearson_procrustes(thetas)
+    print(f"  Per-dim Pearson (Procrustes orthogonal):  {proc_m:.4f} ± {proc_s:.4f}")
+
+    proc_full_m, proc_full_s = per_dim_pearson_procrustes_full(thetas)
+    print(f"  Per-dim Pearson (Procrustes full):        {proc_full_m:.4f} ± {proc_full_s:.4f}")
+
     return {
-        "K": d.get("K"),
-        "n_seeds": len(d.get("seeds", [])),
-        "seeds": d.get("seeds", []),
-        "flat_pearson_mean": d.get("theta_pairwise_pearson_flat_mean"),
-        "flat_pearson_std": d.get("theta_pairwise_pearson_flat_std"),
-        "per_llm_pearson_mean": d.get("theta_per_llm_pearson_mean"),
-        "per_llm_pearson_std": d.get("theta_per_llm_pearson_std"),
-        "per_dim_pearson_raw_mean": d.get("theta_per_skill_pearson_mean"),
-        "per_dim_pearson_raw_std": d.get("theta_per_skill_pearson_std"),
+        "K": CDMEVAL_K,
+        "n_seeds": len(thetas),
+        "seeds": seeds_loaded,
+        "flat_pearson_mean": flat_m,
+        "flat_pearson_std": flat_s,
+        "per_llm_pearson_mean": llm_m,
+        "per_llm_pearson_std": llm_s,
+        "per_dim_pearson_raw_mean": dim_m,
+        "per_dim_pearson_raw_std": dim_s,
+        "per_dim_pearson_procrustes_mean": proc_m,
+        "per_dim_pearson_procrustes_std": proc_s,
+        "per_dim_pearson_procrustes_full_mean": proc_full_m,
+        "per_dim_pearson_procrustes_full_std": proc_full_s,
         "note": (
             "CDMEval K=100 dimensions are anchored to named Q-matrix skills, "
-            "so per-dim correlation is computed without Procrustes alignment "
-            "(rotation invariance does not apply)."
+            "so rotation invariance does not apply — raw per-dim Pearson is the "
+            "fair number. Procrustes rows are reported for symmetric comparison "
+            "with IrtNet, not because alignment is needed."
         ),
     }
 
@@ -282,8 +346,10 @@ def print_comparison(cdmeval: dict, irtnet: dict) -> None:
     print("-" * 96)
 
     if cdmeval.get("flat_pearson_mean") is not None:
+        n_seeds = cdmeval.get("n_seeds", "?")
+        label = f"CDMEval K=100 ({n_seeds} seeds)"
         print(
-            f"{'CDMEval K=100 (5 seeds)':<28} "
+            f"{label:<28} "
             f"{cdmeval['flat_pearson_mean']:.4f} ± {cdmeval['flat_pearson_std']:.4f}   "
             f"{cdmeval['per_llm_pearson_mean']:.4f} ± {cdmeval['per_llm_pearson_std']:.4f}   "
             f"{cdmeval['per_dim_pearson_raw_mean']:.4f} ± {cdmeval['per_dim_pearson_raw_std']:.4f}"
@@ -304,25 +370,35 @@ def print_comparison(cdmeval: dict, irtnet: dict) -> None:
         )
 
     print("\n" + "-" * 96)
-    print("IrtNet per-dim Pearson AFTER Procrustes alignment (handles rotation invariance):")
+    print("Per-dim Pearson AFTER Procrustes alignment (orthogonal | full):")
+    if cdmeval.get("per_dim_pearson_procrustes_mean") is not None:
+        print(
+            f"  CDMEval K=100:  raw {cdmeval['per_dim_pearson_raw_mean']:.4f}  ->  "
+            f"orth {cdmeval['per_dim_pearson_procrustes_mean']:.4f} ± "
+            f"{cdmeval['per_dim_pearson_procrustes_std']:.4f}  |  "
+            f"full {cdmeval['per_dim_pearson_procrustes_full_mean']:.4f} ± "
+            f"{cdmeval['per_dim_pearson_procrustes_full_std']:.4f}"
+        )
     for d in D_MODEL_GRID:
         key = f"d_model={d}"
         if key not in irtnet:
             continue
         r = irtnet[key]
         print(
-            f"  IrtNet d={d}:  raw {r['per_dim_pearson_raw_mean']:.4f}  →  "
-            f"aligned {r['per_dim_pearson_procrustes_mean']:.4f} ± "
-            f"{r['per_dim_pearson_procrustes_std']:.4f}"
+            f"  IrtNet d={d}:    raw {r['per_dim_pearson_raw_mean']:.4f}  ->  "
+            f"orth {r['per_dim_pearson_procrustes_mean']:.4f} ± "
+            f"{r['per_dim_pearson_procrustes_std']:.4f}  |  "
+            f"full {r['per_dim_pearson_procrustes_full_mean']:.4f} ± "
+            f"{r['per_dim_pearson_procrustes_full_std']:.4f}"
         )
     print("=" * 96)
 
 
 def main() -> int:
-    print("Computing IrtNet θ stability across seeds...")
+    print("Computing CDMEval K=100 θ stability across seeds (symmetric pipeline)...")
+    cdmeval = analyse_cdmeval()
+    print("\nComputing IrtNet θ stability across seeds...")
     irtnet = analyse_irtnet()
-    print("\nLoading CDMEval K=100 reference from v2_multi_seed.json...")
-    cdmeval = load_cdmeval_reference()
 
     summary = {
         "cdmeval_K100": cdmeval,
@@ -334,8 +410,11 @@ def main() -> int:
                 "flat_pearson",
                 "per_llm_pearson",
                 "per_dim_pearson_raw",
-                "per_dim_pearson_procrustes (IrtNet only)",
+                "per_dim_pearson_procrustes (orthogonal: rotation+sign-flip)",
+                "per_dim_pearson_procrustes_full (centering+scaling+rotation)",
             ],
+            "cdmeval_seeds": CDMEVAL_SEEDS,
+            "cdmeval_K": CDMEVAL_K,
             "interpretation": (
                 "Per-dim Pearson is the headline metric for non-identifiability. "
                 "CDMEval's named-skill θ should show high per-dim stability; "
