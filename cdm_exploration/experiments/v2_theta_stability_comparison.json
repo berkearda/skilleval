@@ -9,13 +9,17 @@
       45,
       46
     ],
-    "flat_pearson_mean": 0.99105148908562,
-    "flat_pearson_std": 0.0048739525253377455,
-    "per_llm_pearson_mean": 0.990420767039061,
-    "per_llm_pearson_std": 0.005179012505509462,
-    "per_dim_pearson_raw_mean": 0.9593839286518144,
-    "per_dim_pearson_raw_std": 0.13851767129213727,
-    "note": "CDMEval K=100 dimensions are anchored to named Q-matrix skills, so per-dim correlation is computed without Procrustes alignment (rotation invariance does not apply)."
+    "flat_pearson_mean": 0.9910486936569214,
+    "flat_pearson_std": 0.004874898586422205,
+    "per_llm_pearson_mean": 0.9904207665880843,
+    "per_llm_pearson_std": 0.005179012365727925,
+    "per_dim_pearson_raw_mean": 0.9593839307503076,
+    "per_dim_pearson_raw_std": 0.0038846333018006,
+    "per_dim_pearson_procrustes_mean": 0.9572868015746355,
+    "per_dim_pearson_procrustes_std": 0.004793149663291186,
+    "per_dim_pearson_procrustes_full_mean": 0.9572676283736479,
+    "per_dim_pearson_procrustes_full_std": 0.004726615681019597,
+    "note": "CDMEval K=100 dimensions are anchored to named Q-matrix skills, so rotation invariance does not apply \u2014 raw per-dim Pearson is the fair number. Procrustes rows are reported for symmetric comparison with IrtNet, not because alignment is needed."
   },
   "irtnet": {
     "d_model=232": {
@@ -33,7 +37,9 @@
       "per_dim_pearson_raw_mean": -0.0038604026813954567,
       "per_dim_pearson_raw_std": 0.010538064387279262,
       "per_dim_pearson_procrustes_mean": 0.4341342443568183,
-      "per_dim_pearson_procrustes_std": 0.2160679075615544
+      "per_dim_pearson_procrustes_std": 0.2160679075615544,
+      "per_dim_pearson_procrustes_full_mean": 0.4324101573640962,
+      "per_dim_pearson_procrustes_full_std": 0.2147576398395342
     },
     "d_model=512": {
       "d_model": 512,
@@ -50,7 +56,9 @@
       "per_dim_pearson_raw_mean": -0.00048012096079238137,
       "per_dim_pearson_raw_std": 0.0018975315952637977,
       "per_dim_pearson_procrustes_mean": 0.16694537820634045,
-      "per_dim_pearson_procrustes_std": 0.015575123497156075
+      "per_dim_pearson_procrustes_std": 0.015575123497156075,
+      "per_dim_pearson_procrustes_full_mean": 0.16702535320738213,
+      "per_dim_pearson_procrustes_full_std": 0.014493614228660294
     },
     "d_model=1024": {
       "d_model": 1024,
@@ -67,7 +75,9 @@
       "per_dim_pearson_raw_mean": 0.0007291182707484337,
       "per_dim_pearson_raw_std": 0.0004579902330627625,
       "per_dim_pearson_procrustes_mean": 0.10173987972242078,
-      "per_dim_pearson_procrustes_std": 0.017786344235736024
+      "per_dim_pearson_procrustes_std": 0.017786344235736024,
+      "per_dim_pearson_procrustes_full_mean": 0.1021075730725804,
+      "per_dim_pearson_procrustes_full_std": 0.017924479434603378
     }
   },
   "_meta": {
@@ -85,8 +95,17 @@
       "flat_pearson",
       "per_llm_pearson",
       "per_dim_pearson_raw",
-      "per_dim_pearson_procrustes (IrtNet only)"
+      "per_dim_pearson_procrustes (orthogonal: rotation+sign-flip)",
+      "per_dim_pearson_procrustes_full (centering+scaling+rotation)"
     ],
+    "cdmeval_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "cdmeval_K": 100,
     "interpretation": "Per-dim Pearson is the headline metric for non-identifiability. CDMEval's named-skill \u03b8 should show high per-dim stability; IrtNet's latent \u03b8 should show low raw per-dim stability that recovers under Procrustes alignment if the underlying ability ordering is preserved across seeds."
   }
 }
