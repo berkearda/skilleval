@@ -1,6 +1,6 @@
 {
   "experiment": "leave_one_benchmark_out",
-  "K": 500,
+  "K": 200,
   "benchmarks": [
     "MATH",
     "BBH",
@@ -11,46 +11,46 @@
   "folds": {
     "BBH": {
       "held_out": "BBH",
-      "K": 500,
+      "K": 200,
       "epochs": 15,
       "n_llms": 3811,
       "n_train_items": 2708,
       "n_in_dist_test_items": 753,
       "n_held_out_items": 5761,
-      "held_out_auc": 0.5380786956908861,
-      "held_out_acc": 0.5064495739978523,
-      "held_out_rmse": 0.560238830564361,
-      "held_out_pearson_r": 0.705313906484442,
+      "held_out_auc": 0.5052028545534012,
+      "held_out_acc": 0.4930783731996439,
+      "held_out_rmse": 0.5752349751527759,
+      "held_out_pearson_r": 0.7667598716609,
       "held_out_routing": {
         "n_items": 5761,
-        "cdm_acc1": 0.5773303245964242,
+        "cdm_acc1": 0.6287102933518487,
         "strongest_acc1": 0.7109876757507377,
         "random_acc1": 0.4875889602499566
       },
-      "in_dist_auc": 0.7050921886765277,
-      "in_dist_acc": 0.7363461399743456,
+      "in_dist_auc": 0.7204536250972773,
+      "in_dist_acc": 0.752538869275805,
       "in_dist_routing": {
         "MATH": {
           "n_items": 271,
-          "cdm_acc1": 0.5756457564575646,
+          "cdm_acc1": 0.6051660516605166,
           "strongest_acc1": 0.5830258302583026,
           "random_acc1": 0.14760147601476015
         },
         "GPQA": {
           "n_items": 229,
-          "cdm_acc1": 0.36681222707423583,
+          "cdm_acc1": 0.4366812227074236,
           "strongest_acc1": 0.35807860262008734,
           "random_acc1": 0.31877729257641924
         },
         "MuSR": {
           "n_items": 142,
-          "cdm_acc1": 0.6549295774647887,
+          "cdm_acc1": 0.6338028169014085,
           "strongest_acc1": 0.3591549295774648,
           "random_acc1": 0.34507042253521125
         },
         "IFEval": {
           "n_items": 111,
-          "cdm_acc1": 0.8378378378378378,
+          "cdm_acc1": 0.8288288288288288,
           "strongest_acc1": 0.7657657657657657,
           "random_acc1": 0.40540540540540543
         }
@@ -61,40 +61,40 @@
     },
     "GPQA": {
       "held_out": "GPQA",
-      "K": 500,
+      "K": 200,
       "epochs": 15,
       "n_llms": 3811,
       "n_train_items": 5997,
       "n_in_dist_test_items": 1667,
       "n_held_out_items": 1192,
-      "held_out_auc": 0.47370751995649074,
-      "held_out_acc": 0.6796037257039407,
-      "held_out_rmse": 0.49136894087513805,
-      "held_out_pearson_r": 0.7939416594797809,
+      "held_out_auc": 0.5168222440568878,
+      "held_out_acc": 0.664790327892237,
+      "held_out_rmse": 0.48931689021503766,
+      "held_out_pearson_r": 0.7747217949028606,
       "held_out_routing": {
         "n_items": 1192,
-        "cdm_acc1": 0.3808724832214765,
+        "cdm_acc1": 0.33976510067114096,
         "strongest_acc1": 0.38674496644295303,
         "random_acc1": 0.3011744966442953
       },
-      "in_dist_auc": 0.730189546205719,
-      "in_dist_acc": 0.6805786048248236,
+      "in_dist_auc": 0.7371766096985903,
+      "in_dist_acc": 0.6834607363491878,
       "in_dist_routing": {
         "MATH": {
           "n_items": 267,
-          "cdm_acc1": 0.5205992509363296,
+          "cdm_acc1": 0.5468164794007491,
           "strongest_acc1": 0.5393258426966292,
           "random_acc1": 0.10861423220973783
         },
         "BBH": {
           "n_items": 1141,
-          "cdm_acc1": 0.7835232252410167,
+          "cdm_acc1": 0.7791411042944786,
           "strongest_acc1": 0.7063978965819456,
           "random_acc1": 0.4697633654688869
         },
         "MuSR": {
           "n_items": 146,
-          "cdm_acc1": 0.5958904109589042,
+          "cdm_acc1": 0.6027397260273972,
           "strongest_acc1": 0.4520547945205479,
           "random_acc1": 0.4315068493150685
         },
@@ -109,98 +109,48 @@
       "reference_auc": 0.717,
       "in_dist_warning": false
     },
-    "MATH": {
-      "held_out": "MATH",
-      "K": 500,
-      "epochs": 15,
-      "n_llms": 3811,
-      "n_train_items": 5936,
-      "n_in_dist_test_items": 1649,
-      "n_held_out_items": 1278,
-      "held_out_auc": 0.5428401520141923,
-      "held_out_acc": 0.8004339632946224,
-      "held_out_rmse": 0.4212433974883676,
-      "held_out_pearson_r": 0.6158304785319386,
-      "held_out_routing": {
-        "n_items": 1278,
-        "cdm_acc1": 0.14475743348982786,
-        "strongest_acc1": 0.4139280125195618,
-        "random_acc1": 0.10406885758998435
-      },
-      "in_dist_auc": 0.696874077745449,
-      "in_dist_acc": 0.6573006325724949,
-      "in_dist_routing": {
-        "BBH": {
-          "n_items": 1147,
-          "cdm_acc1": 0.7925021795989537,
-          "strongest_acc1": 0.7314734088927637,
-          "random_acc1": 0.4777680906713165
-        },
-        "GPQA": {
-          "n_items": 236,
-          "cdm_acc1": 0.461864406779661,
-          "strongest_acc1": 0.3983050847457627,
-          "random_acc1": 0.3389830508474576
-        },
-        "MuSR": {
-          "n_items": 139,
-          "cdm_acc1": 0.5755395683453237,
-          "strongest_acc1": 0.5899280575539568,
-          "random_acc1": 0.381294964028777
-        },
-        "IFEval": {
-          "n_items": 127,
-          "cdm_acc1": 0.7874015748031497,
-          "strongest_acc1": 0.7716535433070866,
-          "random_acc1": 0.44881889763779526
-        }
-      },
-      "reference_acc1": 0.5417,
-      "reference_auc": 0.717,
-      "in_dist_warning": false
-    },
     "IFEval": {
       "held_out": "IFEval",
-      "K": 500,
+      "K": 200,
       "epochs": 15,
       "n_llms": 3811,
       "n_train_items": 6470,
       "n_in_dist_test_items": 1798,
       "n_held_out_items": 536,
-      "held_out_auc": 0.541423089921573,
-      "held_out_acc": 0.5837510819035235,
-      "held_out_rmse": 0.5238310134647902,
-      "held_out_pearson_r": 0.6028711009672717,
+      "held_out_auc": 0.5525252092862716,
+      "held_out_acc": 0.5594841327343864,
+      "held_out_rmse": 0.5488347155022747,
+      "held_out_pearson_r": 0.5980942758893457,
       "held_out_routing": {
         "n_items": 536,
-        "cdm_acc1": 0.44776119402985076,
+        "cdm_acc1": 0.44029850746268656,
         "strongest_acc1": 0.6716417910447762,
         "random_acc1": 0.376865671641791
       },
-      "in_dist_auc": 0.7236474809486281,
-      "in_dist_acc": 0.678866777833267,
+      "in_dist_auc": 0.7272393302188125,
+      "in_dist_acc": 0.6812607611769572,
       "in_dist_routing": {
         "MATH": {
           "n_items": 254,
-          "cdm_acc1": 0.562992125984252,
+          "cdm_acc1": 0.5748031496062992,
           "strongest_acc1": 0.5275590551181102,
           "random_acc1": 0.10236220472440945
         },
         "BBH": {
           "n_items": 1152,
-          "cdm_acc1": 0.7838541666666666,
+          "cdm_acc1": 0.7612847222222222,
           "strongest_acc1": 0.6935763888888888,
           "random_acc1": 0.4583333333333333
         },
         "GPQA": {
           "n_items": 228,
-          "cdm_acc1": 0.4692982456140351,
+          "cdm_acc1": 0.4166666666666667,
           "strongest_acc1": 0.40350877192982454,
           "random_acc1": 0.2850877192982456
         },
         "MuSR": {
           "n_items": 164,
-          "cdm_acc1": 0.6707317073170732,
+          "cdm_acc1": 0.5975609756097561,
           "strongest_acc1": 0.5304878048780488,
           "random_acc1": 0.43902439024390244
         }
@@ -209,48 +159,98 @@
       "reference_auc": 0.717,
       "in_dist_warning": false
     },
+    "MATH": {
+      "held_out": "MATH",
+      "K": 200,
+      "epochs": 15,
+      "n_llms": 3811,
+      "n_train_items": 5936,
+      "n_in_dist_test_items": 1649,
+      "n_held_out_items": 1278,
+      "held_out_auc": 0.5014738995424877,
+      "held_out_acc": 0.7314466113864445,
+      "held_out_rmse": 0.46199701741520705,
+      "held_out_pearson_r": 0.6129385690882084,
+      "held_out_routing": {
+        "n_items": 1278,
+        "cdm_acc1": 0.2237871674491393,
+        "strongest_acc1": 0.4139280125195618,
+        "random_acc1": 0.10406885758998435
+      },
+      "in_dist_auc": 0.6954855214243768,
+      "in_dist_acc": 0.6527313373769301,
+      "in_dist_routing": {
+        "BBH": {
+          "n_items": 1147,
+          "cdm_acc1": 0.7741935483870968,
+          "strongest_acc1": 0.7314734088927637,
+          "random_acc1": 0.4777680906713165
+        },
+        "GPQA": {
+          "n_items": 236,
+          "cdm_acc1": 0.4830508474576271,
+          "strongest_acc1": 0.3983050847457627,
+          "random_acc1": 0.3389830508474576
+        },
+        "MuSR": {
+          "n_items": 139,
+          "cdm_acc1": 0.5899280575539568,
+          "strongest_acc1": 0.5899280575539568,
+          "random_acc1": 0.381294964028777
+        },
+        "IFEval": {
+          "n_items": 127,
+          "cdm_acc1": 0.8346456692913385,
+          "strongest_acc1": 0.7716535433070866,
+          "random_acc1": 0.44881889763779526
+        }
+      },
+      "reference_acc1": 0.5417,
+      "reference_auc": 0.717,
+      "in_dist_warning": false
+    },
     "MuSR": {
       "held_out": "MuSR",
-      "K": 500,
+      "K": 200,
       "epochs": 15,
       "n_llms": 3811,
       "n_train_items": 6311,
       "n_in_dist_test_items": 1754,
       "n_held_out_items": 756,
-      "held_out_auc": 0.502978138061254,
-      "held_out_acc": 0.5254168870673726,
-      "held_out_rmse": 0.5377455465549322,
-      "held_out_pearson_r": 0.6193523147889648,
+      "held_out_auc": 0.4920557444289311,
+      "held_out_acc": 0.5206912876815789,
+      "held_out_rmse": 0.5506710697127488,
+      "held_out_pearson_r": 0.6787595007982458,
       "held_out_routing": {
         "n_items": 756,
-        "cdm_acc1": 0.42592592592592593,
+        "cdm_acc1": 0.4973544973544973,
         "strongest_acc1": 0.4669312169312169,
         "random_acc1": 0.41534391534391535
       },
-      "in_dist_auc": 0.7331426397412192,
-      "in_dist_acc": 0.6891155860114467,
+      "in_dist_auc": 0.7408603928830928,
+      "in_dist_acc": 0.6931158888017552,
       "in_dist_routing": {
         "MATH": {
           "n_items": 268,
-          "cdm_acc1": 0.585820895522388,
+          "cdm_acc1": 0.5522388059701493,
           "strongest_acc1": 0.48880597014925375,
           "random_acc1": 0.12313432835820895
         },
         "BBH": {
           "n_items": 1150,
-          "cdm_acc1": 0.7930434782608695,
+          "cdm_acc1": 0.7669565217391304,
           "strongest_acc1": 0.7086956521739131,
           "random_acc1": 0.46
         },
         "GPQA": {
           "n_items": 212,
-          "cdm_acc1": 0.42452830188679247,
+          "cdm_acc1": 0.42924528301886794,
           "strongest_acc1": 0.4056603773584906,
           "random_acc1": 0.2971698113207547
         },
         "IFEval": {
           "n_items": 124,
-          "cdm_acc1": 0.75,
+          "cdm_acc1": 0.8629032258064516,
           "strongest_acc1": 0.75,
           "random_acc1": 0.4274193548387097
         }

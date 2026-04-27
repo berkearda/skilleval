@@ -1,0 +1,50 @@
+{
+  "held_out": "GPQA",
+  "K": 50,
+  "epochs": 15,
+  "n_llms": 3811,
+  "n_train_items": 5997,
+  "n_in_dist_test_items": 1667,
+  "n_held_out_items": 1192,
+  "held_out_auc": 0.5162869477777865,
+  "held_out_acc": 0.670003733452616,
+  "held_out_rmse": 0.48575551324082533,
+  "held_out_pearson_r": 0.762334360672328,
+  "held_out_routing": {
+    "n_items": 1192,
+    "cdm_acc1": 0.34815436241610737,
+    "strongest_acc1": 0.38674496644295303,
+    "random_acc1": 0.3011744966442953
+  },
+  "in_dist_auc": 0.735937372613056,
+  "in_dist_acc": 0.6784191311829474,
+  "in_dist_routing": {
+    "MATH": {
+      "n_items": 267,
+      "cdm_acc1": 0.5131086142322098,
+      "strongest_acc1": 0.5393258426966292,
+      "random_acc1": 0.10861423220973783
+    },
+    "BBH": {
+      "n_items": 1141,
+      "cdm_acc1": 0.7519719544259421,
+      "strongest_acc1": 0.7063978965819456,
+      "random_acc1": 0.4697633654688869
+    },
+    "MuSR": {
+      "n_items": 146,
+      "cdm_acc1": 0.6232876712328768,
+      "strongest_acc1": 0.4520547945205479,
+      "random_acc1": 0.4315068493150685
+    },
+    "IFEval": {
+      "n_items": 113,
+      "cdm_acc1": 0.8141592920353983,
+      "strongest_acc1": 0.7876106194690266,
+      "random_acc1": 0.4690265486725664
+    }
+  },
+  "reference_acc1": 0.4065,
+  "reference_auc": 0.717,
+  "in_dist_warning": false
+}
