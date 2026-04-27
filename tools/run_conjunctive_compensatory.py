@@ -31,6 +31,98 @@ MIN_GROUP_SIZE = 20
 MIN_EFFECT = 0.05
 CONJUNCTIVE_THRESH = 0.6
 COMPENSATORY_THRESH = 0.6
+SENSITIVITY_THRESHOLDS = [0.5, 0.6, 0.7]
+
+
+def analyze_items_pattern(two_skill_items, R, q_matrix, theta, items_data):
+    """Pattern-based classification for 2-skill items.
+
+    Groups LLMs into the four binary mastery patterns {0,0}, {1,0}, {0,1}, {1,1}
+    and uses p_11 vs max(p_10, p_01) vs p_00 to classify items without averaging
+    across qualitatively different mastery profiles. This mirrors the G-DINA /
+    DINA / DINO logic on a reduced 2-skill design.
+    """
+    mastery_binary = (theta > 0.5).astype(int)
+    results = []
+    filter_stats = {"total": len(two_skill_items), "too_few": 0,
+                    "no_effect": 0, "analyzed": 0}
+
+    for j in two_skill_items:
+        req = np.where(q_matrix[j] > 0)[0]
+        if len(req) != 2:
+            continue
+        a, b = req
+        ma = mastery_binary[:, a]
+        mb = mastery_binary[:, b]
+
+        m00 = (ma == 0) & (mb == 0)
+        m10 = (ma == 1) & (mb == 0)
+        m01 = (ma == 0) & (mb == 1)
+        m11 = (ma == 1) & (mb == 1)
+
+        n00, n10, n01, n11 = m00.sum(), m10.sum(), m01.sum(), m11.sum()
+        if min(n00, n10, n01, n11) < MIN_GROUP_SIZE:
+            filter_stats["too_few"] += 1
+            continue
+
+        p00 = R[m00, j].mean()
+        p10 = R[m10, j].mean()
+        p01 = R[m01, j].mean()
+        p11 = R[m11, j].mean()
+
+        p_max_single = max(p10, p01)
+        effect = p11 - p00
+        if effect < MIN_EFFECT:
+            filter_stats["no_effect"] += 1
+            continue
+
+        filter_stats["analyzed"] += 1
+        conj_pattern = (p11 - p_max_single) / (effect + 1e-8)
+        comp_pattern = (p_max_single - p00) / (effect + 1e-8)
+
+        if conj_pattern > CONJUNCTIVE_THRESH:
+            item_type = "conjunctive"
+        elif comp_pattern > COMPENSATORY_THRESH:
+            item_type = "compensatory"
+        else:
+            item_type = "additive"
+
+        results.append({
+            "item_idx": int(j),
+            "benchmark": items_data[j].get("benchmark", "unknown"),
+            "n_required_skills": 2,
+            "n_all": int(n11), "n_none": int(n00),
+            "n_partial": int(n10 + n01),
+            "p_all": float(p11), "p_none": float(p00),
+            "p_partial": float(p_max_single),
+            "n_00": int(n00), "n_10": int(n10), "n_01": int(n01), "n_11": int(n11),
+            "p_00": float(p00), "p_10": float(p10),
+            "p_01": float(p01), "p_11": float(p11),
+            "conj_index": float(conj_pattern),
+            "comp_index": float(comp_pattern),
+            "item_type": item_type,
+        })
+
+    return results, filter_stats
+
+
+def reclassify(results, conj_thresh, comp_thresh):
+    """Apply alternative thresholds to existing per-item indices."""
+    counts = {"conjunctive": 0, "compensatory": 0, "additive": 0}
+    for r in results:
+        if r["conj_index"] > conj_thresh:
+            counts["conjunctive"] += 1
+        elif r["comp_index"] > comp_thresh:
+            counts["compensatory"] += 1
+        else:
+            counts["additive"] += 1
+    total = max(len(results), 1)
+    return {
+        "conj_thresh": conj_thresh, "comp_thresh": comp_thresh,
+        "n_analyzed": len(results),
+        "counts": counts,
+        "pct": {t: 100 * counts[t] / total for t in counts},
+    }
 
 
 def analyze_items(multi_items, R, q_matrix, theta, items_data, n_llms,
@@ -293,6 +385,42 @@ def main(cfg: DictConfig) -> None:
     print(f"  Filter: {fstats_binary}", flush=True)
     print_summary(summary_binary, "BINARY RESULTS")
 
+    # ── ROBUSTNESS: pattern-based classification for 2-skill items ──
+    two_skill_items = np.where(skills_per_item == 2)[0]
+    print(f"\n{'='*60}", flush=True)
+    print(f"ROBUSTNESS CHECK: Pattern-based grouping for 2-skill items "
+          f"({len(two_skill_items)} items)", flush=True)
+    print(f"{'='*60}", flush=True)
+    results_pattern, fstats_pattern = analyze_items_pattern(
+        two_skill_items, R, q_matrix, theta, items_data,
+    )
+    summary_pattern = summarize(results_pattern)
+    print(f"  Filter: {fstats_pattern}", flush=True)
+    print_summary(summary_pattern, "PATTERN RESULTS")
+
+    # Agreement between tertile and pattern classification (on shared items)
+    tertile_by_idx = {r["item_idx"]: r["item_type"] for r in results_tertile}
+    pattern_by_idx = {r["item_idx"]: r["item_type"] for r in results_pattern}
+    shared = sorted(set(tertile_by_idx) & set(pattern_by_idx))
+    agree = sum(1 for j in shared if tertile_by_idx[j] == pattern_by_idx[j])
+    agreement_pct = 100 * agree / max(len(shared), 1)
+    print(f"\n  Tertile vs Pattern agreement on {len(shared)} shared items: "
+          f"{agree}/{len(shared)} ({agreement_pct:.1f}%)", flush=True)
+
+    # ── THRESHOLD SENSITIVITY on tertile results ──
+    print(f"\n{'='*60}", flush=True)
+    print("THRESHOLD SENSITIVITY: tertile results at 0.5 / 0.6 / 0.7", flush=True)
+    print(f"{'='*60}", flush=True)
+    threshold_sensitivity = []
+    for thr in SENSITIVITY_THRESHOLDS:
+        s = reclassify(results_tertile, thr, thr)
+        threshold_sensitivity.append(s)
+        c = s["counts"]
+        p = s["pct"]
+        print(f"  thresh={thr:.1f} | conj={c['conjunctive']:>4} ({p['conjunctive']:>5.1f}%)  "
+              f"comp={c['compensatory']:>4} ({p['compensatory']:>5.1f}%)  "
+              f"add={c['additive']:>4} ({p['additive']:>5.1f}%)", flush=True)
+
     # ── Figure: per-benchmark stacked bars (tertile results) ──
     print("\nGenerating figure...", flush=True)
     setup_style()
@@ -315,45 +443,92 @@ def main(cfg: DictConfig) -> None:
         vals = [summary_tertile["per_benchmark"][b][f"{t}_pct"] for b in bench_order]
         ax.bar(x, vals, width, bottom=bottoms, label=labels_map[t],
                color=colors_map[t], edgecolor="white", linewidth=0.5)
-        # Annotate percentage inside bar if large enough
         for i, (v, bot) in enumerate(zip(vals, bottoms)):
-            if v > 12:
-                ax.text(x[i], bot + v / 2, f"{v:.0f}%", ha="center", va="center",
-                        fontsize=8, fontweight="bold", color="white")
+            if v >= 10:
+                ax.text(x[i], bot + v / 2, f"{v:.0f}%", ha="center",
+                        va="center", fontsize=8, fontweight="bold",
+                        color="white")
+            elif v >= 6:
+                ax.text(x[i], bot + v / 2, f"{v:.0f}%", ha="center",
+                        va="center", fontsize=6.5, fontweight="bold",
+                        color="white")
+            elif v > 0:
+                ax.text(x[i], bot + v / 2, f"{v:.0f}%", ha="center",
+                        va="center", fontsize=5.5, fontweight="bold",
+                        color="white")
         bottoms += vals
 
     ax.set_xticks(x)
     ax.set_xticklabels(bench_order, fontsize=10)
     ax.set_ylabel("% of items", fontsize=11)
     ax.set_ylim(0, 105)
-    ax.legend(frameon=False, fontsize=8.5, loc="upper right")
+    ax.set_yticks([0, 20, 40, 60, 80, 100])
+    # Legend is placed below the figure via figure-level legend (see end).
     for sp in ["top", "right"]:
         ax.spines[sp].set_visible(False)
 
-    # Panel 2: Scatter of conj_index vs comp_index, colored by benchmark
+    # Panel 2: Method sensitivity — stacked bars across classification methods.
+    # (Replaces the earlier conj-index vs comp-index scatter, which was a
+    # degenerate 1D line since the two indices sum to 1 by construction.)
     ax = axes[1]
-    bench_colors = {"MATH": "#4C72B0", "BBH": "#DD8452", "GPQA": "#55A868",
-                    "IFEval": "#C44E52", "MuSR": "#8172B3"}
-    for r in results_tertile:
-        b = r["benchmark"]
-        c = bench_colors.get(b, "#999999")
-        ax.scatter(r["comp_index"], r["conj_index"], s=6, alpha=0.25, color=c)
-    # Legend with proxy artists
-    for b in bench_order:
-        ax.scatter([], [], s=30, color=bench_colors.get(b, "#999"), label=b)
-    ax.axhline(CONJUNCTIVE_THRESH, color="#ccc", ls="--", lw=0.8)
-    ax.axvline(COMPENSATORY_THRESH, color="#ccc", ls="--", lw=0.8)
-    ax.set_xlabel("Compensatory index", fontsize=11)
-    ax.set_ylabel("Conjunctive index", fontsize=11)
-    ax.legend(frameon=False, fontsize=8.5, markerscale=2)
+    methods = [
+        ("Tertile\n(primary)",
+         summary_tertile["overall_pct"], summary_tertile["n_analyzed"]),
+        ("Binary\nmastery",
+         summary_binary["overall_pct"], summary_binary["n_analyzed"]),
+        ("Pattern\n(2-skill)",
+         summary_pattern["overall_pct"], summary_pattern["n_analyzed"]),
+    ]
+    x_m = np.arange(len(methods))
+    bottoms_m = np.zeros(len(methods))
+    for t in types_ordered:
+        vals = [m[1][t] for m in methods]
+        ax.bar(x_m, vals, width, bottom=bottoms_m, label=labels_map[t],
+               color=colors_map[t], edgecolor="white", linewidth=0.5)
+        for i, (v, bot) in enumerate(zip(vals, bottoms_m)):
+            if v > 8:
+                ax.text(x_m[i], bot + v / 2, f"{v:.0f}%", ha="center",
+                        va="center", fontsize=8, fontweight="bold",
+                        color="white")
+        bottoms_m += vals
+
+    ax.set_xticks(x_m)
+    ax.set_xticklabels([m[0] for m in methods], fontsize=9.5)
+    # Annotate n per method below each bar
+    for i, m in enumerate(methods):
+        ax.text(x_m[i], -6, f"n={m[2]}", ha="center", va="top",
+                fontsize=8, color="#444444")
+    ax.set_ylabel("% of items", fontsize=11)
+    ax.set_ylim(-10, 105)
+    ax.set_yticks([0, 20, 40, 60, 80, 100])
+    ax.set_title("(b) Classification-method sensitivity",
+                 fontsize=10.5, loc="left")
     for sp in ["top", "right"]:
         ax.spines[sp].set_visible(False)
+    ax.set_axisbelow(True)
+    ax.grid(axis="y", ls=":", lw=0.5, alpha=0.35)
 
-    plt.tight_layout(pad=2.0)
+    # Title for panel (a) only after panel (b) is in place so titles align
+    axes[0].set_title("(a) Per-benchmark classification (tertile)",
+                      fontsize=10.5, loc="left")
+
+    # Shared horizontal legend below both panels
+    legend_handles = [
+        plt.Rectangle((0, 0), 1, 1, facecolor=colors_map[t],
+                      edgecolor="white", linewidth=0.5, label=labels_map[t])
+        for t in types_ordered
+    ]
+    fig.legend(handles=legend_handles, loc="lower center",
+               bbox_to_anchor=(0.5, -0.02), ncol=3, frameon=False,
+               fontsize=10, handletextpad=0.5, columnspacing=1.8)
+
+    plt.tight_layout(pad=2.0, rect=(0, 0.05, 1, 1))
     out_fig = fig_dir / "fig_conjunctive_compensatory.pdf"
+    out_fig_png = fig_dir / "fig_conjunctive_compensatory.png"
     fig.savefig(out_fig, dpi=300, bbox_inches="tight")
+    fig.savefig(out_fig_png, dpi=200, bbox_inches="tight")
     plt.close()
-    print(f"Saved: {out_fig}", flush=True)
+    print(f"Saved: {out_fig} and {out_fig_png}", flush=True)
 
     # ── Save JSON ──
     save_data = {
@@ -371,6 +546,16 @@ def main(cfg: DictConfig) -> None:
             "filter_stats": fstats_binary,
             **summary_binary,
         },
+        "pattern_robustness_2skill": {
+            "filter_stats": fstats_pattern,
+            "tertile_vs_pattern_agreement": {
+                "n_shared": len(shared),
+                "n_agree": int(agree),
+                "agreement_pct": float(agreement_pct),
+            },
+            **summary_pattern,
+        },
+        "threshold_sensitivity_tertile": threshold_sensitivity,
     }
     out_json = Path("cdm_exploration/experiments/v2_conjunctive_compensatory.json")
     with open(out_json, "w") as f:

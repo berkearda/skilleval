@@ -20,17 +20,49 @@ import numpy as np
 import torch
 import hydra
 from omegaconf import DictConfig
+from scipy.stats import wilcoxon
+
+ALPHA = 0.05
+MIN_RELIABLE_N = 10  # min pairs per family to call results reliable
+
+
+def _wilcoxon_p(x):
+    """Two-sided Wilcoxon signed-rank p-value, with guards for edge cases."""
+    x = np.asarray(x, dtype=float)
+    if np.all(x == 0) or len(x) < 2:
+        return 1.0
+    try:
+        _, p = wilcoxon(x, zero_method="wilcox", alternative="two-sided")
+        return float(p)
+    except ValueError:
+        return 1.0
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(line_buffering=True)
 
 
 def find_pairs(names):
-    """Find base-instruct pairs by stripping alignment suffixes."""
+    """Find base-instruct pairs by stripping alignment suffixes.
+
+    Excludes candidate bases whose names contain alignment markers (SFT,
+    DPO, ORPO, etc.) since those are already-aligned checkpoints rather
+    than true base models.
+    """
     name_to_idx = {n: i for i, n in enumerate(names)}
 
     def norm(n):
         return n.replace("__", "/").lower()
+
+    # Markers in a candidate 'base' name that indicate it is already aligned.
+    # See the project log 2026-04-19 R8 audit for rationale.
+    aligned_markers = [
+        "-sft", "_sft", "-dpo", "_dpo", "-mdpo", "-orpo",
+        "-ipo", "-simpo", "-kto", "-rlaif", "-rlhf", "_rlhf",
+        "-tuned", "-aligned",
+    ]
+
+    def is_already_aligned(nl):
+        return any(m in nl for m in aligned_markers)
 
     suffixes = ["-instruct", "_instruct", "-chat", "-it", ".instruct", "-rlhf"]
     pairs = []
@@ -47,6 +79,8 @@ def find_pairs(names):
                         continue
                     nl2 = norm(name2)
                     if nl2 == base_nl or nl2.replace("-", "") == base_nl.replace("-", ""):
+                        if is_already_aligned(nl2):
+                            continue
                         key = tuple(sorted([idx, idx2]))
                         if key not in seen:
                             seen.add(key)
@@ -261,29 +295,204 @@ def main(cfg: DictConfig) -> None:
     print("\nGenerating figures...", flush=True)
     setup_style()
 
-    # ── Fig 1: Top improved + degraded skills ──
-    fig, ax = plt.subplots(figsize=(10, 7))
-    n_show = 15
+    # ── Fig 1: Alignment-tax concentration (2-panel) ──
+    # Panel (a): per-benchmark mean delta across pairs, error bars = SEM.
+    # Panel (b): top improved + top degraded skills, colored by primary
+    #            benchmark, Bonferroni-significant bars at full saturation.
+
+    # Reverse-engineered full names for the 33 cluster labels truncated to 50
+    # chars by the upstream clustering pipeline. Display-only fix.
+    LABEL_FIXES = {
+        "Applying Inequality Theorems To Minimize Expressio": "Applying Inequality Theorems to Minimize Expressions",
+        "Applying Linear Combination Of Operators In Quantu": "Applying Linear Combinations of Operators in Quantum Mechanics",
+        "Evaluating Sporting Event Plausibility Based On Co": "Evaluating Sporting Event Plausibility Based on Context",
+        "Applying Trigonometric Identities To Solve Equatio": "Applying Trigonometric Identities to Solve Equations",
+        "Analyzing Geometric Interpretations Of Matrix Oper": "Analyzing Geometric Interpretations of Matrix Operations",
+        "Applying Properties Of Rectangles To Find Dimensio": "Applying Properties of Rectangles to Find Dimensions",
+        "Identifying Structural Isomers In Organic Compound": "Identifying Structural Isomers in Organic Compounds",
+        "Evaluating Climate Control System Activation Condi": "Evaluating Climate Control System Activation Conditions",
+        "Crafting Concise Descriptions Of Professional Acti": "Crafting Concise Descriptions of Professional Activities",
+        "Embedding Comments With Security Keywords In Code ": "Embedding Comments with Security Keywords in Code",
+        "Articulating Customer Rights Under Consumer Protec": "Articulating Customer Rights Under Consumer Protection",
+        "Calculating Compound Interest With Quarterly Compo": "Calculating Compound Interest with Quarterly Compounding",
+        "Applying Maxwell Equations To Electromagnetic Fiel": "Applying Maxwell's Equations to Electromagnetic Fields",
+        "Applying Synonyms To Replace Restricted Vocabulary": "Applying Synonyms to Replace Restricted Vocabulary",
+        "Analyzing Historical Significance Of Chess Program": "Analyzing Historical Significance of Chess Programs",
+        "Applying Pattern Recognition To Algorithmic Output": "Applying Pattern Recognition to Algorithmic Outputs",
+        "Calculating Future Dates From Anniversary Informat": "Calculating Future Dates from Anniversary Information",
+        "Applying Random Variable Concepts To Sleep Pattern": "Applying Random Variable Concepts to Sleep Patterns",
+        "Applying Discrete Group Approximations To Gauge Th": "Applying Discrete Group Approximations to Gauge Theory",
+        "Calculating Oscillation Frequency Of Quantum Parti": "Calculating Oscillation Frequency of Quantum Particles",
+        "Evaluating Possible Storage Options Based On Story": "Evaluating Possible Storage Options Based on Story",
+        "Applying Mott Gurney Equation To Device Characteri": "Applying Mott-Gurney Equation to Device Characterization",
+        "Applying Properties Of Complex Numbers In Equation": "Applying Properties of Complex Numbers in Equations",
+        "Calculating Handshake Combinations In Group Intera": "Calculating Handshake Combinations in Group Interactions",
+        "Ensuring Consistent Section Headers In Document St": "Ensuring Consistent Section Headers in Document Structure",
+        "Interpreting Luminescence Behavior In Zinc Silicat": "Interpreting Luminescence Behavior in Zinc Silicates",
+        "Balancing Instrumentation For Optimal Sound Qualit": "Balancing Instrumentation for Optimal Sound Quality",
+        "Identifying Transformations In Quantum Field Theor": "Identifying Transformations in Quantum Field Theory",
+    }
+
+    def _clean(n):
+        return LABEL_FIXES.get(n, n)
+
+    bench_colors = {
+        "MATH":   "#0072B2",
+        "BBH":    "#E69F00",
+        "GPQA":   "#009E73",
+        "MuSR":   "#CC79A7",
+        "IFEval": "#56B4E9",
+    }
+    # Primary benchmark per skill (argmax over benchmark item counts)
+    skill_bench_counts = np.zeros((K, len(benchmarks)), dtype=int)
+    for i, it in enumerate(items_data):
+        b = it.get("benchmark")
+        if b in benchmarks:
+            bi = benchmarks.index(b)
+            skill_bench_counts[:, bi] += q_matrix[i].astype(int)
+    primary_bench_idx = skill_bench_counts.argmax(axis=1)
+    primary_bench_idx[skill_bench_counts.sum(axis=1) == 0] = -1
+
+    # Per-skill SEM and significance (inline so the figure block is
+    # self-contained; cheap because deltas[:, k] is small).
+    sem_per_skill = deltas.std(axis=0) / np.sqrt(deltas.shape[0])
+    bonf_alpha_fig = ALPHA / K
+    sig_bonf_mask = np.zeros(K, dtype=bool)
+    for k in range(K):
+        sig_bonf_mask[k] = _wilcoxon_p(deltas[:, k]) < bonf_alpha_fig
+    n_bonf = int(sig_bonf_mask.sum())
+
+    # Per-benchmark pair-level mean/SEM/p using primary-benchmark skills.
+    _per_benchmark_stats = {}
+    for bi, b in enumerate(bench_order := ["MATH", "BBH", "GPQA", "MuSR", "IFEval"]):
+        sk = np.where(primary_bench_idx == bi)[0]
+        if len(sk) == 0:
+            _per_benchmark_stats[b] = {"mean": 0.0, "sem": 0.0, "p": 1.0}
+            continue
+        per_pair = deltas[:, sk].mean(axis=1)
+        _per_benchmark_stats[b] = {
+            "mean": float(per_pair.mean()),
+            "sem": float(per_pair.std() / np.sqrt(len(per_pair))),
+            "p": _wilcoxon_p(per_pair),
+        }
+
+    fig, axes = plt.subplots(1, 2, figsize=(14.0, 6.6),
+                             gridspec_kw={"width_ratios": [0.95, 2.00]})
+
+    # Panel (a): per-benchmark mean pair-level delta with ±SEM
+    ax_a = axes[0]
+    means_a = [_per_benchmark_stats[b]["mean"] for b in bench_order]
+    sems_a = [_per_benchmark_stats[b]["sem"] for b in bench_order]
+    ps_a = [_per_benchmark_stats[b]["p"] for b in bench_order]
+    y_pos = np.arange(len(bench_order))
+    colors_a = [bench_colors[b] for b in bench_order]
+    ax_a.barh(y_pos, means_a, xerr=sems_a, color=colors_a, alpha=0.85,
+              edgecolor="#333333", linewidth=0.7, capsize=4,
+              error_kw={"elinewidth": 1.0, "capthick": 1.0})
+    ax_a.axvline(0, color="black", lw=0.8)
+    ax_a.set_yticks(y_pos)
+    ax_a.set_yticklabels(bench_order, fontsize=10)
+    ax_a.set_xlabel(r"Mean $\Delta$ (instruct $-$ base)", fontsize=10.5)
+    ax_a.set_title("(a) Per-benchmark delta", fontsize=10.5, loc="left")
+    # P-values in a dedicated right column (outside the bars)
+    x_right = max(means_a) + max(sems_a) + 0.02
+    ax_a.set_xlim(min(means_a) - max(sems_a) - 0.025,
+                  x_right + 0.055)
+    for i, p in enumerate(ps_a):
+        if p < 0.001:
+            p_str = f"$p{{<}}10^{{{int(np.floor(np.log10(max(p,1e-300))))}}}$"
+        elif p < 0.01:
+            p_str = f"$p{{=}}{p:.3f}$"
+        else:
+            p_str = f"$p{{=}}{p:.2f}$"
+        ax_a.text(x_right, i, p_str, ha="left", va="center",
+                  fontsize=8.5, color="#444444")
+    ax_a.invert_yaxis()
+    for sp in ["top", "right"]:
+        ax_a.spines[sp].set_visible(False)
+    ax_a.grid(axis="x", ls=":", lw=0.5, alpha=0.35)
+
+    # Panel (b): top N improved + top N degraded skills
+    ax_b = axes[1]
+    n_show = 10
     top_up = sorted_idx[:n_show]
     top_down = sorted_idx[-n_show:][::-1]
+    # Add a visual gap between degraded (top) and improved (bottom) rows
     show_idx = np.concatenate([top_down, top_up])
     show_delta = mean_delta[show_idx]
-    show_names = [skill_names[k][:40] for k in show_idx]
-    colors = ["#C44E52" if d < 0 else "#55A868" for d in show_delta]
+    show_sem = sem_per_skill[show_idx]
+    show_names = [_clean(skill_names[k]) for k in show_idx]
+    show_sig = sig_bonf_mask[show_idx]
 
-    y = np.arange(len(show_idx))
-    ax.barh(y, show_delta, color=colors, edgecolor="white", linewidth=0.5)
-    ax.set_yticks(y)
-    ax.set_yticklabels(show_names, fontsize=8)
-    ax.axvline(0, color="black", lw=0.8)
-    ax.set_xlabel("Mean mastery change (instruct - base)", fontsize=11)
+    bar_colors = []
+    for k in show_idx:
+        pb = primary_bench_idx[k]
+        bar_colors.append(bench_colors[benchmarks[pb]] if pb >= 0 else "#888888")
+
+    y_b = np.arange(len(show_idx))
+    for i, (d, s, c, sig) in enumerate(zip(show_delta, show_sem,
+                                             bar_colors, show_sig)):
+        if sig:
+            ax_b.barh(i, d, xerr=s, color=c, alpha=0.95,
+                      edgecolor="#111111", linewidth=1.1, capsize=3,
+                      error_kw={"elinewidth": 0.9, "capthick": 0.9,
+                                "ecolor": "#333333"})
+        else:
+            # Muted fill + hatching for non-significant bars so they remain
+            # visible at small magnitudes while clearly distinct from sig bars.
+            ax_b.barh(i, d, xerr=s, facecolor=c, alpha=0.20,
+                      edgecolor=c, linewidth=1.4, hatch="////",
+                      capsize=3,
+                      error_kw={"elinewidth": 0.7, "capthick": 0.7,
+                                "ecolor": "#888888"})
+    # Subtle divider between degraded (rows 0..n_show-1) and improved rows
+    ax_b.axhline(n_show - 0.5, color="#cccccc", lw=0.6, ls="-", zorder=1)
+    ax_b.axvline(0, color="black", lw=0.8)
+    ax_b.set_yticks(y_b)
+    ax_b.set_yticklabels(show_names, fontsize=8.5)
+    ax_b.set_xlabel(r"Mean $\Delta$ (instruct $-$ base)", fontsize=10.5)
+    ax_b.set_title(
+        f"(b) Top-{n_show} improved and degraded skills "
+        f"($n_{{\\mathrm{{Bonf-sig}}}}{{=}}{n_bonf}/100$ across all skills)",
+        fontsize=10.5, loc="left")
+    ax_b.invert_yaxis()
     for sp in ["top", "right"]:
-        ax.spines[sp].set_visible(False)
+        ax_b.spines[sp].set_visible(False)
+    ax_b.grid(axis="x", ls=":", lw=0.5, alpha=0.35)
+
+    # Shared benchmark-color legend BELOW panel b, outside data area
+    legend_handles = [
+        plt.Rectangle((0, 0), 1, 1, facecolor=bench_colors[b],
+                      edgecolor="#222222", linewidth=0.8, label=b)
+        for b in bench_order
+    ]
+    # A small style legend for sig/non-sig
+    sig_handles = [
+        plt.Rectangle((0, 0), 1, 1, facecolor="#4C72B0",
+                      edgecolor="#111111", linewidth=1.1,
+                      label="Bonferroni-significant"),
+        plt.Rectangle((0, 0), 1, 1, facecolor="#4C72B0", alpha=0.20,
+                      edgecolor="#4C72B0", linewidth=1.4, hatch="////",
+                      label="Not significant"),
+    ]
+    first_leg = ax_b.legend(handles=legend_handles,
+                            loc="upper center", bbox_to_anchor=(0.5, -0.11),
+                            fontsize=8.5, frameon=False, ncol=5,
+                            handletextpad=0.4, columnspacing=1.0,
+                            title="Primary benchmark", title_fontsize=8.5)
+    ax_b.add_artist(first_leg)
+    ax_b.legend(handles=sig_handles,
+                loc="upper center", bbox_to_anchor=(0.5, -0.18),
+                fontsize=8.5, frameon=False, ncol=2,
+                handletextpad=0.4, columnspacing=1.0)
+
     plt.tight_layout()
     out1 = fig_dir / "fig_alignment_tax_skills.pdf"
+    out1_png = fig_dir / "fig_alignment_tax_skills.png"
     fig.savefig(out1, dpi=300, bbox_inches="tight")
+    fig.savefig(out1_png, dpi=200, bbox_inches="tight")
     plt.close()
-    print(f"  Saved: {out1}", flush=True)
+    print(f"  Saved: {out1} and {out1_png}", flush=True)
 
     # ── Fig 2: Family heatmap ──
     fam_order = [f for f in sorted(per_family.keys()) if per_family[f]["n_pairs"] >= 3]
@@ -339,6 +548,70 @@ def main(cfg: DictConfig) -> None:
     plt.close()
     print(f"  Saved: {out3}", flush=True)
 
+    # ════════════════════════════════════════════════════════════════
+    # 6. STATISTICAL TESTS
+    # ════════════════════════════════════════════════════════════════
+    print(f"\n{'='*60}", flush=True)
+    print("6. WILCOXON SIGNED-RANK TESTS", flush=True)
+    print(f"{'='*60}", flush=True)
+
+    bonf_alpha = ALPHA / K
+    per_skill_tests = []
+    n_sig_raw = 0
+    n_sig_bonf = 0
+    for k in range(K):
+        d = deltas[:, k]
+        p_val = _wilcoxon_p(d)
+        sem_k = float(d.std() / np.sqrt(len(d))) if len(d) > 1 else 0.0
+        sig_raw = bool(p_val < ALPHA)
+        sig_bonf = bool(p_val < bonf_alpha)
+        n_sig_raw += int(sig_raw)
+        n_sig_bonf += int(sig_bonf)
+        per_skill_tests.append({
+            "skill": int(k),
+            "name": skill_names[k],
+            "mean_delta": float(mean_delta[k]),
+            "sem": sem_k,
+            "p_value": p_val,
+            "sig_raw": sig_raw,
+            "sig_bonferroni": sig_bonf,
+        })
+    print(f"  Per-skill (n={len(pairs)}): raw-significant (p<{ALPHA})={n_sig_raw}/{K}, "
+          f"Bonferroni (p<{bonf_alpha:.4g})={n_sig_bonf}/{K}", flush=True)
+
+    # Primary-benchmark skill assignment: each skill is attributed to the
+    # benchmark whose items use it most (argmax of per-benchmark Q-column sum).
+    # This avoids double-counting shared skills across benchmarks.
+    skill_bench_counts = np.zeros((K, len(benchmarks)), dtype=int)
+    for i, it in enumerate(items_data):
+        b = it.get("benchmark")
+        if b in benchmarks:
+            bi = benchmarks.index(b)
+            skill_bench_counts[:, bi] += q_matrix[i].astype(int)
+    primary_bench = skill_bench_counts.argmax(axis=1)
+
+    per_benchmark_sem = {}
+    for bi, b in enumerate(benchmarks):
+        skill_ids = np.where(primary_bench == bi)[0]
+        if len(skill_ids) == 0:
+            continue
+        per_pair = deltas[:, skill_ids].mean(axis=1)
+        p_val = _wilcoxon_p(per_pair)
+        sem_b = float(per_pair.std() / np.sqrt(len(per_pair)))
+        per_benchmark_sem[b] = {
+            "mean": float(per_pair.mean()),
+            "sem": sem_b,
+            "p": p_val,
+        }
+        print(f"  {b:<8} (n_skills_primary={len(skill_ids)}): "
+              f"mean={per_pair.mean():+.4f}  sem={sem_b:.4f}  p={p_val:.4g}",
+              flush=True)
+
+    family_reliability = {
+        fam: {"n": int(n_fam), "reliable": bool(n_fam >= MIN_RELIABLE_N)}
+        for fam, n_fam in family_counts.items()
+    }
+
     # ── Save JSON ──
     save_data = {
         "experiment": "alignment_tax",
@@ -372,6 +645,14 @@ def main(cfg: DictConfig) -> None:
                             "skills_degraded": v["skills_degraded"]}
                         for f, v in per_family.items()},
         "per_depth": {str(k): v for k, v in depth_delta.items()},
+        "statistical_tests": {
+            "n_pairs": len(pairs),
+            "n_significant_raw_005": n_sig_raw,
+            "n_significant_bonferroni": n_sig_bonf,
+            "per_skill": per_skill_tests,
+            "per_benchmark_sem": per_benchmark_sem,
+            "family_reliability": family_reliability,
+        },
     }
 
     out_json = Path("cdm_exploration/experiments/v2_alignment_tax.json")
@@ -382,10 +663,18 @@ def main(cfg: DictConfig) -> None:
     log_experiment(
         name="alignment_tax",
         config={"K": K, "n_pairs": len(pairs), "device": device},
-        results={"n_pairs": len(pairs), "mean_delta": float(mean_delta.mean()),
-                 "skills_improved": int(n_skills_improved),
-                 "skills_degraded": int(n_skills_degraded),
-                 "per_benchmark": bench_delta},
+        results={
+            "n_pairs": len(pairs),
+            "mean_delta": float(mean_delta.mean()),
+            "skills_improved": int(n_skills_improved),
+            "skills_degraded": int(n_skills_degraded),
+            "per_benchmark": bench_delta,
+            "per_benchmark_sem": per_benchmark_sem,
+            "n_significant_bonferroni": save_data["statistical_tests"].get(
+                "n_significant_bonferroni"),
+            "family_reliability": save_data["statistical_tests"].get(
+                "family_reliability"),
+        },
         split_info={"n_llms": n_llms, "K": K},
         verified=True,
     )

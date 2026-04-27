@@ -1,12 +1,12 @@
 {
   "experiment": "skill_prerequisites",
   "method": "odds_ratio",
-  "OR_threshold": 10,
+  "OR_threshold": 10.0,
   "asymmetry_threshold": 0.3,
   "n_llms": 3811,
   "K": 100,
   "n_edges_raw": 455,
-  "n_edges_reduced": 245,
+  "n_edges_reduced": 242,
   "n_roots": 31,
   "n_leaves": 9,
   "n_isolated": 25,
@@ -2389,16 +2389,6 @@
     },
     {
       "from": 83,
-      "to": 6,
-      "from_name": "Incorporating Friends Name In Personalized Message",
-      "to_name": "Applying Quadratic Formula To Find Roots",
-      "OR": 11.910785619174433,
-      "lift": 3.37854609929078,
-      "p_a_given_b": 1.0,
-      "asymmetry": 0.99822695035461
-    },
-    {
-      "from": 83,
       "to": 17,
       "from_name": "Incorporating Friends Name In Personalized Message",
       "to_name": "Calculating Ratios Of Segments In Triangles",
@@ -2526,26 +2516,6 @@
       "lift": 79.39583333333333,
       "p_a_given_b": 0.6666666666666666,
       "asymmetry": 0.6041666666666666
-    },
-    {
-      "from": 91,
-      "to": 6,
-      "from_name": "Calculating Handshake Combinations In Group Intera",
-      "to_name": "Applying Quadratic Formula To Find Roots",
-      "OR": 13.168812589413447,
-      "lift": 3.6295238095238096,
-      "p_a_given_b": 1.0,
-      "asymmetry": 0.9980952380952381
-    },
-    {
-      "from": 91,
-      "to": 11,
-      "from_name": "Calculating Handshake Combinations In Group Intera",
-      "to_name": "Applying Trigonometric Identities To Solve Equatio",
-      "OR": 13.168812589413447,
-      "lift": 3.6295238095238096,
-      "p_a_given_b": 1.0,
-      "asymmetry": 0.9980952380952381
     },
     {
       "from": 91,
@@ -2887,35 +2857,29 @@
   },
   "per_benchmark_depth": {
     "MATH": {
-      "avg_depth": 2.310344827586207,
+      "avg_depth": 1.3548387096774193,
       "max_depth": 5,
-      "n_skills": 29
+      "n_skills": 62
     },
     "BBH": {
-      "avg_depth": 0.30434782608695654,
+      "avg_depth": 0.8095238095238095,
       "max_depth": 4,
-      "n_skills": 23
+      "n_skills": 42
     },
     "GPQA": {
-      "avg_depth": 0.5217391304347826,
-      "max_depth": 2,
-      "n_skills": 23
+      "avg_depth": 1.1724137931034482,
+      "max_depth": 5,
+      "n_skills": 58
     },
     "MuSR": {
-      "avg_depth": 0.0,
-      "max_depth": 0,
-      "n_skills": 3
+      "avg_depth": 0.5882352941176471,
+      "max_depth": 3,
+      "n_skills": 17
     },
     "IFEval": {
-      "avg_depth": 0.6818181818181818,
-      "max_depth": 3,
-      "n_skills": 22
+      "avg_depth": 0.9354838709677419,
+      "max_depth": 5,
+      "n_skills": 62
     }
-  },
-  "comparison_with_previous": {
-    "previous_method": "P(A|B) > 0.85 AND P(A|B) - P(B|A) > 0.3",
-    "previous_edges": 747,
-    "new_method": "OR > 10 AND P(A|B) - P(B|A) > 0.3",
-    "new_edges": 245
   }
 }

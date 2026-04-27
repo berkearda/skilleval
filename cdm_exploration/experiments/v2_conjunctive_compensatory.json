@@ -185,5 +185,139 @@
     "avg_p_all": 0.6505491498078891,
     "avg_p_partial": 0.37913573111889176,
     "avg_p_none": 0.18437658418893527
-  }
+  },
+  "pattern_robustness_2skill": {
+    "filter_stats": {
+      "total": 3117,
+      "too_few": 2755,
+      "no_effect": 111,
+      "analyzed": 251
+    },
+    "tertile_vs_pattern_agreement": {
+      "n_shared": 233,
+      "n_agree": 90,
+      "agreement_pct": 38.62660944206009
+    },
+    "n_analyzed": 251,
+    "overall": {
+      "conjunctive": 47,
+      "compensatory": 162,
+      "additive": 42
+    },
+    "overall_pct": {
+      "conjunctive": 18.725099601593627,
+      "compensatory": 64.54183266932272,
+      "additive": 16.733067729083665
+    },
+    "per_benchmark": {
+      "BBH": {
+        "conjunctive": 19,
+        "compensatory": 16,
+        "additive": 7,
+        "total": 42,
+        "conjunctive_pct": 45.23809523809524,
+        "compensatory_pct": 38.095238095238095,
+        "additive_pct": 16.666666666666668
+      },
+      "GPQA": {
+        "conjunctive": 12,
+        "compensatory": 59,
+        "additive": 14,
+        "total": 85,
+        "conjunctive_pct": 14.117647058823529,
+        "compensatory_pct": 69.41176470588235,
+        "additive_pct": 16.470588235294116
+      },
+      "IFEval": {
+        "conjunctive": 12,
+        "compensatory": 64,
+        "additive": 16,
+        "total": 92,
+        "conjunctive_pct": 13.043478260869565,
+        "compensatory_pct": 69.56521739130434,
+        "additive_pct": 17.391304347826086
+      },
+      "MATH": {
+        "conjunctive": 4,
+        "compensatory": 19,
+        "additive": 3,
+        "total": 26,
+        "conjunctive_pct": 15.384615384615385,
+        "compensatory_pct": 73.07692307692308,
+        "additive_pct": 11.538461538461538
+      },
+      "MuSR": {
+        "conjunctive": 0,
+        "compensatory": 4,
+        "additive": 2,
+        "total": 6,
+        "conjunctive_pct": 0.0,
+        "compensatory_pct": 66.66666666666667,
+        "additive_pct": 33.333333333333336
+      }
+    },
+    "per_skill_count": {
+      "2": {
+        "conjunctive": 47,
+        "compensatory": 162,
+        "additive": 42,
+        "total": 251,
+        "conj_pct": 18.725099601593627
+      }
+    },
+    "conj_index_mean": 0.16337316542351382,
+    "conj_index_median": 0.24118028487576942,
+    "comp_index_mean": 0.836626794367174,
+    "comp_index_median": 0.7588196885095322,
+    "avg_p_all": 0.6295826860098416,
+    "avg_p_partial": 0.5283974183709512,
+    "avg_p_none": 0.21541789706389014
+  },
+  "threshold_sensitivity_tertile": [
+    {
+      "conj_thresh": 0.5,
+      "comp_thresh": 0.5,
+      "n_analyzed": 2725,
+      "counts": {
+        "conjunctive": 1601,
+        "compensatory": 1124,
+        "additive": 0
+      },
+      "pct": {
+        "conjunctive": 58.75229357798165,
+        "compensatory": 41.24770642201835,
+        "additive": 0.0
+      }
+    },
+    {
+      "conj_thresh": 0.6,
+      "comp_thresh": 0.6,
+      "n_analyzed": 2725,
+      "counts": {
+        "conjunctive": 1427,
+        "compensatory": 946,
+        "additive": 352
+      },
+      "pct": {
+        "conjunctive": 52.36697247706422,
+        "compensatory": 34.71559633027523,
+        "additive": 12.917431192660551
+      }
+    },
+    {
+      "conj_thresh": 0.7,
+      "comp_thresh": 0.7,
+      "n_analyzed": 2725,
+      "counts": {
+        "conjunctive": 1187,
+        "compensatory": 770,
+        "additive": 768
+      },
+      "pct": {
+        "conjunctive": 43.559633027522935,
+        "compensatory": 28.256880733944953,
+        "additive": 28.18348623853211
+      }
+    }
+  ]
 }

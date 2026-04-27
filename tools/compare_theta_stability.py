@@ -101,7 +101,27 @@ def load_cdmeval_theta(seed: int) -> np.ndarray | None:
     pipeline operates on the same representation that produced the published
     v2_multi_seed.json numbers.
     """
-    path = CDMEVAL_CKPT / f"text_conditioned_seed_{seed}.pt"
+    return load_cdmeval_theta_K(100, seed)
+
+
+CDMEVAL_EXPANDED_CKPT = REPO / "cdm_exploration" / "checkpoints" / "expanded"
+
+
+def load_cdmeval_theta_K(K: int, seed: int) -> np.ndarray | None:
+    """Generalised CDMEval mastery loader for any K and seed.
+
+    File naming convention:
+      K=100, seeds 42-46: cdm_exploration/checkpoints/multi_seed/text_conditioned_seed_{seed}.pt
+      K!=100, seed 42:    cdm_exploration/checkpoints/expanded/text_conditioned_K{K}.pt
+      K!=100, seed 43+:   cdm_exploration/checkpoints/expanded/text_conditioned_K{K}_s{seed}.pt
+    """
+    if K == 100:
+        path = CDMEVAL_CKPT / f"text_conditioned_seed_{seed}.pt"
+    else:
+        if seed == 42:
+            path = CDMEVAL_EXPANDED_CKPT / f"text_conditioned_K{K}.pt"
+        else:
+            path = CDMEVAL_EXPANDED_CKPT / f"text_conditioned_K{K}_s{seed}.pt"
     if not path.exists():
         return None
     ckpt = torch.load(path, map_location="cpu", weights_only=False)
@@ -274,26 +294,26 @@ def analyse_irtnet() -> dict:
     return results
 
 
-def analyse_cdmeval() -> dict:
-    """Compute CDMEval K=100 θ stability through the same pipeline as IrtNet.
+def analyse_cdmeval_K(K: int, seeds: list[int]) -> dict:
+    """Compute CDMEval θ stability at arbitrary K through the same pipeline as IrtNet.
 
     Symmetric reporting: same metrics, same Procrustes variants. CDMEval
     dimensions are anchored to named Q-matrix skills so the raw per-dim
     Pearson should already be high; the Procrustes rows are reported for
     fairness, not because rotation invariance is expected to apply.
     """
-    print(f"\n[ CDMEval K={CDMEVAL_K} ]")
+    print(f"\n[ CDMEval K={K} ]")
     thetas = []
     seeds_loaded = []
-    for s in CDMEVAL_SEEDS:
-        t = load_cdmeval_theta(s)
+    for s in seeds:
+        t = load_cdmeval_theta_K(K, s)
         if t is None:
-            print(f"  WARN: missing checkpoint for seed={s}")
+            print(f"  WARN: missing checkpoint for K={K}, seed={s}")
             continue
         thetas.append(t)
         seeds_loaded.append(s)
     if len(thetas) < 2:
-        return {"error": f"only {len(thetas)} CDMEval seeds available"}
+        return {"error": f"only {len(thetas)} CDMEval seeds available at K={K}"}
     print(f"  Loaded {len(thetas)} seeds: {seeds_loaded}")
     print(f"  θ shape per seed: {thetas[0].shape}")
 
@@ -313,7 +333,7 @@ def analyse_cdmeval() -> dict:
     print(f"  Per-dim Pearson (Procrustes full):        {proc_full_m:.4f} ± {proc_full_s:.4f}")
 
     return {
-        "K": CDMEVAL_K,
+        "K": K,
         "n_seeds": len(thetas),
         "seeds": seeds_loaded,
         "flat_pearson_mean": flat_m,
@@ -327,12 +347,17 @@ def analyse_cdmeval() -> dict:
         "per_dim_pearson_procrustes_full_mean": proc_full_m,
         "per_dim_pearson_procrustes_full_std": proc_full_s,
         "note": (
-            "CDMEval K=100 dimensions are anchored to named Q-matrix skills, "
+            f"CDMEval K={K} dimensions are anchored to named Q-matrix skills, "
             "so rotation invariance does not apply — raw per-dim Pearson is the "
             "fair number. Procrustes rows are reported for symmetric comparison "
             "with IrtNet, not because alignment is needed."
         ),
     }
+
+
+def analyse_cdmeval() -> dict:
+    """Backward-compat wrapper: K=100 with the original 5-seed roster."""
+    return analyse_cdmeval_K(CDMEVAL_K, CDMEVAL_SEEDS)
 
 
 def print_comparison(cdmeval: dict, irtnet: dict) -> None:
@@ -396,12 +421,18 @@ def print_comparison(cdmeval: dict, irtnet: dict) -> None:
 
 def main() -> int:
     print("Computing CDMEval K=100 θ stability across seeds (symmetric pipeline)...")
-    cdmeval = analyse_cdmeval()
+    cdmeval_K100 = analyse_cdmeval_K(100, [42, 43, 44, 45, 46])
+    print("\nComputing CDMEval K=300 θ stability across seeds...")
+    cdmeval_K300 = analyse_cdmeval_K(300, [42, 43, 44])
+    print("\nComputing CDMEval K=500 θ stability across seeds...")
+    cdmeval_K500 = analyse_cdmeval_K(500, [42, 43, 44])
     print("\nComputing IrtNet θ stability across seeds...")
     irtnet = analyse_irtnet()
 
     summary = {
-        "cdmeval_K100": cdmeval,
+        "cdmeval_K100": cdmeval_K100,
+        "cdmeval_K300": cdmeval_K300,
+        "cdmeval_K500": cdmeval_K500,
         "irtnet": irtnet,
         "_meta": {
             "d_model_grid": D_MODEL_GRID,
@@ -413,8 +444,10 @@ def main() -> int:
                 "per_dim_pearson_procrustes (orthogonal: rotation+sign-flip)",
                 "per_dim_pearson_procrustes_full (centering+scaling+rotation)",
             ],
-            "cdmeval_seeds": CDMEVAL_SEEDS,
-            "cdmeval_K": CDMEVAL_K,
+            "cdmeval_K_grid": [100, 300, 500],
+            "cdmeval_K100_seeds": [42, 43, 44, 45, 46],
+            "cdmeval_K300_seeds": [42, 43, 44],
+            "cdmeval_K500_seeds": [42, 43, 44],
             "interpretation": (
                 "Per-dim Pearson is the headline metric for non-identifiability. "
                 "CDMEval's named-skill θ should show high per-dim stability; "
@@ -430,7 +463,20 @@ def main() -> int:
         json.dump(summary, f, indent=2)
     print(f"\nWrote summary: {out}")
 
-    print_comparison(cdmeval, irtnet)
+    print_comparison(cdmeval_K100, irtnet)
+
+    print("\nAdditional CDMEval rows (symmetric Procrustes pipeline):")
+    for cd, K in [(cdmeval_K300, 300), (cdmeval_K500, 500)]:
+        if cd.get("per_dim_pearson_procrustes_full_mean") is None:
+            continue
+        print(
+            f"  CDMEval K={K} ({cd['n_seeds']} seeds):  "
+            f"raw {cd['per_dim_pearson_raw_mean']:.4f}  ->  "
+            f"orth {cd['per_dim_pearson_procrustes_mean']:.4f} ± "
+            f"{cd['per_dim_pearson_procrustes_std']:.4f}  |  "
+            f"full {cd['per_dim_pearson_procrustes_full_mean']:.4f} ± "
+            f"{cd['per_dim_pearson_procrustes_full_std']:.4f}"
+        )
     return 0
 
 

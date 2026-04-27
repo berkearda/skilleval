@@ -26,6 +26,50 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(line_buffering=True)
 
 N_BINS = 20
+N_BINS_SENSITIVITY = 15  # Guo et al. (2017) standard for binning-sensitivity check
+
+
+def ece_equal_width(preds, labels, n_bins):
+    """Equal-width ECE helper used for the binning-sensitivity block."""
+    if len(preds) == 0:
+        return 0.0
+    edges = np.linspace(0, 1, n_bins + 1)
+    total = len(preds)
+    ece = 0.0
+    for i, (lo, hi) in enumerate(zip(edges[:-1], edges[1:])):
+        mask = (preds >= lo) & (preds <= hi) if i == 0 else (preds > lo) & (preds <= hi)
+        n = int(mask.sum())
+        if n == 0:
+            continue
+        ece += (n / total) * abs(preds[mask].mean() - labels[mask].mean())
+    return float(ece)
+
+
+def ece_equal_count(preds, labels, n_bins=N_BINS):
+    """Expected Calibration Error with equal-mass (quantile) bins.
+
+    Each bin holds roughly 1/n_bins of the predictions. Lower bias than
+    equal-width when predictions cluster (e.g. near 0). Complements the
+    default equal-width ECE for sensitivity analysis.
+    """
+    if len(preds) == 0:
+        return 0.0
+    edges = np.unique(np.quantile(preds, np.linspace(0, 1, n_bins + 1)))
+    if len(edges) < 2:
+        return 0.0
+    total = len(preds)
+    ece = 0.0
+    for lo, hi in zip(edges[:-1], edges[1:]):
+        if lo == edges[0]:
+            mask = (preds >= lo) & (preds <= hi)
+        else:
+            mask = (preds > lo) & (preds <= hi)
+        n = int(mask.sum())
+        if n == 0:
+            continue
+        gap = abs(preds[mask].mean() - labels[mask].mean())
+        ece += (n / total) * gap
+    return float(ece)
 
 
 def calibration_metrics(preds, labels, n_bins=N_BINS):
@@ -344,6 +388,44 @@ def main(cfg: DictConfig) -> None:
     plt.close()
     print(f"  Saved: {out4}", flush=True)
 
+    # ════════════════════════════════════════════════════════════════
+    # 7. BINNING SENSITIVITY: equal-width vs equal-count ECE
+    # ════════════════════════════════════════════════════════════════
+    print(f"\n{'='*60}", flush=True)
+    print("BINNING SENSITIVITY (equal-width vs equal-count)", flush=True)
+    print(f"{'='*60}", flush=True)
+
+    nb = N_BINS_SENSITIVITY
+    overall_ew = ece_equal_width(preds_flat, labels_flat, nb)
+    overall_ec = ece_equal_count(preds_flat, labels_flat, nb)
+    test_ew = ece_equal_width(test_p, test_l, nb)
+    test_ec = ece_equal_count(test_p, test_l, nb)
+    per_bench_sens = {}
+    for b in benchmarks:
+        idx = bench_items[b]
+        p = all_preds[:, idx].ravel()
+        l = R[:, idx].ravel().astype(np.float32)
+        per_bench_sens[b] = {
+            "equal_width": ece_equal_width(p, l, nb),
+            "equal_count": ece_equal_count(p, l, nb),
+        }
+
+    binning_sensitivity = {
+        "overall_equal_width": overall_ew,
+        "overall_equal_count": overall_ec,
+        "test_equal_width": test_ew,
+        "test_equal_count": test_ec,
+        "per_benchmark": per_bench_sens,
+    }
+    print(f"  Overall : width={overall['ece']:.4f}  count={overall_ec:.4f}",
+          flush=True)
+    print(f"  Test    : width={test_cal['ece']:.4f}  count={test_ec:.4f}",
+          flush=True)
+    for b in benchmarks:
+        pb = per_bench_sens[b]
+        print(f"  {b:<8}: width={pb['equal_width']:.4f}  count={pb['equal_count']:.4f}",
+              flush=True)
+
     # ── Save JSON ──
     save_data = {
         "experiment": "calibration_analysis",
@@ -372,6 +454,7 @@ def main(cfg: DictConfig) -> None:
             "train_ece": train_cal["ece"], "train_brier": train_cal["brier"],
             "test_ece": test_cal["ece"], "test_brier": test_cal["brier"],
         },
+        "binning_sensitivity": binning_sensitivity,
     }
 
     out_json = Path("cdm_exploration/experiments/v2_calibration_analysis.json")

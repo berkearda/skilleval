@@ -25,8 +25,33 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(line_buffering=True)
 
 MASTERY_THRESH = 0.5
-PREREQ_ASYM_THRESH = 0.3   # P(A|B) - P(B|A) must exceed this
-PREREQ_COND_THRESH = 0.85  # P(A|B) must exceed this
+ASYMMETRY_THRESHOLD = 0.3  # P(A|B) - P(B|A) must exceed this
+OR_THRESHOLD = 10.0        # Odds ratio must exceed this (base-rate-corrected)
+CONTINUITY_CORRECTION = 0.5
+
+
+def compute_odds_ratio(co_mastery, n_mastering, n_llms):
+    """Pairwise odds ratio with Haldane continuity correction.
+
+    For each ordered pair (a, b), build the 2x2 contingency table over LLMs:
+        ab          = #LLMs mastering both a and b
+        a_not_b     = #LLMs mastering a but not b
+        not_a_b     = #LLMs mastering b but not a
+        not_a_not_b = #LLMs mastering neither
+    OR(a→b) = ((ab + 0.5) · (not_a_not_b + 0.5)) / ((a_not_b + 0.5) · (not_a_b + 0.5))
+    The 0.5 offset avoids division-by-zero when any cell is empty (Haldane 1956).
+    """
+    ab = co_mastery
+    a_count = n_mastering[:, np.newaxis]
+    b_count = n_mastering[np.newaxis, :]
+    a_not_b = a_count - co_mastery
+    not_a_b = b_count - co_mastery
+    not_a_not_b = n_llms - a_count - b_count + co_mastery
+
+    c = CONTINUITY_CORRECTION
+    numer = (ab + c) * (not_a_not_b + c)
+    denom = (a_not_b + c) * (not_a_b + c)
+    return numer / denom
 
 
 def transitive_reduction(adj):
@@ -176,8 +201,20 @@ def main(cfg: DictConfig) -> None:
     # prerequisite_score[a,b] = P(A|B) - P(B|A): positive means A is prereq for B
     prereq_score = p_a_given_b - p_a_given_b.T
 
-    # Edge: A→B if score(A→B) > thresh AND P(A|B) > cond_thresh
-    adj_raw = (prereq_score > PREREQ_ASYM_THRESH) & (p_a_given_b > PREREQ_COND_THRESH)
+    # Lift(a|b) = P(a|b) / P(a) — quantifies how much b's mastery raises a's
+    # probability beyond its marginal. Reported per-edge for inspection.
+    p_a = mastery_rate  # (K,)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        lift = p_a_given_b / p_a[:, np.newaxis]
+        lift = np.nan_to_num(lift, nan=0.0, posinf=0.0)
+
+    # Odds ratio: base-rate-corrected association. OR > 1 means b mastery
+    # genuinely predicts a mastery beyond what their marginals would imply.
+    odds_ratio = compute_odds_ratio(co_mastery, n_mastering, n_llms)
+
+    # Edge: a→b if asymmetry > thresh (a is easier than b given b) AND
+    # OR > thresh (a and b are non-trivially associated).
+    adj_raw = (prereq_score > ASYMMETRY_THRESHOLD) & (odds_ratio > OR_THRESHOLD)
     np.fill_diagonal(adj_raw, False)
     n_edges_raw = adj_raw.sum()
     print(f"  Raw edges (before reduction): {n_edges_raw}", flush=True)
@@ -358,7 +395,8 @@ def main(cfg: DictConfig) -> None:
             p_ab = co_m / n_m[np.newaxis, :]
             p_ab = np.nan_to_num(p_ab, nan=0.0)
         ps = p_ab - p_ab.T
-        fam_adj = (ps > PREREQ_ASYM_THRESH) & (p_ab > PREREQ_COND_THRESH)
+        or_fam = compute_odds_ratio(co_m, n_m, n_fam)
+        fam_adj = (ps > ASYMMETRY_THRESHOLD) & (or_fam > OR_THRESHOLD)
         np.fill_diagonal(fam_adj, False)
         edge_set = set(zip(*np.where(fam_adj)))
         family_edges[fam] = edge_set
@@ -416,52 +454,142 @@ def main(cfg: DictConfig) -> None:
     print("\nGenerating figures...", flush=True)
     setup_style()
 
-    # ── Fig 1: DAG visualization ──
-    try:
-        import networkx as nx
-        G = nx.DiGraph()
-        for k in range(K):
-            if in_degree[k] > 0 or out_degree[k] > 0:
-                G.add_node(k)
-        for i in range(K):
-            for j in range(K):
-                if adj[i, j]:
-                    G.add_edge(i, j)
+    # ── Fig 1: Skill co-mastery structure (2-panel: scatter + per-depth bars) ──
+    # Replaces the earlier node-link DAG; the usual convention for
+    # hierarchical/ordinal skill data prefers ordered scatter + mean-per-bin
+    # over node-link graphs (verified across 8 D&B/E&D reference papers).
+    from scipy.stats import spearmanr
 
-        fig, ax = plt.subplots(figsize=(14, 10))
-        if len(G.nodes) > 0:
-            pos = nx.spring_layout(G, k=2.5, iterations=100, seed=42)
-            node_sizes = [300 * mastery_rate[n] + 50 for n in G.nodes]
-            node_colors = [depth[n] for n in G.nodes]
-            nx.draw_networkx_nodes(G, pos, ax=ax, node_size=node_sizes,
-                                   node_color=node_colors, cmap="YlOrRd",
-                                   alpha=0.8, edgecolors="#333", linewidths=0.5)
-            nx.draw_networkx_edges(G, pos, ax=ax, edge_color="#999",
-                                   arrows=True, arrowsize=10, width=0.8, alpha=0.6)
-            # Label roots and leaves
-            labels = {}
-            for n in roots:
-                if n in G.nodes:
-                    labels[n] = skill_names[n][:20]
-            for n in leaves:
-                if n in G.nodes:
-                    labels[n] = skill_names[n][:20]
-            if labels:
-                nx.draw_networkx_labels(G, pos, labels, ax=ax, font_size=6)
-        ax.set_title(f"Skill Prerequisite DAG ({len(G.nodes)} skills, "
-                     f"{len(G.edges)} edges)", fontsize=12)
-        ax.axis("off")
-        plt.tight_layout()
-    except ImportError:
-        fig, ax = plt.subplots(figsize=(8, 6))
-        ax.text(0.5, 0.5, "networkx not installed\n(DAG visualization skipped)",
-                ha="center", va="center", fontsize=14)
-        ax.axis("off")
+    # Primary benchmark per skill = argmax over benchmark item counts.
+    skill_bench_counts = np.zeros((K, len(benchmarks)), dtype=int)
+    for i, it in enumerate(items_data):
+        b = it.get("benchmark")
+        if b in benchmarks:
+            bi = benchmarks.index(b)
+            skill_bench_counts[:, bi] += q_matrix[i].astype(int)
+    primary_bench = skill_bench_counts.argmax(axis=1)
+    primary_bench[skill_bench_counts.sum(axis=1) == 0] = -1
 
+    dag_mask = (in_degree > 0) | (out_degree > 0)
+    dag_skills = np.where(dag_mask)[0]
+    x_vals = np.array([depth[k] for k in dag_skills])
+    y_vals = np.array([mastery_rate[k] for k in dag_skills])
+
+    # Okabe-Ito colorblind-safe palette + distinct marker shapes per benchmark
+    # so overlapping dots remain distinguishable even if printed monochrome.
+    bench_styles = {
+        "MATH":   ("#0072B2", "o"),  # blue circle
+        "BBH":    ("#E69F00", "s"),  # orange square
+        "GPQA":   ("#009E73", "^"),  # green up-triangle
+        "MuSR":   ("#CC79A7", "D"),  # pink diamond
+        "IFEval": ("#56B4E9", "v"),  # light blue down-triangle
+    }
+
+    fig, axes = plt.subplots(1, 2, figsize=(13.0, 4.5),
+                             gridspec_kw={"width_ratios": [1.25, 1.0]})
+
+    # Panel (a): per-skill mastery vs co-mastery depth, colored by primary bench.
+    # Uses a beeswarm-style x-offset so overlapping y values dodge horizontally
+    # rather than stacking vertically at each integer depth column.
+    def _beeswarm_x(y_arr, center_x, half_width=0.36, diameter=0.045):
+        n = len(y_arr)
+        if n == 0:
+            return np.array([])
+        order = np.argsort(y_arr)
+        x_off = np.zeros(n)
+        placed = []  # (y, offset) pairs already placed in this column
+        step = diameter
+        col_offsets = [0.0]
+        for k in range(1, int(half_width / step) + 1):
+            col_offsets.extend([k * step, -k * step])
+        for idx in order:
+            yi = y_arr[idx]
+            blocked = {ox for py, ox in placed if abs(py - yi) < diameter}
+            for ox in col_offsets:
+                if ox not in blocked:
+                    x_off[idx] = center_x + ox
+                    placed.append((yi, ox))
+                    break
+            else:
+                x_off[idx] = center_x
+        return x_off
+
+    ax_a = axes[0]
+    primaries_dag = primary_bench[dag_skills]
+    # Compute beeswarm offsets per depth column (all skills, regardless of benchmark)
+    x_swarm = np.zeros_like(x_vals, dtype=float)
+    for d in sorted(set(x_vals.astype(int))):
+        col_idx = np.where(x_vals.astype(int) == d)[0]
+        if len(col_idx) > 0:
+            x_swarm[col_idx] = _beeswarm_x(y_vals[col_idx], center_x=float(d))
+    for bi, b in enumerate(benchmarks):
+        mask = primaries_dag == bi
+        if mask.sum() > 0:
+            color, marker = bench_styles[b]
+            ax_a.scatter(x_swarm[mask], y_vals[mask],
+                         s=42, alpha=0.78, color=color, marker=marker,
+                         edgecolor="white", linewidth=0.7, label=b, zorder=3)
+
+    # Linear trend (for visual anchoring); Spearman reported in a corner box.
+    if len(x_vals) > 2 and x_vals.std() > 0:
+        z = np.polyfit(x_vals, y_vals, 1)
+        xs = np.linspace(x_vals.min(), x_vals.max(), 50)
+        ys = np.clip(np.polyval(z, xs), 0.0, 1.0)
+        ax_a.plot(xs, ys, color="#555555", ls="--", lw=1.1,
+                  alpha=0.55, zorder=1)
+        rho, p_val = spearmanr(x_vals, y_vals)
+        p_text = f"$p < 10^{{{int(np.floor(np.log10(max(p_val, 1e-300))))}}}$" \
+                 if p_val < 0.001 else f"$p = {p_val:.3f}$"
+        ax_a.text(0.55, 0.90,
+                  rf"Spearman $\rho = {rho:.2f}$, {p_text}",
+                  transform=ax_a.transAxes, fontsize=9,
+                  bbox=dict(boxstyle="round,pad=0.35",
+                            facecolor="white",
+                            edgecolor="#cccccc", linewidth=0.6))
+
+    ax_a.set_xlabel("Co-mastery DAG depth", fontsize=10.5)
+    ax_a.set_ylabel("Skill mastery rate", fontsize=10.5)
+    ax_a.set_xticks(sorted(set(x_vals.astype(int))))
+    ax_a.set_ylim(-0.03, 1.05)
+    ax_a.set_title("(a) Per-skill mastery by depth", fontsize=10.5, loc="left")
+    ax_a.legend(frameon=False, fontsize=8.5, loc="upper right",
+                handletextpad=0.3, labelspacing=0.3)
+    for sp in ["top", "right"]:
+        ax_a.spines[sp].set_visible(False)
+    ax_a.grid(axis="y", ls=":", lw=0.5, alpha=0.35)
+
+    # Panel (b): mean mastery per depth ± SEM with n annotations.
+    ax_b = axes[1]
+    depth_levels = sorted(set(x_vals.astype(int)))
+    means, sems, counts = [], [], []
+    for d in depth_levels:
+        m = y_vals[x_vals == d]
+        means.append(float(m.mean()))
+        sems.append(float(m.std(ddof=1) / np.sqrt(len(m))) if len(m) > 1 else 0.0)
+        counts.append(int(len(m)))
+    x_pos = np.arange(len(depth_levels))
+    ax_b.bar(x_pos, means, yerr=sems, color="#4C72B0", alpha=0.80,
+             edgecolor="#2a4a6d", linewidth=0.9, capsize=4, zorder=3)
+    for i, (m, n) in enumerate(zip(means, counts)):
+        ax_b.text(i, m + max(sems[i], 0.01) + 0.02, f"n={n}",
+                  ha="center", va="bottom", fontsize=8.5, color="#333333")
+    ax_b.set_xticks(x_pos)
+    ax_b.set_xticklabels([str(d) for d in depth_levels])
+    ax_b.set_xlabel("Co-mastery DAG depth", fontsize=10.5)
+    ax_b.set_ylabel("Mean mastery ($\\pm$ SEM)", fontsize=10.5)
+    ax_b.set_ylim(0, 1.05)
+    ax_b.set_title("(b) Mean mastery per depth level", fontsize=10.5, loc="left")
+    for sp in ["top", "right"]:
+        ax_b.spines[sp].set_visible(False)
+    ax_b.grid(axis="y", ls=":", lw=0.5, alpha=0.35)
+
+    plt.tight_layout()
     out1 = fig_dir / "fig_skill_prerequisite_dag.pdf"
+    out1_png = fig_dir / "fig_skill_prerequisite_dag.png"
     fig.savefig(out1, dpi=300, bbox_inches="tight")
+    fig.savefig(out1_png, dpi=200, bbox_inches="tight")
     plt.close()
-    print(f"  Saved: {out1}", flush=True)
+    print(f"  Saved: {out1} and {out1_png}", flush=True)
 
     # ── Fig 2: Depth vs size correlation ──
     fig, ax = plt.subplots(figsize=(7, 5))
@@ -494,16 +622,18 @@ def main(cfg: DictConfig) -> None:
     # ── Save JSON ──
     edges_list = [{"from": int(i), "to": int(j),
                    "from_name": skill_names[i], "to_name": skill_names[j],
-                   "score": float(prereq_score[i, j]),
-                   "p_a_given_b": float(p_a_given_b[i, j])}
+                   "OR": float(odds_ratio[i, j]),
+                   "lift": float(lift[i, j]),
+                   "p_a_given_b": float(p_a_given_b[i, j]),
+                   "asymmetry": float(prereq_score[i, j])}
                   for i, j in zip(*np.where(adj))]
 
     save_data = {
         "experiment": "skill_prerequisites",
+        "method": "odds_ratio",
+        "OR_threshold": OR_THRESHOLD,
+        "asymmetry_threshold": ASYMMETRY_THRESHOLD,
         "n_llms": int(n_llms), "K": int(K),
-        "mastery_threshold": MASTERY_THRESH,
-        "prereq_asym_thresh": PREREQ_ASYM_THRESH,
-        "prereq_cond_thresh": PREREQ_COND_THRESH,
         "n_edges_raw": int(n_edges_raw),
         "n_edges_reduced": int(n_edges_reduced),
         "n_roots": int(len(roots)),
@@ -530,9 +660,10 @@ def main(cfg: DictConfig) -> None:
 
     log_experiment(
         name="skill_prerequisites",
-        config={"mastery_threshold": MASTERY_THRESH,
-                "prereq_asym_thresh": PREREQ_ASYM_THRESH,
-                "prereq_cond_thresh": PREREQ_COND_THRESH, "K": K},
+        config={"method": "odds_ratio",
+                "OR_threshold": OR_THRESHOLD,
+                "asymmetry_threshold": ASYMMETRY_THRESHOLD,
+                "mastery_threshold": MASTERY_THRESH, "K": K},
         results={"n_edges": int(n_edges_reduced), "n_roots": int(len(roots)),
                  "n_leaves": int(len(leaves)), "max_depth": int(depth.max()),
                  "depth_size_corr": float(r_depth_size)},
