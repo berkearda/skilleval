@@ -56,6 +56,20 @@ export function TopLLMsChart({ models, skillId, darkMode }: TopLLMsChartProps) {
     return scored
   }, [models, skillId])
 
+  // Normalize bar color to the visible range so a narrow [0.86, 0.90] band
+  // still shows visible variation, instead of all bars looking identical
+  // on the absolute [0, 1] scale.
+  const { minTheta, maxTheta } = useMemo(() => {
+    if (data.length === 0) return { minTheta: 0, maxTheta: 1 }
+    let mn = data[0].theta
+    let mx = data[0].theta
+    for (const r of data) {
+      if (r.theta < mn) mn = r.theta
+      if (r.theta > mx) mx = r.theta
+    }
+    return { minTheta: mn, maxTheta: mx }
+  }, [data])
+
   const axisColor = darkMode ? '#94a3b8' : '#64748b'
   const gridColor = darkMode ? '#1f2937' : '#e2e8f0'
 
@@ -109,9 +123,15 @@ export function TopLLMsChart({ models, skillId, darkMode }: TopLLMsChartProps) {
             }) as never}
           />
           <Bar dataKey="theta" isAnimationActive={false}>
-            {data.map((row, i) => (
-              <Cell key={i} fill={getMasteryColor(row.theta, darkMode)} />
-            ))}
+            {data.map((row, i) => {
+              const range = maxTheta - minTheta
+              // Avoid divide-by-zero when all 10 LLMs tie exactly.
+              const relative =
+                range > 1e-9 ? (row.theta - minTheta) / range : 0.5
+              return (
+                <Cell key={i} fill={getMasteryColor(relative, darkMode)} />
+              )
+            })}
             <LabelList
               dataKey="theta"
               position="right"
