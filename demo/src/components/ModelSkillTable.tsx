@@ -10,7 +10,7 @@ import { ArrowDown, ArrowUp, ChevronsUpDown, ExternalLink } from 'lucide-react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import type { Model, Skill } from '@/lib/types'
 import { cn } from '@/lib/utils'
-import { getFamilyColor } from '@/lib/colors'
+import { getFamilyColor, getMasteryColor, getMasteryTextColor } from '@/lib/colors'
 import { RowExpansion } from '@/components/RowExpansion'
 import { ModelFilters } from '@/components/ModelFilters'
 import { SkillCell } from '@/components/SkillCell'
@@ -46,8 +46,12 @@ const COL_W = {
   tier: 72,
   params: 72,
   mean: 80,
-  skill: 56,
+  skill: 72,
 } as const
+
+// Right-edge inset shadow on the pinned cluster — provides a visual hint
+// that more columns exist to the right.
+const PINNED_RIGHT_SHADOW = '2px 0 0 0 hsl(var(--border)), inset -8px 0 8px -8px rgba(0,0,0,0.18)'
 
 const PINNED_WIDTHS = [
   COL_W.rank,
@@ -74,6 +78,13 @@ interface SortableSkillGroup {
   benchmark: string
   skills: Skill[]
   startIndex: number // index into ordered skill list
+}
+
+// Convert an `rgb(r, g, b)` string to `rgba(r, g, b, a)` for translucency.
+function rgbToRgba(rgb: string, alpha: number): string {
+  const m = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/.exec(rgb)
+  if (!m) return rgb
+  return `rgba(${m[1]}, ${m[2]}, ${m[3]}, ${alpha})`
 }
 
 function formatParams(p: number | null): string {
@@ -267,7 +278,7 @@ export function ModelSkillTable({
   const gridTotalW = PINNED_TOTAL_W + skillColsWidth
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
+    <div className="flex h-full min-h-0 min-w-0 flex-col">
       <ModelFilters
         search={search}
         onSearchChange={setSearch}
@@ -372,7 +383,7 @@ function TableHeader({
         className="sticky left-0 z-30 flex bg-background"
         style={{
           width: pinnedTotalW,
-          boxShadow: '2px 0 0 0 hsl(var(--border))',
+          boxShadow: PINNED_RIGHT_SHADOW,
         }}
       >
         <PinnedHeaderCell
@@ -596,7 +607,7 @@ function TableRow({
         )}
         style={{
           width: PINNED_TOTAL_W,
-          boxShadow: '2px 0 0 0 hsl(var(--border))',
+          boxShadow: PINNED_RIGHT_SHADOW,
         }}
       >
         <div
@@ -637,7 +648,15 @@ function TableRow({
         </div>
         <div
           className="flex h-full items-center justify-end border-r border-border px-2 font-mono text-xs font-semibold"
-          style={{ width: COL_W.mean }}
+          style={{
+            width: COL_W.mean,
+            // Subtle gradient — about 70% intensity of the per-skill cells.
+            backgroundColor: rgbToRgba(
+              getMasteryColor(model.meanTheta, darkMode),
+              0.7
+            ),
+            color: getMasteryTextColor(model.meanTheta, darkMode),
+          }}
         >
           {model.meanTheta.toFixed(3)}
         </div>

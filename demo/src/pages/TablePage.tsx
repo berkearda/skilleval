@@ -18,13 +18,37 @@ function useDarkMode(): boolean {
   return dark
 }
 
+function TableSkeleton() {
+  return (
+    <div className="flex-1 overflow-hidden border-t border-border bg-background p-4">
+      {/* Header strip */}
+      <div className="mb-3 flex gap-3">
+        <div className="h-8 w-64 animate-pulse rounded bg-muted" />
+        <div className="h-8 w-32 animate-pulse rounded bg-muted" />
+        <div className="h-8 w-32 animate-pulse rounded bg-muted" />
+      </div>
+      {/* Row skeletons */}
+      <div className="flex flex-col gap-1.5">
+        {Array.from({ length: 14 }).map((_, i) => (
+          <div
+            key={i}
+            className="h-8 w-full animate-pulse rounded bg-muted"
+            style={{ opacity: 1 - i * 0.04 }}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function TablePage() {
   const { models, skills, loading, error } = useSkillEvalData()
   const darkMode = useDarkMode()
 
   return (
-    // Subtract header height (~65px) so the table fills the remaining viewport.
-    <div className="flex h-[calc(100vh-65px)] flex-col">
+    // Subtract header (~65px) and footer (~52px) so the table fills the
+    // remaining viewport without forcing page-level vertical scroll.
+    <div className="flex h-[calc(100vh-117px)] flex-col overflow-hidden">
       <div className="border-b border-border bg-background px-6 py-4">
         <h1 className="text-2xl font-semibold tracking-tight">
           SkillEval Browser
@@ -41,9 +65,7 @@ export function TablePage() {
           Error loading data: {error}
         </div>
       ) : loading ? (
-        <div className="flex flex-1 items-center justify-center text-muted-foreground">
-          Loading SkillEval data...
-        </div>
+        <TableSkeleton />
       ) : (
         <ModelSkillTable
           models={models}

@@ -33,6 +33,19 @@ function useDarkMode(): boolean {
   return dark
 }
 
+function normalize(s: string): string {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ')
+}
+
+function descriptionDuplicatesLabel(
+  description: string,
+  label: string,
+  heading: string
+): boolean {
+  const d = normalize(description)
+  return d === normalize(label) || d === normalize(heading)
+}
+
 function BackLink({ className = '' }: { className?: string }) {
   return (
     <Link
@@ -55,6 +68,48 @@ function NotFound({ rawId }: { rawId: string | undefined }) {
       </p>
       <div className="mt-6">
         <BackLink />
+      </div>
+    </div>
+  )
+}
+
+function SkillDetailSkeleton() {
+  return (
+    <div className="mx-auto max-w-5xl px-6 py-8">
+      <div className="mb-6">
+        <div className="h-4 w-32 animate-pulse rounded bg-muted" />
+      </div>
+      {/* Heading */}
+      <div className="border-b border-border pb-6">
+        <div className="h-3 w-24 animate-pulse rounded bg-muted" />
+        <div className="mt-3 h-9 w-2/3 animate-pulse rounded bg-muted" />
+        <div className="mt-3 h-5 w-32 animate-pulse rounded bg-muted" />
+      </div>
+      {/* Stat cards */}
+      <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div
+            key={i}
+            className="h-20 flex-1 animate-pulse rounded-md bg-muted"
+          />
+        ))}
+      </div>
+      {/* Chart placeholder */}
+      <div className="mt-10">
+        <div className="h-5 w-56 animate-pulse rounded bg-muted" />
+        <div className="mt-4 h-[420px] w-full animate-pulse rounded-md bg-muted" />
+      </div>
+      {/* Example items placeholder */}
+      <div className="mt-10">
+        <div className="h-5 w-40 animate-pulse rounded bg-muted" />
+        <div className="mt-4 flex flex-col gap-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-24 w-full animate-pulse rounded-md bg-muted"
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -86,11 +141,7 @@ export function SkillDetailPage() {
   }
 
   if (loading) {
-    return (
-      <div className="mx-auto max-w-3xl px-6 py-10 text-muted-foreground">
-        Loading SkillEval data…
-      </div>
-    )
+    return <SkillDetailSkeleton />
   }
 
   if (skillId == null) {
@@ -132,7 +183,8 @@ export function SkillDetailPage() {
             <span className="text-xs text-muted-foreground">{languageNote}</span>
           ) : null}
         </div>
-        {skill.description ? (
+        {skill.description &&
+        !descriptionDuplicatesLabel(skill.description, skill.label, heading) ? (
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
             {skill.description}
           </p>
