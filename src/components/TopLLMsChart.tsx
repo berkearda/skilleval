@@ -43,7 +43,7 @@ export function TopLLMsChart({ models, skillId, darkMode }: TopLLMsChartProps) {
     const scored = models
       .map((m) => ({
         name: m.name,
-        displayName: truncate(m.name, 24),
+        displayName: truncate(m.name, 36),
         theta: m.theta?.[skillId] ?? 0,
         family: m.family,
         tier: m.tier,
@@ -92,7 +92,7 @@ export function TopLLMsChart({ models, skillId, darkMode }: TopLLMsChartProps) {
           <YAxis
             type="category"
             dataKey="displayName"
-            width={180}
+            width={260}
             stroke={axisColor}
             tick={{ fill: axisColor, fontSize: 11 }}
             interval={0}

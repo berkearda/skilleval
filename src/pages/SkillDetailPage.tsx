@@ -169,7 +169,7 @@ export function SkillDetailPage() {
         <div className="text-xs uppercase tracking-wide text-muted-foreground">
           Skill {skill.id} of 100
         </div>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+        <h1 className="mt-2 break-words text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
           {heading}
         </h1>
         {skill.label_english && skill.label !== skill.label_english ? (
