@@ -27,4 +27,7 @@ export interface Skill {
   alpha_mean: number
   theta_variance_across_LLMs: number
   example_items: ExampleItem[]
+  // Optional fields present on non-English-origin clusters (e.g. skill 67).
+  label_english?: string
+  language?: string
 }
