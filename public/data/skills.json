@@ -1,0 +1,36 @@
+{
+  "skills": [
+    {
+      "id": 0,
+      "label": "Placeholder skill A",
+      "description": "Placeholder description for skill A.",
+      "primary_benchmark": "demo_bench",
+      "n_items": 100,
+      "alpha_mean": 1.0,
+      "theta_variance_across_LLMs": 0.5,
+      "example_items": [
+        {
+          "item_idx": 0,
+          "benchmark": "demo_bench",
+          "text": "Example item text for skill A."
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "label": "Placeholder skill B",
+      "description": "Placeholder description for skill B.",
+      "primary_benchmark": "demo_bench",
+      "n_items": 80,
+      "alpha_mean": 1.2,
+      "theta_variance_across_LLMs": 0.3,
+      "example_items": [
+        {
+          "item_idx": 1,
+          "benchmark": "demo_bench",
+          "text": "Example item text for skill B."
+        }
+      ]
+    }
+  ]
+}
