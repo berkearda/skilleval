@@ -3,15 +3,18 @@
 export interface ExampleItem {
   item_idx: number
   benchmark: string
+  subtask?: string
+  primary_skill?: string
   text: string
 }
 
 export interface Model {
-  id: string
+  id: number
   name: string
+  hf_id?: string
   family: string
   tier: string
-  params: string
+  params: number | null
   theta: number[]
 }
 

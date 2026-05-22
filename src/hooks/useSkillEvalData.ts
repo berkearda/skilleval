@@ -27,10 +27,11 @@ async function loadAll(): Promise<{ models: Model[]; skills: Skill[] }> {
     ])
     if (!thetaResp.ok) throw new Error(`theta_matrix.json: ${thetaResp.status}`)
     if (!skillsResp.ok) throw new Error(`skills.json: ${skillsResp.status}`)
-    const thetaJson = (await thetaResp.json()) as { models: Model[] }
-    const skillsJson = (await skillsResp.json()) as { skills: Skill[] }
-    cachedModels = thetaJson.models
-    cachedSkills = skillsJson.skills
+    // The JSON files are stored as bare arrays at the root.
+    const thetaJson = (await thetaResp.json()) as Model[] | { models: Model[] }
+    const skillsJson = (await skillsResp.json()) as Skill[] | { skills: Skill[] }
+    cachedModels = Array.isArray(thetaJson) ? thetaJson : thetaJson.models
+    cachedSkills = Array.isArray(skillsJson) ? skillsJson : skillsJson.skills
     return { models: cachedModels, skills: cachedSkills }
   })()
 

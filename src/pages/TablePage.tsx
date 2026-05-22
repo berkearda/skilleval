@@ -1,37 +1,56 @@
+import { useEffect, useState } from 'react'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
+import { ModelSkillTable } from '@/components/ModelSkillTable'
+
+function useDarkMode(): boolean {
+  const [dark, setDark] = useState<boolean>(
+    typeof document !== 'undefined' &&
+      document.documentElement.classList.contains('dark')
+  )
+  useEffect(() => {
+    const root = document.documentElement
+    const obs = new MutationObserver(() => {
+      setDark(root.classList.contains('dark'))
+    })
+    obs.observe(root, { attributes: true, attributeFilter: ['class'] })
+    return () => obs.disconnect()
+  }, [])
+  return dark
+}
 
 export function TablePage() {
   const { models, skills, loading, error } = useSkillEvalData()
+  const darkMode = useDarkMode()
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-10">
-      <h1 className="text-3xl font-semibold tracking-tight">
-        SkillEval table view coming soon
-      </h1>
-      <p className="mt-3 text-muted-foreground">
-        Placeholder for the skill x model theta table.
-      </p>
-
-      <div className="mt-8 rounded-md border border-border p-4 text-sm">
-        {loading && <span>Loading placeholder data...</span>}
-        {error && (
-          <span className="text-destructive">
-            Error loading data: {error}
-          </span>
-        )}
-        {!loading && !error && (
-          <span className="text-muted-foreground">
-            Loaded {models.length} models and {skills.length} skills.
-          </span>
-        )}
+    // Subtract header height (~65px) so the table fills the remaining viewport.
+    <div className="flex h-[calc(100vh-65px)] flex-col">
+      <div className="border-b border-border bg-background px-6 py-4">
+        <h1 className="text-2xl font-semibold tracking-tight">
+          SkillEval Browser
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          {models.length > 0 && skills.length > 0
+            ? `${models.length.toLocaleString()} LLMs × ${skills.length} named skills`
+            : '3,811 LLMs × 100 named skills'}
+        </p>
       </div>
 
-      {/* Smoke-test for Okabe-Ito Tailwind color */}
-      <div
-        aria-hidden
-        className="mt-6 h-2 w-24 rounded-full bg-okabe-blue"
-        title="okabe-blue swatch"
-      />
+      {error ? (
+        <div className="m-6 rounded-md border border-destructive bg-destructive/10 p-4 text-sm text-destructive">
+          Error loading data: {error}
+        </div>
+      ) : loading ? (
+        <div className="flex flex-1 items-center justify-center text-muted-foreground">
+          Loading SkillEval data...
+        </div>
+      ) : (
+        <ModelSkillTable
+          models={models}
+          skills={skills}
+          darkMode={darkMode}
+        />
+      )}
     </div>
   )
 }
