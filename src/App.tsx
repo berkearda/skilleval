@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { HomePage } from '@/pages/HomePage'
 import { TablePage } from '@/pages/TablePage'
 import { SkillDetailPage } from '@/pages/SkillDetailPage'
 import { AboutPage } from '@/pages/AboutPage'
@@ -12,7 +13,8 @@ function App() {
         <Header />
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<TablePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/browse" element={<TablePage />} />
             <Route path="/skill/:id" element={<SkillDetailPage />} />
             <Route path="/about" element={<AboutPage />} />
           </Routes>
