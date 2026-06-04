@@ -28,6 +28,7 @@ type SortKey =
   | { kind: 'family' }
   | { kind: 'tier' }
   | { kind: 'params' }
+  | { kind: 'acc' }
   | { kind: 'mean' }
   | { kind: 'skill'; skillId: number }
 
@@ -45,6 +46,7 @@ const COL_W = {
   family: 96,
   tier: 72,
   params: 72,
+  acc: 80,
   mean: 80,
   skill: 72,
 } as const
@@ -59,13 +61,16 @@ const PINNED_WIDTHS = [
   COL_W.family,
   COL_W.tier,
   COL_W.params,
+  COL_W.acc,
   COL_W.mean,
 ]
 
 const PINNED_TOTAL_W = PINNED_WIDTHS.reduce((a, b) => a + b, 0)
 
 const ROW_HEIGHT = 32
-const EXPANDED_PANEL_HEIGHT = 220
+// Fixed height of the expansion panel; its skill list scrolls internally.
+// Must match the height RowExpansion renders at.
+const EXPANDED_PANEL_HEIGHT = 300
 const GROUP_HEADER_H = 28
 const SKILL_HEADER_H = 56
 const COL_HEADER_H = GROUP_HEADER_H + SKILL_HEADER_H
@@ -196,6 +201,11 @@ export function ModelSkillTable({
           const bv = b.params ?? -Infinity
           return (av - bv) * dirMul
         }
+        case 'acc': {
+          const av = a.accuracy ?? -Infinity
+          const bv = b.accuracy ?? -Infinity
+          return (av - bv) * dirMul
+        }
         case 'mean':
           return (a.meanTheta - b.meanTheta) * dirMul
         case 'skill': {
@@ -241,7 +251,7 @@ export function ModelSkillTable({
       }
       // Sensible defaults: numeric / mastery columns default to descending,
       // string columns default to ascending.
-      const numericKinds = ['mean', 'skill', 'params', 'index']
+      const numericKinds = ['mean', 'acc', 'skill', 'params', 'index']
       const dir: SortDir = numericKinds.includes(key.kind) ? 'desc' : 'asc'
       return { key, dir }
     })
@@ -346,6 +356,7 @@ export function ModelSkillTable({
                       model={m}
                       skills={orderedSkills}
                       darkMode={darkMode}
+                      height={EXPANDED_PANEL_HEIGHT}
                     />
                   ) : null}
                 </div>
@@ -421,6 +432,14 @@ function TableHeader({
           sort={sort}
           onToggle={onToggleSort}
           width={COL_W.params}
+          align="right"
+        />
+        <PinnedHeaderCell
+          label="Acc"
+          k={{ kind: 'acc' }}
+          sort={sort}
+          onToggle={onToggleSort}
+          width={COL_W.acc}
           align="right"
         />
         <PinnedHeaderCell
@@ -645,6 +664,13 @@ function TableRow({
           style={{ width: COL_W.params }}
         >
           {formatParams(model.params)}
+        </div>
+        <div
+          className="flex h-full items-center justify-end border-r border-border px-2 font-mono text-xs"
+          style={{ width: COL_W.acc }}
+          title="Fraction of all 9,523 items answered correctly"
+        >
+          {model.accuracy != null ? `${(model.accuracy * 100).toFixed(1)}%` : '—'}
         </div>
         <div
           className="flex h-full items-center justify-end border-r border-border px-2 font-mono text-xs font-semibold"

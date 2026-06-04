@@ -19,11 +19,12 @@ export function AboutPage() {
           3,811 LLMs assessed on 9,523 items drawn from five public
           benchmarks (MATH, BBH, GPQA, MuSR, IFEval). The items are clustered
           into 100 named skills, and each model is scored on every skill via
-          a neural cognitive diagnostic model. The main page is a sortable
+          a neural cognitive diagnostic model. The Browse page is a sortable
           table over the full grid: browse by family, search for a specific
-          model, or sort any column to find the specialists for a given
-          skill. Click any skill column header to open its detail page,
-          which shows the top-ranked LLMs on that skill along with example
+          model, or sort any column (including raw accuracy and mean θ) to
+          find the specialists for a given skill. Click any row to open that
+          model's full ranked skill profile, and any skill column header to
+          open the skill's detail page with its top-ranked LLMs and example
           items drawn from the underlying cluster.
         </p>
 

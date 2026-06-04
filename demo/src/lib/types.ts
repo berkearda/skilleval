@@ -16,6 +16,8 @@ export interface Model {
   tier: string
   params: number | null
   theta: number[]
+  /** Fraction of the 9,523 items answered correctly (raw benchmark accuracy). */
+  accuracy?: number
 }
 
 export interface Skill {
