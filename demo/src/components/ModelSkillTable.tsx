@@ -6,11 +6,24 @@ import {
   useState,
 } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowDown, ArrowUp, ChevronsUpDown, ExternalLink } from 'lucide-react'
+import {
+  ArrowDown,
+  ArrowUp,
+  ChevronRight,
+  ChevronsUpDown,
+  ExternalLink,
+  SearchX,
+} from 'lucide-react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import type { Model, Skill } from '@/lib/types'
 import { cn } from '@/lib/utils'
-import { getFamilyColor, getMasteryColor, getMasteryTextColor } from '@/lib/colors'
+import {
+  getBenchmarkColor,
+  getFamilyColor,
+  getMasteryColor,
+  getMasteryTextColor,
+  rgbToRgba,
+} from '@/lib/colors'
 import { RowExpansion } from '@/components/RowExpansion'
 import { ModelFilters } from '@/components/ModelFilters'
 import { SkillCell } from '@/components/SkillCell'
@@ -25,10 +38,6 @@ interface ModelSkillTableProps {
 type SortKey =
   | { kind: 'index' }
   | { kind: 'name' }
-  | { kind: 'family' }
-  | { kind: 'tier' }
-  | { kind: 'params' }
-  | { kind: 'acc' }
   | { kind: 'mean' }
   | { kind: 'skill'; skillId: number }
 
@@ -39,40 +48,31 @@ interface SortState {
   dir: SortDir
 }
 
+type Density = 'compact' | 'regular' | 'relaxed'
+
 // Column widths (px). Adjust here if visual tuning is needed.
 const COL_W = {
-  rank: 48,
-  name: 280,
-  family: 96,
-  tier: 72,
-  params: 72,
-  acc: 80,
-  mean: 80,
+  expander: 28,
+  rank: 44,
+  name: 264,
+  mean: 84,
   skill: 72,
 } as const
 
-// Right-edge inset shadow on the pinned cluster — provides a visual hint
-// that more columns exist to the right.
-const PINNED_RIGHT_SHADOW = '2px 0 0 0 hsl(var(--border)), inset -8px 0 8px -8px rgba(0,0,0,0.18)'
+const PINNED_WIDTHS = [COL_W.expander, COL_W.rank, COL_W.name, COL_W.mean]
+const PINNED_TOTAL_W = PINNED_WIDTHS.reduce((a, b) => a + b, 0) // 420
 
-const PINNED_WIDTHS = [
-  COL_W.rank,
-  COL_W.name,
-  COL_W.family,
-  COL_W.tier,
-  COL_W.params,
-  COL_W.acc,
-  COL_W.mean,
-]
+const ROW_HEIGHTS: Record<Density, number> = {
+  compact: 32,
+  regular: 40,
+  relaxed: 48,
+}
 
-const PINNED_TOTAL_W = PINNED_WIDTHS.reduce((a, b) => a + b, 0)
-
-const ROW_HEIGHT = 32
 // Fixed height of the expansion panel; its skill list scrolls internally.
 // Must match the height RowExpansion renders at.
-const EXPANDED_PANEL_HEIGHT = 300
+const EXPANDED_PANEL_HEIGHT = 340
 const GROUP_HEADER_H = 28
-const SKILL_HEADER_H = 56
+const SKILL_HEADER_H = 66
 const COL_HEADER_H = GROUP_HEADER_H + SKILL_HEADER_H
 
 interface ProcessedModel extends Model {
@@ -83,19 +83,6 @@ interface SortableSkillGroup {
   benchmark: string
   skills: Skill[]
   startIndex: number // index into ordered skill list
-}
-
-// Convert an `rgb(r, g, b)` string to `rgba(r, g, b, a)` for translucency.
-function rgbToRgba(rgb: string, alpha: number): string {
-  const m = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/.exec(rgb)
-  if (!m) return rgb
-  return `rgba(${m[1]}, ${m[2]}, ${m[3]}, ${alpha})`
-}
-
-function formatParams(p: number | null): string {
-  if (p == null) return '—'
-  if (p >= 1) return `${p.toFixed(p >= 10 ? 0 : 1)}B`
-  return `${(p * 1000).toFixed(0)}M`
 }
 
 function sortKeysEqual(a: SortKey, b: SortKey): boolean {
@@ -122,7 +109,7 @@ export function ModelSkillTable({
 
   // Group skills by primary_benchmark while preserving an ordered skill list
   // that drives the column order.
-  const { orderedSkills, groups } = useMemo(() => {
+  const { orderedSkills, groups, groupStartIds } = useMemo(() => {
     const byBench = new Map<string, Skill[]>()
     for (const s of skills) {
       const b = s.primary_benchmark
@@ -142,7 +129,13 @@ export function ModelSkillTable({
       groupArr.push({ benchmark: b, skills: list, startIndex: ordered.length })
       ordered.push(...list)
     }
-    return { orderedSkills: ordered, groups: groupArr }
+    // Skill ids that begin a benchmark group (for the 1px group dividers).
+    const startIds = new Set<number>()
+    for (const g of groupArr) {
+      const first = ordered[g.startIndex]
+      if (first) startIds.add(first.id)
+    }
+    return { orderedSkills: ordered, groups: groupArr, groupStartIds: startIds }
   }, [skills])
 
   // Filter state
@@ -167,6 +160,18 @@ export function ModelSkillTable({
   // Expanded row id (model.id)
   const [expandedId, setExpandedId] = useState<number | null>(null)
 
+  // Density (persisted)
+  const [density, setDensity] = useState<Density>(() => {
+    if (typeof window === 'undefined') return 'compact'
+    const v = window.localStorage.getItem('skilleval-density')
+    return v === 'regular' || v === 'relaxed' ? v : 'compact'
+  })
+  useEffect(() => {
+    window.localStorage.setItem('skilleval-density', density)
+  }, [density])
+  const rowHeight = ROW_HEIGHTS[density]
+  const cellFontSize = density === 'compact' ? 10 : 12
+
   // Filter models.
   const filteredModels = useMemo(() => {
     const q = debouncedSearch.trim().toLowerCase()
@@ -184,28 +189,13 @@ export function ModelSkillTable({
     const arr = filteredModels.slice()
     const dirMul = sort.dir === 'asc' ? 1 : -1
     const key = sort.key
-    const cmpStr = (a: string, b: string) =>
-      a < b ? -1 : a > b ? 1 : 0
+    const cmpStr = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0)
     arr.sort((a, b) => {
       switch (key.kind) {
         case 'index':
           return (a.id - b.id) * dirMul
         case 'name':
           return cmpStr(a.name.toLowerCase(), b.name.toLowerCase()) * dirMul
-        case 'family':
-          return cmpStr(a.family, b.family) * dirMul
-        case 'tier':
-          return cmpStr(a.tier, b.tier) * dirMul
-        case 'params': {
-          const av = a.params ?? -Infinity
-          const bv = b.params ?? -Infinity
-          return (av - bv) * dirMul
-        }
-        case 'acc': {
-          const av = a.accuracy ?? -Infinity
-          const bv = b.accuracy ?? -Infinity
-          return (av - bv) * dirMul
-        }
         case 'mean':
           return (a.meanTheta - b.meanTheta) * dirMul
         case 'skill': {
@@ -243,15 +233,19 @@ export function ModelSkillTable({
       return next
     })
   }, [])
+  const clearAll = useCallback(() => {
+    setSearch('')
+    setSelectedFamilies(new Set())
+    setSelectedTiers(new Set())
+  }, [])
 
   const toggleSort = useCallback((key: SortKey) => {
     setSort((prev) => {
       if (sortKeysEqual(prev.key, key)) {
         return { key, dir: prev.dir === 'asc' ? 'desc' : 'asc' }
       }
-      // Sensible defaults: numeric / mastery columns default to descending,
-      // string columns default to ascending.
-      const numericKinds = ['mean', 'acc', 'skill', 'params', 'index']
+      // Numeric / mastery columns default to descending; name defaults asc.
+      const numericKinds = ['mean', 'skill', 'index']
       const dir: SortDir = numericKinds.includes(key.kind) ? 'desc' : 'asc'
       return { key, dir }
     })
@@ -264,7 +258,7 @@ export function ModelSkillTable({
     getScrollElement: () => scrollRef.current,
     estimateSize: (i) => {
       const id = sortedModels[i]?.id
-      return id === expandedId ? ROW_HEIGHT + EXPANDED_PANEL_HEIGHT : ROW_HEIGHT
+      return id === expandedId ? rowHeight + EXPANDED_PANEL_HEIGHT : rowHeight
     },
     overscan: 12,
     measureElement:
@@ -280,31 +274,95 @@ export function ModelSkillTable({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [expandedId])
 
-  const virtualItems = rowVirtualizer.getVirtualItems()
-  const totalHeight = rowVirtualizer.getTotalSize()
+  // Re-measure when density changes (estimateSize depends on rowHeight).
+  useEffect(() => {
+    rowVirtualizer.measure()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [density])
 
   // Pre-compute the full grid width.
   const skillColsWidth = orderedSkills.length * COL_W.skill
   const gridTotalW = PINNED_TOTAL_W + skillColsWidth
 
+  // Horizontal-scroll affordance state.
+  const [scrollLeft, setScrollLeft] = useState(0)
+  const [maxScrollLeft, setMaxScrollLeft] = useState(0)
+  const onScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const el = e.currentTarget
+    setScrollLeft(el.scrollLeft)
+    setMaxScrollLeft(el.scrollWidth - el.clientWidth)
+  }, [])
+  // Measure scroll extent on mount and when the grid width changes so the
+  // right-edge fade shows on first paint (the grid is wider than the viewport).
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    setScrollLeft(el.scrollLeft)
+    setMaxScrollLeft(el.scrollWidth - el.clientWidth)
+  }, [gridTotalW, sortedModels.length])
+  const showLeftShadow = scrollLeft > 1
+  const showRightShadow = scrollLeft < maxScrollLeft - 1
+  const pinnedShadow = showLeftShadow
+    ? '2px 0 0 0 hsl(var(--border)), 8px 0 8px -6px rgba(0,0,0,0.18)'
+    : '1px 0 0 0 hsl(var(--border))'
+
+  const jumpToGroup = useCallback((startIndex: number) => {
+    scrollRef.current?.scrollTo({
+      left: PINNED_TOTAL_W + startIndex * COL_W.skill,
+      behavior: 'smooth',
+    })
+  }, [])
+
+  const virtualItems = rowVirtualizer.getVirtualItems()
+  const totalHeight = rowVirtualizer.getTotalSize()
+
+  const isEmpty = sortedModels.length === 0
+
   return (
     <div className="flex h-full min-h-0 min-w-0 flex-col">
-      <ModelFilters
-        search={search}
-        onSearchChange={setSearch}
-        selectedFamilies={selectedFamilies}
-        onToggleFamily={toggleFamily}
-        selectedTiers={selectedTiers}
-        onToggleTier={toggleTier}
-        visibleCount={sortedModels.length}
-        totalCount={processedModels.length}
-      />
+      <div className="border-b border-border">
+        <ModelFilters
+          search={search}
+          onSearchChange={setSearch}
+          selectedFamilies={selectedFamilies}
+          onToggleFamily={toggleFamily}
+          selectedTiers={selectedTiers}
+          onToggleTier={toggleTier}
+          visibleCount={sortedModels.length}
+          totalCount={processedModels.length}
+          density={density}
+          onDensityChange={setDensity}
+          onClearAll={clearAll}
+        />
+      </div>
 
+      {/* Benchmark jump bar */}
+      <div className="flex flex-wrap items-center gap-2 border-b border-border bg-background px-6 py-1.5">
+        <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          Jump to
+        </span>
+        {groups.map((g) => (
+          <button
+            key={g.benchmark}
+            type="button"
+            onClick={() => jumpToGroup(g.startIndex)}
+            className="inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-xs text-muted-foreground transition-colors hover:bg-surface-elevated hover:text-foreground"
+          >
+            <span
+              className="h-2 w-2 rounded-full"
+              style={{ backgroundColor: getBenchmarkColor(g.benchmark) }}
+            />
+            {g.benchmark}
+          </button>
+        ))}
+      </div>
+
+      <div className="relative flex-1 border-t border-border">
       <div
         ref={scrollRef}
-        className="relative flex-1 overflow-auto border-t border-border bg-background"
+        onScroll={onScroll}
+        className="h-full overflow-auto bg-background"
       >
-        {/* Sticky header (positioned at top via sticky positioning on inner elements) */}
         <div
           style={{
             width: gridTotalW,
@@ -316,54 +374,91 @@ export function ModelSkillTable({
             sort={sort}
             onToggleSort={toggleSort}
             pinnedTotalW={PINNED_TOTAL_W}
+            pinnedShadow={pinnedShadow}
+            groupStartIds={groupStartIds}
           />
 
           {/* Body */}
-          <div
-            style={{
-              height: totalHeight,
-              position: 'relative',
-              width: '100%',
-            }}
-          >
-            {virtualItems.map((vi) => {
-              const m = sortedModels[vi.index]
-              const isExpanded = m.id === expandedId
-              return (
-                <div
-                  key={m.id}
-                  data-index={vi.index}
-                  ref={rowVirtualizer.measureElement}
-                  style={{
-                    position: 'absolute',
-                    top: vi.start,
-                    left: 0,
-                    width: gridTotalW,
-                  }}
-                >
-                  <TableRow
-                    model={m}
-                    displayRank={vi.index + 1}
-                    skills={orderedSkills}
-                    darkMode={darkMode}
-                    expanded={isExpanded}
-                    onToggleExpand={() =>
-                      setExpandedId((cur) => (cur === m.id ? null : m.id))
-                    }
-                  />
-                  {isExpanded ? (
-                    <RowExpansion
+          {isEmpty ? (
+            <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
+              <SearchX className="h-8 w-8 text-muted-foreground" />
+              <p className="text-sm text-muted-foreground">
+                No models match these filters.
+              </p>
+              <button
+                type="button"
+                onClick={clearAll}
+                className="rounded-md border border-border px-3 py-1.5 text-sm text-foreground hover:bg-surface-elevated"
+              >
+                Clear filters
+              </button>
+            </div>
+          ) : (
+            <div
+              style={{
+                height: totalHeight,
+                position: 'relative',
+                width: '100%',
+              }}
+            >
+              {virtualItems.map((vi) => {
+                const m = sortedModels[vi.index]
+                const isExpanded = m.id === expandedId
+                return (
+                  <div
+                    key={m.id}
+                    data-index={vi.index}
+                    ref={rowVirtualizer.measureElement}
+                    style={{
+                      position: 'absolute',
+                      top: vi.start,
+                      left: 0,
+                      width: gridTotalW,
+                    }}
+                  >
+                    <TableRow
                       model={m}
+                      displayRank={vi.index + 1}
                       skills={orderedSkills}
                       darkMode={darkMode}
-                      height={EXPANDED_PANEL_HEIGHT}
+                      expanded={isExpanded}
+                      rowHeight={rowHeight}
+                      cellFontSize={cellFontSize}
+                      pinnedShadow={pinnedShadow}
+                      sort={sort}
+                      groupStartIds={groupStartIds}
+                      onToggleExpand={() =>
+                        setExpandedId((cur) => (cur === m.id ? null : m.id))
+                      }
                     />
-                  ) : null}
-                </div>
-              )
-            })}
-          </div>
+                    {isExpanded ? (
+                      <RowExpansion
+                        model={m}
+                        skills={orderedSkills}
+                        darkMode={darkMode}
+                        height={EXPANDED_PANEL_HEIGHT}
+                      />
+                    ) : null}
+                  </div>
+                )
+              })}
+            </div>
+          )}
         </div>
+      </div>
+
+        {/* Right-edge fade overlay: anchored to the viewport edge of the
+            scroll area, indicating more grid columns off-screen. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 transition-opacity duration-150"
+          style={{
+            width: 24,
+            opacity: showRightShadow ? 1 : 0,
+            background:
+              'linear-gradient(to left, hsl(var(--background)), transparent)',
+          }}
+        />
       </div>
     </div>
   )
@@ -376,6 +471,8 @@ interface TableHeaderProps {
   sort: SortState
   onToggleSort: (k: SortKey) => void
   pinnedTotalW: number
+  pinnedShadow: string
+  groupStartIds: Set<number>
 }
 
 function TableHeader({
@@ -383,6 +480,8 @@ function TableHeader({
   sort,
   onToggleSort,
   pinnedTotalW,
+  pinnedShadow,
+  groupStartIds,
 }: TableHeaderProps) {
   return (
     <div
@@ -394,9 +493,14 @@ function TableHeader({
         className="sticky left-0 z-30 flex bg-background"
         style={{
           width: pinnedTotalW,
-          boxShadow: PINNED_RIGHT_SHADOW,
+          boxShadow: pinnedShadow,
         }}
       >
+        {/* Expander spacer */}
+        <div
+          className="border-b border-border"
+          style={{ width: COL_W.expander, height: COL_HEADER_H }}
+        />
         <PinnedHeaderCell
           label="#"
           k={{ kind: 'index' }}
@@ -411,36 +515,6 @@ function TableHeader({
           sort={sort}
           onToggle={onToggleSort}
           width={COL_W.name}
-        />
-        <PinnedHeaderCell
-          label="Family"
-          k={{ kind: 'family' }}
-          sort={sort}
-          onToggle={onToggleSort}
-          width={COL_W.family}
-        />
-        <PinnedHeaderCell
-          label="Tier"
-          k={{ kind: 'tier' }}
-          sort={sort}
-          onToggle={onToggleSort}
-          width={COL_W.tier}
-        />
-        <PinnedHeaderCell
-          label="Params"
-          k={{ kind: 'params' }}
-          sort={sort}
-          onToggle={onToggleSort}
-          width={COL_W.params}
-          align="right"
-        />
-        <PinnedHeaderCell
-          label="Acc"
-          k={{ kind: 'acc' }}
-          sort={sort}
-          onToggle={onToggleSort}
-          width={COL_W.acc}
-          align="right"
         />
         <PinnedHeaderCell
           label="Mean θ"
@@ -460,27 +534,30 @@ function TableHeader({
             <div
               key={g.benchmark}
               style={{ width: g.skills.length * COL_W.skill }}
-              title={`${g.benchmark} — ${g.skills.length} skills`}
+              title={`${g.benchmark} (${g.skills.length} skills)`}
             >
-              <BenchmarkBadge
-                benchmark={g.benchmark}
-                count={g.skills.length}
-              />
+              <BenchmarkBadge benchmark={g.benchmark} count={g.skills.length} />
             </div>
           ))}
         </div>
         {/* Bottom: individual skill columns */}
         <div className="flex" style={{ height: SKILL_HEADER_H }}>
           {groups.map((g) =>
-            g.skills.map((s) => (
-              <SkillHeaderCell
-                key={s.id}
-                skill={s}
-                sort={sort}
-                onToggle={onToggleSort}
-                width={COL_W.skill}
-              />
-            ))
+            g.skills.map((s) => {
+              const isSorted =
+                sort.key.kind === 'skill' && sort.key.skillId === s.id
+              return (
+                <SkillHeaderCell
+                  key={s.id}
+                  skill={s}
+                  sort={sort}
+                  onToggle={onToggleSort}
+                  width={COL_W.skill}
+                  isSorted={isSorted}
+                  isGroupStart={groupStartIds.has(s.id)}
+                />
+              )
+            })
           )}
         </div>
       </div>
@@ -517,8 +594,17 @@ function PinnedHeaderCell({
       )}
       style={{ width, height: COL_HEADER_H }}
     >
-      <span>{label}</span>
-      <SortIndicator active={active} dir={active ? sort.dir : undefined} />
+      {align === 'right' ? (
+        <>
+          <SortIndicator active={active} dir={active ? sort.dir : undefined} />
+          <span>{label}</span>
+        </>
+      ) : (
+        <>
+          <span>{label}</span>
+          <SortIndicator active={active} dir={active ? sort.dir : undefined} />
+        </>
+      )}
     </button>
   )
 }
@@ -528,6 +614,8 @@ interface SkillHeaderCellProps {
   sort: SortState
   onToggle: (k: SortKey) => void
   width: number
+  isSorted: boolean
+  isGroupStart: boolean
 }
 
 function SkillHeaderCell({
@@ -535,23 +623,32 @@ function SkillHeaderCell({
   sort,
   onToggle,
   width,
+  isSorted,
+  isGroupStart,
 }: SkillHeaderCellProps) {
   const k: SortKey = { kind: 'skill', skillId: skill.id }
   const active = sortKeysEqual(sort.key, k)
   return (
     <div
-      className="relative flex flex-col items-center justify-end border-r border-b border-border px-1 pb-1 pt-1 hover:bg-accent"
-      style={{ width, height: SKILL_HEADER_H }}
+      className={cn(
+        'relative flex flex-col items-center justify-end border-b border-border px-1 pb-1 pt-1 hover:bg-accent',
+        isSorted && 'bg-brand/10'
+      )}
+      style={{
+        width,
+        height: SKILL_HEADER_H,
+        borderLeft: isGroupStart ? '1px solid hsl(var(--border))' : undefined,
+      }}
       title={skill.label}
     >
       <button
         type="button"
         onClick={() => onToggle(k)}
-        className="flex w-full flex-1 flex-col items-center justify-end gap-0.5 truncate text-[10px] font-medium leading-tight text-foreground"
+        className="flex w-full flex-1 flex-col items-center justify-end gap-0.5 overflow-hidden text-[10px] font-medium leading-tight text-foreground"
       >
         <span
           className="line-clamp-3 w-full px-0.5 text-center"
-          style={{ wordBreak: 'break-word' }}
+          style={{ wordBreak: 'break-word', whiteSpace: 'normal' }}
         >
           {skill.label}
         </span>
@@ -570,13 +667,7 @@ function SkillHeaderCell({
   )
 }
 
-function SortIndicator({
-  active,
-  dir,
-}: {
-  active: boolean
-  dir?: SortDir
-}) {
+function SortIndicator({ active, dir }: { active: boolean; dir?: SortDir }) {
   if (!active) {
     return (
       <ChevronsUpDown className="h-3 w-3 text-muted-foreground opacity-60" />
@@ -597,6 +688,11 @@ interface TableRowProps {
   skills: Skill[]
   darkMode: boolean
   expanded: boolean
+  rowHeight: number
+  cellFontSize: number
+  pinnedShadow: string
+  sort: SortState
+  groupStartIds: Set<number>
   onToggleExpand: () => void
 }
 
@@ -606,77 +702,76 @@ function TableRow({
   skills,
   darkMode,
   expanded,
+  rowHeight,
+  cellFontSize,
+  pinnedShadow,
+  sort,
+  groupStartIds,
   onToggleExpand,
 }: TableRowProps) {
   const familyColor = getFamilyColor(model.family)
+  const sortedSkillId =
+    sort.key.kind === 'skill' ? sort.key.skillId : null
   return (
     <div
       onClick={onToggleExpand}
       className={cn(
-        'group relative flex w-full cursor-pointer border-b border-border transition-colors hover:bg-accent/50',
-        expanded && 'bg-accent/40'
+        'group relative flex w-full cursor-pointer border-b border-border transition-colors hover:bg-surface-elevated/60',
+        expanded && 'bg-surface-elevated'
       )}
-      style={{ height: ROW_HEIGHT }}
+      style={{
+        height: rowHeight,
+        boxShadow: expanded ? 'inset 2px 0 0 0 hsl(var(--brand))' : undefined,
+      }}
     >
       {/* Pinned cluster */}
       <div
         className={cn(
-          'sticky left-0 z-10 flex bg-background group-hover:bg-accent/50',
-          expanded && 'bg-accent/40'
+          'sticky left-0 z-10 flex bg-background group-hover:bg-surface-elevated',
+          expanded && 'bg-surface-elevated'
         )}
         style={{
           width: PINNED_TOTAL_W,
-          boxShadow: PINNED_RIGHT_SHADOW,
+          boxShadow: pinnedShadow,
         }}
       >
+        {/* Expander */}
         <div
-          className="flex h-full items-center justify-center border-r border-border text-xs text-muted-foreground"
+          className="flex h-full items-center justify-center text-muted-foreground"
+          style={{ width: COL_W.expander }}
+        >
+          <ChevronRight
+            className={cn(
+              'h-3.5 w-3.5 transition-transform duration-150',
+              expanded && 'rotate-90'
+            )}
+          />
+        </div>
+        {/* Rank */}
+        <div
+          className="tabular flex h-full items-center justify-center border-r border-border text-xs text-muted-foreground"
           style={{ width: COL_W.rank }}
         >
           {displayRank}
         </div>
+        {/* Model name + family dot */}
         <div
-          className="flex h-full items-center border-r border-border px-2 text-sm"
+          className="flex h-full items-center gap-2 border-r border-border px-3 text-sm"
           style={{ width: COL_W.name }}
           title={model.name}
         >
+          <span
+            className="h-2 w-2 shrink-0 rounded-full"
+            style={{ backgroundColor: familyColor }}
+            aria-hidden
+          />
           <span className="truncate">{model.name}</span>
         </div>
+        {/* Mean theta */}
         <div
-          className="flex h-full items-center border-r border-border px-2"
-          style={{ width: COL_W.family }}
-        >
-          <span
-            className="inline-flex h-5 items-center rounded-full px-2 text-[10px] font-semibold text-white"
-            style={{ backgroundColor: familyColor }}
-          >
-            {model.family}
-          </span>
-        </div>
-        <div
-          className="flex h-full items-center border-r border-border px-2 text-xs text-muted-foreground"
-          style={{ width: COL_W.tier }}
-        >
-          {model.tier}
-        </div>
-        <div
-          className="flex h-full items-center justify-end border-r border-border px-2 font-mono text-xs"
-          style={{ width: COL_W.params }}
-        >
-          {formatParams(model.params)}
-        </div>
-        <div
-          className="flex h-full items-center justify-end border-r border-border px-2 font-mono text-xs"
-          style={{ width: COL_W.acc }}
-          title="Fraction of all 9,523 items answered correctly"
-        >
-          {model.accuracy != null ? `${(model.accuracy * 100).toFixed(1)}%` : '—'}
-        </div>
-        <div
-          className="flex h-full items-center justify-end border-r border-border px-2 font-mono text-xs font-semibold"
+          className="tabular flex h-full items-center justify-end border-r border-border px-2 font-mono text-xs font-semibold"
           style={{
             width: COL_W.mean,
-            // Subtle gradient — about 70% intensity of the per-skill cells.
             backgroundColor: rgbToRgba(
               getMasteryColor(model.meanTheta, darkMode),
               0.7
@@ -691,14 +786,28 @@ function TableRow({
       {/* Skill cells */}
       <div className="flex h-full">
         {skills.map((s) => {
-          const v = model.theta[s.id] ?? 0
+          const v = model.theta[s.id] ?? null
+          const isSorted = sortedSkillId === s.id
           return (
             <div
               key={s.id}
-              className="h-full border-r border-border"
-              style={{ width: COL_W.skill }}
+              className="h-full"
+              style={{
+                width: COL_W.skill,
+                borderLeft: groupStartIds.has(s.id)
+                  ? '1px solid hsl(var(--border))'
+                  : undefined,
+                boxShadow: isSorted
+                  ? 'inset 0 0 0 1px hsl(var(--brand) / 0.25)'
+                  : undefined,
+              }}
             >
-              <SkillCell theta={v} darkMode={darkMode} skillLabel={s.label} />
+              <SkillCell
+                theta={v}
+                darkMode={darkMode}
+                skillLabel={s.label}
+                fontSize={cellFontSize}
+              />
             </div>
           )
         })}

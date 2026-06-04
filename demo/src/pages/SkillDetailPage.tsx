@@ -166,7 +166,7 @@ export function SkillDetailPage() {
 
       {/* Header */}
       <header className="border-b border-border pb-6">
-        <div className="text-xs uppercase tracking-wide text-muted-foreground">
+        <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
           Skill {skill.id} of 100
         </div>
         <h1 className="mt-2 break-words text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
@@ -185,7 +185,7 @@ export function SkillDetailPage() {
         </div>
         {skill.description &&
         !descriptionDuplicatesLabel(skill.description, skill.label, heading) ? (
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-4 max-w-[68ch] text-sm leading-relaxed text-muted-foreground">
             {skill.description}
           </p>
         ) : null}
@@ -208,7 +208,11 @@ export function SkillDetailPage() {
         <p className="mt-1 text-sm text-muted-foreground">
           Ranked by per-skill mastery θ; full range [0, 1].
         </p>
-        <div className="mt-4 rounded-md border border-border bg-card p-3">
+        <p className="mt-1 max-w-[68ch] text-sm text-muted-foreground">
+          Differences smaller than the estimation noise are not meaningful; read
+          the ranking as a profile, not a precise order.
+        </p>
+        <div className="mt-4 rounded-md border border-border bg-surface p-3">
           <TopLLMsChart
             models={models}
             skillId={skillId}

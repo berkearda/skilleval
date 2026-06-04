@@ -1,7 +1,10 @@
 export function AboutPage() {
   return (
-    <article className="mx-auto max-w-[70ch] px-6 py-12 leading-7 text-foreground">
-      <h1 className="text-3xl font-semibold tracking-tight">About SkillEval</h1>
+    <article className="mx-auto max-w-[68ch] px-6 py-12 leading-7 text-foreground">
+      <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+        Methodology
+      </div>
+      <h1 className="mt-2 text-3xl font-semibold tracking-tight">About SkillEval</h1>
 
       <section className="mt-6 space-y-4 text-[15px] text-foreground/90">
         <p>
@@ -35,6 +38,35 @@ export function AboutPage() {
           of the K=100 skill taxonomy together with the trained NCDM
           parameters after the paper is public. The numbers shown here are
           a snapshot for inspection, not a leaderboard ranking.
+        </p>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold tracking-tight">
+          How the composite is formed
+        </h2>
+        <p className="mt-3 text-[15px] leading-7 text-foreground/90">
+          The headline number on each model is the mean of its mastery
+          estimates over all 100 skills. Mean θ weights every skill equally and
+          does not depend on which other models are in the table, so adding or
+          removing models never reorders the ones that remain. It is a summary,
+          and like any single number over 100 dimensions it hides structure:
+          two models with the same mean θ can have very different strengths. The
+          per-skill grid and the per-model profile exist so that structure stays
+          visible. Treat mean θ as an entry point, not a verdict.
+        </p>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold tracking-tight">
+          Reading the ranks
+        </h2>
+        <p className="mt-3 text-[15px] leading-7 text-foreground/90">
+          The mastery scores are latent estimates with sampling noise, not exact
+          measurements. Small gaps between adjacent ranks fall inside that noise
+          and should not be read as real differences in ability. Use the ranking
+          to find candidates and the skill profile to compare them, rather than
+          treating one position as strictly better than the next.
         </p>
       </section>
     </article>

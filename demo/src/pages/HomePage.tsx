@@ -1,8 +1,13 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Grid3X3, ListOrdered, User } from 'lucide-react'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
-import { getFamilyColor } from '@/lib/colors'
+import {
+  getFamilyColor,
+  getMasteryColor,
+  getMasteryTextColor,
+  rgbToRgba,
+} from '@/lib/colors'
 
 interface RankedModel {
   id: number
@@ -19,8 +24,25 @@ function formatParams(p: number | null): string {
   return `${(p * 1000).toFixed(0)}M`
 }
 
+function useDarkMode(): boolean {
+  const [dark, setDark] = useState<boolean>(
+    typeof document !== 'undefined' &&
+      document.documentElement.classList.contains('dark')
+  )
+  useEffect(() => {
+    const root = document.documentElement
+    const obs = new MutationObserver(() => {
+      setDark(root.classList.contains('dark'))
+    })
+    obs.observe(root, { attributes: true, attributeFilter: ['class'] })
+    return () => obs.disconnect()
+  }, [])
+  return dark
+}
+
 export function HomePage() {
   const { models, skills, loading } = useSkillEvalData()
+  const darkMode = useDarkMode()
 
   const top10 = useMemo<RankedModel[]>(() => {
     return models
@@ -46,12 +68,21 @@ export function HomePage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-12">
       {/* Hero */}
-      <section className="max-w-[62ch]">
-        <h1 className="text-4xl font-semibold tracking-tight">
+      <section className="max-w-[68ch]">
+        <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          Overview
+        </div>
+        <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">
           SkillEval
         </h1>
-        <p className="mt-3 text-lg text-muted-foreground">
-          Skill-aware evaluation of large language models.
+        <p className="mt-4 text-[15px] leading-7 text-foreground/90">
+          Skill-level ability estimates for {nModels.toLocaleString()} language
+          models across {nSkills} cognitive skills, from a cognitive-diagnostic
+          item-response model.
+        </p>
+        <p className="mt-2 text-sm text-muted-foreground tabular">
+          Snapshot last updated 2026-05-22. {nModels.toLocaleString()} models,{' '}
+          {nSkills} skills, 9,523 items, 5 public benchmarks.
         </p>
         <p className="mt-4 text-[15px] leading-7 text-foreground/90">
           A single benchmark accuracy hides what a model is actually good at.
@@ -80,15 +111,105 @@ export function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <section className="mt-16 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard value={nModels.toLocaleString()} label="LLMs profiled" />
         <StatCard value={String(nSkills)} label="named skills" />
         <StatCard value="9,523" label="benchmark items" />
         <StatCard value="5" label="benchmarks (MATH, BBH, GPQA, MuSR, IFEval)" />
       </section>
 
+      {/* Top-10 preview */}
+      <section className="mt-16">
+        <div className="flex items-baseline justify-between">
+          <h2 className="text-xl font-semibold tracking-tight">
+            Top 10 by mean mastery
+          </h2>
+          <Link
+            to="/browse"
+            className="text-sm text-muted-foreground hover:text-foreground"
+          >
+            full table →
+          </Link>
+        </div>
+        <div className="mt-3 overflow-hidden rounded-lg border border-border">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border bg-surface text-left text-xs uppercase tracking-wide text-muted-foreground">
+                <th className="px-3 py-2 font-semibold">#</th>
+                <th className="px-3 py-2 font-semibold">Model</th>
+                <th className="px-3 py-2 font-semibold">Family</th>
+                <th className="px-3 py-2 text-right font-semibold">Params</th>
+                <th className="px-3 py-2 text-right font-semibold">Acc</th>
+                <th className="px-3 py-2 text-right font-semibold">Mean θ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading
+                ? Array.from({ length: 10 }).map((_, i) => (
+                    <tr key={i} className="border-b border-border last:border-0">
+                      <td colSpan={6} className="px-3 py-2">
+                        <div className="h-4 w-full animate-pulse rounded bg-muted" />
+                      </td>
+                    </tr>
+                  ))
+                : top10.map((m, i) => (
+                    <tr
+                      key={m.id}
+                      className="border-b border-border last:border-0 hover:bg-surface-elevated/60"
+                    >
+                      <td className="tabular px-3 py-2 text-muted-foreground">
+                        {i + 1}
+                      </td>
+                      <td
+                        className="max-w-[280px] truncate px-3 py-2"
+                        title={m.name}
+                      >
+                        {m.name}
+                      </td>
+                      <td className="px-3 py-2">
+                        <span
+                          className="inline-flex h-5 items-center rounded-full px-2 text-[10px] font-semibold text-white"
+                          style={{ backgroundColor: getFamilyColor(m.family) }}
+                        >
+                          {m.family}
+                        </span>
+                      </td>
+                      <td className="tabular px-3 py-2 text-right font-mono text-xs">
+                        {formatParams(m.params)}
+                      </td>
+                      <td className="tabular px-3 py-2 text-right font-mono text-xs">
+                        {m.accuracy != null
+                          ? `${(m.accuracy * 100).toFixed(1)}%`
+                          : '—'}
+                      </td>
+                      <td className="px-3 py-2 text-right">
+                        <span
+                          className="tabular inline-flex min-w-[3.5rem] justify-end rounded px-1.5 py-0.5 font-mono text-xs font-semibold"
+                          style={{
+                            backgroundColor: rgbToRgba(
+                              getMasteryColor(m.meanTheta, darkMode),
+                              0.7
+                            ),
+                            color: getMasteryTextColor(m.meanTheta, darkMode),
+                          }}
+                        >
+                          {m.meanTheta.toFixed(3)}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Mean θ averages the model's mastery over all {nSkills} skills; Acc is
+          the fraction of all 9,523 items answered correctly. A snapshot for
+          inspection, not a leaderboard ranking.
+        </p>
+      </section>
+
       {/* What you can do */}
-      <section className="mt-10 grid gap-4 md:grid-cols-3">
+      <section className="mt-16 grid gap-4 md:grid-cols-3">
         <FeatureCard
           icon={<Grid3X3 className="h-5 w-5" />}
           title="Browse the grid"
@@ -111,89 +232,17 @@ export function HomePage() {
           cta="See an example"
         />
       </section>
-
-      {/* Top-10 preview */}
-      <section className="mt-12">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-xl font-semibold tracking-tight">
-            Top 10 by mean mastery
-          </h2>
-          <Link
-            to="/browse"
-            className="text-sm text-muted-foreground hover:text-foreground"
-          >
-            full table →
-          </Link>
-        </div>
-        <div className="mt-3 overflow-hidden rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
-                <th className="px-3 py-2 font-semibold">#</th>
-                <th className="px-3 py-2 font-semibold">Model</th>
-                <th className="px-3 py-2 font-semibold">Family</th>
-                <th className="px-3 py-2 text-right font-semibold">Params</th>
-                <th className="px-3 py-2 text-right font-semibold">Acc</th>
-                <th className="px-3 py-2 text-right font-semibold">Mean θ</th>
-              </tr>
-            </thead>
-            <tbody>
-              {loading
-                ? Array.from({ length: 10 }).map((_, i) => (
-                    <tr key={i} className="border-b border-border last:border-0">
-                      <td colSpan={6} className="px-3 py-2">
-                        <div className="h-4 w-full animate-pulse rounded bg-muted" />
-                      </td>
-                    </tr>
-                  ))
-                : top10.map((m, i) => (
-                    <tr
-                      key={m.id}
-                      className="border-b border-border last:border-0 hover:bg-accent/40"
-                    >
-                      <td className="px-3 py-2 text-muted-foreground">{i + 1}</td>
-                      <td className="max-w-[280px] truncate px-3 py-2" title={m.name}>
-                        {m.name}
-                      </td>
-                      <td className="px-3 py-2">
-                        <span
-                          className="inline-flex h-5 items-center rounded-full px-2 text-[10px] font-semibold text-white"
-                          style={{ backgroundColor: getFamilyColor(m.family) }}
-                        >
-                          {m.family}
-                        </span>
-                      </td>
-                      <td className="px-3 py-2 text-right font-mono text-xs">
-                        {formatParams(m.params)}
-                      </td>
-                      <td className="px-3 py-2 text-right font-mono text-xs">
-                        {m.accuracy != null
-                          ? `${(m.accuracy * 100).toFixed(1)}%`
-                          : '—'}
-                      </td>
-                      <td className="px-3 py-2 text-right font-mono text-xs font-semibold">
-                        {m.meanTheta.toFixed(3)}
-                      </td>
-                    </tr>
-                  ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="mt-2 text-xs text-muted-foreground">
-          Mean θ averages the model's mastery over all {nSkills} skills; Acc is
-          the fraction of all 9,523 items answered correctly. A snapshot for
-          inspection, not a leaderboard ranking.
-        </p>
-      </section>
     </div>
   )
 }
 
 function StatCard({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-lg border border-border bg-background p-4">
-      <div className="text-2xl font-semibold tracking-tight">{value}</div>
-      <div className="mt-1 text-xs text-muted-foreground">{label}</div>
+    <div className="rounded-lg border border-border bg-surface p-4">
+      <div className="text-3xl font-semibold tabular leading-none">{value}</div>
+      <div className="mt-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+        {label}
+      </div>
     </div>
   )
 }
@@ -212,17 +261,17 @@ function FeatureCard({
   cta: string
 }) {
   return (
-    <div className="flex flex-col rounded-lg border border-border bg-background p-5">
+    <div className="flex flex-col rounded-lg border border-border bg-surface p-5">
       <div className="flex items-center gap-2 text-foreground">
         {icon}
-        <h3 className="font-semibold">{title}</h3>
+        <h3 className="text-base font-semibold">{title}</h3>
       </div>
       <p className="mt-2 flex-1 text-sm leading-6 text-muted-foreground">
         {body}
       </p>
       <Link
         to={to}
-        className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-foreground hover:underline"
+        className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-brand"
       >
         {cta}
         <ArrowRight className="h-3.5 w-3.5" />
