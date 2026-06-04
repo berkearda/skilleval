@@ -284,24 +284,42 @@ export function ModelSkillTable({
   const skillColsWidth = orderedSkills.length * COL_W.skill
   const gridTotalW = PINNED_TOTAL_W + skillColsWidth
 
-  // Horizontal-scroll affordance state.
-  const [scrollLeft, setScrollLeft] = useState(0)
-  const [maxScrollLeft, setMaxScrollLeft] = useState(0)
-  const onScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
-    const el = e.currentTarget
-    setScrollLeft(el.scrollLeft)
-    setMaxScrollLeft(el.scrollWidth - el.clientWidth)
+  // Horizontal-scroll affordance state. Scroll events fire continuously
+  // (vertical scrolling included), so store only the two booleans the UI
+  // needs and update state only when one actually flips; otherwise every
+  // scroll tick re-renders the whole virtualized grid and scrolling lags.
+  const [edges, setEdges] = useState({ left: false, right: false })
+  const syncEdges = useCallback((el: HTMLDivElement) => {
+    const left = el.scrollLeft > 1
+    const right = el.scrollLeft < el.scrollWidth - el.clientWidth - 1
+    setEdges((prev) =>
+      prev.left === left && prev.right === right ? prev : { left, right }
+    )
   }, [])
+  const onScroll = useCallback(
+    (e: React.UIEvent<HTMLDivElement>) => syncEdges(e.currentTarget),
+    [syncEdges]
+  )
+  // Visible scroller width; used to pin the expansion panel on screen.
+  const [viewportW, setViewportW] = useState(0)
   // Measure scroll extent on mount and when the grid width changes so the
   // right-edge fade shows on first paint (the grid is wider than the viewport).
   useEffect(() => {
     const el = scrollRef.current
     if (!el) return
-    setScrollLeft(el.scrollLeft)
-    setMaxScrollLeft(el.scrollWidth - el.clientWidth)
-  }, [gridTotalW, sortedModels.length])
-  const showLeftShadow = scrollLeft > 1
-  const showRightShadow = scrollLeft < maxScrollLeft - 1
+    syncEdges(el)
+    setViewportW(el.clientWidth)
+    const onResize = () => {
+      if (scrollRef.current) {
+        syncEdges(scrollRef.current)
+        setViewportW(scrollRef.current.clientWidth)
+      }
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [gridTotalW, sortedModels.length, syncEdges])
+  const showLeftShadow = edges.left
+  const showRightShadow = edges.right
   const pinnedShadow = showLeftShadow
     ? '2px 0 0 0 hsl(var(--border)), 8px 0 8px -6px rgba(0,0,0,0.18)'
     : '1px 0 0 0 hsl(var(--border))'
@@ -358,10 +376,14 @@ export function ModelSkillTable({
       </div>
 
       <div className="relative flex-1 border-t border-border">
+      {/* contain:strict isolates the scroller's layout/paint from the page;
+          without it Chrome repaints the full grid every scroll frame and
+          scrolling visibly lags. Size comes from the wrapper, so size
+          containment is safe here. */}
       <div
         ref={scrollRef}
         onScroll={onScroll}
-        className="h-full overflow-auto bg-background"
+        className="h-full overflow-auto bg-background [contain:strict]"
       >
         <div
           style={{
@@ -432,12 +454,20 @@ export function ModelSkillTable({
                       }
                     />
                     {isExpanded ? (
-                      <RowExpansion
-                        model={m}
-                        skills={orderedSkills}
-                        darkMode={darkMode}
-                        height={EXPANDED_PANEL_HEIGHT}
-                      />
+                      // Pin the panel to the visible viewport: the row wrapper
+                      // is grid-wide (thousands of px), so without this the
+                      // panel content sits far off-screen when scrolled right.
+                      <div
+                        className="sticky left-0"
+                        style={{ width: viewportW || '100%' }}
+                      >
+                        <RowExpansion
+                          model={m}
+                          skills={orderedSkills}
+                          darkMode={darkMode}
+                          height={EXPANDED_PANEL_HEIGHT}
+                        />
+                      </div>
                     ) : null}
                   </div>
                 )
