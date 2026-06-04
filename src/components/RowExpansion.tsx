@@ -2,7 +2,12 @@ import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { ExternalLink } from 'lucide-react'
 import type { Model, Skill } from '@/lib/types'
-import { getMasteryColor, getMasteryTextColor } from '@/lib/colors'
+import {
+  getFamilyColor,
+  getMasteryColor,
+  getMasteryTextColor,
+  rgbToRgba,
+} from '@/lib/colors'
 
 interface RowExpansionProps {
   model: Model
@@ -16,6 +21,23 @@ interface RankedSkill {
   skill: Skill
   theta: number
   rank: number
+}
+
+function formatParams(p: number | null): string {
+  if (p == null) return '—'
+  if (p >= 1) return `${p.toFixed(p >= 10 ? 0 : 1)}B`
+  return `${(p * 1000).toFixed(0)}M`
+}
+
+const kicker = 'text-xs font-medium uppercase tracking-wider text-muted-foreground'
+
+function MetaStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-baseline gap-1.5">
+      <span className={kicker}>{label}</span>
+      <span className="font-mono text-sm tabular text-foreground">{value}</span>
+    </div>
+  )
 }
 
 export function RowExpansion({
@@ -38,57 +60,88 @@ export function RowExpansion({
     return sum / model.theta.length
   }, [model])
 
+  const familyColor = getFamilyColor(model.family)
+  const hfUrl = model.hf_id
+    ? `https://huggingface.co/${model.hf_id.replace('__', '/')}`
+    : null
+
   return (
     <div
-      className="flex flex-col border-t border-border bg-muted/30"
-      style={{ height }}
+      className="flex flex-col border-t border-border bg-surface"
+      style={{ height, boxShadow: 'inset 2px 0 0 0 hsl(var(--brand))' }}
     >
-      {/* Summary strip */}
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-1 border-b border-border px-6 py-2">
-        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          All {ranked.length} skills, ranked by mastery
+      {/* Metadata header strip */}
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-border px-6 py-3">
+        <span
+          className="inline-flex h-5 items-center rounded-full px-2 text-[11px] font-semibold text-white"
+          style={{ backgroundColor: familyColor }}
+        >
+          {model.family}
         </span>
-        <span className="font-mono text-xs text-foreground">
-          mean θ {meanTheta.toFixed(3)}
-        </span>
-        {model.accuracy != null ? (
-          <span className="font-mono text-xs text-foreground">
-            accuracy {(model.accuracy * 100).toFixed(1)}%
-          </span>
+        <MetaStat label="Tier" value={model.tier} />
+        <MetaStat label="Params" value={formatParams(model.params)} />
+        <MetaStat
+          label="Accuracy"
+          value={
+            model.accuracy != null
+              ? `${(model.accuracy * 100).toFixed(1)}%`
+              : '—'
+          }
+        />
+        <MetaStat label="Mean θ" value={meanTheta.toFixed(3)} />
+        {hfUrl ? (
+          <a
+            href={hfUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm text-brand hover:underline"
+          >
+            Hugging Face
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
         ) : null}
-        <span className="ml-auto text-[11px] text-muted-foreground">
+      </div>
+
+      {/* Full ranked list */}
+      <div className="flex items-baseline justify-between px-6 pb-1 pt-2">
+        <span className={kicker}>All {ranked.length} skills, ranked by mastery</span>
+        <span className="text-[11px] text-muted-foreground">
           scroll for more · click a skill to open its page
         </span>
       </div>
-
-      {/* Scrollable ranked list */}
-      <div className="min-h-0 flex-1 overflow-y-auto px-6 py-2">
+      <div className="min-h-0 flex-1 overflow-y-auto px-6 pb-2">
         <ul className="space-y-1 pb-2">
           {ranked.map(({ skill, theta, rank }) => {
             const bg = getMasteryColor(theta, darkMode)
             const fg = getMasteryTextColor(theta, darkMode)
+            const barColor = rgbToRgba(bg, darkMode ? 0.25 : 0.18)
             return (
               <li key={skill.id}>
                 <Link
                   to={`/skill/${skill.id}`}
-                  className="group flex items-center gap-2 rounded-md border border-border bg-background px-2 py-1 text-sm hover:bg-accent"
+                  className="group relative flex items-center gap-2 overflow-hidden rounded-md border border-border bg-background px-2 py-1 text-sm hover:bg-surface-elevated"
                 >
-                  <span className="w-7 shrink-0 text-right font-mono text-[11px] text-muted-foreground">
+                  <span
+                    aria-hidden
+                    className="absolute inset-y-0 left-0"
+                    style={{ width: `${theta * 100}%`, backgroundColor: barColor }}
+                  />
+                  <span className="tabular relative w-7 shrink-0 text-right font-mono text-[11px] text-muted-foreground">
                     {rank}
                   </span>
                   <span
-                    className="inline-flex h-6 w-12 shrink-0 items-center justify-center rounded font-mono text-xs"
+                    className="tabular relative inline-flex h-6 w-12 shrink-0 items-center justify-center rounded font-mono text-xs"
                     style={{ backgroundColor: bg, color: fg }}
                   >
                     {theta.toFixed(2)}
                   </span>
-                  <span className="truncate" title={skill.label}>
+                  <span className="relative truncate" title={skill.label}>
                     {skill.label}
                   </span>
-                  <span className="ml-auto shrink-0 text-xs text-muted-foreground">
+                  <span className="relative ml-auto shrink-0 text-xs text-muted-foreground">
                     {skill.primary_benchmark}
                   </span>
-                  <ExternalLink className="h-3 w-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                  <ExternalLink className="relative h-3 w-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
                 </Link>
               </li>
             )

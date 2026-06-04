@@ -45,11 +45,20 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        surface: 'hsl(var(--surface))',
+        'surface-elevated': 'hsl(var(--surface-elevated))',
+        brand: {
+          DEFAULT: 'hsl(var(--brand))',
+          foreground: 'hsl(var(--brand-foreground))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      transitionTimingFunction: {
+        'out-quint': 'cubic-bezier(0.25, 1, 0.5, 1)',
       },
     },
   },
