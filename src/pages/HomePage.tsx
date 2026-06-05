@@ -46,7 +46,12 @@ function useDarkMode(): boolean {
   return dark
 }
 
-const MEDALS = ['🥇', '🥈', '🥉']
+// Top-3 rank badges: tinted typographic circles instead of medal emojis.
+const RANK_BADGE = [
+  'bg-brand text-brand-foreground',
+  'bg-brand/15 text-brand',
+  'bg-brand/[0.08] text-brand/80',
+]
 
 /** Mastery profile as a sorted, downsampled sparkline: skills ranked from
  * strongest to weakest, so the SHAPE of the curve is what differs between
@@ -390,8 +395,10 @@ export function HomePage() {
                           aria-label={`Rank ${rank}`}
                         >
                           {rank <= 3 ? (
-                            <span aria-hidden className="text-base">
-                              {MEDALS[rank - 1]}
+                            <span
+                              className={`tabular inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold ${RANK_BADGE[rank - 1]}`}
+                            >
+                              {rank}
                             </span>
                           ) : (
                             <span className="tabular text-muted-foreground">
@@ -414,8 +421,12 @@ export function HomePage() {
                         </td>
                         <td className="px-3 py-2.5">
                           <span
-                            className="inline-flex h-5 items-center rounded-full px-2 text-[10px] font-semibold text-white"
-                            style={{ backgroundColor: getFamilyColor(m.family) }}
+                            className="inline-flex h-5 items-center rounded-full border px-2 text-[10px] font-semibold"
+                            style={{
+                              color: getFamilyColor(m.family),
+                              borderColor: `${getFamilyColor(m.family)}55`,
+                              backgroundColor: `${getFamilyColor(m.family)}14`,
+                            }}
                             title={
                               m.family === 'Other'
                                 ? 'Open-weights model outside the six major families (community fine-tunes and merges)'

@@ -9,12 +9,21 @@ export function BenchmarkBadge({ benchmark, count }: BenchmarkBadgeProps) {
   const color = getBenchmarkColor(benchmark)
   return (
     <div
-      className="flex h-7 items-center justify-center px-2 text-xs font-semibold tracking-wide text-white"
-      style={{ backgroundColor: color }}
+      className="flex h-7 items-center justify-center gap-1.5 px-2 text-xs font-semibold tracking-wide"
+      style={{
+        color,
+        backgroundColor: `${color}14`,
+        boxShadow: `inset 0 -2px 0 0 ${color}`,
+      }}
     >
+      <span
+        aria-hidden
+        className="h-1.5 w-1.5 rounded-full"
+        style={{ backgroundColor: color }}
+      />
       {benchmark}
       {count !== undefined ? (
-        <span className="ml-1 font-normal opacity-90">({count})</span>
+        <span className="font-normal opacity-80">({count})</span>
       ) : null}
     </div>
   )
