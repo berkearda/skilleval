@@ -3,7 +3,7 @@ import { ThemeToggle } from '@/components/ThemeToggle'
 import { cn } from '@/lib/utils'
 
 const navItems = [
-  { to: '/browse', label: 'Browse' },
+  { to: '/overview', label: 'Overview' },
   { to: '/about', label: 'About' },
 ]
 

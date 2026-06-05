@@ -40,7 +40,7 @@ function useDarkMode(): boolean {
   return dark
 }
 
-export function HomePage() {
+export function OverviewPage() {
   const { models, skills, loading } = useSkillEvalData()
   const darkMode = useDarkMode()
 
@@ -95,10 +95,10 @@ export function HomePage() {
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
-            to="/browse"
+            to="/"
             className="inline-flex items-center gap-2 rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
           >
-            Browse the full table
+            Open the leaderboard
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
@@ -107,6 +107,33 @@ export function HomePage() {
           >
             About the method
           </Link>
+        </div>
+      </section>
+
+      {/* How it works (pipeline) */}
+      <section className="mt-16">
+        <h2 className="text-xl font-semibold tracking-tight">How it works</h2>
+        <div className="mt-4 grid gap-3 md:grid-cols-4">
+          <PipelineCard
+            step="1"
+            title="Items"
+            body="9,523 items drawn from MATH, BBH, GPQA, MuSR, and IFEval, clustered into 100 named skills."
+          />
+          <PipelineCard
+            step="2"
+            title="Responses"
+            body="3,811 LLMs answer every item, giving a binary correct/incorrect response matrix."
+          />
+          <PipelineCard
+            step="3"
+            title="Diagnosis"
+            body="A neural cognitive diagnostic model estimates per-skill mastery jointly with per-item difficulty."
+          />
+          <PipelineCard
+            step="4"
+            title="Profiles"
+            body="Every model gets a 100-dimensional mastery profile, browsable and sortable on the leaderboard."
+          />
         </div>
       </section>
 
@@ -125,7 +152,7 @@ export function HomePage() {
             Top 10 by mean mastery
           </h2>
           <Link
-            to="/browse"
+            to="/"
             className="text-sm text-muted-foreground hover:text-foreground"
           >
             full table →
@@ -214,14 +241,14 @@ export function HomePage() {
           icon={<Grid3X3 className="h-5 w-5" />}
           title="Browse the grid"
           body={`The full ${nModels.toLocaleString()} × ${nSkills} mastery matrix: search any model, filter by family or tier, and sort by accuracy, mean θ, or any single skill to find the specialists.`}
-          to="/browse"
+          to="/"
           cta="Open the table"
         />
         <FeatureCard
           icon={<User className="h-5 w-5" />}
           title="Per-model profiles"
           body="Click any row to open that model's full skill profile: all skills ranked from strongest to weakest, in a scrollable list, next to its raw accuracy."
-          to="/browse"
+          to="/"
           cta="Pick a model"
         />
         <FeatureCard
@@ -276,6 +303,28 @@ function FeatureCard({
         {cta}
         <ArrowRight className="h-3.5 w-3.5" />
       </Link>
+    </div>
+  )
+}
+
+function PipelineCard({
+  step,
+  title,
+  body,
+}: {
+  step: string
+  title: string
+  body: string
+}) {
+  return (
+    <div className="relative rounded-lg border border-border bg-surface p-4">
+      <div className="flex items-center gap-2">
+        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand text-[11px] font-semibold text-white">
+          {step}
+        </span>
+        <h3 className="text-sm font-semibold text-foreground">{title}</h3>
+      </div>
+      <p className="mt-2 text-[13px] leading-5 text-muted-foreground">{body}</p>
     </div>
   )
 }

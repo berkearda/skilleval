@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { HomePage } from '@/pages/HomePage'
+import { OverviewPage } from '@/pages/OverviewPage'
 import { TablePage } from '@/pages/TablePage'
 import { SkillDetailPage } from '@/pages/SkillDetailPage'
 import { AboutPage } from '@/pages/AboutPage'
@@ -13,8 +13,11 @@ function App() {
         <Header />
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/browse" element={<TablePage />} />
+            {/* The leaderboard is the front page; the overview moved to its
+                own page. /browse stays as a redirect for old links. */}
+            <Route path="/" element={<TablePage />} />
+            <Route path="/overview" element={<OverviewPage />} />
+            <Route path="/browse" element={<Navigate to="/" replace />} />
             <Route path="/skill/:id" element={<SkillDetailPage />} />
             <Route path="/about" element={<AboutPage />} />
           </Routes>
