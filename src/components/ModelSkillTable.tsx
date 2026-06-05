@@ -27,6 +27,7 @@ import {
   rgbToRgba,
 } from '@/lib/colors'
 import { RowExpansion } from '@/components/RowExpansion'
+import { CompareModal, CompareTray } from '@/components/CompareOverlay'
 import { ModelFilters } from '@/components/ModelFilters'
 import { SkillCell } from '@/components/SkillCell'
 import { BenchmarkBadge } from '@/components/BenchmarkBadge'
@@ -173,6 +174,26 @@ export function ModelSkillTable({
   const toggleExpand = useCallback((id: number) => {
     setExpandedId((cur) => (cur === id ? null : id))
   }, [])
+
+  // Compare selection (max 3 models).
+  const [compareIds, setCompareIds] = useState<number[]>([])
+  const [compareOpen, setCompareOpen] = useState(false)
+  const toggleCompare = useCallback((id: number) => {
+    setCompareIds((cur) =>
+      cur.includes(id)
+        ? cur.filter((x) => x !== id)
+        : cur.length >= 3
+          ? cur
+          : [...cur, id]
+    )
+  }, [])
+  const compareModels = useMemo(
+    () =>
+      compareIds
+        .map((id) => processedModels.find((m) => m.id === id))
+        .filter((m): m is ProcessedModel => m != null),
+    [compareIds, processedModels]
+  )
 
   // Density (persisted)
   const [density, setDensity] = useState<Density>(() => {
@@ -485,6 +506,12 @@ export function ModelSkillTable({
                           skills={orderedSkills}
                           darkMode={darkMode}
                           height={EXPANDED_PANEL_HEIGHT}
+                          inCompare={compareIds.includes(m.id)}
+                          compareFull={
+                            compareIds.length >= 3 &&
+                            !compareIds.includes(m.id)
+                          }
+                          onToggleCompare={toggleCompare}
                         />
                       </div>
                     ) : null}
@@ -509,6 +536,22 @@ export function ModelSkillTable({
           }}
         />
       </div>
+
+      {/* Compare tray + modal */}
+      <CompareTray
+        models={compareModels}
+        onRemove={toggleCompare}
+        onClear={() => setCompareIds([])}
+        onOpen={() => setCompareOpen(true)}
+      />
+      {compareOpen && compareModels.length >= 2 ? (
+        <CompareModal
+          models={compareModels}
+          orderedSkills={orderedSkills}
+          darkMode={darkMode}
+          onClose={() => setCompareOpen(false)}
+        />
+      ) : null}
     </div>
   )
 }
