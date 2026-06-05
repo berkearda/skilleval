@@ -75,6 +75,60 @@ export function getMasteryTextColor(theta: number, darkMode: boolean): string {
   return L < 0.4 ? '#f8fafc' : '#0b1220'
 }
 
+// Diverging ramp for RELATIVE mode (theta minus the population mean on that
+// skill): terracotta below the mean, the brand navy/teal family above it,
+// pale neutral at zero. Magnitude is clamped at +-0.5.
+const DELTA_NEG_LIGHT = [
+  [232, 236, 243],
+  [231, 200, 182],
+  [216, 148, 116],
+  [190, 95, 60],
+  [155, 55, 30],
+]
+const DELTA_POS_LIGHT = [
+  [232, 236, 243],
+  [170, 214, 206],
+  [88, 184, 172],
+  [42, 111, 151],
+  [31, 46, 102],
+]
+const DELTA_NEG_DARK = [
+  [34, 42, 55],
+  [84, 58, 44],
+  [140, 84, 56],
+  [196, 116, 72],
+  [235, 158, 108],
+]
+const DELTA_POS_DARK = [
+  [34, 42, 55],
+  [40, 92, 96],
+  [69, 168, 153],
+  [140, 210, 184],
+  [217, 242, 226],
+]
+
+const DELTA_CLAMP = 0.5
+
+/** Cell color for relative mode: delta = theta minus the skill's population
+ * mean, clamped to +-0.5. */
+export function getDeltaColor(delta: number, darkMode: boolean): string {
+  const m = clamp01(Math.abs(delta) / DELTA_CLAMP)
+  const ramp =
+    delta >= 0
+      ? darkMode
+        ? DELTA_POS_DARK
+        : DELTA_POS_LIGHT
+      : darkMode
+        ? DELTA_NEG_DARK
+        : DELTA_NEG_LIGHT
+  return rampColor(ramp, m)
+}
+
+export function getDeltaTextColor(delta: number, darkMode: boolean): string {
+  const L = relativeLuminance(getDeltaColor(delta, darkMode))
+  return L < 0.4 ? '#f8fafc' : '#0b1220'
+}
+
 /** Neutral surface for a missing (null/undefined) theta — never "low mastery". */
 export const NULL_CELL_BG_LIGHT = 'hsl(240 5% 94%)'
 export const NULL_CELL_BG_DARK = 'hsl(240 4% 16%)'

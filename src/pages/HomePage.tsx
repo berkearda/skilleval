@@ -410,9 +410,9 @@ export function HomePage() {
                         </td>
                         <td className="px-3 py-2.5">
                           <Link
-                            to="/leaderboard"
+                            to={`/model/${m.id}`}
                             className="flex items-center gap-2 font-medium transition-colors hover:text-brand"
-                            title={m.name}
+                            title={`Open the model page for ${m.name}`}
                           >
                             <span
                               className="h-2 w-2 shrink-0 rounded-full"

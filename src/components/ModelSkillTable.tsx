@@ -6,13 +6,14 @@ import {
   useRef,
   useState,
 } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   ArrowDown,
   ArrowUp,
   ChevronRight,
   ChevronsUpDown,
   ExternalLink,
+  GitCompareArrows,
   SearchX,
 } from 'lucide-react'
 import { useVirtualizer } from '@tanstack/react-virtual'
@@ -53,6 +54,7 @@ interface SortState {
 }
 
 type Density = 'compact' | 'regular' | 'relaxed'
+type ValueMode = 'abs' | 'rel'
 
 // Column widths (px). Adjust here if visual tuning is needed.
 const COL_W = {
@@ -227,6 +229,29 @@ export function ModelSkillTable({
   }, [density])
   const rowHeight = ROW_HEIGHTS[density]
   const cellFontSize = density === 'compact' ? 10 : 12
+
+  // Absolute theta vs relative-to-population-mean display (persisted).
+  const [valueMode, setValueMode] = useState<ValueMode>(() => {
+    if (typeof window === 'undefined') return 'abs'
+    return window.localStorage.getItem('skilleval-valuemode') === 'rel'
+      ? 'rel'
+      : 'abs'
+  })
+  useEffect(() => {
+    window.localStorage.setItem('skilleval-valuemode', valueMode)
+  }, [valueMode])
+
+  // Population mean per skill, for relative mode.
+  const skillMeans = useMemo(() => {
+    const means = new Map<number, number>()
+    if (models.length === 0) return means
+    for (const s of skills) {
+      let sum = 0
+      for (const m of models) sum += m.theta[s.id] ?? 0
+      means.set(s.id, sum / models.length)
+    }
+    return means
+  }, [models, skills])
 
   // Filter models.
   const filteredModels = useMemo(() => {
@@ -411,6 +436,8 @@ export function ModelSkillTable({
           totalCount={processedModels.length}
           density={density}
           onDensityChange={setDensity}
+          valueMode={valueMode}
+          onValueModeChange={setValueMode}
           onClearAll={clearAll}
         />
       </div>
@@ -514,6 +541,13 @@ export function ModelSkillTable({
                       }
                       groupStartIds={groupStartIds}
                       onToggleExpand={toggleExpand}
+                      valueMode={valueMode}
+                      skillMeans={skillMeans}
+                      inCompare={compareIds.includes(m.id)}
+                      compareFull={
+                        compareIds.length >= 3 && !compareIds.includes(m.id)
+                      }
+                      onToggleCompare={toggleCompare}
                     />
                     {isExpanded ? (
                       // Pin the panel to the visible viewport: the row wrapper
@@ -849,6 +883,11 @@ interface TableRowProps {
   sortedSkillId: number | null
   groupStartIds: Set<number>
   onToggleExpand: (id: number) => void
+  valueMode: ValueMode
+  skillMeans: Map<number, number>
+  inCompare: boolean
+  compareFull: boolean
+  onToggleCompare: (id: number) => void
 }
 
 // Memoized: on expand/collapse and most filter/sort updates only the rows
@@ -866,8 +905,14 @@ const TableRow = memo(function TableRow({
   sortedSkillId,
   groupStartIds,
   onToggleExpand,
+  valueMode,
+  skillMeans,
+  inCompare,
+  compareFull,
+  onToggleCompare,
 }: TableRowProps) {
   const familyColor = getFamilyColor(model.family)
+  const navigate = useNavigate()
   return (
     <div
       onClick={() => onToggleExpand(model.id)}
@@ -912,7 +957,7 @@ const TableRow = memo(function TableRow({
         </div>
         {/* Model name + family dot */}
         <div
-          className="flex h-full items-center gap-2 border-r border-border px-3 text-sm"
+          className="relative flex h-full items-center gap-2 border-r border-border px-3 text-sm"
           style={{ width: COL_W.name }}
           title={model.name}
         >
@@ -921,7 +966,42 @@ const TableRow = memo(function TableRow({
             style={{ backgroundColor: familyColor }}
             aria-hidden
           />
-          <span className="truncate">{model.name}</span>
+          <Link
+            to={`/model/${model.id}`}
+            onClick={(e) => e.stopPropagation()}
+            className="truncate hover:text-brand hover:underline"
+            title={`Open the model page for ${model.name}`}
+          >
+            {model.name}
+          </Link>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              if (!compareFull || inCompare) onToggleCompare(model.id)
+            }}
+            disabled={compareFull && !inCompare}
+            aria-label={
+              inCompare
+                ? `Remove ${model.name} from comparison`
+                : `Add ${model.name} to comparison`
+            }
+            title={
+              compareFull && !inCompare
+                ? 'Comparison is full (3 models)'
+                : inCompare
+                  ? 'Remove from comparison'
+                  : 'Add to comparison'
+            }
+            className={cn(
+              'ml-auto shrink-0 rounded p-1 transition-all',
+              inCompare
+                ? 'text-brand opacity-100'
+                : 'text-muted-foreground opacity-0 hover:text-brand group-hover:opacity-100 disabled:cursor-not-allowed'
+            )}
+          >
+            <GitCompareArrows className="h-3.5 w-3.5" />
+          </button>
         </div>
         {/* Accuracy */}
         <div
@@ -967,12 +1047,23 @@ const TableRow = memo(function TableRow({
                   ? 'inset 0 0 0 1px hsl(var(--brand) / 0.25)'
                   : undefined,
               }}
+              onClick={(e) => {
+                e.stopPropagation()
+                navigate(`/skill/${s.id}`)
+              }}
+              role="link"
+              aria-label={`Open skill ${s.label}`}
             >
               <SkillCell
                 theta={v}
                 darkMode={darkMode}
                 skillLabel={s.label}
                 fontSize={cellFontSize}
+                delta={
+                  valueMode === 'rel' && v != null
+                    ? v - (skillMeans.get(s.id) ?? 0)
+                    : null
+                }
               />
             </div>
           )
