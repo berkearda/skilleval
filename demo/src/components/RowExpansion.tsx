@@ -82,8 +82,12 @@ export function RowExpansion({
       {/* Metadata header strip */}
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-border px-6 py-3">
         <span
-          className="inline-flex h-5 items-center rounded-full px-2 text-[11px] font-semibold text-white"
-          style={{ backgroundColor: familyColor }}
+          className="inline-flex h-5 items-center rounded-full border px-2 text-[11px] font-semibold"
+          style={{
+            color: familyColor,
+            borderColor: `${familyColor}55`,
+            backgroundColor: `${familyColor}14`,
+          }}
         >
           {model.family}
         </span>
