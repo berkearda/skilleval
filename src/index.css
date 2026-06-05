@@ -80,3 +80,24 @@
       "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 }
+
+/* Hero mosaic: cells flash bright as the resolve wave reaches them, and a
+   scan line sweeps across the grid once while the model "fits". */
+@keyframes cellflash {
+  from {
+    filter: brightness(1.8);
+  }
+  to {
+    filter: brightness(1);
+  }
+}
+@keyframes scanwipe {
+  from {
+    transform: translateX(-52px);
+    opacity: 0.9;
+  }
+  to {
+    transform: translateX(300px);
+    opacity: 0;
+  }
+}

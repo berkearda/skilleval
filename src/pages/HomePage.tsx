@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, RotateCcw } from 'lucide-react'
 import { PipelineDiagram } from '@/components/PipelineDiagram'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import { displaySkillLabel } from '@/lib/labels'
@@ -105,15 +105,16 @@ function cellRand(i: number, tick: number): number {
   return x - Math.floor(x)
 }
 
-const NOISE_TICKS = 4 // distinct response samples shown while flickering
-const NOISE_MS = 420 // per flicker frame
-const HOLD_MS = 4600 // resolved heatmap hold
-const RESOLVE_MS = 550 // per-cell color transition
+const NOISE_TICKS = 9 // response samples streamed in while flickering
+const NOISE_MS = 150 // per flicker frame: fast, like data arriving
+const RESOLVE_MS = 520 // per-cell color transition
 
-/** The hero visual tells the method's story: raw correct/incorrect responses
- * (real Bernoulli draws from each cell's actual theta, so strong rows read
- * denser even as noise) resolve wave-like into the mastery heatmap, hold,
- * and loop. Static heatmap when the user prefers reduced motion. */
+/** The hero visual tells the method's story ONCE: raw correct/incorrect
+ * responses stream in as fast binary flicker (real Bernoulli draws from each
+ * cell's actual theta, so strong rows read denser even as noise), then a
+ * scan line sweeps the grid and the cells resolve left-to-right into the
+ * mastery heatmap, flashing as the wave reaches them. It then settles for
+ * good, with a small replay control. Static when reduced motion is set. */
 function MatrixMosaic({
   models,
   darkMode,
@@ -132,34 +133,31 @@ function MatrixMosaic({
   )
   const [resolved, setResolved] = useState(reduced)
   const [tick, setTick] = useState(0)
+  const [run, setRun] = useState(0)
+  const hasData = rows.length > 0
 
   useEffect(() => {
-    if (reduced || rows.length === 0) return
+    if (reduced || !hasData) return
     let alive = true
     let t: ReturnType<typeof setTimeout>
-    const loop = (phase: 'noise' | 'hold', step: number) => {
+    setResolved(false)
+    const step = (i: number) => {
       if (!alive) return
-      if (phase === 'noise') {
-        if (step < NOISE_TICKS) {
-          setTick(step)
-          t = setTimeout(() => loop('noise', step + 1), NOISE_MS)
-        } else {
-          setResolved(true)
-          t = setTimeout(() => loop('hold', 0), HOLD_MS)
-        }
+      if (i < NOISE_TICKS) {
+        setTick(i)
+        t = setTimeout(() => step(i + 1), NOISE_MS)
       } else {
-        setResolved(false)
-        t = setTimeout(() => loop('noise', 0), NOISE_MS)
+        setResolved(true) // settle; no loop
       }
     }
-    loop('noise', 0)
+    t = setTimeout(() => step(0), 350)
     return () => {
       alive = false
       clearTimeout(t)
     }
-  }, [reduced, rows.length])
+  }, [reduced, hasData, run])
 
-  if (rows.length === 0) {
+  if (!hasData) {
     return (
       <div className="h-[210px] w-[300px] animate-pulse rounded-lg bg-muted" />
     )
@@ -170,46 +168,72 @@ function MatrixMosaic({
 
   return (
     <div aria-hidden>
-      <div
-        className="grid gap-[3px]"
-        style={{ gridTemplateColumns: `repeat(${cols.length}, 17px)` }}
-      >
-        {rows.flatMap((m, r) =>
-          cols.map((c, ci) => {
-            const theta = m.theta[c] ?? 0
-            const i = r * cols.length + ci
-            const correct = cellRand(i, tick) < theta
-            return (
-              <span
-                key={`${r}-${c}`}
-                className="h-[17px] w-[17px] rounded-[3px]"
-                style={{
-                  backgroundColor: resolved
-                    ? getMasteryColor(theta, darkMode)
-                    : correct
-                      ? onColor
-                      : offColor,
-                  transition: `background-color ${RESOLVE_MS}ms ease`,
-                  // left-to-right wave when resolving; snap back together
-                  transitionDelay: resolved ? `${ci * 55 + r * 14}ms` : '0ms',
-                }}
-              />
-            )
-          })
-        )}
+      <div className="relative overflow-hidden rounded-md p-px">
+        <div
+          className="grid gap-[3px]"
+          style={{ gridTemplateColumns: `repeat(${cols.length}, 17px)` }}
+        >
+          {rows.flatMap((m, r) =>
+            cols.map((c, ci) => {
+              const theta = m.theta[c] ?? 0
+              const i = r * cols.length + ci
+              const correct = cellRand(i, tick) < theta
+              const delay = ci * 60 + r * 16
+              return (
+                <span
+                  key={`${r}-${c}`}
+                  className="h-[17px] w-[17px] rounded-[3px]"
+                  style={{
+                    backgroundColor: resolved
+                      ? getMasteryColor(theta, darkMode)
+                      : correct
+                        ? onColor
+                        : offColor,
+                    transition: `background-color ${RESOLVE_MS}ms ease`,
+                    transitionDelay: resolved ? `${delay}ms` : '0ms',
+                    animation:
+                      resolved && !reduced
+                        ? `cellflash 480ms ${delay}ms ease-out`
+                        : 'none',
+                  }}
+                />
+              )
+            })
+          )}
+        </div>
+        {/* scan line: sweeps once as the model "fits" */}
+        {resolved && !reduced ? (
+          <span
+            className="pointer-events-none absolute inset-y-0 w-12"
+            style={{
+              background:
+                'linear-gradient(90deg, transparent, hsl(var(--brand) / 0.30), transparent)',
+              animation: 'scanwipe 1.4s ease-out forwards',
+            }}
+          />
+        ) : null}
       </div>
       <div className="relative mt-2 h-4 text-right text-[11px] text-muted-foreground">
         <span
           className="absolute inset-0 whitespace-nowrap transition-opacity duration-500"
           style={{ opacity: resolved ? 0 : 1 }}
         >
-          raw right-or-wrong responses, one sample
+          raw right-or-wrong responses streaming in
         </span>
         <span
-          className="absolute inset-0 whitespace-nowrap transition-opacity duration-500"
+          className="absolute inset-0 flex items-center justify-end gap-2 whitespace-nowrap transition-opacity duration-500"
           style={{ opacity: resolved ? 1 : 0 }}
         >
           resolved: a slice of the real mastery matrix
+          <button
+            type="button"
+            onClick={() => setRun((n) => n + 1)}
+            className="pointer-events-auto text-muted-foreground transition-colors hover:text-brand"
+            aria-label="Replay the animation"
+            title="Replay"
+          >
+            <RotateCcw className="h-3 w-3" />
+          </button>
         </span>
       </div>
     </div>
