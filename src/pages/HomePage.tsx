@@ -98,8 +98,22 @@ function ProfileSparkline({
   )
 }
 
-/** A real slice of the mastery matrix as a hero visual: rows are the top
- * models, columns a spread of skills, colors are actual theta values. */
+/** Deterministic per-cell pseudo-random in [0,1): no Math.random so frames
+ * are reproducible. */
+function cellRand(i: number, tick: number): number {
+  const x = Math.sin(i * 127.1 + tick * 311.7) * 43758.5453
+  return x - Math.floor(x)
+}
+
+const NOISE_TICKS = 4 // distinct response samples shown while flickering
+const NOISE_MS = 420 // per flicker frame
+const HOLD_MS = 4600 // resolved heatmap hold
+const RESOLVE_MS = 550 // per-cell color transition
+
+/** The hero visual tells the method's story: raw correct/incorrect responses
+ * (real Bernoulli draws from each cell's actual theta, so strong rows read
+ * denser even as noise) resolve wave-like into the mastery heatmap, hold,
+ * and loop. Static heatmap when the user prefers reduced motion. */
 function MatrixMosaic({
   models,
   darkMode,
@@ -109,11 +123,51 @@ function MatrixMosaic({
 }) {
   const rows = models.slice(0, 9)
   const cols = Array.from({ length: 14 }, (_, i) => i * 7 + 2)
+
+  const reduced = useMemo(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    []
+  )
+  const [resolved, setResolved] = useState(reduced)
+  const [tick, setTick] = useState(0)
+
+  useEffect(() => {
+    if (reduced || rows.length === 0) return
+    let alive = true
+    let t: ReturnType<typeof setTimeout>
+    const loop = (phase: 'noise' | 'hold', step: number) => {
+      if (!alive) return
+      if (phase === 'noise') {
+        if (step < NOISE_TICKS) {
+          setTick(step)
+          t = setTimeout(() => loop('noise', step + 1), NOISE_MS)
+        } else {
+          setResolved(true)
+          t = setTimeout(() => loop('hold', 0), HOLD_MS)
+        }
+      } else {
+        setResolved(false)
+        t = setTimeout(() => loop('noise', 0), NOISE_MS)
+      }
+    }
+    loop('noise', 0)
+    return () => {
+      alive = false
+      clearTimeout(t)
+    }
+  }, [reduced, rows.length])
+
   if (rows.length === 0) {
     return (
       <div className="h-[210px] w-[300px] animate-pulse rounded-lg bg-muted" />
     )
   }
+
+  const onColor = darkMode ? 'hsl(220 18% 72%)' : 'hsl(222 32% 32%)'
+  const offColor = darkMode ? 'hsl(222 18% 15%)' : 'hsl(220 28% 89%)'
+
   return (
     <div aria-hidden>
       <div
@@ -121,20 +175,43 @@ function MatrixMosaic({
         style={{ gridTemplateColumns: `repeat(${cols.length}, 17px)` }}
       >
         {rows.flatMap((m, r) =>
-          cols.map((c) => (
-            <span
-              key={`${r}-${c}`}
-              className="h-[17px] w-[17px] rounded-[3px]"
-              style={{
-                backgroundColor: getMasteryColor(m.theta[c] ?? 0, darkMode),
-              }}
-            />
-          ))
+          cols.map((c, ci) => {
+            const theta = m.theta[c] ?? 0
+            const i = r * cols.length + ci
+            const correct = cellRand(i, tick) < theta
+            return (
+              <span
+                key={`${r}-${c}`}
+                className="h-[17px] w-[17px] rounded-[3px]"
+                style={{
+                  backgroundColor: resolved
+                    ? getMasteryColor(theta, darkMode)
+                    : correct
+                      ? onColor
+                      : offColor,
+                  transition: `background-color ${RESOLVE_MS}ms ease`,
+                  // left-to-right wave when resolving; snap back together
+                  transitionDelay: resolved ? `${ci * 55 + r * 14}ms` : '0ms',
+                }}
+              />
+            )
+          })
         )}
       </div>
-      <p className="mt-2 text-right text-[11px] text-muted-foreground">
-        a real slice of the 3,811 × 100 mastery matrix
-      </p>
+      <div className="relative mt-2 h-4 text-right text-[11px] text-muted-foreground">
+        <span
+          className="absolute inset-0 whitespace-nowrap transition-opacity duration-500"
+          style={{ opacity: resolved ? 0 : 1 }}
+        >
+          raw right-or-wrong responses, one sample
+        </span>
+        <span
+          className="absolute inset-0 whitespace-nowrap transition-opacity duration-500"
+          style={{ opacity: resolved ? 1 : 0 }}
+        >
+          resolved: a slice of the real mastery matrix
+        </span>
+      </div>
     </div>
   )
 }
