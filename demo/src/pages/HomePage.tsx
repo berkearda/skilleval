@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Boxes, FileText, Layers, Library } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { PipelineDiagram } from '@/components/PipelineDiagram'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import {
@@ -162,12 +162,28 @@ export function HomePage() {
       .slice(0, 12)
   }, [models])
 
-  const chips = [
-    { icon: <Boxes className="h-4 w-4" />, label: '3,811 models' },
-    { icon: <Layers className="h-4 w-4" />, label: '100 skills' },
-    { icon: <FileText className="h-4 w-4" />, label: '9,523 items' },
-    { icon: <Library className="h-4 w-4" />, label: '5 benchmarks' },
+  const stats = [
+    { value: '3,811', label: 'open-weights models' },
+    { value: '100', label: 'skills' },
+    { value: '9,523', label: 'items' },
+    { value: '5', label: 'benchmarks' },
   ]
+
+  // Skills grouped by source benchmark, in the grid's column order.
+  const skillGroups = useMemo(() => {
+    const order = ['MATH', 'BBH', 'GPQA', 'IFEval', 'MuSR']
+    const byBench = new Map<string, typeof skills>()
+    for (const s of skills) {
+      const b = s.primary_benchmark
+      if (!byBench.has(b)) byBench.set(b, [])
+      byBench.get(b)!.push(s)
+    }
+    const benches = [
+      ...order.filter((b) => byBench.has(b)),
+      ...[...byBench.keys()].filter((b) => !order.includes(b)),
+    ]
+    return benches.map((b) => ({ benchmark: b, skills: byBench.get(b)! }))
+  }, [skills])
 
   return (
     <div>
@@ -186,28 +202,32 @@ export function HomePage() {
               with a cognitive-diagnostic item-response model. One profile per
               model, not one score.
             </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {chips.map((c) => (
-                <span
-                  key={c.label}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-sm"
-                >
-                  {c.icon}
-                  {c.label}
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2">
+              {stats.map((s, i) => (
+                <span key={s.label} className="flex items-center gap-3 text-sm">
+                  <span>
+                    <span className="tabular font-semibold text-foreground">
+                      {s.value}
+                    </span>{' '}
+                    <span className="text-muted-foreground">{s.label}</span>
+                  </span>
+                  {i < stats.length - 1 ? (
+                    <span aria-hidden className="h-3.5 w-px bg-border" />
+                  ) : null}
                 </span>
               ))}
             </div>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 to="/leaderboard"
-                className="inline-flex items-center gap-2 rounded-md bg-brand px-4 py-2 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand/90"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-brand-foreground shadow-sm transition-colors hover:bg-brand/90"
               >
                 View full leaderboard
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent"
               >
                 How it works
               </Link>
@@ -293,6 +313,11 @@ export function HomePage() {
                           <span
                             className="inline-flex h-5 items-center rounded-full px-2 text-[10px] font-semibold text-white"
                             style={{ backgroundColor: getFamilyColor(m.family) }}
+                            title={
+                              m.family === 'Other'
+                                ? 'Open-weights model outside the six major families (community fine-tunes and merges)'
+                                : `${m.family} family`
+                            }
                           >
                             {m.family}
                           </span>
@@ -339,8 +364,10 @@ export function HomePage() {
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
           Ranked by mean θ over all 100 skills. Mastery estimates carry sampling
-          noise, so small gaps between adjacent ranks are not meaningful.
-          Snapshot 2026-05-22.
+          noise, so small gaps between adjacent ranks are not meaningful. All
+          models are open-weights; the Other family groups models outside the
+          six major families, mostly community fine-tunes and merges. Snapshot
+          2026-05-22.
         </p>
       </section>
 
@@ -358,7 +385,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Skill explorer teaser */}
+      {/* Skill explorer teaser, grouped by benchmark */}
       <section className="mt-16">
         <div className="flex items-baseline justify-between">
           <h2 className="text-xl font-semibold tracking-tight">
@@ -371,23 +398,46 @@ export function HomePage() {
             Browse every skill in the grid →
           </Link>
         </div>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {skills.map((s) => (
-            <Link
-              key={s.id}
-              to={`/skill/${s.id}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-2.5 py-1 text-xs text-foreground transition-colors hover:border-brand hover:text-brand"
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {skillGroups.map((g) => (
+            <div
+              key={g.benchmark}
+              className="rounded-xl border border-border bg-card p-4"
             >
-              <span
-                className="h-1.5 w-1.5 shrink-0 rounded-full"
-                style={{
-                  backgroundColor: getBenchmarkColor(s.primary_benchmark),
-                }}
-              />
-              <span className="max-w-[16ch] truncate">
-                {s.label_english ?? s.label}
-              </span>
-            </Link>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2 text-sm font-semibold">
+                  <span
+                    className="h-2 w-2 shrink-0 rounded-full"
+                    style={{ backgroundColor: getBenchmarkColor(g.benchmark) }}
+                  />
+                  {g.benchmark}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  {g.skills.length} skills
+                </span>
+              </div>
+              <ul className="mt-3 space-y-1">
+                {g.skills.slice(0, 5).map((s) => (
+                  <li key={s.id}>
+                    <Link
+                      to={`/skill/${s.id}`}
+                      className="block truncate rounded px-1.5 py-1 text-[13px] text-foreground/85 transition-colors hover:bg-accent hover:text-brand"
+                      title={s.label_english ?? s.label}
+                    >
+                      {s.label_english ?? s.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              {g.skills.length > 5 ? (
+                <Link
+                  to={`/skill/${g.skills[5].id}`}
+                  className="mt-2 inline-block px-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-brand"
+                >
+                  + {g.skills.length - 5} more
+                </Link>
+              ) : null}
+            </div>
           ))}
         </div>
       </section>

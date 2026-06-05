@@ -29,7 +29,8 @@
 
     --surface: 220 40% 95.5%;
     --surface-elevated: 220 32% 92%;
-    --brand: 221 83% 53%;
+    /* deeper, less electric blue than tailwind blue-600 */
+    --brand: 222 64% 46%;
     --brand-foreground: 0 0% 100%;
   }
 
