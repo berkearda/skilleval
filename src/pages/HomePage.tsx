@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Boxes, FileText, Layers, Library } from 'lucide-react'
+import { PipelineDiagram } from '@/components/PipelineDiagram'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import {
   getBenchmarkColor,
@@ -45,7 +46,10 @@ function useDarkMode(): boolean {
 
 const MEDALS = ['🥇', '🥈', '🥉']
 
-/** 100-skill mastery profile as a compact SVG bar sparkline. */
+/** Mastery profile as a sorted, downsampled sparkline: skills ranked from
+ * strongest to weakest, so the SHAPE of the curve is what differs between
+ * models (flat = generalist, steep = narrow specialist). Raw unsorted bars
+ * all look like identical noise at this size. */
 function ProfileSparkline({
   theta,
   darkMode,
@@ -55,29 +59,82 @@ function ProfileSparkline({
 }) {
   const W = 100
   const H = 20
+  const BUCKETS = 25
+  const bars = useMemo(() => {
+    const sorted = [...theta].sort((a, b) => b - a)
+    const per = Math.max(1, Math.floor(sorted.length / BUCKETS))
+    return Array.from({ length: BUCKETS }, (_, i) => {
+      const slice = sorted.slice(i * per, (i + 1) * per)
+      return slice.length
+        ? slice.reduce((a, b) => a + b, 0) / slice.length
+        : 0
+    })
+  }, [theta])
   return (
     <svg
       width={W}
       height={H}
       viewBox={`0 0 ${W} ${H}`}
       role="img"
-      aria-label="100-skill mastery profile"
+      aria-label="Skill profile, strongest to weakest"
       className="block"
     >
-      {theta.map((t, i) => {
-        const h = Math.max(1, t * H)
+      {bars.map((t, i) => {
+        const h = Math.max(1.5, t * H)
         return (
           <rect
             key={i}
-            x={i}
+            x={i * 4}
             y={H - h}
-            width={1}
+            width={3}
             height={h}
+            rx={0.75}
             fill={getMasteryColor(t, darkMode)}
           />
         )
       })}
     </svg>
+  )
+}
+
+/** A real slice of the mastery matrix as a hero visual: rows are the top
+ * models, columns a spread of skills, colors are actual theta values. */
+function MatrixMosaic({
+  models,
+  darkMode,
+}: {
+  models: RankedModel[]
+  darkMode: boolean
+}) {
+  const rows = models.slice(0, 9)
+  const cols = Array.from({ length: 14 }, (_, i) => i * 7 + 2)
+  if (rows.length === 0) {
+    return (
+      <div className="h-[210px] w-[300px] animate-pulse rounded-lg bg-muted" />
+    )
+  }
+  return (
+    <div aria-hidden>
+      <div
+        className="grid gap-[3px]"
+        style={{ gridTemplateColumns: `repeat(${cols.length}, 17px)` }}
+      >
+        {rows.flatMap((m, r) =>
+          cols.map((c) => (
+            <span
+              key={`${r}-${c}`}
+              className="h-[17px] w-[17px] rounded-[3px]"
+              style={{
+                backgroundColor: getMasteryColor(m.theta[c] ?? 0, darkMode),
+              }}
+            />
+          ))
+        )}
+      </div>
+      <p className="mt-2 text-right text-[11px] text-muted-foreground">
+        a real slice of the 3,811 × 100 mastery matrix
+      </p>
+    </div>
   )
 }
 
@@ -113,56 +170,56 @@ export function HomePage() {
   ]
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-10 sm:py-14">
-      {/* Hero */}
-      <section className="max-w-[60ch]">
-        <div className="text-xs font-medium uppercase tracking-wider text-brand">
-          Item-response leaderboard
-        </div>
-        <h1 className="mt-3 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-          Skill-level mastery for every language model.
-        </h1>
-        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-          SkillEval estimates how 3,811 models master 100 academic skills with a
-          cognitive-diagnostic item-response model. One profile per model, not
-          one score.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {chips.map((c) => (
-            <span
-              key={c.label}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-sm"
-            >
-              {c.icon}
-              {c.label}
-            </span>
-          ))}
-        </div>
-        <div className="mt-7 flex flex-wrap gap-3">
-          <Link
-            to="/leaderboard"
-            className="inline-flex items-center gap-2 rounded-md bg-brand px-4 py-2 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand/90"
-          >
-            View full leaderboard
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            to="/about"
-            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            How it works
-          </Link>
-        </div>
-      </section>
+    <div>
+      {/* Hero: full-bleed blue wash band with a data-true matrix mosaic */}
+      <div className="border-b border-border bg-gradient-to-b from-brand/[0.08] via-brand/[0.03] to-transparent">
+        <section className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-12 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-[60ch]">
+            <div className="text-xs font-medium uppercase tracking-wider text-brand">
+              Item-response leaderboard
+            </div>
+            <h1 className="mt-3 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+              Skill-level mastery for every language model.
+            </h1>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              SkillEval estimates how 3,811 models master 100 academic skills
+              with a cognitive-diagnostic item-response model. One profile per
+              model, not one score.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {chips.map((c) => (
+                <span
+                  key={c.label}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-sm"
+                >
+                  {c.icon}
+                  {c.label}
+                </span>
+              ))}
+            </div>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                to="/leaderboard"
+                className="inline-flex items-center gap-2 rounded-md bg-brand px-4 py-2 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand/90"
+              >
+                View full leaderboard
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+              >
+                How it works
+              </Link>
+            </div>
+          </div>
+          <div className="hidden lg:block">
+            <MatrixMosaic models={top} darkMode={darkMode} />
+          </div>
+        </section>
+      </div>
 
-      {/* Trust / scale strip */}
-      <section className="mt-10 border-y border-border py-4">
-        <p className="text-sm text-muted-foreground">
-          Profiling 3,811 open-weights models across the Llama, Qwen, Gemma,
-          Mistral, Phi, and Mixtral families, plus community fine-tunes.
-        </p>
-      </section>
-
+      <div className="mx-auto max-w-6xl px-6 pb-14">
       {/* Compact leaderboard preview */}
       <section className="mt-12">
         <div className="flex items-baseline justify-between">
@@ -290,59 +347,7 @@ export function HomePage() {
       {/* How it works */}
       <section className="mt-16">
         <h2 className="text-xl font-semibold tracking-tight">How it works</h2>
-        <div className="mt-4 grid gap-4 md:grid-cols-3">
-          <div className="rounded-xl border border-border bg-surface p-5">
-            <svg
-              width={64}
-              height={40}
-              viewBox="0 0 64 40"
-              aria-hidden
-              className="mb-3"
-            >
-              {Array.from({ length: 5 }).map((_, r) =>
-                Array.from({ length: 8 }).map((_, c) => (
-                  <rect
-                    key={`${r}-${c}`}
-                    x={c * 8}
-                    y={r * 8}
-                    width={6}
-                    height={6}
-                    rx={1}
-                    className="fill-muted-foreground/30"
-                  />
-                ))
-              )}
-            </svg>
-            <h3 className="text-base font-semibold">Score matrix</h3>
-            <p className="mt-1 text-sm leading-6 text-muted-foreground">
-              3,811 models answer 9,523 items from MATH, BBH, GPQA, MuSR, and
-              IFEval, clustered into 100 skills.
-            </p>
-          </div>
-          <div className="rounded-xl border border-border bg-surface p-5">
-            <div className="mb-3 rounded-md border border-border bg-card px-3 py-2 font-mono text-sm">
-              p(correct) = σ( α_s · (θ_m − β_s) )
-            </div>
-            <h3 className="text-base font-semibold">Fit the model</h3>
-            <p className="mt-1 text-sm leading-6 text-muted-foreground">
-              A cognitive-diagnostic model estimates each model's per-skill
-              mastery θ jointly with each skill's discrimination α and difficulty
-              β.
-            </p>
-          </div>
-          <div className="rounded-xl border border-border bg-surface p-5">
-            <div className="mb-3 h-[40px]">
-              {top.length > 0 ? (
-                <ProfileSparkline theta={top[0].theta} darkMode={darkMode} />
-              ) : null}
-            </div>
-            <h3 className="text-base font-semibold">Read the profile</h3>
-            <p className="mt-1 text-sm leading-6 text-muted-foreground">
-              Every model gets a 100-skill mastery profile, sortable and
-              searchable on the full grid.
-            </p>
-          </div>
-        </div>
+        <PipelineDiagram />
         <div className="mt-4">
           <Link
             to="/about"
@@ -386,6 +391,7 @@ export function HomePage() {
           ))}
         </div>
       </section>
+      </div>
     </div>
   )
 }
