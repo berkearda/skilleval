@@ -102,6 +102,13 @@ export function RowExpansion({
           }
         />
         <MetaStat label="Mean θ" value={meanTheta.toFixed(3)} />
+        <Link
+          to={`/model/${model.id}`}
+          className="inline-flex items-center gap-1 text-sm text-brand hover:underline"
+        >
+          Model page
+          <ExternalLink className="h-3.5 w-3.5" />
+        </Link>
         {hfUrl ? (
           <a
             href={hfUrl}

@@ -5,6 +5,7 @@ import { HomePage } from '@/pages/HomePage'
 import { TablePage } from '@/pages/TablePage'
 import { SkillsPage } from '@/pages/SkillsPage'
 import { ComparePage } from '@/pages/ComparePage'
+import { ModelPage } from '@/pages/ModelPage'
 import { SkillDetailPage } from '@/pages/SkillDetailPage'
 import { AboutPage } from '@/pages/AboutPage'
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/skills" element={<SkillsPage />} />
             <Route path="/compare" element={<ComparePage />} />
+            <Route path="/model/:id" element={<ModelPage />} />
             <Route path="/skill/:id" element={<SkillDetailPage />} />
             <Route path="/overview" element={<Navigate to="/" replace />} />
             <Route path="/browse" element={<Navigate to="/leaderboard" replace />} />

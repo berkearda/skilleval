@@ -7,6 +7,7 @@ import {
 } from '@/lib/colors'
 
 type Density = 'compact' | 'regular' | 'relaxed'
+type ValueMode = 'abs' | 'rel'
 
 interface ModelFiltersProps {
   search: string
@@ -19,6 +20,8 @@ interface ModelFiltersProps {
   totalCount: number
   density: Density
   onDensityChange: (d: Density) => void
+  valueMode: ValueMode
+  onValueModeChange: (m: ValueMode) => void
   onClearAll: () => void
 }
 
@@ -46,6 +49,40 @@ function DensityControl({
             'rounded px-2.5 py-1 text-xs font-medium transition-colors duration-150',
             value === v
               ? 'bg-surface-elevated text-foreground'
+              : 'text-muted-foreground hover:text-foreground'
+          )}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+function ValueModeControl({
+  value,
+  onChange,
+}: {
+  value: ValueMode
+  onChange: (m: ValueMode) => void
+}) {
+  const opts: Array<[ValueMode, string, string]> = [
+    ['abs', 'Absolute', 'Raw mastery theta in [0, 1]'],
+    ['rel', 'Relative', 'Theta minus the population mean on each skill'],
+  ]
+  return (
+    <div className="inline-flex items-center rounded-md border border-border p-0.5">
+      {opts.map(([v, label, hint]) => (
+        <button
+          key={v}
+          type="button"
+          onClick={() => onChange(v)}
+          aria-pressed={value === v}
+          title={hint}
+          className={cn(
+            'rounded px-2.5 py-1 text-xs font-medium transition-colors duration-150',
+            value === v
+              ? 'bg-brand text-brand-foreground'
               : 'text-muted-foreground hover:text-foreground'
           )}
         >
@@ -97,6 +134,8 @@ export function ModelFilters({
   totalCount,
   density,
   onDensityChange,
+  valueMode,
+  onValueModeChange,
   onClearAll,
 }: ModelFiltersProps) {
   const hasAnyFilter =
@@ -177,8 +216,9 @@ export function ModelFilters({
           })}
         </div>
 
-        {/* Density control */}
-        <div className="ml-auto">
+        {/* Value mode + density controls */}
+        <div className="ml-auto flex items-center gap-2">
+          <ValueModeControl value={valueMode} onChange={onValueModeChange} />
           <DensityControl value={density} onChange={onDensityChange} />
         </div>
       </div>
