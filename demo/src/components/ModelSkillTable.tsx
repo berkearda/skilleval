@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import type { Model, Skill } from '@/lib/types'
+import { displaySkillLabel } from '@/lib/labels'
 import { cn } from '@/lib/utils'
 import {
   getBenchmarkColor,
@@ -706,7 +707,7 @@ function SkillHeaderCell({
           className="line-clamp-3 w-full px-0.5 text-center"
           style={{ wordBreak: 'break-word', whiteSpace: 'normal' }}
         >
-          {skill.label}
+          {displaySkillLabel(skill.label)}
         </span>
         <SortIndicator active={active} dir={active ? sort.dir : undefined} />
       </button>

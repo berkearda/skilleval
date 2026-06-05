@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { ExternalLink } from 'lucide-react'
 import type { Model, Skill } from '@/lib/types'
+import { displaySkillLabel } from '@/lib/labels'
 import {
   getFamilyColor,
   getMasteryColor,
@@ -136,7 +137,7 @@ export function RowExpansion({
                     {theta.toFixed(2)}
                   </span>
                   <span className="relative truncate" title={skill.label}>
-                    {skill.label}
+                    {displaySkillLabel(skill.label)}
                   </span>
                   <span className="relative ml-auto shrink-0 text-xs text-muted-foreground">
                     {skill.primary_benchmark}

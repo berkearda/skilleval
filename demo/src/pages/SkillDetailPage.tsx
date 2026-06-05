@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
+import { displaySkillLabel } from '@/lib/labels'
 import { BenchmarkBadge } from '@/components/BenchmarkBadge'
 import { SkillStatsRow } from '@/components/SkillStatsRow'
 import { TopLLMsChart } from '@/components/TopLLMsChart'
@@ -153,7 +154,7 @@ export function SkillDetailPage() {
     return <NotFound rawId={id} />
   }
 
-  const heading = skill.label_english ?? skill.label
+  const heading = displaySkillLabel(skill.label_english ?? skill.label)
   const languageNote = skill.language ? LANGUAGE_NOTES[skill.language] : null
   const isSmallCluster = SMALL_CLUSTER_IDS.has(skillId)
   const examples = skill.example_items ?? []
