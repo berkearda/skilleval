@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { PipelineDiagram } from '@/components/PipelineDiagram'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
+import { displaySkillLabel } from '@/lib/labels'
 import {
   getBenchmarkColor,
   getFamilyColor,
@@ -422,7 +423,7 @@ export function HomePage() {
                     <Link
                       to={`/skill/${s.id}`}
                       className="block truncate rounded px-1.5 py-1 text-[13px] text-foreground/85 transition-colors hover:bg-accent hover:text-brand"
-                      title={s.label_english ?? s.label}
+                      title={displaySkillLabel(s.label_english ?? s.label)}
                     >
                       {s.label_english ?? s.label}
                     </Link>

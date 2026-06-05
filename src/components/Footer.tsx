@@ -41,15 +41,10 @@ export function Footer() {
 
           <div className="flex flex-col gap-2">
             <span className={kicker}>Resources</span>
-            <a href="#" className={linkCls}>
-              Paper
-            </a>
-            <a href="#" className={linkCls}>
-              Code
-            </a>
-            <a href="#" className={linkCls}>
-              Data
-            </a>
+            <span className="text-sm text-muted-foreground">
+              Paper, code, and the K=100 taxonomy will be released here once
+              the paper is public.
+            </span>
           </div>
 
           <div className="flex flex-col gap-2">
