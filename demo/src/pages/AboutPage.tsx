@@ -1,3 +1,5 @@
+import { PipelineDiagram } from '@/components/PipelineDiagram'
+
 const BASE = import.meta.env.BASE_URL
 
 function Figure({
@@ -52,11 +54,7 @@ export function AboutPage() {
         <h2 className="text-xl font-semibold tracking-tight">
           How it works
         </h2>
-        <Figure
-          src="fig_pipeline.png"
-          alt="SkillEval pipeline: questions are mapped to skills, LLM responses form a performance matrix, and a neural CDM learns per-skill ability vectors"
-          caption="Questions are tagged with the skills they require; model responses form a correct/incorrect matrix; a neural cognitive diagnostic model reads each item's text to estimate its difficulty and discrimination and jointly learns a per-skill mastery profile for every model. Fit is checked on held-out responses."
-        />
+        <PipelineDiagram />
       </section>
 
       <section className="mt-10">
