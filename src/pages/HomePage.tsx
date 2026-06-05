@@ -2,12 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, RotateCcw } from 'lucide-react'
 import { PipelineDiagram } from '@/components/PipelineDiagram'
-import { SkillMap } from '@/components/SkillMap'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import { usePageTitle } from '@/hooks/usePageTitle'
-import { displaySkillLabel } from '@/lib/labels'
 import {
-  getBenchmarkColor,
   getFamilyColor,
   getMasteryColor,
   getMasteryTextColor,
@@ -249,7 +246,7 @@ function MatrixMosaic({
 
 export function HomePage() {
   usePageTitle('SkillEval: skill-level mastery for every language model')
-  const { models, skills, loading } = useSkillEvalData()
+  const { models, loading } = useSkillEvalData()
   const darkMode = useDarkMode()
 
   const top = useMemo<RankedModel[]>(() => {
@@ -279,21 +276,6 @@ export function HomePage() {
     { value: '5', label: 'benchmarks' },
   ]
 
-  // Skills grouped by source benchmark, in the grid's column order.
-  const skillGroups = useMemo(() => {
-    const order = ['MATH', 'BBH', 'GPQA', 'IFEval', 'MuSR']
-    const byBench = new Map<string, typeof skills>()
-    for (const s of skills) {
-      const b = s.primary_benchmark
-      if (!byBench.has(b)) byBench.set(b, [])
-      byBench.get(b)!.push(s)
-    }
-    const benches = [
-      ...order.filter((b) => byBench.has(b)),
-      ...[...byBench.keys()].filter((b) => !order.includes(b)),
-    ]
-    return benches.map((b) => ({ benchmark: b, skills: byBench.get(b)! }))
-  }, [skills])
 
   return (
     <div>
@@ -501,79 +483,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* The capability space */}
-      <section className="mt-16">
-        <h2 className="text-xl font-semibold tracking-tight">
-          The capability space of open LLMs
-        </h2>
-        <p className="mt-2 max-w-[68ch] text-sm leading-6 text-muted-foreground">
-          Every skill, positioned by how similarly the 3,811 models master it:
-          nearby skills are mastered by the same models. The layout never sees
-          which benchmark a skill came from, yet the benchmarks emerge as
-          regions. Dot size is the number of items; hover for the skill, click
-          to open it.
-        </p>
-        <div className="mt-4">
-          <SkillMap skills={skills} models={models} darkMode={darkMode} />
-        </div>
-      </section>
-
-      {/* Skill explorer teaser, grouped by benchmark */}
-      <section className="mt-16">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-xl font-semibold tracking-tight">
-            Mastery, skill by skill.
-          </h2>
-          <Link
-            to="/leaderboard"
-            className="text-sm font-medium text-brand transition-colors hover:underline"
-          >
-            Browse every skill in the grid →
-          </Link>
-        </div>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {skillGroups.map((g) => (
-            <div
-              key={g.benchmark}
-              className="rounded-xl border border-border bg-card p-4"
-            >
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2 text-sm font-semibold">
-                  <span
-                    className="h-2 w-2 shrink-0 rounded-full"
-                    style={{ backgroundColor: getBenchmarkColor(g.benchmark) }}
-                  />
-                  {g.benchmark}
-                </span>
-                <span className="text-xs text-muted-foreground">
-                  {g.skills.length} skills
-                </span>
-              </div>
-              <ul className="mt-3 space-y-1">
-                {g.skills.slice(0, 5).map((s) => (
-                  <li key={s.id}>
-                    <Link
-                      to={`/skill/${s.id}`}
-                      className="block truncate rounded px-1.5 py-1 text-[13px] text-foreground/85 transition-colors hover:bg-accent hover:text-brand"
-                      title={displaySkillLabel(s.label_english ?? s.label)}
-                    >
-                      {s.label_english ?? s.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              {g.skills.length > 5 ? (
-                <Link
-                  to={`/skill/${g.skills[5].id}`}
-                  className="mt-2 inline-block px-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-brand"
-                >
-                  + {g.skills.length - 5} more
-                </Link>
-              ) : null}
-            </div>
-          ))}
-        </div>
-      </section>
       </div>
     </div>
   )
