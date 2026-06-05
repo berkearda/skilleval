@@ -4,6 +4,7 @@ import { ArrowRight, RotateCcw } from 'lucide-react'
 import { PipelineDiagram } from '@/components/PipelineDiagram'
 import { SkillMap } from '@/components/SkillMap'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
+import { usePageTitle } from '@/hooks/usePageTitle'
 import { displaySkillLabel } from '@/lib/labels'
 import {
   getBenchmarkColor,
@@ -247,6 +248,7 @@ function MatrixMosaic({
 }
 
 export function HomePage() {
+  usePageTitle('SkillEval: skill-level mastery for every language model')
   const { models, skills, loading } = useSkillEvalData()
   const darkMode = useDarkMode()
 

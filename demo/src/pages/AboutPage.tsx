@@ -1,4 +1,5 @@
 import { PipelineDiagram } from '@/components/PipelineDiagram'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 const BASE = import.meta.env.BASE_URL
 
@@ -34,6 +35,7 @@ function Figure({
 }
 
 export function AboutPage() {
+  usePageTitle('Methodology · SkillEval')
   return (
     <article className="mx-auto max-w-4xl px-6 py-12 leading-7 text-foreground">
       <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">

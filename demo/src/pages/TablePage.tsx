@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
+import { usePageTitle } from '@/hooks/usePageTitle'
 import { ModelSkillTable } from '@/components/ModelSkillTable'
 
 function useDarkMode(): boolean {
@@ -42,6 +43,7 @@ function TableSkeleton() {
 }
 
 export function TablePage() {
+  usePageTitle('Leaderboard · SkillEval')
   const { models, skills, loading, error } = useSkillEvalData()
   const darkMode = useDarkMode()
 
