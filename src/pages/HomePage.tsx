@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, RotateCcw } from 'lucide-react'
+import { ArrowRight, GitCompareArrows, RotateCcw } from 'lucide-react'
 import { PipelineDiagram } from '@/components/PipelineDiagram'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import { usePageTitle } from '@/hooks/usePageTitle'
@@ -269,6 +269,24 @@ export function HomePage() {
       .slice(0, 12)
   }, [models])
 
+  // Pre-seeded comparison: the strongest model vs the best one at <=13B,
+  // which is the weak-beats-strong story in one click.
+  const comparePair = useMemo(() => {
+    if (top.length === 0) return null
+    let bestSmall: RankedModel | null = null
+    for (const m of models) {
+      if (m.params == null || m.params > 13) continue
+      let sum = 0
+      for (const v of m.theta) sum += v
+      const mean = m.theta.length ? sum / m.theta.length : 0
+      if (!bestSmall || mean > bestSmall.meanTheta) {
+        bestSmall = { ...m, meanTheta: mean } as RankedModel
+      }
+    }
+    if (!bestSmall || bestSmall.id === top[0].id) return null
+    return `${top[0].id},${bestSmall.id}`
+  }, [top, models])
+
   const stats = [
     { value: '3,811', label: 'open-weights models' },
     { value: '100', label: 'skills' },
@@ -467,6 +485,18 @@ export function HomePage() {
           six major families, mostly community fine-tunes and merges. Snapshot
           2026-05-22.
         </p>
+        <div className="mt-4 flex items-center gap-2.5 rounded-xl border border-border bg-surface px-4 py-3">
+          <GitCompareArrows className="h-4 w-4 shrink-0 text-brand" />
+          <p className="text-sm text-foreground/90">
+            Any two models, head to head:{' '}
+            <Link
+              to={comparePair ? `/compare?m=${comparePair}` : '/compare'}
+              className="font-medium text-brand hover:underline"
+            >
+              compare skill fingerprints →
+            </Link>
+          </p>
+        </div>
       </section>
 
       {/* How it works */}

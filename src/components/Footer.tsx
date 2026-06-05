@@ -37,6 +37,9 @@ export function Footer() {
             <Link to="/skills" className={linkCls}>
               Skills
             </Link>
+            <Link to="/compare" className={linkCls}>
+              Compare
+            </Link>
             <Link to="/about" className={linkCls}>
               Methodology
             </Link>
