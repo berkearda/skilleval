@@ -1,8 +1,9 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { ExternalLink } from 'lucide-react'
+import { Check, ExternalLink, GitCompareArrows } from 'lucide-react'
 import type { Model, Skill } from '@/lib/types'
 import { displaySkillLabel } from '@/lib/labels'
+import { ModelFingerprint } from '@/components/ModelFingerprint'
 import {
   getFamilyColor,
   getMasteryColor,
@@ -16,6 +17,10 @@ interface RowExpansionProps {
   darkMode: boolean
   /** Fixed panel height (px); the ranked skill list scrolls inside it. */
   height: number
+  inCompare: boolean
+  /** True when the compare set is full and this model is not in it. */
+  compareFull: boolean
+  onToggleCompare: (id: number) => void
 }
 
 interface RankedSkill {
@@ -46,6 +51,9 @@ export function RowExpansion({
   skills,
   darkMode,
   height,
+  inCompare,
+  compareFull,
+  onToggleCompare,
 }: RowExpansionProps) {
   const ranked = useMemo<RankedSkill[]>(() => {
     return skills
@@ -103,6 +111,8 @@ export function RowExpansion({
         ) : null}
       </div>
 
+      <div className="flex min-h-0 flex-1">
+        <div className="flex min-w-0 flex-1 flex-col">
       {/* Full ranked list */}
       <div className="flex items-baseline justify-between px-6 pb-1 pt-2">
         <span className={kicker}>All {ranked.length} skills, ranked by mastery</span>
@@ -148,6 +158,45 @@ export function RowExpansion({
             )
           })}
         </ul>
+      </div>
+        </div>
+
+        {/* Fingerprint rail */}
+        <div className="hidden w-60 shrink-0 flex-col items-center justify-center gap-2.5 border-l border-border px-4 md:flex">
+          <ModelFingerprint
+            model={model}
+            orderedSkills={skills}
+            darkMode={darkMode}
+            size={170}
+          />
+          <button
+            type="button"
+            onClick={() => onToggleCompare(model.id)}
+            disabled={compareFull}
+            title={
+              compareFull
+                ? 'Comparison is full (3 models); remove one first'
+                : undefined
+            }
+            className={
+              inCompare
+                ? 'inline-flex items-center gap-1.5 rounded-lg border border-brand bg-brand/10 px-3 py-1.5 text-xs font-medium text-brand transition-colors hover:bg-brand/15'
+                : 'inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-sm transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50'
+            }
+          >
+            {inCompare ? (
+              <>
+                <Check className="h-3.5 w-3.5" />
+                In comparison
+              </>
+            ) : (
+              <>
+                <GitCompareArrows className="h-3.5 w-3.5" />
+                Add to compare
+              </>
+            )}
+          </button>
+        </div>
       </div>
     </div>
   )
