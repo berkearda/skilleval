@@ -5,32 +5,32 @@
 
 const clamp01 = (x: number): number => (x < 0 ? 0 : x > 1 ? 1 : x)
 
-// Viridis 9-stop, low -> high (light surface). Perceptually uniform and
-// colorblind-safe (no red/green confusion).
-const VIRIDIS = [
-  [68, 1, 84],
-  [72, 45, 123],
-  [59, 82, 139],
-  [44, 114, 142],
-  [33, 145, 140],
-  [40, 174, 128],
-  [94, 201, 98],
-  [173, 220, 48],
-  [253, 231, 37],
+// The SkillEval ramp: a single cool family (ice -> aqua -> mint -> teal ->
+// sea blue -> deep navy) so data surfaces share a palette with the blue
+// brand UI instead of importing a full-spectrum chart rainbow. Ordered in
+// luminance, colorblind-safe (no red/green axis). Low -> high.
+const RAMP_LIGHT = [
+  [234, 241, 248],
+  [201, 228, 229],
+  [147, 211, 200],
+  [88, 184, 172],
+  [47, 149, 150],
+  [42, 111, 151],
+  [39, 76, 139],
+  [31, 46, 102],
 ]
 
-// Cividis-like, low end lifted to ~#243044 so it stays distinct from the
-// dark page background (~#0f0f10). low -> high (dark surface).
-const CIVIDIS_DARK = [
-  [36, 48, 68],
-  [38, 62, 99],
-  [55, 80, 110],
-  [97, 101, 111],
-  [125, 124, 120],
-  [155, 148, 118],
-  [188, 174, 108],
-  [222, 201, 88],
-  [254, 232, 56],
+// Dark-mode mirror: low sits just above the blue-black background, high
+// glows bright mint. Low -> high.
+const RAMP_DARK = [
+  [27, 39, 53],
+  [30, 58, 77],
+  [34, 92, 102],
+  [46, 131, 127],
+  [69, 168, 153],
+  [111, 197, 169],
+  [163, 221, 192],
+  [217, 242, 226],
 ]
 
 function lerp(a: number, b: number, t: number) {
@@ -48,11 +48,11 @@ function rampColor(stops: number[][], t: number): string {
 }
 
 /**
- * Mastery cell background color. theta in [0,1] -> a perceptually uniform
- * sequential ramp (viridis in light, cividis-with-lifted-floor in dark).
+ * Mastery cell background color. theta in [0,1] -> the SkillEval cool ramp
+ * (deep navy = high in light mode; bright mint = high in dark mode).
  */
 export function getMasteryColor(theta: number, darkMode: boolean): string {
-  return rampColor(darkMode ? CIVIDIS_DARK : VIRIDIS, theta)
+  return rampColor(darkMode ? RAMP_DARK : RAMP_LIGHT, theta)
 }
 
 function relativeLuminance(rgb: string): number {
