@@ -302,7 +302,7 @@ export function HomePage() {
             <div className="text-xs font-medium uppercase tracking-wider text-brand">
               Item-response leaderboard
             </div>
-            <h1 className="mt-3 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+            <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.06] sm:text-[3.4rem]">
               Skill-level mastery for every language model.
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">

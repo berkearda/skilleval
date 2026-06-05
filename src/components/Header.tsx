@@ -13,7 +13,9 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-border bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80">
       <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-3">
         <Link to="/" className="flex items-baseline gap-2">
-          <span className="text-base font-semibold tracking-tight">SkillEval</span>
+          <span className="font-display text-base font-semibold tracking-tight">
+            SkillEval
+          </span>
           <span className="hidden border-l border-border pl-2 text-xs text-muted-foreground sm:inline">
             ETH Zürich
           </span>
