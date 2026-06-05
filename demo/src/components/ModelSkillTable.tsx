@@ -1,4 +1,5 @@
 import {
+  memo,
   useCallback,
   useEffect,
   useMemo,
@@ -159,6 +160,10 @@ export function ModelSkillTable({
 
   // Expanded row id (model.id)
   const [expandedId, setExpandedId] = useState<number | null>(null)
+  // Stable toggle so memoized rows don't re-render from a fresh closure.
+  const toggleExpand = useCallback((id: number) => {
+    setExpandedId((cur) => (cur === id ? null : id))
+  }, [])
 
   // Density (persisted)
   const [density, setDensity] = useState<Density>(() => {
@@ -447,11 +452,11 @@ export function ModelSkillTable({
                       rowHeight={rowHeight}
                       cellFontSize={cellFontSize}
                       pinnedShadow={pinnedShadow}
-                      sort={sort}
-                      groupStartIds={groupStartIds}
-                      onToggleExpand={() =>
-                        setExpandedId((cur) => (cur === m.id ? null : m.id))
+                      sortedSkillId={
+                        sort.key.kind === 'skill' ? sort.key.skillId : null
                       }
+                      groupStartIds={groupStartIds}
+                      onToggleExpand={toggleExpand}
                     />
                     {isExpanded ? (
                       // Pin the panel to the visible viewport: the row wrapper
@@ -721,12 +726,15 @@ interface TableRowProps {
   rowHeight: number
   cellFontSize: number
   pinnedShadow: string
-  sort: SortState
+  sortedSkillId: number | null
   groupStartIds: Set<number>
-  onToggleExpand: () => void
+  onToggleExpand: (id: number) => void
 }
 
-function TableRow({
+// Memoized: on expand/collapse and most filter/sort updates only the rows
+// whose props actually changed re-render, instead of every visible row's
+// 100 cells. All props are primitives or stable references on purpose.
+const TableRow = memo(function TableRow({
   model,
   displayRank,
   skills,
@@ -735,16 +743,14 @@ function TableRow({
   rowHeight,
   cellFontSize,
   pinnedShadow,
-  sort,
+  sortedSkillId,
   groupStartIds,
   onToggleExpand,
 }: TableRowProps) {
   const familyColor = getFamilyColor(model.family)
-  const sortedSkillId =
-    sort.key.kind === 'skill' ? sort.key.skillId : null
   return (
     <div
-      onClick={onToggleExpand}
+      onClick={() => onToggleExpand(model.id)}
       className={cn(
         'group relative flex w-full cursor-pointer border-b border-border transition-colors hover:bg-surface-elevated/60',
         expanded && 'bg-surface-elevated'
@@ -844,4 +850,4 @@ function TableRow({
       </div>
     </div>
   )
-}
+})
