@@ -53,7 +53,7 @@ export function TablePage() {
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <div>
             <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Browse
+              Leaderboard
             </div>
             <h1 className="text-xl font-semibold tracking-tight">
               Model by skill mastery

@@ -39,6 +39,7 @@ interface ModelSkillTableProps {
 type SortKey =
   | { kind: 'index' }
   | { kind: 'name' }
+  | { kind: 'acc' }
   | { kind: 'mean' }
   | { kind: 'skill'; skillId: number }
 
@@ -56,12 +57,19 @@ const COL_W = {
   expander: 28,
   rank: 44,
   name: 264,
+  acc: 76,
   mean: 84,
   skill: 72,
 } as const
 
-const PINNED_WIDTHS = [COL_W.expander, COL_W.rank, COL_W.name, COL_W.mean]
-const PINNED_TOTAL_W = PINNED_WIDTHS.reduce((a, b) => a + b, 0) // 420
+const PINNED_WIDTHS = [
+  COL_W.expander,
+  COL_W.rank,
+  COL_W.name,
+  COL_W.acc,
+  COL_W.mean,
+]
+const PINNED_TOTAL_W = PINNED_WIDTHS.reduce((a, b) => a + b, 0) // 496
 
 const ROW_HEIGHTS: Record<Density, number> = {
   compact: 32,
@@ -201,6 +209,11 @@ export function ModelSkillTable({
           return (a.id - b.id) * dirMul
         case 'name':
           return cmpStr(a.name.toLowerCase(), b.name.toLowerCase()) * dirMul
+        case 'acc': {
+          const av = a.accuracy ?? -Infinity
+          const bv = b.accuracy ?? -Infinity
+          return (av - bv) * dirMul
+        }
         case 'mean':
           return (a.meanTheta - b.meanTheta) * dirMul
         case 'skill': {
@@ -250,7 +263,7 @@ export function ModelSkillTable({
         return { key, dir: prev.dir === 'asc' ? 'desc' : 'asc' }
       }
       // Numeric / mastery columns default to descending; name defaults asc.
-      const numericKinds = ['mean', 'skill', 'index']
+      const numericKinds = ['mean', 'acc', 'skill', 'index']
       const dir: SortDir = numericKinds.includes(key.kind) ? 'desc' : 'asc'
       return { key, dir }
     })
@@ -552,6 +565,14 @@ function TableHeader({
           width={COL_W.name}
         />
         <PinnedHeaderCell
+          label="Acc"
+          k={{ kind: 'acc' }}
+          sort={sort}
+          onToggle={onToggleSort}
+          width={COL_W.acc}
+          align="right"
+        />
+        <PinnedHeaderCell
           label="Mean θ"
           k={{ kind: 'mean' }}
           sort={sort}
@@ -802,6 +823,16 @@ const TableRow = memo(function TableRow({
             aria-hidden
           />
           <span className="truncate">{model.name}</span>
+        </div>
+        {/* Accuracy */}
+        <div
+          className="tabular flex h-full items-center justify-end border-r border-border px-2 font-mono text-xs"
+          style={{ width: COL_W.acc }}
+          title="Fraction of all 9,523 items answered correctly"
+        >
+          {model.accuracy != null
+            ? `${(model.accuracy * 100).toFixed(1)}%`
+            : '—'}
         </div>
         {/* Mean theta */}
         <div
