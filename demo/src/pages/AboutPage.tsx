@@ -33,8 +33,8 @@ export function AboutPage() {
 
         <p>
           The framework is research code. Planned follow-ups include
-          model-upload calibration — cold-start profiling of a new model
-          from its answers on a small fixed item set — and an open release
+          model-upload calibration (cold-start profiling of a new model
+          from its answers on a small fixed item set) and an open release
           of the K=100 skill taxonomy together with the trained NCDM
           parameters after the paper is public. The numbers shown here are
           a snapshot for inspection, not a leaderboard ranking.

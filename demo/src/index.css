@@ -22,12 +22,12 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 6% 90%;
     --input: 240 6% 90%;
-    --ring: 243 75% 59%;
+    --ring: 217 91% 60%;
     --radius: 0.5rem;
 
     --surface: 240 5% 98%;
     --surface-elevated: 240 5% 95%;
-    --brand: 243 75% 59%;
+    --brand: 221 83% 53%;
     --brand-foreground: 0 0% 100%;
   }
 
@@ -50,12 +50,12 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 4% 18%;
     --input: 240 4% 18%;
-    --ring: 243 80% 72%;
+    --ring: 213 94% 68%;
 
     --surface: 240 5% 9%;
     --surface-elevated: 240 4% 13%;
-    --brand: 243 80% 72%;
-    --brand-foreground: 240 6% 10%;
+    --brand: 213 94% 68%;
+    --brand-foreground: 222 47% 11%;
   }
 }
 
