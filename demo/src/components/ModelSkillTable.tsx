@@ -83,7 +83,7 @@ const ROW_HEIGHTS: Record<Density, number> = {
 // Must match the height RowExpansion renders at.
 const EXPANDED_PANEL_HEIGHT = 340
 const GROUP_HEADER_H = 28
-const SKILL_HEADER_H = 66
+const SKILL_HEADER_H = 84
 const COL_HEADER_H = GROUP_HEADER_H + SKILL_HEADER_H
 
 interface ProcessedModel extends Model {
@@ -148,6 +148,27 @@ export function ModelSkillTable({
     }
     return { orderedSkills: ordered, groups: groupArr, groupStartIds: startIds }
   }, [skills])
+
+  // Per-skill population histogram (16 bins over [0,1], max-normalized),
+  // computed once: it powers the micro-distribution under each column header.
+  const skillHists = useMemo(() => {
+    const BINS = 16
+    const hists = new Map<number, number[]>()
+    if (models.length === 0) return hists
+    for (const s of skills) {
+      const bins = new Array<number>(BINS).fill(0)
+      for (const m of models) {
+        const v = m.theta[s.id] ?? 0
+        bins[Math.min(BINS - 1, Math.floor(v * BINS))]++
+      }
+      const max = Math.max(...bins, 1)
+      hists.set(
+        s.id,
+        bins.map((b) => b / max)
+      )
+    }
+    return hists
+  }, [models, skills])
 
   // Filter state
   const [search, setSearch] = useState('')
@@ -438,6 +459,7 @@ export function ModelSkillTable({
             pinnedTotalW={PINNED_TOTAL_W}
             pinnedShadow={pinnedShadow}
             groupStartIds={groupStartIds}
+            skillHists={skillHists}
           />
 
           {/* Body */}
@@ -565,15 +587,20 @@ interface TableHeaderProps {
   pinnedTotalW: number
   pinnedShadow: string
   groupStartIds: Set<number>
+  skillHists: Map<number, number[]>
 }
 
-function TableHeader({
+// Memoized: the header holds ~100 cells with histograms, and the parent
+// re-renders on every virtualizer scroll tick; props only change on sort or
+// edge-shadow flips.
+const TableHeader = memo(function TableHeader({
   groups,
   sort,
   onToggleSort,
   pinnedTotalW,
   pinnedShadow,
   groupStartIds,
+  skillHists,
 }: TableHeaderProps) {
   return (
     <div
@@ -655,6 +682,7 @@ function TableHeader({
                   width={COL_W.skill}
                   isSorted={isSorted}
                   isGroupStart={groupStartIds.has(s.id)}
+                  hist={skillHists.get(s.id)}
                 />
               )
             })
@@ -663,7 +691,7 @@ function TableHeader({
       </div>
     </div>
   )
-}
+})
 
 interface PinnedHeaderCellProps {
   label: string
@@ -716,6 +744,7 @@ interface SkillHeaderCellProps {
   width: number
   isSorted: boolean
   isGroupStart: boolean
+  hist?: number[]
 }
 
 function SkillHeaderCell({
@@ -725,6 +754,7 @@ function SkillHeaderCell({
   width,
   isSorted,
   isGroupStart,
+  hist,
 }: SkillHeaderCellProps) {
   const k: SortKey = { kind: 'skill', skillId: skill.id }
   const active = sortKeysEqual(sort.key, k)
@@ -744,7 +774,7 @@ function SkillHeaderCell({
       <button
         type="button"
         onClick={() => onToggle(k)}
-        className="flex w-full flex-1 flex-col items-center justify-end gap-0.5 overflow-hidden text-[10px] font-medium leading-tight text-foreground"
+        className="flex w-full flex-1 flex-col items-center justify-end gap-1 overflow-hidden text-[10px] font-medium leading-tight text-foreground"
       >
         <span
           className="line-clamp-3 w-full px-0.5 text-center"
@@ -752,6 +782,31 @@ function SkillHeaderCell({
         >
           {displaySkillLabel(skill.label)}
         </span>
+        {hist ? (
+          <svg
+            width={64}
+            height={13}
+            viewBox="0 0 64 13"
+            aria-hidden
+            className="shrink-0"
+          >
+            {hist.map((h, i) => (
+              <rect
+                key={i}
+                x={i * 4}
+                y={13 - Math.max(1, h * 12)}
+                width={3}
+                height={Math.max(1, h * 12)}
+                rx={0.5}
+                fill={
+                  isSorted
+                    ? 'hsl(var(--brand) / 0.85)'
+                    : 'hsl(var(--muted-foreground) / 0.55)'
+                }
+              />
+            ))}
+          </svg>
+        ) : null}
         <SortIndicator active={active} dir={active ? sort.dir : undefined} />
       </button>
       <Link
