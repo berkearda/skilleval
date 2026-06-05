@@ -29,10 +29,10 @@ export function Footer() {
           <div className="flex flex-col gap-2">
             <span className={kicker}>SkillEval</span>
             <Link to="/" className={linkCls}>
-              Leaderboard
+              Home
             </Link>
-            <Link to="/overview" className={linkCls}>
-              Overview
+            <Link to="/leaderboard" className={linkCls}>
+              Leaderboard
             </Link>
             <Link to="/about" className={linkCls}>
               Methodology

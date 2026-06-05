@@ -3,8 +3,9 @@ import { ThemeToggle } from '@/components/ThemeToggle'
 import { cn } from '@/lib/utils'
 
 const navItems = [
-  { to: '/overview', label: 'Overview' },
-  { to: '/about', label: 'About' },
+  { to: '/', label: 'Home', end: true },
+  { to: '/leaderboard', label: 'Leaderboard' },
+  { to: '/about', label: 'Methodology' },
 ]
 
 export function Header() {
@@ -13,8 +14,8 @@ export function Header() {
       <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-3">
         <Link to="/" className="flex items-baseline gap-2">
           <span className="text-base font-semibold tracking-tight">SkillEval</span>
-          <span className="hidden text-xs text-muted-foreground sm:inline">
-            skill-level ability estimates for LLMs
+          <span className="hidden border-l border-border pl-2 text-xs text-muted-foreground sm:inline">
+            ETH Zürich
           </span>
         </Link>
         <nav className="flex items-center gap-1">
@@ -22,6 +23,7 @@ export function Header() {
             <NavLink
               key={item.to}
               to={item.to}
+              end={item.end}
               className={({ isActive }) =>
                 cn(
                   'rounded-md px-3 py-1.5 text-sm transition-colors duration-150',
@@ -34,6 +36,12 @@ export function Header() {
               {item.label}
             </NavLink>
           ))}
+          <Link
+            to="/leaderboard"
+            className="ml-2 hidden rounded-md bg-brand px-3 py-1.5 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand/90 sm:inline-flex"
+          >
+            Explore all 3,811 models
+          </Link>
           <div className="ml-2">
             <ThemeToggle />
           </div>

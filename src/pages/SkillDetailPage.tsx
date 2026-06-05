@@ -14,7 +14,7 @@ const SMALL_CLUSTER_IDS = new Set([
 ])
 
 const LANGUAGE_NOTES: Record<string, string> = {
-  vi: 'Vietnamese-origin skill cluster — heading shown is the English translation.',
+  vi: 'Vietnamese-origin skill cluster. The heading shown is the English translation.',
 }
 
 function useDarkMode(): boolean {
@@ -49,11 +49,11 @@ function descriptionDuplicatesLabel(
 function BackLink({ className = '' }: { className?: string }) {
   return (
     <Link
-      to="/"
+      to="/leaderboard"
       className={`inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground ${className}`}
     >
       <ArrowLeft className="h-3.5 w-3.5" />
-      Back to table
+      Back to leaderboard
     </Link>
   )
 }
@@ -227,7 +227,7 @@ export function SkillDetailPage() {
         {isSmallCluster ? (
           <p className="mt-1 text-sm text-muted-foreground">
             Only {examples.length} example item{examples.length === 1 ? '' : 's'}{' '}
-            available — this is a small cluster ({skill.n_items.toLocaleString()}{' '}
+            available. This is a small cluster ({skill.n_items.toLocaleString()}{' '}
             item{skill.n_items === 1 ? '' : 's'}).
           </p>
         ) : (
