@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, RotateCcw } from 'lucide-react'
 import { PipelineDiagram } from '@/components/PipelineDiagram'
+import { SkillMap } from '@/components/SkillMap'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import { displaySkillLabel } from '@/lib/labels'
 import {
@@ -484,6 +485,23 @@ export function HomePage() {
           >
             Read the methodology →
           </Link>
+        </div>
+      </section>
+
+      {/* The capability space */}
+      <section className="mt-16">
+        <h2 className="text-xl font-semibold tracking-tight">
+          The capability space of open LLMs
+        </h2>
+        <p className="mt-2 max-w-[68ch] text-sm leading-6 text-muted-foreground">
+          Every skill, positioned by how similarly the 3,811 models master it:
+          nearby skills are mastered by the same models. The layout never sees
+          which benchmark a skill came from, yet the benchmarks emerge as
+          regions. Dot size is the number of items; hover for the skill, click
+          to open it.
+        </p>
+        <div className="mt-4">
+          <SkillMap skills={skills} models={models} darkMode={darkMode} />
         </div>
       </section>
 
