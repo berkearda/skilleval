@@ -12,6 +12,8 @@ import json, re, sys
 from collections import Counter
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 P = Path(__file__).resolve().parent.parent / "cdm_exploration/experiments/pipeline_v7"
 
 
@@ -53,10 +55,11 @@ def main(tag="final"):
             seen.add(cid); cid = cb["alias"][cid]
         uses[cid] += 1
     sizes = sorted((uses[c] for c in live), reverse=True)
-    stop = next((l.strip() for l in log.open() if l.startswith("stopped:")), "(still running)")
+    stops = [l.strip() for l in log.open() if l.startswith("stopped:")]
+    stop = stops[-1] if stops else "(still running)"   # the last one is the outcome
     jo = Counter(j["op"] for j in cb.get("journal", []))
 
-    print(f"**Ran** {len(B)} batches of {BATCH_HINT}, {len(A)} audits. {stop}\n")
+    print(f"**Ran** {len(B)} batches, {len(A)} audits. {stop}\n")
     print("| | |\n|---|---|")
     print(f"| live codes | {len(live):,} |")
     print(f"| codes created | {len(cb['codes']):,} |")
@@ -67,22 +70,44 @@ def main(tag="final"):
         print(f"| singleton codes | {sum(1 for s in sizes if s == 1):,} "
               f"({sum(1 for s in sizes if s == 1)/len(sizes):.0%}) |")
     if B:
-        print(f"| tokens | {B[-1]['tok']:,} |")
-        print(f"| wall time | {B[-1]['sec']/3600:.1f} h |")
+        # counters reset on every process start, so after a --resume the last row
+        # is the continuation segment, not the run. Sum the segments instead.
+        segs, prev = [], None
+        for r in B:
+            if prev is None or r["tok"] < prev["tok"]:
+                segs.append(r)
+            else:
+                segs[-1] = r
+            prev = r
+        print(f"| tokens | {sum(x['tok'] for x in segs):,} |")
+        print(f"| wall time | {sum(x['sec'] for x in segs)/3600:.1f} h |")
+        if len(segs) > 1:
+            print(f"| segments (resumes) | {len(segs)} |")
     print(f"| audit operations | {dict(jo)} |\n")
 
     print("New-code rate, mean per ten batches:\n")
     print("| batches | mean new/batch | rate |\n|---|---|---|")
     for lo in range(0, (B[-1]["b"] if B else 0) + 1, 10):
-        w = [r["new"] for r in B if lo <= r["b"] < lo + 10]
+        w = [r for r in B if lo <= r["b"] < lo + 10]
         if w:
-            print(f"| {lo}-{lo+9} | {sum(w)/len(w):.1f} | {sum(w)/len(w)/50:.1%} |")
+            # the script's own rate, not new/50: a batch that absorbed a failed
+            # batch's carry processes 100 labels and /50 reports it as double
+            print(f"| {lo}-{lo+9} | {sum(x['new'] for x in w)/len(w):.1f} | "
+                  f"{sum(x['rate'] for x in w)/len(w):.1f}% |")
     print("\nAudits:\n")
     print("| audit | operations | churn | live codes after |\n|---|---|---|---|")
     for a in A:
         print(f"| v{a['v']} | {a['ops']} | {a['churn']:.1f}% | {a['codes']} |")
 
 
-BATCH_HINT = 50
 if __name__ == "__main__":
-    main(sys.argv[2] if len(sys.argv) > 2 else "final")
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--codebook", default="final")
+    ap.add_argument("--no-gate", action="store_true",
+                    help="emit numbers without running the regression suite first")
+    args = ap.parse_args()
+    if not args.no_gate:
+        from tools.gate import require_tests_pass
+        require_tests_pass()
+    main(args.codebook)
