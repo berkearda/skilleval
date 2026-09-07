@@ -232,6 +232,28 @@ def code_line(cb, cid, full=True):
             f"exclude: {exc} | examples: {ex}")
 
 
+def embed_new_codes(g, cb, code_vec):
+    """Embed every code that has no vector yet, in ONE call.
+
+    Was a call per code. Eleven new codes meant eleven HTTP requests fired back
+    to back, which is what tripped the embedding endpoint's rate limit and
+    killed the 2026-09-07 run at batch 40. A 429 here now defers instead of
+    raising: the code keeps no vector, so the next batch retries it, and the
+    only cost is that it cannot be retrieved as a candidate until then.
+    """
+    todo = [c for c in cb.codes if c not in code_vec and c not in cb.alias]
+    if not todo:
+        return 0
+    try:
+        V = g.embed([f"{cb.codes[c]['name']}. {cb.codes[c]['definition']}" for c in todo])
+    except GeminiError as e:
+        print(f"    embed deferred for {len(todo)} codes: {e}", flush=True)
+        return 0
+    for c, v in zip(todo, V):
+        code_vec[c] = v
+    return len(todo)
+
+
 def run_batch(g, cb, labels, freq, bidx, lab_vec, code_vec, batch_model=CODEBOOK):
     """One append-only batch: map to an existing code, or create a new one."""
     if cb.codes:
@@ -439,10 +461,7 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
     created_since = resumed_created
     stop_reason = f"batch cap {BATCH_CAP}"
     if start_batch:                    # re-embed the codebook we just loaded
-        live = [c for c in cb.codes if c not in cb.alias]
-        if live:
-            V = g.embed([f"{cb.codes[c]['name']}. {cb.codes[c]['definition']}" for c in live])
-            code_vec = {c: v for c, v in zip(live, V)}
+        embed_new_codes(g, cb, code_vec)
     for bi, labels in enumerate(batches):
         if bi < start_batch:
             continue
@@ -461,9 +480,7 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
         created_since += n_new
         rate = n_new / max(1, len(labels))
         hist.append(rate)
-        for cid in cb.codes:
-            if cid not in code_vec:
-                code_vec[cid] = g.embed([f"{cb.codes[cid]['name']}. {cb.codes[cid]['definition']}"])[0]
+        embed_new_codes(g, cb, code_vec)
         print(f"  batch {bi:3d}: {n_map:3d} mapped, {n_new:3d} new ({rate:5.1%}), "
               f"{len(still):2d} carried | codes {len(cb.codes)-len(cb.alias):4d} | "
               f"{g.total_tokens:,} tok | {time.time()-t0:.0f}s", flush=True)
@@ -479,9 +496,7 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
             for cid in list(code_vec):
                 if cid in cb.alias:
                     code_vec.pop(cid, None)
-            for cid in cb.codes:
-                if cid not in code_vec and cid not in cb.alias:
-                    code_vec[cid] = g.embed([f"{cb.codes[cid]['name']}. {cb.codes[cid]['definition']}"])[0]
+            embed_new_codes(g, cb, code_vec)
             print(f"    audit v{cb.version}: {dict(applied)} churn {churn:.1%} "
                   f"| codes {len(cb.codes)-len(cb.alias)}")
             if churn > CHURN_ABORT:
