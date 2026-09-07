@@ -363,3 +363,77 @@ class TestGate(unittest.TestCase):
         self.assertTrue(callable(require_tests_pass))
         src = (REPO / "tools/step2_report.py").read_text()
         self.assertIn("require_tests_pass()", src)
+
+
+# --------------------------------------------------------------------------
+class TestModulesActuallyRun(unittest.TestCase):
+    """String-matching tests miss what only execution catches.
+
+    I added an atomic rewrite to step5_loop.py without importing os. The suite
+    passed, because the test asserted the string "os.replace" appeared in the
+    source. The chain then died at the write with a NameError, after the API
+    calls. These tests execute instead of grepping.
+    """
+
+    def test_every_tool_module_imports(self):
+        import importlib
+        for m in ("gemini", "step1_extract", "step2_codebook", "step3_freeze",
+                  "step4_relabel", "step5_loop", "step6_validate", "step7_audit",
+                  "step2_report", "gate"):
+            with self.subTest(module=m):
+                importlib.import_module(f"tools.{m}")
+
+    def test_every_tool_module_compiles_under_py_compile(self):
+        import py_compile, tempfile
+        for f in sorted((REPO / "tools").glob("step*.py")) + [REPO / "tools/gemini.py"]:
+            with self.subTest(file=f.name), tempfile.TemporaryDirectory() as d:
+                py_compile.compile(str(f), cfile=str(Path(d) / "x.pyc"), doraise=True)
+
+    def test_atomic_rewrite_actually_replaces(self):
+        """Executes the os.replace path rather than grepping for it."""
+        import os as _os, tempfile
+        for mod in (S4, S5):
+            with self.subTest(module=mod.__name__):
+                self.assertTrue(hasattr(mod, "os"), f"{mod.__name__} uses os.replace but never imported os")
+        with tempfile.TemporaryDirectory() as d:
+            src, dst = Path(d) / "a.tmp", Path(d) / "a.jsonl"
+            dst.write_text("old\n"); src.write_text("new\n")
+            _os.replace(src, dst)
+            self.assertEqual(dst.read_text(), "new\n")
+            self.assertFalse(src.exists())
+
+
+# --------------------------------------------------------------------------
+class TestStep7Audit(unittest.TestCase):
+    """The evidence-driven audit the doc defers the real merge decisions to."""
+
+    def test_alias_chain_resolves(self):
+        from tools.step7_audit import resolve
+        self.assertEqual(resolve({"a": "b", "b": "c"}, "a"), "c")
+        self.assertEqual(resolve({}, "a"), "a")
+
+    def test_alias_cycle_terminates(self):
+        from tools.step7_audit import resolve
+        self.assertIn(resolve({"a": "b", "b": "a"}, "a"), {"a", "b"})
+
+    def test_splits_are_proposed_never_applied(self):
+        """The doc: a split needs new labels, so applying one here would be
+        'looks off to me' dressed as evidence."""
+        src = (REPO / "tools/step7_audit.py").read_text()
+        self.assertIn("split proposals (not applied)", src)
+        self.assertNotIn('alias[o["code"]]', src)
+
+    def test_uses_step0_thresholds_as_defaults(self):
+        src = (REPO / "tools/step7_audit.py").read_text()
+        self.assertIn('"--floor", type=int, default=20', src)
+        self.assertIn('"--ceiling", type=float, default=0.05', src)
+
+    def test_persists_the_co_assignment_matrix(self):
+        """It was previously built in a local and discarded, though the doc names
+        it as one of the three evidence streams."""
+        src = (REPO / "tools/step7_audit.py").read_text()
+        self.assertIn("co_assignment.json", src)
+
+    def test_reporting_is_gated(self):
+        src = (REPO / "tools/step7_audit.py").read_text()
+        self.assertIn("require_tests_pass()", src)

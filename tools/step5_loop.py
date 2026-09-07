@@ -18,7 +18,7 @@ Two departures from a literal reading, both forced by measurement:
 
     python3 tools/step5_loop.py [--rounds 2] [--smoke]
 """
-import argparse, json, sys, time
+import argparse, json, os, sys, time
 from collections import Counter
 from pathlib import Path
 import numpy as np
