@@ -462,3 +462,50 @@ class TestStep7Audit(unittest.TestCase):
     def test_reporting_is_gated(self):
         src = (REPO / "tools/step7_audit.py").read_text()
         self.assertIn("require_tests_pass()", src)
+
+
+# --------------------------------------------------------------------------
+class TestStep8Definitions(unittest.TestCase):
+    """Repairing definitions that drifted from the questions they hold."""
+
+    def test_split_is_deterministic_and_disjoint(self):
+        from tools.step8_definitions import split_items
+        items = list(range(37))
+        r1, h1 = split_items("c_0001", items)
+        r2, h2 = split_items("c_0001", items)
+        self.assertEqual(r1, r2, "the split must reproduce, or before/after is not like-for-like")
+        self.assertEqual(h1, h2)
+        self.assertEqual(set(r1) & set(h1), set(), "repair and holdout must be disjoint")
+        self.assertEqual(sorted(r1 + h1), sorted(items), "no item may be lost in the split")
+
+    def test_split_differs_per_code(self):
+        from tools.step8_definitions import split_items
+        items = list(range(40))
+        self.assertNotEqual(split_items("c_0001", items)[0], split_items("c_0002", items)[0])
+
+    def test_holdout_is_never_shown_to_the_writer(self):
+        """The whole point: rewriting a definition from items and then scoring
+        coherence on those same items raises the score by construction."""
+        src = (REPO / "tools/step8_definitions.py").read_text()
+        self.assertIn("repair, _hold = splits[c]", src)
+        self.assertIn("shown = repair[:a.show]", src)
+        self.assertNotIn("hold[:a.show]", src)
+
+    def test_previous_definition_is_kept(self):
+        """Without definition_before there is no like-for-like baseline."""
+        src = (REPO / "tools/step8_definitions.py").read_text()
+        self.assertIn('codes[c]["definition_before"]', src)
+
+    def test_coherence_can_score_holdout_and_before(self):
+        src = (REPO / "tools/step6_validate.py").read_text()
+        self.assertIn('"--holdout"', src)
+        self.assertIn('"--use-before"', src)
+        self.assertIn('field = "definition_before" if', src)
+
+    def test_coherence_refuses_holdout_without_step8(self):
+        src = (REPO / "tools/step6_validate.py").read_text()
+        self.assertIn("--holdout needs a codebook that Step 8 has written", src)
+
+    def test_reporting_is_gated(self):
+        src = (REPO / "tools/step8_definitions.py").read_text()
+        self.assertIn("require_tests_pass()", src)

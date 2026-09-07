@@ -64,11 +64,17 @@ def load_items():
     return txt
 
 
-def load_state():
-    f = P / "codebook_v2_amended.json"
-    if not f.exists():
-        f = P / "codebook_v1_frozen.json"
+def load_state(name=None):
+    if name:
+        f = P / name
+    else:
+        for cand in ("codebook_v4_definitions.json", "codebook_v3_audited.json",
+                     "codebook_v2_amended.json", "codebook_v1_frozen.json"):
+            f = P / cand
+            if f.exists():
+                break
     fz = json.loads(f.read_text())
+    print(f"  codebook: {f.name}")
     rows = [json.loads(l) for l in (P / "item_labels.jsonl").open()]
     ok = [r for r in rows if "error" not in r]
     by_code = defaultdict(list)
@@ -79,7 +85,18 @@ def load_state():
 
 
 def coherence(a):
-    fz, ok, by_code = load_state(); codes = fz["codes"]; txt = load_items()
+    fz, ok, by_code = load_state(getattr(a, "codebook", None))
+    codes = fz["codes"]; txt = load_items()
+    field = "definition_before" if getattr(a, "use_before", False) else "definition"
+    if a.use_before and not any("definition_before" in v for v in codes.values()):
+        raise SystemExit("--use-before needs a codebook that Step 8 has written")
+    if getattr(a, "holdout", False):
+        # score only on items the definition writer never saw, or the comparison
+        # is circular: a definition rewritten from items trivially matches them
+        hold = {c: set(v.get("holdout_items", [])) for c, v in codes.items()}
+        if not any(hold.values()):
+            raise SystemExit("--holdout needs a codebook that Step 8 has written")
+        by_code = {c: [i for i in v if i in hold.get(c, set())] for c, v in by_code.items()}
     g = Gemini()
     targets = [c for c in by_code if len(by_code[c]) >= 2]
     if a.smoke:
@@ -94,7 +111,7 @@ def coherence(a):
         # 4,000 depresses precision by truncation rather than by disagreement
         qs = "\n".join(f"{i+1}. {txt[j][:4000]}" for i, j in enumerate(items))
         try:
-            obj = g.json_obj(COH_SYS, COH_U.format(definition=codes[c]["definition"], questions=qs),
+            obj = g.json_obj(COH_SYS, COH_U.format(definition=codes[c][field], questions=qs),
                              model=JUDGE, max_out=4000)
         except GeminiError as e:
             return {"code": c, "error": str(e)[:120]}
@@ -135,9 +152,12 @@ def coherence(a):
         for thr in (0.5, 0.7, 0.9):
             print(f"  codes below {thr:.0%}: {sum(1 for p in ps if p < thr):,} ({sum(1 for p in ps if p < thr)/len(ps):.0%})")
     if not a.smoke:
-        (P / "validation_coherence.json").write_text(json.dumps(
-            {"judge": JUDGE, "sample": a.sample, "results": out}, indent=1))
-        print("wrote validation_coherence.json")
+        tag = ("_holdout_before" if (a.holdout and a.use_before)
+               else "_holdout_after" if a.holdout else "")
+        f = P / f"validation_coherence{tag}.json"
+        f.write_text(json.dumps({"judge": JUDGE, "sample": a.sample, "field": field,
+                                 "holdout_only": bool(a.holdout), "results": out}, indent=1))
+        print(f"wrote {f.name}")
 
 
 def distinctness(a):
@@ -282,6 +302,11 @@ if __name__ == "__main__":
                     help="re-label with JUDGE instead; measures cross-model agreement, "
                          "which is a different quantity from order stability")
     ap.add_argument("--sample", type=int, default=10)
+    ap.add_argument("--codebook", default=None, help="codebook filename to score")
+    ap.add_argument("--holdout", action="store_true",
+                    help="score only items Step 8's definition writer never saw")
+    ap.add_argument("--use-before", action="store_true",
+                    help="score the pre-repair definitions, for a like-for-like baseline")
     ap.add_argument("--smoke", action="store_true")
     a = ap.parse_args()
     if a.what == "gold":
