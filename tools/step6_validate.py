@@ -28,7 +28,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from tools.gemini import Gemini, GeminiError, JUDGE
+from tools.gemini import Gemini, GeminiError, JUDGE, BULK
 
 REPO = Path(__file__).resolve().parent.parent
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
@@ -80,7 +80,7 @@ def load_state():
 
 def coherence(a):
     fz, ok, by_code = load_state(); codes = fz["codes"]; txt = load_items()
-    g = Gemini(); rng = random.Random(42)
+    g = Gemini()
     targets = [c for c in by_code if len(by_code[c]) >= 2]
     if a.smoke:
         targets = targets[:5]
@@ -88,9 +88,11 @@ def coherence(a):
 
     def one(c):
         items = by_code[c][:]
-        rng.shuffle(items)
+        random.Random(42 + hash(c) % 10**6).shuffle(items)   # per-code, so it reproduces
         items = items[:a.sample]
-        qs = "\n".join(f"{i+1}. {txt[j][:600]}" for i, j in enumerate(items))
+        # same window the labeller saw: judging on 600 chars what was decided on
+        # 4,000 depresses precision by truncation rather than by disagreement
+        qs = "\n".join(f"{i+1}. {txt[j][:4000]}" for i, j in enumerate(items))
         try:
             obj = g.json_obj(COH_SYS, COH_U.format(definition=codes[c]["definition"], questions=qs),
                              model=JUDGE, max_out=4000)
@@ -173,9 +175,85 @@ def distinctness(a):
         print("wrote validation_distinctness.json")
 
 
+def stability(a):
+    """The doc: re-run labelling with the candidate order shuffled and a different
+    seed, then measure agreement. Disagreement means an ambiguous definition.
+
+    Default is the SAME model that did the labelling. The annotation's
+    different-model rule is about not checking our own work with the judge we
+    tuned against, which applies to coherence and distinctness. Here a model
+    swap would confound the thing being measured: disagreement would mix
+    order-sensitivity with cross-model difference. --cross-model measures that
+    separately, and it is a different quantity."""
+    fz, ok, _ = load_state(); codes = fz["codes"]; txt = load_items()
+    z = np.load(P / "code_def_emb.npz", allow_pickle=True)
+    ids = list(z["ids"]); C = z["vecs"] / np.linalg.norm(z["vecs"], axis=1, keepdims=True)
+    iz = np.load(P / "item_emb_gemini.npz", allow_pickle=True)
+    pos = {int(i): k for k, i in enumerate(list(iz["idx"]))}
+    V = iz["vecs"] / np.linalg.norm(iz["vecs"], axis=1, keepdims=True)
+
+    rng = random.Random(4242)                      # a different seed, as the doc asks
+    pool = [r for r in ok if r["assigned"]]
+    sample = rng.sample(pool, 30 if a.smoke else min(a.sample_items, len(pool)))
+    model = JUDGE if a.cross_model else BULK
+    print(f"stability: re-labelling {len(sample):,} items, shuffled candidate order, "
+          f"model {model} ({'cross-model' if a.cross_model else 'same model as Step 4'})")
+    g = Gemini()
+
+    def one(r):
+        i = r["item_idx"]
+        from tools.step4_relabel import TOPK as S4TOPK
+        cand = [ids[j] for j in np.argsort(-(V[pos[i]] @ C.T))[:S4TOPK]]
+        random.Random(4242 + i).shuffle(cand)      # the shuffle the doc specifies
+        ctxt = "\n".join(f"{c} | {codes[c]['name']} | {codes[c]['definition']}"
+                          for c in cand if c in codes)
+        u = (f"QUESTION:\n{txt[i][:2500]}\n\nCANDIDATE SKILLS:\n{ctxt}\n\n"
+             "Choose the skills a solver must actually perform, at most 3. Choose one if "
+             "one is enough. Return JSON only: {\"assigned\": [{\"code\": \"c_0123\"}]}")
+        try:
+            obj = g.json_obj("You assign cognitive skills to test questions from a fixed "
+                             "codebook. You judge by the operation the solver performs, "
+                             "never by the subject matter.", u, model=model, max_out=1200)
+        except GeminiError as e:
+            return {"item_idx": i, "error": str(e)[:100]}
+        # the judge returns assigned as objects or as bare id strings; accept both
+        b = set()
+        for x in obj.get("assigned", []):
+            cid = x.get("code") if isinstance(x, dict) else x
+            if isinstance(cid, str) and cid in codes:
+                b.add(cid)
+        a_ = {x["code"] for x in r["assigned"]}
+        inter, union = len(a_ & b), len(a_ | b)
+        return {"item_idx": i, "orig": sorted(a_), "rerun": sorted(b),
+                "jaccard": inter / union if union else 1.0, "exact": a_ == b}
+
+    res, t0 = [], time.time()
+    with ThreadPoolExecutor(max_workers=WORKERS) as ex:
+        for k, r in enumerate(ex.map(one, sample), 1):
+            res.append(r)
+            if k % 100 == 0 or k == len(sample):
+                print(f"  {k:,}/{len(sample):,} | {g.total_tokens:,} tok | {time.time()-t0:.0f}s", flush=True)
+    good = [r for r in res if "error" not in r]
+    if good:
+        js = sorted(r["jaccard"] for r in good)
+        print(f"\nitems compared: {len(good):,} ({len(res)-len(good)} errors)")
+        print(f"exact set match: {sum(r['exact'] for r in good)/len(good):.1%}")
+        print(f"Jaccard: mean {sum(js)/len(js):.3f}, median {js[len(js)//2]:.3f}, "
+              f"zero-overlap {sum(1 for j in js if j == 0)/len(js):.1%}")
+    if not a.smoke:
+        (P / "validation_stability.json").write_text(json.dumps(
+            {"model": model, "cross_model": bool(a.cross_model), "seed": 4242,
+             "results": res}, indent=1))
+        print("wrote validation_stability.json")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("what", choices=["coherence", "distinctness", "gold"])
+    ap.add_argument("what", choices=["coherence", "distinctness", "stability", "gold"])
+    ap.add_argument("--sample-items", type=int, default=1000)
+    ap.add_argument("--cross-model", action="store_true",
+                    help="re-label with JUDGE instead; measures cross-model agreement, "
+                         "which is a different quantity from order stability")
     ap.add_argument("--sample", type=int, default=10)
     ap.add_argument("--smoke", action="store_true")
     a = ap.parse_args()
@@ -184,4 +262,5 @@ if __name__ == "__main__":
               "so this cannot be generated here. The doc ranks it first for return on effort:\n"
               "without it, no pipeline change can be shown to be an improvement.")
     else:
-        {"coherence": coherence, "distinctness": distinctness}[a.what](a)
+        {"coherence": coherence, "distinctness": distinctness,
+         "stability": stability}[a.what](a)

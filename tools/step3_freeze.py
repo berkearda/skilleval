@@ -57,16 +57,30 @@ def load():
     return cb, live, uses
 
 
+def code_text(cb, c):
+    """The doc retrieves on "the code's definition + exemplars", not the definition
+    alone. Pass 1 has no item exemplars yet, so it uses the raw-label ones."""
+    e = cb["codes"][c]
+    ex = "; ".join(e.get("exemplars", [])[:3])
+    return f"{e['name']}. {e['definition']}" + (f" Examples: {ex}" if ex else "")
+
+
 def embed_defs(g, cb, live):
+    import hashlib
+    texts = [code_text(cb, c) for c in live]
+    digest = hashlib.sha256("\x00".join(texts).encode()).hexdigest()
     cache = P / "code_def_emb.npz"
     if cache.exists():
         z = np.load(cache, allow_pickle=True)
-        if list(z["ids"]) == live:
+        # keyed on the embedded TEXT, not just the ids: changing code_text with the
+        # ids unchanged would otherwise silently reuse stale vectors
+        if list(z["ids"]) == live and str(z["digest"]) == digest:
             print(f"  loaded {len(live):,} cached definition embeddings")
             return z["vecs"]
+        print("  cache stale (embedded text changed); re-embedding")
     print(f"  embedding {len(live):,} code definitions ...")
-    V = np.stack(g.embed([f"{cb['codes'][c]['name']}. {cb['codes'][c]['definition']}" for c in live]))
-    np.savez_compressed(cache, ids=np.array(live, dtype=object), vecs=V)
+    V = np.stack(g.embed(texts))
+    np.savez_compressed(cache, ids=np.array(live, dtype=object), vecs=V, digest=digest)
     return V
 
 
@@ -89,6 +103,22 @@ def main():
     a = ap.parse_args()
 
     cb, live, uses = load()
+    # exemplar_items are item ids, which only exist once Step 4 has run. On a
+    # second pass they are filled from it; on the first they stay empty.
+    ex_items = {}
+    lf = P / "item_labels.jsonl"
+    if lf.exists():
+        from collections import defaultdict as _dd
+        acc = _dd(list)
+        for l in lf.open():
+            r = json.loads(l)
+            if "error" in r:
+                continue
+            for asg in r.get("assigned", []):
+                if len(acc[asg["code"]]) < 3:
+                    acc[asg["code"]].append(r["item_idx"])
+        ex_items = dict(acc)
+        print(f"  filling exemplar_items from {lf.name}: {len(ex_items):,} codes have items")
     print(f"step 3: freezing {len(live):,} live codes ({len(cb['alias'])} merged away)")
     g = Gemini()
     V = embed_defs(g, cb, live)
@@ -114,13 +144,21 @@ def main():
         names.setdefault(j, f"domain_{j:02d}")
 
     # ---- confusable_with ----
+    rules = {}
+    df = P / "validation_distinctness.json"
+    if df.exists():
+        for r in json.loads(df.read_text()).get("results", []):
+            if r.get("rule") and not r.get("merge") and len(r.get("pair", [])) == 2:
+                rules[tuple(sorted(r["pair"]))] = r["rule"]
+        print(f"  loaded {len(rules):,} discriminating rules from validation_distinctness.json")
     S = Vn @ Vn.T
     np.fill_diagonal(S, -1)
     conf = {}
     for i, c in enumerate(live):
         order = np.argsort(-S[i])[:CONF_KEEP]
         conf[c] = [{"id": live[j], "name": cb["codes"][live[j]]["name"],
-                    "similarity": round(float(S[i, j]), 3)}
+                    "similarity": round(float(S[i, j]), 3),
+                    "rule": rules.get(tuple(sorted((c, live[j]))))}
                    for j in order if S[i, j] >= CONF_THR]
 
     out = {}
@@ -130,7 +168,7 @@ def main():
                   "definition": e["definition"], "include": e.get("include", []),
                   "exclude": e.get("exclude", []),
                   "exemplar_labels": e.get("exemplars", [])[:5],
-                  "exemplar_items": [],          # filled at Step 4, which is where items meet codes
+                  "exemplar_items": ex_items.get(c, []),
                   "confusable_with": conf[c], "raw_label_mentions": uses[c]}
 
     frozen = {"version": "v1", "source": "codebook_final.json",

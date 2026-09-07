@@ -341,7 +341,9 @@ def run_audit(g, cb, code_vec, bidx, created_since):
     """
     cap = max(AUDIT_OPS_MIN, created_since // AUDIT_OPS_PER)
     uses = cb.uses()
-    live = [c for c in cb.codes if c not in cb.alias]
+    # a 429-deferred embed leaves a live code with no vector; indexing it below
+    # would raise KeyError and kill the run, which is what deferring exists to avoid
+    live = [c for c in cb.codes if c not in cb.alias and c in code_vec]
     for c in live:
         cb.codes[c]["stable"] = cb.codes[c]["unchanged_audits"] >= 2 and uses[c] >= 4
 
@@ -388,6 +390,8 @@ def run_audit(g, cb, code_vec, bidx, created_since):
             elif kind == "RENAME":
                 c = cb.resolve(op["code"])
                 if c in cb.codes and op.get("new_name"):
+                    if cb.codes[c]["stable"] and not op.get("reason"):
+                        continue          # "changing it after that requires an explicit override"
                     cb.log("RENAME", code=c, old=cb.codes[c]["name"],
                            new=op["new_name"], reason=op.get("reason"))
                     cb.codes[c]["name"] = op["new_name"]
@@ -395,8 +399,11 @@ def run_audit(g, cb, code_vec, bidx, created_since):
             elif kind == "EDIT_DEF":
                 c = cb.resolve(op["code"])
                 if c in cb.codes and op.get("add_exclude"):
+                    if cb.codes[c]["stable"] and not op.get("reason"):
+                        continue
                     cb.codes[c]["exclude"].append(op["add_exclude"])
-                    cb.log("EDIT_DEF", code=c, add_exclude=op["add_exclude"])
+                    cb.log("EDIT_DEF", code=c, add_exclude=op["add_exclude"],
+                           reason=op.get("reason"))
                     applied["EDIT_DEF"] += 1
             elif kind == "SPLIT":
                 # recorded only: a text-level audit cannot see member counts (doc, Step 5)
@@ -514,6 +521,8 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
                                f"< {SAT_RATE:.0%}, churn {churn:.1%}")
                 break
 
+    if stop_reason == f"batch cap {BATCH_CAP}" and len(hist) < BATCH_CAP:
+        stop_reason = f"corpus exhausted after {len(batches)} batches"
     cb.save("final" if mode != "smoke" else "smoke")
     uses = cb.uses()
     live = [c for c in cb.codes if c not in cb.alias]

@@ -67,11 +67,14 @@ def norm_proposal(p):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--rounds", type=int, default=2)
+    # NOTE: one round only. The script is not re-entrant (it reloads
+    # codebook_v1_frozen.json unconditionally, so a second call would discard the
+    # first round's codes), and one round reached 0.4% against a 2-3% target.
+    # A --rounds flag is deliberately absent rather than present and ignored.
     ap.add_argument("--smoke", action="store_true")
     a = ap.parse_args()
 
-    fz = json.loads((P / "codebook_v1_frozen.json").read_text())
+    fz = json.loads((P / "codebook_v1_frozen.json").read_text())  # single round; see above
     codes = fz["codes"]
     rows = {json.loads(l)["item_idx"]: json.loads(l)
             for l in (P / "item_labels.jsonl").open()}
@@ -129,19 +132,65 @@ def main():
         for k in c.get("covers", []):
             if isinstance(k, int) and 1 <= k <= len(props):
                 covered.add(props[k - 1][0])
-    other = [i for i, _, _ in props if i not in covered]
+    # seeded from ALL residue, not just those carrying a proposal: the item nothing
+    # could even be proposed for is the one that most belongs in the tail bucket
+    other = [i for i in resid if i not in covered]
     print(f"  added {len(added)} codes covering {len(covered)} items; "
           f"OTHER bucket {len(other)} items ({len(other)/n:.2%})")
 
     fz["codes"].update(added)
     fz["version"] = "v2"
-    fz["step5"] = {"residue_in": len(resid), "errored_retried": len(errs),
-                   "codes_added": len(added), "items_covered": len(covered),
-                   "other_bucket": sorted(other),
-                   "residual_rate": len(other) / n}
+    fz["step5"] = {"residue_in": len(resid), "errored_remaining": len(errs),
+                   "codes_added": len(added), "items_claimed_covered": len(covered)}
     (P / "codebook_v2_amended.json").write_text(json.dumps(fz, indent=1))
     print(f"\nwrote codebook_v2_amended.json: {len(fz['codes']):,} codes "
           f"({len(added)} new). Residual {len(other)/n:.2%}, target {RESID_TARGET:.0%}.")
+
+    # The doc: "re-run only the affected items". Adding codes changes nothing for
+    # items that were already assigned, so the affected set is the residue.
+    if not added:
+        return
+    print(f"\nre-running the {len(resid)} affected items against the amended codebook ...")
+    from tools.step4_relabel import load_items as _li
+    txt = {it["item_idx"]: it for it in _li()}
+    newV = np.stack(g.embed([f"{v['name']}. {v['definition']}" for v in added.values()]))
+    newV = newV / np.linalg.norm(newV, axis=1, keepdims=True)
+    allC = np.vstack([C, newV]); allIds = ids + list(added)
+    iz = np.load(P / "item_emb_gemini.npz", allow_pickle=True)
+    ipos = {int(i): k for k, i in enumerate(list(iz["idx"]))}
+    IV = iz["vecs"] / np.linalg.norm(iz["vecs"], axis=1, keepdims=True)
+
+    from tools.step4_relabel import SYS as S4SYS, USER as S4USER, TOPK, MAX_SKILLS
+    fixed = 0
+    for i in resid:
+        it = txt.get(i)
+        if it is None:
+            continue
+        cand = [allIds[j] for j in np.argsort(-(IV[ipos[i]] @ allC.T))[:TOPK]]
+        ctxt = "\n".join(f"{c} | {fz['codes'][c]['name']} | {fz['codes'][c]['definition']}"
+                          for c in cand if c in fz["codes"])
+        try:
+            obj = g.json_obj(S4SYS, S4USER.format(benchmark=it["benchmark"], subtask=it["subtask"],
+                                                  question=it["question"], codes=ctxt, maxk=MAX_SKILLS),
+                             model=BULK, max_out=1600)
+        except GeminiError:
+            continue
+        asg = [x for x in obj.get("assigned", []) if x.get("code") in fz["codes"]][:MAX_SKILLS]
+        if asg:
+            rows[i]["assigned"] = asg; rows[i]["unassignable"] = False
+            rows[i]["relabelled_step5"] = True
+            fixed += 1
+    with (P / "item_labels.jsonl").open("w") as f:
+        for i in sorted(rows):
+            f.write(json.dumps(rows[i]) + "\n")
+    still_ids = [i for i in resid if not rows[i].get("assigned")]
+    # measured after the re-run, not predicted from the model's `covers` field
+    fz["step5"]["other_bucket"] = sorted(still_ids)
+    fz["step5"]["residual_rate"] = len(still_ids) / n
+    fz["step5"]["measured_after_rerun"] = True
+    (P / "codebook_v2_amended.json").write_text(json.dumps(fz, indent=1))
+    print(f"  {fixed} of {len(resid)} residue items now assigned; {len(still_ids)} still "
+          f"unassigned ({len(still_ids)/n:.2%}) <- measured residual")
 
 
 if __name__ == "__main__":
