@@ -104,7 +104,17 @@ def main(mode="smoke"):
     V = np.stack([Vall[pos[it["item_idx"]]] for it in items])
     V = V / np.linalg.norm(V, axis=1, keepdims=True)
 
-    done = {json.loads(l)["item_idx"] for l in outf.open()} if outf.exists() else set()
+    # an errored row is missing data, not a result: re-running retries it
+    done = set()
+    if outf.exists():
+        keep = []
+        for l in outf.open():
+            r = json.loads(l)
+            if "error" in r:
+                continue
+            done.add(r["item_idx"]); keep.append(l)
+        if len(keep) != sum(1 for _ in outf.open()):
+            outf.write_text("".join(keep))
     todo = [(i, it) for i, it in enumerate(items) if it["item_idx"] not in done]
     print(f"step 4: {len(todo):,} items to label ({len(done):,} done), "
           f"{len(ids):,} codes, top-{TOPK} candidates, model {BULK}")
