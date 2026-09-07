@@ -98,9 +98,22 @@ def coherence(a):
                              model=JUDGE, max_out=4000)
         except GeminiError as e:
             return {"code": c, "error": str(e)[:120]}
-        v = [bool(x.get("match")) for x in obj.get("verdicts", [])][:len(items)]
-        return {"code": c, "n": len(v), "matched": sum(v),
-                "precision": (sum(v) / len(v)) if v else None}
+        got = {}
+        for x in obj.get("verdicts", []):
+            if not isinstance(x, dict):
+                continue
+            try:
+                idx = int(x.get("i", 0)) - 1        # index by i, never by position:
+            except (TypeError, ValueError):         # a skipped question would otherwise
+                continue                            # shift every later verdict
+            if 0 <= idx < len(items):
+                got[idx] = bool(x.get("match"))
+        missing = len(items) - len(got)
+        return {"code": c, "sent": len(items), "returned": len(got), "missing": missing,
+                "matched": sum(got.values()),
+                # denominator is what was SENT; an unreturned verdict is not a match
+                "precision": (sum(got.values()) / len(items)) if items else None,
+                "precision_on_returned": (sum(got.values()) / len(got)) if got else None}
 
     out, t0 = [], time.time()
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
@@ -109,8 +122,13 @@ def coherence(a):
             if k % 100 == 0 or k == len(targets):
                 print(f"  {k:,}/{len(targets):,} | {g.total_tokens:,} tok | {time.time()-t0:.0f}s", flush=True)
     good = [r for r in out if r.get("precision") is not None]
+    n_err = sum(1 for r in out if "error" in r)
+    n_empty = len(out) - len(good) - n_err
     ps = sorted(r["precision"] for r in good)
-    print(f"\ncodes judged: {len(good):,} ({sum(1 for r in out if 'error' in r)} errors)")
+    miss = sum(r.get("missing", 0) for r in good)
+    print(f"\ncodes: {len(out):,} = judged {len(good):,} + errors {n_err} + empty {n_empty}")
+    print(f"verdicts not returned by the judge: {miss:,} "
+          f"({miss/max(1,sum(r['sent'] for r in good)):.1%} of questions sent)")
     if ps:
         print(f"per-skill precision: mean {sum(ps)/len(ps):.3f}, median {ps[len(ps)//2]:.3f}, "
               f"p10 {ps[len(ps)//10]:.3f}")
@@ -126,6 +144,10 @@ def distinctness(a):
     fz, ok, by_code = load_state(); codes = fz["codes"]
     z = np.load(P / "code_def_emb.npz", allow_pickle=True)
     ids = list(z["ids"]); C = z["vecs"] / np.linalg.norm(z["vecs"], axis=1, keepdims=True)
+    absent = [c for c in codes if c not in set(ids)]
+    if absent:
+        print(f"  WARNING: {len(absent)} codes have no embedding and cannot be "
+              f"nominated or retrieved: {absent[:5]}{' ...' if len(absent) > 5 else ''}")
     S = C @ C.T; np.fill_diagonal(S, -1)
     sim_pairs = {(ids[i], ids[j]) for i in range(len(ids)) for j in np.where(S[i] >= 0.85)[0] if i < j}
     co = Counter()
@@ -144,10 +166,13 @@ def distinctness(a):
     chunks = [pairs[i:i + B] for i in range(0, len(pairs), B)]
 
     def one(ch):
+        ch = [(x, y) for x, y in ch if x in codes and y in codes]   # filter BEFORE
+        if not ch:                                                   # numbering, or the
+            return []                                                # echoed indices gap
         txt = "\n".join(
             f"PAIR {k+1}:\n  A {x} | {codes[x]['name']} | {codes[x]['definition']}\n"
             f"  B {y} | {codes[y]['name']} | {codes[y]['definition']}"
-            for k, (x, y) in enumerate(ch) if x in codes and y in codes)
+            for k, (x, y) in enumerate(ch))
         try:
             obj = g.json_obj(DIS_SYS, DIS_U.format(pairs=txt), model=JUDGE, max_out=6000)
         except GeminiError as e:
@@ -165,8 +190,10 @@ def distinctness(a):
             res.extend(r)
             if k % 10 == 0 or k == len(chunks):
                 print(f"  {k}/{len(chunks)} chunks | {g.total_tokens:,} tok | {time.time()-t0:.0f}s", flush=True)
-    m = [r for r in res if r.get("merge")]
-    print(f"\npairs judged: {len(res):,} | MERGE verdicts: {len(m):,} ({len(m)/max(1,len(res)):.0%})")
+    judged = [r for r in res if "error" not in r]
+    m = [r for r in judged if r.get("merge")]
+    print(f"\npairs: {len(res):,} = judged {len(judged):,} + errored {len(res)-len(judged):,}")
+    print(f"MERGE verdicts: {len(m):,} ({len(m)/max(1,len(judged)):.0%} of judged)")
     invol = {c for r in m for c in r["pair"]}
     print(f"codes implicated in a merge: {len(invol):,}")
     if not a.smoke:

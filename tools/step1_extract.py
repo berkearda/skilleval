@@ -96,7 +96,17 @@ def main(mode):
         items = items[:10] + items[5000:5010]
         outf.unlink(missing_ok=True)
 
-    done = {json.loads(l)["item_idx"] for l in outf.open()} if outf.exists() else set()
+    # an errored row is missing data, not a result: re-running must retry it.
+    # Step 4 already did this; Step 1 had the opposite behaviour, so a budget trip
+    # mid-run would have been recorded as 9,523 "done" items.
+    done = set()
+    if outf.exists():
+        allrows = [json.loads(l) for l in outf.open()]
+        keep = [r for r in allrows if "error" not in r]
+        done = {r["item_idx"] for r in keep}
+        if len(keep) != len(allrows):
+            print(f"  dropping {len(allrows)-len(keep)} errored rows to retry them")
+            outf.write_text("".join(json.dumps(r) + "\n" for r in keep))
     todo = [it for it in items if it["item_idx"] not in done]
     print(f"step 1: {len(todo)} items to extract ({len(done)} already done), model {BULK}")
     if not todo:

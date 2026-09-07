@@ -371,7 +371,8 @@ def run_audit(g, cb, code_vec, bidx, created_since):
                          model=CODEBOOK, max_out=40000)
     except GeminiError as e:
         print(f"    audit failed, skipped: {e}")
-        return 0.0, Counter()
+        return None, Counter()      # None, never 0.0: a failed audit must not read
+                                    # as zero churn and satisfy the saturation test
 
     cb.version += 1
     applied = Counter()
@@ -499,11 +500,16 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
         churn = None
         if (bi + 1) % AUDIT_EVERY == 0:
             churn, applied = run_audit(g, cb, code_vec, bi, created_since)
-            created_since = 0
+            if churn is not None:
+                created_since = 0      # only a successful audit consumes the backlog
             for cid in list(code_vec):
                 if cid in cb.alias:
                     code_vec.pop(cid, None)
             embed_new_codes(g, cb, code_vec)
+            if churn is None:
+                print(f"    audit v{cb.version}: FAILED, skipped (no churn measured); "
+                      f"saturation cannot be judged this cycle")
+                continue          # no save, no saturation test, keep created_since
             print(f"    audit v{cb.version}: {dict(applied)} churn {churn:.1%} "
                   f"| codes {len(cb.codes)-len(cb.alias)}")
             if churn > CHURN_ABORT:
@@ -523,7 +529,7 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
 
     if stop_reason == f"batch cap {BATCH_CAP}" and len(hist) < BATCH_CAP:
         stop_reason = f"corpus exhausted after {len(batches)} batches"
-    cb.save("final" if mode != "smoke" else "smoke")
+    cb.save({"run": "final", "trial": "trial", "smoke": "smoke"}[mode])
     uses = cb.uses()
     live = [c for c in cb.codes if c not in cb.alias]
     sizes = sorted((uses[c] for c in live), reverse=True)

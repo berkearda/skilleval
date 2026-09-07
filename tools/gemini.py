@@ -42,6 +42,12 @@ class GeminiError(RuntimeError):
     """A call did not produce an answer. Never conflate with an empty answer."""
 
 
+class BudgetExceeded(Exception):
+    """The token budget is spent. Deliberately NOT a GeminiError: callers catch
+    GeminiError and record a failed item, so raising one here would quietly turn
+    the rest of the corpus into recorded failures instead of halting the run."""
+
+
 def load_key() -> str:
     t = (Path.home() / ".cdmeval_gemini_key").read_text().strip()
     for pre in ("GEMINI_API_KEY=", "GOOGLE_API_KEY="):
@@ -69,7 +75,7 @@ class Gemini:
             d["calls"] += 1
             self.calls += 1
             if self.total_tokens > self.budget:
-                raise GeminiError(f"token budget exceeded: {self.total_tokens:,} > {self.budget:,}")
+                raise BudgetExceeded(f"token budget exceeded: {self.total_tokens:,} > {self.budget:,}")
 
     @property
     def total_tokens(self) -> int:
@@ -180,9 +186,16 @@ class Gemini:
                 {"model": f"models/{model}", "content": {"parts": [{"text": x}]},
                  **({"outputDimensionality": dim} if dim else {})} for x in chunk]}
             d = self._post(f"{model}:batchEmbedContents", body)
+            # embeddings bypassed accounting entirely, so report() understated the
+            # run and the budget could never fire on this endpoint
+            self._record(model, d.get("usageMetadata") or
+                         {"promptTokenCount": sum(len(x) // 4 for x in chunk)})
             embs = d.get("embeddings")
             if not embs or len(embs) != len(chunk):
                 raise GeminiError(f"embedding count mismatch: got {len(embs or [])} for {len(chunk)}")
-            out.extend(e["values"] for e in embs)
+            try:
+                out.extend(e["values"] for e in embs)
+            except (KeyError, TypeError) as exc:   # a malformed element must raise
+                raise GeminiError(f"malformed embedding element: {exc}") from exc
         v = np.asarray(out, dtype="float32")
         return v / np.linalg.norm(v, axis=1, keepdims=True)

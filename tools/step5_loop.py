@@ -120,7 +120,7 @@ def main():
     print(f"  proposed {len(new)} new codes from {len(props)} residue items")
 
     nxt = max(int(c.split("_")[1]) for c in codes) + 1
-    added, covered = {}, set()
+    added, covered, bad_covers = {}, set(), 0
     for c in new:
         if not c.get("name") or not c.get("definition"):
             continue
@@ -130,8 +130,12 @@ def main():
                       "exclude": c.get("exclude", []), "exemplar_labels": [],
                       "exemplar_items": [], "confusable_with": [], "raw_label_mentions": 0}
         for k in c.get("covers", []):
-            if isinstance(k, int) and 1 <= k <= len(props):
-                covered.add(props[k - 1][0])
+            try:                                   # models return "1" or 1; both count
+                ki = int(str(k).strip())
+            except (TypeError, ValueError):
+                bad_covers += 1; continue
+            if 1 <= ki <= len(props):
+                covered.add(props[ki - 1][0])
     # seeded from ALL residue, not just those carrying a proposal: the item nothing
     # could even be proposed for is the one that most belongs in the tail bucket
     other = [i for i in resid if i not in covered]
@@ -161,7 +165,7 @@ def main():
     IV = iz["vecs"] / np.linalg.norm(iz["vecs"], axis=1, keepdims=True)
 
     from tools.step4_relabel import SYS as S4SYS, USER as S4USER, TOPK, MAX_SKILLS
-    fixed = 0
+    fixed = retry_failed = 0
     for i in resid:
         it = txt.get(i)
         if it is None:
@@ -173,24 +177,33 @@ def main():
             obj = g.json_obj(S4SYS, S4USER.format(benchmark=it["benchmark"], subtask=it["subtask"],
                                                   question=it["question"], codes=ctxt, maxk=MAX_SKILLS),
                              model=BULK, max_out=1600)
-        except GeminiError:
+        except GeminiError as e:
+            retry_failed += 1        # a network blip must not read as "no skill fits"
             continue
         asg = [x for x in obj.get("assigned", []) if x.get("code") in fz["codes"]][:MAX_SKILLS]
         if asg:
             rows[i]["assigned"] = asg; rows[i]["unassignable"] = False
             rows[i]["relabelled_step5"] = True
             fixed += 1
-    with (P / "item_labels.jsonl").open("w") as f:
-        for i in sorted(rows):
+    tmp = P / "item_labels.jsonl.tmp"                  # atomic: this rewrite follows
+    with tmp.open("w") as f:                          # a serial loop of API calls,
+        for i in sorted(rows):                        # so the window is minutes wide
             f.write(json.dumps(rows[i]) + "\n")
+    os.replace(tmp, P / "item_labels.jsonl")
     still_ids = [i for i in resid if not rows[i].get("assigned")]
     # measured after the re-run, not predicted from the model's `covers` field
     fz["step5"]["other_bucket"] = sorted(still_ids)
     fz["step5"]["residual_rate"] = len(still_ids) / n
     fz["step5"]["measured_after_rerun"] = True
     (P / "codebook_v2_amended.json").write_text(json.dumps(fz, indent=1))
+    fz["step5"]["retry_failed"] = retry_failed
+    fz["step5"]["bad_covers_entries"] = bad_covers
+    (P / "codebook_v2_amended.json").write_text(json.dumps(fz, indent=1))
     print(f"  {fixed} of {len(resid)} residue items now assigned; {len(still_ids)} still "
           f"unassigned ({len(still_ids)/n:.2%}) <- measured residual")
+    if retry_failed:
+        print(f"  WARNING: {retry_failed} re-label calls failed; those items are counted "
+              f"as unassigned but were never actually judged")
 
 
 if __name__ == "__main__":

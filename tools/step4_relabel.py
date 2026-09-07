@@ -22,7 +22,7 @@ Unlike Step 2 the items are independent, so this runs concurrently.
     python3 tools/step4_relabel.py smoke     # 20 items
     python3 tools/step4_relabel.py run       # all, resumable
 """
-import json, sys, time
+import json, os, sys, time
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -117,7 +117,9 @@ def main(mode="smoke"):
                 continue
             done.add(r["item_idx"]); keep.append(l)
         if len(keep) != sum(1 for _ in outf.open()):
-            outf.write_text("".join(keep))
+            tmp = outf.with_suffix(".jsonl.tmp")      # atomic: an interrupt mid-write
+            tmp.write_text("".join(keep))                 # must not destroy 9,523 labels
+            os.replace(tmp, outf)
     todo = [(i, it) for i, it in enumerate(items) if it["item_idx"] not in done]
     print(f"step 4: {len(todo):,} items to label ({len(done):,} done), "
           f"{len(ids):,} codes, top-{TOPK} candidates, model {BULK}")
@@ -141,7 +143,8 @@ def main(mode="smoke"):
         # off_candidate: the model named a code outside its own candidate list.
         # Counted rather than silently accepted, and never confused with "no skill".
         off = len([a for a in raw if a.get("code") not in cand])
-        un = bool(obj.get("unassignable")) and not asg
+        _u = obj.get("unassignable")            # bool("false") is True, so never bool()
+        un = (_u is True or (isinstance(_u, str) and _u.strip().lower() == "true")) and not asg
         return {"item_idx": it["item_idx"], "benchmark": it["benchmark"],
                 "subtask": it["subtask"], "candidates": cand,
                 "assigned": asg, "unassignable": un, "off_candidate": off,
@@ -162,7 +165,9 @@ def main(mode="smoke"):
                           f"off-cand {n_off} | "
                           f"skills/item {dict(sorted(n_asg.items()))} | errors {n_err} | "
                           f"{g.total_tokens:,} tok | {time.time()-t0:.0f}s", flush=True)
-    print(f"\ndone: {sum(n_asg.values()):,} labelled, {n_un} unassignable, {n_err} errors")
+    labelled = sum(v for k, v in n_asg.items() if k > 0)   # the 0 bucket is not labelled
+    print(f"\ndone: {labelled:,} labelled, {n_asg[0]} returned no skill, "
+          f"{n_un} unassignable, {n_err} errors")
     print(f"skills per item: {dict(sorted(n_asg.items()))}   off-candidate drops: {n_off}")
     allr = [json.loads(l) for l in outf.open()]
     per = Counter(x["code"] for r in allr if "error" not in r for x in r["assigned"])
