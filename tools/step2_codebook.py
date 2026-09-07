@@ -63,7 +63,7 @@ TOPK_PER = 80                # the codebook is: max(MIN, live // PER), capped at
                              # the full run reaches thousands, where it will not be.
                              # So stay cheap while small, widen as it grows.
 
-AUDIT_EVERY = 12          # doc says every 5-10 batches. Halved from 24: audits are cheap
+AUDIT_EVERY = 10          # doc says every 5-10 batches; 12 sat outside it. Audits are cheap
                           # (one pro call) and merging duplicates sooner keeps them out of
                           # later retrieval, where they compete as candidates
 AUDIT_OPS_MIN = 15        # the doc's flat cap, now a floor
@@ -124,7 +124,8 @@ Propose at most {cap} operations that most improve this codebook. Rules:
   solver does the same thing in both.
 - RENAME a code whose name does not describe its definition.
 - EDIT_DEF to add a missing exclusion clause.
-- SPLIT a code that clearly covers two different operations.
+- SPLIT a code that clearly covers two different operations, or whose share of
+  total uses exceeds ~10% (an over-broad code that has swallowed the corpus).
 
 Do not touch codes marked STABLE unless you state an explicit override reason.
 
@@ -217,13 +218,18 @@ class Codebook:
         return d.get("state", {})
 
 
+EX_KEEP = 6      # exemplars stored per code; the doc shows 2-3, extra give merges material
+
+
 def code_line(cb, cid, full=True):
     c = cb.codes[cid]
     if not full:
         return f"{cid} | {c['name']}"
     inc = "; ".join(c["include"][:2]) or "-"
     exc = "; ".join(c["exclude"][:2]) or "-"
-    return f"{cid} | {c['name']} | {c['definition']} | include: {inc} | exclude: {exc}"
+    ex = "; ".join(c.get("exemplars", [])[:3]) or "-"
+    return (f"{cid} | {c['name']} | {c['definition']} | include: {inc} | "
+            f"exclude: {exc} | examples: {ex}")
 
 
 def run_batch(g, cb, labels, freq, bidx, lab_vec, code_vec, batch_model=CODEBOOK):
@@ -253,7 +259,10 @@ def run_batch(g, cb, labels, freq, bidx, lab_vec, code_vec, batch_model=CODEBOOK
             continue
         lab = labels[i]
         if d.get("action") == "map" and cb.resolve(d.get("code", "")) in cb.codes:
-            cb.assign[lab] = cb.resolve(d["code"])
+            cid = cb.resolve(d["code"])
+            cb.assign[lab] = cid
+            if len(cb.codes[cid]["exemplars"]) < EX_KEEP:
+                cb.codes[cid]["exemplars"].append(lab)
             n_map += 1
         elif d.get("action") == "new" and d.get("name"):
             cid = cb.add(d["name"], d.get("definition", ""), d.get("include"),
@@ -279,7 +288,9 @@ def run_batch(g, cb, labels, freq, bidx, lab_vec, code_vec, batch_model=CODEBOOK
                     continue
                 lab = missing[i]
                 if d.get("action") == "map" and cb.resolve(d.get("code", "")) in cb.codes:
-                    cb.assign[lab] = cb.resolve(d["code"]); n_map += 1
+                    cid = cb.resolve(d["code"]); cb.assign[lab] = cid; n_map += 1
+                    if len(cb.codes[cid]["exemplars"]) < EX_KEEP:
+                        cb.codes[cid]["exemplars"].append(lab)
                 elif d.get("action") == "new" and d.get("name"):
                     cid = cb.add(d["name"], d.get("definition", ""), d.get("include"),
                                  d.get("exclude"), bidx)
@@ -327,7 +338,8 @@ def run_audit(g, cb, code_vec, bidx, created_since):
                           for x, a, b in pairs[:MERGE_PAIRS_SHOWN]) or "(none above threshold)"
     codes_txt = "\n".join(
         f"{c} | {cb.codes[c]['name']}{' [STABLE]' if cb.codes[c]['stable'] else ''} "
-        f"| {uses[c]} | {cb.codes[c]['definition']}" for c in live)
+        f"| {uses[c]} | {cb.codes[c]['definition']} "
+        f"| e.g. {'; '.join(cb.codes[c].get('exemplars', [])[:3]) or '-'}" for c in live)
 
     before = {lab: cb.resolve(cid) for lab, cid in cb.assign.items()}
     try:
