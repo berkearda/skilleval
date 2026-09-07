@@ -1,4 +1,14 @@
-"""Cold-start figure: AUC vs N calibration items for new LLMs."""
+"""Cold-start figure (T-036 fixed trajectory).
+
+Reads cdm_exploration/experiments/v2_cold_start_fixed.json and renders
+AUC vs N calibration items for 763 held-out LLMs (mean +- std over 3 seeds).
+
+Style anchored to NEURIPS_FIGURE_CHECKLIST.md Part J:
+  - protagonist color: Okabe-Ito blue #0072B2
+  - reference lines: dotted gray #888888
+  - sans-serif typography (DejaVu Sans), tick 8pt / axis 10pt
+  - tight axis cropping; spines top+right hidden; faint y-grid only
+"""
 import json
 from pathlib import Path
 
@@ -9,80 +19,101 @@ import numpy as np
 import hydra
 from omegaconf import DictConfig
 
-CDM_COLOR = "#1E40AF"
+# Part J palette (LOCKED: Tailwind-700 / Option K)
+PROTAGONIST = "#1D4ED8"  # blue-700
+REFERENCE = "#475569"    # slate-600
+HIGHLIGHT = "#FACC15"    # yellow-500 (headline star only)
 
 
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
 def main(cfg: DictConfig) -> None:
-    from cdmeval.utils.visualization import SAVE_KW, setup_style
-    setup_style()
-
     fig_dir = Path(cfg.paths.figures)
-    data = json.load(open("cdm_exploration/experiments/v2_cold_start.json"))
+    data_path = Path("cdm_exploration/experiments/v2_cold_start_fixed.json")
+    data = json.load(open(data_path))
 
     Ns = [r["N"] for r in data["summary"]]
     aucs = np.array([r["auc_mean"] for r in data["summary"]])
     stds = np.array([r["auc_std"] for r in data["summary"]])
+    pcts = np.array([r["pct_of_full"] for r in data["summary"]])
     full = data["full_training_auc"]
 
-    fig, ax = plt.subplots(figsize=(5.4, 3.6))
+    # Per Part J: sans-serif, tight typography hierarchy
+    matplotlib.rcParams.update({
+        "font.family": "DejaVu Sans",
+        "font.size": 10,
+        "axes.titlesize": 11,
+        "axes.labelsize": 10,
+        "xtick.labelsize": 8,
+        "ytick.labelsize": 8,
+        "pdf.fonttype": 42,
+    })
 
-    # Random baseline
-    ax.axhline(0.5, color="#999999", lw=0.8, ls=":", zorder=1)
-    ax.text(0.45, 0.502, "random AUC = 0.500", fontsize=8, color="#666666",
-            ha="left", va="bottom")
+    fig, ax = plt.subplots(figsize=(5.4, 3.4))
 
-    # Full training reference
-    ax.axhline(full, color="#22C55E", lw=1.0, ls="--", zorder=1)
-    ax.text(0.45, full + 0.004, f"full training AUC = {full:.3f}",
-            fontsize=8, color="#15803D", ha="left", va="bottom",
-            fontweight="bold")
-
-    # Use symlog so N=0 sits at left edge
+    # Symlog-like trick: place N=0 at x=0.5 so it appears on the log axis
     x = np.array([max(n, 0.5) for n in Ns])
 
-    ax.fill_between(x, aucs - stds, aucs + stds,
-                    color=CDM_COLOR, alpha=0.18, zorder=2)
-    ax.plot(x, aucs, "o-", color=CDM_COLOR, lw=1.8, markersize=6,
-            markerfacecolor="white", markeredgewidth=1.6, zorder=3)
+    # Full-training reference (Part J: reference dotted, neutral gray)
+    ax.axhline(full, color=REFERENCE, lw=1.2, ls=":", zorder=1)
+    ax.text(620, full, f"  full-training AUC = {full:.3f}", fontsize=8,
+            color=REFERENCE, ha="left", va="center", style="italic")
 
+    # Data: error band + line + open markers
+    ax.fill_between(x, aucs - stds, aucs + stds,
+                    color=PROTAGONIST, alpha=0.15, zorder=2, linewidth=0)
+    ax.plot(x, aucs, "-", color=PROTAGONIST, lw=2.0, zorder=3)
+    ax.plot(x, aucs, "o", color=PROTAGONIST, markersize=6,
+            markerfacecolor="white", markeredgewidth=1.6, zorder=4)
+
+    # Inline % labels at each operating point (Part J: inline labels)
+    for xi, ai, pi, n in zip(x, aucs, pcts, Ns):
+        if n == 0:
+            ax.annotate(f"{pi:.0f}%", xy=(xi, ai),
+                        xytext=(8, 6), textcoords="offset points",
+                        fontsize=8.5, color=PROTAGONIST,
+                        ha="left", va="bottom")
+        elif n in (50, 100, 500):
+            ax.annotate(f"{pi:.0f}%", xy=(xi, ai),
+                        xytext=(0, 9), textcoords="offset points",
+                        fontsize=8.5, color=PROTAGONIST,
+                        ha="center", va="bottom")
+
+    # Star at headline operating point: N=500 reaches 97% of full
+    ax.plot(500, aucs[-1], "*", color=HIGHLIGHT, markersize=14,
+            markeredgecolor="black", markeredgewidth=0.8, zorder=5)
+
+    # Inline punchline (Part J E4: headline number ON the figure)
+    ax.annotate("$N{=}500$ recovers 97% of\nfull-training AUC",
+                xy=(500, aucs[-1]),
+                xytext=(60, 0.585),
+                fontsize=9, color="#222222", ha="left", va="center",
+                arrowprops=dict(arrowstyle="-", color="#888888",
+                                lw=0.8, alpha=0.7,
+                                connectionstyle="arc3,rad=-0.15"))
+
+    # Axes
     ax.set_xscale("log")
     ax.set_xticks([0.5, 1, 5, 10, 50, 100, 500])
     ax.set_xticklabels(["0", "1", "5", "10", "50", "100", "500"])
-    ax.set_xlim(0.4, 900)
-    ax.set_ylim(0.48, max(0.74, full + 0.02))
-    ax.set_xlabel("Calibration items per new LLM", fontsize=11)
-    ax.set_ylabel("AUC on held-out items", fontsize=11)
-    ax.grid(True, axis="y", alpha=0.15, lw=0.5)
+    ax.set_xlim(0.4, 1500)
+    ax.set_ylim(0.50, 0.72)
+    ax.set_xlabel("Calibration items per new LLM ($N$, log scale)", fontsize=10)
+    ax.set_ylabel("AUC on held-out items", fontsize=10)
+
+    # Spines + grid (Part J: only left+bottom, faint y-grid)
     for sp in ["top", "right"]:
         ax.spines[sp].set_visible(False)
+    ax.grid(True, axis="y", alpha=0.12, lw=0.5)
+    ax.set_axisbelow(True)
 
-    pct0 = data["summary"][0]["pct_of_full"]
-    pct500 = data["summary"][-1]["pct_of_full"]
-
-    # Annotate endpoints above the curve
-    ax.annotate(f"N=0: {aucs[0]:.3f}\n({pct0:.0f}% of full)",
-                xy=(0.5, aucs[0]), xytext=(1.0, aucs[0] + 0.03),
-                fontsize=8.5, color=CDM_COLOR, ha="left", va="bottom",
-                arrowprops=dict(arrowstyle="-", color=CDM_COLOR, lw=0.6))
-    ax.annotate(f"N=500: {aucs[-1]:.3f}\n({pct500:.0f}% of full)",
-                xy=(500, aucs[-1]), xytext=(60, aucs[-1] + 0.025),
-                fontsize=8.5, color=CDM_COLOR, ha="left", va="bottom",
-                arrowprops=dict(arrowstyle="-", color=CDM_COLOR, lw=0.6))
-
-    # Bracket showing the gap to full training at N=500
-    gap = full - aucs[-1]
-    ax.annotate("", xy=(500, full), xytext=(500, aucs[-1]),
-                arrowprops=dict(arrowstyle="<->", color="#666666", lw=0.9))
-    ax.text(560, (full + aucs[-1]) / 2, f"Δ = {gap:.3f}\n(remaining\ngap)",
-            fontsize=8, color="#444444", va="center", ha="left")
-
-    plt.tight_layout(pad=1.0)
+    plt.tight_layout(pad=0.5)
     out = fig_dir / "main_ready" / "fig_cold_start_v2.pdf"
     out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out, **SAVE_KW)
-    fig.savefig(str(out).replace(".pdf", ".png"), dpi=180, bbox_inches="tight")
-    print(f"Saved: {out}", flush=True)
+    fig.savefig(out, dpi=300, bbox_inches="tight", pad_inches=0.05)
+    fig.savefig(str(out).replace(".pdf", ".png"), dpi=200,
+                bbox_inches="tight", pad_inches=0.05)
+    print(f"Saved: {out}")
+    print(f"Saved: {str(out).replace('.pdf', '.png')}")
 
 
 if __name__ == "__main__":

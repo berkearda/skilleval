@@ -70,42 +70,38 @@ def main() -> None:
         ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=False)
         sd = ckpt["model_state_dict"]
 
-        # Reconstruct model
+        # Reconstruct model with the correct IrtNet MoEClassifier signature
         cfg = ckpt.get("config", {})
-        model_embed_dim = cfg.get("model_embed_dim", args.d_model)
-        text_embed_dim = cfg.get("text_embed_dim", 768)
-        num_experts = cfg.get("num_experts", 39)
-        top_k_experts = cfg.get("top_k_experts", 39)
-        expert_hidden_dim = cfg.get("expert_hidden_dim", 512)
-        shared_expert_hidden_dim = cfg.get("shared_expert_hidden_dim", 512)
-        expert_output_dim = cfg.get("expert_output_dim", 256)
-        dropout_rate = cfg.get("dropout_rate", 0.5)
-        embedding_noise = cfg.get("embedding_noise", 0.05)
+        model_hp = {
+            "model_embed_dim": cfg.get("model_embed_dim", args.d_model),
+            "num_experts": cfg.get("num_experts", 39),
+            "top_k_experts": cfg.get("top_k_experts", 39),
+            "expert_hidden_dim": cfg.get("expert_hidden_dim", 512),
+            "shared_expert_hidden_dim": cfg.get("shared_expert_hidden_dim", 512),
+            "expert_output_dim": cfg.get("expert_output_dim", 256),
+            "dropout_rate": cfg.get("dropout_rate", 0.5),
+            "embedding_noise": cfg.get("embedding_noise", 0.05),
+        }
+        prompt_embeddings = torch.tensor(emb, dtype=torch.float32)
 
         model = MoEClassifier(
             num_models=n_llms,
-            text_embed_dim=text_embed_dim,
-            model_embed_dim=model_embed_dim,
-            num_experts=num_experts,
-            top_k_experts=top_k_experts,
-            expert_hidden_dim=expert_hidden_dim,
-            shared_expert_hidden_dim=shared_expert_hidden_dim,
-            expert_output_dim=expert_output_dim,
-            dropout_rate=dropout_rate,
-            embedding_noise=embedding_noise,
+            num_prompts=n_items,
+            prompt_embeddings=prompt_embeddings,
+            **model_hp,
         )
         model.load_state_dict(sd)
         model.eval().to(device)
 
-        # Inference: for each test item, get predicted P(correct) for each LLM
-        text_embs_t = torch.tensor(emb, dtype=torch.float32, device=device)
+        # Inference: model takes (model_ids, prompt_ids), both index tensors
         all_llm_ids = torch.arange(n_llms, device=device)
 
         preds = np.zeros((n_llms, len(test_idx)), dtype=np.float32)
         with torch.no_grad():
             for j, item_idx in enumerate(test_idx):
-                te = text_embs_t[item_idx].unsqueeze(0).expand(n_llms, -1)
-                p = model(all_llm_ids, te).cpu().numpy()
+                p_id = torch.full((n_llms,), int(item_idx), dtype=torch.long,
+                                    device=device)
+                p = model(all_llm_ids, p_id).cpu().numpy()
                 preds[:, j] = p
 
         # Routing Acc@1: argmax over LLMs per test item

@@ -43,7 +43,7 @@ SHORT = {
     "Recognizing Symmetry In Two Dimensional Figures": "2D symmetry",
     "Applying Properties Of Complex Numbers In Equation": "Complex numbers",
     "Identifying Structural Isomers In Organic Compound": "Organic isomers",
-    "Applying Combinatorial Principles To Dice Rolls": "Combinatorics (dice)",
+    "Applying Combinatorial Principles To Dice Rolls": "Dice combinatorics",
     "Applying Quadratic Formula To Find Roots": "Quadratic formula",
     "Applying Divisibility Rules To Integer Sets": "Divisibility rules",
     "Calculating Orbital Period Ratio Between Planets": "Orbital periods",

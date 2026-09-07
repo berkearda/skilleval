@@ -115,7 +115,7 @@ def main(cfg: DictConfig) -> None:
                                 irt_pred.mean(axis=1))
 
     # ── Figure: 2x3 grid ──
-    fig, axes = plt.subplots(2, 3, figsize=(10.5, 7.4))
+    fig, axes = plt.subplots(2, 3, figsize=(9.0, 6.0))
     order = ["MATH", "BBH", "GPQA", "MuSR", "IFEval", "All benchmarks"]
 
     for ax, name in zip(axes.flat, order):
@@ -146,15 +146,15 @@ def main(cfg: DictConfig) -> None:
         # Panel name top-left
         ax.text(0.04, 0.96, name, transform=ax.transAxes,
                 fontsize=12, fontweight="bold", va="top", ha="left")
-        # r values bottom-right (out of data path)
-        box_text = (f"CDM  {r_cdm:.3f}\n"
-                    f"IRT  {r_irt:.3f}\n"
-                    f"Δr  {d_r:+.3f}")
+        # r values bottom-right (out of data path) — fixed-width to align
+        box_text = (f"{'SkillEval':<10}{r_cdm:>6.3f}\n"
+                    f"{'IRT 2PL':<10}{r_irt:>6.3f}\n"
+                    f"{'Δr':<10}{d_r:>+6.3f}")
         ax.text(0.96, 0.04, box_text,
-                transform=ax.transAxes, fontsize=8.5, va="bottom", ha="right",
-                family="monospace",
+                transform=ax.transAxes, fontsize=7.0, va="bottom", ha="right",
+                family="monospace", linespacing=1.15,
                 bbox=dict(facecolor="white", edgecolor="#cccccc",
-                          boxstyle="round,pad=0.35", alpha=0.95, linewidth=0.7))
+                          boxstyle="round,pad=0.2", alpha=0.96, linewidth=0.6))
 
         if ax in axes[:, 0]:
             ax.set_ylabel("Predicted accuracy", fontsize=11)
@@ -164,7 +164,7 @@ def main(cfg: DictConfig) -> None:
     # Shared legend at top
     from matplotlib.lines import Line2D
     legend_handles = [
-        Line2D([0], [0], marker="o", color="w", label="CDMEval",
+        Line2D([0], [0], marker="o", color="w", label="SkillEval",
                markerfacecolor=CDM_COLOR, markersize=8),
         Line2D([0], [0], marker="o", color="w", label="IRT 2PL",
                markerfacecolor=IRT_COLOR, markersize=8),
@@ -173,12 +173,13 @@ def main(cfg: DictConfig) -> None:
     fig.legend(handles=legend_handles, loc="upper center",
                bbox_to_anchor=(0.5, 1.0), ncol=3, frameon=False, fontsize=11)
 
-    plt.tight_layout(pad=1.2, rect=[0, 0, 1, 0.96])
+    plt.tight_layout(pad=0.5, rect=[0, 0, 1, 0.96])
 
     out_pdf = fig_dir / "main_ready" / "fig_benchmark_prediction.pdf"
     out_pdf.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(out_pdf, **SAVE_KW)
-    fig.savefig(str(out_pdf).replace(".pdf", ".png"), dpi=180, bbox_inches="tight")
+    fig.savefig(out_pdf, dpi=300, bbox_inches="tight", pad_inches=0.05)
+    fig.savefig(str(out_pdf).replace(".pdf", ".png"), dpi=200,
+                bbox_inches="tight", pad_inches=0.05)
     print(f"Saved: {out_pdf}", flush=True)
 
 
