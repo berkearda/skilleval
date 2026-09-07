@@ -145,17 +145,27 @@ def main():
             props.append({"op": "SPLIT_OR_EDIT_DEF", "code": c,
                           "reason": f"coherence {coh[c]:.2f} < {a.coherence} on {n} items"})
 
-    # apply merges through the alias chain, longest-first so chains settle
-    applied = 0
-    for o in ops:
+    # Apply merges, smallest source first so a chain settles on the larger code.
+    # A merge that would push its target past Step 0's ceiling is refused: the
+    # ceiling exists because "anything larger is almost certainly several
+    # operations fused", and merging below-floor codes into a nearest neighbour
+    # otherwise chains them into a few attractors. Without this the dry run
+    # produced a 982-item code against a ceiling of 476.
+    applied = refused_ceiling = 0
+    size = Counter(counts)
+    for o in sorted(ops, key=lambda o: counts[o["from"]]):
         f_, t_ = resolve(alias, o["from"]), resolve(alias, o["into"])
         if f_ == t_ or f_ not in codes or t_ not in codes:
             continue
+        if size[t_] + size[f_] > ceil_n:
+            refused_ceiling += 1
+            continue
         alias[f_] = t_
+        size[t_] += size[f_]; size[f_] = 0
         applied += 1
     live = [c for c in codes if resolve(alias, c) == c]
-    print(f"\nmerge operations proposed {len(ops)}, applied {applied} "
-          f"({dict(reasons)})")
+    print(f"\nmerge operations proposed {len(ops)}, applied {applied}, "
+          f"refused for breaching the ceiling {refused_ceiling} ({dict(reasons)})")
     print(f"split proposals (not applied): {len(props)}")
     print(f"codes: {len(codes):,} -> {len(live):,} live")
 
@@ -172,6 +182,12 @@ def main():
         print(f"items per code now: max {sz[0]}, median {sz[len(sz)//2]}, used {len(per):,}")
         print(f"  below floor: {sum(1 for s in sz if s < a.floor):,} "
               f"({sum(1 for s in sz if s < a.floor)/len(sz):.0%} of used)")
+
+    empty = [c for c in live if per.get(c, 0) == 0]
+    print(f"live codes holding no item after migration: {len(empty):,} "
+          f"(dropped from the codebook)")
+    live = [c for c in live if per.get(c, 0) > 0]
+    print(f"codes after pruning: {len(live):,}")
 
     if a.dry_run:
         print("\nDRY RUN: nothing written"); return

@@ -160,6 +160,16 @@ def main():
     newV = np.stack(g.embed([f"{v['name']}. {v['definition']}" for v in added.values()]))
     newV = newV / np.linalg.norm(newV, axis=1, keepdims=True)
     allC = np.vstack([C, newV]); allIds = ids + list(added)
+    # Persist them. Previously these vectors were computed here and thrown away,
+    # so Step 6 loaded an embedding file that predated Step 5 and silently could
+    # neither nominate the new codes for a merge nor retrieve them as candidates,
+    # which manufactures a jaccard of 0 for every item they cover.
+    z_old = np.load(P / "code_def_emb.npz", allow_pickle=True)
+    np.savez_compressed(P / "code_def_emb.npz",
+                        ids=np.array(allIds, dtype=object),
+                        vecs=np.vstack([z_old["vecs"], newV]),
+                        digest="stale-after-step5")   # forces Step 3 to re-embed
+    print(f"  appended {len(added)} new code embeddings to code_def_emb.npz")
     iz = np.load(P / "item_emb_gemini.npz", allow_pickle=True)
     ipos = {int(i): k for k, i in enumerate(list(iz["idx"]))}
     IV = iz["vecs"] / np.linalg.norm(iz["vecs"], axis=1, keepdims=True)

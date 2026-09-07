@@ -272,6 +272,14 @@ class TestStep5Loop(unittest.TestCase):
         src = (REPO / "tools/step5_loop.py").read_text()
         self.assertIn("retry_failed", src)
 
+    def test_new_code_embeddings_are_persisted(self):
+        """Bug: Step 5 computed vectors for its new codes and discarded them, so
+        Step 6 loaded a pre-Step-5 embedding file and silently could neither
+        nominate them for merging nor retrieve them, manufacturing instability."""
+        src = (REPO / "tools/step5_loop.py").read_text()
+        self.assertIn('np.savez_compressed(P / "code_def_emb.npz"', src)
+        self.assertIn("stale-after-step5", src)
+
     def test_no_dead_rounds_flag(self):
         """Bug: --rounds was parsed and never read, advertising a loop the
         script does not have and is not re-entrant enough to run."""
@@ -433,6 +441,23 @@ class TestStep7Audit(unittest.TestCase):
         it as one of the three evidence streams."""
         src = (REPO / "tools/step7_audit.py").read_text()
         self.assertIn("co_assignment.json", src)
+
+    def test_a_merge_cannot_breach_step0_ceiling(self):
+        """Bug found in the first dry run: merging below-floor codes into their
+        nearest neighbour chains them into attractors, producing a 982-item code
+        against a ceiling of 476 - the very fusion the ceiling exists to prevent."""
+        src = (REPO / "tools/step7_audit.py").read_text()
+        self.assertIn("size[t_] + size[f_] > ceil_n", src)
+        self.assertIn("refused_ceiling", src)
+
+    def test_merges_apply_smallest_source_first(self):
+        """Otherwise a chain can settle on the smaller code."""
+        src = (REPO / "tools/step7_audit.py").read_text()
+        self.assertIn('sorted(ops, key=lambda o: counts[o["from"]])', src)
+
+    def test_empty_codes_are_pruned(self):
+        src = (REPO / "tools/step7_audit.py").read_text()
+        self.assertIn("holding no item after migration", src)
 
     def test_reporting_is_gated(self):
         src = (REPO / "tools/step7_audit.py").read_text()
