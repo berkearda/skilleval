@@ -88,8 +88,15 @@ def coherence(a):
     fz, ok, by_code = load_state(getattr(a, "codebook", None))
     codes = fz["codes"]; txt = load_items()
     field = "definition_before" if getattr(a, "use_before", False) else "definition"
-    if a.use_before and not any("definition_before" in v for v in codes.values()):
+    rewritten = {c for c, v in codes.items() if "definition_before" in v}
+    if getattr(a, "use_before", False) and not rewritten:
         raise SystemExit("--use-before needs a codebook that Step 8 has written")
+    if rewritten and (getattr(a, "use_before", False) or getattr(a, "holdout", False)):
+        # Compare like with like. Only codes Step 8 actually rewrote have a
+        # before and an after; including the rest would dilute both sides with
+        # identical scores and understate whatever the repair did.
+        by_code = {c: v for c, v in by_code.items() if c in rewritten}
+        print(f"  restricted to the {len(rewritten):,} codes Step 8 rewrote")
     if getattr(a, "holdout", False):
         # score only on items the definition writer never saw, or the comparison
         # is circular: a definition rewritten from items trivially matches them

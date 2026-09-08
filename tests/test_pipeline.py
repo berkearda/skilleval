@@ -506,6 +506,88 @@ class TestStep8Definitions(unittest.TestCase):
         src = (REPO / "tools/step6_validate.py").read_text()
         self.assertIn("--holdout needs a codebook that Step 8 has written", src)
 
+    def test_before_after_compares_only_rewritten_codes(self):
+        """Bug: definition_before exists only on codes Step 8 rewrote, and the
+        guard checked whether ANY code had it before indexing every code blindly.
+        Including unrewritten codes would also dilute both sides equally."""
+        src = (REPO / "tools/step6_validate.py").read_text()
+        self.assertIn('rewritten = {c for c, v in codes.items() if "definition_before" in v}', src)
+        self.assertIn("restricted to the", src)
+
     def test_reporting_is_gated(self):
         src = (REPO / "tools/step8_definitions.py").read_text()
         self.assertIn("require_tests_pass()", src)
+
+
+# --------------------------------------------------------------------------
+class TestGoldSet(unittest.TestCase):
+    """The reference the doc ranks first and calls best return on effort."""
+
+    def test_the_set_is_frozen_against_accidental_redraw(self):
+        """Redrawing invalidates every score measured against it, so the sampler
+        must refuse rather than silently overwrite."""
+        src = (REPO / "tools/gold_sample.py").read_text()
+        self.assertIn("already exists. The set is frozen by design", src)
+        self.assertIn("--force", src)
+
+    def test_selection_never_looks_at_pipeline_output(self):
+        """A gold set stratified by the thing it judges agrees by construction.
+
+        Checks executable code only. An earlier version of this test grepped the
+        whole file and failed on the docstring sentence explaining that selection
+        ignores what the pipeline assigned, which is the opposite of a violation.
+        """
+        import ast
+        tree = ast.parse((REPO / "tools/gold_sample.py").read_text())
+        for node in ast.walk(tree):          # drop docstrings, keep real strings
+            if isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant) \
+               and isinstance(node.value.value, str):
+                node.value.value = ""
+        code = ast.unparse(tree)
+        for forbidden in ("item_labels", "codebook_v", "confidence", "validation_"):
+            self.assertNotIn(forbidden, code,
+                             f"the sampler reads {forbidden}, which taints the reference")
+
+    def test_frozen_file_matches_the_declared_size_and_strata(self):
+        f = REPO / "gold/gold_set.json"
+        if not f.exists():
+            self.skipTest("gold set not drawn yet")
+        gs = json.loads(f.read_text())
+        self.assertEqual(len(gs["items"]), gs["n"])
+        self.assertEqual(len({i["item_idx"] for i in gs["items"]}), gs["n"],
+                         "a duplicated question would be double-counted in the score")
+        self.assertEqual(sum(gs["quota"].values()), gs["n"])
+        for b, q in gs["quota"].items():
+            self.assertGreaterEqual(q, min(gs["floor_per_benchmark"], gs["corpus_counts"][b]))
+
+    def test_both_weightings_are_recorded(self):
+        """The sample is not corpus-proportional, so a score can be reported
+        per-question or re-weighted; the choice must be explicit, not baked in."""
+        f = REPO / "gold/gold_set.json"
+        if not f.exists():
+            self.skipTest("gold set not drawn yet")
+        gs = json.loads(f.read_text())
+        self.assertIn("corpus_weight", gs)
+        self.assertIn("sample_weight", gs)
+        self.assertAlmostEqual(sum(gs["corpus_weight"].values()), 1.0, places=6)
+
+    def test_part_b_carries_decoys_as_a_null_control(self):
+        """Without decoys, a high tick rate cannot be told apart from agreeableness."""
+        f = REPO / "gold/gold_partB_key.json"
+        if not f.exists():
+            self.skipTest("sheet not generated yet")
+        key = json.loads(f.read_text())["by_item"]
+        self.assertTrue(all(len(v["decoys"]) >= 1 for v in key.values()))
+        for v in key.values():
+            self.assertEqual(set(v["shown"]), set(v["assigned"]) | set(v["decoys"]))
+            self.assertEqual(set(v["assigned"]) & set(v["decoys"]), set())
+
+    def test_sheet_puts_free_text_before_the_checklist(self):
+        """Seeing the pipeline's answer first anchors the free-text answer."""
+        f = REPO / "gold/gold_sheet.md"
+        if not f.exists():
+            self.skipTest("sheet not generated yet")
+        t = f.read_text()
+        first = t.index("### Q001")
+        blk = t[first:t.index("### Q002")]
+        self.assertLess(blk.index("**Part A**"), blk.index("**Part B**"))
