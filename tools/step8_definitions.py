@@ -75,8 +75,8 @@ Return JSON only:
   "note": "<one clause on what drifted, or null>"}}"""
 
 
-def load():
-    fz = json.loads((P / "codebook_v3_audited.json").read_text())
+def load(src="codebook_v3_audited.json"):
+    fz = json.loads((P / src).read_text())
     rows = [json.loads(l) for l in (P / "item_labels.jsonl").open()]
     txt = {r["item_idx"]: " ".join(r["question_full_text"].split())
            for r in json.load(open(D / "item_full_text_recovered.json"))}
@@ -105,13 +105,15 @@ def main():
     ap.add_argument("--model", choices=["codebook", "bulk"], default="codebook")
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--no-gate", action="store_true")
+    ap.add_argument("--codebook", default="codebook_v3_audited.json")
+    ap.add_argument("--out", default=None)
     a = ap.parse_args()
     if not a.no_gate:
         from tools.gate import require_tests_pass
         require_tests_pass()
 
     model = CODEBOOK if a.model == "codebook" else BULK
-    fz, by, txt = load()
+    fz, by, txt = load(a.codebook)
     codes = fz["codes"]
     targets = [c for c in codes if len(by.get(c, [])) >= a.min_items]
     if a.smoke:
@@ -179,8 +181,10 @@ def main():
                    "errors": len(out) - len(ok), "changed": len(changed),
                    "renamed": len(renamed), "two_operations": [r["code"] for r in two],
                    "min_items": a.min_items, "shown_per_code": a.show}
-    (P / "codebook_v4_definitions.json").write_text(json.dumps(fz, indent=1))
-    print("\nwrote codebook_v4_definitions.json (definition_before kept on every code)")
+    out = a.out or ("codebook_v6_definitions.json" if "v5" in a.codebook
+                    else "codebook_v4_definitions.json")
+    (P / out).write_text(json.dumps(fz, indent=1))
+    print(f"\nwrote {out} (definition_before kept on every code)")
     print("Next: score coherence on the HOLDOUT half only, which the writer never saw.")
 
 

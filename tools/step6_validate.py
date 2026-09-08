@@ -30,6 +30,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tools.gemini import Gemini, GeminiError, JUDGE, BULK
 from tools.textclip import clip
+from tools.metrics import coherence_precision, jaccard
 
 REPO = Path(__file__).resolve().parent.parent
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
@@ -69,7 +70,8 @@ def load_state(name=None):
     if name:
         f = P / name
     else:
-        for cand in ("codebook_v4_definitions.json", "codebook_v3_audited.json",
+        for cand in ("codebook_v5_deduped.json", "codebook_v4_definitions.json",
+                     "codebook_v3_audited.json",
                      "codebook_v2_amended.json", "codebook_v1_frozen.json"):
             f = P / cand
             if f.exists():
@@ -123,22 +125,9 @@ def coherence(a):
                              model=JUDGE, max_out=4000)
         except GeminiError as e:
             return {"code": c, "error": str(e)[:120]}
-        got = {}
-        for x in obj.get("verdicts", []):
-            if not isinstance(x, dict):
-                continue
-            try:
-                idx = int(x.get("i", 0)) - 1        # index by i, never by position:
-            except (TypeError, ValueError):         # a skipped question would otherwise
-                continue                            # shift every later verdict
-            if 0 <= idx < len(items):
-                got[idx] = bool(x.get("match"))
-        missing = len(items) - len(got)
-        return {"code": c, "sent": len(items), "returned": len(got), "missing": missing,
-                "matched": sum(got.values()),
-                # denominator is what was SENT; an unreturned verdict is not a match
-                "precision": (sum(got.values()) / len(items)) if items else None,
-                "precision_on_returned": (sum(got.values()) / len(got)) if got else None}
+        prec, got, missing = coherence_precision(obj.get("verdicts"), len(items))
+        return {"code": c, "sent": len(items), "returned": got, "missing": missing,
+                "matched": round((prec or 0) * len(items)), "precision": prec}
 
     out, t0 = [], time.time()
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
@@ -278,9 +267,8 @@ def stability(a):
             if isinstance(cid, str) and cid in codes:
                 b.add(cid)
         a_ = {x["code"] for x in r["assigned"]}
-        inter, union = len(a_ & b), len(a_ | b)
         return {"item_idx": i, "orig": sorted(a_), "rerun": sorted(b),
-                "jaccard": inter / union if union else 1.0, "exact": a_ == b}
+                "jaccard": jaccard(a_, b), "exact": a_ == b}
 
     res, t0 = [], time.time()
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:

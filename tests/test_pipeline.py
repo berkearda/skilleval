@@ -295,19 +295,18 @@ class TestStep5Loop(unittest.TestCase):
 # --------------------------------------------------------------------------
 class TestStep6Validate(unittest.TestCase):
 
-    def test_coherence_indexes_verdicts_by_i(self):
-        """Bug: verdicts were consumed positionally while the prompt asks the
-        judge to echo i, so one skipped question shifted every later verdict."""
+    def test_coherence_delegates_to_the_tested_metric(self):
+        """The indexing and denominator rules are unit-tested in test_metrics.
+        What matters here is that the step calls that function rather than
+        keeping a second copy that can drift from it."""
         src = (REPO / "tools/step6_validate.py").read_text()
-        self.assertIn('int(x.get("i", 0)) - 1', src)
-        self.assertNotIn('[bool(x.get("match")) for x in obj.get("verdicts", [])]', src)
+        self.assertIn("from tools.metrics import coherence_precision", src)
+        self.assertIn("coherence_precision(obj.get(\"verdicts\"), len(items))", src)
 
-    def test_coherence_denominator_is_what_was_sent(self):
-        """Bug: precision divided by verdicts returned, so a code sent 10 and
-        given 3 matching verdicts scored 1.0."""
+    def test_coherence_records_missing_verdicts(self):
         src = (REPO / "tools/step6_validate.py").read_text()
-        self.assertIn("sum(got.values()) / len(items)", src)
-        self.assertIn('"missing"', src)
+        self.assertIn('"missing": missing', src)
+        self.assertIn('"sent": len(items)', src)
 
     def test_distinctness_merge_rate_excludes_errored_pairs(self):
         src = (REPO / "tools/step6_validate.py").read_text()
@@ -738,13 +737,20 @@ class TestStep9Dedupe(unittest.TestCase):
         self.assertIn("max_out=16000", src)
 
     def test_merges_respect_the_ceiling_and_go_through_the_alias_chain(self):
-        """Property, not implementation: the greedy version named these t_/f_,
-        the union-find version names them rx/ry, and both must honour Step 0's
-        ceiling and migrate labels through the alias chain."""
         src = (REPO / "tools/step9_dedupe.py").read_text()
-        self.assertIn("> ceil_n", src)
-        self.assertIn("refused += 1", src)
+        self.assertIn("ceil_n", src)
         self.assertIn("resolve(alias", src)
+
+    def test_merges_apply_smallest_first(self):
+        """Largest-first let big pairs consume the ceiling budget: 44 merges were
+        refused and the undersized tail was never consolidated. The effect of the
+        ordering is unit-tested in test_metrics."""
+        src = (REPO / "tools/step9_dedupe.py").read_text()
+        self.assertIn('order="smallest"', src)
+
+    def test_verdicts_can_be_reused_to_isolate_application_changes(self):
+        src = (REPO / "tools/step9_dedupe.py").read_text()
+        self.assertIn("--reuse-verdicts", src)
 
     def test_reporting_is_gated(self):
         src = (REPO / "tools/step9_dedupe.py").read_text()
@@ -759,15 +765,16 @@ class TestMergeApplication(unittest.TestCase):
     together anyway, through a chain 8 hops long at its worst.
     """
 
-    def test_union_refuses_an_explicitly_rejected_pair(self):
+    def test_step9_passes_rejected_pairs_to_the_applier(self):
+        """The non-transitivity rule is unit-tested in test_metrics; here we only
+        check the rejected pairs are actually handed over."""
         src = (REPO / "tools/step9_dedupe.py").read_text()
-        self.assertIn("rejected = {tuple(sorted(r[\"pair\"])) for r in judged if not r[\"merge\"]}", src)
-        self.assertIn("would this union co-locate a pair the judge said to keep apart", src)
+        self.assertIn('rejected = [tuple(r["pair"]) for r in judged if not r["merge"]]', src)
+        self.assertIn("apply_merges(accepted, rejected", src)
 
-    def test_components_not_greedy_pairwise(self):
+    def test_step9_delegates_merge_application(self):
         src = (REPO / "tools/step9_dedupe.py").read_text()
-        self.assertIn("def find(c):", src)
-        self.assertIn("members[big] |= members[small]", src)
+        self.assertIn("from tools.metrics import apply_merges", src)
 
     def test_union_find_honours_both_constraints(self):
         """Executes the logic rather than grepping it."""

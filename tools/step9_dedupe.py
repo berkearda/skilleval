@@ -48,6 +48,7 @@ import numpy as np
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 from tools.gemini import Gemini, GeminiError, JUDGE
+from tools.metrics import apply_merges, resolve as m_resolve
 
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
 SIM_PCT = 99.0        # percentile, not an absolute cosine: 0.85 was above p99.9 here
@@ -84,6 +85,9 @@ def main():
     ap.add_argument("--ceiling", type=float, default=0.05)
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--no-gate", action="store_true")
+    ap.add_argument("--reuse-verdicts", action="store_true",
+                    help="load validation_dedupe.json instead of re-judging, so a change "
+                         "to the application is isolated from judge variance")
     a = ap.parse_args()
     if not a.no_gate:
         from tools.gate import require_tests_pass
@@ -149,12 +153,17 @@ def main():
                             "rule": v.get("rule"), "why": why[ch[k]]})
         return out
 
-    res, t0 = [], time.time()
-    with ThreadPoolExecutor(max_workers=WORKERS) as ex:
-        for k, r in enumerate(ex.map(one, chunks), 1):
-            res.extend(r)
-            if k % 20 == 0 or k == len(chunks):
-                print(f"  {k}/{len(chunks)} chunks | {g.total_tokens:,} tok | {time.time()-t0:.0f}s", flush=True)
+    vf = P / "validation_dedupe.json"
+    if a.reuse_verdicts and vf.exists():
+        res = json.loads(vf.read_text())["results"]
+        print(f"  reusing {len(res):,} stored verdicts (no new judging)")
+    else:
+        res, t0 = [], time.time()
+        with ThreadPoolExecutor(max_workers=WORKERS) as ex:
+            for k, r in enumerate(ex.map(one, chunks), 1):
+                res.extend(r)
+                if k % 20 == 0 or k == len(chunks):
+                    print(f"  {k}/{len(chunks)} chunks | {g.total_tokens:,} tok | {time.time()-t0:.0f}s", flush=True)
 
     judged = [r for r in res if "error" not in r]
     merges = [r for r in judged if r["merge"]]
@@ -169,39 +178,11 @@ def main():
     #
     # Instead: union-find over accepted edges, refusing any union that would put
     # an explicitly rejected pair in the same component, or breach the ceiling.
-    rejected = {tuple(sorted(r["pair"])) for r in judged if not r["merge"]}
-    parent, size = {c: c for c in codes}, Counter(counts)
-    members = {c: {c} for c in codes}
-
-    def find(c):
-        while parent[c] != c:
-            parent[c] = parent[parent[c]]; c = parent[c]
-        return c
-
-    applied = refused = blocked = 0
-    for r in sorted(merges, key=lambda r: -max(counts[r["pair"][0]], counts[r["pair"][1]])):
-        x, y = r["pair"]
-        if x not in parent or y not in parent:
-            continue
-        rx, ry = find(x), find(y)
-        if rx == ry:
-            continue
-        if size[rx] + size[ry] > ceil_n:
-            refused += 1; continue
-        # would this union co-locate a pair the judge said to keep apart?
-        if any(tuple(sorted((u, v))) in rejected
-               for u in members[rx] for v in members[ry]):
-            blocked += 1; continue
-        big, small = (rx, ry) if size[rx] >= size[ry] else (ry, rx)
-        parent[small] = big
-        members[big] |= members[small]; members.pop(small, None)
-        size[big] += size[small]; size[small] = 0
-        applied += 1
-
-    alias = {c: find(c) for c in codes if find(c) != c}
-    comps = Counter(find(c) for c in codes)
-    print(f"  components formed: {sum(1 for v in comps.values() if v > 1)} "
-          f"(largest {max(comps.values())} codes)")
+    accepted = [tuple(r["pair"]) for r in merges]
+    rejected = [tuple(r["pair"]) for r in judged if not r["merge"]]
+    alias, st = apply_merges(accepted, rejected, dict(counts), ceil_n, order="smallest")
+    applied, refused, blocked = st["applied"], st["refused_ceiling"], st["blocked_rejected"]
+    print(f"  components formed: {st['components']}")
     print(f"  unions blocked by an explicit keep-apart verdict: {blocked}")
     kept = [c for c in codes if resolve(alias, c) == c]
     print(f"unions applied {applied}, refused for the ceiling {refused}, blocked {blocked}")
@@ -241,7 +222,8 @@ def main():
                    "sim_percentile": SIM_PCT, "sim_threshold": thr,
                    "offered_min": OFFERED_MIN, "chosen_max": CHOSEN_MAX}
     (P / "codebook_v5_deduped.json").write_text(json.dumps(fz, indent=1))
-    (P / "validation_dedupe.json").write_text(json.dumps({"judge": JUDGE, "results": res}, indent=1))
+    if not a.reuse_verdicts:
+        (P / "validation_dedupe.json").write_text(json.dumps({"judge": JUDGE, "results": res}, indent=1))
     tmp = P / "item_labels.jsonl.tmp"
     with tmp.open("w") as fh:
         for r in rows:
