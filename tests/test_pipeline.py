@@ -701,3 +701,107 @@ class TestTask2NullControl(unittest.TestCase):
         """Otherwise a decoy could be a skill the question genuinely needs."""
         src = (REPO / "tools/gold_task2.py").read_text()
         self.assertIn('banned = set(r.get("candidates", [])) | set(assigned)', src)
+
+
+# --------------------------------------------------------------------------
+class TestStep9Dedupe(unittest.TestCase):
+    """Merging duplicates that every earlier criterion was blind to.
+
+    Berke's "neither definition fits" on 6 of 14 hand-labelled items turned out
+    to be four codes for one operation (object location from a narrative). All
+    four were above the size floor, had pairwise cosine 0.67-0.79 against a 0.85
+    threshold, and were co-assigned 0-2 times against a threshold of 20.
+    """
+
+    def test_similarity_threshold_is_a_percentile_not_an_absolute(self):
+        """0.85 sat above the 99.9th percentile here and nominated 28 pairs of
+        roughly 68,000. An absolute cosine does not transfer between codebooks."""
+        src = (REPO / "tools/step9_dedupe.py").read_text()
+        self.assertIn("np.percentile", src)
+        self.assertIn("SIM_PCT", src)
+        self.assertNotIn(">= 0.85", src)
+
+    def test_competition_not_co_assignment_is_the_duplicate_signal(self):
+        """Co-assignment is backwards for this: near-duplicates compete for the
+        same item, so exactly one wins and they co-occur almost never."""
+        src = (REPO / "tools/step9_dedupe.py").read_text()
+        self.assertIn("OFFERED_MIN", src)
+        self.assertIn("CHOSEN_MAX", src)
+        self.assertIn("offered[x] & offered[y]", src)
+        self.assertIn("chosen[x] & chosen[y]", src)
+
+    def test_chunk_size_leaves_room_for_thinking_tokens(self):
+        """10 pairs truncated the JSON mid-array and every such chunk was
+        recorded as an error; the judge spends thinking tokens from max_out."""
+        src = (REPO / "tools/step9_dedupe.py").read_text()
+        self.assertIn("CHUNK = 6", src)
+        self.assertIn("max_out=16000", src)
+
+    def test_merges_respect_the_ceiling_and_go_through_the_alias_chain(self):
+        """Property, not implementation: the greedy version named these t_/f_,
+        the union-find version names them rx/ry, and both must honour Step 0's
+        ceiling and migrate labels through the alias chain."""
+        src = (REPO / "tools/step9_dedupe.py").read_text()
+        self.assertIn("> ceil_n", src)
+        self.assertIn("refused += 1", src)
+        self.assertIn("resolve(alias", src)
+
+    def test_reporting_is_gated(self):
+        src = (REPO / "tools/step9_dedupe.py").read_text()
+        self.assertIn("require_tests_pass()", src)
+
+
+# --------------------------------------------------------------------------
+class TestMergeApplication(unittest.TestCase):
+    """Merging is not transitive, and applying it as if it were composed
+    accepted pairs into a merge the judge had explicitly rejected:
+    it ruled c_0464 and c_0274 distinct, and c_0464 -> c_1047 -> c_0274 put them
+    together anyway, through a chain 8 hops long at its worst.
+    """
+
+    def test_union_refuses_an_explicitly_rejected_pair(self):
+        src = (REPO / "tools/step9_dedupe.py").read_text()
+        self.assertIn("rejected = {tuple(sorted(r[\"pair\"])) for r in judged if not r[\"merge\"]}", src)
+        self.assertIn("would this union co-locate a pair the judge said to keep apart", src)
+
+    def test_components_not_greedy_pairwise(self):
+        src = (REPO / "tools/step9_dedupe.py").read_text()
+        self.assertIn("def find(c):", src)
+        self.assertIn("members[big] |= members[small]", src)
+
+    def test_union_find_honours_both_constraints(self):
+        """Executes the logic rather than grepping it."""
+        counts = {"a": 10, "b": 10, "c": 10}
+        rejected = {("a", "c")}
+        parent = {c: c for c in counts}
+        members = {c: {c} for c in counts}
+        size = dict(counts)
+
+        def find(c):
+            while parent[c] != c:
+                parent[c] = parent[parent[c]]; c = parent[c]
+            return c
+
+        def union(x, y, ceiling=100):
+            rx, ry = find(x), find(y)
+            if rx == ry:
+                return "same"
+            if size[rx] + size[ry] > ceiling:
+                return "ceiling"
+            if any(tuple(sorted((u, v))) in rejected
+                   for u in members[rx] for v in members[ry]):
+                return "blocked"
+            parent[ry] = rx; members[rx] |= members[ry]; size[rx] += size[ry]
+            return "ok"
+
+        self.assertEqual(union("a", "b"), "ok")
+        # a~b and b~c accepted, but a~c was rejected: the chain must not close
+        self.assertEqual(union("b", "c"), "blocked")
+        self.assertNotEqual(find("a"), find("c"))
+
+    def test_label_migration_is_snapshotted_first(self):
+        """The alias map is many-to-one and cannot be inverted, so a bad pass
+        without a snapshot costs a full Step 4 re-run. It did once."""
+        for f in ("step7_audit", "step9_dedupe"):
+            src = (REPO / f"tools/{f}.py").read_text()
+            self.assertIn("item_labels_before_", src, f"{f} migrates labels with no snapshot")

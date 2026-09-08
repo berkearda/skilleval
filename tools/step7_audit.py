@@ -169,6 +169,14 @@ def main():
     print(f"split proposals (not applied): {len(props)}")
     print(f"codes: {len(codes):,} -> {len(live):,} live")
 
+    TAG = "step7"
+    # snapshot before migrating: the alias map is many-to-one and cannot be
+    # inverted, so without this a bad merge pass costs a full Step 4 re-run
+    import shutil
+    src = P / "item_labels.jsonl"
+    if src.exists():
+        shutil.copy(src, P / f"item_labels_before_{TAG}.jsonl")
+        print(f"  snapshot -> item_labels_before_{TAG}.jsonl")
     moved = 0
     for r in rows:
         for x in r.get("assigned", []):
