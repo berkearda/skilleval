@@ -647,3 +647,57 @@ class TestTextClipping(unittest.TestCase):
         for f in ("step4_relabel", "step6_validate", "step8_definitions"):
             src = (REPO / f"tools/{f}.py").read_text()
             self.assertIn("from tools.textclip import clip", src, f"{f}.py has its own rule")
+
+
+# --------------------------------------------------------------------------
+class TestTask2NullControl(unittest.TestCase):
+    """A null control the subject can detect is not a control.
+
+    v1 sampled its composition (12 decoys of 20, 7 of the last 8 consecutive)
+    and the labeller noticed. v2's first attempt fixed the balance but produced
+    RdRdRdRdRd, a perfect alternation, which is more detectable than the bug it
+    replaced.
+    """
+
+    def _key(self):
+        f = REPO / "gold/task2_key.json"
+        if not f.exists():
+            self.skipTest("task 2 sheet not generated")
+        return json.loads(f.read_text())["items"]
+
+    def test_composition_is_exactly_half(self):
+        k = self._key()
+        real = sum(1 for v in k.values() if v["is_pipeline_assignment"])
+        self.assertEqual(real * 2, len(k), "composition must be fixed, not sampled")
+
+    def test_no_run_longer_than_two(self):
+        k = self._key()
+        seq = [v["is_pipeline_assignment"] for v in k.values()]
+        best = cur = 1
+        for x, y in zip(seq, seq[1:]):
+            cur = cur + 1 if x == y else 1
+            best = max(best, cur)
+        self.assertLessEqual(best, 2, "a long run is detectable")
+
+    def test_order_is_not_a_strict_alternation(self):
+        """The failure introduced while fixing the first one."""
+        k = self._key()
+        seq = [v["is_pipeline_assignment"] for v in k.values()]
+        alt = all(x != y for x, y in zip(seq, seq[1:]))
+        self.assertFalse(alt, "perfect alternation is trivially predictable")
+
+    def test_items_are_not_reused_from_the_earlier_sheet(self):
+        """Remembering an earlier answer is its own contamination."""
+        k = self._key()
+        old = REPO / "gold/choice_key.json"
+        if not old.exists():
+            self.skipTest("no earlier sheet")
+        o = json.loads(old.read_text())
+        prev = {v["item_idx"] for v in o.get("task2", {}).values()} | \
+               {v["item_idx"] for v in o.get("task1", {}).values()}
+        self.assertEqual({v["item_idx"] for v in k.values()} & prev, set())
+
+    def test_decoys_are_never_drawn_from_the_items_own_candidates(self):
+        """Otherwise a decoy could be a skill the question genuinely needs."""
+        src = (REPO / "tools/gold_task2.py").read_text()
+        self.assertIn('banned = set(r.get("candidates", [])) | set(assigned)', src)
