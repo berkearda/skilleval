@@ -35,6 +35,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tools.gemini import Gemini, GeminiError, BULK, CODEBOOK
+from tools.textclip import clip
 
 REPO = Path(__file__).resolve().parent.parent
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
@@ -124,7 +125,7 @@ def main():
     def one(c):
         repair, _hold = splits[c]
         shown = repair[:a.show]
-        qs = "\n".join(f"{i+1}. {txt[j][:700]}" for i, j in enumerate(shown))
+        qs = "\n".join(f"{i+1}. {clip(txt[j], 1500)}" for i, j in enumerate(shown))
         try:
             obj = g.json_obj(SYS, USER.format(name=codes[c]["name"], definition=codes[c]["definition"],
                                               n=len(shown), questions=qs),

@@ -29,6 +29,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tools.gemini import Gemini, GeminiError, JUDGE, BULK
+from tools.textclip import clip
 
 REPO = Path(__file__).resolve().parent.parent
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
@@ -116,7 +117,7 @@ def coherence(a):
         items = items[:a.sample]
         # same window the labeller saw: judging on 600 chars what was decided on
         # 4,000 depresses precision by truncation rather than by disagreement
-        qs = "\n".join(f"{i+1}. {txt[j][:4000]}" for i, j in enumerate(items))
+        qs = "\n".join(f"{i+1}. {clip(txt[j], 4000)}" for i, j in enumerate(items))
         try:
             obj = g.json_obj(COH_SYS, COH_U.format(definition=codes[c][field], questions=qs),
                              model=JUDGE, max_out=4000)
@@ -261,7 +262,7 @@ def stability(a):
         random.Random(4242 + i).shuffle(cand)      # the shuffle the doc specifies
         ctxt = "\n".join(f"{c} | {codes[c]['name']} | {codes[c]['definition']}"
                           for c in cand if c in codes)
-        u = (f"QUESTION:\n{txt[i][:2500]}\n\nCANDIDATE SKILLS:\n{ctxt}\n\n"
+        u = (f"QUESTION:\n{clip(txt[i], 4000)}\n\nCANDIDATE SKILLS:\n{ctxt}\n\n"
              "Choose the skills a solver must actually perform, at most 3. Choose one if "
              "one is enough. Return JSON only: {\"assigned\": [{\"code\": \"c_0123\"}]}")
         try:

@@ -193,13 +193,18 @@ class TestStep3Freeze(unittest.TestCase):
 # --------------------------------------------------------------------------
 class TestStep4Relabel(unittest.TestCase):
 
-    def test_retrieval_and_judging_use_one_truncation(self):
+    def test_retrieval_and_judging_see_the_same_question_text(self):
         """Bug: retrieval saw 2,000 chars and the judge saw 4,000, so for 30% of
-        the corpus candidates were chosen from half the question."""
+        the corpus candidates were chosen from half the question.
+
+        Now the loader clips once and both paths use that one string, so they
+        cannot drift apart again.
+        """
         src = (REPO / "tools/step4_relabel.py").read_text()
-        self.assertIn("QCHARS", src)
         self.assertNotIn("[:2000]", src)
-        self.assertEqual(src.count("txt[i][:QCHARS]"), 1)
+        self.assertEqual(src.count('"question": clip(txt[i], QCHARS)'), 1)
+        self.assertIn('g.embed([it["question"] for it in items])', src,
+                      "retrieval must embed the same clipped question the judge sees")
 
     def test_model_is_restricted_to_its_own_candidates(self):
         """The doc: 'have the LLM pick from those candidates'.
@@ -591,3 +596,54 @@ class TestGoldSet(unittest.TestCase):
         first = t.index("### Q001")
         blk = t[first:t.index("### Q002")]
         self.assertLess(blk.index("**Part A**"), blk.index("**Part B**"))
+
+
+# --------------------------------------------------------------------------
+class TestTextClipping(unittest.TestCase):
+    """A flat cut deletes the question, and this project found that once already.
+
+    MuSR items are ~4,800-char narratives whose ask is at the very end. Measured
+    here: 506 questions exceed 4,000 chars, 502 of them MuSR, and 493 of the 506
+    have question-like text after the cut. That produced a phantom skill about
+    "completing an abruptly cut-off sentence" which no question actually needs.
+    the project log 2026-06-13 recorded the same bug; Step 1 was fixed and Steps 4,
+    6 and 8 reintroduced it with flat caps.
+    """
+
+    def test_short_text_is_untouched(self):
+        from tools.textclip import clip
+        self.assertEqual(clip("abc", 100), "abc")
+
+    def test_the_tail_survives(self):
+        """The whole point: the question lives at the end."""
+        from tools.textclip import clip
+        q = "narrative " * 800 + "Which location would Charlie look? 1 - cupboard 2 - desk"
+        out = clip(q, 500)
+        self.assertIn("Which location would Charlie look?", out)
+        self.assertIn("2 - desk", out)
+
+    def test_output_respects_the_budget(self):
+        from tools.textclip import clip
+        for b in (60, 200, 1500, 4000):
+            self.assertLessEqual(len(clip("x" * 20000, b)), b)
+
+    def test_head_is_kept_too(self):
+        from tools.textclip import clip
+        out = clip("START" + "m" * 5000 + "END", 200)
+        self.assertTrue(out.startswith("START"))
+        self.assertTrue(out.endswith("END"))
+
+    def test_no_step_truncates_question_text_with_a_flat_cut(self):
+        """The regression guard that would have caught this."""
+        import re
+        for f in ("step4_relabel", "step6_validate", "step8_definitions",
+                  "gold_choice", "gold_sheet"):
+            src = (REPO / f"tools/{f}.py").read_text()
+            bad = re.findall(r'(?:txt\[[a-z_]+\]|question"?\]?)\[:\s*\d+\s*\]', src)
+            self.assertEqual(bad, [], f"{f}.py truncates question text with a flat cut: {bad}")
+
+    def test_every_step_uses_the_shared_clipper(self):
+        """Three copies of a rule drift apart, and these three did."""
+        for f in ("step4_relabel", "step6_validate", "step8_definitions"):
+            src = (REPO / f"tools/{f}.py").read_text()
+            self.assertIn("from tools.textclip import clip", src, f"{f}.py has its own rule")

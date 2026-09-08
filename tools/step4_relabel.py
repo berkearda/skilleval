@@ -30,6 +30,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tools.gemini import Gemini, GeminiError, BULK
+from tools.textclip import clip
 
 REPO = Path(__file__).resolve().parent.parent
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
@@ -69,7 +70,7 @@ def load_items():
            for r in json.load(open(D / "item_full_text_recovered.json"))}
     meta = {p["item_idx"]: p for p in
             json.load(open(REPO / "cdm_exploration/experiments/oldtax_repaired_FINAL.json"))["per_item"]}
-    return [{"item_idx": i, "question": txt[i][:QCHARS],
+    return [{"item_idx": i, "question": clip(txt[i], QCHARS),
              "benchmark": meta.get(i, {}).get("benchmark"),
              "subtask": meta.get(i, {}).get("subtask")} for i in sorted(txt)]
 
@@ -83,7 +84,7 @@ def item_vectors(g, items):
             print(f"  loaded {len(idx):,} cached question embeddings")
             return z["vecs"]
     print(f"  embedding {len(idx):,} questions (this is the only serial part) ...")
-    V = np.stack(g.embed([it["question"][:QCHARS] for it in items]))
+    V = np.stack(g.embed([it["question"] for it in items]))
     np.savez_compressed(cache, idx=np.array(idx, dtype=object), vecs=V)
     return V
 

@@ -23,6 +23,7 @@ import numpy as np
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
+from tools.textclip import clip
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
 D = REPO / "cdm_exploration/data/cdm_ready"
 GOLD = REPO / "gold"
@@ -132,7 +133,7 @@ def main():
         key[str(i)] = {"assigned": assigned, "decoys": decoys, "shown": shown}
 
         out.append(f"### Q{n:03d} · item {i} · {it['benchmark']} / {it.get('subtask') or '-'}\n")
-        out.append(f"> {q[:QMAX]}{' …[truncated]' if trunc else ''}\n")
+        out.append(f"> {clip(q, QMAX)}\n")
         out.append("**Part A** — write before reading Part B\n")
         out.append("```\nn_operations: \nop_1: \nop_2: \nop_3: \nnotes: \n```\n")
         out.append("**Part B** — only after Part A\n")
