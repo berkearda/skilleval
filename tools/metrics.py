@@ -133,7 +133,20 @@ def size_stats(counts, floor=20, ceiling_frac=0.05, n_items=None):
             "total_assignments": sum(sz)}
 
 
-def identifiable(rows):
+def row_codes(row, alias=None):
+    """The DISTINCT live codes a label row assigns.
+
+    The labeller can name the same code twice in one row, and 2,139 of the 9,503
+    rows do. Reading `assigned` as a list therefore inflates every size-derived
+    statistic and, worse, makes a genuinely single-skill question look like a
+    two-skill one: 1,345 rows were being discarded from the identifiability count
+    for that reason alone. Always go through this function.
+    """
+    cs = {x["code"] for x in row.get("assigned", []) if x.get("code")}
+    return {resolve(alias, c) for c in cs} if alias else cs
+
+
+def identifiable(rows, alias=None):
     """Codes with at least one question that measures them ALONE.
 
     A skill that never appears by itself is not separately identifiable: if a
@@ -141,7 +154,7 @@ def identifiable(rows):
     """
     alone = set()
     for r in rows:
-        cs = [x["code"] for x in r.get("assigned", [])]
+        cs = row_codes(r, alias)
         if len(cs) == 1:
-            alone.add(cs[0])
+            alone.add(next(iter(cs)))
     return alone
