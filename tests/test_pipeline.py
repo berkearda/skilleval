@@ -888,3 +888,38 @@ class TestValidationTargetsTheCodebookYouAsked(unittest.TestCase):
             self.assertIn("codebook", c,
                           "a validation entry point ignores --codebook and will "
                           "silently score whichever codebook the fallback list finds first")
+
+
+class TestValidationOutputsAreNamedForTheirCodebook(unittest.TestCase):
+    """Bug: every check wrote to a fixed filename, so scoring a second codebook
+    destroyed the first one's per-skill results. On 2026-09-09 the v6 coherence
+    detail was lost that way. The run log's by-size table and floor analysis were
+    computed from it, and only the aggregates survived, in prose. An aggregate
+    cannot re-verify a claim."""
+
+    def test_a_second_codebook_does_not_overwrite_the_first(self):
+        import argparse
+        from tools.step6_validate import out_name
+        a = argparse.Namespace(codebook="codebook_v8_definitions.json")
+        b = argparse.Namespace(codebook="codebook_v6_definitions.json")
+        for base in ("validation_coherence.json", "validation_distinctness.json",
+                     "validation_stability.json"):
+            with self.subTest(base=base):
+                self.assertNotEqual(out_name(a, base), out_name(b, base))
+                self.assertIn("v8_definitions", out_name(a, base))
+                self.assertTrue(out_name(a, base).endswith(".json"))
+
+    def test_the_holdout_tag_survives_the_rename(self):
+        import argparse
+        from tools.step6_validate import out_name
+        a = argparse.Namespace(codebook="codebook_v8_definitions.json")
+        n = out_name(a, "validation_coherence_holdout_before.json")
+        self.assertIn("holdout_before", n)
+        self.assertIn("v8_definitions", n)
+
+    def test_no_codebook_flag_keeps_the_legacy_name(self):
+        import argparse
+        from tools.step6_validate import out_name
+        a = argparse.Namespace(codebook=None)
+        self.assertEqual(out_name(a, "validation_coherence.json"),
+                         "validation_coherence.json")

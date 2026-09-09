@@ -60,13 +60,37 @@ Return JSON only:
 {{"verdicts": [{{"pair": 1, "merge": false, "rule": "<operation-level rule, or null>"}}]}}"""
 
 
+def out_name(a, base):
+    """Validation results are named for the codebook they describe.
+
+    Every check wrote to a fixed filename, so scoring a second codebook silently
+    destroyed the first one's per-skill results. That is how the v6 coherence
+    detail was lost on 2026-09-09: the run log's by-size table and floor
+    analysis were derived from a file the next run overwrote, and only the
+    aggregates survived in prose. Aggregates are not enough to re-verify a claim.
+    """
+    cb = getattr(a, "codebook", None)
+    if not cb:
+        return base
+    stem = Path(cb).stem.replace("codebook_", "")
+    return f"{base.rsplit('.', 1)[0]}_{stem}.json"
+
+
 def load_items():
     txt = {r["item_idx"]: " ".join(r["question_full_text"].split())
            for r in json.load(open(D / "item_full_text_recovered.json"))}
     return txt
 
 
-def load_state(name=None):
+def load_state(name=None, labels=None):
+    """Codebook and labels, with the pairing checked rather than assumed.
+
+    A later step migrates item_labels.jsonl onto a merged codebook, and the
+    merged ids are a SUBSET of the earlier ones, so "every label names a known
+    code" still passes and the mismatch is invisible. The invariant that catches
+    it is the other direction: scoring codebook A against labels migrated to a
+    later codebook B leaves A's merged-away codes holding nothing.
+    """
     if name:
         f = P / name
     else:
@@ -77,9 +101,19 @@ def load_state(name=None):
             if f.exists():
                 break
     fz = json.loads(f.read_text())
-    print(f"  codebook: {f.name}")
-    rows = [json.loads(l) for l in (P / "item_labels.jsonl").open()]
+    lf = P / (labels or "item_labels.jsonl")
+    print(f"  codebook: {f.name}  labels: {lf.name}")
+    rows = [json.loads(l) for l in lf.open() if l.strip()]
     ok = [r for r in rows if "error" not in r]
+    live = {c for c in fz["codes"] if c not in fz.get("alias", {})}
+    used = {x["code"] for r in ok for x in r["assigned"]}
+    empty = live - used
+    if len(empty) > 0.05 * max(1, len(live)):
+        raise SystemExit(
+            f"{len(empty)} of {len(live)} live codes in {f.name} hold no item in "
+            f"{lf.name}. These files are from different stages: the labels have "
+            f"been migrated onto a later codebook. Pass --labels with the snapshot "
+            f"that matches, e.g. item_labels_before_<that codebook>.jsonl.")
     by_code = defaultdict(list)
     for r in ok:
         for a in r["assigned"]:
@@ -88,7 +122,7 @@ def load_state(name=None):
 
 
 def coherence(a):
-    fz, ok, by_code = load_state(getattr(a, "codebook", None))
+    fz, ok, by_code = load_state(getattr(a, "codebook", None), getattr(a, "labels", None))
     codes = fz["codes"]; txt = load_items()
     field = "definition_before" if getattr(a, "use_before", False) else "definition"
     rewritten = {c for c, v in codes.items() if "definition_before" in v}
@@ -151,14 +185,14 @@ def coherence(a):
     if not a.smoke:
         tag = ("_holdout_before" if (a.holdout and a.use_before)
                else "_holdout_after" if a.holdout else "")
-        f = P / f"validation_coherence{tag}.json"
+        f = P / out_name(a, f"validation_coherence{tag}.json")
         f.write_text(json.dumps({"judge": JUDGE, "sample": a.sample, "field": field,
                                  "holdout_only": bool(a.holdout), "results": out}, indent=1))
         print(f"wrote {f.name}")
 
 
 def distinctness(a):
-    fz, ok, by_code = load_state(getattr(a, "codebook", None)); codes = fz["codes"]
+    fz, ok, by_code = load_state(getattr(a, "codebook", None), getattr(a, "labels", None)); codes = fz["codes"]
     # Nominate on the definitions as they stand now. Reading the cache blind
     # meant this check selected its "near-identical" candidates from pre-Step-8
     # text, so the pairs it judged were themselves chosen on superseded wording
@@ -215,7 +249,7 @@ def distinctness(a):
     invol = {c for r in m for c in r["pair"]}
     print(f"codes implicated in a merge: {len(invol):,}")
     if not a.smoke:
-        (P / "validation_distinctness.json").write_text(json.dumps(
+        (P / out_name(a, "validation_distinctness.json")).write_text(json.dumps(
             {"judge": JUDGE, "results": res}, indent=1))
         print("wrote validation_distinctness.json")
 
@@ -230,7 +264,7 @@ def stability(a):
     swap would confound the thing being measured: disagreement would mix
     order-sensitivity with cross-model difference. --cross-model measures that
     separately, and it is a different quantity."""
-    fz, ok, _ = load_state(getattr(a, "codebook", None)); codes = fz["codes"]; txt = load_items()
+    fz, ok, _ = load_state(getattr(a, "codebook", None), getattr(a, "labels", None)); codes = fz["codes"]; txt = load_items()
     # retrieval has to offer candidates described the way they are described now,
     # or the re-run is choosing between definitions that no longer exist
     from tools.codeemb import load as load_code_vecs, normed
@@ -288,7 +322,7 @@ def stability(a):
         print(f"Jaccard: mean {sum(js)/len(js):.3f}, median {js[len(js)//2]:.3f}, "
               f"zero-overlap {sum(1 for j in js if j == 0)/len(js):.1%}")
     if not a.smoke:
-        (P / "validation_stability.json").write_text(json.dumps(
+        (P / out_name(a, "validation_stability.json")).write_text(json.dumps(
             {"model": model, "cross_model": bool(a.cross_model), "seed": 4242,
              "results": res}, indent=1))
         print("wrote validation_stability.json")
@@ -303,6 +337,9 @@ if __name__ == "__main__":
                          "which is a different quantity from order stability")
     ap.add_argument("--sample", type=int, default=10)
     ap.add_argument("--codebook", default=None, help="codebook filename to score")
+    ap.add_argument("--labels", default=None,
+                    help="label file matching that codebook; defaults to "
+                         "item_labels.jsonl, which tracks the LATEST codebook")
     ap.add_argument("--holdout", action="store_true",
                     help="score only items Step 8's definition writer never saw")
     ap.add_argument("--use-before", action="store_true",
