@@ -997,3 +997,32 @@ class TestGoldSheetIsUsable(unittest.TestCase):
 
     def test_the_old_flat_truncation_marker_is_gone(self):
         self.assertNotIn("[truncated]", self.f.read_text())
+
+
+class TestAuditBudgetActuallyScales(unittest.TestCase):
+    """The missing test. run_audit carried a scaling cap whose comment said the
+    doc's flat 15 was too small, and it computed max(15, created//10). With ~56
+    codes created per audit that is max(15, 5) = 15, so the relaxation never once
+    took effect and all 31 audits were truncated at the doc's original figure.
+    Nothing asserted the cap ever exceeded its floor."""
+
+    def cap(self, created):
+        import re
+        src = (REPO / "tools/step2_codebook.py").read_text()
+        mn = int(re.search(r"AUDIT_OPS_MIN\s*=\s*(\d+)", src).group(1))
+        per = int(re.search(r"AUDIT_OPS_PER\s*=\s*(\d+)", src).group(1))
+        return max(mn, created // per)
+
+    def test_the_cap_rises_above_its_floor_at_the_observed_creation_rate(self):
+        """1,727 codes over 31 audits is about 56 created per audit."""
+        self.assertGreater(self.cap(56), 15,
+                           "the scaling cap is dead code: it never exceeds its own floor")
+
+    def test_the_budget_is_not_a_quarter_of_creation(self):
+        """31 audits x 15 ops = 465 against 1,727 codes created, i.e. 27%."""
+        total = 31 * self.cap(56)
+        self.assertGreater(total, 1727,
+                           f"consolidation gets {total} operations for 1,727 codes created")
+
+    def test_a_small_batch_still_gets_the_floor(self):
+        self.assertEqual(self.cap(0), 15)

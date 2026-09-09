@@ -67,7 +67,11 @@ AUDIT_EVERY = 10          # doc says every 5-10 batches; 12 sat outside it. Audi
                           # (one pro call) and merging duplicates sooner keeps them out of
                           # later retrieval, where they compete as candidates
 AUDIT_OPS_MIN = 15        # the doc's flat cap, now a floor
-AUDIT_OPS_PER = 10        # plus one operation per this many codes created since the last audit
+AUDIT_OPS_PER = 1         # one operation per code created since the last audit.
+                          # Was 10, which made the scaling dead code: ~56 codes were
+                          # created per audit, 56//10 = 5, below the floor of 15, so
+                          # the cap was 15 on all 31 audits and every one of them hit
+                          # it. 1,727 codes were created against 465 operations.
 CHURN_ABORT = 0.15        # if an audit moves this much, it is thrashing: stop the run
 MERGE_SIM = 0.65          # definition-embedding threshold for nominating merge pairs.
                           # Was 0.80. Of 21 merges the first audit made, 10 were below
@@ -325,7 +329,7 @@ def run_batch(g, cb, labels, freq, bidx, lab_vec, code_vec, batch_model=CODEBOOK
     return n_new, n_map, still
 
 
-def run_audit(g, cb, code_vec, bidx, created_since):
+def run_audit(g, cb, code_vec, bidx, created_since, cap=None):
     """Destructive edits, emitted as an explicit edit script. Returns churn.
 
     The doc caps this at a flat 15 operations. On our corpus that is far too
@@ -339,7 +343,7 @@ def run_audit(g, cb, code_vec, bidx, created_since):
     changed without an explicit override), which is unchanged. Churn is the
     alarm: above CHURN_ABORT the audit is thrashing and the run stops.
     """
-    cap = max(AUDIT_OPS_MIN, created_since // AUDIT_OPS_PER)
+    cap = cap or max(AUDIT_OPS_MIN, created_since // AUDIT_OPS_PER)
     uses = cb.uses()
     # a 429-deferred embed leaves a live code with no vector; indexing it below
     # would raise KeyError and kill the run, which is what deferring exists to avoid
