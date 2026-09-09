@@ -869,3 +869,22 @@ class TestMergeApplication(unittest.TestCase):
         for f in ("step7_audit", "step9_dedupe"):
             src = (REPO / f"tools/{f}.py").read_text()
             self.assertIn("item_labels_before_", src, f"{f} migrates labels with no snapshot")
+
+
+class TestValidationTargetsTheCodebookYouAsked(unittest.TestCase):
+    """Bug: --codebook was honoured by coherence and silently ignored by
+    distinctness and stability, which fell back to a hardcoded list headed by
+    codebook_v5_deduped.json. That is why those two were reported against v5
+    while coherence was against v6, a discrepancy recorded in the run log as a
+    sequencing choice when it was this defect."""
+
+    def test_all_three_checks_pass_the_requested_codebook_through(self):
+        import re
+        src = (REPO / "tools/step6_validate.py").read_text()
+        calls = re.findall(r"load_state\(([^)]*)\)", src)
+        calls = [c for c in calls if "name=None" not in c]
+        self.assertEqual(len(calls), 3, "expected coherence, distinctness and stability")
+        for c in calls:
+            self.assertIn("codebook", c,
+                          "a validation entry point ignores --codebook and will "
+                          "silently score whichever codebook the fallback list finds first")

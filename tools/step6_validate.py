@@ -158,7 +158,7 @@ def coherence(a):
 
 
 def distinctness(a):
-    fz, ok, by_code = load_state(); codes = fz["codes"]
+    fz, ok, by_code = load_state(getattr(a, "codebook", None)); codes = fz["codes"]
     # Nominate on the definitions as they stand now. Reading the cache blind
     # meant this check selected its "near-identical" candidates from pre-Step-8
     # text, so the pairs it judged were themselves chosen on superseded wording
@@ -230,7 +230,7 @@ def stability(a):
     swap would confound the thing being measured: disagreement would mix
     order-sensitivity with cross-model difference. --cross-model measures that
     separately, and it is a different quantity."""
-    fz, ok, _ = load_state(); codes = fz["codes"]; txt = load_items()
+    fz, ok, _ = load_state(getattr(a, "codebook", None)); codes = fz["codes"]; txt = load_items()
     # retrieval has to offer candidates described the way they are described now,
     # or the re-run is choosing between definitions that no longer exist
     from tools.codeemb import load as load_code_vecs, normed
