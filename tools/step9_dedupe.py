@@ -85,6 +85,13 @@ def main():
     ap.add_argument("--ceiling", type=float, default=0.05)
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--no-gate", action="store_true")
+    ap.add_argument("--codebook", default="codebook_v4_definitions.json",
+                    help="codebook to dedupe. The first run hardcoded v4; a second "
+                         "pass on the repaired definitions needs v6.")
+    ap.add_argument("--out", default="codebook_v5_deduped.json",
+                    help="where to write the deduped codebook")
+    ap.add_argument("--verdicts", default="validation_dedupe.json",
+                    help="where to write the judge verdicts")
     ap.add_argument("--reuse-verdicts", action="store_true",
                     help="load validation_dedupe.json instead of re-judging, so a change "
                          "to the application is isolated from judge variance")
@@ -93,8 +100,9 @@ def main():
         from tools.gate import require_tests_pass
         require_tests_pass()
 
-    fz = json.loads((P / "codebook_v4_definitions.json").read_text())
+    fz = json.loads((P / a.codebook).read_text())
     codes = fz["codes"]
+    print(f"  codebook: {a.codebook}")
     rows = [json.loads(l) for l in (P / "item_labels.jsonl").open()]
     ok = [r for r in rows if "error" not in r]
     # Nominate on the definitions as they stand NOW. Step 8 rewrote 271 of these
@@ -157,7 +165,7 @@ def main():
                             "rule": v.get("rule"), "why": why[ch[k]]})
         return out
 
-    vf = P / "validation_dedupe.json"
+    vf = P / a.verdicts
     if a.reuse_verdicts and vf.exists():
         res = json.loads(vf.read_text())["results"]
         print(f"  reusing {len(res):,} stored verdicts (no new judging)")
@@ -192,7 +200,7 @@ def main():
     print(f"unions applied {applied}, refused for the ceiling {refused}, blocked {blocked}")
     print(f"codes: {len(codes):,} -> {len(kept):,}")
 
-    TAG = "step9"
+    TAG = Path(a.out).stem
     # snapshot before migrating: the alias map is many-to-one and cannot be
     # inverted, so without this a bad merge pass costs a full Step 4 re-run
     import shutil
@@ -225,15 +233,15 @@ def main():
                    "applied": applied, "refused_ceiling": refused, "alias": alias,
                    "sim_percentile": SIM_PCT, "sim_threshold": thr,
                    "offered_min": OFFERED_MIN, "chosen_max": CHOSEN_MAX}
-    (P / "codebook_v5_deduped.json").write_text(json.dumps(fz, indent=1))
+    (P / a.out).write_text(json.dumps(fz, indent=1))
     if not a.reuse_verdicts:
-        (P / "validation_dedupe.json").write_text(json.dumps({"judge": JUDGE, "results": res}, indent=1))
+        (P / a.verdicts).write_text(json.dumps({"judge": JUDGE, "results": res}, indent=1))
     tmp = P / "item_labels.jsonl.tmp"
     with tmp.open("w") as fh:
         for r in rows:
             fh.write(json.dumps(r) + "\n")
     os.replace(tmp, P / "item_labels.jsonl")
-    print(f"\nwrote codebook_v5_deduped.json ({len(fz['codes']):,} codes)")
+    print(f"\nwrote {a.out} ({len(fz['codes']):,} codes)")
 
 
 if __name__ == "__main__":
