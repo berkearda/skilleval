@@ -57,31 +57,13 @@ def load():
     return cb, live, uses
 
 
-def code_text(cb, c):
-    """The doc retrieves on "the code's definition + exemplars", not the definition
-    alone. Pass 1 has no item exemplars yet, so it uses the raw-label ones."""
-    e = cb["codes"][c]
-    ex = "; ".join(e.get("exemplars", [])[:3])
-    return f"{e['name']}. {e['definition']}" + (f" Examples: {ex}" if ex else "")
+# code_text and the cache guard live in tools/codeemb so that every step
+# reading code_def_emb.npz gets the staleness check, not just this one.
+from tools.codeemb import code_text, load as _load_code_vecs  # noqa: E402
 
 
 def embed_defs(g, cb, live):
-    import hashlib
-    texts = [code_text(cb, c) for c in live]
-    digest = hashlib.sha256("\x00".join(texts).encode()).hexdigest()
-    cache = P / "code_def_emb.npz"
-    if cache.exists():
-        z = np.load(cache, allow_pickle=True)
-        # keyed on the embedded TEXT, not just the ids: changing code_text with the
-        # ids unchanged would otherwise silently reuse stale vectors
-        if list(z["ids"]) == live and str(z["digest"]) == digest:
-            print(f"  loaded {len(live):,} cached definition embeddings")
-            return z["vecs"]
-        print("  cache stale (embedded text changed); re-embedding")
-    print(f"  embedding {len(live):,} code definitions ...")
-    V = np.stack(g.embed(texts))
-    np.savez_compressed(cache, ids=np.array(live, dtype=object), vecs=V, digest=digest)
-    return V
+    return _load_code_vecs(P / "code_def_emb.npz", cb, live, g=g)
 
 
 def kmeans(V, k, iters=60, seed=42):

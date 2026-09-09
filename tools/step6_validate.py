@@ -159,12 +159,13 @@ def coherence(a):
 
 def distinctness(a):
     fz, ok, by_code = load_state(); codes = fz["codes"]
-    z = np.load(P / "code_def_emb.npz", allow_pickle=True)
-    ids = list(z["ids"]); C = z["vecs"] / np.linalg.norm(z["vecs"], axis=1, keepdims=True)
-    absent = [c for c in codes if c not in set(ids)]
-    if absent:
-        print(f"  WARNING: {len(absent)} codes have no embedding and cannot be "
-              f"nominated or retrieved: {absent[:5]}{' ...' if len(absent) > 5 else ''}")
+    # Nominate on the definitions as they stand now. Reading the cache blind
+    # meant this check selected its "near-identical" candidates from pre-Step-8
+    # text, so the pairs it judged were themselves chosen on superseded wording
+    # and the duplicate count it reports is a floor.
+    from tools.codeemb import load as load_code_vecs, normed
+    ids = [c for c in codes if c not in fz.get("alias", {})]
+    C = normed(load_code_vecs(P / "code_def_emb.npz", fz, ids, g=Gemini()))
     S = C @ C.T; np.fill_diagonal(S, -1)
     sim_pairs = {(ids[i], ids[j]) for i in range(len(ids)) for j in np.where(S[i] >= 0.85)[0] if i < j}
     co = Counter()
@@ -230,8 +231,11 @@ def stability(a):
     order-sensitivity with cross-model difference. --cross-model measures that
     separately, and it is a different quantity."""
     fz, ok, _ = load_state(); codes = fz["codes"]; txt = load_items()
-    z = np.load(P / "code_def_emb.npz", allow_pickle=True)
-    ids = list(z["ids"]); C = z["vecs"] / np.linalg.norm(z["vecs"], axis=1, keepdims=True)
+    # retrieval has to offer candidates described the way they are described now,
+    # or the re-run is choosing between definitions that no longer exist
+    from tools.codeemb import load as load_code_vecs, normed
+    ids = [c for c in codes if c not in fz.get("alias", {})]
+    C = normed(load_code_vecs(P / "code_def_emb.npz", fz, ids, g=Gemini()))
     iz = np.load(P / "item_emb_gemini.npz", allow_pickle=True)
     pos = {int(i): k for k, i in enumerate(list(iz["idx"]))}
     V = iz["vecs"] / np.linalg.norm(iz["vecs"], axis=1, keepdims=True)

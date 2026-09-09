@@ -184,10 +184,67 @@ class TestStep3Freeze(unittest.TestCase):
 
     def test_embedding_cache_is_keyed_on_text_not_ids(self):
         """Bug: the cache keyed on ids alone, so changing the embedded text with
-        ids unchanged silently reused stale vectors and nothing could detect it."""
-        src = (REPO / "tools/step3_freeze.py").read_text()
-        self.assertIn("hashlib.sha256", src)
-        self.assertIn('z["digest"]', src)
+        ids unchanged silently reused stale vectors and nothing could detect it.
+        Step 8 rewrites definitions, so Steps 6 and 9 measured similarity on text
+        the codes no longer had. Now asserted behaviourally, in tools/codeemb."""
+        import numpy as np, tempfile, os
+        from pathlib import Path as _P
+        from tools import codeemb
+
+        class FakeG:
+            def __init__(self): self.calls = []
+            def embed(self, texts):
+                self.calls.append(list(texts))
+                return [np.full(4, float(len(t)), dtype="float32") for t in texts]
+
+        cb = {"codes": {"c_1": {"name": "a", "definition": "one"},
+                        "c_2": {"name": "b", "definition": "two"}}}
+        live = ["c_1", "c_2"]
+        with tempfile.TemporaryDirectory() as d:
+            cache = _P(d) / "e.npz"
+            g = FakeG()
+            codeemb.load(cache, cb, live, g=g, verbose=False)
+            self.assertEqual(len(g.calls[0]), 2, "first run embeds everything")
+
+            g2 = FakeG()
+            codeemb.load(cache, cb, live, g=g2, verbose=False)
+            self.assertEqual(g2.calls, [], "unchanged text must reuse the cache")
+
+            cb["codes"]["c_2"]["definition"] = "two, but reworded by Step 8"
+            g3 = FakeG()
+            V = codeemb.load(cache, cb, live, g=g3, verbose=False)
+            self.assertEqual(len(g3.calls[0]), 1,
+                             "only the changed definition re-embeds")
+            self.assertIn("reworded", g3.calls[0][0])
+            self.assertEqual(V.shape, (2, 4))
+
+            cb["codes"]["c_1"]["definition"] = "changed again"
+            with self.assertRaises(RuntimeError,
+                                   msg="stale cache with no client must raise, not return"):
+                codeemb.load(cache, cb, live, g=None, verbose=False)
+
+    def test_a_cache_without_per_code_hashes_is_not_trusted(self):
+        """The shipped cache carried digest='stale-after-step5' and five steps
+        loaded it anyway. An old-format cache must read as absent."""
+        import numpy as np, tempfile
+        from pathlib import Path as _P
+        from tools import codeemb
+        with tempfile.TemporaryDirectory() as d:
+            cache = _P(d) / "e.npz"
+            np.savez_compressed(cache, ids=np.array(["c_1"], dtype=object),
+                                vecs=np.zeros((1, 4), dtype="float32"),
+                                digest="stale-after-step5")
+            self.assertIsNone(codeemb.read_cache(cache))
+
+    def test_steps_after_definition_repair_do_not_read_the_cache_blind(self):
+        """Step 8 rewrites definitions; anything nominating on similarity after
+        it must go through the guarded loader."""
+        for name in ("step6_validate", "step9_dedupe"):
+            src = (REPO / f"tools/{name}.py").read_text()
+            with self.subTest(step=name):
+                self.assertNotIn('np.load(P / "code_def_emb.npz"', src,
+                                 f"{name} loads the embedding cache without the staleness check")
+                self.assertIn("load_code_vecs", src)
 
 
 # --------------------------------------------------------------------------

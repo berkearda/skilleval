@@ -97,11 +97,16 @@ def main():
     codes = fz["codes"]
     rows = [json.loads(l) for l in (P / "item_labels.jsonl").open()]
     ok = [r for r in rows if "error" not in r]
-    z = np.load(P / "code_def_emb.npz", allow_pickle=True)
-    ids = list(z["ids"]); V = z["vecs"] / np.linalg.norm(z["vecs"], axis=1, keepdims=True)
-    pos = {c: i for i, c in enumerate(ids)}
-    live = [c for c in ids if c in codes]
-    M = np.stack([V[pos[c]] for c in live]); S = M @ M.T; np.fill_diagonal(S, -1)
+    # Nominate on the definitions as they stand NOW. Step 8 rewrote 271 of these
+    # 379, and reading the cache blind meant similarity was computed on the text
+    # they used to have: two codes Step 8 had renamed to the same string scored
+    # 0.698 and were never nominated. `live` comes from the codebook, not the
+    # cache, so a code absent from the cache is embedded rather than dropped.
+    from tools.codeemb import load as load_code_vecs, normed
+    live = [c for c in codes if c not in fz.get("alias", {})]
+    g = Gemini()
+    V = normed(load_code_vecs(P / "code_def_emb.npz", fz, live, g=g))
+    M = V; S = M @ M.T; np.fill_diagonal(S, -1)
     thr = float(np.percentile(S[np.triu_indices(len(live), 1)], SIM_PCT))
 
     offered, chosen = defaultdict(set), defaultdict(set)
@@ -129,7 +134,6 @@ def main():
     print(f"  nominated {len(pairs):,} pairs "
           f"({sum(1 for p in pairs if 'competition' in why[p]):,} by competition)")
 
-    g = Gemini()
     # 6 not 10: JUDGE spends thinking tokens out of the same max_out budget, and
     # the post-Step-8 definitions are long, so 10 pairs truncated the JSON mid-array
     # and every such chunk was recorded as an error.
