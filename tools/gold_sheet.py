@@ -27,7 +27,10 @@ from tools.textclip import clip
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
 D = REPO / "cdm_exploration/data/cdm_ready"
 GOLD = REPO / "gold"
-DECOYS = 2
+OPTIONS = 6              # CONSTANT. Was `assigned + 2 decoys`, so the length of the
+                         # list told the labeller exactly how many to tick: 3 options
+                         # meant 1 real, 5 meant 3. That is the same leak Berke caught
+                         # in the first Task 2 sheet, and it voids the control.
 QMAX = 1400
 
 HEAD = """# Gold set — 100 hand-labelled questions
@@ -105,13 +108,19 @@ are done, run `python3 tools/gold_score.py` and it will parse this file.
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--codebook", default="codebook_v9_double_judged.json",
+                    help="the taxonomy being tested; must match --labels")
+    ap.add_argument("--labels", default="item_labels_codebook_v9_double_judged.jsonl")
+    a = ap.parse_args()
     gs = json.loads((GOLD / "gold_set.json").read_text())
     txt = {r["item_idx"]: " ".join(r["question_full_text"].split())
            for r in json.load(open(D / "item_full_text_recovered.json"))}
-    fz = json.loads((P / "codebook_v4_definitions.json").read_text())
+    fz = json.loads((P / a.codebook).read_text())
     codes = fz["codes"]
     rows = {json.loads(l)["item_idx"]: json.loads(l)
-            for l in (P / "item_labels.jsonl").open()}
+            for l in (P / a.labels).open() if l.strip()}
     rng = random.Random(gs["seed"])
     all_ids = sorted(codes)
 
@@ -122,14 +131,16 @@ def main():
         q = txt[i]
         trunc = len(q) > QMAX
         r = rows.get(i, {})
-        assigned = [x["code"] for x in r.get("assigned", []) if x["code"] in codes]
+        # dedupe: the labeller names the same code twice in 2,139 rows, which put
+        # the identical option in the list twice on 18 of the 100 questions
+        assigned = sorted({x["code"] for x in r.get("assigned", []) if x["code"] in codes})
         decoys = []
-        while len(decoys) < DECOYS:
+        while len(assigned) + len(decoys) < OPTIONS:
             c = rng.choice(all_ids)
             if c not in assigned and c not in decoys:
                 decoys.append(c)
         shown = assigned + decoys
-        rng.shuffle(shown)
+        rng.shuffle(shown)   # so position carries no information
         key[str(i)] = {"assigned": assigned, "decoys": decoys, "shown": shown}
 
         out.append(f"### Q{n:03d} · item {i} · {it['benchmark']} / {it.get('subtask') or '-'}\n")

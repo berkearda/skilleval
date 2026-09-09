@@ -923,3 +923,77 @@ class TestValidationOutputsAreNamedForTheirCodebook(unittest.TestCase):
         a = argparse.Namespace(codebook=None)
         self.assertEqual(out_name(a, "validation_coherence.json"),
                          "validation_coherence.json")
+
+
+class TestDoubleJudgedMerges(unittest.TestCase):
+    """Dedupe pass 2 merged 149 pairs on one judge's word and measured worse.
+    This applies only the intersection of two independent verdict sets."""
+
+    def test_only_pairs_both_judges_accepted_are_taken(self):
+        from tools.apply_double_judged import double_judged, rejected_by_either
+        dedupe = [{"pair": ["a", "b"], "merge": True},
+                  {"pair": ["c", "d"], "merge": True},
+                  {"pair": ["e", "f"], "merge": False}]
+        distinct = [{"pair": ["b", "a"], "merge": True},
+                    {"pair": ["c", "d"], "merge": False},
+                    {"pair": ["e", "f"], "merge": True}]
+        self.assertEqual(double_judged(dedupe, distinct), [("a", "b")],
+                         "a pair only one judge accepted must not be merged")
+
+    def test_either_judge_can_veto(self):
+        from tools.apply_double_judged import rejected_by_either
+        dedupe = [{"pair": ["a", "b"], "merge": False}]
+        distinct = [{"pair": ["c", "d"], "merge": False}]
+        self.assertEqual(rejected_by_either(dedupe, distinct), [("a", "b"), ("c", "d")])
+
+    def test_pair_order_does_not_matter(self):
+        from tools.apply_double_judged import double_judged
+        self.assertEqual(
+            double_judged([{"pair": ["z", "a"], "merge": True}],
+                          [{"pair": ["a", "z"], "merge": True}]), [("a", "z")])
+
+
+class TestGoldSheetIsUsable(unittest.TestCase):
+    """The sheet Berke hand-labels is the doc's acceptance gate, so a flaw in it
+    invalidates every comparison made against it. The version generated on
+    2026-09-08 had three: 18 questions listed the same skill twice, the number of
+    options revealed how many were real (3 options meant 1 real, 5 meant 3), and
+    all 15 MuSR passages were cut before the question, which sits at the end."""
+
+    def setUp(self):
+        self.f = REPO / "gold/gold_sheet.md"
+        if not self.f.exists():
+            self.skipTest("gold sheet not generated")
+        import re
+        self.qs = re.split(r"^### ", self.f.read_text(), flags=re.M)[1:]
+
+    def test_every_question_offers_the_same_number_of_options(self):
+        import re, collections
+        c = collections.Counter(len(re.findall(r"- \[ \] `c_\d+`", q)) for q in self.qs)
+        self.assertEqual(len(c), 1,
+                         f"option count varies {dict(c)}; it tells the labeller how many to tick")
+
+    def test_no_question_lists_the_same_skill_twice(self):
+        import re
+        for q in self.qs:
+            ids = re.findall(r"- \[ \] `(c_\d+)`", q)
+            with self.subTest(q=q.split(chr(10))[0]):
+                self.assertEqual(len(ids), len(set(ids)))
+
+    def test_the_question_itself_is_never_cut_off(self):
+        """MuSR puts the question after a ~5,000 character story. A flat cut
+        removes it and the labeller is shown a passage with nothing asked."""
+        import re, json
+        D = REPO / "cdm_exploration/data/cdm_ready"
+        tx = {r["item_idx"]: " ".join(r["question_full_text"].split())
+              for r in json.load((D / "item_full_text_recovered.json").open())}
+        missing = []
+        for q in self.qs:
+            m = re.match(r"Q\d+ · item (\d+)", q)
+            body = q.split("**Part A**")[0]
+            if m and tx[int(m.group(1))][-40:] not in body:
+                missing.append(m.group(0))
+        self.assertEqual(missing, [], "these entries do not show the end of the question")
+
+    def test_the_old_flat_truncation_marker_is_gone(self):
+        self.assertNotIn("[truncated]", self.f.read_text())
