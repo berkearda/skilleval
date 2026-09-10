@@ -1218,3 +1218,22 @@ class TestEmbeddingCacheIsPerRun(unittest.TestCase):
                          "writing the cache raw, in a format the guard cannot verify")
         self.assertNotIn('digest="stale-after-step5")', src,
                          "the sentinel is a real argument again, not just a comment")
+
+
+class TestStep4WritesToItsOwnLabelFile(unittest.TestCase):
+    """Step 4's output was untagged. A second run read the first run's 9,503
+    rows as "already done", skipped them, and would have written its own code
+    ids into a file full of the previous run's. Ids restart at c_0001 in every
+    run, so the corruption is invisible: every id still looks valid."""
+
+    def test_the_label_file_carries_the_run_tag(self):
+        src = (REPO / "tools/step4_relabel.py").read_text()
+        self.assertNotIn('P / ("labels_smoke.jsonl" if mode == "smoke" else "item_labels.jsonl")', src)
+        self.assertIn('tagged("labels_smoke.jsonl" if mode == "smoke" else "item_labels.jsonl")', src)
+
+    def test_no_step_writes_an_untagged_label_file(self):
+        import re
+        for name in ("step3_freeze", "step4_relabel", "step5_loop"):
+            src = (REPO / f"tools/{name}.py").read_text()
+            with self.subTest(step=name):
+                self.assertEqual(re.findall(r'P / "item_labels\.jsonl"', src), [])

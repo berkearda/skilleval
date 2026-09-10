@@ -107,7 +107,12 @@ def main(mode="smoke"):
     codes = fz["codes"]
     ids = list(codes)
     items = load_items()
-    outf = P / ("labels_smoke.jsonl" if mode == "smoke" else "item_labels.jsonl")
+    # Tagged. Untagged, a second run appended to the first run's labels: it read
+    # the existing 9,503 rows as "already done", skipped them, and would have
+    # written this taxonomy's code ids into a file full of the previous one's.
+    # Code ids restart at c_0001 every run, so the result is unrecoverable by
+    # inspection: the ids look valid and mean something else.
+    outf = P / tagged("labels_smoke.jsonl" if mode == "smoke" else "item_labels.jsonl")
     if mode == "smoke":
         items = items[:10] + items[5000:5010]
         outf.unlink(missing_ok=True)
