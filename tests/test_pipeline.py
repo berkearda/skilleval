@@ -1173,3 +1173,16 @@ class TestSteps3to5CannotClobberAnEarlierRun(unittest.TestCase):
         finally:
             os.environ.pop("STEP_TAG", None)
             importlib.reload(importlib.import_module("step3_freeze"))
+
+
+class TestStep3DoesNotImportAnotherRunsRules(unittest.TestCase):
+    """Code ids restart at c_0001 every run, so they collide across runs while
+    naming different skills. Step 3 read an untagged validation_distinctness.json
+    and attached the previous run's discriminating rules to this run's codes:
+    c_0019 meant "calculating temporal offsets" in one and "solving quadratic
+    equations" in the other. Those rules feed Step 4's prompt."""
+
+    def test_the_distinctness_file_is_namespaced(self):
+        src = (REPO / "tools/step3_freeze.py").read_text()
+        self.assertNotIn('P / "validation_distinctness.json"', src)
+        self.assertIn('tagged("validation_distinctness.json")', src)

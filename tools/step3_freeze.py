@@ -140,7 +140,13 @@ def main():
 
     # ---- confusable_with ----
     rules = {}
-    df = P / "validation_distinctness.json"
+    # Namespaced: code ids restart at c_0001 in every run, so ids COLLIDE across
+    # runs while meaning different skills. Reading an untagged validation file
+    # here attached the previous run's discriminating rules to this run's codes:
+    # c_0019 was "calculating temporal offsets" then and "solving quadratic
+    # equations" now, and the rule would have gone into Step 4's prompt as
+    # guidance about the wrong skill.
+    df = P / tagged("validation_distinctness.json")
     if df.exists():
         for r in json.loads(df.read_text()).get("results", []):
             if r.get("rule") and not r.get("merge") and len(r.get("pair", [])) == 2:
