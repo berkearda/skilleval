@@ -78,6 +78,8 @@ MERGE_SIM = 0.65          # definition-embedding threshold for nominating merge 
                           # 0.80 (min 0.66), i.e. the nomination list missed half of them
                           # and the audit had to find them by reading the codebook.
 MERGE_PAIRS_SHOWN = 60    # lowering the threshold only helps if more pairs are shown
+AUDIT_TIMEOUT = 900       # one audit call, up to `cap` operations with reasons. The
+                          # default 180s fits cap=15 and not cap=150.
 SAT_RATE = 0.02           # doc: new-code rate under ~2% ...
 SAT_RUNS = 8              # ... averaged over this many batches. The doc says "consecutive
                           # batches", but at 50 labels the rate is far too noisy for that
@@ -371,8 +373,11 @@ def run_audit(g, cb, code_vec, bidx, created_since, cap=None):
 
     before = {lab: cb.resolve(cid) for lab, cid in cb.assign.items()}
     try:
+        # a large cap means a long generation: at cap 150 this timed out five
+        # times over 935s against the default 180s. The audit is one call per
+        # round and there is no point retrying a request that cannot finish.
         obj = g.json_obj(SYS, AUDIT_U.format(codes=codes_txt, pairs=pairs_txt, cap=cap),
-                         model=CODEBOOK, max_out=40000)
+                         model=CODEBOOK, max_out=40000, timeout=AUDIT_TIMEOUT)
     except GeminiError as e:
         print(f"    audit failed, skipped: {e}")
         return None, Counter()      # None, never 0.0: a failed audit must not read

@@ -41,9 +41,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tag", default="final", help="codebook_<tag>.json to consolidate")
     ap.add_argument("--out", default="consolidated")
-    ap.add_argument("--cap", type=int, default=150,
-                    help="operations per round. The doc says 15; that bound was "
-                         "hit in all 31 audits of the original run.")
+    ap.add_argument("--cap", type=int, default=60,
+                    help="operations per round. The doc says 15, a bound hit in all "
+                         "31 audits of the original run. 60 matches the number of "
+                         "candidate merge pairs the audit is shown, so a higher cap "
+                         "cannot be reached: 150 only produced a 935s timeout.")
     ap.add_argument("--rounds", type=int, default=MAX_ROUNDS)
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--no-gate", action="store_true")

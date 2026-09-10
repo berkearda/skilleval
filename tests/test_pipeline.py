@@ -1026,3 +1026,35 @@ class TestAuditBudgetActuallyScales(unittest.TestCase):
 
     def test_a_small_batch_still_gets_the_floor(self):
         self.assertEqual(self.cap(0), 15)
+
+
+class TestAuditCallCanActuallyFinish(unittest.TestCase):
+    """The audit is one long generation per round. At cap 150 against the client's
+    default 180s timeout it failed five times over 935s and merged nothing. Two
+    ways that goes wrong silently: the timeout is not plumbed through, or the cap
+    exceeds the number of candidate pairs the audit is even shown."""
+
+    def test_the_client_accepts_a_per_call_timeout(self):
+        import inspect
+        from tools.gemini import Gemini
+        for fn in (Gemini.json_obj, Gemini.text):
+            with self.subTest(fn=fn.__name__):
+                self.assertIn("timeout", inspect.signature(fn).parameters)
+
+    def test_the_audit_asks_for_more_than_the_default(self):
+        import re
+        src = (REPO / "tools/step2_codebook.py").read_text()
+        self.assertIn("timeout=AUDIT_TIMEOUT", src,
+                      "the audit call uses the default timeout it already exceeded")
+        t = int(re.search(r"AUDIT_TIMEOUT\s*=\s*(\d+)", src).group(1))
+        self.assertGreater(t, 180)
+
+    def test_the_cap_cannot_exceed_the_pairs_shown(self):
+        import re
+        shown = int(re.search(r"MERGE_PAIRS_SHOWN\s*=\s*(\d+)",
+                              (REPO / "tools/step2_codebook.py").read_text()).group(1))
+        cap = int(re.search(r'"--cap", type=int, default=(\d+)',
+                            (REPO / "tools/audit_rounds.py").read_text()).group(1))
+        self.assertLessEqual(cap, shown,
+                             "asking for more operations than there are candidate pairs "
+                             "lengthens the generation without making more merges possible")

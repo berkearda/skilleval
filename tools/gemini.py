@@ -114,12 +114,12 @@ class Gemini:
 
     # ---------- generation ----------
     def text(self, system: str, user: str, model: str = BULK, max_out: int = 2000,
-             temperature: float = 0.0) -> str:
+             temperature: float = 0.0, timeout: int = 180) -> str:
         body = {"contents": [{"parts": [{"text": user}]}],
                 "generationConfig": {"temperature": temperature, "maxOutputTokens": max_out}}
         if system:
             body["systemInstruction"] = {"parts": [{"text": system}]}
-        d = self._post(f"{model}:generateContent", body)
+        d = self._post(f"{model}:generateContent", body, timeout=timeout)
         self._record(model, d.get("usageMetadata", {}))
         cands = d.get("candidates") or []
         if not cands:
@@ -162,8 +162,9 @@ class Gemini:
 
         return re.sub(r'\\(.)', fix, s, flags=re.S)
 
-    def json_obj(self, system: str, user: str, model: str = BULK, max_out: int = 2000) -> dict:
-        raw = self.text(system, user, model=model, max_out=max_out)
+    def json_obj(self, system: str, user: str, model: str = BULK, max_out: int = 2000,
+                 timeout: int = 180) -> dict:
+        raw = self.text(system, user, model=model, max_out=max_out, timeout=timeout)
         try:
             sub = raw[raw.index("{"):raw.rindex("}") + 1]
         except ValueError as e:
