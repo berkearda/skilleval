@@ -36,6 +36,8 @@ for Step 5.
 from __future__ import annotations
 
 import json
+import os
+from concurrent.futures import ThreadPoolExecutor
 import re
 import sys
 import time
@@ -50,7 +52,9 @@ from tools.gemini import Gemini, GeminiError, BULK, CODEBOOK
 REPO = Path(__file__).resolve().parent.parent
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
 
-BATCH = 50                 # doc says 100-200
+BATCH = int(os.environ.get("STEP2_BATCH", 150))   # doc says 100-200. Was 50, which
+                           # made 313 API calls where ~105 do, with no recorded reason.
+
 TOPK_MIN, TOPK_MAX = 6, 16   # candidate codes retrieved per raw label, scaled by how big
 TOPK_PER = 80                # the codebook is: max(MIN, live // PER), capped at MAX.
                              # Measured over three 25-batch trials: codes CREATED was
@@ -260,9 +264,10 @@ def embed_new_codes(g, cb, code_vec):
     return len(todo)
 
 
-def run_batch(g, cb, labels, freq, bidx, lab_vec, code_vec, batch_model=CODEBOOK):
-    """One append-only batch: map to an existing code, or create a new one."""
-    if cb.codes:
+def _batch_prompt(cb, labels, freq, lab_vec, code_vec):
+    # code_vec can be empty while cb.codes is not: embed_new_codes defers the
+    # whole batch on a 429, and np.stack([]) raises rather than returning empty
+    if cb.codes and code_vec:
         ids = list(code_vec)
         M = np.stack([code_vec[i] for i in ids])
         sims = np.stack([lab_vec[l] for l in labels]) @ M.T
@@ -276,9 +281,22 @@ def run_batch(g, cb, labels, freq, bidx, lab_vec, code_vec, batch_model=CODEBOOK
     items_txt = "\n".join(
         f"{i+1}. {lab}  (appears {freq[lab]}x)  candidates: {', '.join(cands[i]) or 'none'}"
         for i, lab in enumerate(labels))
+    return cands, codes_txt, items_txt
 
-    obj = g.json_obj(SYS, BATCH_U.format(codes=codes_txt, items=items_txt),
-                     model=batch_model, max_out=60000)
+
+def run_batch(g, cb, labels, freq, bidx, lab_vec, code_vec, batch_model=CODEBOOK, pre=None):
+    """One append-only batch: map to an existing code, or create a new one.
+
+    `pre` is a response already obtained by plan_batch against an earlier
+    snapshot. Applying it is still sequential, so codes created by an earlier
+    batch in the same wave are visible to `cb.resolve` here even though the
+    model did not see them. That is the whole trade: concurrency buys speed and
+    costs some duplicate creation, which the audit removes.
+    """
+    cands, codes_txt, items_txt = _batch_prompt(cb, labels, freq, lab_vec, code_vec)
+    obj = pre if pre is not None else g.json_obj(
+        SYS, BATCH_U.format(codes=codes_txt, items=items_txt),
+        model=batch_model, max_out=60000)
 
     n_new = n_map = 0
     for d in obj.get("decisions", []):
@@ -440,8 +458,10 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
         batches = batches[:1]
         print("SMOKE: one batch only, measuring cost before committing to the rest")
     elif mode == "trial":
-        batches = batches[:25]
-        print("TRIAL: 25 batches (1,250 labels), runs one audit, then stops")
+        n = int(os.environ.get("STEP2_TRIAL_BATCHES", 25))
+        batches = batches[:n]
+        print(f"TRIAL: {n} batches (~{n*BATCH:,} labels), runs "
+              f"{n // AUDIT_EVERY} audit(s), then stops")
 
     g = Gemini()
     cb = Codebook()
@@ -455,6 +475,13 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
             resumed_hist = st.get("hist", [])
             resumed_carry = st.get("carry", [])
             resumed_created = st.get("created_since", 0)
+            saved_batch = st.get("batch_size")
+            if saved_batch is not None and saved_batch != BATCH:
+                raise SystemExit(
+                    f"cannot resume: this run was batched at {saved_batch} and BATCH is "
+                    f"now {BATCH}. next_batch is an index into a partition that depends "
+                    f"on BATCH, so resuming would skip a different set of labels "
+                    f"entirely and they would never be processed.")
             print(f"  RESUME: {len(cb.codes)-len(cb.alias)} live codes, "
                   f"{len(cb.assign):,} labels assigned, continuing at batch {start_batch}")
         except FileNotFoundError:
@@ -479,6 +506,21 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
     stop_reason = f"batch cap {BATCH_CAP}"
     if start_batch:                    # re-embed the codebook we just loaded
         embed_new_codes(g, cb, code_vec)
+    # Parallel batch planning was tried and reverted on 2026-09-10. Two
+    # independent defects, both found by review before it ran:
+    #
+    #   - a batch that picked up carried labels had its plan discarded and then
+    #     immediately re-planned from the ORIGINAL label list, so every decision
+    #     index was shifted by len(carry) and labels were bound to codes chosen
+    #     for different labels. Silent corruption, not loss, and carry is
+    #     non-empty on most batches.
+    #   - the executor joined inside the loop, so planning never overlapped
+    #     application. Steady-state concurrency was 1 while paying for
+    #     PARALLEL-1 discarded pro calls per audit cycle: ~+70% tokens for zero
+    #     wall-clock gain.
+    #
+    # Real prefetching needs futures held across iterations plus a lock around
+    # the codebook snapshot, which is a redesign rather than an addition.
     for bi, labels in enumerate(batches):
         if bi < start_batch:
             continue
@@ -488,7 +530,8 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
             labels = carry + labels
             carry = []
         try:
-            n_new, n_map, still = run_batch(g, cb, labels, freq, bi, lab_vec, code_vec, batch_model)
+            n_new, n_map, still = run_batch(g, cb, labels, freq, bi, lab_vec,
+                                            code_vec, batch_model)
             carry.extend(still)
         except GeminiError as e:
             print(f"  batch {bi}: FAILED {e}")
@@ -504,7 +547,8 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
 
         if mode == "run":          # only a full run leaves resumable state
             cb.save("run", {"next_batch": bi + 1, "hist": hist, "carry": carry,
-                            "created_since": created_since, "mode": mode})
+                            "created_since": created_since, "mode": mode,
+                            "batch_size": BATCH})
 
         churn = None
         if (bi + 1) % AUDIT_EVERY == 0:

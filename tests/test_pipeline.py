@@ -1058,3 +1058,48 @@ class TestAuditCallCanActuallyFinish(unittest.TestCase):
         self.assertLessEqual(cap, shown,
                              "asking for more operations than there are candidate pairs "
                              "lengthens the generation without making more merges possible")
+
+
+class TestBatchSizeAndResumeAgree(unittest.TestCase):
+    """BATCH decides how labels are partitioned, and `next_batch` is an index
+    into that partition. Making BATCH configurable without recording it meant a
+    resume at a different size would skip a completely different set of labels,
+    which would never be processed and would show up nowhere except a total
+    nobody diffs."""
+
+    def test_batch_size_follows_the_doc(self):
+        from tools.step2_codebook import BATCH
+        self.assertGreaterEqual(BATCH, 100, "the doc specifies 100-200 per batch")
+        self.assertLessEqual(BATCH, 200)
+
+    def test_the_resume_state_records_the_batch_size(self):
+        src = (REPO / "tools/step2_codebook.py").read_text()
+        self.assertIn('"batch_size": BATCH', src)
+
+    def test_resuming_at_a_different_batch_size_is_refused(self):
+        src = (REPO / "tools/step2_codebook.py").read_text()
+        self.assertIn("cannot resume:", src,
+                      "a BATCH mismatch on resume must stop the run, not skip labels")
+
+    def test_retrieval_survives_an_empty_embedding_cache(self):
+        """embed_new_codes defers the whole batch on a 429, leaving cb.codes
+        non-empty and code_vec empty. np.stack([]) raises."""
+        from collections import Counter
+        from tools.step2_codebook import Codebook, _batch_prompt
+        import numpy as np
+        cb = Codebook()
+        cb.add("a skill", "does a thing", [], [], 0)
+        cands, codes_txt, items_txt = _batch_prompt(
+            cb, ["some label"], Counter({"some label": 1}),
+            {"some label": np.ones(4, dtype="float32")}, {})
+        self.assertEqual(cands, [[]])
+        self.assertIn("some label", items_txt)
+
+    def test_parallel_planning_is_gone(self):
+        """Reverted 2026-09-10: it shifted decision indices by len(carry) and
+        its executor joined inside the loop, so it corrupted labels and was not
+        faster. Re-adding it needs futures held across iterations and a lock."""
+        import tools.step2_codebook as m
+        self.assertFalse(hasattr(m, "PARALLEL"))
+        self.assertNotIn("ThreadPoolExecutor(max_workers=len(todo))",
+                         (REPO / "tools/step2_codebook.py").read_text())
