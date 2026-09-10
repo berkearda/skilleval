@@ -29,6 +29,19 @@ from tools.gemini import Gemini, GeminiError, BULK, CODEBOOK
 REPO = Path(__file__).resolve().parent.parent
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
 
+# Every artifact this step reads or writes is namespaced by STEP_TAG, so a second
+# run cannot overwrite the first. Steps 2, 6 and 9 already work this way; steps
+# 3-5 did not, and running them untagged would have destroyed
+# codebook_v1_frozen.json and item_labels.jsonl, which the 230-skill taxonomy and
+# Berke's gold-set score both trace to.
+TAG = os.environ.get("STEP_TAG", "")
+
+
+def tagged(name):
+    stem, dot, ext = name.rpartition(".")
+    return f"{stem}{TAG}{dot}{ext}"
+
+
 RESID_TARGET = 0.02
 
 SYS = ("You maintain a codebook of cognitive skills for a test-item taxonomy. A skill is the "
@@ -74,10 +87,10 @@ def main():
     ap.add_argument("--smoke", action="store_true")
     a = ap.parse_args()
 
-    fz = json.loads((P / "codebook_v1_frozen.json").read_text())  # single round; see above
+    fz = json.loads((P / tagged("codebook_v1_frozen.json")).read_text())  # single round; see above
     codes = fz["codes"]
     rows = {json.loads(l)["item_idx"]: json.loads(l)
-            for l in (P / "item_labels.jsonl").open()}
+            for l in (P / tagged("item_labels.jsonl")).open()}
     errs = [i for i, r in rows.items() if "error" in r]
     resid = [i for i, r in rows.items()
              if "error" not in r and (r["unassignable"] or not r["assigned"])]
@@ -146,7 +159,7 @@ def main():
     fz["version"] = "v2"
     fz["step5"] = {"residue_in": len(resid), "errored_remaining": len(errs),
                    "codes_added": len(added), "items_claimed_covered": len(covered)}
-    (P / "codebook_v2_amended.json").write_text(json.dumps(fz, indent=1))
+    (P / tagged("codebook_v2_amended.json")).write_text(json.dumps(fz, indent=1))
     print(f"\nwrote codebook_v2_amended.json: {len(fz['codes']):,} codes "
           f"({len(added)} new). Residual {len(other)/n:.2%}, target {RESID_TARGET:.0%}.")
 
@@ -199,16 +212,16 @@ def main():
     with tmp.open("w") as f:                          # a serial loop of API calls,
         for i in sorted(rows):                        # so the window is minutes wide
             f.write(json.dumps(rows[i]) + "\n")
-    os.replace(tmp, P / "item_labels.jsonl")
+    os.replace(tmp, P / tagged("item_labels.jsonl"))
     still_ids = [i for i in resid if not rows[i].get("assigned")]
     # measured after the re-run, not predicted from the model's `covers` field
     fz["step5"]["other_bucket"] = sorted(still_ids)
     fz["step5"]["residual_rate"] = len(still_ids) / n
     fz["step5"]["measured_after_rerun"] = True
-    (P / "codebook_v2_amended.json").write_text(json.dumps(fz, indent=1))
+    (P / tagged("codebook_v2_amended.json")).write_text(json.dumps(fz, indent=1))
     fz["step5"]["retry_failed"] = retry_failed
     fz["step5"]["bad_covers_entries"] = bad_covers
-    (P / "codebook_v2_amended.json").write_text(json.dumps(fz, indent=1))
+    (P / tagged("codebook_v2_amended.json")).write_text(json.dumps(fz, indent=1))
     print(f"  {fixed} of {len(resid)} residue items now assigned; {len(still_ids)} still "
           f"unassigned ({len(still_ids)/n:.2%}) <- measured residual")
     if retry_failed:

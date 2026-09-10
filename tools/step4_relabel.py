@@ -34,6 +34,19 @@ from tools.textclip import clip
 
 REPO = Path(__file__).resolve().parent.parent
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
+
+# Every artifact this step reads or writes is namespaced by STEP_TAG, so a second
+# run cannot overwrite the first. Steps 2, 6 and 9 already work this way; steps
+# 3-5 did not, and running them untagged would have destroyed
+# codebook_v1_frozen.json and item_labels.jsonl, which the 230-skill taxonomy and
+# Berke's gold-set score both trace to.
+TAG = os.environ.get("STEP_TAG", "")
+
+
+def tagged(name):
+    stem, dot, ext = name.rpartition(".")
+    return f"{stem}{TAG}{dot}{ext}"
+
 D = REPO / "cdm_exploration/data/cdm_ready"
 
 QCHARS = 4000      # one truncation for both retrieval and judging: a shorter
@@ -90,7 +103,7 @@ def item_vectors(g, items):
 
 
 def main(mode="smoke"):
-    fz = json.loads((P / "codebook_v1_frozen.json").read_text())
+    fz = json.loads((P / tagged("codebook_v1_frozen.json")).read_text())
     codes = fz["codes"]
     ids = list(codes)
     items = load_items()

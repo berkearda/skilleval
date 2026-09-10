@@ -17,7 +17,7 @@ than guessed from cosine.
 
     python3 tools/step3_freeze.py [--domains 15] [--smoke]
 """
-import argparse, json, re, sys
+import argparse, os, json, re, sys
 from collections import Counter
 from pathlib import Path
 import numpy as np
@@ -26,6 +26,19 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tools.gemini import Gemini, GeminiError, CODEBOOK
 
 P = Path(__file__).resolve().parent.parent / "cdm_exploration/experiments/pipeline_v7"
+
+# Every artifact this step reads or writes is namespaced by STEP_TAG, so a second
+# run cannot overwrite the first. Steps 2, 6 and 9 already work this way; steps
+# 3-5 did not, and running them untagged would have destroyed
+# codebook_v1_frozen.json and item_labels.jsonl, which the 230-skill taxonomy and
+# Berke's gold-set score both trace to.
+TAG = os.environ.get("STEP_TAG", "")
+
+
+def tagged(name):
+    stem, dot, ext = name.rpartition(".")
+    return f"{stem}{TAG}{dot}{ext}"
+
 CONF_THR = 0.85          # neighbours at or above this are recorded as confusable
 CONF_KEEP = 3
 
@@ -49,7 +62,7 @@ def resolve(cb, cid):
 
 
 def load():
-    cb = json.loads((P / "codebook_final.json").read_text())
+    cb = json.loads((P / tagged("codebook_final.json")).read_text())
     live = [c for c in cb["codes"] if c not in cb["alias"]]
     uses = Counter()
     for lab, cid in cb["assign"].items():
@@ -88,7 +101,7 @@ def main():
     # exemplar_items are item ids, which only exist once Step 4 has run. On a
     # second pass they are filled from it; on the first they stay empty.
     ex_items = {}
-    lf = P / "item_labels.jsonl"
+    lf = P / tagged("item_labels.jsonl")
     if lf.exists():
         from collections import defaultdict as _dd
         acc = _dd(list)
@@ -153,17 +166,17 @@ def main():
                   "exemplar_items": ex_items.get(c, []),
                   "confusable_with": conf[c], "raw_label_mentions": uses[c]}
 
-    frozen = {"version": "v1", "source": "codebook_final.json",
+    frozen = {"version": "v1", "source": tagged("codebook_final.json"),
               "n_codes": len(live), "n_domains": a.domains,
               "domains": {f"D{j:02d}_{names[j].replace(' ', '_')}": int((lab == j).sum())
                           for j in range(a.domains)},
               "codes": out}
     if a.smoke:
         print("SMOKE: not writing"); print(json.dumps(list(out.values())[0], indent=1)[:700]); return
-    (P / "codebook_v1_frozen.json").write_text(json.dumps(frozen, indent=1))
+    (P / tagged("codebook_v1_frozen.json")).write_text(json.dumps(frozen, indent=1))
 
     nconf = sum(1 for c in live if conf[c])
-    print(f"\nwrote codebook_v1_frozen.json")
+    print(f"\nwrote {tagged('codebook_v1_frozen.json')}")
     print(f"  domains: {a.domains}")
     for j in range(a.domains):
         print(f"    D{j:02d} {names[j]:38s} {int((lab==j).sum()):4d} codes")

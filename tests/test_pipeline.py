@@ -1137,3 +1137,39 @@ class TestBatchSizeAndResumeAgree(unittest.TestCase):
         self.assertFalse(hasattr(m, "PARALLEL"))
         self.assertNotIn("ThreadPoolExecutor(max_workers=len(todo))",
                          (REPO / "tools/step2_codebook.py").read_text())
+
+
+class TestSteps3to5CannotClobberAnEarlierRun(unittest.TestCase):
+    """Steps 2, 6 and 9 namespace their outputs; steps 3-5 did not. Running them
+    on a second codebook would have overwritten codebook_v1_frozen.json and
+    item_labels.jsonl, which the 230-skill taxonomy and Berke's gold-set score
+    both trace to, with no warning."""
+
+    def test_every_artifact_path_goes_through_the_tag(self):
+        import re
+        for name in ("step3_freeze", "step4_relabel", "step5_loop"):
+            src = (REPO / f"tools/{name}.py").read_text()
+            bare = re.findall(r'P / "(codebook_[a-z0-9_]*\.json|item_labels[a-z0-9_]*\.jsonl)"', src)
+            with self.subTest(step=name):
+                self.assertEqual(bare, [], f"{name} reads or writes an untagged artifact: {bare}")
+                self.assertIn("def tagged(", src)
+
+    def test_no_tag_means_the_original_filenames(self):
+        import importlib, os, sys
+        sys.path.insert(0, str(REPO / "tools"))
+        os.environ.pop("STEP_TAG", None)
+        m = importlib.reload(importlib.import_module("step3_freeze"))
+        self.assertEqual(m.tagged("codebook_final.json"), "codebook_final.json")
+        self.assertEqual(m.tagged("item_labels.jsonl"), "item_labels.jsonl")
+
+    def test_a_tag_is_inserted_before_the_extension(self):
+        import importlib, os, sys
+        sys.path.insert(0, str(REPO / "tools"))
+        os.environ["STEP_TAG"] = "_b150"
+        try:
+            m = importlib.reload(importlib.import_module("step3_freeze"))
+            self.assertEqual(m.tagged("codebook_final.json"), "codebook_final_b150.json")
+            self.assertEqual(m.tagged("item_labels.jsonl"), "item_labels_b150.jsonl")
+        finally:
+            os.environ.pop("STEP_TAG", None)
+            importlib.reload(importlib.import_module("step3_freeze"))
