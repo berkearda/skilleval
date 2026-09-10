@@ -339,8 +339,12 @@ class TestStep5Loop(unittest.TestCase):
         Step 6 loaded a pre-Step-5 embedding file and silently could neither
         nominate them for merging nor retrieve them, manufacturing instability."""
         src = (REPO / "tools/step5_loop.py").read_text()
-        self.assertIn('np.savez_compressed(P / "code_def_emb.npz"', src)
-        self.assertIn("stale-after-step5", src)
+        # Was: a raw savez_compressed with digest="stale-after-step5". That
+        # format carries no per-code hashes, so the staleness guard cannot
+        # verify it, and it wrote to the cache two runs share. Now persisted
+        # through codeemb, which writes the hashes and honours the run tag.
+        self.assertIn("load_code_vecs", src)
+        self.assertIn('tagged("code_def_emb.npz")', src)
 
     def test_no_dead_rounds_flag(self):
         """Bug: --rounds was parsed and never read, advertising a loop the
@@ -1186,3 +1190,31 @@ class TestStep3DoesNotImportAnotherRunsRules(unittest.TestCase):
         src = (REPO / "tools/step3_freeze.py").read_text()
         self.assertNotIn('P / "validation_distinctness.json"', src)
         self.assertIn('tagged("validation_distinctness.json")', src)
+
+
+class TestEmbeddingCacheIsPerRun(unittest.TestCase):
+    """Code ids restart at c_0001 every run, so an untagged embedding cache is
+    shared by two taxonomies whose ids collide. Step 4 died on
+    `assert list(z["ids"]) == ids` the moment a second run existed, which was the
+    good outcome; the bad one is a run that silently retrieves against another
+    taxonomy's vectors."""
+
+    def test_no_step_touches_an_untagged_embedding_cache(self):
+        import re
+        for name in ("step3_freeze", "step4_relabel", "step5_loop"):
+            src = (REPO / f"tools/{name}.py").read_text()
+            bare = re.findall(r'P / "code_def_emb\.npz"', src)
+            with self.subTest(step=name):
+                self.assertEqual(bare, [], f"{name} uses the shared untagged cache")
+
+    def test_step4_no_longer_asserts_whole_cache_equality(self):
+        src = (REPO / "tools/step4_relabel.py").read_text()
+        self.assertNotIn('assert list(z["ids"]) == ids', src)
+        self.assertIn("load_code_vecs", src)
+
+    def test_step5_writes_hashes_not_a_stale_sentinel(self):
+        src = (REPO / "tools/step5_loop.py").read_text()
+        self.assertNotIn('np.savez_compressed(P / "code_def_emb.npz"', src,
+                         "writing the cache raw, in a format the guard cannot verify")
+        self.assertNotIn('digest="stale-after-step5")', src,
+                         "the sentinel is a real argument again, not just a comment")

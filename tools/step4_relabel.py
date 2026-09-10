@@ -113,9 +113,13 @@ def main(mode="smoke"):
         outf.unlink(missing_ok=True)
 
     g = Gemini()
-    z = np.load(P / "code_def_emb.npz", allow_pickle=True)
-    assert list(z["ids"]) == ids, "frozen codebook and definition embeddings disagree"
-    C = z["vecs"] / np.linalg.norm(z["vecs"], axis=1, keepdims=True)
+    # The cache is shared across runs and code ids restart at c_0001 in each, so
+    # a raw load can mix vectors from two different taxonomies. The guarded
+    # loader returns vectors for exactly these ids, in this order, re-embedding
+    # anything whose definition text has changed. The old assert compared the
+    # whole cache to this codebook and failed as soon as a second run existed.
+    from tools.codeemb import load as load_code_vecs, normed
+    C = normed(load_code_vecs(P / tagged("code_def_emb.npz"), fz, ids, g=g))
     Vall = item_vectors(g, load_items())
     pos = {it["item_idx"]: k for k, it in enumerate(load_items())}
     V = np.stack([Vall[pos[it["item_idx"]]] for it in items])

@@ -76,7 +76,7 @@ from tools.codeemb import code_text, load as _load_code_vecs  # noqa: E402
 
 
 def embed_defs(g, cb, live):
-    return _load_code_vecs(P / "code_def_emb.npz", cb, live, g=g)
+    return _load_code_vecs(P / tagged("code_def_emb.npz"), cb, live, g=g)
 
 
 def kmeans(V, k, iters=60, seed=42):

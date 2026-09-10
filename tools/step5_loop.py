@@ -99,8 +99,9 @@ def main():
           f"({len(resid)/n:.2%}) | target under {RESID_TARGET:.0%}")
 
     g = Gemini()
-    z = np.load(P / "code_def_emb.npz", allow_pickle=True)
-    ids = list(z["ids"]); C = z["vecs"] / np.linalg.norm(z["vecs"], axis=1, keepdims=True)
+    from tools.codeemb import load as load_code_vecs, normed
+    ids = [c for c in fz["codes"] if c not in fz.get("alias", {})]
+    C = normed(load_code_vecs(P / tagged("code_def_emb.npz"), fz, ids, g=g))
 
     # --- residue: what operations were proposed, and are they really missing? ---
     props = []
@@ -177,12 +178,17 @@ def main():
     # so Step 6 loaded an embedding file that predated Step 5 and silently could
     # neither nominate the new codes for a merge nor retrieve them as candidates,
     # which manufactures a jaccard of 0 for every item they cover.
-    z_old = np.load(P / "code_def_emb.npz", allow_pickle=True)
-    np.savez_compressed(P / "code_def_emb.npz",
-                        ids=np.array(allIds, dtype=object),
-                        vecs=np.vstack([z_old["vecs"], newV]),
-                        digest="stale-after-step5")   # forces Step 3 to re-embed
-    print(f"  appended {len(added)} new code embeddings to code_def_emb.npz")
+    # Written through codeemb so the per-code text hashes go in with them. The
+    # old path wrote ids+vecs plus digest="stale-after-step5", a format the
+    # staleness guard cannot verify, so every later step either re-embedded
+    # everything or (before the guard existed) used vectors it could not vouch
+    # for. It also wrote to the untagged cache, which two runs then shared while
+    # their code ids collided.
+    from tools.codeemb import load as load_code_vecs
+    load_code_vecs(P / tagged("code_def_emb.npz"), fz,
+                   [c for c in fz["codes"] if c not in fz.get("alias", {})],
+                   g=g, verbose=False)
+    print(f"  persisted embeddings for {len(added)} new codes")
     iz = np.load(P / "item_emb_gemini.npz", allow_pickle=True)
     ipos = {int(i): k for k, i in enumerate(list(iz["idx"]))}
     IV = iz["vecs"] / np.linalg.norm(iz["vecs"], axis=1, keepdims=True)
