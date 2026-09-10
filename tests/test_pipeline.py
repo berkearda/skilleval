@@ -1060,6 +1060,30 @@ class TestAuditCallCanActuallyFinish(unittest.TestCase):
                              "lengthens the generation without making more merges possible")
 
 
+class TestChurnGuardAppliesWhereThrashingIsPossible(unittest.TestCase):
+    """The churn abort fired on the first audit of the batch-150 run, stopping it
+    after 10 batches. Churn detects thrashing, and thrashing means undoing an
+    earlier audit's work. The first audit has none to undo: it collapses the cold
+    start, where batch 0 puts BATCH labels into an empty codebook and creates one
+    code per label by construction. Merging those moves a large share of labels
+    arithmetically. From the second audit the guard is unchanged."""
+
+    def test_the_threshold_itself_was_not_moved(self):
+        import re
+        src = (REPO / "tools/step2_codebook.py").read_text()
+        v = float(re.search(r"CHURN_ABORT\s*=\s*([\d.]+)", src).group(1))
+        self.assertEqual(v, 0.15, "CHURN_ABORT must not be relaxed to make a run pass")
+
+    def test_the_guard_is_skipped_only_for_the_first_audit(self):
+        src = (REPO / "tools/step2_codebook.py").read_text()
+        self.assertIn("if churn > CHURN_ABORT and cb.version > 1:", src)
+
+    def test_audit_interval_is_inside_the_doc_range(self):
+        from tools.step2_codebook import AUDIT_EVERY
+        self.assertGreaterEqual(AUDIT_EVERY, 5, "the doc says every 5-10 batches")
+        self.assertLessEqual(AUDIT_EVERY, 10)
+
+
 class TestBatchSizeAndResumeAgree(unittest.TestCase):
     """BATCH decides how labels are partitioned, and `next_batch` is an index
     into that partition. Making BATCH configurable without recording it meant a
@@ -1094,6 +1118,16 @@ class TestBatchSizeAndResumeAgree(unittest.TestCase):
             {"some label": np.ones(4, dtype="float32")}, {})
         self.assertEqual(cands, [[]])
         self.assertIn("some label", items_txt)
+
+    def test_a_run_can_be_namespaced_so_it_cannot_clobber_the_existing_one(self):
+        """codebook_final.json and codebook_run.json are what every downstream
+        number currently traces to. A second run with no tag overwrites both."""
+        src = (REPO / "tools/step2_codebook.py").read_text()
+        self.assertIn('TAG = os.environ.get("STEP2_TAG"', src)
+        for call in ('cb.save(f"run{TAG}"', '{"run": "final", "trial": "trial", "smoke": "smoke"}[mode] + TAG',
+                     'cb.save(f"v{cb.version}{TAG}")', 'cb.load(f"run{TAG}")'):
+            with self.subTest(call=call):
+                self.assertIn(call, src, "an output path ignores the run tag")
 
     def test_parallel_planning_is_gone(self):
         """Reverted 2026-09-10: it shifted decision indices by len(carry) and

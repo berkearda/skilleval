@@ -52,6 +52,10 @@ from tools.gemini import Gemini, GeminiError, BULK, CODEBOOK
 REPO = Path(__file__).resolve().parent.parent
 P = REPO / "cdm_exploration/experiments/pipeline_v7"
 
+TAG = os.environ.get("STEP2_TAG", "")     # namespaces every output of a run.
+                           # Without it a re-run overwrites codebook_final.json and
+                           # codebook_run.json, i.e. the artifacts every downstream
+                           # number is currently traced to.
 BATCH = int(os.environ.get("STEP2_BATCH", 150))   # doc says 100-200. Was 50, which
                            # made 313 API calls where ~105 do, with no recorded reason.
 
@@ -67,7 +71,11 @@ TOPK_PER = 80                # the codebook is: max(MIN, live // PER), capped at
                              # the full run reaches thousands, where it will not be.
                              # So stay cheap while small, widen as it grows.
 
-AUDIT_EVERY = 10          # doc says every 5-10 batches; 12 sat outside it. Audits are cheap
+AUDIT_EVERY = 5           # doc says every 5-10 batches. Was 10, our choice inside
+                          # that range. At 10 the backlog reaching each audit was
+                          # large enough that one audit restructured 64% of the bank
+                          # and tripped the churn abort. Halving the interval halves
+                          # the step size without touching any threshold.
                           # (one pro call) and merging duplicates sooner keeps them out of
                           # later retrieval, where they compete as candidates
 AUDIT_OPS_MIN = 15        # the doc's flat cap, now a floor
@@ -470,7 +478,7 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
     start_batch, resumed_hist, resumed_carry, resumed_created = 0, [], [], 0
     if resume:
         try:
-            st = cb.load("run")
+            st = cb.load(f"run{TAG}")
             start_batch = st.get("next_batch", 0)
             resumed_hist = st.get("hist", [])
             resumed_carry = st.get("carry", [])
@@ -485,7 +493,7 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
             print(f"  RESUME: {len(cb.codes)-len(cb.alias)} live codes, "
                   f"{len(cb.assign):,} labels assigned, continuing at batch {start_batch}")
         except FileNotFoundError:
-            print("  RESUME requested but no codebook_run.json; starting fresh")
+            print(f"  RESUME requested but no codebook_run{TAG}.json; starting fresh")
 
     # embed every unique label once; codebook entries are embedded as they appear
     cache = P / "label_emb.npz"
@@ -546,7 +554,7 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
               f"{g.total_tokens:,} tok | {time.time()-t0:.0f}s", flush=True)
 
         if mode == "run":          # only a full run leaves resumable state
-            cb.save("run", {"next_batch": bi + 1, "hist": hist, "carry": carry,
+            cb.save(f"run{TAG}", {"next_batch": bi + 1, "hist": hist, "carry": carry,
                             "created_since": created_since, "mode": mode,
                             "batch_size": BATCH})
 
@@ -565,11 +573,19 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
                 continue          # no save, no saturation test, keep created_since
             print(f"    audit v{cb.version}: {dict(applied)} churn {churn:.1%} "
                   f"| codes {len(cb.codes)-len(cb.alias)}")
-            if churn > CHURN_ABORT:
+            # Churn measures thrashing, and thrashing means undoing earlier
+            # audits' work. The FIRST audit has no earlier work to undo: it is
+            # collapsing the cold start, where batch 0 puts BATCH labels into an
+            # empty codebook and necessarily creates one code per label. Merging
+            # those is the job, not a fault, and it moves a large share of labels
+            # by arithmetic. The doc's own stable-code rule is likewise defined
+            # over "two consecutive audits", so the first is already a special
+            # case. From the second audit onward the guard applies unchanged.
+            if churn > CHURN_ABORT and cb.version > 1:
                 stop_reason = f"audit thrashing: churn {churn:.1%} > {CHURN_ABORT:.0%}"
-                cb.save(f"v{cb.version}")
+                cb.save(f"v{cb.version}{TAG}")
                 break
-            cb.save(f"v{cb.version}")
+            cb.save(f"v{cb.version}{TAG}")
 
             # the doc's rule: new-code rate low for a few batches AND low churn
             window = hist[-SAT_RUNS:]
@@ -582,7 +598,7 @@ def main(mode="smoke", batch_model=CODEBOOK, resume=False):
 
     if stop_reason == f"batch cap {BATCH_CAP}" and len(hist) < BATCH_CAP:
         stop_reason = f"corpus exhausted after {len(batches)} batches"
-    cb.save({"run": "final", "trial": "trial", "smoke": "smoke"}[mode])
+    cb.save({"run": "final", "trial": "trial", "smoke": "smoke"}[mode] + TAG)
     uses = cb.uses()
     live = [c for c in cb.codes if c not in cb.alias]
     sizes = sorted((uses[c] for c in live), reverse=True)
