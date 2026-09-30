@@ -21,7 +21,7 @@ JUDGE (gemini-3.6-flash) is neither.
 
     python3 tools/step6_validate.py coherence [--sample 10] [--smoke]
 """
-import argparse, json, random, sys, time
+import argparse, hashlib, json, random, sys, time
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -82,7 +82,7 @@ def load_items():
     return txt
 
 
-def load_state(name=None, labels=None):
+def load_state(name=None, labels=None, allow_unused=0):
     """Codebook and labels, with the pairing checked rather than assumed.
 
     A later step migrates item_labels.jsonl onto a merged codebook, and the
@@ -108,12 +108,25 @@ def load_state(name=None, labels=None):
     live = {c for c in fz["codes"] if c not in fz.get("alias", {})}
     used = {x["code"] for r in ok for x in r["assigned"]}
     empty = live - used
-    if len(empty) > 0.05 * max(1, len(live)):
+    stray = used - set(fz["codes"])
+    print(f"  {len(live) - len(empty)} of {len(live)} live codes hold at least one item"
+          + (f"; {len(empty)} unused" if empty else ""))
+    if len(empty) > max(allow_unused, 0.05 * max(1, len(live))):
         raise SystemExit(
             f"{len(empty)} of {len(live)} live codes in {f.name} hold no item in "
-            f"{lf.name}. These files are from different stages: the labels have "
+            f"{lf.name}.\n"
+            f"Two different situations look like this and only one is a bug.\n"
+            f"  (a) MISMATCH: these files are from different stages, the labels having "
             f"been migrated onto a later codebook. Pass --labels with the snapshot "
-            f"that matches, e.g. item_labels_before_<that codebook>.jsonl.")
+            f"that matches, e.g. item_labels_before_<that codebook>.jsonl.\n"
+            f"  (b) PROPERTY OF THE RUN: Step 2 created skills that Step 4 never "
+            f"assigned. Nothing is wrong and the count is real.\n"
+            f"Evidence here: {len(stray)} codes named in the labels are absent from "
+            f"this codebook, and the codebook carries {len(fz.get('alias', {}))} "
+            f"aliases. Both zero points to (b), since a migration leaves either "
+            f"strays or aliases behind. If it is (b), say so explicitly with "
+            f"--allow-unused {len(empty)} rather than loosening the 5% threshold, "
+            f"which would disarm this check for every future run.")
     by_code = defaultdict(list)
     for r in ok:
         for a in r["assigned"]:
@@ -122,7 +135,8 @@ def load_state(name=None, labels=None):
 
 
 def coherence(a):
-    fz, ok, by_code = load_state(getattr(a, "codebook", None), getattr(a, "labels", None))
+    fz, ok, by_code = load_state(getattr(a, "codebook", None), getattr(a, "labels", None),
+                                   getattr(a, "allow_unused", 0))
     codes = fz["codes"]; txt = load_items()
     field = "definition_before" if getattr(a, "use_before", False) else "definition"
     rewritten = {c for c, v in codes.items() if "definition_before" in v}
@@ -149,7 +163,12 @@ def coherence(a):
 
     def one(c):
         items = by_code[c][:]
-        random.Random(42 + hash(c) % 10**6).shuffle(items)   # per-code, so it reproduces
+        # sha256, not hash(): Python randomises string hashing per process unless
+        # PYTHONHASHSEED is set, and it is set nowhere here, so this "reproducible"
+        # per-code shuffle drew a different sample of questions on every run and no
+        # stored coherence score can be re-derived from the artifacts. T-115.
+        seed = 42 + int(hashlib.sha256(c.encode()).hexdigest()[:8], 16)
+        random.Random(seed).shuffle(items)                   # per-code, and now truly reproducible
         items = items[:a.sample]
         # same window the labeller saw: judging on 600 chars what was decided on
         # 4,000 depresses precision by truncation rather than by disagreement
@@ -160,8 +179,21 @@ def coherence(a):
         except GeminiError as e:
             return {"code": c, "error": str(e)[:120]}
         prec, got, missing = coherence_precision(obj.get("verdicts"), len(items))
+        # Record WHICH item each verdict was about, not only how many passed. The
+        # artifact stored counts alone, so it could not answer "which assignments
+        # did the judge reject", which is the first question asked of it the moment
+        # the judge disagrees with a human (T-114). Counts cannot be re-examined.
+        seen = {}
+        for v in (obj.get("verdicts") or []):
+            try:
+                k = int(v.get("i")) - 1
+            except (TypeError, ValueError):
+                continue
+            if 0 <= k < len(items):
+                seen[items[k]] = bool(v.get("match"))
         return {"code": c, "sent": len(items), "returned": got, "missing": missing,
-                "matched": round((prec or 0) * len(items)), "precision": prec}
+                "matched": round((prec or 0) * len(items)), "precision": prec,
+                "verdicts": {str(i): m for i, m in seen.items()}}
 
     out, t0 = [], time.time()
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
@@ -192,14 +224,15 @@ def coherence(a):
 
 
 def distinctness(a):
-    fz, ok, by_code = load_state(getattr(a, "codebook", None), getattr(a, "labels", None)); codes = fz["codes"]
+    fz, ok, by_code = load_state(getattr(a, "codebook", None), getattr(a, "labels", None),
+                                   getattr(a, "allow_unused", 0)); codes = fz["codes"]
     # Nominate on the definitions as they stand now. Reading the cache blind
     # meant this check selected its "near-identical" candidates from pre-Step-8
     # text, so the pairs it judged were themselves chosen on superseded wording
     # and the duplicate count it reports is a floor.
     from tools.codeemb import load as load_code_vecs, normed
     ids = [c for c in codes if c not in fz.get("alias", {})]
-    C = normed(load_code_vecs(P / "code_def_emb.npz", fz, ids, g=Gemini()))
+    C = normed(load_code_vecs(P / getattr(a, "emb", "code_def_emb.npz"), fz, ids, g=Gemini()))
     S = C @ C.T; np.fill_diagonal(S, -1)
     sim_pairs = {(ids[i], ids[j]) for i in range(len(ids)) for j in np.where(S[i] >= 0.85)[0] if i < j}
     co = Counter()
@@ -249,9 +282,9 @@ def distinctness(a):
     invol = {c for r in m for c in r["pair"]}
     print(f"codes implicated in a merge: {len(invol):,}")
     if not a.smoke:
-        (P / out_name(a, "validation_distinctness.json")).write_text(json.dumps(
-            {"judge": JUDGE, "results": res}, indent=1))
-        print("wrote validation_distinctness.json")
+        f = P / out_name(a, "validation_distinctness.json")
+        f.write_text(json.dumps({"judge": JUDGE, "results": res}, indent=1))
+        print(f"wrote {f.name}")
 
 
 def stability(a):
@@ -264,12 +297,13 @@ def stability(a):
     swap would confound the thing being measured: disagreement would mix
     order-sensitivity with cross-model difference. --cross-model measures that
     separately, and it is a different quantity."""
-    fz, ok, _ = load_state(getattr(a, "codebook", None), getattr(a, "labels", None)); codes = fz["codes"]; txt = load_items()
+    fz, ok, _ = load_state(getattr(a, "codebook", None), getattr(a, "labels", None),
+                                   getattr(a, "allow_unused", 0)); codes = fz["codes"]; txt = load_items()
     # retrieval has to offer candidates described the way they are described now,
     # or the re-run is choosing between definitions that no longer exist
     from tools.codeemb import load as load_code_vecs, normed
     ids = [c for c in codes if c not in fz.get("alias", {})]
-    C = normed(load_code_vecs(P / "code_def_emb.npz", fz, ids, g=Gemini()))
+    C = normed(load_code_vecs(P / getattr(a, "emb", "code_def_emb.npz"), fz, ids, g=Gemini()))
     iz = np.load(P / "item_emb_gemini.npz", allow_pickle=True)
     pos = {int(i): k for k, i in enumerate(list(iz["idx"]))}
     V = iz["vecs"] / np.linalg.norm(iz["vecs"], axis=1, keepdims=True)
@@ -322,10 +356,11 @@ def stability(a):
         print(f"Jaccard: mean {sum(js)/len(js):.3f}, median {js[len(js)//2]:.3f}, "
               f"zero-overlap {sum(1 for j in js if j == 0)/len(js):.1%}")
     if not a.smoke:
-        (P / out_name(a, "validation_stability.json")).write_text(json.dumps(
+        f = P / out_name(a, "validation_stability.json")
+        f.write_text(json.dumps(
             {"model": model, "cross_model": bool(a.cross_model), "seed": 4242,
              "results": res}, indent=1))
-        print("wrote validation_stability.json")
+        print(f"wrote {f.name}")
 
 
 if __name__ == "__main__":
@@ -340,6 +375,20 @@ if __name__ == "__main__":
     ap.add_argument("--labels", default=None,
                     help="label file matching that codebook; defaults to "
                          "item_labels.jsonl, which tracks the LATEST codebook")
+    ap.add_argument("--allow-unused", type=int, default=0,
+                    help="how many live codes are expected to hold no item. The guard "
+                         "against scoring a codebook against another stage's labels "
+                         "trips on this too, so a run whose Step 2 created skills that "
+                         "Step 4 never assigned declares the count here. Declaring it "
+                         "keeps the guard armed for every other run; raising the "
+                         "threshold would not")
+    ap.add_argument("--emb", default="code_def_emb.npz",
+                    help="definition-embedding cache for THIS run. Distinctness nominates "
+                         "its candidate pairs from it and stability retrieves candidates "
+                         "from it, so a cache left over from another run judges another "
+                         "taxonomy's definitions while reporting this one's ids. Code ids "
+                         "restart at c_0001 every run, so the mismatch is silent. Pass the "
+                         "run-tagged file, e.g. code_def_emb_b150.npz")
     ap.add_argument("--holdout", action="store_true",
                     help="score only items Step 8's definition writer never saw")
     ap.add_argument("--use-before", action="store_true",

@@ -7,7 +7,7 @@ by these scripts is not accepted unless the test guarding its computation passes
 
     python3 -m unittest discover -s tests -v
 """
-import json, os, sys, types, unittest
+import json, os, re, sys, types, unittest
 from collections import Counter
 from pathlib import Path
 
@@ -369,6 +369,26 @@ class TestStep6Validate(unittest.TestCase):
         self.assertIn('"missing": missing', src)
         self.assertIn('"sent": len(items)', src)
 
+    def test_the_per_skill_sample_is_actually_reproducible(self):
+        """Bug: the per-skill shuffle was seeded with hash(code), and Python
+        randomises string hashing per process unless PYTHONHASHSEED is set, which
+        it is not. So every run scored a different 10 questions per skill while a
+        comment asserted the sample reproduced, and no stored coherence score can
+        be re-derived. It also confounds the 0.660 against 0.663 spread that was
+        reported as the judge's run-to-run noise."""
+        src = (REPO / "tools/step6_validate.py").read_text()
+        self.assertNotIn("hash(c) % 10**6", src, "the sample still depends on PYTHONHASHSEED")
+        self.assertIn("hashlib.sha256(c.encode())", src)
+        import hashlib as _h
+        seed = 42 + int(_h.sha256(b"c_0673").hexdigest()[:8], 16)
+        self.assertEqual(seed, 42 + int(_h.sha256(b"c_0673").hexdigest()[:8], 16))
+
+    def test_coherence_records_which_item_each_verdict_was_about(self):
+        """Counts alone cannot answer "which assignments did the judge reject",
+        which is the first question asked whenever it disagrees with a human."""
+        src = (REPO / "tools/step6_validate.py").read_text()
+        self.assertIn('"verdicts": {str(i): m for i, m in seen.items()}', src)
+
     def test_distinctness_merge_rate_excludes_errored_pairs(self):
         src = (REPO / "tools/step6_validate.py").read_text()
         self.assertIn('judged = [r for r in res if "error" not in r]', src)
@@ -387,10 +407,19 @@ class TestStep6Validate(unittest.TestCase):
 
     def test_sampling_is_reproducible_under_concurrency(self):
         """Bug: one random.Random was shared across 16 workers while recording a
-        seed in the artifact, asserting a reproducibility the code did not have."""
+        seed in the artifact, asserting a reproducibility the code did not have.
+
+        What this guards is that each call builds its OWN generator from a seed
+        instead of touching the module-level one. The seed itself moved off
+        hash(code) on 2026-09-12, because hash() is randomised per process and made
+        the sample irreproducible regardless of the threading; that half is pinned
+        by test_the_per_skill_sample_is_actually_reproducible.
+        """
         src = (REPO / "tools/step6_validate.py").read_text()
-        self.assertIn("random.Random(42 + hash(c)", src)
+        self.assertIn("random.Random(seed).shuffle(items)", src)
         self.assertIn("random.Random(4242 + i)", src)
+        self.assertNotIn("random.shuffle(items)", src,
+                         "the per-code sample uses the shared module generator")
 
 
 if __name__ == "__main__":
@@ -656,6 +685,283 @@ class TestGoldSet(unittest.TestCase):
         first = t.index("### Q001")
         blk = t[first:t.index("### Q002")]
         self.assertLess(blk.index("**Part A**"), blk.index("**Part B**"))
+
+
+# --------------------------------------------------------------------------
+class TestSecondGoldSet(unittest.TestCase):
+    """T-110. Only 10 of the reference set's 145 assignments come from skills
+    below the floor of 20, so the biggest open question in the taxonomy (drop or
+    merge the undersized skills) cannot be answered by the one instrument built
+    to answer such questions. The second set buys that power by stratifying on
+    pipeline output, which the reference set must never do."""
+
+    def _set2(self):
+        f = REPO / "gold/gold_set_2.json"
+        if not f.exists():
+            self.skipTest("second gold set not drawn yet")
+        return json.loads(f.read_text())
+
+    def test_the_stratified_draw_lives_in_its_own_file(self):
+        """It breaks the reference sampler's defining property, so it cannot be a
+        flag on it: the AST test guarding gold_sample.py would have to be dropped."""
+        self.assertTrue((REPO / "tools/gold_sample2.py").exists())
+        src = (REPO / "tools/gold_sample.py").read_text()
+        self.assertNotIn("FLOOR = 20", src, "the reference sampler learned about skill size")
+
+    def test_it_declares_that_it_is_not_a_corpus_estimate(self):
+        """Its headline acceptance rate is biased by construction. Whoever reads
+        the file next has to be told that before they quote the number."""
+        gs = self._set2()
+        self.assertTrue(gs["pipeline_dependent"])
+        self.assertFalse(gs["corpus_estimate"])
+        self.assertIn("pipeline_dependence", gs)
+
+    def test_no_question_is_asked_twice(self):
+        """Remembering an earlier answer is its own contamination."""
+        gs = self._set2()
+        new = {i["item_idx"] for i in gs["items"]}
+        self.assertEqual(len(new), gs["n"], "a duplicated question is double-counted")
+        for prior in ("gold/gold_set.json", "gold/task2_key.json"):
+            f = REPO / prior
+            if not f.exists():
+                continue
+            o = json.loads(f.read_text())
+            old = ({i["item_idx"] for i in o["items"]} if prior.endswith("set.json")
+                   else {v["item_idx"] for v in o["items"].values()})
+            self.assertEqual(new & old, set(), f"reuses questions from {prior}")
+
+    def test_the_strata_differ_in_skill_size_and_nothing_else(self):
+        """Unmatched, the control carries ~1.8 skills per question against the
+        treatment's ~1.1, so a gap would mix skill size with how much there is to
+        disagree about."""
+        gs = self._set2()
+        api = gs["assignments_per_item"]
+        self.assertLessEqual(abs(api["below_floor"] - api["at_or_above"]), 0.35,
+                             "the strata are not matched on assignments per question")
+
+    def test_it_actually_has_the_power_it_was_drawn_for(self):
+        """The whole point. The reference set sits at 7%."""
+        gs = self._set2()
+        self.assertGreaterEqual(gs["assignments"]["share_below_floor"], 0.40,
+                                "no more power to test the floor than the set it supplements")
+
+
+class TestGoldSheetAndScorerAreReusable(unittest.TestCase):
+    """Both were single-sheet tools with constant paths. Rendering a second sheet
+    overwrote the first sheet and its key, and the key is the only record of what
+    the labeller was shown; a sheet whose options no longer match its key cannot
+    be scored at all."""
+
+    def test_the_sheet_refuses_to_overwrite_a_labelled_sheet_or_key(self):
+        src = (REPO / "tools/gold_sheet.py").read_text()
+        self.assertIn("--force", src)
+        self.assertIn("destroys the only record of what was shown", src)
+        for flag in ('"--set"', '"--out"', '"--key"'):
+            self.assertIn(flag, src, f"gold_sheet.py hardcodes the path behind {flag}")
+
+    def test_decoys_exclude_the_items_own_retrieved_candidates(self):
+        """A decoy has to be a skill the question does not need, or ticking it is
+        correct and scores as a false positive. Sheet 2 served c_0148 on item 528
+        as a decoy and it was the second half of the solution path. gold_task2.py
+        had this rule; gold_sheet.py did not."""
+        src = (REPO / "tools/gold_sheet.py").read_text()
+        self.assertIn('set(r.get("candidates") or [])', src)
+        self.assertIn("pool = [c for c in all_ids if c not in banned]", src)
+
+    def test_part_b_always_keeps_at_least_one_decoy(self):
+        """With 6 options and 6 assignments the list has no decoy, and the null
+        control silently disappears for that question."""
+        src = (REPO / "tools/gold_sheet.py").read_text()
+        self.assertIn("assigned[:OPTIONS - 1]", src)
+
+    def test_the_scorer_reproduces_the_numbers_quoted_in_decisions(self):
+        """the project log 2026-09-09 quotes 108/145 accepted and 4/455 decoys ticked.
+        Those came from an ad-hoc computation with no script, so under N5 they had
+        no producer. This is the producer, and it has to agree."""
+        sheet = REPO / "gold/gold_sheet_labelled.md"
+        keyf = REPO / "gold/gold_partB_key.json"
+        if not (sheet.exists() and keyf.exists()):
+            self.skipTest("labelled sheet not filed")
+        from tools.gold_score_partb import parse_sheet
+        ticks, shown, anchored = parse_sheet(sheet)
+        key = json.loads(keyf.read_text())["by_item"]
+        n_asg = sum(len(v["assigned"]) for v in key.values())
+        n_dec = sum(len(v["decoys"]) for v in key.values())
+        ta = sum(1 for i, v in key.items() for c in v["assigned"] if c in ticks.get(i, ()))
+        td = sum(1 for i, v in key.items() for c in v["decoys"] if c in ticks.get(i, ()))
+        self.assertEqual((ta, n_asg), (108, 145))
+        self.assertEqual((td, n_dec), (4, 455))
+        self.assertEqual(len(anchored), 22, "the recorded Part A anchoring count")
+
+    def test_it_refuses_a_key_from_a_different_taxonomy(self):
+        """Code ids restart at c_0001 every run, so a key from another run scores
+        against ids that name different skills while every id resolves."""
+        src = (REPO / "tools/gold_score_partb.py").read_text()
+        self.assertIn("are not in", src)
+        self.assertIn("restart at", src)
+
+
+class TestQMatrixFromLabels(unittest.TestCase):
+    """T-106's missing bridge. The v7 pipeline writes item_labels*.jsonl and every
+    trainer reads qmatrix_*.npy, with nothing in between, so the Q had to be built
+    from scratch. Row i must be item_idx i or every question is attached to the
+    wrong skills while every shape check still passes."""
+
+    CR = REPO / "cdm_exploration/data/cdm_ready"
+    Q = "qmatrix_v7_b150_K274.npy"
+
+    def test_the_builder_refuses_to_overwrite(self):
+        """A checkpoint trained on a different Q of the same name cannot be told
+        apart from one trained on this."""
+        src = (REPO / "tools/build_qmatrix_from_labels.py").read_text()
+        self.assertIn("--force", src)
+        self.assertIn("cannot be told apart", src)
+
+    def test_the_builder_records_its_column_order(self):
+        """Without it, a later run that merges a code shifts every column."""
+        src = (REPO / "tools/build_qmatrix_from_labels.py").read_text()
+        self.assertIn('"column_order": live', src)
+
+    def test_the_builder_checks_row_alignment_before_writing(self):
+        src = (REPO / "tools/build_qmatrix_from_labels.py").read_text()
+        self.assertIn('is not in item_idx order', src)
+
+    def test_the_built_q_matches_the_submitted_one_in_shape_and_kind(self):
+        f, ref = self.CR / self.Q, self.CR / "qmatrix_v2_K100.npy"
+        if not (f.exists() and ref.exists()):
+            self.skipTest("Q-matrix not built yet")
+        import numpy as np
+        Q, R = np.load(f), np.load(ref)
+        self.assertEqual(Q.shape[0], R.shape[0], "row counts differ, so the item "
+                                                 "split is not comparable")
+        self.assertEqual(Q.dtype, R.dtype)
+        self.assertEqual(sorted(np.unique(Q).tolist()), [0, 1], "the Q is not binary")
+        self.assertEqual(int((Q.sum(axis=1) == 0).sum()), 0,
+                         "a zero row would make the trainer reach for a 768-dim "
+                         "phrase-space file this taxonomy does not have")
+
+    def test_the_sidecar_describes_the_matrix_it_sits_beside(self):
+        f = self.CR / self.Q
+        meta = self.CR / (Path(self.Q).stem + "_meta.json")
+        if not (f.exists() and meta.exists()):
+            self.skipTest("Q-matrix not built yet")
+        import numpy as np
+        Q = np.load(f)
+        m = json.loads(meta.read_text())
+        self.assertEqual(list(Q.shape), m["shape"])
+        self.assertEqual(len(m["column_order"]), Q.shape[1])
+        self.assertEqual(len(set(m["column_order"])), Q.shape[1], "duplicate columns")
+        self.assertEqual(int(Q.sum()), m["n_assignments"])
+        self.assertEqual(m["effective_k"], int((Q.sum(axis=0) > 0).sum()))
+
+
+class TestExperimentLogMerge(unittest.TestCase):
+    """The cluster's log holds only its own runs, because scratch was purged. Copying
+    it back would destroy the local history that every paper number traces to."""
+
+    def _run(self, cur, inc, apply=False):
+        import subprocess, tempfile
+        with tempfile.TemporaryDirectory() as d:
+            t, i = Path(d) / "target.json", Path(d) / "inc.json"
+            t.write_text(json.dumps(cur))
+            i.write_text(json.dumps(inc))
+            cmd = [sys.executable, str(REPO / "tools/merge_experiment_log.py"),
+                   "--incoming", str(i), "--target", str(t)]
+            if apply:
+                cmd.append("--apply")
+            p = subprocess.run(cmd, capture_output=True, text=True)
+            return p, json.loads(t.read_text())
+
+    def test_existing_entries_are_never_lost(self):
+        cur = [{"experiment": "a", "timestamp": "t1", "results": {"test_auc": 0.5}}]
+        inc = [{"experiment": "b", "timestamp": "t2", "results": {"test_auc": 0.6}}]
+        p, after = self._run(cur, inc, apply=True)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn(cur[0], after)
+        self.assertEqual(len(after), 2)
+
+    def test_a_dry_run_writes_nothing(self):
+        cur = [{"experiment": "a", "timestamp": "t1"}]
+        inc = [{"experiment": "b", "timestamp": "t2"}]
+        p, after = self._run(cur, inc, apply=False)
+        self.assertEqual(after, cur)
+        self.assertIn("dry run", p.stdout)
+
+    def test_reimporting_the_same_log_adds_nothing(self):
+        cur = [{"experiment": "a", "timestamp": "t1", "results": {"test_auc": 0.5}}]
+        p, after = self._run(cur, list(cur), apply=True)
+        self.assertEqual(after, cur, "an idempotent merge must not duplicate")
+
+    def test_a_conflicting_entry_is_refused_not_overwritten(self):
+        """Same run identity, different numbers: guessing would silently replace a
+        result."""
+        cur = [{"experiment": "a", "timestamp": "t1", "results": {"test_auc": 0.5}}]
+        inc = [{"experiment": "a", "timestamp": "t1", "results": {"test_auc": 0.9}}]
+        p, after = self._run(cur, inc, apply=True)
+        self.assertEqual(after, cur, "the local result was overwritten")
+        self.assertIn("CONFLICTS        1", p.stdout)
+
+
+class TestTrainerCannotClobberACheckpoint(unittest.TestCase):
+    """save_checkpoint has no existence check, and the names carry no taxonomy, so
+    training any other Q at seed 42 overwrote the checkpoint behind the paper's
+    table AUC, and seeds 43-46 overwrote the multi-seed appendix checkpoints."""
+
+    def test_an_existing_checkpoint_is_moved_aside_not_destroyed(self):
+        """Overwriting lost the paper's checkpoint silently. Refusing was worse for a
+        reproducibility artifact: train_v2.sh would abort the moment a checkpoint
+        existed, so the submitted repo would no longer reproduce its own number.
+        Moving it aside keeps both properties."""
+        src = (REPO / "tools/train_expanded.py").read_text()
+        self.assertIn("shutil.move", src)
+        self.assertIn("superseded_", src)
+        self.assertIn("moved existing checkpoint aside", src)
+        self.assertNotIn("already exists and nothing in its name says which", src,
+                         "the refusal is back, and it breaks reproduction")
+        # The move-aside path only runs when a checkpoint already exists, which is
+        # exactly the reproduction path, so a missing import would raise NameError
+        # there and nowhere else. A source-string test cannot see that; pin the
+        # import, and compile the module so a syntax or name error fails here.
+        self.assertIn("from datetime import datetime", src)
+        import py_compile, tempfile
+        with tempfile.TemporaryDirectory() as d:
+            py_compile.compile(str(REPO / "tools/train_expanded.py"),
+                               cfile=str(Path(d) / "t.pyc"), doraise=True)
+
+    def test_the_arm_can_be_named(self):
+        src = (REPO / "tools/train_expanded.py").read_text()
+        self.assertIn("ckpt_tag", src)
+        self.assertIn('ckpt_name = f"{base}{tag}.pt"', src)
+
+    def test_the_log_entry_records_which_qmatrix_it_trained_on(self):
+        """K alone does not identify a taxonomy: two 274-skill banks differ."""
+        src = (REPO / "tools/train_expanded.py").read_text()
+        self.assertIn('"qmatrix": (str(cfg.data.qmatrix)', src)
+        self.assertIn('name=f"train_expanded_seed{seed}{tag}"', src)
+
+
+class TestValidationReadsThisRunsEmbeddingCache(unittest.TestCase):
+    """Bug: distinctness nominated its candidate pairs, and stability retrieved
+    its candidates, from a constant `code_def_emb.npz`. A second run writes its
+    own tagged cache, so both checks judged the previous run's definitions while
+    reporting this run's ids."""
+
+    def test_both_checks_take_the_cache_as_an_argument(self):
+        src = (REPO / "tools/step6_validate.py").read_text()
+        self.assertEqual(src.count('getattr(a, "emb"'), 2,
+                         "distinctness and stability must both honour --emb")
+        self.assertIn('ap.add_argument("--emb"', src)
+
+    def test_the_unused_code_guard_is_declared_not_loosened(self):
+        """The guard catches labels migrated onto a later codebook. It also trips
+        on skills Step 2 created and Step 4 never assigned, which is not a bug.
+        The run declares that count; the 5% threshold stays put."""
+        src = (REPO / "tools/step6_validate.py").read_text()
+        self.assertIn('ap.add_argument("--allow-unused"', src)
+        self.assertIn("0.05 * max(1, len(live))", src,
+                      "the threshold was loosened instead of declared")
+        self.assertIn("max(allow_unused, 0.05", src)
+        self.assertIn("item_labels_before_", src, "the mismatch remedy was dropped")
 
 
 # --------------------------------------------------------------------------
@@ -927,6 +1233,19 @@ class TestValidationOutputsAreNamedForTheirCodebook(unittest.TestCase):
         a = argparse.Namespace(codebook=None)
         self.assertEqual(out_name(a, "validation_coherence.json"),
                          "validation_coherence.json")
+
+    def test_the_message_names_the_file_that_was_actually_written(self):
+        """Bug: the write went through out_name and the message did not, so
+        distinctness and stability announced the untagged legacy filename while
+        writing the tagged one. Anyone reading the log concludes the previous
+        run's results were just overwritten, which is the opposite of what the
+        rename was introduced to guarantee."""
+        src = (REPO / "tools/step6_validate.py").read_text()
+        for stale in ('print("wrote validation_distinctness.json")',
+                      'print("wrote validation_stability.json")'):
+            self.assertNotIn(stale, src, "a check reports a filename it did not write")
+        self.assertEqual(src.count('print(f"wrote {f.name}")'), 3,
+                         "all three checks must report the name they actually wrote")
 
 
 class TestDoubleJudgedMerges(unittest.TestCase):
