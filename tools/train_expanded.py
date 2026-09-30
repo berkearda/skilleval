@@ -7,6 +7,7 @@ Usage:
 """
 
 import json
+from datetime import datetime
 from pathlib import Path
 
 import numpy as np
@@ -154,6 +155,22 @@ def main(cfg: DictConfig) -> None:
     train_triplets = triplets[train_mask]
     test_triplets = triplets[~train_mask]
 
+    # ── Optional LLM hold-out (T-123) ──
+    # +holdout_llms=true removes every response of the 763 cold-start LLMs from fitting, validation and the
+    # test metrics of this run. The split is the one used by cold_start_v2_fixed.py and
+    # run_adaptive_testing_v2_fixed.py, so those scripts can treat the 763 LLMs as unseen by the network.
+    # The embedding table keeps all n_llms rows; the rows of the held-out LLMs are simply never trained.
+    holdout_llms = bool(cfg.holdout_llms) if hasattr(cfg, "holdout_llms") else False
+    eval_llms = np.arange(n_llms)
+    if holdout_llms:
+        eval_llms, heldout = train_test_split(np.arange(n_llms), test_size=0.2, random_state=42)
+        assert len(set(eval_llms.tolist()) & set(heldout.tolist())) == 0
+        train_triplets = train_triplets[np.isin(train_triplets[:, 0].astype(int), eval_llms)]
+        test_triplets = test_triplets[np.isin(test_triplets[:, 0].astype(int), eval_llms)]
+        assert not np.isin(train_triplets[:, 0].astype(int), heldout).any(), "held-out LLM in training triplets"
+        print(f"  LLM hold-out ON: {len(eval_llms)} training LLMs, {len(heldout)} held-out LLMs "
+              f"(no response of theirs is used in this run)")
+
     tv_idx = np.arange(len(train_triplets))
     tr_idx, va_idx = train_test_split(tv_idx, test_size=0.1, random_state=42)
     print(f"  Train triplets: {len(train_triplets[tr_idx]):,}, Val: {len(train_triplets[va_idx]):,}, Test: {len(test_triplets):,}")
@@ -189,20 +206,20 @@ def main(cfg: DictConfig) -> None:
     print("\nRouting evaluation on test items...")
     net.eval()
     net = net.to(device)
-    all_llm_ids = torch.arange(n_llms, device=device)
+    all_llm_ids = torch.tensor(eval_llms, dtype=torch.int64, device=device)   # all LLMs unless +holdout_llms=true
 
     accs_at = {1: 0, 3: 0, 5: 0, 10: 0}
     total = len(test_items)
 
     for item_idx in test_items:
-        gt = R[:, int(item_idx)]
+        gt = R[eval_llms, int(item_idx)]
         if gt.sum() == 0:
             continue
 
         emb = torch.tensor(text_embeddings[int(item_idx)], dtype=torch.float32, device=device)
-        emb_batch = emb.unsqueeze(0).expand(n_llms, -1)
+        emb_batch = emb.unsqueeze(0).expand(len(eval_llms), -1)
         q_row = torch.tensor(q_matrix[int(item_idx)], dtype=torch.float32, device=device)
-        q_batch = q_row.unsqueeze(0).expand(n_llms, -1)
+        q_batch = q_row.unsqueeze(0).expand(len(eval_llms), -1)
 
         with torch.no_grad():
             preds = net(all_llm_ids, emb_batch, q_batch).cpu().numpy()
@@ -216,8 +233,8 @@ def main(cfg: DictConfig) -> None:
     print(f"  Routing: " + ", ".join(f"@{k}={routing[f'acc@{k}']:.4f}" for k in accs_at))
 
     # Strongest model baseline
-    train_acc = R[:, train_items.astype(int)].mean(axis=1)
-    strongest_idx = int(np.argmax(train_acc))
+    train_acc = R[eval_llms][:, train_items.astype(int)].mean(axis=1)
+    strongest_idx = int(eval_llms[int(np.argmax(train_acc))])
     strongest_correct = sum(R[strongest_idx, int(i)] for i in test_items)
     strongest_acc1 = strongest_correct / total
     print(f"  Strongest model: {llm_names[strongest_idx].split('__')[-1] if '__' in llm_names[strongest_idx] else llm_names[strongest_idx]}")
@@ -230,12 +247,36 @@ def main(cfg: DictConfig) -> None:
     if seed != 42:
         ckpt_dir = Path("cdm_exploration/checkpoints/multi_seed")
     ckpt_dir.mkdir(parents=True, exist_ok=True)
-    ckpt_name = f"seed_{seed}.pt" if seed != 42 else "text_conditioned_protocolB.pt"
+    # Checkpoint names carry no taxonomy, and save_checkpoint does not check for an
+    # existing file. So training any other Q-matrix at seed 42 overwrote
+    # text_conditioned_protocolB.pt, the checkpoint behind the paper's table AUC,
+    # and seeds 43-46 overwrote the multi_seed checkpoints behind the appendix's
+    # 0.7215 +/- 0.0007. Two models trained on different taxonomies were then
+    # indistinguishable by filename.
+    tag = str(cfg.ckpt_tag) if hasattr(cfg, "ckpt_tag") else ""
+    if holdout_llms and not tag:
+        tag = "_llmsplit3048"            # a hold-out run must not take the main model's file name
+    base = f"seed_{seed}" if seed != 42 else "text_conditioned_protocolB"
+    ckpt_name = f"{base}{tag}.pt"
+    target = ckpt_dir / ckpt_name
+    if target.exists():
+        # Move the old one aside rather than refusing or overwriting. Overwriting
+        # destroyed it silently, and the paper's table AUC lives in
+        # text_conditioned_protocolB.pt; refusing was worse for a reproducibility
+        # artifact, because train_v2.sh then aborts the moment a checkpoint exists.
+        # Nothing in these names records which taxonomy was trained, so pass
+        # +ckpt_tag=_arm to keep arms apart instead of relying on this.
+        import shutil
+        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        kept = ckpt_dir / f"{base}{tag}.superseded_{stamp}.pt"
+        shutil.move(str(target), str(kept))
+        print(f"  moved existing checkpoint aside: {kept.name}")
     save_checkpoint(
         net, ckpt_dir / ckpt_name,
         config={"K": n_skills, "n_llms": n_llms, "n_items": n_items,
                 "epochs": cfg.model.epochs, "lr": cfg.model.lr, "text_dim": text_dim,
-                "seed": seed},
+                "seed": seed, "holdout_llms": holdout_llms, "n_training_llms": int(len(eval_llms)),
+                "batch_size": int(cfg.model.batch_size)},
         train_items=train_items, test_items=test_items,
         val_auc=auc, epoch=cfg.model.epochs,
     )
@@ -243,10 +284,16 @@ def main(cfg: DictConfig) -> None:
     # ── Verify and log ──
     verified = verify_splits(train_items, test_items, label="train_expanded")
     log_experiment(
-        name=f"train_expanded_seed{seed}",
+        name=f"train_expanded_seed{seed}{tag}",
+        # K alone does not say which taxonomy: two 274-skill banks differ. Record the
+        # Q-matrix and the checkpoint so an entry can be traced to its artifacts (N5).
         config={"K": n_skills, "n_llms": n_llms, "n_items": n_items,
                 "epochs": cfg.model.epochs, "lr": cfg.model.lr, "device": device,
-                "seed": seed},
+                "seed": seed, "checkpoint": ckpt_name, "holdout_llms": holdout_llms,
+                "n_training_llms": int(len(eval_llms)), "batch_size": int(cfg.model.batch_size),
+                "qmatrix": (str(cfg.data.qmatrix)
+                            if (hasattr(cfg, "data") and hasattr(cfg.data, "qmatrix"))
+                            else "qmatrix_expanded.npy")},
         results={"test_auc": float(auc), "test_acc": float(acc),
                  "test_rmse": float(rmse), **routing,
                  "strongest_acc1": float(strongest_acc1)},

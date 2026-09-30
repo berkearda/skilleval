@@ -87,7 +87,9 @@ def main(cfg: DictConfig) -> None:
     print(f"  [F5 OK] train_llms ∩ test_llms == ∅", flush=True)
 
     # Model
-    ckpt_path = Path("cdm_exploration/checkpoints/expanded/text_conditioned_protocolB.pt")
+    # +ckpt=<file> selects the frozen network; +out_tag=<suffix> keeps the result file apart (T-123).
+    ckpt_path = Path(str(cfg.ckpt)) if hasattr(cfg, "ckpt") else Path("cdm_exploration/checkpoints/expanded/text_conditioned_protocolB.pt")
+    out_tag = str(cfg.out_tag) if hasattr(cfg, "out_tag") else ""
     print(f"\nLoading checkpoint: {ckpt_path}", flush=True)
     net = TextConditionedNet(K, n_llms, 768)
     load_checkpoint(ckpt_path, net, device)
@@ -122,6 +124,13 @@ def main(cfg: DictConfig) -> None:
     # Cold-start sweep with the fixed optimizer settings
     cal_sizes = [0, 1, 5, 10, 50, 100, 500]
     n_repeats = 3
+    # Optional overrides, used only for smoke tests; the defaults above are the paper's settings.
+    if hasattr(cfg, "cal_sizes"):
+        cal_sizes = [int(x) for x in str(cfg.cal_sizes).split(",")]
+    if hasattr(cfg, "n_repeats"):
+        n_repeats = int(cfg.n_repeats)
+    if hasattr(cfg, "n_eval_llms"):
+        test_llms = test_llms[:int(cfg.n_eval_llms)]
     rng = np.random.RandomState(42)
     print(f"\nCold-start (FIXED): {len(test_llms)} LLMs, sizes={cal_sizes}, "
             f"repeats={n_repeats}, lr={CALIBRATION_LR}, steps={CALIBRATION_STEPS}",
@@ -187,8 +196,31 @@ def main(cfg: DictConfig) -> None:
                     f"{delta:>+10.4f} {o_pct:>11.1f}% {s['pct_of_full']:>11.1f}%",
                     flush=True)
 
+    # Same-LLM reference (T-123): calibrate each held-out LLM on ALL training items with the same recipe, in
+    # chunks so the pooled tensors stay small. This is the ceiling for the 763 LLMs themselves, whereas
+    # full_training_auc above comes from 50 other (training) LLMs.
+    full_cal_auc = None
+    if hasattr(cfg, "full_calibration") and bool(cfg.full_calibration):
+        print("\nFull-calibration reference: all training items, same held-out LLMs...", flush=True)
+        ref_aucs, chunk = [], 32
+        for c0 in range(0, len(test_llms), chunk):
+            sub = test_llms[c0:c0 + chunk]
+            th = batch_calibrate(net, R, sub, [train_items for _ in sub], q_matrix, text_embs, device, K,
+                                 lr=CALIBRATION_LR, steps=CALIBRATION_STEPS)
+            pr = batch_predict(net, th, test_items, q_matrix, text_embs, device)
+            for i, llm_idx in enumerate(sub):
+                y_true = R[llm_idx, test_items.astype(int)]
+                if len(np.unique(y_true)) >= 2:
+                    ref_aucs.append(roc_auc_score(y_true, pr[i]))
+        full_cal_auc = float(np.mean(ref_aucs))
+        print(f"  Full-calibration AUC (same {len(test_llms)} LLMs): {full_cal_auc:.4f}", flush=True)
+        for srow in summary:
+            srow["pct_of_full_calibration"] = float(100 * srow["auc_mean"] / full_cal_auc)
+
     save_data = {
         "dataset": "v2_full",
+        "checkpoint": str(ckpt_path),
+        "full_calibration_auc_same_llms": full_cal_auc,
         "experiment": "cold_start_v2_fixed",
         "t_id": "T-036",
         "fix": "calibration optimizer: lr 0.01 -> 0.05, steps 50 -> 500",
@@ -204,14 +236,14 @@ def main(cfg: DictConfig) -> None:
         "summary": summary,
         "verified": True,
     }
-    out_json = Path("cdm_exploration/experiments/v2_cold_start_fixed.json")
+    out_json = Path(f"cdm_exploration/experiments/v2_cold_start_fixed{out_tag}.json")
     with open(out_json, "w") as f:
         json.dump(save_data, f, indent=2)
     print(f"\nSaved: {out_json}", flush=True)
 
     verified = verify_splits(train_items, test_items, label="cold_start_v2_fixed")
     log_experiment(
-        name="cold_start_v2_fixed",
+        name=f"cold_start_v2_fixed{out_tag}",
         config={"n_test_llms": len(test_llms), "K": K,
                 "cal_sizes": cal_sizes, "n_repeats": n_repeats,
                 "lr": CALIBRATION_LR, "steps": CALIBRATION_STEPS,

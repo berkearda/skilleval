@@ -110,7 +110,9 @@ def main(cfg: DictConfig) -> None:
     all_llms = np.arange(n_llms)
     train_llms, test_llms = train_test_split(all_llms, test_size=0.2, random_state=42)
 
-    ckpt_path = Path("cdm_exploration/checkpoints/expanded/text_conditioned_protocolB.pt")
+    # +ckpt=<file> selects the frozen network; +out_tag=<suffix> keeps the result file apart (T-123).
+    ckpt_path = Path(str(cfg.ckpt)) if hasattr(cfg, "ckpt") else Path("cdm_exploration/checkpoints/expanded/text_conditioned_protocolB.pt")
+    out_tag = str(cfg.out_tag) if hasattr(cfg, "out_tag") else ""
     print(f"Loading checkpoint: {ckpt_path}", flush=True)
     net = TextConditionedNet(K, n_llms, 768)
     load_checkpoint(ckpt_path, net, device)
@@ -216,6 +218,7 @@ def main(cfg: DictConfig) -> None:
         "experiment": "adaptive_testing_v2_fixed",
         "t_id": "T-038",
         "fix": "symmetric final-fit (T-036 recipe), 100 LLMs (was 20), 3 seeds (was 1)",
+        "checkpoint": str(ckpt_path),
         "n_eval_llms": n_eval, "n_repeats": n_repeats, "K": K,
         "cal_sizes": cal_sizes, "criteria": criteria,
         "top_k_prefilter": TOP_K_PREFILTER,
@@ -223,14 +226,14 @@ def main(cfg: DictConfig) -> None:
         "selector_uses_exact_autograd": True,
         "summary": summary,
     }
-    out_json = Path("cdm_exploration/experiments/v2_adaptive_testing_v2_fixed.json")
+    out_json = Path(f"cdm_exploration/experiments/v2_adaptive_testing_v2_fixed{out_tag}.json")
     with open(out_json, "w") as f:
         json.dump(save_data, f, indent=2)
     print(f"\nSaved: {out_json}", flush=True)
 
     verified = verify_splits(train_items, test_items, label="adaptive_testing_v2_fixed")
     log_experiment(
-        name="adaptive_testing_v2_fixed",
+        name=f"adaptive_testing_v2_fixed{out_tag}",
         config={"n_eval": n_eval, "K": K, "n_repeats": n_repeats,
                 "cal_sizes": cal_sizes, "criteria": criteria,
                 "top_k_prefilter": TOP_K_PREFILTER,

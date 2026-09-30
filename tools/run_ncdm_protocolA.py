@@ -40,7 +40,8 @@ K_FIXED = 100  # Protocol A run scoped to K=100 per the 2026-04-25 request
 
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
 def main(cfg: DictConfig) -> None:
-    from cdmeval.data.dataloader import make_text_dataloader
+    from cdmeval.data.dataloader import make_dataloader, make_text_dataloader
+    from cdmeval.modeling.free_item import FreeItemNCDM
     from cdmeval.evaluation.metrics import eval_text_model
     from cdmeval.evaluation.training import train_text_model
     from cdmeval.modeling.text_conditioned import TextConditionedNet
@@ -63,6 +64,15 @@ def main(cfg: DictConfig) -> None:
     with open(data_dir / "response_matrix_v2_full_llms.json") as f:
         llm_names = json.load(f)
 
+    # +free_items=true: Table 2 baseline (a), the same network with free per-item difficulty and discrimination
+    # instead of text-derived ones (an external review, 2026-09-22). Everything else is unchanged.
+    free_items = bool(cfg.free_items) if hasattr(cfg, "free_items") else False
+    # +subset.n_llms=N: smoke tests only (same random subset rule as train_expanded.py).
+    if hasattr(cfg, "subset") and hasattr(cfg.subset, "n_llms"):
+        idx = np.random.RandomState(42).choice(R.shape[0], size=int(cfg.subset.n_llms), replace=False)
+        R = R[idx]
+        llm_names = [llm_names[i] for i in idx]
+        print(f"  SMOKE: {len(idx)}-LLM subset", flush=True)
     n_llms, n_items = R.shape
     n_skills = q_matrix.shape[1]
     text_dim = text_embs.shape[1]
@@ -98,15 +108,13 @@ def main(cfg: DictConfig) -> None:
     )
 
     bs = cfg.model.batch_size
-    train_loader = make_text_dataloader(
-        triplets[tr_idx], text_embs, q_matrix, bs, shuffle=True,
-    )
-    val_loader = make_text_dataloader(
-        triplets[va_idx], text_embs, q_matrix, bs, shuffle=False,
-    )
-    test_loader = make_text_dataloader(
-        triplets[te_idx], text_embs, q_matrix, bs, shuffle=False,
-    )
+    # The free-item model takes item ids where the text model takes text embeddings; the training and
+    # evaluation loops pass the second element of each batch through unchanged.
+    make = (lambda t, sh: make_dataloader(t, q_matrix, bs, shuffle=sh)) if free_items else \
+           (lambda t, sh: make_text_dataloader(t, text_embs, q_matrix, bs, shuffle=sh))
+    train_loader = make(triplets[tr_idx], True)
+    val_loader = make(triplets[va_idx], False)
+    test_loader = make(triplets[te_idx], False)
 
     # ── Train ──
     epochs = cfg.model.epochs
@@ -119,7 +127,8 @@ def main(cfg: DictConfig) -> None:
     )
     print(f"  {n_batches:,} batches/epoch, {epochs} epochs", flush=True)
 
-    net = TextConditionedNet(n_skills, n_llms, text_dim)
+    net = FreeItemNCDM(n_skills, n_llms, n_items) if free_items else TextConditionedNet(n_skills, n_llms, text_dim)
+    print(f"  model: {type(net).__name__}", flush=True)
     net = train_text_model(
         net, train_loader, val_loader,
         epochs=epochs, lr=lr, device=device,
@@ -134,7 +143,8 @@ def main(cfg: DictConfig) -> None:
     )
 
     # ── Persist ──
-    seed_suffix = "" if seed == 42 else f"_s{seed}"
+    seed_suffix = ("" if seed == 42 else f"_s{seed}") + ("_freeitems" if free_items else "") + \
+                  ("_smoke" if hasattr(cfg, "subset") else "")
     ckpt_dir = Path("cdm_exploration/checkpoints/expanded")
     ckpt_path = ckpt_dir / f"text_conditioned_protocolA_K{K_FIXED}{seed_suffix}.pt"
     save_checkpoint(
@@ -143,6 +153,7 @@ def main(cfg: DictConfig) -> None:
             "K": K_FIXED, "seed": seed, "protocol": "A",
             "n_llms": n_llms, "n_items": n_items,
             "epochs": epochs, "lr": lr, "text_dim": text_dim,
+            "free_items": free_items, "batch_size": int(bs),
         },
         train_items=np.array([], dtype=np.int64),  # not item-wise; sentinel
         test_items=np.array([], dtype=np.int64),
@@ -161,6 +172,7 @@ def main(cfg: DictConfig) -> None:
         "test_rmse": float(rmse),
         "n_llms": n_llms, "n_items": n_items,
         "epochs": epochs, "lr": lr,
+        "model": type(net).__name__, "free_items": free_items, "batch_size": int(bs),
     }
     out = Path(
         f"cdm_exploration/experiments/v2_ncdm_protocolA_K{K_FIXED}"
@@ -176,7 +188,7 @@ def main(cfg: DictConfig) -> None:
     log_experiment(
         name=f"ncdm_protocolA_K{K_FIXED}{seed_suffix}",
         config={
-            "model": "TextConditionedNet",
+            "model": type(net).__name__, "batch_size": int(bs),
             "K": K_FIXED, "seed": seed, "protocol": "A",
             "epochs": epochs, "lr": lr, "device": device,
         },

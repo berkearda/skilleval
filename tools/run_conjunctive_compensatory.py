@@ -34,7 +34,7 @@ COMPENSATORY_THRESH = 0.6
 SENSITIVITY_THRESHOLDS = [0.5, 0.6, 0.7]
 
 
-def analyze_items_pattern(two_skill_items, R, q_matrix, theta, items_data):
+def analyze_items_pattern(two_skill_items, R, q_matrix, theta, items_data, cut=0.5):
     """Pattern-based classification for 2-skill items.
 
     Groups LLMs into the four binary mastery patterns {0,0}, {1,0}, {0,1}, {1,1}
@@ -42,7 +42,7 @@ def analyze_items_pattern(two_skill_items, R, q_matrix, theta, items_data):
     across qualitatively different mastery profiles. This mirrors the G-DINA /
     DINA / DINO logic on a reduced 2-skill design.
     """
-    mastery_binary = (theta > 0.5).astype(int)
+    mastery_binary = (theta > cut).astype(int)
     results = []
     filter_stats = {"total": len(two_skill_items), "too_few": 0,
                     "no_effect": 0, "analyzed": 0}
@@ -126,7 +126,7 @@ def reclassify(results, conj_thresh, comp_thresh):
 
 
 def analyze_items(multi_items, R, q_matrix, theta, items_data, n_llms,
-                  mode="tertile"):
+                  mode="tertile", cut=0.5):
     """Run conjunctive/compensatory classification on a set of items.
 
     Args:
@@ -135,7 +135,7 @@ def analyze_items(multi_items, R, q_matrix, theta, items_data, n_llms,
     Returns:
         list of per-item result dicts, filter_stats dict.
     """
-    mastery_binary = (theta > 0.5).astype(int) if mode == "binary" else None
+    mastery_binary = (theta > cut).astype(int) if mode == "binary" else None
     results = []
     filter_stats = {"total": len(multi_items), "too_few": 0,
                     "no_effect": 0, "analyzed": 0}
@@ -338,6 +338,18 @@ def main(cfg: DictConfig) -> None:
         theta = torch.sigmoid(net.student_emb.weight).numpy()
     print(f"  theta: {theta.shape}, range [{theta.min():.3f}, {theta.max():.3f}]",
           flush=True)
+    # +mastery=predicted|observed (an external review, 2026-09-22): predictions depend on theta - d only, so
+    # "theta > 0.5" is not identified. predicted = mean predicted P(correct) over the skill's items
+    # (tools/predict_skill_accuracy.py), observed = observed accuracy on them. The score replaces theta in all three
+    # groupings; the default (theta) is unchanged. +mastery_cut sets the binary cut-off; outputs get a suffix.
+    from cdmeval.evaluation.skill_mastery import skill_scores
+    mastery_source = str(cfg.mastery) if hasattr(cfg, "mastery") else "theta"
+    mastery_cut = float(cfg.mastery_cut) if hasattr(cfg, "mastery_cut") else 0.5
+    out_tag = (str(cfg.out_tag) if hasattr(cfg, "out_tag")
+               else "" if (mastery_source, mastery_cut) == ("theta", 0.5)
+               else f"_{mastery_source}{round(100 * mastery_cut):03d}")
+    theta = skill_scores(mastery_source, theta, R, q_matrix)
+    print(f"  mastery: {mastery_source} > {mastery_cut}, outputs tagged '{out_tag}'", flush=True)
 
     # ── Item stats ──
     skills_per_item = q_matrix.sum(axis=1).astype(int)
@@ -348,7 +360,7 @@ def main(cfg: DictConfig) -> None:
     # ── Sanity check: single-skill items ──
     print("\nSanity check: single-skill items...", flush=True)
     single_items = np.where(skills_per_item == 1)[0]
-    mastery_bin = (theta > 0.5).astype(int)
+    mastery_bin = (theta > mastery_cut).astype(int)
     p_master_list, p_non_list = [], []
     for j in single_items[:500]:
         sk = np.where(q_matrix[j] > 0)[0][0]
@@ -376,10 +388,11 @@ def main(cfg: DictConfig) -> None:
 
     # ── SENSITIVITY: binary grouping ──
     print(f"\n{'='*60}", flush=True)
-    print("SENSITIVITY CHECK: Binary grouping (theta > 0.5)", flush=True)
+    print(f"SENSITIVITY CHECK: Binary grouping ({mastery_source} > {mastery_cut})", flush=True)
     print(f"{'='*60}", flush=True)
     results_binary, fstats_binary = analyze_items(
         multi_items, R, q_matrix, theta, items_data, n_llms, mode="binary",
+        cut=mastery_cut,
     )
     summary_binary = summarize(results_binary)
     print(f"  Filter: {fstats_binary}", flush=True)
@@ -392,7 +405,7 @@ def main(cfg: DictConfig) -> None:
           f"({len(two_skill_items)} items)", flush=True)
     print(f"{'='*60}", flush=True)
     results_pattern, fstats_pattern = analyze_items_pattern(
-        two_skill_items, R, q_matrix, theta, items_data,
+        two_skill_items, R, q_matrix, theta, items_data, cut=mastery_cut,
     )
     summary_pattern = summarize(results_pattern)
     print(f"  Filter: {fstats_pattern}", flush=True)
@@ -523,8 +536,8 @@ def main(cfg: DictConfig) -> None:
                fontsize=10, handletextpad=0.5, columnspacing=1.8)
 
     plt.tight_layout(pad=2.0, rect=(0, 0.05, 1, 1))
-    out_fig = fig_dir / "fig_conjunctive_compensatory.pdf"
-    out_fig_png = fig_dir / "fig_conjunctive_compensatory.png"
+    out_fig = fig_dir / f"fig_conjunctive_compensatory{out_tag}.pdf"
+    out_fig_png = fig_dir / f"fig_conjunctive_compensatory{out_tag}.png"
     fig.savefig(out_fig, dpi=300, bbox_inches="tight")
     fig.savefig(out_fig_png, dpi=200, bbox_inches="tight")
     plt.close()
@@ -557,15 +570,20 @@ def main(cfg: DictConfig) -> None:
         },
         "threshold_sensitivity_tertile": threshold_sensitivity,
     }
-    out_json = Path("cdm_exploration/experiments/v2_conjunctive_compensatory.json")
+    if out_tag:
+        save_data.update({"mastery_source": mastery_source, "mastery_cut": mastery_cut,
+                          "tertile_items": results_tertile, "binary_items": results_binary,
+                          "pattern_items": results_pattern})
+    out_json = Path(f"cdm_exploration/experiments/v2_conjunctive_compensatory{out_tag}.json")
     with open(out_json, "w") as f:
         json.dump(save_data, f, indent=2)
     print(f"Saved: {out_json}", flush=True)
 
     log_experiment(
-        name="conjunctive_compensatory",
+        name=f"conjunctive_compensatory{out_tag}",
         config={"min_group_size": MIN_GROUP_SIZE, "min_effect": MIN_EFFECT,
-                "primary_method": "tertile", "K": K, "device": device},
+                "primary_method": "tertile", "K": K, "device": device,
+                "mastery_source": mastery_source, "mastery_cut": mastery_cut},
         results=save_data,
         split_info={"n_items": n_items, "n_llms": n_llms,
                     "tertile_analyzed": fstats_tertile["analyzed"],

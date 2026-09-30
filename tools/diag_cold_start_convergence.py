@@ -106,7 +106,10 @@ def main() -> None:
     rng = np.random.RandomState(42)
     test_llms_sub = rng.choice(test_llms, 100, replace=False)
 
-    ckpt_path = REPO / "cdm_exploration" / "checkpoints" / "expanded" / "text_conditioned_protocolB.pt"
+    # --ckpt <file> and --out_tag <suffix> (T-123): rerun the same diagnostic on another frozen network.
+    args = sys.argv[1:]
+    ckpt_path = REPO / (args[args.index("--ckpt") + 1] if "--ckpt" in args else "cdm_exploration/checkpoints/expanded/text_conditioned_protocolB.pt")
+    out_tag = args[args.index("--out_tag") + 1] if "--out_tag" in args else ""
     net = TextConditionedNet(K, n_llms, 768)
     load_checkpoint(ckpt_path, net, device)
     net = net.to(device).eval()
@@ -151,8 +154,8 @@ def main() -> None:
                           "auc": auc_m, "theta_raw_mean_abs": norm,
                           "final_loss": float(losses[-1])})
 
-    out = REPO / "cdm_exploration" / "experiments" / "v2_cold_start_convergence_diag.json"
-    json.dump({"reference_trained_theta_norm": train_theta_norm,
+    out = REPO / "cdm_exploration" / "experiments" / f"v2_cold_start_convergence_diag{out_tag}.json"
+    json.dump({"checkpoint": str(ckpt_path.relative_to(REPO)), "reference_trained_theta_norm": train_theta_norm,
                  "n_test_llms": int(len(test_llms_sub)),
                  "results": rows}, open(out, "w"), indent=2)
     print(f"\nWrote {out}")

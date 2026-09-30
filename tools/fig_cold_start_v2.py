@@ -28,14 +28,20 @@ HIGHLIGHT = "#FACC15"    # yellow-500 (headline star only)
 @hydra.main(version_base=None, config_path="../configs", config_name="config")
 def main(cfg: DictConfig) -> None:
     fig_dir = Path(cfg.paths.figures)
-    data_path = Path("cdm_exploration/experiments/v2_cold_start_fixed.json")
+    # +in_tag=<suffix> draws from another cold-start result file and writes a figure with the same suffix (T-123).
+    in_tag = str(cfg.in_tag) if hasattr(cfg, "in_tag") else ""
+    data_path = Path(f"cdm_exploration/experiments/v2_cold_start_fixed{in_tag}.json")
     data = json.load(open(data_path))
 
     Ns = [r["N"] for r in data["summary"]]
     aucs = np.array([r["auc_mean"] for r in data["summary"]])
     stds = np.array([r["auc_std"] for r in data["summary"]])
-    pcts = np.array([r["pct_of_full"] for r in data["summary"]])
-    full = data["full_training_auc"]
+    # +ref=full_calibration uses the same-LLM ceiling (each held-out LLM calibrated on all training items), which is the
+    # reference the paper text uses; the default keeps the submitted reference (50 training LLMs with trained vectors).
+    same_llm = hasattr(cfg, "ref") and str(cfg.ref) == "full_calibration"
+    pcts = np.array([r["pct_of_full_calibration" if same_llm else "pct_of_full"] for r in data["summary"]])
+    full = data["full_calibration_auc_same_llms"] if same_llm else data["full_training_auc"]
+    ref_name = "full-calibration" if same_llm else "full-training"
 
     # Per Part J: sans-serif, tight typography hierarchy
     matplotlib.rcParams.update({
@@ -55,8 +61,8 @@ def main(cfg: DictConfig) -> None:
 
     # Full-training reference (Part J: reference dotted, neutral gray)
     ax.axhline(full, color=REFERENCE, lw=1.2, ls=":", zorder=1)
-    ax.text(620, full, f"  full-training AUC = {full:.3f}", fontsize=8,
-            color=REFERENCE, ha="left", va="center", style="italic")
+    ax.text(0.45, full + 0.002, f"{ref_name} AUC = {full:.3f}", fontsize=8,      # above the line, left, clear of the data
+            color=REFERENCE, ha="left", va="bottom", style="italic")
 
     # Data: error band + line + open markers
     ax.fill_between(x, aucs - stds, aucs + stds,
@@ -72,7 +78,12 @@ def main(cfg: DictConfig) -> None:
                         xytext=(8, 6), textcoords="offset points",
                         fontsize=8.5, color=PROTAGONIST,
                         ha="left", va="bottom")
-        elif n in (50, 100, 500):
+        elif n == 500:                                   # left of the star, below the reference line
+            ax.annotate(f"{pi:.0f}%", xy=(xi, ai),
+                        xytext=(-11, 2), textcoords="offset points",
+                        fontsize=8.5, color=PROTAGONIST,
+                        ha="right", va="bottom")
+        elif n in (50, 100):
             ax.annotate(f"{pi:.0f}%", xy=(xi, ai),
                         xytext=(0, 9), textcoords="offset points",
                         fontsize=8.5, color=PROTAGONIST,
@@ -83,7 +94,7 @@ def main(cfg: DictConfig) -> None:
             markeredgecolor="black", markeredgewidth=0.8, zorder=5)
 
     # Inline punchline (Part J E4: headline number ON the figure)
-    ax.annotate("$N{=}500$ recovers 97% of\nfull-training AUC",
+    ax.annotate(f"$N{{=}}500$ recovers {pcts[-1]:.0f}% of\n{ref_name} AUC",
                 xy=(500, aucs[-1]),
                 xytext=(60, 0.585),
                 fontsize=9, color="#222222", ha="left", va="center",
@@ -107,7 +118,7 @@ def main(cfg: DictConfig) -> None:
     ax.set_axisbelow(True)
 
     plt.tight_layout(pad=0.5)
-    out = fig_dir / "main_ready" / "fig_cold_start_v2.pdf"
+    out = fig_dir / "main_ready" / f"fig_cold_start_v2{in_tag}{'_fullcal' if same_llm else ''}.pdf"
     out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out, dpi=300, bbox_inches="tight", pad_inches=0.05)
     fig.savefig(str(out).replace(".pdf", ".png"), dpi=200,

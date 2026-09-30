@@ -211,6 +211,11 @@ def analyze_extracted_skills(results_df: pd.DataFrame) -> Counter:
 
 # ════════════════════════════════════════════════════════════════════
 #  Benchmark-aware extraction (v2 prompt)
+#
+#  FROZEN 2026-08-11. QMATRIX_SYSTEM_PROMPT produced the published 100-skill
+#  Q-matrix and is imported by four reference-answer diagnostics. Do not edit
+#  it: doing so makes those artifacts unreproducible. New work uses
+#  QMATRIX_SYSTEM_PROMPT_V3 below. See the project log 2026-08-11.
 # ════════════════════════════════════════════════════════════════════
 
 QMATRIX_SYSTEM_PROMPT = """You are a psychometrician designing a Q-matrix for cognitive diagnostic assessment of AI systems. Your task: identify the specific cognitive skills each test item measures.
@@ -242,6 +247,58 @@ BAD examples (too generic, rejected):
 - "problem solving" -> decompose to "applying_substitution_to_solve_nonlinear_systems"
 - "reading comprehension" -> decompose to "extracting_temporal_ordering_from_narrative_clues"
 - "scientific knowledge" -> decompose to "applying_conservation_of_angular_momentum_to_rotating_bodies"
+"""
+
+# ════════════════════════════════════════════════════════════════════
+#  v3 prompt (2026-08-11): the corpus-level rules removed
+#
+#  Two rules were dropped because they ask the model for a statistic it cannot
+#  see. At extraction time it is looking at ONE item and has no way to know how
+#  many of the other 9,522 share a skill:
+#
+#    old rule 3, second clause  "any label that would apply to >15% of items"
+#    old rule 4                 "would fewer than 100 items in a 10,000-item
+#                                test share this? If not, decompose further"
+#
+#  They also contradicted each other by a factor of 15 (15% vs 1%), and the
+#  finished taxonomy contradicts rule 4 outright: 28 of its 99 skills are above
+#  the 1% bar and those 28 carry 85% of all labelled questions. Rule 4 pushed
+#  toward over-decomposition, and piles under 4 questions are discarded.
+#
+#  The banned-label list is also gone. It was tuned to these five benchmarks
+#  ("reasoning" is noise here and legitimate in a legal-reasoning corpus). Its
+#  measured replacement is taxonomy_pipeline.stranger_gap(), applied to every
+#  skill at certification.
+#
+#  What remains is format only: shape of the label, how many per item, casing.
+#  Whether a skill is too broad is decided after clustering, where the count
+#  actually exists.
+# ════════════════════════════════════════════════════════════════════
+
+QMATRIX_SYSTEM_PROMPT_V3 = """You are a psychometrician designing a Q-matrix for cognitive diagnostic assessment of AI systems. Your task: identify the specific cognitive skills each test item measures.
+
+RULES:
+1. Each skill must be a compound phrase (5-10 words): [specific_cognitive_process] + [specific_content_domain]
+2. Extract 2-4 skills per item. At least one must be domain-specific.
+3. Name the operation a solver must perform, not the subject area the item belongs to.
+4. Use lowercase snake_case labels.
+
+GOOD examples by benchmark type:
+
+MATH: "factoring_higher_degree_polynomials_over_integers", "applying_pigeonhole_principle_to_combinatorial_bounds", "computing_modular_arithmetic_in_residue_classes"
+
+BBH: "tracing_boolean_operator_precedence_in_nested_expressions", "identifying_causal_direction_from_correlational_evidence", "tracking_object_positions_through_spatial_transformations"
+
+GPQA: "applying_gauss_law_to_cylindrical_charge_distributions", "predicting_reaction_products_via_retrosynthetic_analysis", "interpreting_phylogenetic_trees_from_molecular_sequence_data"
+
+MuSR: "integrating_alibis_and_motives_to_identify_suspects", "tracking_object_locations_across_sequential_room_transfers", "resolving_team_allocation_under_mutual_exclusion_constraints"
+
+IFEval: "enforcing_exact_word_count_in_structured_output", "maintaining_consistent_formatting_across_nested_lists", "embedding_required_keywords_while_preserving_coherence"
+
+BAD examples (name the operation instead):
+- "problem solving" -> "applying_substitution_to_solve_nonlinear_systems"
+- "reading comprehension" -> "extracting_temporal_ordering_from_narrative_clues"
+- "scientific knowledge" -> "applying_conservation_of_angular_momentum_to_rotating_bodies"
 """
 
 QMATRIX_USER_TEMPLATE = """Benchmark: {benchmark} | Subtask: {subtask}

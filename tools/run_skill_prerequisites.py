@@ -174,7 +174,19 @@ def main(cfg: DictConfig) -> None:
     )
     with torch.no_grad():
         theta = torch.sigmoid(net.student_emb.weight).numpy()  # (n_llms, K)
-    mastery = (theta > MASTERY_THRESH).astype(int)
+    # +mastery=predicted|observed (an external review, 2026-09-22): predictions depend on theta - d only, so
+    # "theta > 0.5" is not identified. predicted = mean predicted P(correct) over the skill's items
+    # (tools/predict_skill_accuracy.py), observed = observed accuracy on them. The default (theta) is unchanged.
+    # +mastery_cut sets the cut-off; outputs get a suffix (+out_tag) so the submitted files are not overwritten.
+    from cdmeval.evaluation.skill_mastery import skill_scores
+    mastery_source = str(cfg.mastery) if hasattr(cfg, "mastery") else "theta"
+    mastery_cut = float(cfg.mastery_cut) if hasattr(cfg, "mastery_cut") else MASTERY_THRESH
+    out_tag = (str(cfg.out_tag) if hasattr(cfg, "out_tag")
+               else "" if (mastery_source, mastery_cut) == ("theta", MASTERY_THRESH)
+               else f"_{mastery_source}{round(100 * mastery_cut):03d}")
+    score = skill_scores(mastery_source, theta, R, q_matrix)
+    print(f"  mastery: {mastery_source} > {mastery_cut}, outputs tagged '{out_tag}'", flush=True)
+    mastery = (score > mastery_cut).astype(int)
     mastery_rate = mastery.mean(axis=0)  # (K,)
     print(f"  theta: {theta.shape}", flush=True)
     print(f"  Mastery rates: min={mastery_rate.min():.3f}, "
@@ -336,7 +348,7 @@ def main(cfg: DictConfig) -> None:
     if n_with_size > 50:
         log_sizes = np.array([np.log10(s) if s else 0 for s in sizes])
         valid_log = log_sizes[valid_size_mask]
-        valid_mastery = theta[valid_size_mask]
+        valid_mastery = score[valid_size_mask]
 
         from scipy.stats import pearsonr
         depth_size_corrs = []
@@ -584,8 +596,8 @@ def main(cfg: DictConfig) -> None:
     ax_b.grid(axis="y", ls=":", lw=0.5, alpha=0.35)
 
     plt.tight_layout()
-    out1 = fig_dir / "fig_skill_prerequisite_dag.pdf"
-    out1_png = fig_dir / "fig_skill_prerequisite_dag.png"
+    out1 = fig_dir / f"fig_skill_prerequisite_dag{out_tag}.pdf"
+    out1_png = fig_dir / f"fig_skill_prerequisite_dag{out_tag}.png"
     fig.savefig(out1, dpi=300, bbox_inches="tight")
     fig.savefig(out1_png, dpi=200, bbox_inches="tight")
     plt.close()
@@ -614,7 +626,7 @@ def main(cfg: DictConfig) -> None:
     for sp in ["top", "right"]:
         ax.spines[sp].set_visible(False)
     plt.tight_layout()
-    out2 = fig_dir / "fig_skill_depth_vs_size.pdf"
+    out2 = fig_dir / f"fig_skill_depth_vs_size{out_tag}.pdf"
     fig.savefig(out2, dpi=300, bbox_inches="tight")
     plt.close()
     print(f"  Saved: {out2}", flush=True)
@@ -652,18 +664,26 @@ def main(cfg: DictConfig) -> None:
         "cross_family_jaccard": fam_jaccard,
         "per_benchmark_depth": bench_depth,
     }
+    if out_tag:
+        save_data.update({"mastery_source": mastery_source, "mastery_cut": mastery_cut,
+                          "n_connected_skills": int(dag_mask.sum()),
+                          "spearman_depth_prevalence": float(spearmanr(x_vals, y_vals)[0]),
+                          "per_benchmark_primary_depth": {b: float(np.mean([depth[k] for k in range(K) if primary_bench[k] == bi]))
+                                                          for bi, b in enumerate(benchmarks)
+                                                          if (primary_bench == bi).any()}})
 
-    out_json = Path("cdm_exploration/experiments/v2_skill_prerequisites.json")
+    out_json = Path(f"cdm_exploration/experiments/v2_skill_prerequisites{out_tag}.json")
     with open(out_json, "w") as f:
         json.dump(save_data, f, indent=2)
     print(f"\nSaved: {out_json}", flush=True)
 
     log_experiment(
-        name="skill_prerequisites",
+        name=f"skill_prerequisites{out_tag}",
         config={"method": "odds_ratio",
                 "OR_threshold": OR_THRESHOLD,
                 "asymmetry_threshold": ASYMMETRY_THRESHOLD,
-                "mastery_threshold": MASTERY_THRESH, "K": K},
+                "mastery_source": mastery_source,
+                "mastery_threshold": mastery_cut, "K": K},
         results={"n_edges": int(n_edges_reduced), "n_roots": int(len(roots)),
                  "n_leaves": int(len(leaves)), "max_depth": int(depth.max()),
                  "depth_size_corr": float(r_depth_size)},

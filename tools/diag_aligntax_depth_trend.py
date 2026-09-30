@@ -60,9 +60,15 @@ def perm_p(x: np.ndarray, y: np.ndarray, observed: float, rng: np.random.Generat
 
 
 def main() -> None:
+    # --tag _predicted050 etc.: depths from the co-mastery graph built with that mastery definition
+    # (tools/run_skill_prerequisites.py +mastery=..., an external review, point 2); output gets the same suffix.
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--tag", default="")
+    tag = ap.parse_args().tag
     rng = np.random.default_rng(42)
     align = json.loads((EXP / "v2_alignment_tax.json").read_text())
-    prereq = json.loads((EXP / "v2_skill_prerequisites.json").read_text())
+    prereq = json.loads((EXP / f"v2_skill_prerequisites{tag}.json").read_text())
 
     K = int(align["K"])
     depth = np.array([int(prereq["depth_per_skill"][str(k)]) for k in range(K)])
@@ -121,8 +127,10 @@ def main() -> None:
         "verdict": verdict,
         "verified": True,
     }
-    (EXP / "v2_aligntax_depth_trend.json").write_text(json.dumps(out, indent=2))
-    print(f"\nWrote {EXP / 'v2_aligntax_depth_trend.json'}", flush=True)
+    if tag:
+        out["prerequisites_file"] = f"v2_skill_prerequisites{tag}.json"
+    (EXP / f"v2_aligntax_depth_trend{tag}.json").write_text(json.dumps(out, indent=2))
+    print(f"\nWrote {EXP / f'v2_aligntax_depth_trend{tag}.json'}", flush=True)
 
 
 if __name__ == "__main__":

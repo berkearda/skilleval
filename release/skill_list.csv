@@ -1,0 +1,101 @@
+skill_id,skill_name
+0,track entity states through sequential events
+1,determine value ranges of algebraic expressions
+2,determine properties of geometric figures
+3,calculate quantum state properties
+4,compute physical quantities from formulas
+5,evaluate sentence plausibility in context
+6,find values from equations
+7,identify relationships among entities
+8,craft creative written pieces
+9,count combinatorial outcomes
+10,count distinct items in collections
+11,manipulate trigonometric expressions for results
+12,evaluate causal relationships in scenarios
+13,evaluate conditions for outcomes
+14,analyze physical phenomena
+15,calculate values from provided data
+16,determine relationships between geometric entities
+17,solve quantitative word problems
+18,extract attribute values from tables
+19,determine integer properties from conditions
+20,determine object states from descriptions
+21,craft engaging messages for varied audiences
+22,determine effects of variable factors
+23,compose structured written responses
+24,analyze mathematical relationships
+25,calculate physical properties from data
+26,calculate dimensions from given conditions
+27,perform mathematical calculations
+28,create structured content with specific requirements
+29,identify humor in text
+30,analyze physical motion scenarios
+31,analyze quantitative relationships
+32,generate humorous phrase modifications
+33,compose responses in designated languages
+34,analyze scientific phenomena
+35,solve mathematical problems
+36,determine return to starting point
+37,evaluate potential outcomes from scenarios
+38,compute values from sequences
+39,determine values from mathematical expressions
+40,solve natural science problems
+41,generate structured content with specific criteria
+42,apply organic chemistry knowledge
+43,determine activation conditions for systems
+44,compute quantitative chemistry values
+45,analyze biological processes
+46,compose professional application materials
+47,determine object arrangements from relations
+48,compare beliefs across denominations
+49,calculate vector properties with matrices
+50,demonstrate code vulnerabilities with corrections
+51,compose written responses for various contexts
+52,extract penguin attributes from table
+53,expand condolence messages with care
+54,compute numeric math answers
+55,find values under specified conditions
+56,generate funny text variations
+57,count combinations and arrangements
+58,calculate total amounts with growth
+59,generate responses for pet situations
+60,extract specific data from tables
+61,repeat request verbatim before answering
+62,calculate field properties from potentials
+63,rephrase sentences with varied vocabulary
+64,analyze geometric shapes and paths
+65,calculate total game counts
+66,determine output values from input functions
+67,give funny critiques of sentences
+68,calculate dates from given points
+69,calculate tax amounts for income segments
+70,reason about causal relationships
+71,compose engaging written content
+72,evaluate gauge group characteristics
+73,compute properties of matrices
+74,evaluate boolean expressions with negations
+75,create bash scripts for file transfers
+76,analyze causal relationships
+77,compute physics quantities
+78,count distinct objects in a collection
+79,assign roles based on team strengths
+80,evaluate genetic equilibrium conditions
+81,locate required items for activities
+82,critique marketing messages for effectiveness
+83,draft personalized messages for recipients
+84,solve integer number theory problems
+85,count subsets of composite numbers
+86,evaluate polynomial values at specific inputs
+87,apply equations to device behavior
+88,rephrase statements with formal tone
+89,analyze scientific data
+90,manipulate complex number expressions
+91,count combinatorial interactions in scenarios
+92,solve algebraic word problems
+93,extract and organize information
+94,calculate weight changes over weeks
+95,interpret luminescence effects on materials
+96,choose option meeting constraints
+97,analyze logical relationships
+98,evaluate data sets for properties
+99,interpret mathematical expressions in physics
