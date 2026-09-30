@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import { Check, Copy } from 'lucide-react'
 
 const BIBTEX = `@misc{skilleval,
-  title  = {SkillEval: Skill-Level Ability Estimates for Language Models},
-  note   = {Cognitive-diagnostic evaluation snapshot, 2026-05-22},
-  year   = {2026},
-  url    = {https://example.org/skilleval}
+  title        = {SkillEval: Skill-Level Evaluation of Language Models with Cognitive Diagnosis Models},
+  author       = {Arda, Berke},
+  year         = {2026},
+  howpublished = {\\url{https://github.com/berkearda/skilleval}},
+  note         = {Code and data; paper forthcoming}
 }`
 
 const kicker = 'text-xs font-medium uppercase tracking-wider text-muted-foreground'
@@ -47,10 +48,16 @@ export function Footer() {
 
           <div className="flex flex-col gap-2">
             <span className={kicker}>Resources</span>
-            <span className="text-sm text-muted-foreground">
-              Paper, code, and the K=100 taxonomy will be released here once
-              the paper is public.
-            </span>
+            <a href="https://github.com/berkearda/skilleval" className={linkCls}>
+              Code and results
+            </a>
+            <a href="https://github.com/berkearda/skilleval/blob/main/release/skill_list.csv" className={linkCls}>
+              The 100 skills
+            </a>
+            <a href="https://huggingface.co/datasets/bearda/skilleval-cdm-assets" className={linkCls}>
+              Trained model
+            </a>
+            <span className="text-sm text-muted-foreground">Paper forthcoming</span>
           </div>
 
           <div className="flex flex-col gap-2">

@@ -239,7 +239,9 @@ export function SkillDetailPage() {
 
         {examples.length === 0 ? (
           <div className="mt-4 rounded-md border border-dashed border-border p-6 text-sm text-muted-foreground">
-            No example items available for this cluster.
+            {skill.primary_benchmark === 'GPQA'
+              ? 'GPQA questions are not shown: the GPQA authors ask that its questions not be posted in plain text.'
+              : 'No example items available for this cluster.'}
           </div>
         ) : (
           <div className="mt-4 flex flex-col gap-3">

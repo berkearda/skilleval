@@ -81,14 +81,15 @@ export function AboutPage() {
           Do the profiles predict performance?
         </h2>
         <p className="mt-3 max-w-[68ch] text-[15px] leading-7 text-foreground/90">
-          On held-out items, accuracy predicted from the profiles tracks true
-          accuracy on every benchmark, clearly tighter than a classical
-          two-parameter IRT baseline.
+          On held-out items, the accuracy predicted from the profiles tracks
+          each model's observed accuracy: closely on most benchmarks, more
+          loosely on GPQA and MuSR. The figure compares SkillEval with IRTNet,
+          a neural IRT model whose ability dimensions have no names.
         </p>
         <Figure
-          src="fig_benchmark_prediction.png"
-          alt="Predicted versus true accuracy per benchmark for SkillEval and an IRT 2PL baseline"
-          caption="Predicted vs. true held-out accuracy per benchmark. Blue is SkillEval; pink is the IRT 2PL baseline; the diagonal is perfect prediction."
+          src="fig_benchmark_prediction_irtnet_row.png"
+          alt="Predicted versus observed held-out accuracy per benchmark for SkillEval and IRTNet"
+          caption="Predicted vs. observed held-out accuracy per benchmark for SkillEval and IRTNet (d = 232); r is the Pearson correlation across models, and the diagonal is perfect prediction."
           maxWidth={720}
         />
       </section>
@@ -103,8 +104,9 @@ export function AboutPage() {
           have very different strengths. Mastery estimates carry sampling
           noise, so small gaps between adjacent ranks are not meaningful. The
           numbers are a fixed snapshot for inspection, not a live leaderboard;
-          the K=100 skill taxonomy and trained model parameters will be
-          released once the paper is public.
+          the 100 skill names are in the repository (release/skill_list.csv)
+          and the trained model is on the Hugging Face Hub
+          (bearda/skilleval-cdm-assets).
         </p>
       </section>
     </article>
