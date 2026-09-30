@@ -11565,6 +11565,79 @@
     "verified": true
   },
   {
+    "timestamp": "2026-09-12T10:34:34.385289",
+    "experiment": "diag_judge_vs_human",
+    "git_commit": "8956935",
+    "config": {
+      "judge": "gemini-3.6-flash",
+      "batch_cap": 10,
+      "seed": 42,
+      "codebook": "codebook_v2_amended_b150.json",
+      "labels": "item_labels_b150.jsonl",
+      "sheet": "gold/gold_sheet_2_labelled.md"
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is the fixed set of human-labelled assignments",
+      "n_assignments": 42,
+      "n_skills": 38
+    },
+    "results": {
+      "n_paired": 42,
+      "human_acceptance": 0.9523809523809523,
+      "judge_acceptance": 0.7619047619047619,
+      "agreement": 0.7619047619047619,
+      "judge_stricter": 9,
+      "human_stricter": 1
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-09-12T10:34:36.674569",
+    "experiment": "diag_retrieval_recall",
+    "git_commit": "8956935",
+    "config": {
+      "sheet": "gold/gold_sheet_2_labelled.md",
+      "codebook": "codebook_v2_amended_b150.json",
+      "emb": "code_def_emb_b150.npz",
+      "topk": 12,
+      "seed": 42
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is the fixed set of hand-written Part A operations",
+      "n_operations": 59
+    },
+    "results": {
+      "n_operations": 59,
+      "never_offered_rate": 0.23728813559322035,
+      "offered_not_chosen_rate": 0.23728813559322035,
+      "assigned_rate": 0.5254237288135594
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-09-12T10:36:08.732365",
+    "experiment": "diag_retrieval_recall",
+    "git_commit": "8956935",
+    "config": {
+      "sheet": "gold/gold_sheet_2_labelled.md",
+      "codebook": "codebook_v2_amended_b150.json",
+      "emb": "code_def_emb_b150.npz",
+      "topk": 12,
+      "seed": 42
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is the fixed set of hand-written Part A operations",
+      "n_operations": 59
+    },
+    "results": {
+      "n_operations": 59,
+      "never_offered_rate": 0.23728813559322035,
+      "offered_not_chosen_rate": 0.23728813559322035,
+      "assigned_rate": 0.5254237288135594
+    },
+    "verified": true
+  },
+  {
     "timestamp": "2026-09-12T10:55:06.034889",
     "experiment": "train_expanded_seed42_K100sub100",
     "git_commit": "8956935",
@@ -11753,6 +11826,300 @@
       "acc@5": 0.8283464566929134,
       "acc@10": 0.8745406824146982,
       "strongest_acc1": 0.6157480314960629
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-09-14T12:05:07.157038",
+    "experiment": "diag_stability_exact",
+    "git_commit": "8956935",
+    "config": {
+      "model": "gemini-3.5-flash-lite",
+      "temperature": 0.0,
+      "seed": 42,
+      "n": 300,
+      "shuffle": "random.Random(4242 + item_idx)",
+      "codebook_step4": "codebook_v1_frozen_b150.json",
+      "codebook_rerun": "codebook_v2_amended_b150.json",
+      "labels": "item_labels_b150.jsonl",
+      "stored": "validation_stability_v2_amended_b150.json"
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is a random sample of questions from the stored stability re-run",
+      "n_items": 300
+    },
+    "results": {
+      "A_exact": 0.71,
+      "B_exact": 0.5,
+      "C_exact": 0.45819397993311034,
+      "stored_exact_same_questions": 0.46,
+      "A_mean_size": 1.76,
+      "B_mean_size": 1.86,
+      "C_mean_size": 2.100334448160535,
+      "replication_identical": 0.8054474708171206,
+      "errors": 1
+    },
+    "verified": false
+  },
+  {
+    "timestamp": "2026-09-14T12:51:10.897491",
+    "experiment": "diag_fit_judge_validate",
+    "git_commit": "8956935",
+    "config": {
+      "judge": "gemini-3.6-flash",
+      "seed": 42,
+      "own_per_batch": 10,
+      "decoys_per_batch": 3,
+      "codebook": "codebook_v2_amended_b150.json",
+      "labels": "item_labels_b150.jsonl",
+      "sheet": "gold/gold_sheet_2_labelled.md",
+      "key": "gold/gold_partB_key_2.json"
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is the gold sheet 2 hand check (42 real and 198 decoy assignments)",
+      "n_pairs": 240
+    },
+    "results": {
+      "new_real_accept": 38,
+      "new_decoy_accept": 8,
+      "old_real_accept": 34,
+      "old_decoy_accept": 0,
+      "n_real": 42,
+      "n_decoy": 198,
+      "new_agreement": 229,
+      "old_agreement": 231,
+      "human_real_accept": 40,
+      "human_decoy_accept": 1,
+      "passed": true,
+      "error_calls": 0
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-09-14T12:57:19.373151",
+    "experiment": "diag_fit_judge_score_b150",
+    "git_commit": "8956935",
+    "config": {
+      "judge": "gemini-3.6-flash",
+      "seed": 42,
+      "own_per_batch": 10,
+      "decoys_per_batch": 3,
+      "codebook": "codebook_v2_amended_b150.json",
+      "labels": "item_labels_b150.jsonl"
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is a skill and a sample of its questions",
+      "n_skills": 234
+    },
+    "results": {
+      "skills_scored": 234,
+      "error_calls": 0,
+      "mean_fit": 0.871939017772351,
+      "mean_main_only": 0.6509259259259259,
+      "pooled_fit": 0.8662041625371655,
+      "decoy_accept": 0.04415954415954416,
+      "separation": 0.8220446183776213,
+      "skills_fit_0.2_or_less": 4,
+      "questions_sent": 2018,
+      "decoys_sent": 702,
+      "missing_or_invalid": 2
+    },
+    "verified": false
+  },
+  {
+    "timestamp": "2026-09-14T12:59:28.686770",
+    "experiment": "diag_fit_judge_score_v8",
+    "git_commit": "8956935",
+    "config": {
+      "judge": "gemini-3.6-flash",
+      "seed": 42,
+      "own_per_batch": 10,
+      "decoys_per_batch": 3,
+      "codebook": "codebook_v8_definitions.json",
+      "labels": "item_labels_before_codebook_v7_deduped.jsonl"
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is a skill and a sample of its questions",
+      "n_skills": 139
+    },
+    "results": {
+      "skills_scored": 139,
+      "error_calls": 0,
+      "mean_fit": 0.7886262418636519,
+      "mean_main_only": 0.6951610140459061,
+      "pooled_fit": 0.816267942583732,
+      "decoy_accept": 0.023980815347721823,
+      "separation": 0.7922871272360102,
+      "skills_fit_0.2_or_less": 8,
+      "questions_sent": 1045,
+      "decoys_sent": 417,
+      "missing_or_invalid": 0
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-09-14T13:02:53.532096",
+    "experiment": "diag_fit_judge_score_v6",
+    "git_commit": "8956935",
+    "config": {
+      "judge": "gemini-3.6-flash",
+      "seed": 42,
+      "own_per_batch": 10,
+      "decoys_per_batch": 3,
+      "codebook": "codebook_v6_definitions.json",
+      "labels": "item_labels_before_codebook_v7_deduped.jsonl"
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is a skill and a sample of its questions",
+      "n_skills": 197
+    },
+    "results": {
+      "skills_scored": 197,
+      "error_calls": 0,
+      "mean_fit": 0.8167452260091854,
+      "mean_main_only": 0.7412960277173475,
+      "pooled_fit": 0.8458549222797928,
+      "decoy_accept": 0.021996615905245348,
+      "separation": 0.8238583063745474,
+      "skills_fit_0.2_or_less": 7,
+      "questions_sent": 1544,
+      "decoys_sent": 591,
+      "missing_or_invalid": 0
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-09-14T13:47:46.243328",
+    "experiment": "diag_fit_judge_score_b150_reasked",
+    "git_commit": "8956935",
+    "config": {
+      "judge": "gemini-3.6-flash",
+      "seed": 42,
+      "codebook": "codebook_v2_amended_b150.json",
+      "labels": "item_labels_b150.jsonl",
+      "reasked": [
+        {
+          "code": "c_0108",
+          "items": [
+            "8580"
+          ],
+          "filled": {
+            "8580": "no"
+          },
+          "calls": 1
+        },
+        {
+          "code": "c_0657",
+          "items": [
+            "4571"
+          ],
+          "filled": {
+            "4571": "main"
+          },
+          "calls": 1
+        }
+      ],
+      "first_run_file": "diag_fit_judge_score_b150.before_reask.json"
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is a skill and a sample of its questions",
+      "n_skills": 234
+    },
+    "results": {
+      "skills_scored": 234,
+      "error_calls": 0,
+      "mean_fit": 0.8723663681997015,
+      "mean_main_only": 0.6513532763532763,
+      "pooled_fit": 0.8666997026759168,
+      "decoy_accept": 0.04415954415954416,
+      "separation": 0.8225401585163726,
+      "skills_fit_0.2_or_less": 4,
+      "questions_sent": 2018,
+      "decoys_sent": 702,
+      "missing_or_invalid": 0
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-09-14T21:46:58.354241",
+    "experiment": "distinctness_k100_names",
+    "git_commit": "8956935",
+    "config": {
+      "judge": "gemini-3.6-flash",
+      "tool": "tools/step6_validate.py distinctness",
+      "codebook": "codebook_k100_names.json",
+      "labels": "item_labels_k100.jsonl",
+      "emb": "code_def_emb_k100.npz",
+      "nomination": "definition-embedding cosine >= 0.85 or co-assigned >= 20",
+      "result_file": "cdm_exploration/experiments/pipeline_v7/validation_distinctness_k100_names.json"
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is a nominated skill pair",
+      "n_pairs": 49
+    },
+    "results": {
+      "pairs": 49,
+      "judged": 49,
+      "errors": 0,
+      "merge": 0,
+      "merge_rate": 0.0
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-09-14T21:46:58.377225",
+    "experiment": "distinctness_v2_amended_b150",
+    "git_commit": "8956935",
+    "config": {
+      "judge": "gemini-3.6-flash",
+      "tool": "tools/step6_validate.py distinctness",
+      "codebook": "codebook_v2_amended_b150.json",
+      "labels": "item_labels_b150.jsonl",
+      "emb": "code_def_emb_b150.npz",
+      "nomination": "definition-embedding cosine >= 0.85 or co-assigned >= 20",
+      "result_file": "cdm_exploration/experiments/pipeline_v7/validation_distinctness_v2_amended_b150.json"
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is a nominated skill pair",
+      "n_pairs": 77
+    },
+    "results": {
+      "pairs": 77,
+      "judged": 77,
+      "errors": 0,
+      "merge": 0,
+      "merge_rate": 0.0
+    },
+    "verified": true
+  },
+  {
+    "timestamp": "2026-09-14T21:47:31.922722",
+    "experiment": "diag_fit_judge_score_k100",
+    "git_commit": "8956935",
+    "config": {
+      "judge": "gemini-3.6-flash",
+      "seed": 42,
+      "own_per_batch": 10,
+      "decoys_per_batch": 3,
+      "codebook": "codebook_k100_names.json",
+      "labels": "item_labels_k100.jsonl"
+    },
+    "split_info": {
+      "note": "no train/test split applies; the unit is a skill and a sample of its questions",
+      "n_skills": 94
+    },
+    "results": {
+      "skills_scored": 94,
+      "error_calls": 0,
+      "mean_fit": 0.3116599121918271,
+      "mean_main_only": 0.24646234380276935,
+      "pooled_fit": 0.2842377260981912,
+      "decoy_accept": 0.010638297872340425,
+      "separation": 0.27359942822585076,
+      "skills_fit_0.2_or_less": 47,
+      "questions_sent": 774,
+      "decoys_sent": 282,
+      "missing_or_invalid": 0
     },
     "verified": true
   },

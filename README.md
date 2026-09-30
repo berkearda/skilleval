@@ -10,6 +10,12 @@ route each question to a cheaper model that can answer it, and to profile new mo
 
 ![Overview of SkillEval](assets/overview.png)
 
+> **This branch is under development.** It adds the skill-bank pipeline, which builds the skill list and the
+> Q-matrix from the questions with an LLM instead of by clustering: `tools/step1_extract.py` to
+> `tools/step9_dedupe.py`, the gold sets, judges and checks around them (`tests/test_pipeline.py`,
+> `tests/test_metrics.py`) and its outputs in `cdm_exploration/experiments/pipeline_v7/`. It has not been
+> validated yet and is not part of the paper. The paper's code is on `main`.
+
 - **Demo website:** source in [`demo/`](demo/); not online yet
 - **Skill list, Q-matrix and the list of evaluated LLMs:** in [`release/`](release/); the trained model and the per-LLM
   mastery profiles will be released with the paper
