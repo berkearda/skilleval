@@ -10,12 +10,17 @@ def resolve_device(device: str) -> str:
     """Resolve requested device to an available one, falling back to CPU.
 
     Args:
-        device: One of ``"cpu"``, ``"cuda"``, or ``"mps"``.
+        device: One of ``"auto"``, ``"cpu"``, ``"cuda"``, or ``"mps"``. ``"auto"``
+            picks CUDA, then Apple MPS, then the CPU.
 
     Returns:
         The validated device string (may be ``"cpu"`` if the requested
         accelerator is unavailable).
     """
+    if device == "auto":
+        if torch.cuda.is_available():
+            return "cuda"
+        return "mps" if torch.backends.mps.is_available() else "cpu"
     if device == "mps" and not torch.backends.mps.is_available():
         device = "cpu"
     if device == "cuda" and not torch.cuda.is_available():

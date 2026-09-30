@@ -12,7 +12,7 @@ model:
   batch_size: 64
   text_dim: 768
 
-device: mps
+device: auto
 
 skills:
   api: mock

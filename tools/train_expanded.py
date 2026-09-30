@@ -1,9 +1,10 @@
-"""Train text-conditioned NCDM on the expanded dataset (3811 LLMs x 7039 items).
+"""Train the text-conditioned NCDM.
 
 Usage:
-    python tools/train_expanded.py device=cpu                    # full dataset
-    python tools/train_expanded.py device=cpu '+subset.n_llms=381'  # 10% subset
-    python tools/train_expanded.py device=mps model.epochs=5     # quick test
+    python tools/train_expanded.py --config-name paper                          # the paper's main model
+    python tools/train_expanded.py --config-name paper '+subset.n_llms=200' model.epochs=1   # quick check
+Without --config-name paper, the defaults in configs/config.yaml read the earlier two-benchmark files
+(response_matrix_expanded*.npy); build the paper data first with tools/download_data.py.
 """
 
 import json

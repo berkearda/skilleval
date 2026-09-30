@@ -1,0 +1,21 @@
+# The main model of the paper: seed 42, batch size 1024, 15 epochs, K = 100 skills.
+#   python tools/train_expanded.py --config-name paper
+defaults:
+  - config
+  - _self_
+
+seed: 42
+device: auto
+
+model:
+  batch_size: 1024
+  epochs: 15
+  lr: 0.002
+
+data:
+  response_matrix: response_matrix_v2_full.npy
+  qmatrix: qmatrix_v2_K100.npy
+  text_embeddings: item_text_embeddings_v2_full.npz
+  llm_names: response_matrix_v2_full_llms.json
+  item_metadata: response_matrix_v2_full_items.json
+  skill_embeddings: skill_embeddings_v2_K100.npz
