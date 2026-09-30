@@ -1,4 +1,4 @@
-"""Build expanded response matrix from NEW leaderboard (MATH + BBH).
+"""Build the earlier two-benchmark response matrix (MATH + BBH), superseded by tools/build_response_matrix_v2.py.
 
 Uses only the new leaderboard (3,811 models), no OLD leaderboard dependency.
 Filters out low-accuracy LLMs and unsolvable items.
