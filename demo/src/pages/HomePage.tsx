@@ -1,0 +1,519 @@
+import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ArrowRight, GitCompareArrows, RotateCcw } from 'lucide-react'
+import { PipelineDiagram } from '@/components/PipelineDiagram'
+import { useSkillEvalData } from '@/hooks/useSkillEvalData'
+import { usePageTitle } from '@/hooks/usePageTitle'
+import {
+  getFamilyColor,
+  getMasteryColor,
+  getMasteryTextColor,
+  rgbToRgba,
+} from '@/lib/colors'
+
+interface RankedModel {
+  id: number
+  name: string
+  family: string
+  tier: string
+  params: number | null
+  accuracy?: number
+  theta: number[]
+  meanTheta: number
+}
+
+function formatParams(p: number | null): string {
+  if (p == null) return '—'
+  if (p >= 1) return `${p.toFixed(p >= 10 ? 0 : 1)}B`
+  return `${(p * 1000).toFixed(0)}M`
+}
+
+function useDarkMode(): boolean {
+  const [dark, setDark] = useState<boolean>(
+    typeof document !== 'undefined' &&
+      document.documentElement.classList.contains('dark')
+  )
+  useEffect(() => {
+    const root = document.documentElement
+    const obs = new MutationObserver(() => {
+      setDark(root.classList.contains('dark'))
+    })
+    obs.observe(root, { attributes: true, attributeFilter: ['class'] })
+    return () => obs.disconnect()
+  }, [])
+  return dark
+}
+
+// Top-3 rank badges: tinted typographic circles instead of medal emojis.
+const RANK_BADGE = [
+  'bg-brand text-brand-foreground',
+  'bg-brand/15 text-brand',
+  'bg-brand/[0.08] text-brand/80',
+]
+
+/** Mastery profile as a sorted, downsampled sparkline: skills ranked from
+ * strongest to weakest, so the SHAPE of the curve is what differs between
+ * models (flat = generalist, steep = narrow specialist). Raw unsorted bars
+ * all look like identical noise at this size. */
+function ProfileSparkline({
+  theta,
+  darkMode,
+}: {
+  theta: number[]
+  darkMode: boolean
+}) {
+  const W = 100
+  const H = 20
+  const BUCKETS = 25
+  const bars = useMemo(() => {
+    const sorted = [...theta].sort((a, b) => b - a)
+    const per = Math.max(1, Math.floor(sorted.length / BUCKETS))
+    return Array.from({ length: BUCKETS }, (_, i) => {
+      const slice = sorted.slice(i * per, (i + 1) * per)
+      return slice.length
+        ? slice.reduce((a, b) => a + b, 0) / slice.length
+        : 0
+    })
+  }, [theta])
+  return (
+    <svg
+      width={W}
+      height={H}
+      viewBox={`0 0 ${W} ${H}`}
+      role="img"
+      aria-label="Skill profile, strongest to weakest"
+      className="block"
+    >
+      {bars.map((t, i) => {
+        const h = Math.max(1.5, t * H)
+        return (
+          <rect
+            key={i}
+            x={i * 4}
+            y={H - h}
+            width={3}
+            height={h}
+            rx={0.75}
+            fill={getMasteryColor(t, darkMode)}
+          />
+        )
+      })}
+    </svg>
+  )
+}
+
+/** Deterministic per-cell pseudo-random in [0,1): no Math.random so frames
+ * are reproducible. */
+function cellRand(i: number, tick: number): number {
+  const x = Math.sin(i * 127.1 + tick * 311.7) * 43758.5453
+  return x - Math.floor(x)
+}
+
+const NOISE_TICKS = 9 // response samples streamed in while flickering
+const NOISE_MS = 150 // per flicker frame: fast, like data arriving
+const RESOLVE_MS = 520 // per-cell color transition
+
+/** The hero visual tells the method's story ONCE: raw correct/incorrect
+ * responses stream in as fast binary flicker (real Bernoulli draws from each
+ * cell's actual theta, so strong rows read denser even as noise), then a
+ * scan line sweeps the grid and the cells resolve left-to-right into the
+ * mastery heatmap, flashing as the wave reaches them. It then settles for
+ * good, with a small replay control. Static when reduced motion is set. */
+function MatrixMosaic({
+  models,
+  darkMode,
+}: {
+  models: RankedModel[]
+  darkMode: boolean
+}) {
+  const rows = models.slice(0, 9)
+  const cols = Array.from({ length: 14 }, (_, i) => i * 7 + 2)
+
+  const reduced = useMemo(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    []
+  )
+  const [resolved, setResolved] = useState(reduced)
+  const [tick, setTick] = useState(0)
+  const [run, setRun] = useState(0)
+  const hasData = rows.length > 0
+
+  useEffect(() => {
+    if (reduced || !hasData) return
+    let alive = true
+    let t: ReturnType<typeof setTimeout>
+    setResolved(false)
+    const step = (i: number) => {
+      if (!alive) return
+      if (i < NOISE_TICKS) {
+        setTick(i)
+        t = setTimeout(() => step(i + 1), NOISE_MS)
+      } else {
+        setResolved(true) // settle; no loop
+      }
+    }
+    t = setTimeout(() => step(0), 350)
+    return () => {
+      alive = false
+      clearTimeout(t)
+    }
+  }, [reduced, hasData, run])
+
+  if (!hasData) {
+    return (
+      <div className="h-[210px] w-[300px] animate-pulse rounded-lg bg-muted" />
+    )
+  }
+
+  const onColor = darkMode ? 'hsl(220 18% 72%)' : 'hsl(222 32% 32%)'
+  const offColor = darkMode ? 'hsl(222 18% 15%)' : 'hsl(220 28% 89%)'
+
+  return (
+    <div aria-hidden>
+      <div className="relative overflow-hidden rounded-md p-px">
+        <div
+          className="grid gap-[3px]"
+          style={{ gridTemplateColumns: `repeat(${cols.length}, 17px)` }}
+        >
+          {rows.flatMap((m, r) =>
+            cols.map((c, ci) => {
+              const theta = m.theta[c] ?? 0
+              const i = r * cols.length + ci
+              const correct = cellRand(i, tick) < theta
+              const delay = ci * 60 + r * 16
+              return (
+                <span
+                  key={`${r}-${c}`}
+                  className="h-[17px] w-[17px] rounded-[3px]"
+                  style={{
+                    backgroundColor: resolved
+                      ? getMasteryColor(theta, darkMode)
+                      : correct
+                        ? onColor
+                        : offColor,
+                    transition: `background-color ${RESOLVE_MS}ms ease`,
+                    transitionDelay: resolved ? `${delay}ms` : '0ms',
+                    animation:
+                      resolved && !reduced
+                        ? `cellflash 480ms ${delay}ms ease-out`
+                        : 'none',
+                  }}
+                />
+              )
+            })
+          )}
+        </div>
+        {/* scan line: sweeps once as the model "fits" */}
+        {resolved && !reduced ? (
+          <span
+            className="pointer-events-none absolute inset-y-0 w-12"
+            style={{
+              background:
+                'linear-gradient(90deg, transparent, hsl(var(--brand) / 0.30), transparent)',
+              animation: 'scanwipe 1.4s ease-out forwards',
+            }}
+          />
+        ) : null}
+      </div>
+      <div className="relative mt-2 h-4 text-right text-[11px] text-muted-foreground">
+        <span
+          className="absolute inset-0 whitespace-nowrap transition-opacity duration-500"
+          style={{ opacity: resolved ? 0 : 1 }}
+        >
+          raw right-or-wrong responses streaming in
+        </span>
+        <span
+          className="absolute inset-0 flex items-center justify-end gap-2 whitespace-nowrap transition-opacity duration-500"
+          style={{ opacity: resolved ? 1 : 0 }}
+        >
+          resolved: a slice of the real mastery matrix
+          <button
+            type="button"
+            onClick={() => setRun((n) => n + 1)}
+            className="pointer-events-auto text-muted-foreground transition-colors hover:text-brand"
+            aria-label="Replay the animation"
+            title="Replay"
+          >
+            <RotateCcw className="h-3 w-3" />
+          </button>
+        </span>
+      </div>
+    </div>
+  )
+}
+
+export function HomePage() {
+  usePageTitle('SkillEval: skill-level mastery for every language model')
+  const { models, loading } = useSkillEvalData()
+  const darkMode = useDarkMode()
+
+  const top = useMemo<RankedModel[]>(() => {
+    return models
+      .map((m) => {
+        let sum = 0
+        for (const v of m.theta) sum += v
+        return {
+          id: m.id,
+          name: m.name,
+          family: m.family,
+          tier: m.tier,
+          params: m.params,
+          accuracy: m.accuracy,
+          theta: m.theta,
+          meanTheta: m.theta.length ? sum / m.theta.length : 0,
+        }
+      })
+      .sort((a, b) => b.meanTheta - a.meanTheta)
+      .slice(0, 12)
+  }, [models])
+
+  // Pre-seeded comparison: the strongest model vs the best one at <=13B,
+  // which is the weak-beats-strong story in one click.
+  const comparePair = useMemo(() => {
+    if (top.length === 0) return null
+    let bestSmall: RankedModel | null = null
+    for (const m of models) {
+      if (m.params == null || m.params > 13) continue
+      let sum = 0
+      for (const v of m.theta) sum += v
+      const mean = m.theta.length ? sum / m.theta.length : 0
+      if (!bestSmall || mean > bestSmall.meanTheta) {
+        bestSmall = { ...m, meanTheta: mean } as RankedModel
+      }
+    }
+    if (!bestSmall || bestSmall.id === top[0].id) return null
+    return `${top[0].id},${bestSmall.id}`
+  }, [top, models])
+
+  const stats = [
+    { value: '3,811', label: 'open-weights models' },
+    { value: '100', label: 'skills' },
+    { value: '9,523', label: 'items' },
+    { value: '5', label: 'benchmarks' },
+  ]
+
+
+  return (
+    <div>
+      {/* Hero: full-bleed blue wash band with a data-true matrix mosaic */}
+      <div className="border-b border-border bg-gradient-to-b from-brand/[0.08] via-brand/[0.03] to-transparent">
+        <section className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-12 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-[60ch]">
+            <div className="text-xs font-medium uppercase tracking-wider text-brand">
+              Item-response leaderboard
+            </div>
+            <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.06] sm:text-[3.4rem]">
+              Skill-level mastery for every language model.
+            </h1>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              SkillEval estimates how 3,811 models master 100 academic skills
+              with a cognitive-diagnostic item-response model. One profile per
+              model, not one score.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2">
+              {stats.map((s, i) => (
+                <span key={s.label} className="flex items-center gap-3 text-sm">
+                  <span>
+                    <span className="tabular font-semibold text-foreground">
+                      {s.value}
+                    </span>{' '}
+                    <span className="text-muted-foreground">{s.label}</span>
+                  </span>
+                  {i < stats.length - 1 ? (
+                    <span aria-hidden className="h-3.5 w-px bg-border" />
+                  ) : null}
+                </span>
+              ))}
+            </div>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                to="/leaderboard"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-brand-foreground shadow-sm transition-colors hover:bg-brand/90"
+              >
+                View full leaderboard
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent"
+              >
+                How it works
+              </Link>
+            </div>
+          </div>
+          <div className="hidden lg:block">
+            <MatrixMosaic models={top} darkMode={darkMode} />
+          </div>
+        </section>
+      </div>
+
+      <div className="mx-auto max-w-6xl px-6 pb-14">
+      {/* Compact leaderboard preview */}
+      <section className="mt-12">
+        <div className="flex items-baseline justify-between">
+          <h2 className="text-xl font-semibold tracking-tight">
+            Top models by overall mastery
+          </h2>
+          <Link
+            to="/leaderboard"
+            className="text-sm font-medium text-brand transition-colors hover:underline"
+          >
+            See the full 3,811 × 100 grid →
+          </Link>
+        </div>
+        <div className="mt-4 overflow-hidden rounded-xl border border-border bg-card">
+          <table className="w-full text-sm tabular">
+            <thead>
+              <tr className="border-b border-border bg-surface text-left text-xs uppercase tracking-wide text-muted-foreground">
+                <th className="w-12 px-3 py-2 text-center font-semibold">#</th>
+                <th className="px-3 py-2 font-semibold">Model</th>
+                <th className="w-24 px-3 py-2 font-semibold">Family</th>
+                <th className="w-20 px-3 py-2 text-right font-semibold">Params</th>
+                <th className="w-20 px-3 py-2 text-right font-semibold">Acc</th>
+                <th className="w-24 px-3 py-2 text-right font-semibold">Mean θ</th>
+                <th className="w-[120px] px-3 py-2 font-semibold">Profile</th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading
+                ? Array.from({ length: 12 }).map((_, i) => (
+                    <tr key={i} className="border-b border-border last:border-0">
+                      <td colSpan={7} className="px-3 py-2.5">
+                        <div className="h-4 w-full animate-pulse rounded bg-muted" />
+                      </td>
+                    </tr>
+                  ))
+                : top.map((m, i) => {
+                    const rank = i + 1
+                    return (
+                      <tr
+                        key={m.id}
+                        className="border-b border-border last:border-0 transition-colors hover:bg-surface-elevated/60"
+                      >
+                        <td
+                          className="px-3 py-2.5 text-center"
+                          aria-label={`Rank ${rank}`}
+                        >
+                          {rank <= 3 ? (
+                            <span
+                              className={`tabular inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold ${RANK_BADGE[rank - 1]}`}
+                            >
+                              {rank}
+                            </span>
+                          ) : (
+                            <span className="tabular text-muted-foreground">
+                              {rank}
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-3 py-2.5">
+                          <Link
+                            to={`/model/${m.id}`}
+                            className="flex items-center gap-2 font-medium transition-colors hover:text-brand"
+                            title={`Open the model page for ${m.name}`}
+                          >
+                            <span
+                              className="h-2 w-2 shrink-0 rounded-full"
+                              style={{ backgroundColor: getFamilyColor(m.family) }}
+                            />
+                            <span className="truncate">{m.name}</span>
+                          </Link>
+                        </td>
+                        <td className="px-3 py-2.5">
+                          <span
+                            className="inline-flex h-5 items-center rounded-full border px-2 text-[10px] font-semibold"
+                            style={{
+                              color: getFamilyColor(m.family),
+                              borderColor: `${getFamilyColor(m.family)}55`,
+                              backgroundColor: `${getFamilyColor(m.family)}14`,
+                            }}
+                            title={
+                              m.family === 'Other'
+                                ? 'Open-weights model outside the six major families (community fine-tunes and merges)'
+                                : `${m.family} family`
+                            }
+                          >
+                            {m.family}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2.5 text-right font-mono text-xs">
+                          {formatParams(m.params)}
+                        </td>
+                        <td
+                          className="px-3 py-2.5 text-right font-mono text-xs"
+                          title="Fraction of 9,523 items answered correctly"
+                        >
+                          {m.accuracy != null
+                            ? `${(m.accuracy * 100).toFixed(2)}%`
+                            : '—'}
+                        </td>
+                        <td className="px-3 py-2.5 text-right">
+                          <span
+                            className="inline-flex min-w-[3.5rem] justify-end rounded px-1.5 py-0.5 font-mono text-xs font-semibold"
+                            style={{
+                              backgroundColor: rgbToRgba(
+                                getMasteryColor(m.meanTheta, darkMode),
+                                0.7
+                              ),
+                              color: getMasteryTextColor(m.meanTheta, darkMode),
+                            }}
+                          >
+                            {m.meanTheta.toFixed(3)}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2.5">
+                          <Link
+                            to="/leaderboard"
+                            title="100-skill mastery profile"
+                            className="inline-block"
+                          >
+                            <ProfileSparkline theta={m.theta} darkMode={darkMode} />
+                          </Link>
+                        </td>
+                      </tr>
+                    )
+                  })}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Ranked by mean θ over all 100 skills. Mastery estimates carry sampling
+          noise, so small gaps between adjacent ranks are not meaningful. All
+          models are open-weights; the Other family groups models outside the
+          six major families, mostly community fine-tunes and merges. Snapshot
+          2026-05-22.
+        </p>
+        <div className="mt-4 flex items-center gap-2.5 rounded-xl border border-border bg-surface px-4 py-3">
+          <GitCompareArrows className="h-4 w-4 shrink-0 text-brand" />
+          <p className="text-sm text-foreground/90">
+            Any two models, head to head:{' '}
+            <Link
+              to={comparePair ? `/compare?m=${comparePair}` : '/compare'}
+              className="font-medium text-brand hover:underline"
+            >
+              compare skill fingerprints →
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section className="mt-16">
+        <h2 className="text-xl font-semibold tracking-tight">How it works</h2>
+        <PipelineDiagram />
+        <div className="mt-4">
+          <Link
+            to="/about"
+            className="text-sm font-medium text-brand transition-colors hover:underline"
+          >
+            Read the methodology →
+          </Link>
+        </div>
+      </section>
+
+      </div>
+    </div>
+  )
+}
