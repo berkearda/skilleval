@@ -1,8 +1,7 @@
 # SkillEval demo site
 
-Interactive view of the SkillEval skill profiles, live at
-[berkearda.github.io/skilleval](https://berkearda.github.io/skilleval/): a model-by-skill table, a page per
-skill and per model, and a comparison view.
+Interactive view of the SkillEval skill profiles: a model-by-skill table, a page per skill and per model,
+and a comparison view. The site is not online yet.
 
 ## Data
 
@@ -21,5 +20,4 @@ npm run dev      # http://localhost:5173/skilleval/
 npm run build    # writes dist/
 ```
 
-Built with Vite, React, TypeScript, Tailwind CSS, TanStack Table and Recharts. Every push to `main` that
-touches `demo/` rebuilds the site through `../.github/workflows/deploy-demo.yml`.
+Built with Vite, React, TypeScript, Tailwind CSS, TanStack Table and Recharts.

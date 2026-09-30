@@ -10,7 +10,7 @@ route each question to a cheaper model that can answer it, and to profile new mo
 
 ![Overview of SkillEval](assets/overview.png)
 
-- **Demo:** [berkearda.github.io/skilleval](https://berkearda.github.io/skilleval/) (source in [`demo/`](demo/))
+- **Demo website:** source in [`demo/`](demo/); not online yet
 - **Profile your own model:** [skilleval-cdm](https://github.com/berkearda/skilleval-cdm), a pip-installable tool
 - **Trained model, Q-matrix and item embeddings:** [bearda/skilleval-cdm-assets](https://huggingface.co/datasets/bearda/skilleval-cdm-assets) on the Hugging Face Hub
 - **Paper:** forthcoming
