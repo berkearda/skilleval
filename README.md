@@ -31,22 +31,50 @@ route each question to a cheaper model that can answer it, and to profile new mo
 
 The Python package is called `cdmeval`, the project's earlier name.
 
-## Installation
+## Quickstart
 
 ```bash
+git clone https://github.com/berkearda/skilleval.git
+cd skilleval
 pip install -e .
+python tools/download_data.py
+python tools/train_expanded.py --config-name paper
 ```
 
-Python 3.9 to 3.11. Dependencies are listed in `pyproject.toml`.
+`download_data.py` downloads the item-level results and builds everything the training script reads (see
+[Data](#data)). `train_expanded.py --config-name paper` trains the paper's main model on a GPU, on Apple silicon
+or on the CPU, whichever is available. It prints the test AUC and the routing accuracy and adds an entry to
+`cdm_exploration/experiments/experiment_log.json`.
+
+To check the setup in about a minute on a laptop CPU:
+
+```bash
+python tools/train_expanded.py --config-name paper '+subset.n_llms=100' model.epochs=3 device=cpu
+```
+
+This trains on 100 LLMs for three epochs and should print a test AUC of about 0.70.
+
+Python 3.11 or newer. Optional extras: `.[figures]` for the plotting scripts, `.[extract]` for skill extraction
+with an LLM API, `.[baselines]` for the EduCDM baselines and `.[dev]` for the tests
+(for example `pip install -e ".[figures]"`).
 
 ## Data
 
-The per-item responses come from RouterEval (Huang et al., 2025), which collects the item-level results of the
-Open LLM Leaderboard v2. They are not redistributed here; `tools/build_expanded_matrix.py` builds the
-3,811 x 9,523 response matrix from RouterEval, and the scripts expect their inputs under
-`cdm_exploration/data/cdm_ready/`. The Q-matrix is in `release/qmatrix_K100.csv`: one row per item with the ids
-of its skills (0 to 99, as in `skill_list.csv`). The trained model and the per-LLM mastery profiles will be
-released with the paper.
+The per-item responses come from RouterEval (Huang et al., 2025; MIT licence), which collects the item-level
+results of the Open LLM Leaderboard v2. They are not redistributed here. `tools/download_data.py` downloads them
+from the Hugging Face Hub at a pinned revision, checks their SHA-256 and writes to `cdm_exploration/data/cdm_ready/`:
+
+| File | Contents |
+|---|---|
+| `response_matrix_v2_full.npy` | Responses of 3,811 LLMs to 9,523 items, 1 = correct |
+| `response_matrix_v2_full_llms.json` | LLM names, in row order |
+| `response_matrix_v2_full_items.json` | Benchmark, subtask and a short excerpt of each item |
+| `item_text_embeddings_v2_full.npz` | Item-text embeddings (all-mpnet-base-v2) |
+| `qmatrix_v2_K100.npy` | The Q-matrix |
+
+These are the files the paper's model was trained on. The Q-matrix is also in `release/qmatrix_K100.csv`: one
+row per item with the ids of its skills (0 to 99, as in `skill_list.csv`). The trained model and the per-LLM
+mastery profiles will be released with the paper.
 
 Files that quote GPQA questions are not included, because the GPQA authors ask that its questions not be
 posted in plain text. The human-evaluation sheets in `cdm_exploration/experiments/human_eval/` keep the
@@ -56,8 +84,9 @@ annotators' judgments without the question text.
 
 | Result | Scripts |
 |---|---|
+| Data | `tools/download_data.py`, `tools/build_response_matrix_v2.py` |
 | Skill extraction and Q-matrix | `tools/extract_skills_v2.py` (prompt in `cdmeval/skills/extraction.py`), `tools/cluster_skills.py` |
-| Main model and routing | `tools/train_expanded.py`, `tools/diag_table4_routing_summary.py` |
+| Main model and routing | `tools/train_expanded.py --config-name paper`, `tools/diag_table4_routing_summary.py` |
 | Item-level prediction and baselines | `tools/run_ncdm_protocolA.py`, `tools/run_multi_seed.py`, `tools/run_irt_baseline_v2.py`, `tools/run_irtnet_headtohead.py`, `tools/run_knn_baseline.py` |
 | Benchmark-level prediction | `tools/diag_benchpred_skilleval_vs_irtnet.py` |
 | Stability of the profiles | `tools/compare_theta_stability.py` |
