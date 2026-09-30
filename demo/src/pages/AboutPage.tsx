@@ -104,9 +104,8 @@ export function AboutPage() {
           have very different strengths. Mastery estimates carry sampling
           noise, so small gaps between adjacent ranks are not meaningful. The
           numbers are a fixed snapshot for inspection, not a live leaderboard;
-          the 100 skill names are in the repository (release/skill_list.csv)
-          and the trained model is on the Hugging Face Hub
-          (bearda/skilleval-cdm-assets).
+          the 100 skill names and the Q-matrix are in the repository
+          (release/).
         </p>
       </section>
     </article>

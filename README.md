@@ -11,8 +11,8 @@ route each question to a cheaper model that can answer it, and to profile new mo
 ![Overview of SkillEval](assets/overview.png)
 
 - **Demo website:** source in [`demo/`](demo/); not online yet
-- **Profile your own model:** [skilleval-cdm](https://github.com/berkearda/skilleval-cdm), a pip-installable tool
-- **Trained model, Q-matrix and item embeddings:** [bearda/skilleval-cdm-assets](https://huggingface.co/datasets/bearda/skilleval-cdm-assets) on the Hugging Face Hub
+- **Skill list, Q-matrix and the list of evaluated LLMs:** in [`release/`](release/); the trained model and the per-LLM
+  mastery profiles will be released with the paper
 - **Paper:** forthcoming
 
 ## Repository layout
@@ -25,7 +25,7 @@ route each question to a cheaper model that can answer it, and to profile new mo
 | `cdm_exploration/experiments/` | Result files (JSON) behind the reported numbers; `experiment_log.json` records every run |
 | `cdm_exploration/figures/` | Figures; the final ones are in `report/main_ready/` and `report/appendix_ready/` |
 | `cdm_exploration/scripts/` | The first version of the pipeline |
-| `release/` | The 3,811 evaluated LLMs (`llm_list.csv`) and the 100 skills (`skill_list.csv`) |
+| `release/` | The 3,811 evaluated LLMs (`llm_list.csv`), the 100 skills (`skill_list.csv`) and the Q-matrix, the skills of each item (`qmatrix_K100.csv`) |
 | `demo/` | The demo website |
 | `tests/` | Tests |
 
@@ -44,8 +44,9 @@ Python 3.9 to 3.11. Dependencies are listed in `pyproject.toml`.
 The per-item responses come from RouterEval (Huang et al., 2025), which collects the item-level results of the
 Open LLM Leaderboard v2. They are not redistributed here; `tools/build_expanded_matrix.py` builds the
 3,811 x 9,523 response matrix from RouterEval, and the scripts expect their inputs under
-`cdm_exploration/data/cdm_ready/`. The trained main model, the Q-matrix and the item-text embeddings are on
-the Hugging Face Hub (link above).
+`cdm_exploration/data/cdm_ready/`. The Q-matrix is in `release/qmatrix_K100.csv`: one row per item with the ids
+of its skills (0 to 99, as in `skill_list.csv`). The trained model and the per-LLM mastery profiles will be
+released with the paper.
 
 Files that quote GPQA questions are not included, because the GPQA authors ask that its questions not be
 posted in plain text. The human-evaluation sheets in `cdm_exploration/experiments/human_eval/` keep the

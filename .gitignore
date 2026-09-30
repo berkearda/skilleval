@@ -70,7 +70,7 @@ cdm_exploration/reports/
 # Old/superseded scripts
 cdm_exploration/scripts/03_analyze_and_cluster_skills.py
 
-# Checkpoints, run logs and large arrays (not versioned; model assets are on the Hugging Face Hub)
+# Checkpoints, run logs and large arrays (not versioned)
 cdm_exploration/checkpoints/
 cdm_exploration/logs/
 *.npz

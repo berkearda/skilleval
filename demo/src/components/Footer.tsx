@@ -54,9 +54,6 @@ export function Footer() {
             <a href="https://github.com/berkearda/skilleval/blob/main/release/skill_list.csv" className={linkCls}>
               The 100 skills
             </a>
-            <a href="https://huggingface.co/datasets/bearda/skilleval-cdm-assets" className={linkCls}>
-              Trained model
-            </a>
             <span className="text-sm text-muted-foreground">Paper forthcoming</span>
           </div>
 
