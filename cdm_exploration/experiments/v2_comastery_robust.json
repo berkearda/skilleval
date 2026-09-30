@@ -1,0 +1,244 @@
+{
+  "experiment": "comastery_robust_links",
+  "rule": "mastered = mean predicted P(correct) on the skill's items > cut",
+  "n_llms": 3811,
+  "graph_at_0.5": {
+    "n_connected_skills": 86,
+    "n_edges_reduced": 304,
+    "n_roots": 18,
+    "n_leaves": 13,
+    "n_isolated": 14,
+    "n_components": 2,
+    "longest_chain_links": 10,
+    "max_depth_reported_underestimated": 5
+  },
+  "sweep": {
+    "predicted040": {
+      "n_connected_skills": 89,
+      "n_edges_reduced": 391,
+      "longest_chain_links": 8,
+      "max_depth_reported_underestimated": 6
+    },
+    "predicted060": {
+      "n_connected_skills": 68,
+      "n_edges_reduced": 209,
+      "longest_chain_links": 8,
+      "max_depth_reported_underestimated": 5
+    },
+    "observed050": {
+      "n_connected_skills": 86,
+      "n_edges_reduced": 278,
+      "longest_chain_links": 10,
+      "max_depth_reported_underestimated": 6
+    },
+    "theta050check": {
+      "n_connected_skills": 75,
+      "n_edges_reduced": 242,
+      "longest_chain_links": 6,
+      "max_depth_reported_underestimated": 5
+    }
+  },
+  "n_links_robust_all_cutoffs": 29,
+  "n_links_robust_and_in_observed_graph": 16,
+  "orderings": {
+    "predicted050_vs_observed050": {
+      "shared": 983,
+      "reversed": 1,
+      "n_observed": 1325,
+      "n_predicted": 1588
+    },
+    "theta_vs_observed050": {
+      "shared": 376,
+      "reversed": 28,
+      "n_theta": 661
+    }
+  },
+  "chains": {
+    "MATH": {
+      "rule": "longest chain of robust links among skills with most items from MATH",
+      "skills": [
+        {
+          "skill": 91,
+          "name": "Calculating Handshake Combinations In Group Intera",
+          "prevalence": 0.22067698766727892,
+          "n_llms_master": 841,
+          "primary_benchmark": "MATH",
+          "n_items": 5,
+          "items_per_benchmark": {
+            "MATH": 5,
+            "BBH": 0,
+            "GPQA": 0,
+            "MuSR": 0,
+            "IFEval": 0
+          }
+        },
+        {
+          "skill": 27,
+          "name": "Manipulating Algebraic Expressions For Variance",
+          "prevalence": 0.08737864077669903,
+          "n_llms_master": 333,
+          "primary_benchmark": "MATH",
+          "n_items": 22,
+          "items_per_benchmark": {
+            "MATH": 16,
+            "BBH": 2,
+            "GPQA": 2,
+            "MuSR": 0,
+            "IFEval": 2
+          }
+        },
+        {
+          "skill": 57,
+          "name": "Applying Divisibility Rules To Factorials",
+          "prevalence": 0.043820519548674886,
+          "n_llms_master": 167,
+          "primary_benchmark": "MATH",
+          "n_items": 32,
+          "items_per_benchmark": {
+            "MATH": 32,
+            "BBH": 0,
+            "GPQA": 0,
+            "MuSR": 0,
+            "IFEval": 0
+          }
+        },
+        {
+          "skill": 9,
+          "name": "Applying Combinatorial Principles To Dice Rolls",
+          "prevalence": 0.01443190763579113,
+          "n_llms_master": 55,
+          "primary_benchmark": "MATH",
+          "n_items": 113,
+          "items_per_benchmark": {
+            "MATH": 95,
+            "BBH": 7,
+            "GPQA": 11,
+            "MuSR": 0,
+            "IFEval": 0
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": 91,
+          "to": 27,
+          "n_llms_master_from": 841,
+          "n_llms_master_to": 333,
+          "n_llms_master_both": 243,
+          "p_from_given_to": 0.7297297297297297,
+          "p_to_given_from": 0.28894173602853745,
+          "odds_ratio": 12.949533133016704
+        },
+        {
+          "from": 27,
+          "to": 57,
+          "n_llms_master_from": 333,
+          "n_llms_master_to": 167,
+          "n_llms_master_both": 130,
+          "p_from_given_to": 0.7784431137724551,
+          "p_to_given_from": 0.39039039039039036,
+          "odds_ratio": 58.85218673218673
+        },
+        {
+          "from": 57,
+          "to": 9,
+          "n_llms_master_from": 167,
+          "n_llms_master_to": 55,
+          "n_llms_master_both": 52,
+          "p_from_given_to": 0.9454545454545454,
+          "p_to_given_from": 0.31137724550898205,
+          "odds_ratio": 472.9220779220779
+        }
+      ],
+      "min_p_from_given_to": 0.7297297297297297
+    },
+    "IFEval": {
+      "rule": "longest chain of robust links among skills with most items from IFEval",
+      "skills": [
+        {
+          "skill": 51,
+          "name": "Articulating Customer Rights Under Consumer Protec",
+          "prevalence": 0.7313041196536342,
+          "n_llms_master": 2787,
+          "primary_benchmark": "IFEval",
+          "n_items": 8,
+          "items_per_benchmark": {
+            "MATH": 0,
+            "BBH": 3,
+            "GPQA": 0,
+            "MuSR": 0,
+            "IFEval": 5
+          }
+        },
+        {
+          "skill": 21,
+          "name": "Adapting Language For Age Appropriate Audience",
+          "prevalence": 0.38205195486748883,
+          "n_llms_master": 1456,
+          "primary_benchmark": "IFEval",
+          "n_items": 68,
+          "items_per_benchmark": {
+            "MATH": 0,
+            "BBH": 0,
+            "GPQA": 0,
+            "MuSR": 2,
+            "IFEval": 66
+          }
+        },
+        {
+          "skill": 28,
+          "name": "Articulating Feature Vs Bug Distinction",
+          "prevalence": 0.20965625819994751,
+          "n_llms_master": 799,
+          "primary_benchmark": "IFEval",
+          "n_items": 8,
+          "items_per_benchmark": {
+            "MATH": 0,
+            "BBH": 0,
+            "GPQA": 0,
+            "MuSR": 0,
+            "IFEval": 8
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": 51,
+          "to": 21,
+          "n_llms_master_from": 2787,
+          "n_llms_master_to": 1456,
+          "n_llms_master_both": 1417,
+          "p_from_given_to": 0.9732142857142857,
+          "p_to_given_from": 0.50843200574094,
+          "odds_ratio": 25.80498201247812
+        },
+        {
+          "from": 21,
+          "to": 28,
+          "n_llms_master_from": 1456,
+          "n_llms_master_to": 799,
+          "n_llms_master_both": 775,
+          "p_from_given_to": 0.9699624530663329,
+          "p_to_given_from": 0.5322802197802198,
+          "odds_ratio": 108.28923293455313
+        }
+      ],
+      "min_p_from_given_to": 0.9699624530663329
+    }
+  },
+  "link_shares_at_0.5": {
+    "n_links": 304,
+    "median_p_from_given_to": 0.8701042347127155,
+    "median_p_to_given_from": 0.26386865907823986,
+    "share_links_p_from_given_to_above_half": 0.8914473684210527,
+    "min_p_from_given_to": 0.3333333333333333
+  },
+  "null_control_at_0.5": {
+    "n_raw_links_real": 1031,
+    "n_shuffles": 200,
+    "null_mean_raw_links": 27.705,
+    "null_max_raw_links": 51,
+    "seed": 42
+  },
+  "verified": true
+}

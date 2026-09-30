@@ -1,0 +1,345 @@
+{
+  "experiment": "skill_theta_vs_scalar_trainacc_heldout_prediction",
+  "ckpt": "cdm_exploration/checkpoints/expanded/text_conditioned_protocolB.pt",
+  "design": "predictors use train data only; target = held-out per-skill accuracy",
+  "min_heldout_items": 10,
+  "n_skills_evaluated": 41,
+  "mean_r_scalar": 0.6376555134919794,
+  "mean_r_theta": 0.6569226626542023,
+  "mean_delta": 0.019267149162223104,
+  "theta_wins": 24,
+  "theta_win_rate": 0.5853658536585366,
+  "mean_partial_r_theta_given_scalar": 0.4263045385727839,
+  "n_partial_positive": 38,
+  "per_skill": [
+    {
+      "skill": 0,
+      "n_heldout_items": 177,
+      "r_scalar": 0.7730580859752124,
+      "r_theta": 0.8686385736470259,
+      "delta": 0.09558048767181349,
+      "r_theta_partial_given_scalar": 0.6297796965454854
+    },
+    {
+      "skill": 1,
+      "n_heldout_items": 38,
+      "r_scalar": 0.736106197077465,
+      "r_theta": 0.790715094136551,
+      "delta": 0.054608897059086,
+      "r_theta_partial_given_scalar": 0.6549044576062991
+    },
+    {
+      "skill": 2,
+      "n_heldout_items": 126,
+      "r_scalar": 0.8722268283176223,
+      "r_theta": 0.9061518298455645,
+      "delta": 0.0339250015279422,
+      "r_theta_partial_given_scalar": 0.5941068713414098
+    },
+    {
+      "skill": 3,
+      "n_heldout_items": 34,
+      "r_scalar": 0.56101803817203,
+      "r_theta": 0.6271695400671127,
+      "delta": 0.06615150189508268,
+      "r_theta_partial_given_scalar": 0.3906772564203115
+    },
+    {
+      "skill": 5,
+      "n_heldout_items": 156,
+      "r_scalar": 0.8364132034869054,
+      "r_theta": 0.8444849149524241,
+      "delta": 0.00807171146551866,
+      "r_theta_partial_given_scalar": 0.4179138646376205
+    },
+    {
+      "skill": 6,
+      "n_heldout_items": 102,
+      "r_scalar": 0.7347911770047397,
+      "r_theta": 0.9575123236348377,
+      "delta": 0.222721146630098,
+      "r_theta_partial_given_scalar": 0.9091485897505975
+    },
+    {
+      "skill": 7,
+      "n_heldout_items": 270,
+      "r_scalar": 0.9411999943860154,
+      "r_theta": 0.8170486746369225,
+      "delta": -0.12415131974909288,
+      "r_theta_partial_given_scalar": 0.3380312052698413
+    },
+    {
+      "skill": 8,
+      "n_heldout_items": 17,
+      "r_scalar": 0.648332471314405,
+      "r_theta": 0.7272126114841524,
+      "delta": 0.07888014016974743,
+      "r_theta_partial_given_scalar": 0.5458465042997872
+    },
+    {
+      "skill": 9,
+      "n_heldout_items": 23,
+      "r_scalar": 0.6314477417724039,
+      "r_theta": 0.7317190044887536,
+      "delta": 0.10027126271634967,
+      "r_theta_partial_given_scalar": 0.5417212411626926
+    },
+    {
+      "skill": 10,
+      "n_heldout_items": 44,
+      "r_scalar": 0.8187451243366135,
+      "r_theta": 0.7762694109703436,
+      "delta": -0.042475713366269874,
+      "r_theta_partial_given_scalar": 0.5753164282067343
+    },
+    {
+      "skill": 11,
+      "n_heldout_items": 19,
+      "r_scalar": 0.607997529174846,
+      "r_theta": 0.5729289982861754,
+      "delta": -0.03506853088867057,
+      "r_theta_partial_given_scalar": 0.4033832950492683
+    },
+    {
+      "skill": 12,
+      "n_heldout_items": 37,
+      "r_scalar": 0.31806200489851777,
+      "r_theta": 0.16145973969079938,
+      "delta": -0.1566022652077184,
+      "r_theta_partial_given_scalar": -0.08768050331931188
+    },
+    {
+      "skill": 14,
+      "n_heldout_items": 30,
+      "r_scalar": 0.044733999500660655,
+      "r_theta": 0.15582873897888078,
+      "delta": 0.11109473947822013,
+      "r_theta_partial_given_scalar": 0.16285554164428312
+    },
+    {
+      "skill": 15,
+      "n_heldout_items": 14,
+      "r_scalar": 0.11722982083133354,
+      "r_theta": 0.11142557404176653,
+      "delta": -0.005804246789567008,
+      "r_theta_partial_given_scalar": 0.06414784970538047
+    },
+    {
+      "skill": 17,
+      "n_heldout_items": 14,
+      "r_scalar": 0.6841735989155869,
+      "r_theta": 0.6954287906524406,
+      "delta": 0.011255191736853631,
+      "r_theta_partial_given_scalar": 0.4806226456117388
+    },
+    {
+      "skill": 18,
+      "n_heldout_items": 27,
+      "r_scalar": 0.8118509025028678,
+      "r_theta": 0.611938574156298,
+      "delta": -0.1999123283465698,
+      "r_theta_partial_given_scalar": -0.21717131828249372
+    },
+    {
+      "skill": 19,
+      "n_heldout_items": 42,
+      "r_scalar": 0.7305917412326247,
+      "r_theta": 0.9127680985522961,
+      "delta": 0.1821763573196714,
+      "r_theta_partial_given_scalar": 0.8389439383904624
+    },
+    {
+      "skill": 20,
+      "n_heldout_items": 254,
+      "r_scalar": 0.9641538370019943,
+      "r_theta": 0.9116208278862796,
+      "delta": -0.05253300911571468,
+      "r_theta_partial_given_scalar": 0.257148448442052
+    },
+    {
+      "skill": 21,
+      "n_heldout_items": 10,
+      "r_scalar": 0.6364103008664947,
+      "r_theta": 0.8092294310091229,
+      "delta": 0.17281913014262817,
+      "r_theta_partial_given_scalar": 0.6639669460999047
+    },
+    {
+      "skill": 23,
+      "n_heldout_items": 77,
+      "r_scalar": 0.6960982392717279,
+      "r_theta": 0.9574434909923875,
+      "delta": 0.2613452517206596,
+      "r_theta_partial_given_scalar": 0.9300585774623089
+    },
+    {
+      "skill": 25,
+      "n_heldout_items": 27,
+      "r_scalar": 0.11532107019223015,
+      "r_theta": -0.1763760042336146,
+      "delta": -0.29169707442584475,
+      "r_theta_partial_given_scalar": -0.15840265170267215
+    },
+    {
+      "skill": 29,
+      "n_heldout_items": 89,
+      "r_scalar": 0.8985194167243821,
+      "r_theta": 0.8859188527043612,
+      "delta": -0.012600564020020855,
+      "r_theta_partial_given_scalar": 0.6014177241894068
+    },
+    {
+      "skill": 30,
+      "n_heldout_items": 11,
+      "r_scalar": 0.6217940834374829,
+      "r_theta": 0.26056338761808107,
+      "delta": -0.3612306958194018,
+      "r_theta_partial_given_scalar": 0.030818552473507198
+    },
+    {
+      "skill": 32,
+      "n_heldout_items": 24,
+      "r_scalar": 0.8885938908902453,
+      "r_theta": 0.8969451693183937,
+      "delta": 0.008351278428148423,
+      "r_theta_partial_given_scalar": 0.6256309952921794
+    },
+    {
+      "skill": 35,
+      "n_heldout_items": 32,
+      "r_scalar": 0.7238884102325759,
+      "r_theta": 0.8693302057825707,
+      "delta": 0.1454417955499948,
+      "r_theta_partial_given_scalar": 0.7715935113928505
+    },
+    {
+      "skill": 36,
+      "n_heldout_items": 58,
+      "r_scalar": 0.7493524420674924,
+      "r_theta": 0.6639851008410822,
+      "delta": -0.08536734122641021,
+      "r_theta_partial_given_scalar": 0.4479847734107548
+    },
+    {
+      "skill": 38,
+      "n_heldout_items": 14,
+      "r_scalar": 0.6716805715786176,
+      "r_theta": 0.7654260180454482,
+      "delta": 0.09374544646683058,
+      "r_theta_partial_given_scalar": 0.5945113566828559
+    },
+    {
+      "skill": 41,
+      "n_heldout_items": 13,
+      "r_scalar": 0.7754584156046653,
+      "r_theta": 0.6989090702145736,
+      "delta": -0.07654934539009173,
+      "r_theta_partial_given_scalar": 0.43056241272657186
+    },
+    {
+      "skill": 42,
+      "n_heldout_items": 99,
+      "r_scalar": 0.41422053893370664,
+      "r_theta": 0.3377536613802059,
+      "delta": -0.07646687755350073,
+      "r_theta_partial_given_scalar": 0.047308305840840004
+    },
+    {
+      "skill": 44,
+      "n_heldout_items": 13,
+      "r_scalar": -0.02957912170393011,
+      "r_theta": 0.0038028192651581695,
+      "delta": 0.03338194096908828,
+      "r_theta_partial_given_scalar": 0.011999587982311755
+    },
+    {
+      "skill": 45,
+      "n_heldout_items": 39,
+      "r_scalar": 0.8222061591500234,
+      "r_theta": 0.8112435225571251,
+      "delta": -0.010962636592898312,
+      "r_theta_partial_given_scalar": 0.4176265859149375
+    },
+    {
+      "skill": 47,
+      "n_heldout_items": 49,
+      "r_scalar": 0.5101603969077899,
+      "r_theta": 0.39833686803242585,
+      "delta": -0.11182352887536406,
+      "r_theta_partial_given_scalar": 0.07298424421998508
+    },
+    {
+      "skill": 60,
+      "n_heldout_items": 24,
+      "r_scalar": 0.7397144090170212,
+      "r_theta": 0.6937219631933609,
+      "delta": -0.045992445823660355,
+      "r_theta_partial_given_scalar": 0.12124061512720505
+    },
+    {
+      "skill": 64,
+      "n_heldout_items": 17,
+      "r_scalar": 0.48011367008020334,
+      "r_theta": 0.5449178204664169,
+      "delta": 0.06480415038621357,
+      "r_theta_partial_given_scalar": 0.5171731448131172
+    },
+    {
+      "skill": 68,
+      "n_heldout_items": 50,
+      "r_scalar": 0.81714972745052,
+      "r_theta": 0.8191548685819486,
+      "delta": 0.0020051411314286893,
+      "r_theta_partial_given_scalar": 0.4406141485298218
+    },
+    {
+      "skill": 74,
+      "n_heldout_items": 57,
+      "r_scalar": 0.7691999954432661,
+      "r_theta": 0.9333884760519782,
+      "delta": 0.16418848060871205,
+      "r_theta_partial_given_scalar": 0.8792655409105561
+    },
+    {
+      "skill": 78,
+      "n_heldout_items": 82,
+      "r_scalar": 0.7893976705598091,
+      "r_theta": 0.8396200565493315,
+      "delta": 0.05022238598952233,
+      "r_theta_partial_given_scalar": 0.6012194192870306
+    },
+    {
+      "skill": 84,
+      "n_heldout_items": 22,
+      "r_scalar": 0.6971963157223142,
+      "r_theta": 0.8638368386188445,
+      "delta": 0.1666405228965303,
+      "r_theta_partial_given_scalar": 0.7523686259959868
+    },
+    {
+      "skill": 89,
+      "n_heldout_items": 14,
+      "r_scalar": -0.09148641773530997,
+      "r_theta": 0.2254522450478435,
+      "delta": 0.31693866278315347,
+      "r_theta_partial_given_scalar": 0.21569339319058717
+    },
+    {
+      "skill": 90,
+      "n_heldout_items": 19,
+      "r_scalar": 0.6608111351071895,
+      "r_theta": 0.7567646857445298,
+      "delta": 0.09595355063734035,
+      "r_theta_partial_given_scalar": 0.6101369296810562
+    },
+    {
+      "skill": 97,
+      "n_heldout_items": 385,
+      "r_scalar": 0.9555224374707874,
+      "r_theta": 0.8941393009320966,
+      "delta": -0.061383136538690763,
+      "r_theta_partial_given_scalar": 0.35301732948087683
+    }
+  ],
+  "verified": true
+}

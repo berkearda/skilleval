@@ -1,0 +1,652 @@
+{
+  "experiment": "pareto_multiseed",
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "thresholds": [
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95
+  ],
+  "strongest": {
+    "accuracy": 0.6157480314960629,
+    "cost": 79872.0
+  },
+  "per_seed": {
+    "42": [
+      {
+        "threshold": 0.1,
+        "accuracy": 0.47191601049868764,
+        "mean_cost": 1310.915661942264
+      },
+      {
+        "threshold": 0.15,
+        "accuracy": 0.483989501312336,
+        "mean_cost": 2101.5866456693525
+      },
+      {
+        "threshold": 0.2,
+        "accuracy": 0.48713910761154855,
+        "mean_cost": 2771.1762141733275
+      },
+      {
+        "threshold": 0.25,
+        "accuracy": 0.494488188976378,
+        "mean_cost": 3862.0227191602053
+      },
+      {
+        "threshold": 0.3,
+        "accuracy": 0.5065616797900262,
+        "mean_cost": 4494.463395275694
+      },
+      {
+        "threshold": 0.35,
+        "accuracy": 0.516010498687664,
+        "mean_cost": 5229.136361154954
+      },
+      {
+        "threshold": 0.4,
+        "accuracy": 0.5301837270341208,
+        "mean_cost": 10102.347523359675
+      },
+      {
+        "threshold": 0.45,
+        "accuracy": 0.5396325459317586,
+        "mean_cost": 11471.690313910853
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5496062992125984,
+        "mean_cost": 12481.94990026255
+      },
+      {
+        "threshold": 0.55,
+        "accuracy": 0.5511811023622047,
+        "mean_cost": 13789.416751706118
+      },
+      {
+        "threshold": 0.6,
+        "accuracy": 0.5648293963254594,
+        "mean_cost": 15292.306880839971
+      },
+      {
+        "threshold": 0.65,
+        "accuracy": 0.5695538057742782,
+        "mean_cost": 16620.53002414705
+      },
+      {
+        "threshold": 0.7,
+        "accuracy": 0.5784776902887139,
+        "mean_cost": 18359.521763779536
+      },
+      {
+        "threshold": 0.75,
+        "accuracy": 0.5837270341207349,
+        "mean_cost": 19583.120058792603
+      },
+      {
+        "threshold": 0.8,
+        "accuracy": 0.5958005249343832,
+        "mean_cost": 22873.583067716387
+      },
+      {
+        "threshold": 0.85,
+        "accuracy": 0.5968503937007874,
+        "mean_cost": 23736.125950656027
+      },
+      {
+        "threshold": 0.9,
+        "accuracy": 0.5989501312335958,
+        "mean_cost": 24634.237379527407
+      },
+      {
+        "threshold": 0.95,
+        "accuracy": 0.6215223097112861,
+        "mean_cost": 30673.288398950088
+      }
+    ],
+    "43": [
+      {
+        "threshold": 0.1,
+        "accuracy": 0.47296587926509187,
+        "mean_cost": 1812.5203149606768
+      },
+      {
+        "threshold": 0.15,
+        "accuracy": 0.483989501312336,
+        "mean_cost": 2346.8929679790776
+      },
+      {
+        "threshold": 0.2,
+        "accuracy": 0.494488188976378,
+        "mean_cost": 3845.3495265092865
+      },
+      {
+        "threshold": 0.25,
+        "accuracy": 0.49606299212598426,
+        "mean_cost": 4681.435044619522
+      },
+      {
+        "threshold": 0.3,
+        "accuracy": 0.5007874015748032,
+        "mean_cost": 5458.421518110331
+      },
+      {
+        "threshold": 0.35,
+        "accuracy": 0.5181102362204725,
+        "mean_cost": 9639.603267191695
+      },
+      {
+        "threshold": 0.4,
+        "accuracy": 0.5280839895013123,
+        "mean_cost": 11118.407088713999
+      },
+      {
+        "threshold": 0.45,
+        "accuracy": 0.5412073490813648,
+        "mean_cost": 12484.413950656257
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5448818897637795,
+        "mean_cost": 13833.564321259926
+      },
+      {
+        "threshold": 0.55,
+        "accuracy": 0.5480314960629922,
+        "mean_cost": 14883.139057217928
+      },
+      {
+        "threshold": 0.6,
+        "accuracy": 0.563254593175853,
+        "mean_cost": 15742.940522834722
+      },
+      {
+        "threshold": 0.65,
+        "accuracy": 0.5706036745406824,
+        "mean_cost": 17417.907267191666
+      },
+      {
+        "threshold": 0.7,
+        "accuracy": 0.5811023622047244,
+        "mean_cost": 18669.022404199477
+      },
+      {
+        "threshold": 0.75,
+        "accuracy": 0.5853018372703412,
+        "mean_cost": 19704.488516535395
+      },
+      {
+        "threshold": 0.8,
+        "accuracy": 0.6005249343832021,
+        "mean_cost": 22391.645127558953
+      },
+      {
+        "threshold": 0.85,
+        "accuracy": 0.605249343832021,
+        "mean_cost": 22990.803922309602
+      },
+      {
+        "threshold": 0.9,
+        "accuracy": 0.6078740157480315,
+        "mean_cost": 23927.65856587916
+      },
+      {
+        "threshold": 0.95,
+        "accuracy": 0.6199475065616797,
+        "mean_cost": 30403.446929133836
+      }
+    ],
+    "44": [
+      {
+        "threshold": 0.1,
+        "accuracy": 0.4755905511811024,
+        "mean_cost": 1186.6902173228289
+      },
+      {
+        "threshold": 0.15,
+        "accuracy": 0.48293963254593175,
+        "mean_cost": 1575.0469207349436
+      },
+      {
+        "threshold": 0.2,
+        "accuracy": 0.48766404199475066,
+        "mean_cost": 1963.4654404199944
+      },
+      {
+        "threshold": 0.25,
+        "accuracy": 0.49133858267716535,
+        "mean_cost": 2835.5135160105847
+      },
+      {
+        "threshold": 0.3,
+        "accuracy": 0.5034120734908136,
+        "mean_cost": 3439.4380766405093
+      },
+      {
+        "threshold": 0.35,
+        "accuracy": 0.5091863517060368,
+        "mean_cost": 3950.7306834646615
+      },
+      {
+        "threshold": 0.4,
+        "accuracy": 0.5249343832020997,
+        "mean_cost": 7084.302379002716
+      },
+      {
+        "threshold": 0.45,
+        "accuracy": 0.531233595800525,
+        "mean_cost": 9299.473469816365
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5385826771653544,
+        "mean_cost": 10563.648503937091
+      },
+      {
+        "threshold": 0.55,
+        "accuracy": 0.5396325459317586,
+        "mean_cost": 11556.558681364915
+      },
+      {
+        "threshold": 0.6,
+        "accuracy": 0.5448818897637795,
+        "mean_cost": 13308.167928609002
+      },
+      {
+        "threshold": 0.65,
+        "accuracy": 0.5616797900262467,
+        "mean_cost": 14718.193352231043
+      },
+      {
+        "threshold": 0.7,
+        "accuracy": 0.5690288713910762,
+        "mean_cost": 16253.904697112925
+      },
+      {
+        "threshold": 0.75,
+        "accuracy": 0.5763779527559055,
+        "mean_cost": 17823.614992126026
+      },
+      {
+        "threshold": 0.8,
+        "accuracy": 0.5884514435695538,
+        "mean_cost": 21294.855122309604
+      },
+      {
+        "threshold": 0.85,
+        "accuracy": 0.5973753280839895,
+        "mean_cost": 22942.207193700626
+      },
+      {
+        "threshold": 0.9,
+        "accuracy": 0.6005249343832021,
+        "mean_cost": 23977.662017847615
+      },
+      {
+        "threshold": 0.95,
+        "accuracy": 0.6026246719160105,
+        "mean_cost": 30658.291233595744
+      }
+    ],
+    "45": [
+      {
+        "threshold": 0.1,
+        "accuracy": 0.47034120734908136,
+        "mean_cost": 1125.023916010483
+      },
+      {
+        "threshold": 0.15,
+        "accuracy": 0.4860892388451444,
+        "mean_cost": 1512.4232734908487
+      },
+      {
+        "threshold": 0.2,
+        "accuracy": 0.4881889763779528,
+        "mean_cost": 2253.8589396326142
+      },
+      {
+        "threshold": 0.25,
+        "accuracy": 0.49816272965879266,
+        "mean_cost": 3259.549497112958
+      },
+      {
+        "threshold": 0.3,
+        "accuracy": 0.5028871391076115,
+        "mean_cost": 4052.9979128609893
+      },
+      {
+        "threshold": 0.35,
+        "accuracy": 0.5228346456692914,
+        "mean_cost": 7509.82571338592
+      },
+      {
+        "threshold": 0.4,
+        "accuracy": 0.531758530183727,
+        "mean_cost": 9881.114607874106
+      },
+      {
+        "threshold": 0.45,
+        "accuracy": 0.5485564304461942,
+        "mean_cost": 11400.469366929225
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5574803149606299,
+        "mean_cost": 12873.042645669382
+      },
+      {
+        "threshold": 0.55,
+        "accuracy": 0.5721784776902887,
+        "mean_cost": 14412.04476640429
+      },
+      {
+        "threshold": 0.6,
+        "accuracy": 0.5784776902887139,
+        "mean_cost": 16108.026893438391
+      },
+      {
+        "threshold": 0.65,
+        "accuracy": 0.589501312335958,
+        "mean_cost": 17506.75499002631
+      },
+      {
+        "threshold": 0.7,
+        "accuracy": 0.6031496062992125,
+        "mean_cost": 18726.249222047227
+      },
+      {
+        "threshold": 0.75,
+        "accuracy": 0.6146981627296588,
+        "mean_cost": 21580.74087139097
+      },
+      {
+        "threshold": 0.8,
+        "accuracy": 0.6220472440944882,
+        "mean_cost": 22786.651649343697
+      },
+      {
+        "threshold": 0.85,
+        "accuracy": 0.6204724409448819,
+        "mean_cost": 23452.78971968492
+      },
+      {
+        "threshold": 0.9,
+        "accuracy": 0.6325459317585301,
+        "mean_cost": 25075.6362078739
+      },
+      {
+        "threshold": 0.95,
+        "accuracy": 0.6451443569553805,
+        "mean_cost": 31275.32514435693
+      }
+    ],
+    "46": [
+      {
+        "threshold": 0.1,
+        "accuracy": 0.4666666666666667,
+        "mean_cost": 1446.1874057742866
+      },
+      {
+        "threshold": 0.15,
+        "accuracy": 0.48766404199475066,
+        "mean_cost": 1883.0639706037173
+      },
+      {
+        "threshold": 0.2,
+        "accuracy": 0.49606299212598426,
+        "mean_cost": 2989.975718635265
+      },
+      {
+        "threshold": 0.25,
+        "accuracy": 0.50498687664042,
+        "mean_cost": 3817.58004409458
+      },
+      {
+        "threshold": 0.3,
+        "accuracy": 0.5086614173228347,
+        "mean_cost": 4694.074053543408
+      },
+      {
+        "threshold": 0.35,
+        "accuracy": 0.5223097112860893,
+        "mean_cost": 8566.338922834742
+      },
+      {
+        "threshold": 0.4,
+        "accuracy": 0.5280839895013123,
+        "mean_cost": 10777.332846194318
+      },
+      {
+        "threshold": 0.45,
+        "accuracy": 0.5333333333333333,
+        "mean_cost": 11582.71502782161
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.5401574803149606,
+        "mean_cost": 12465.651367979088
+      },
+      {
+        "threshold": 0.55,
+        "accuracy": 0.5475065616797901,
+        "mean_cost": 13363.600999475148
+      },
+      {
+        "threshold": 0.6,
+        "accuracy": 0.5553805774278215,
+        "mean_cost": 14172.197089763858
+      },
+      {
+        "threshold": 0.65,
+        "accuracy": 0.552755905511811,
+        "mean_cost": 15184.547678740231
+      },
+      {
+        "threshold": 0.7,
+        "accuracy": 0.5538057742782152,
+        "mean_cost": 16544.79971443576
+      },
+      {
+        "threshold": 0.75,
+        "accuracy": 0.5648293963254594,
+        "mean_cost": 18074.404686614183
+      },
+      {
+        "threshold": 0.8,
+        "accuracy": 0.5863517060367454,
+        "mean_cost": 21743.49344251954
+      },
+      {
+        "threshold": 0.85,
+        "accuracy": 0.5963254593175853,
+        "mean_cost": 23309.20073070852
+      },
+      {
+        "threshold": 0.9,
+        "accuracy": 0.6036745406824147,
+        "mean_cost": 25062.34678425183
+      },
+      {
+        "threshold": 0.95,
+        "accuracy": 0.6047244094488189,
+        "mean_cost": 29323.113490813605
+      }
+    ]
+  },
+  "verified": true,
+  "provenance": "policy/split/FLOPs from tools/pareto_routing_v2.py (identical to submitted commit 1ecb56ad); only the checkpoint varies",
+  "aggregate": [
+    {
+      "threshold": 0.1,
+      "acc_mean": 0.471496062992126,
+      "acc_std": 0.0029583207986572995,
+      "cost_mean": 1376.2675032021077,
+      "cost_std": 244.3518197702983,
+      "cost_frac_of_strongest": 0.017230913251228313
+    },
+    {
+      "threshold": 0.15,
+      "acc_mean": 0.4849343832020997,
+      "acc_std": 0.0017058348356191013,
+      "cost_mean": 1883.802755695588,
+      "cost_std": 314.685811142857,
+      "cost_frac_of_strongest": 0.023585270879602216
+    },
+    {
+      "threshold": 0.2,
+      "acc_mean": 0.49070866141732283,
+      "acc_std": 0.003776610130940675,
+      "cost_mean": 2764.7651678740976,
+      "cost_std": 651.3877304785193,
+      "cost_frac_of_strongest": 0.0346149485160519
+    },
+    {
+      "threshold": 0.25,
+      "acc_mean": 0.49700787401574803,
+      "acc_std": 0.0045690404508113335,
+      "cost_mean": 3691.22016419957,
+      "cost_std": 623.5766631315015,
+      "cost_frac_of_strongest": 0.04621419476411721
+    },
+    {
+      "threshold": 0.3,
+      "acc_mean": 0.5044619422572179,
+      "acc_std": 0.0027974619620943207,
+      "cost_mean": 4427.878991286186,
+      "cost_std": 671.5448545443078,
+      "cost_frac_of_strongest": 0.055437186890101485
+    },
+    {
+      "threshold": 0.35,
+      "acc_mean": 0.5176902887139108,
+      "acc_std": 0.004962226686864672,
+      "cost_mean": 6979.126989606394,
+      "cost_std": 2102.9820858351877,
+      "cost_frac_of_strongest": 0.08737889359983966
+    },
+    {
+      "threshold": 0.4,
+      "acc_mean": 0.5286089238845145,
+      "acc_std": 0.0023001472231188027,
+      "cost_mean": 9792.700889028962,
+      "cost_std": 1425.9114651267362,
+      "cost_frac_of_strongest": 0.12260492899926084
+    },
+    {
+      "threshold": 0.45,
+      "acc_mean": 0.5387926509186352,
+      "acc_std": 0.0061450963261572,
+      "cost_mean": 11247.752425826862,
+      "cost_std": 1049.8374354137873,
+      "cost_frac_of_strongest": 0.14082222087623775
+    },
+    {
+      "threshold": 0.5,
+      "acc_mean": 0.5461417322834645,
+      "acc_std": 0.00685717828569361,
+      "cost_mean": 12443.571347821608,
+      "cost_std": 1063.2588021191657,
+      "cost_frac_of_strongest": 0.15579391210714152
+    },
+    {
+      "threshold": 0.55,
+      "acc_mean": 0.5517060367454069,
+      "acc_std": 0.010920653962369204,
+      "cost_mean": 13600.952051233679,
+      "cost_std": 1146.5839373352562,
+      "cost_frac_of_strongest": 0.170284355609396
+    },
+    {
+      "threshold": 0.6,
+      "acc_mean": 0.5613648293963255,
+      "acc_std": 0.01109885588359266,
+      "cost_mean": 14924.727863097189,
+      "cost_std": 1037.7236118208025,
+      "cost_frac_of_strongest": 0.1868580712026391
+    },
+    {
+      "threshold": 0.65,
+      "acc_mean": 0.5688188976377953,
+      "acc_std": 0.0121694237319409,
+      "cost_mean": 16289.58666246726,
+      "cost_std": 1144.9469615934238,
+      "cost_frac_of_strongest": 0.20394614711622672
+    },
+    {
+      "threshold": 0.7,
+      "acc_mean": 0.5771128608923884,
+      "acc_std": 0.016150926685982333,
+      "cost_mean": 17710.699560314988,
+      "cost_std": 1081.8750172119728,
+      "cost_frac_of_strongest": 0.22173852614577058
+    },
+    {
+      "threshold": 0.75,
+      "acc_mean": 0.5849868766404199,
+      "acc_std": 0.01652201263494731,
+      "cost_mean": 19353.273825091837,
+      "cost_std": 1350.048362956062,
+      "cost_frac_of_strongest": 0.24230360858738778
+    },
+    {
+      "threshold": 0.8,
+      "acc_mean": 0.5986351706036744,
+      "acc_std": 0.012761844744586043,
+      "cost_mean": 22218.045681889635,
+      "cost_std": 610.0261330740677,
+      "cost_frac_of_strongest": 0.278170644054107
+    },
+    {
+      "threshold": 0.85,
+      "acc_mean": 0.6032545931758531,
+      "acc_std": 0.00920897102764865,
+      "cost_mean": 23286.225503411937,
+      "cost_std": 295.39953271460195,
+      "cost_frac_of_strongest": 0.29154428965609896
+    },
+    {
+      "threshold": 0.9,
+      "acc_mean": 0.6087139107611549,
+      "acc_std": 0.012300053853738677,
+      "cost_mean": 24535.508191075984,
+      "cost_std": 501.9398669719883,
+      "cost_frac_of_strongest": 0.30718534894676464
+    },
+    {
+      "threshold": 0.95,
+      "acc_mean": 0.6187926509186352,
+      "acc_std": 0.015248056287999327,
+      "cost_mean": 30466.693039370042,
+      "cost_std": 639.5391537947684,
+      "cost_frac_of_strongest": 0.3814439733494847
+    }
+  ],
+  "matched_point": {
+    "threshold": 0.9,
+    "acc_mean": 0.6087139107611549,
+    "acc_std": 0.012300053853738677,
+    "cost_mean": 24535.508191075984,
+    "cost_std": 501.9398669719883,
+    "cost_frac_of_strongest": 0.30718534894676464
+  }
+}

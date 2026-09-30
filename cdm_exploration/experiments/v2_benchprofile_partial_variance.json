@@ -1,0 +1,46 @@
+{
+  "experiment": "benchprofile_partial_r_variance",
+  "n_skills": 41,
+  "min_heldout_items": 10,
+  "seed_variation": {
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "mean_partial_r_per_seed": [
+      0.13347344318875282,
+      0.13740337816273793,
+      0.13474665315134493,
+      0.13594978811338645,
+      0.13332240041280669
+    ],
+    "mean": 0.13497913260580577,
+    "std": 0.0015417553315226935,
+    "positive_count_per_seed": [
+      30,
+      30,
+      29,
+      31,
+      30
+    ]
+  },
+  "item_bootstrap": {
+    "B": 200,
+    "theta_seed": 42,
+    "mean_partial_r": 0.1107266503680562,
+    "ci95": [
+      0.08175005486549708,
+      0.13770512961713138
+    ],
+    "positive_count_median": 28,
+    "positive_count_ci95": [
+      25,
+      33
+    ],
+    "n_skills_positive_95pct_of_draws": 17
+  },
+  "verified": true
+}

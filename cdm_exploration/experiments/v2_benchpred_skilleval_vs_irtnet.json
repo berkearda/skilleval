@@ -1,0 +1,48 @@
+{
+  "experiment": "benchpred_skilleval_vs_irtnet",
+  "split": "item-wise 80/20, random_state 42",
+  "n_llms": 3811,
+  "n_test_items": 1905,
+  "n_test_items_per_benchmark": {
+    "MATH": 264,
+    "BBH": 1159,
+    "GPQA": 246,
+    "MuSR": 136,
+    "IFEval": 100
+  },
+  "skilleval": {
+    "checkpoint": "expanded/text_conditioned_protocolB.pt",
+    "test_auc": 0.7170448175173879,
+    "r": {
+      "MATH": 0.9765630323274734,
+      "BBH": 0.9835375326347162,
+      "GPQA": 0.8090320110210836,
+      "MuSR": 0.6288608356139938,
+      "IFEval": 0.9661615964747253,
+      "all": 0.9888585412305013
+    }
+  },
+  "irtnet_d232_s42": {
+    "checkpoint": "irtnet/d232_s42.pt",
+    "test_auc": 0.7485832337080871,
+    "r": {
+      "MATH": 0.8519789813826282,
+      "BBH": 0.9738727812408303,
+      "GPQA": 0.7358839716411788,
+      "MuSR": 0.60717475219016,
+      "IFEval": 0.7181063927753804,
+      "all": 0.9929309986571269
+    }
+  },
+  "expected": {
+    "skilleval_test_auc": 0.7170448,
+    "irtnet_test_auc": 0.7485832343376343,
+    "skilleval_overall_r": 0.9889
+  },
+  "checks": {
+    "skilleval_auc": true,
+    "irtnet_auc": true,
+    "skilleval_overall_r": true
+  },
+  "verified": true
+}

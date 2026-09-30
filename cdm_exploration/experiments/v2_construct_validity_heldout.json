@@ -1,0 +1,25 @@
+{
+  "experiment": "construct_validity_heldout_items",
+  "ckpt": "cdm_exploration/checkpoints/expanded/text_conditioned_protocolB.pt",
+  "held_out_source": "checkpoint test_items (item-wise OOD split, seed 42)",
+  "n_held_out_items": 1905,
+  "min_heldout_items_per_skill_filter": 10,
+  "all_skills": {
+    "n": 85,
+    "diagonal_mean_r": 0.42146914784119627,
+    "diagonal_median_r": 0.40234578766010903
+  },
+  "robust_subset": {
+    "n": 41,
+    "diagonal_mean_r": 0.6569226626542023,
+    "diagonal_median_r": 0.7654260180454482,
+    "off_diagonal_mean_r": 0.4142746122133759,
+    "gap": 0.24264805044082638
+  },
+  "full_matrix_reference": {
+    "diagonal": 0.8372,
+    "off_diagonal": 0.2533,
+    "gap": 0.5838
+  },
+  "verified": true
+}

@@ -1,0 +1,39 @@
+{
+  "experiment": "final_circularity_checks",
+  "n_skills": 41,
+  "min_heldout_items": 10,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "A_placebo": {
+    "real_mean_partial_r_benchprofile_5seed": 0.13497913260580577,
+    "n_permutations": 20,
+    "null_mean": -0.019333052838969706,
+    "null_std": 0.016214641064730976,
+    "null_max": 0.010557697400527736,
+    "z_score": 9.516842514659498,
+    "empirical_p": 0.0
+  },
+  "B_subtask_control": {
+    "n_subtasks": 38,
+    "mean_partial_r": 0.021396849926745856,
+    "std_across_seeds": 0.002164062414926491,
+    "positive_range": [
+      26,
+      28
+    ],
+    "median_dominant_subtask_share": 0.5384615384615384,
+    "n_skills_over_90pct_one_subtask": 6
+  },
+  "C_per_llm_profile": {
+    "raw_mean_r": 0.6815985964705945,
+    "raw_std": 0.006440199875778163,
+    "centered_mean_r": 0.4228465850044625,
+    "centered_std": 0.005931482026189514
+  },
+  "verified": true
+}

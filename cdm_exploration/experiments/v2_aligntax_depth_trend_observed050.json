@@ -1,0 +1,51 @@
+{
+  "experiment": "aligntax_depth_trend_test",
+  "depth_histogram": [
+    [
+      0,
+      34
+    ],
+    [
+      1,
+      11
+    ],
+    [
+      2,
+      17
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      4,
+      7
+    ],
+    [
+      5,
+      11
+    ],
+    [
+      6,
+      13
+    ]
+  ],
+  "full_trend": {
+    "spearman_rho": -0.18211386948063593,
+    "perm_p_one_sided": 0.0352,
+    "n_perm": 10000
+  },
+  "floor_control": {
+    "depth_vs_base_acc_rho": -0.5072423957589852,
+    "partial_rho_given_base_acc": -0.19004423160698172,
+    "n_base_models": 81
+  },
+  "depths_0_3": {
+    "spearman_rho": 0.227873704634685,
+    "perm_p": 0.9713,
+    "n_skills": 69
+  },
+  "verdict": "TREND WEAK OR BIN-DRIVEN - concede as drafted",
+  "verified": true,
+  "prerequisites_file": "v2_skill_prerequisites_observed050.json"
+}

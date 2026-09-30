@@ -1,0 +1,87 @@
+{
+  "dataset": "v2_full",
+  "checkpoint": "cdm_exploration/checkpoints/expanded/text_conditioned_protocolB_llmsplit3048.pt",
+  "full_calibration_auc_same_llms": 0.6931081736966248,
+  "experiment": "cold_start_v2_fixed",
+  "t_id": "T-036",
+  "fix": "calibration optimizer: lr 0.01 -> 0.05, steps 50 -> 500",
+  "n_llms": 3811,
+  "n_test_llms": 763,
+  "n_items": 9523,
+  "n_test_items": 1905,
+  "K": 100,
+  "full_training_auc": 0.6964609436362275,
+  "calibration_sizes": [
+    0,
+    1,
+    5,
+    10,
+    50,
+    100,
+    500
+  ],
+  "n_repeats": 3,
+  "calibration_lr": 0.05,
+  "calibration_steps": 500,
+  "trained_theta_raw_ref_norm": 1.6657617092132568,
+  "init_method": "zero (principled no-info prior)",
+  "summary": [
+    {
+      "N": 0,
+      "auc_mean": 0.5467338858929162,
+      "auc_std": 0.017389966295458473,
+      "acc_mean": 0.5462558005937331,
+      "pct_of_full": 78.50172947795389,
+      "pct_of_full_calibration": 78.88146564149783
+    },
+    {
+      "N": 1,
+      "auc_mean": 0.5509667680965553,
+      "auc_std": 0.022918794245969227,
+      "acc_mean": 0.5498906673363076,
+      "pct_of_full": 79.10949969713363,
+      "pct_of_full_calibration": 79.49217582560422
+    },
+    {
+      "N": 5,
+      "auc_mean": 0.5612970077939842,
+      "auc_std": 0.03077003812720008,
+      "acc_mean": 0.5570964179936224,
+      "pct_of_full": 80.59274722046129,
+      "pct_of_full_calibration": 80.9825982574064
+    },
+    {
+      "N": 10,
+      "auc_mean": 0.5730609948368945,
+      "auc_std": 0.03313812891539724,
+      "acc_mean": 0.5640136726028512,
+      "pct_of_full": 82.28185658838801,
+      "pct_of_full_calibration": 82.67987834864645
+    },
+    {
+      "N": 50,
+      "auc_mean": 0.6179087642982725,
+      "auc_std": 0.028271464110016527,
+      "acc_mean": 0.603531668633164,
+      "pct_of_full": 88.72123698310583,
+      "pct_of_full_calibration": 89.15040793743873
+    },
+    {
+      "N": 100,
+      "auc_mean": 0.640275091289068,
+      "auc_std": 0.024802716848938405,
+      "acc_mean": 0.6244595572342448,
+      "pct_of_full": 91.9326628635035,
+      "pct_of_full_calibration": 92.37736843791977
+    },
+    {
+      "N": 500,
+      "auc_mean": 0.6775449173334915,
+      "auc_std": 0.021195352911559988,
+      "acc_mean": 0.6565539399318204,
+      "pct_of_full": 97.28397888272453,
+      "pct_of_full_calibration": 97.75457036091089
+    }
+  ],
+  "verified": true
+}

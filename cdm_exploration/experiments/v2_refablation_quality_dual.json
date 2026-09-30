@@ -1,0 +1,24 @@
+{
+  "experiment": "refablation_quality_dual_order",
+  "judge": "gpt-4.1-mini",
+  "n_items": 600,
+  "n_calls": 1200,
+  "position_second_chosen_rate": 0.6600173460537727,
+  "unstable_rate": 0.405,
+  "stable_n": 357,
+  "solution_aware_win_among_stable": 0.4957983193277311,
+  "question_only_win_among_stable": 0.5042016806722689,
+  "by_benchmark": {
+    "MATH": {
+      "ref": 0.40594059405940597,
+      "ctrl": 0.594059405940594
+    },
+    "GPQA": {
+      "ref": 0.6129032258064516,
+      "ctrl": 0.3870967741935484
+    }
+  },
+  "supersedes": "v2_refablation_quality.json single-order judge (position bias 70%)",
+  "verified": true,
+  "judge_criterion": "project SKILL_DEF (taxonomy_pipeline.py), same construct as name-fit and human eval"
+}

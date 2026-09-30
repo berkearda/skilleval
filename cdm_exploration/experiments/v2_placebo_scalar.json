@@ -1,0 +1,34 @@
+{
+  "experiment": "placebo_null_scalar_control",
+  "control": "model overall training accuracy (scalar)",
+  "n_skills": 41,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "real_mean_partial_r_5seed": 0.3519916924751791,
+  "real_per_seed": [
+    0.34941929602452193,
+    0.3547350428356482,
+    0.346634051185578,
+    0.35813776157033617,
+    0.3510323107598113
+  ],
+  "positive_skill_range": [
+    37,
+    37
+  ],
+  "placebo": {
+    "n_perm": 20,
+    "mean": 0.2202778877271955,
+    "std": 0.011897946314574285,
+    "max": 0.24353346909250925
+  },
+  "z": 11.070297450127331,
+  "empirical_p": 0.0,
+  "note": "matches the statistic reported earlier (scalar control), unlike v2_final_circularity_checks.json whose placebo targets the 5-benchmark-profile control",
+  "verified": true
+}

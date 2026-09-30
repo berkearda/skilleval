@@ -1,0 +1,78 @@
+{
+  "dataset": "v2_full",
+  "experiment": "cold_start_v2_fixed",
+  "t_id": "T-036",
+  "fix": "calibration optimizer: lr 0.01 -> 0.05, steps 50 -> 500",
+  "n_llms": 3811,
+  "n_test_llms": 763,
+  "n_items": 9523,
+  "n_test_items": 1905,
+  "K": 100,
+  "full_training_auc": 0.6998474376086921,
+  "calibration_sizes": [
+    0,
+    1,
+    5,
+    10,
+    50,
+    100,
+    500
+  ],
+  "n_repeats": 3,
+  "calibration_lr": 0.05,
+  "calibration_steps": 500,
+  "trained_theta_raw_ref_norm": 1.8706378936767578,
+  "init_method": "zero (principled no-info prior)",
+  "summary": [
+    {
+      "N": 0,
+      "auc_mean": 0.5401002921757672,
+      "auc_std": 0.017559802040360215,
+      "acc_mean": 0.5434543159169324,
+      "pct_of_full": 77.17400438318889
+    },
+    {
+      "N": 1,
+      "auc_mean": 0.5447185744503505,
+      "auc_std": 0.022572581311754537,
+      "acc_mean": 0.5478317503889996,
+      "pct_of_full": 77.8339028162479
+    },
+    {
+      "N": 5,
+      "auc_mean": 0.5562771949996145,
+      "auc_std": 0.030261902653246634,
+      "acc_mean": 0.5576449732774229,
+      "pct_of_full": 79.48549428149046
+    },
+    {
+      "N": 10,
+      "auc_mean": 0.5692093542288663,
+      "auc_std": 0.03289088963226612,
+      "acc_mean": 0.5664269030591359,
+      "pct_of_full": 81.3333483328591
+    },
+    {
+      "N": 50,
+      "auc_mean": 0.6159823198574755,
+      "auc_std": 0.028627680358730284,
+      "acc_mean": 0.6060068179550949,
+      "pct_of_full": 88.01665716777143
+    },
+    {
+      "N": 100,
+      "auc_mean": 0.6394082392310202,
+      "auc_std": 0.02558284598073379,
+      "acc_mean": 0.6261180655170396,
+      "pct_of_full": 91.36394660753685
+    },
+    {
+      "N": 500,
+      "auc_mean": 0.6789772656563331,
+      "auc_std": 0.02091574392602151,
+      "acc_mean": 0.6582138241894075,
+      "pct_of_full": 97.01789692569709
+    }
+  ],
+  "verified": true
+}

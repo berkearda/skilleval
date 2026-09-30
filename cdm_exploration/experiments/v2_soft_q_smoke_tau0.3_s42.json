@@ -1,0 +1,43 @@
+{
+  "experiment": "soft_q_ncdm",
+  "soft_q_file": "qmatrix_v2_K100_soft_tau0.3.npy",
+  "tau": 0.3,
+  "tag": "smoke",
+  "seed": 42,
+  "K": 100,
+  "n_llms": 100,
+  "n_items": 9523,
+  "epochs": 1,
+  "lr": 0.002,
+  "n_train_items": 7618,
+  "n_test_items": 1905,
+  "val_protocol": "triplet_level_90_10",
+  "test_auc": 0.7359653705019503,
+  "test_acc": 0.6898215223097113,
+  "test_rmse": 0.4459634953107759,
+  "routing_acc1": 0.6056185845488925,
+  "strongest_acc1": 0.6056185845488925,
+  "random_acc1": 0.3787142085359265,
+  "per_benchmark_acc1": {
+    "BBH": {
+      "n_items": 1158,
+      "acc1": 0.6450777202072538
+    },
+    "GPQA": {
+      "n_items": 245,
+      "acc1": 0.4163265306122449
+    },
+    "IFEval": {
+      "n_items": 99,
+      "acc1": 0.7474747474747475
+    },
+    "MATH": {
+      "n_items": 216,
+      "acc1": 0.6712962962962963
+    },
+    "MuSR": {
+      "n_items": 133,
+      "acc1": 0.39849624060150374
+    }
+  }
+}

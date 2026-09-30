@@ -1,0 +1,82 @@
+{
+  "experiment": "adaptive_testing_v2_fixed",
+  "t_id": "T-038",
+  "fix": "symmetric final-fit (T-036 recipe), 100 LLMs (was 20), 3 seeds (was 1)",
+  "checkpoint": "cdm_exploration/checkpoints/expanded/text_conditioned_protocolB_llmsplit3048.pt",
+  "n_eval_llms": 50,
+  "n_repeats": 5,
+  "K": 100,
+  "cal_sizes": [
+    1,
+    2,
+    5,
+    10,
+    20,
+    30
+  ],
+  "criteria": [
+    "random",
+    "heuristic",
+    "trace"
+  ],
+  "top_k_prefilter": 200,
+  "final_fit_lr": 0.05,
+  "final_fit_steps": 500,
+  "selector_uses_exact_autograd": true,
+  "summary": [
+    {
+      "N": 1,
+      "random_mean": 0.5525390034165941,
+      "random_std": 0.02088345152386016,
+      "heuristic_mean": 0.5487576239331884,
+      "heuristic_std": 0.01686316709554877,
+      "trace_mean": 0.5511400998966599,
+      "trace_std": 0.016409498928505004
+    },
+    {
+      "N": 2,
+      "random_mean": 0.5565205641323917,
+      "random_std": 0.023004941813922663,
+      "heuristic_mean": 0.5690481434375259,
+      "heuristic_std": 0.016183877169428967,
+      "trace_mean": 0.5644834199482109,
+      "trace_std": 0.01688868184166921
+    },
+    {
+      "N": 5,
+      "random_mean": 0.5603233156547226,
+      "random_std": 0.031885302698742804,
+      "heuristic_mean": 0.5817079375679898,
+      "heuristic_std": 0.015464351653677924,
+      "trace_mean": 0.5747793003859847,
+      "trace_std": 0.03459010916959546
+    },
+    {
+      "N": 10,
+      "random_mean": 0.5767930828407233,
+      "random_std": 0.030402911255770968,
+      "heuristic_mean": 0.5980283974541003,
+      "heuristic_std": 0.022023312987968592,
+      "trace_mean": 0.5799544330213556,
+      "trace_std": 0.02989410522461082
+    },
+    {
+      "N": 20,
+      "random_mean": 0.6031576413991506,
+      "random_std": 0.03247915853198787,
+      "heuristic_mean": 0.6114358702468428,
+      "heuristic_std": 0.026102977852289353,
+      "trace_mean": 0.5925403499966317,
+      "trace_std": 0.02348627869268669
+    },
+    {
+      "N": 30,
+      "random_mean": 0.6149196987123651,
+      "random_std": 0.0298137965511798,
+      "heuristic_mean": 0.6151383101718539,
+      "heuristic_std": 0.027868221570571915,
+      "trace_mean": 0.6071692650090652,
+      "trace_std": 0.021421035564804763
+    }
+  ]
+}

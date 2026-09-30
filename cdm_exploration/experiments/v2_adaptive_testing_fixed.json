@@ -1,0 +1,78 @@
+{
+  "experiment": "adaptive_testing_fixed",
+  "t_id": "T-037",
+  "fix": "symmetric final-fit recipe (T-036): lr=0.05, steps=500 fresh from zero",
+  "selector": "p(1-p) * |q|_1 (entropy x coverage), no Q-row gradient proxy",
+  "n_eval_llms": 100,
+  "n_repeats": 3,
+  "K": 100,
+  "cal_sizes": [
+    5,
+    10,
+    20,
+    50,
+    100,
+    200,
+    500
+  ],
+  "final_fit_lr": 0.05,
+  "final_fit_steps": 500,
+  "summary": [
+    {
+      "N": 5,
+      "random_mean": 0.5588791080676726,
+      "random_std": 0.03219714857237848,
+      "adaptive_mean": 0.5804999039262672,
+      "adaptive_std": 0.01768529197700217,
+      "gain": 0.021620795858594555
+    },
+    {
+      "N": 10,
+      "random_mean": 0.5780996836877768,
+      "random_std": 0.027184558187041526,
+      "adaptive_mean": 0.5873154537069123,
+      "adaptive_std": 0.01976618610666696,
+      "gain": 0.009215770019135539
+    },
+    {
+      "N": 20,
+      "random_mean": 0.591964797947605,
+      "random_std": 0.029310617949963293,
+      "adaptive_mean": 0.5955333857313458,
+      "adaptive_std": 0.0240207498222694,
+      "gain": 0.0035685877837408064
+    },
+    {
+      "N": 50,
+      "random_mean": 0.6241614938181783,
+      "random_std": 0.030287833732999772,
+      "adaptive_mean": 0.6128926938102172,
+      "adaptive_std": 0.02609624505755257,
+      "gain": -0.011268800007961155
+    },
+    {
+      "N": 100,
+      "random_mean": 0.6389364350080212,
+      "random_std": 0.026060466160798133,
+      "adaptive_mean": 0.6206236521292798,
+      "adaptive_std": 0.02644307489738262,
+      "gain": -0.018312782878741385
+    },
+    {
+      "N": 200,
+      "random_mean": 0.6594132889972363,
+      "random_std": 0.020681176864759582,
+      "adaptive_mean": 0.6509344990058781,
+      "adaptive_std": 0.02547855099110251,
+      "gain": -0.008478789991358204
+    },
+    {
+      "N": 500,
+      "random_mean": 0.6805265174351046,
+      "random_std": 0.01912733742794494,
+      "adaptive_mean": 0.6733234911285467,
+      "adaptive_std": 0.023662359584053626,
+      "gain": -0.0072030263065578914
+    }
+  ]
+}

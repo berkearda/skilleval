@@ -1,0 +1,51 @@
+{
+  "experiment": "embedllm_textmf_headtohead",
+  "d_model": 232,
+  "seed": 43,
+  "smoke": true,
+  "n_llms": 100,
+  "n_items": 200,
+  "n_train_rows": 16000,
+  "n_test_rows": 4000,
+  "config": {
+    "num_epochs": 3,
+    "batch_size": 2048,
+    "lr": 0.0001,
+    "weight_decay": 1e-05,
+    "alpha": 0.05
+  },
+  "train_losses": [
+    0.6915590133666992,
+    0.6910471873283386,
+    0.6903005466461182
+  ],
+  "metrics": {
+    "test_auc": 0.524362622251742,
+    "test_acc": 0.47,
+    "routing": {
+      "acc@1": 0.525,
+      "acc@3": 0.875,
+      "acc@5": 0.875,
+      "acc@10": 0.9
+    },
+    "per_benchmark": {
+      "MATH": {
+        "n_items": 40,
+        "acc@1": 0.525
+      }
+    },
+    "benchmark_prediction_r": {
+      "MATH": 0.22008735917829936,
+      "overall": 0.22008735917829936
+    }
+  },
+  "diagnostics": {
+    "n_unique_routing_picks": 12,
+    "fraction_picks_concentrated_on_top_1_llm": 0.3,
+    "pred_min": 0.4715132415294647,
+    "pred_max": 0.5125072002410889,
+    "pred_mean": 0.493141233921051,
+    "pred_std": 0.0058860769495368
+  },
+  "verified": true
+}

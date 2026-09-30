@@ -1,0 +1,124 @@
+{
+  "experiment": "profiling_bayes",
+  "t_id": "T-137",
+  "checkpoint": "text_conditioned_protocolB_llmsplit3048.pt",
+  "n_new_llms": 3,
+  "seeds": 1,
+  "budgets": [
+    0,
+    5,
+    20
+  ],
+  "adaptive_max": 20,
+  "shrink": 0.1,
+  "full_answers": {
+    "auc": 0.6818373267082615,
+    "bench_err": 0.03208697605934105,
+    "bench_r": 0.9375782761272685
+  },
+  "checks": {
+    "prior_vs_noprior_all_answers_max_abs_pred_diff": 0.45309001207351685,
+    "prior_vs_noprior_all_answers_auc_diff_max_abs": 0.0021559490044279483,
+    "old_method_zero_answers_auc": 0.5499842285450786
+  },
+  "summary": [
+    {
+      "N": 0,
+      "random_auc": 0.6557756203022557,
+      "random_bench_err": 0.10757001018318105,
+      "random_bench_r": 0.0,
+      "random_profile_agreement": 0.0,
+      "count_bench_err": 0.10757001018318105,
+      "count_bench_r": 0.0,
+      "old_auc": 0.5499842285450786,
+      "old_bench_err": 0.16919702008067397,
+      "old_bench_r": 0.0,
+      "old_profile_agreement": 0.0,
+      "adaptive_auc": 0.6557756203022557,
+      "adaptive_bench_err": 0.10757001018318105,
+      "adaptive_bench_r": 0.0,
+      "adaptive_profile_agreement": 0.0,
+      "adaptive_minus_random_auc": 0.0,
+      "adaptive_minus_random_auc_ci95": [
+        0.0,
+        0.0
+      ],
+      "adaptive_minus_random_bench_err": 0.0,
+      "adaptive_minus_random_bench_err_ci95": [
+        0.0,
+        0.0
+      ],
+      "adaptive_minus_random_profile_agreement": 0.0,
+      "adaptive_minus_random_profile_agreement_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "N": 5,
+      "random_auc": 0.656226653587643,
+      "random_bench_err": 0.08800842326390783,
+      "random_bench_r": 0.4324061571231691,
+      "random_profile_agreement": 0.38270898704543205,
+      "count_bench_err": 0.15271992592819603,
+      "count_bench_r": 0.37706085537056816,
+      "old_auc": 0.5845707184282805,
+      "old_bench_err": 0.12743191889865907,
+      "old_bench_r": 0.41650398685676376,
+      "old_profile_agreement": 0.04359113790840618,
+      "adaptive_auc": 0.6680834468681688,
+      "adaptive_bench_err": 0.06527784391693957,
+      "adaptive_bench_r": 0.7368938811348601,
+      "adaptive_profile_agreement": 0.6270970268373464,
+      "adaptive_minus_random_auc": 0.011856793280525801,
+      "adaptive_minus_random_auc_ci95": [
+        -5.526657278820402e-06,
+        0.031006956386673057
+      ],
+      "adaptive_minus_random_bench_err": -0.02273057934696826,
+      "adaptive_minus_random_bench_err_ci95": [
+        -0.05357171964596927,
+        0.002268803119659421
+      ],
+      "adaptive_minus_random_profile_agreement": 0.2443880397919143,
+      "adaptive_minus_random_profile_agreement_ci95": [
+        0.0,
+        0.2443880397919143
+      ]
+    },
+    {
+      "N": 20,
+      "random_auc": 0.6607134135493186,
+      "random_bench_err": 0.0717502774892144,
+      "random_bench_r": 0.8535685708883356,
+      "random_profile_agreement": 0.6434323999165317,
+      "count_bench_err": 0.16954683695464706,
+      "count_bench_r": 0.8512322558180058,
+      "old_auc": 0.6019093825740711,
+      "old_bench_err": 0.11577425866930728,
+      "old_bench_r": 0.9052369916290559,
+      "old_profile_agreement": 0.13129139139449275,
+      "adaptive_auc": 0.6723690813066115,
+      "adaptive_bench_err": 0.053180024313285036,
+      "adaptive_bench_r": 0.9134821697392386,
+      "adaptive_profile_agreement": 0.7306799467168326,
+      "adaptive_minus_random_auc": 0.011655667757293061,
+      "adaptive_minus_random_auc_ci95": [
+        0.006461215024549327,
+        0.017976906349505772
+      ],
+      "adaptive_minus_random_bench_err": -0.018570253175929353,
+      "adaptive_minus_random_bench_err_ci95": [
+        -0.02729710996362429,
+        -0.012664485573768619
+      ],
+      "adaptive_minus_random_profile_agreement": 0.08724754680030089,
+      "adaptive_minus_random_profile_agreement_ci95": [
+        -0.04,
+        0.08724754680030111
+      ]
+    }
+  ],
+  "minutes": 0.5334267020225525,
+  "verified": true
+}

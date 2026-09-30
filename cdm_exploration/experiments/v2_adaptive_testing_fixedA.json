@@ -1,0 +1,61 @@
+{
+  "experiment": "adaptive_testing_fixedA",
+  "t_id": "T-039",
+  "fix": "periodic re-fit of inner theta every K_REFIT items (T-036 recipe)",
+  "selector": "p(1-p) * |q|_1, theta computed at converged inner theta",
+  "n_eval_llms": 50,
+  "n_repeats": 1,
+  "K": 100,
+  "cal_sizes": [
+    10,
+    50,
+    100,
+    200,
+    500
+  ],
+  "k_refit": 10,
+  "final_fit_lr": 0.05,
+  "final_fit_steps": 500,
+  "summary": [
+    {
+      "N": 10,
+      "random_mean": 0.5818201505043296,
+      "random_std": 0.017574263590662866,
+      "adaptive_mean": 0.593038513467743,
+      "adaptive_std": 0.027483100335995526,
+      "gain": 0.011218362963413386
+    },
+    {
+      "N": 50,
+      "random_mean": 0.6269711238534349,
+      "random_std": 0.024889571290896854,
+      "adaptive_mean": 0.6247149163716336,
+      "adaptive_std": 0.027136929354514474,
+      "gain": -0.002256207481801331
+    },
+    {
+      "N": 100,
+      "random_mean": 0.6380641043869631,
+      "random_std": 0.02439542595226549,
+      "adaptive_mean": 0.646312110577713,
+      "adaptive_std": 0.019869550201312515,
+      "gain": 0.008248006190749835
+    },
+    {
+      "N": 200,
+      "random_mean": 0.6616346635077818,
+      "random_std": 0.019823894039053665,
+      "adaptive_mean": 0.6592075039272351,
+      "adaptive_std": 0.022425648749270572,
+      "gain": -0.002427159580546623
+    },
+    {
+      "N": 500,
+      "random_mean": 0.6813858821040857,
+      "random_std": 0.01992539292181541,
+      "adaptive_mean": 0.6755218154519018,
+      "adaptive_std": 0.0221497471322024,
+      "gain": -0.005864066652183864
+    }
+  ]
+}

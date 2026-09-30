@@ -1,0 +1,40 @@
+{
+  "experiment": "knn_baseline",
+  "K_neighbours": 10,
+  "split": "from sklearn.model_selection import train_test_split; train_test_split(np.arange(9523), test_size=0.2, random_state=42)",
+  "n_llms": 3811,
+  "n_train_items": 7618,
+  "n_test_items": 100,
+  "smoke": true,
+  "test_auc": 0.7290502206771992,
+  "test_acc": 0.7007950669115718,
+  "routing": {
+    "acc@1": 0.58,
+    "acc@3": 0.74,
+    "acc@5": 0.81,
+    "acc@10": 0.88
+  },
+  "per_benchmark": {
+    "MATH": {
+      "n_items": 13,
+      "knn_acc1": 0.46153846153846156
+    },
+    "BBH": {
+      "n_items": 59,
+      "knn_acc1": 0.6610169491525424
+    },
+    "GPQA": {
+      "n_items": 17,
+      "knn_acc1": 0.5882352941176471
+    },
+    "MuSR": {
+      "n_items": 9,
+      "knn_acc1": 0.1111111111111111
+    },
+    "IFEval": {
+      "n_items": 2,
+      "knn_acc1": 1.0
+    }
+  },
+  "verified": true
+}

@@ -1,0 +1,38 @@
+{
+  "experiment": "cdcat_gradient_validation",
+  "n_items_sample": 100,
+  "n_llms_sample": 50,
+  "K": 100,
+  "gradient_vector_basic": {
+    "cosine_mean": 0.935478912127018,
+    "cosine_median": 1.0,
+    "cosine_min": 0.0,
+    "cosine_max": 1.0,
+    "mag_ratio_median": 7.351655006408691,
+    "mag_ratio_p95": 80331.92148437435
+  },
+  "gradient_vector_corrected": {
+    "cosine_mean": 0.9526727865934372,
+    "cosine_median": 1.0,
+    "cosine_min": 0.0,
+    "cosine_max": 1.0000001192092896,
+    "mag_ratio_median": 1.0247249603271484,
+    "mag_ratio_p95": 2947.256945800775
+  },
+  "a_optimality_ranking_basic": {
+    "spearman_mean": -0.2581229967166083,
+    "spearman_median": -0.2542638607180392,
+    "spearman_min": -0.49214659686085394,
+    "spearman_max": -0.0316719273212685,
+    "top10_overlap_mean": 0.01,
+    "top10_overlap_median": 0.0
+  },
+  "a_optimality_ranking_corrected": {
+    "spearman_mean": 0.06947232984336321,
+    "spearman_median": 0.0821883379223218,
+    "spearman_min": -0.20967548365416927,
+    "spearman_max": 0.5517694534896345,
+    "top10_overlap_mean": 0.016,
+    "top10_overlap_median": 0.0
+  }
+}

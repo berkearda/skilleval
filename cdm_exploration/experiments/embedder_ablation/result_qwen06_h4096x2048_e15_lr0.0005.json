@@ -1,0 +1,38 @@
+{
+  "arm": "qwen06",
+  "model": "Qwen/Qwen3-Embedding-0.6B",
+  "K": 100,
+  "epochs": 15,
+  "text_dim": 1024,
+  "hidden": [
+    4096,
+    2048
+  ],
+  "epochs_run": 15,
+  "lr": 0.0005,
+  "per_seed": [
+    {
+      "seed": 42,
+      "auc": 0.5,
+      "acc": 0.3946344020038692,
+      "routing_acc1": 0.3952755905511811,
+      "best_val_auc": 0.5,
+      "best_epoch": 1
+    }
+  ],
+  "mean_std": {
+    "auc": [
+      0.5,
+      0.0
+    ],
+    "acc": [
+      0.3946344020038692,
+      0.0
+    ],
+    "routing_acc1": [
+      0.3952755905511811,
+      0.0
+    ]
+  },
+  "verified": true
+}

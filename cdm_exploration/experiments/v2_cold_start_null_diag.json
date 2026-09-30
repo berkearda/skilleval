@@ -1,0 +1,18 @@
+{
+  "experiment": "cold_start_null_diagnostic",
+  "n_train_llms": 3048,
+  "n_test_llms": 763,
+  "n_test_items": 1905,
+  "trivial_null_auc": {
+    "mean": 0.8277150609138757,
+    "std": 0.07258558000852014,
+    "p10": 0.6977398757463987,
+    "p50": 0.8509073593073593,
+    "p90": 0.9002058597902949,
+    "min": 0.6115582551306984,
+    "max": 0.9257476755232199
+  },
+  "cdmeval_pop_init_n0_auc": 0.6777818839240876,
+  "cdmeval_zero_init_n0_auc": 0.5401017727269862,
+  "cdmeval_full_training_auc": 0.6998474376086921
+}

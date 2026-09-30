@@ -1,0 +1,1104 @@
+{
+  "experiment": "mastery_definition_compare",
+  "theta_check_reproduces_submitted": true,
+  "predict_checks": {
+    "test_auc": 0.7170450143064919,
+    "test_auc_pass": true,
+    "example": [
+      {
+        "llm": "meta-llama__Llama-3.2-1B",
+        "skill": "Evaluating Truthfulness Of Nested Statements",
+        "theta": 0.7055168747901917,
+        "predicted": 0.2989393943682947,
+        "observed": 0.3680851063829787
+      }
+    ],
+    "cells_disagree_at_0.5": 0.18141695093151403,
+    "r_predicted_observed_cells": 0.9051549918087289
+  },
+  "example_skill": {
+    "skill": "Evaluating Truthfulness Of Nested Statements",
+    "llms": {
+      "meta-llama__Llama-3.2-1B": {
+        "theta": 0.7055168747901917,
+        "predicted": 0.29893940687179565,
+        "observed": 0.3680851063829787
+      },
+      "meta-llama__Llama-3.2-1B-Instruct": {
+        "theta": 0.7890895009040833,
+        "predicted": 0.3655393123626709,
+        "observed": 0.3803191489361702
+      }
+    }
+  },
+  "runs": {
+    "_theta050check": {
+      "mastery": "theta",
+      "cut": 0.5,
+      "graph": {
+        "n_connected_skills": 75,
+        "n_links": 242,
+        "max_depth": 5,
+        "n_roots": 31,
+        "n_leaves": 9,
+        "n_isolated": 25,
+        "spearman_depth_prevalence": -0.6276945541127197,
+        "depth_size_correlation": 0.2061087751234405,
+        "avg_depth_per_benchmark": {
+          "MATH": 1.3548387096774193,
+          "BBH": 0.8095238095238095,
+          "GPQA": 1.1724137931034482,
+          "MuSR": 0.5882352941176471,
+          "IFEval": 0.9354838709677419
+        },
+        "cross_family_jaccard_min": 0.05714285714285714,
+        "cross_family_jaccard_max": 0.2161422708618331,
+        "leaves": [
+          [
+            "Applying Quadratic Formula To Find Roots",
+            0.0005247966413014956
+          ],
+          [
+            "Applying Combinatorial Principles To Dice Rolls",
+            0.0007871949619522435
+          ],
+          [
+            "Applying Set Theory To Count Unique Items",
+            0.0005247966413014956
+          ],
+          [
+            "Applying Trigonometric Identities To Solve Equatio",
+            0.0005247966413014956
+          ],
+          [
+            "Interpreting Numerical Values In Context",
+            0.04145893466281816
+          ],
+          [
+            "Applying Nernst Equation To Redox Potential",
+            0.09078981894515875
+          ],
+          [
+            "Crafting Concise Descriptions Of Professional Acti",
+            0.42797166098136974
+          ],
+          [
+            "Converting Repeating Decimals To Fractions",
+            0.0007871949619522435
+          ],
+          [
+            "Analyzing Fragmentation Patterns In Ei Ms",
+            0.6195224350564157
+          ]
+        ]
+      },
+      "links_shared_with_theta_graph": 242,
+      "link_jaccard_with_theta_graph": 1.0,
+      "depth_spearman_with_theta_graph": 1.0,
+      "prevalence_change_vs_theta_pts": {
+        "median_abs": 0.0,
+        "p90_abs": 0.0,
+        "max_abs": 0.0
+      },
+      "conjunctive": {
+        "tertile": {
+          "n": 2725,
+          "conjunctive": 52.36697247706422,
+          "compensatory": 34.71559633027523,
+          "additive": 12.917431192660551,
+          "per_benchmark_conj_pct": {
+            "BBH": 40.63745019920319,
+            "GPQA": 60.90909090909091,
+            "IFEval": 51.94805194805195,
+            "MATH": 86.85714285714286,
+            "MuSR": 28.089887640449437
+          },
+          "per_benchmark_comp_pct": {
+            "BBH": 45.68393094289509,
+            "GPQA": 23.181818181818183,
+            "IFEval": 35.58441558441559,
+            "MATH": 3.8095238095238093,
+            "MuSR": 56.17977528089887
+          }
+        },
+        "binary": {
+          "n": 680,
+          "conjunctive": 55.88235294117647,
+          "compensatory": 27.794117647058822,
+          "additive": 16.323529411764707
+        },
+        "pattern": {
+          "n": 251,
+          "conjunctive": 18.725099601593627,
+          "compensatory": 64.54183266932272,
+          "additive": 16.733067729083665
+        },
+        "agreement_tertile_pattern": {
+          "n_shared": 233,
+          "n_agree": 90,
+          "agreement_pct": 38.62660944206009
+        },
+        "tertile_reclassified_0.6_to_0.7_pct": 6.458715596330279
+      },
+      "tab_divergent": {
+        "BBH": {
+          "item": 6398,
+          "skill1": "Inferring Time Intervals From Sequential Events",
+          "skill2": "Tracking Object Trades Among Multiple Participants",
+          "both": {
+            "n": 1009,
+            "acc": 0.7423191278493558
+          },
+          "skill1_only": {
+            "n": 1094,
+            "acc": 0.3336380255941499
+          },
+          "skill2_only": {
+            "n": 147,
+            "acc": 0.21768707482993196
+          },
+          "neither": {
+            "n": 1561,
+            "acc": 0.09993593850096093
+          }
+        },
+        "IFEval": {
+          "item": 8261,
+          "skill1": "Maintaining Word Count Constraints In Responses",
+          "skill2": "Adapting Tone For Dialogue In Urdu Language",
+          "both": {
+            "n": 826,
+            "acc": 0.9261501210653753
+          },
+          "skill1_only": {
+            "n": 36,
+            "acc": 0.9722222222222222
+          },
+          "skill2_only": {
+            "n": 1409,
+            "acc": 0.41660752306600424
+          },
+          "neither": {
+            "n": 1540,
+            "acc": 0.12207792207792208
+          }
+        }
+      },
+      "align_delta_by_depth": {
+        "0": {
+          "n": 56,
+          "mean_delta": 0.012401625965788265
+        },
+        "1": {
+          "n": 18,
+          "mean_delta": 0.07878827683458971
+        },
+        "2": {
+          "n": 8,
+          "mean_delta": 0.06874367873094489
+        },
+        "3": {
+          "n": 8,
+          "mean_delta": 0.020188524480971994
+        },
+        "4": {
+          "n": 7,
+          "mean_delta": -0.011750216653445906
+        },
+        "5": {
+          "n": 3,
+          "mean_delta": -0.016796366622656933
+        }
+      },
+      "named_llms_item_6398": {
+        "allenai__Llama-3.1-Tulu-3-70B": {
+          "masters_skill1": true,
+          "masters_skill2": true,
+          "score_skill1": 0.7903650999069214,
+          "score_skill2": 0.5153622627258301,
+          "correct": 1
+        },
+        "Bllossom__llama-3.2-Korean-Bllossom-AICA-5B": {
+          "masters_skill1": true,
+          "masters_skill2": false,
+          "score_skill1": 0.5294743776321411,
+          "score_skill2": 0.4188885986804962,
+          "correct": 0
+        }
+      }
+    },
+    "_predicted040": {
+      "mastery": "predicted",
+      "cut": 0.4,
+      "graph": {
+        "n_connected_skills": 89,
+        "n_links": 391,
+        "max_depth": 6,
+        "n_roots": 19,
+        "n_leaves": 17,
+        "n_isolated": 11,
+        "spearman_depth_prevalence": -0.8887030183172682,
+        "depth_size_correlation": 0.05870965622330404,
+        "avg_depth_per_benchmark": {
+          "MATH": 2.5,
+          "BBH": 1.9523809523809523,
+          "GPQA": 2.2586206896551726,
+          "MuSR": 1.3529411764705883,
+          "IFEval": 1.6290322580645162
+        },
+        "cross_family_jaccard_min": 0.08260869565217391,
+        "cross_family_jaccard_max": 0.2792714657415438,
+        "leaves": [
+          [
+            "Applying Inequality Theorems To Minimize Expressio",
+            0.005247966413014957
+          ],
+          [
+            "Applying Wetting Theory To Liquid Droplets",
+            0.15717659406979795
+          ],
+          [
+            "Evaluating Conditions For Automated Shutdown",
+            0.5819994752033587
+          ],
+          [
+            "Analyzing Geometric Interpretations Of Matrix Oper",
+            0.009446339543426921
+          ],
+          [
+            "Calculating Orbital Period Ratio Between Planets",
+            0.0005247966413014956
+          ],
+          [
+            "Articulating Feature Vs Bug Distinction",
+            0.2587247441616374
+          ],
+          [
+            "Applying Albedo Concepts To Temperature Difference",
+            0.02072946733140908
+          ],
+          [
+            "Identifying Structural Isomers In Organic Compound",
+            0.0002623983206507478
+          ],
+          [
+            "Applying Molarity Concepts To Solution Mixing",
+            0.0026239832065074785
+          ],
+          [
+            "Crafting Concise Descriptions Of Professional Acti",
+            0.2770926266071897
+          ],
+          [
+            "Embedding Comments With Security Keywords In Code ",
+            0.33429546050905273
+          ],
+          [
+            "Separating Versions With Specific Delimiters",
+            0.3335082655471005
+          ],
+          [
+            "Embedding Asterisk Symbols For Visual Separation",
+            0.3741800052479664
+          ],
+          [
+            "Recognizing Symmetry In Two Dimensional Figures",
+            0.005247966413014957
+          ],
+          [
+            "Calculating Oscillation Frequency Of Quantum Parti",
+            0.1891891891891892
+          ],
+          [
+            "Applying Interpolation To Estimate Values",
+            0.007609551298871687
+          ],
+          [
+            "Applying Snell'S Law To Light Refraction In Media",
+            0.02282865389661506
+          ]
+        ]
+      },
+      "links_shared_with_theta_graph": 33,
+      "link_jaccard_with_theta_graph": 0.055,
+      "depth_spearman_with_theta_graph": 0.5522306666368179,
+      "prevalence_change_vs_theta_pts": {
+        "median_abs": 5.562844397795853,
+        "p90_abs": 27.717134610338512,
+        "max_abs": 71.47730254526371
+      },
+      "conjunctive": {
+        "tertile": {
+          "n": 2716,
+          "conjunctive": 52.83505154639175,
+          "compensatory": 34.46244477172312,
+          "additive": 12.702503681885124,
+          "per_benchmark_conj_pct": {
+            "BBH": 41.324503311258276,
+            "GPQA": 58.333333333333336,
+            "IFEval": 53.00261096605744,
+            "MATH": 87.6425855513308,
+            "MuSR": 25.925925925925927
+          },
+          "per_benchmark_comp_pct": {
+            "BBH": 45.629139072847686,
+            "GPQA": 23.14814814814815,
+            "IFEval": 33.68146214099217,
+            "MATH": 3.2319391634980987,
+            "MuSR": 62.96296296296296
+          }
+        },
+        "binary": {
+          "n": 2508,
+          "conjunctive": 46.05263157894737,
+          "compensatory": 36.68261562998405,
+          "additive": 17.26475279106858
+        },
+        "pattern": {
+          "n": 886,
+          "conjunctive": 21.44469525959368,
+          "compensatory": 64.44695259593679,
+          "additive": 14.108352144469526
+        },
+        "agreement_tertile_pattern": {
+          "n_shared": 861,
+          "n_agree": 431,
+          "agreement_pct": 50.05807200929152
+        },
+        "tertile_reclassified_0.6_to_0.7_pct": 6.2960235640648
+      },
+      "tab_divergent": {
+        "BBH": {
+          "item": 6398,
+          "skill1": "Inferring Time Intervals From Sequential Events",
+          "skill2": "Tracking Object Trades Among Multiple Participants",
+          "both": {
+            "n": 245,
+            "acc": 0.9387755102040817
+          },
+          "skill1_only": {
+            "n": 415,
+            "acc": 0.8578313253012049
+          },
+          "skill2_only": {
+            "n": 2,
+            "acc": 1.0
+          },
+          "neither": {
+            "n": 3149,
+            "acc": 0.226738647189584
+          }
+        },
+        "IFEval": {
+          "item": 8261,
+          "skill1": "Maintaining Word Count Constraints In Responses",
+          "skill2": "Adapting Tone For Dialogue In Urdu Language",
+          "both": {
+            "n": 1356,
+            "acc": 0.8303834808259587
+          },
+          "skill1_only": {
+            "n": 117,
+            "acc": 0.6153846153846154
+          },
+          "skill2_only": {
+            "n": 759,
+            "acc": 0.30039525691699603
+          },
+          "neither": {
+            "n": 1579,
+            "acc": 0.09436352121595946
+          }
+        }
+      },
+      "align_delta_by_depth": {
+        "0": {
+          "n": 30,
+          "mean_delta": 0.0067202285271202155
+        },
+        "1": {
+          "n": 27,
+          "mean_delta": 0.0932173806659813
+        },
+        "2": {
+          "n": 11,
+          "mean_delta": 0.034711813569801665
+        },
+        "3": {
+          "n": 2,
+          "mean_delta": 0.004878264803002462
+        },
+        "4": {
+          "n": 19,
+          "mean_delta": -0.019378503639293554
+        },
+        "5": {
+          "n": 9,
+          "mean_delta": -0.005066511046245246
+        },
+        "6": {
+          "n": 2,
+          "mean_delta": -0.0023876988730698037
+        }
+      },
+      "named_llms_item_6398": {
+        "allenai__Llama-3.1-Tulu-3-70B": {
+          "masters_skill1": true,
+          "masters_skill2": false,
+          "score_skill1": 0.4808143377304077,
+          "score_skill2": 0.360592246055603,
+          "correct": 1
+        },
+        "Bllossom__llama-3.2-Korean-Bllossom-AICA-5B": {
+          "masters_skill1": false,
+          "masters_skill2": false,
+          "score_skill1": 0.23877859115600586,
+          "score_skill2": 0.23845970630645752,
+          "correct": 0
+        }
+      }
+    },
+    "_predicted050": {
+      "mastery": "predicted",
+      "cut": 0.5,
+      "graph": {
+        "n_connected_skills": 86,
+        "n_links": 304,
+        "max_depth": 5,
+        "n_roots": 18,
+        "n_leaves": 13,
+        "n_isolated": 14,
+        "spearman_depth_prevalence": -0.78834310034975,
+        "depth_size_correlation": 0.22421028002630505,
+        "avg_depth_per_benchmark": {
+          "MATH": 2.403225806451613,
+          "BBH": 2.0476190476190474,
+          "GPQA": 1.9482758620689655,
+          "MuSR": 1.5294117647058822,
+          "IFEval": 1.7741935483870968
+        },
+        "cross_family_jaccard_min": 0.09437086092715231,
+        "cross_family_jaccard_max": 0.3055555555555556,
+        "leaves": [
+          [
+            "Applying Inequality Theorems To Minimize Expressio",
+            0.0002623983206507478
+          ],
+          [
+            "Analyzing Coordinates To Determine Shape Type",
+            0.0002623983206507478
+          ],
+          [
+            "Applying Linear Combination Of Operators In Quantu",
+            0.004460771451062713
+          ],
+          [
+            "Analyzing Geometric Interpretations Of Matrix Oper",
+            0.0010495932826029913
+          ],
+          [
+            "Applying Recursion To Define Number Sequences",
+            0.0007871949619522435
+          ],
+          [
+            "Applying Albedo Concepts To Temperature Difference",
+            0.0010495932826029913
+          ],
+          [
+            "Applying Molarity Concepts To Solution Mixing",
+            0.0002623983206507478
+          ],
+          [
+            "Crafting Concise Descriptions Of Professional Acti",
+            0.14458147467856206
+          ],
+          [
+            "Recognizing Symmetry In Two Dimensional Figures",
+            0.0002623983206507478
+          ],
+          [
+            "Calculating Eigenvalues Of Quantum Operators",
+            0.0007871949619522435
+          ],
+          [
+            "Applying Interpolation To Estimate Values",
+            0.0013119916032537393
+          ],
+          [
+            "Applying Snell'S Law To Light Refraction In Media",
+            0.0005247966413014956
+          ],
+          [
+            "Balancing Instrumentation For Optimal Sound Qualit",
+            0.007084754657570191
+          ]
+        ]
+      },
+      "links_shared_with_theta_graph": 28,
+      "link_jaccard_with_theta_graph": 0.05405405405405406,
+      "depth_spearman_with_theta_graph": 0.5551855950374752,
+      "prevalence_change_vs_theta_pts": {
+        "median_abs": 8.055628443977959,
+        "p90_abs": 48.769351876148,
+        "max_abs": 75.3345578588297
+      },
+      "conjunctive": {
+        "tertile": {
+          "n": 2716,
+          "conjunctive": 52.83505154639175,
+          "compensatory": 34.46244477172312,
+          "additive": 12.702503681885124,
+          "per_benchmark_conj_pct": {
+            "BBH": 41.324503311258276,
+            "GPQA": 58.333333333333336,
+            "IFEval": 53.00261096605744,
+            "MATH": 87.6425855513308,
+            "MuSR": 25.925925925925927
+          },
+          "per_benchmark_comp_pct": {
+            "BBH": 45.629139072847686,
+            "GPQA": 23.14814814814815,
+            "IFEval": 33.68146214099217,
+            "MATH": 3.2319391634980987,
+            "MuSR": 62.96296296296296
+          }
+        },
+        "binary": {
+          "n": 1934,
+          "conjunctive": 33.86763185108583,
+          "compensatory": 48.345398138572904,
+          "additive": 17.78697001034126
+        },
+        "pattern": {
+          "n": 805,
+          "conjunctive": 12.049689440993788,
+          "compensatory": 78.63354037267081,
+          "additive": 9.316770186335404
+        },
+        "agreement_tertile_pattern": {
+          "n_shared": 789,
+          "n_agree": 507,
+          "agreement_pct": 64.25855513307985
+        },
+        "tertile_reclassified_0.6_to_0.7_pct": 6.2960235640648
+      },
+      "tab_divergent": {
+        "BBH": {
+          "item": 6398,
+          "skill1": "Inferring Time Intervals From Sequential Events",
+          "skill2": "Tracking Object Trades Among Multiple Participants",
+          "both": {
+            "n": 0,
+            "acc": null
+          },
+          "skill1_only": {
+            "n": 164,
+            "acc": 0.9695121951219512
+          },
+          "skill2_only": {
+            "n": 0,
+            "acc": null
+          },
+          "neither": {
+            "n": 3647,
+            "acc": 0.31340828077872224
+          }
+        },
+        "IFEval": {
+          "item": 8261,
+          "skill1": "Maintaining Word Count Constraints In Responses",
+          "skill2": "Adapting Tone For Dialogue In Urdu Language",
+          "both": {
+            "n": 972,
+            "acc": 0.9002057613168725
+          },
+          "skill1_only": {
+            "n": 95,
+            "acc": 0.8105263157894737
+          },
+          "skill2_only": {
+            "n": 757,
+            "acc": 0.4715984147952444
+          },
+          "neither": {
+            "n": 1987,
+            "acc": 0.1338701560140916
+          }
+        }
+      },
+      "align_delta_by_depth": {
+        "0": {
+          "n": 32,
+          "mean_delta": 0.005910972787531159
+        },
+        "1": {
+          "n": 13,
+          "mean_delta": 0.06903058490648482
+        },
+        "2": {
+          "n": 19,
+          "mean_delta": 0.10072027805290891
+        },
+        "3": {
+          "n": 18,
+          "mean_delta": -0.0071087402686843115
+        },
+        "4": {
+          "n": 13,
+          "mean_delta": -0.01208014343461687
+        },
+        "5": {
+          "n": 5,
+          "mean_delta": -0.004747556028846309
+        }
+      },
+      "named_llms_item_6398": {
+        "allenai__Llama-3.1-Tulu-3-70B": {
+          "masters_skill1": false,
+          "masters_skill2": false,
+          "score_skill1": 0.4808143377304077,
+          "score_skill2": 0.360592246055603,
+          "correct": 1
+        },
+        "Bllossom__llama-3.2-Korean-Bllossom-AICA-5B": {
+          "masters_skill1": false,
+          "masters_skill2": false,
+          "score_skill1": 0.23877859115600586,
+          "score_skill2": 0.23845970630645752,
+          "correct": 0
+        }
+      }
+    },
+    "_predicted060": {
+      "mastery": "predicted",
+      "cut": 0.6,
+      "graph": {
+        "n_connected_skills": 68,
+        "n_links": 209,
+        "max_depth": 5,
+        "n_roots": 10,
+        "n_leaves": 14,
+        "n_isolated": 32,
+        "spearman_depth_prevalence": -0.7626763276045884,
+        "depth_size_correlation": 0.2589738463387989,
+        "avg_depth_per_benchmark": {
+          "MATH": 1.8870967741935485,
+          "BBH": 1.7619047619047619,
+          "GPQA": 1.5344827586206897,
+          "MuSR": 1.7647058823529411,
+          "IFEval": 1.7903225806451613
+        },
+        "cross_family_jaccard_min": 0.085995085995086,
+        "cross_family_jaccard_max": 0.20159680638722555,
+        "leaves": [
+          [
+            "Applying Wetting Theory To Liquid Droplets",
+            0.010233534505379166
+          ],
+          [
+            "Evaluating Sporting Event Plausibility Based On Co",
+            0.0028863815271582263
+          ],
+          [
+            "Applying Combinatorial Principles To Dice Rolls",
+            0.0026239832065074785
+          ],
+          [
+            "Applying Divisibility Rules To Integer Sets",
+            0.0002623983206507478
+          ],
+          [
+            "Analyzing Effects Of Vertical Stretch On Graphs",
+            0.0002623983206507478
+          ],
+          [
+            "Applying Relativity To Calculate Velocity Vectors",
+            0.003148779847808974
+          ],
+          [
+            "Identifying Mutations In Nucleotide Sequences",
+            0.0023615848858567303
+          ],
+          [
+            "Analyzing Door Count Distribution In Car Types",
+            0.0036735764891104696
+          ],
+          [
+            "Applying Maxwell Equations To Electromagnetic Fiel",
+            0.008921542902125426
+          ],
+          [
+            "Analyzing Surface Properties Of Materials",
+            0.0007871949619522435
+          ],
+          [
+            "Calculating Oscillation Frequency Of Quantum Parti",
+            0.031225400157438993
+          ],
+          [
+            "Evaluating Possible Storage Options Based On Story",
+            0.003148779847808974
+          ],
+          [
+            "Applying Mott Gurney Equation To Device Characteri",
+            0.006559958016268696
+          ],
+          [
+            "Ensuring Consistent Section Headers In Document St",
+            0.005772763054316453
+          ]
+        ]
+      },
+      "links_shared_with_theta_graph": 18,
+      "link_jaccard_with_theta_graph": 0.04157043879907621,
+      "depth_spearman_with_theta_graph": 0.10444390094958028,
+      "prevalence_change_vs_theta_pts": {
+        "median_abs": 14.012070322749937,
+        "p90_abs": 67.97953293098925,
+        "max_abs": 98.0320125951194
+      },
+      "conjunctive": {
+        "tertile": {
+          "n": 2716,
+          "conjunctive": 52.83505154639175,
+          "compensatory": 34.46244477172312,
+          "additive": 12.702503681885124,
+          "per_benchmark_conj_pct": {
+            "BBH": 41.324503311258276,
+            "GPQA": 58.333333333333336,
+            "IFEval": 53.00261096605744,
+            "MATH": 87.6425855513308,
+            "MuSR": 25.925925925925927
+          },
+          "per_benchmark_comp_pct": {
+            "BBH": 45.629139072847686,
+            "GPQA": 23.14814814814815,
+            "IFEval": 33.68146214099217,
+            "MATH": 3.2319391634980987,
+            "MuSR": 62.96296296296296
+          }
+        },
+        "binary": {
+          "n": 1292,
+          "conjunctive": 21.594427244582043,
+          "compensatory": 64.0092879256966,
+          "additive": 14.396284829721361
+        },
+        "pattern": {
+          "n": 500,
+          "conjunctive": 9.4,
+          "compensatory": 84.2,
+          "additive": 6.4
+        },
+        "agreement_tertile_pattern": {
+          "n_shared": 476,
+          "n_agree": 256,
+          "agreement_pct": 53.78151260504202
+        },
+        "tertile_reclassified_0.6_to_0.7_pct": 6.2960235640648
+      },
+      "tab_divergent": {
+        "BBH": {
+          "item": 6398,
+          "skill1": "Inferring Time Intervals From Sequential Events",
+          "skill2": "Tracking Object Trades Among Multiple Participants",
+          "both": {
+            "n": 0,
+            "acc": null
+          },
+          "skill1_only": {
+            "n": 0,
+            "acc": null
+          },
+          "skill2_only": {
+            "n": 0,
+            "acc": null
+          },
+          "neither": {
+            "n": 3811,
+            "acc": 0.3416426134872737
+          }
+        },
+        "IFEval": {
+          "item": 8261,
+          "skill1": "Maintaining Word Count Constraints In Responses",
+          "skill2": "Adapting Tone For Dialogue In Urdu Language",
+          "both": {
+            "n": 616,
+            "acc": 0.9415584415584416
+          },
+          "skill1_only": {
+            "n": 89,
+            "acc": 0.9662921348314607
+          },
+          "skill2_only": {
+            "n": 618,
+            "acc": 0.6504854368932039
+          },
+          "neither": {
+            "n": 2488,
+            "acc": 0.2037781350482315
+          }
+        }
+      },
+      "align_delta_by_depth": {
+        "0": {
+          "n": 42,
+          "mean_delta": -0.0067771454228447835
+        },
+        "1": {
+          "n": 14,
+          "mean_delta": 0.04818058275932617
+        },
+        "2": {
+          "n": 9,
+          "mean_delta": 0.15425540855798273
+        },
+        "3": {
+          "n": 16,
+          "mean_delta": 0.06039863649716103
+        },
+        "4": {
+          "n": 12,
+          "mean_delta": -0.004117521458146979
+        },
+        "5": {
+          "n": 7,
+          "mean_delta": -0.0005225154271060231
+        }
+      },
+      "named_llms_item_6398": {
+        "allenai__Llama-3.1-Tulu-3-70B": {
+          "masters_skill1": false,
+          "masters_skill2": false,
+          "score_skill1": 0.4808143377304077,
+          "score_skill2": 0.360592246055603,
+          "correct": 1
+        },
+        "Bllossom__llama-3.2-Korean-Bllossom-AICA-5B": {
+          "masters_skill1": false,
+          "masters_skill2": false,
+          "score_skill1": 0.23877859115600586,
+          "score_skill2": 0.23845970630645752,
+          "correct": 0
+        }
+      }
+    },
+    "_observed050": {
+      "mastery": "observed",
+      "cut": 0.5,
+      "graph": {
+        "n_connected_skills": 86,
+        "n_links": 278,
+        "max_depth": 6,
+        "n_roots": 20,
+        "n_leaves": 13,
+        "n_isolated": 14,
+        "spearman_depth_prevalence": -0.7126804843136089,
+        "depth_size_correlation": 0.2418762356109599,
+        "avg_depth_per_benchmark": {
+          "MATH": 3.0806451612903225,
+          "BBH": 2.2142857142857144,
+          "GPQA": 2.4655172413793105,
+          "MuSR": 1.5294117647058822,
+          "IFEval": 2.1129032258064515
+        },
+        "cross_family_jaccard_min": 0.06738131699846861,
+        "cross_family_jaccard_max": 0.21614583333333334,
+        "leaves": [
+          [
+            "Applying Inequality Theorems To Minimize Expressio",
+            0.0013119916032537393
+          ],
+          [
+            "Applying Linear Combination Of Operators In Quantu",
+            0.0026239832065074785
+          ],
+          [
+            "Interpreting Numerical Values In Context",
+            0.0002623983206507478
+          ],
+          [
+            "Analyzing Geometric Interpretations Of Matrix Oper",
+            0.0007871949619522435
+          ],
+          [
+            "Analyzing Effects Of Vertical Stretch On Graphs",
+            0.0020991865652059826
+          ],
+          [
+            "Applying Properties Of Rectangles To Find Dimensio",
+            0.0002623983206507478
+          ],
+          [
+            "Applying Nernst Equation To Redox Potential",
+            0.006559958016268696
+          ],
+          [
+            "Applying Recursion To Define Number Sequences",
+            0.0010495932826029913
+          ],
+          [
+            "Tracking Object Trades Among Multiple Participants",
+            0.0010495932826029913
+          ],
+          [
+            "Applying Pattern Recognition To Algorithmic Output",
+            0.007609551298871687
+          ],
+          [
+            "Calculating Eigenvalues Of Quantum Operators",
+            0.005247966413014957
+          ],
+          [
+            "Applying Interpolation To Estimate Values",
+            0.0023615848858567303
+          ],
+          [
+            "Ensuring Consistent Section Headers In Document St",
+            0.006559958016268696
+          ]
+        ]
+      },
+      "links_shared_with_theta_graph": 21,
+      "link_jaccard_with_theta_graph": 0.04208416833667335,
+      "depth_spearman_with_theta_graph": 0.49873052211260804,
+      "prevalence_change_vs_theta_pts": {
+        "median_abs": 10.46969299396484,
+        "p90_abs": 43.030700603516145,
+        "max_abs": 75.59695617948046
+      },
+      "conjunctive": {
+        "tertile": {
+          "n": 2801,
+          "conjunctive": 51.695822920385574,
+          "compensatory": 34.59478757586576,
+          "additive": 13.70938950374866,
+          "per_benchmark_conj_pct": {
+            "BBH": 41.71539961013645,
+            "GPQA": 46.18473895582329,
+            "IFEval": 51.42118863049095,
+            "MATH": 86.50646950092421,
+            "MuSR": 28.235294117647058
+          },
+          "per_benchmark_comp_pct": {
+            "BBH": 44.83430799220273,
+            "GPQA": 31.325301204819276,
+            "IFEval": 33.59173126614987,
+            "MATH": 3.8817005545286505,
+            "MuSR": 58.8235294117647
+          }
+        },
+        "binary": {
+          "n": 2061,
+          "conjunctive": 34.10965550703542,
+          "compensatory": 47.50121300339641,
+          "additive": 18.38913148956817
+        },
+        "pattern": {
+          "n": 868,
+          "conjunctive": 13.709677419354838,
+          "compensatory": 76.84331797235023,
+          "additive": 9.44700460829493
+        },
+        "agreement_tertile_pattern": {
+          "n_shared": 851,
+          "n_agree": 517,
+          "agreement_pct": 60.752056404230316
+        },
+        "tertile_reclassified_0.6_to_0.7_pct": 5.498036415565867
+      },
+      "tab_divergent": {
+        "BBH": {
+          "item": 6398,
+          "skill1": "Inferring Time Intervals From Sequential Events",
+          "skill2": "Tracking Object Trades Among Multiple Participants",
+          "both": {
+            "n": 4,
+            "acc": 1.0
+          },
+          "skill1_only": {
+            "n": 160,
+            "acc": 0.96875
+          },
+          "skill2_only": {
+            "n": 0,
+            "acc": null
+          },
+          "neither": {
+            "n": 3647,
+            "acc": 0.31340828077872224
+          }
+        },
+        "IFEval": {
+          "item": 8261,
+          "skill1": "Maintaining Word Count Constraints In Responses",
+          "skill2": "Adapting Tone For Dialogue In Urdu Language",
+          "both": {
+            "n": 1102,
+            "acc": 0.8865698729582577
+          },
+          "skill1_only": {
+            "n": 54,
+            "acc": 0.6111111111111112
+          },
+          "skill2_only": {
+            "n": 804,
+            "acc": 0.47761194029850745
+          },
+          "neither": {
+            "n": 1851,
+            "acc": 0.097784981091302
+          }
+        }
+      },
+      "align_delta_by_depth": {
+        "0": {
+          "n": 34,
+          "mean_delta": 0.009559992450229267
+        },
+        "1": {
+          "n": 11,
+          "mean_delta": 0.08896474183056771
+        },
+        "2": {
+          "n": 17,
+          "mean_delta": 0.10300704072492577
+        },
+        "3": {
+          "n": 7,
+          "mean_delta": 0.010585751180481148
+        },
+        "4": {
+          "n": 7,
+          "mean_delta": -0.014264463409050522
+        },
+        "5": {
+          "n": 11,
+          "mean_delta": -0.02223620951837402
+        },
+        "6": {
+          "n": 13,
+          "mean_delta": -0.007148096854282891
+        }
+      },
+      "named_llms_item_6398": {
+        "allenai__Llama-3.1-Tulu-3-70B": {
+          "masters_skill1": true,
+          "masters_skill2": false,
+          "score_skill1": 0.5021097046413502,
+          "score_skill2": 0.4166666666666667,
+          "correct": 1
+        },
+        "Bllossom__llama-3.2-Korean-Bllossom-AICA-5B": {
+          "masters_skill1": false,
+          "masters_skill2": false,
+          "score_skill1": 0.23523206751054854,
+          "score_skill2": 0.3134920634920635,
+          "correct": 0
+        }
+      }
+    }
+  },
+  "verified": true
+}

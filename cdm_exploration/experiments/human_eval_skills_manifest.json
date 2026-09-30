@@ -1,0 +1,20 @@
+{
+  "artifact": "human_eval_skills_csv",
+  "date": "2026-07-26",
+  "seed": 42,
+  "sampling": "uniform random per cluster, seed 42+skill_id, no curation",
+  "n_skills": 100,
+  "n_rows": 780,
+  "n_truncated_texts": 180,
+  "n_missing_texts": 0,
+  "max_chars": 700,
+  "judging_question": "Does solving this question genuinely require the named skill? Answer yes or no in skill_needed_yes_no.",
+  "comparable_llm_number": "wmean_all100=0.834 micro / mean_all100=0.815 macro (gpt-4o-mini); wmean_big=0.820 micro / mean_big=0.796 macro (gpt-4.1-mini, judge_big.log)",
+  "sources": [
+    "qmatrix_v2_K100.npy",
+    "cluster_labels_v2_K100.json",
+    "item_full_text_recovered.json",
+    "oldtax_repaired_FINAL.json",
+    "oldtax_final.json"
+  ]
+}

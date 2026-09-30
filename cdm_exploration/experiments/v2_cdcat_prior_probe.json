@@ -1,0 +1,19 @@
+{
+  "experiment": "cdcat_prior_probe",
+  "checkpoint": "text_conditioned_protocolB_llmsplit3048.pt",
+  "n_train_llms": 3048,
+  "starts": {
+    "all_0.5": {
+      "auc_mean_all_763": 0.5467333251690784,
+      "auc_std_all_763": 0.01738990100000744,
+      "auc_mean_first_50": 0.5495970573295589
+    },
+    "population_mean": {
+      "auc_mean_all_763": 0.6749783100087375,
+      "auc_std_all_763": 0.02185092956759819,
+      "auc_mean_first_50": 0.6764619835185968
+    }
+  },
+  "reproduces_registered_N0": 0.5467338858929162,
+  "verified": true
+}

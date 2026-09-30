@@ -1,0 +1,64 @@
+{
+  "experiment": "pareto_costfix_summary",
+  "n_llms_repriced": 4,
+  "note": "four LLMs re-priced; see price_corrections in v2_pareto_costfix.json",
+  "main_model": {
+    "parity": {
+      "threshold": 0.9,
+      "accuracy": 0.6204724409448819,
+      "cost_pct": 33.04845077057679,
+      "acc_pct_of_strongest": 100.76726342710998
+    },
+    "tau095": {
+      "threshold": 0.95,
+      "accuracy": 0.6425196850393701,
+      "cost_pct": 37.25907934585108,
+      "acc_pct_of_strongest": 104.34782608695653
+    },
+    "tau080": {
+      "threshold": 0.8,
+      "accuracy": 0.5963254593175853,
+      "cost_pct": 25.170321690557923,
+      "acc_pct_of_strongest": 96.845694799659
+    },
+    "tau095_points_over_strongest": 2.677165354330713,
+    "tau095_cost_reduction_pct": 62.74092065414892,
+    "submitted_prices_tau080": {
+      "threshold": 0.8,
+      "accuracy": 0.6152230971128609,
+      "cost_pct": 24.962946362473904,
+      "acc_pct_of_strongest": 99.91474850809891
+    }
+  },
+  "five_seed": {
+    "parity": {
+      "threshold": 0.95,
+      "acc_mean": 0.6171128608923884,
+      "acc_sd_sample": 0.018464711500048678,
+      "cost_pct_mean": 38.07844404064872,
+      "cost_pct_sd_sample": 1.0080277053214883,
+      "acc_pct_of_strongest": 100.22165387894287
+    }
+  },
+  "irtnet_d232": {
+    "parity": {
+      "threshold": 0.8,
+      "accuracy": 0.6272965879265092,
+      "cost_pct": 43.133812504206205,
+      "acc_pct_of_strongest": 101.8755328218244
+    },
+    "n_points_dominated_by_skilleval_or_knn": 15,
+    "n_points": 18
+  },
+  "knn_k10": {
+    "best_point": {
+      "threshold": 0.9,
+      "accuracy": 0.5994750656167979,
+      "cost_pct": 19.175344235816688,
+      "acc_pct_of_strongest": 97.35720375106565
+    },
+    "best_acc_pct_of_strongest": 97.35720375106565,
+    "reaches_strongest": false
+  },
+  "verified": true
+}

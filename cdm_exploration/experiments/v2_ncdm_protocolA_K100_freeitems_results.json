@@ -1,0 +1,20 @@
+{
+  "K": 100,
+  "seed": 42,
+  "protocol": "A",
+  "split": "interaction_wise_80_10_10",
+  "n_total_triplets": 36292153,
+  "n_train_triplets": 29033721,
+  "n_val_triplets": 3629216,
+  "n_test_triplets": 3629216,
+  "test_auc": 0.8524013767764622,
+  "test_acc": 0.783144624073078,
+  "test_rmse": 0.38716338396397876,
+  "n_llms": 3811,
+  "n_items": 9523,
+  "epochs": 15,
+  "lr": 0.002,
+  "model": "FreeItemNCDM",
+  "free_items": true,
+  "batch_size": 64
+}

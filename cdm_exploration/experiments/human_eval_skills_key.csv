@@ -1,0 +1,781 @@
+skill_id,item_idx,_benchmark,_subtask,_n_in_skill
+1,1742,BBH,date_understanding,948
+1,5882,BBH,temporal_sequences,948
+1,6027,BBH,temporal_sequences,948
+1,6134,BBH,tracking_shuffled_objects_five_objects,948
+1,6259,BBH,tracking_shuffled_objects_five_objects,948
+1,6489,BBH,tracking_shuffled_objects_seven_objects,948
+1,6515,BBH,tracking_shuffled_objects_seven_objects,948
+1,6518,BBH,tracking_shuffled_objects_seven_objects,948
+1,6596,BBH,tracking_shuffled_objects_three_objects,948
+1,6643,BBH,tracking_shuffled_objects_three_objects,948
+2,112,MATH,Algebra,121
+2,207,MATH,Algebra,121
+2,255,MATH,Algebra,121
+2,451,MATH,Geometry,121
+2,595,MATH,Intermediate Algebra,121
+2,606,MATH,Intermediate Algebra,121
+2,670,MATH,Intermediate Algebra,121
+2,677,MATH,Intermediate Algebra,121
+2,771,MATH,Intermediate Algebra,121
+2,7146,GPQA,Diamond,121
+3,91,MATH,Algebra,648
+3,303,MATH,Algebra,648
+3,391,MATH,Counting & Probability,648
+3,1014,MATH,Prealgebra,648
+3,1057,MATH,Prealgebra,648
+3,1137,MATH,Prealgebra,648
+3,1238,MATH,Precalculus,648
+3,2524,BBH,geometric_shapes,648
+3,2592,BBH,geometric_shapes,648
+3,2596,BBH,geometric_shapes,648
+4,7077,GPQA,Diamond,174
+4,7147,GPQA,Diamond,174
+4,7253,GPQA,Extended,174
+4,7428,GPQA,Extended,174
+4,7747,GPQA,Extended,174
+4,7953,GPQA,Main,174
+4,7969,GPQA,Main,174
+4,8071,GPQA,Main,174
+4,8073,GPQA,Main,174
+4,8162,GPQA,Main,174
+5,7269,GPQA,Extended,21
+5,7374,GPQA,Extended,21
+5,7437,GPQA,Extended,21
+5,7600,GPQA,Extended,21
+5,7712,GPQA,Extended,21
+5,7743,GPQA,Extended,21
+5,7787,GPQA,Main,21
+5,7806,GPQA,Main,21
+5,7882,GPQA,Main,21
+5,8098,GPQA,Main,21
+6,5551,BBH,sports_understanding,831
+6,5613,BBH,sports_understanding,831
+6,5725,BBH,sports_understanding,831
+6,5739,BBH,sports_understanding,831
+6,6556,BBH,tracking_shuffled_objects_three_objects,831
+6,6694,BBH,tracking_shuffled_objects_three_objects,831
+6,6749,BBH,tracking_shuffled_objects_three_objects,831
+6,8294,IFEval,IFEval,831
+6,9420,MuSR,Team Allocation,831
+6,9504,MuSR,Team Allocation,831
+7,51,MATH,Algebra,451
+7,65,MATH,Algebra,451
+7,100,MATH,Algebra,451
+7,297,MATH,Algebra,451
+7,552,MATH,Intermediate Algebra,451
+7,603,MATH,Intermediate Algebra,451
+7,672,MATH,Intermediate Algebra,451
+7,708,MATH,Intermediate Algebra,451
+7,1080,MATH,Prealgebra,451
+7,1224,MATH,Precalculus,451
+8,2067,BBH,disambiguation_qa,1359
+8,3907,BBH,movie_recommendation,1359
+8,3956,BBH,movie_recommendation,1359
+8,5863,BBH,temporal_sequences,1359
+8,5896,BBH,temporal_sequences,1359
+8,6008,BBH,temporal_sequences,1359
+8,8642,IFEval,IFEval,1359
+8,8786,MuSR,Murder Mysteries,1359
+8,8870,MuSR,Murder Mysteries,1359
+8,9145,MuSR,Object Placements,1359
+9,8365,IFEval,IFEval,85
+9,8431,IFEval,IFEval,85
+9,8437,IFEval,IFEval,85
+9,8445,IFEval,IFEval,85
+9,8561,IFEval,IFEval,85
+9,8627,IFEval,IFEval,85
+9,8649,IFEval,IFEval,85
+9,8714,IFEval,IFEval,85
+9,8735,IFEval,IFEval,85
+9,8742,IFEval,IFEval,85
+10,306,MATH,Counting & Probability,113
+10,311,MATH,Counting & Probability,113
+10,359,MATH,Counting & Probability,113
+10,381,MATH,Counting & Probability,113
+10,388,MATH,Counting & Probability,113
+10,406,MATH,Counting & Probability,113
+10,412,MATH,Counting & Probability,113
+10,1148,MATH,Prealgebra,113
+10,7847,GPQA,Main,113
+10,8165,GPQA,Main,113
+11,308,MATH,Counting & Probability,186
+11,425,MATH,Counting & Probability,186
+11,4254,BBH,object_counting,186
+11,4316,BBH,object_counting,186
+11,4336,BBH,object_counting,186
+11,4354,BBH,object_counting,186
+11,4362,BBH,object_counting,186
+11,4432,BBH,object_counting,186
+11,7884,GPQA,Main,186
+11,7999,GPQA,Main,186
+12,1057,MATH,Prealgebra,83
+12,1167,MATH,Precalculus,83
+12,1190,MATH,Precalculus,83
+12,1198,MATH,Precalculus,83
+12,1210,MATH,Precalculus,83
+12,1230,MATH,Precalculus,83
+12,1244,MATH,Precalculus,83
+12,1250,MATH,Precalculus,83
+12,1251,MATH,Precalculus,83
+12,1274,MATH,Precalculus,83
+13,1085,MATH,Prealgebra,207
+13,1115,MATH,Prealgebra,207
+13,1529,BBH,causal_judgement,207
+13,1564,BBH,causal_judgement,207
+13,1584,BBH,causal_judgement,207
+13,1589,BBH,causal_judgement,207
+13,1637,BBH,causal_judgement,207
+13,1657,BBH,causal_judgement,207
+13,8615,IFEval,IFEval,207
+13,8763,IFEval,IFEval,207
+14,1528,BBH,causal_judgement,25
+14,1540,BBH,causal_judgement,25
+14,1560,BBH,causal_judgement,25
+14,1591,BBH,causal_judgement,25
+14,1629,BBH,causal_judgement,25
+14,1647,BBH,causal_judgement,25
+14,1662,BBH,causal_judgement,25
+14,1666,BBH,causal_judgement,25
+14,1706,BBH,causal_judgement,25
+14,9451,MuSR,Team Allocation,25
+15,7050,GPQA,Diamond,112
+15,7107,GPQA,Diamond,112
+15,7345,GPQA,Extended,112
+15,7463,GPQA,Extended,112
+15,7487,GPQA,Extended,112
+15,7557,GPQA,Extended,112
+15,7669,GPQA,Extended,112
+15,7717,GPQA,Extended,112
+15,7799,GPQA,Main,112
+15,7815,GPQA,Main,112
+16,867,MATH,Number Theory,69
+16,7088,GPQA,Diamond,69
+16,7142,GPQA,Diamond,69
+16,7218,GPQA,Diamond,69
+16,7219,GPQA,Diamond,69
+16,7231,GPQA,Diamond,69
+16,7954,GPQA,Main,69
+16,7992,GPQA,Main,69
+16,8149,GPQA,Main,69
+16,8185,GPQA,Main,69
+17,70,MATH,Algebra,56
+17,169,MATH,Algebra,56
+17,471,MATH,Geometry,56
+17,746,MATH,Intermediate Algebra,56
+17,1156,MATH,Precalculus,56
+17,1193,MATH,Precalculus,56
+17,1235,MATH,Precalculus,56
+17,1239,MATH,Precalculus,56
+17,1246,MATH,Precalculus,56
+17,1271,MATH,Precalculus,56
+18,402,MATH,Counting & Probability,61
+18,480,MATH,Geometry,61
+18,484,MATH,Geometry,61
+18,513,MATH,Geometry,61
+18,526,MATH,Geometry,61
+18,540,MATH,Geometry,61
+18,967,MATH,Prealgebra,61
+18,968,MATH,Prealgebra,61
+18,1050,MATH,Prealgebra,61
+18,7332,GPQA,Extended,61
+19,4481,BBH,penguins_in_a_table,127
+19,4485,BBH,penguins_in_a_table,127
+19,4497,BBH,penguins_in_a_table,127
+19,4502,BBH,penguins_in_a_table,127
+19,4536,BBH,penguins_in_a_table,127
+19,4546,BBH,penguins_in_a_table,127
+19,4569,BBH,penguins_in_a_table,127
+19,4591,BBH,penguins_in_a_table,127
+19,4592,BBH,penguins_in_a_table,127
+19,7219,GPQA,Diamond,127
+20,131,MATH,Algebra,225
+20,371,MATH,Counting & Probability,225
+20,381,MATH,Counting & Probability,225
+20,629,MATH,Intermediate Algebra,225
+20,816,MATH,Number Theory,225
+20,829,MATH,Number Theory,225
+20,866,MATH,Number Theory,225
+20,908,MATH,Number Theory,225
+20,945,MATH,Number Theory,225
+20,1086,MATH,Prealgebra,225
+21,3128,BBH,logical_deduction_five_objects,1330
+21,3134,BBH,logical_deduction_five_objects,1330
+21,3157,BBH,logical_deduction_five_objects,1330
+21,3486,BBH,logical_deduction_three_objects,1330
+21,3590,BBH,logical_deduction_three_objects,1330
+21,3674,BBH,logical_deduction_three_objects,1330
+21,4738,BBH,reasoning_about_colored_objects,1330
+21,4856,BBH,reasoning_about_colored_objects,1330
+21,4858,BBH,reasoning_about_colored_objects,1330
+21,6272,BBH,tracking_shuffled_objects_five_objects,1330
+22,8250,IFEval,IFEval,68
+22,8379,IFEval,IFEval,68
+22,8389,IFEval,IFEval,68
+22,8463,IFEval,IFEval,68
+22,8575,IFEval,IFEval,68
+22,8606,IFEval,IFEval,68
+22,8656,IFEval,IFEval,68
+22,8703,IFEval,IFEval,68
+22,8717,IFEval,IFEval,68
+22,8748,IFEval,IFEval,68
+23,1588,BBH,causal_judgement,17
+23,1608,BBH,causal_judgement,17
+23,1609,BBH,causal_judgement,17
+23,1657,BBH,causal_judgement,17
+23,1660,BBH,causal_judgement,17
+23,1661,BBH,causal_judgement,17
+23,1673,BBH,causal_judgement,17
+23,7712,GPQA,Extended,17
+23,8339,IFEval,IFEval,17
+23,9440,MuSR,Team Allocation,17
+24,8273,IFEval,IFEval,418
+24,8397,IFEval,IFEval,418
+24,8403,IFEval,IFEval,418
+24,8425,IFEval,IFEval,418
+24,8434,IFEval,IFEval,418
+24,8520,IFEval,IFEval,418
+24,8526,IFEval,IFEval,418
+24,8595,IFEval,IFEval,418
+24,8745,IFEval,IFEval,418
+24,8746,IFEval,IFEval,418
+25,49,MATH,Algebra,25
+25,70,MATH,Algebra,25
+25,111,MATH,Algebra,25
+25,219,MATH,Algebra,25
+25,984,MATH,Prealgebra,25
+25,1022,MATH,Prealgebra,25
+25,1091,MATH,Prealgebra,25
+25,1241,MATH,Precalculus,25
+25,6439,BBH,tracking_shuffled_objects_seven_objects,25
+25,7582,GPQA,Extended,25
+26,7312,GPQA,Extended,134
+26,7667,GPQA,Extended,134
+26,7703,GPQA,Extended,134
+26,7822,GPQA,Main,134
+26,7920,GPQA,Main,134
+26,8072,GPQA,Main,134
+26,8079,GPQA,Main,134
+26,8143,GPQA,Main,134
+26,8144,GPQA,Main,134
+26,8204,GPQA,Main,134
+27,31,MATH,Algebra,30
+27,50,MATH,Algebra,30
+27,120,MATH,Algebra,30
+27,177,MATH,Algebra,30
+27,407,MATH,Counting & Probability,30
+27,472,MATH,Geometry,30
+27,721,MATH,Intermediate Algebra,30
+27,992,MATH,Prealgebra,30
+27,1031,MATH,Prealgebra,30
+27,1215,MATH,Precalculus,30
+28,166,MATH,Algebra,22
+28,233,MATH,Algebra,22
+28,424,MATH,Counting & Probability,22
+28,984,MATH,Prealgebra,22
+28,1007,MATH,Prealgebra,22
+28,1114,MATH,Prealgebra,22
+28,1118,MATH,Prealgebra,22
+28,1706,BBH,causal_judgement,22
+28,8165,GPQA,Main,22
+28,8531,IFEval,IFEval,22
+29,8304,IFEval,IFEval,8
+29,8327,IFEval,IFEval,8
+29,8348,IFEval,IFEval,8
+29,8453,IFEval,IFEval,8
+29,8548,IFEval,IFEval,8
+29,8587,IFEval,IFEval,8
+29,8641,IFEval,IFEval,8
+29,8668,IFEval,IFEval,8
+30,4909,BBH,ruin_names,485
+30,4984,BBH,ruin_names,485
+30,5085,BBH,ruin_names,485
+30,5100,BBH,ruin_names,485
+30,5450,BBH,snarks,485
+30,5476,BBH,snarks,485
+30,5489,BBH,snarks,485
+30,5532,BBH,snarks,485
+30,8316,IFEval,IFEval,485
+30,8394,IFEval,IFEval,485
+31,935,MATH,Number Theory,46
+31,994,MATH,Prealgebra,46
+31,1108,MATH,Prealgebra,46
+31,7098,GPQA,Diamond,46
+31,7234,GPQA,Diamond,46
+31,7618,GPQA,Extended,46
+31,7654,GPQA,Extended,46
+31,7779,GPQA,Extended,46
+31,7936,GPQA,Main,46
+31,7943,GPQA,Main,46
+32,1091,MATH,Prealgebra,6
+32,7461,GPQA,Extended,6
+32,7597,GPQA,Extended,6
+32,7642,GPQA,Extended,6
+32,7951,GPQA,Main,6
+32,8060,GPQA,Main,6
+33,4862,BBH,ruin_names,123
+33,5025,BBH,ruin_names,123
+33,5035,BBH,ruin_names,123
+33,5036,BBH,ruin_names,123
+33,5056,BBH,ruin_names,123
+33,5086,BBH,ruin_names,123
+33,5178,BBH,salient_translation_error_detection,123
+33,5270,BBH,salient_translation_error_detection,123
+33,5336,BBH,salient_translation_error_detection,123
+33,8451,IFEval,IFEval,123
+34,8249,IFEval,IFEval,20
+34,8281,IFEval,IFEval,20
+34,8318,IFEval,IFEval,20
+34,8392,IFEval,IFEval,20
+34,8473,IFEval,IFEval,20
+34,8510,IFEval,IFEval,20
+34,8525,IFEval,IFEval,20
+34,8623,IFEval,IFEval,20
+34,8637,IFEval,IFEval,20
+34,8756,IFEval,IFEval,20
+35,7263,GPQA,Extended,19
+35,7283,GPQA,Extended,19
+35,7295,GPQA,Extended,19
+35,7364,GPQA,Extended,19
+35,7572,GPQA,Extended,19
+35,7600,GPQA,Extended,19
+35,7648,GPQA,Extended,19
+35,7801,GPQA,Main,19
+35,7853,GPQA,Main,19
+35,8128,GPQA,Main,19
+36,25,MATH,Algebra,106
+36,42,MATH,Algebra,106
+36,109,MATH,Algebra,106
+36,160,MATH,Algebra,106
+36,191,MATH,Algebra,106
+36,260,MATH,Algebra,106
+36,748,MATH,Intermediate Algebra,106
+36,799,MATH,Intermediate Algebra,106
+36,813,MATH,Number Theory,106
+36,7932,GPQA,Main,106
+37,3414,BBH,logical_deduction_seven_objects,298
+37,4004,BBH,navigate,298
+37,4009,BBH,navigate,298
+37,4013,BBH,navigate,298
+37,4053,BBH,navigate,298
+37,4055,BBH,navigate,298
+37,4108,BBH,navigate,298
+37,4109,BBH,navigate,298
+37,4154,BBH,navigate,298
+37,4183,BBH,navigate,298
+38,1558,BBH,causal_judgement,7
+38,1579,BBH,causal_judgement,7
+38,1713,BBH,causal_judgement,7
+38,8279,IFEval,IFEval,7
+38,8521,IFEval,IFEval,7
+38,8529,IFEval,IFEval,7
+38,8558,IFEval,IFEval,7
+39,30,MATH,Algebra,80
+39,190,MATH,Algebra,80
+39,192,MATH,Algebra,80
+39,637,MATH,Intermediate Algebra,80
+39,689,MATH,Intermediate Algebra,80
+39,756,MATH,Intermediate Algebra,80
+39,778,MATH,Intermediate Algebra,80
+39,800,MATH,Intermediate Algebra,80
+39,876,MATH,Number Theory,80
+39,892,MATH,Number Theory,80
+40,35,MATH,Algebra,45
+40,134,MATH,Algebra,45
+40,158,MATH,Algebra,45
+40,165,MATH,Algebra,45
+40,239,MATH,Algebra,45
+40,295,MATH,Algebra,45
+40,619,MATH,Intermediate Algebra,45
+40,686,MATH,Intermediate Algebra,45
+40,689,MATH,Intermediate Algebra,45
+40,1148,MATH,Prealgebra,45
+41,7078,GPQA,Diamond,48
+41,7090,GPQA,Diamond,48
+41,7110,GPQA,Diamond,48
+41,7210,GPQA,Diamond,48
+41,7371,GPQA,Extended,48
+41,7377,GPQA,Extended,48
+41,7383,GPQA,Extended,48
+41,7580,GPQA,Extended,48
+41,7718,GPQA,Extended,48
+41,7756,GPQA,Extended,48
+42,1032,MATH,Prealgebra,58
+42,3038,BBH,logical_deduction_five_objects,58
+42,8232,IFEval,IFEval,58
+42,8347,IFEval,IFEval,58
+42,8362,IFEval,IFEval,58
+42,8483,IFEval,IFEval,58
+42,8493,IFEval,IFEval,58
+42,8624,IFEval,IFEval,58
+42,8652,IFEval,IFEval,58
+42,8675,IFEval,IFEval,58
+43,7063,GPQA,Diamond,488
+43,7147,GPQA,Diamond,488
+43,7154,GPQA,Diamond,488
+43,7177,GPQA,Diamond,488
+43,7323,GPQA,Extended,488
+43,7750,GPQA,Extended,488
+43,7881,GPQA,Main,488
+43,8038,GPQA,Main,488
+43,8163,GPQA,Main,488
+43,8216,GPQA,Main,488
+44,1027,MATH,Prealgebra,7
+44,1084,MATH,Prealgebra,7
+44,1582,BBH,causal_judgement,7
+44,1588,BBH,causal_judgement,7
+44,1661,BBH,causal_judgement,7
+44,8420,IFEval,IFEval,7
+44,8457,IFEval,IFEval,7
+45,7204,GPQA,Diamond,83
+45,7249,GPQA,Extended,83
+45,7263,GPQA,Extended,83
+45,7354,GPQA,Extended,83
+45,7525,GPQA,Extended,83
+45,7642,GPQA,Extended,83
+45,7690,GPQA,Extended,83
+45,7719,GPQA,Extended,83
+45,8031,GPQA,Main,83
+45,8210,GPQA,Main,83
+46,7046,GPQA,Diamond,193
+46,7049,GPQA,Diamond,193
+46,7391,GPQA,Extended,193
+46,7401,GPQA,Extended,193
+46,7621,GPQA,Extended,193
+46,7625,GPQA,Extended,193
+46,7704,GPQA,Extended,193
+46,7849,GPQA,Main,193
+46,8054,GPQA,Main,193
+46,8152,GPQA,Main,193
+47,8255,IFEval,IFEval,14
+47,8325,IFEval,IFEval,14
+47,8328,IFEval,IFEval,14
+47,8332,IFEval,IFEval,14
+47,8376,IFEval,IFEval,14
+47,8509,IFEval,IFEval,14
+47,8537,IFEval,IFEval,14
+47,8556,IFEval,IFEval,14
+47,8663,IFEval,IFEval,14
+47,8713,IFEval,IFEval,14
+48,2278,BBH,formal_fallacies,252
+48,2998,BBH,logical_deduction_five_objects,252
+48,3457,BBH,logical_deduction_seven_objects,252
+48,6215,BBH,tracking_shuffled_objects_five_objects,252
+48,6371,BBH,tracking_shuffled_objects_seven_objects,252
+48,6380,BBH,tracking_shuffled_objects_seven_objects,252
+48,6421,BBH,tracking_shuffled_objects_seven_objects,252
+48,6443,BBH,tracking_shuffled_objects_seven_objects,252
+48,6502,BBH,tracking_shuffled_objects_seven_objects,252
+48,6695,BBH,tracking_shuffled_objects_three_objects,252
+49,1181,MATH,Precalculus,5
+49,1186,MATH,Precalculus,5
+49,1235,MATH,Precalculus,5
+49,1239,MATH,Precalculus,5
+49,8224,GPQA,Main,5
+50,1549,BBH,causal_judgement,8
+50,1700,BBH,causal_judgement,8
+50,5253,BBH,salient_translation_error_detection,8
+50,8482,IFEval,IFEval,8
+50,8575,IFEval,IFEval,8
+50,8608,IFEval,IFEval,8
+50,8640,IFEval,IFEval,8
+50,8697,IFEval,IFEval,8
+51,4487,BBH,penguins_in_a_table,53
+51,4499,BBH,penguins_in_a_table,53
+51,4514,BBH,penguins_in_a_table,53
+51,4517,BBH,penguins_in_a_table,53
+51,4538,BBH,penguins_in_a_table,53
+51,4555,BBH,penguins_in_a_table,53
+51,4572,BBH,penguins_in_a_table,53
+51,4577,BBH,penguins_in_a_table,53
+51,4608,BBH,penguins_in_a_table,53
+51,8013,GPQA,Main,53
+52,384,MATH,Counting & Probability,5
+52,398,MATH,Counting & Probability,5
+52,1037,MATH,Prealgebra,5
+52,8326,IFEval,IFEval,5
+52,8681,IFEval,IFEval,5
+53,92,MATH,Algebra,11
+53,95,MATH,Algebra,11
+53,192,MATH,Algebra,11
+53,569,MATH,Intermediate Algebra,11
+53,686,MATH,Intermediate Algebra,11
+53,703,MATH,Intermediate Algebra,11
+53,743,MATH,Intermediate Algebra,11
+53,7200,GPQA,Diamond,11
+53,7499,GPQA,Extended,11
+53,7980,GPQA,Main,11
+54,97,MATH,Algebra,32
+54,139,MATH,Algebra,32
+54,306,MATH,Counting & Probability,32
+54,369,MATH,Counting & Probability,32
+54,377,MATH,Counting & Probability,32
+54,816,MATH,Number Theory,32
+54,862,MATH,Number Theory,32
+54,882,MATH,Number Theory,32
+54,1034,MATH,Prealgebra,32
+54,1043,MATH,Prealgebra,32
+55,1,MATH,Algebra,20
+55,3,MATH,Algebra,20
+55,82,MATH,Algebra,20
+55,157,MATH,Algebra,20
+55,212,MATH,Algebra,20
+55,237,MATH,Algebra,20
+55,254,MATH,Algebra,20
+55,273,MATH,Algebra,20
+55,369,MATH,Counting & Probability,20
+55,831,MATH,Number Theory,20
+56,4473,BBH,penguins_in_a_table,137
+56,4477,BBH,penguins_in_a_table,137
+56,4478,BBH,penguins_in_a_table,137
+56,4513,BBH,penguins_in_a_table,137
+56,4537,BBH,penguins_in_a_table,137
+56,4556,BBH,penguins_in_a_table,137
+56,4558,BBH,penguins_in_a_table,137
+56,4577,BBH,penguins_in_a_table,137
+56,4595,BBH,penguins_in_a_table,137
+56,4602,BBH,penguins_in_a_table,137
+57,8363,IFEval,IFEval,4
+57,8676,IFEval,IFEval,4
+57,8677,IFEval,IFEval,4
+57,8707,IFEval,IFEval,4
+58,7218,GPQA,Diamond,31
+58,7230,GPQA,Diamond,31
+58,7432,GPQA,Extended,31
+58,7505,GPQA,Extended,31
+58,7512,GPQA,Extended,31
+58,7529,GPQA,Extended,31
+58,7835,GPQA,Main,31
+58,7914,GPQA,Main,31
+58,7986,GPQA,Main,31
+58,8136,GPQA,Main,31
+59,524,MATH,Geometry,97
+59,2522,BBH,geometric_shapes,97
+59,2556,BBH,geometric_shapes,97
+59,2633,BBH,geometric_shapes,97
+59,2690,BBH,geometric_shapes,97
+59,2706,BBH,geometric_shapes,97
+59,7104,GPQA,Diamond,97
+59,7347,GPQA,Extended,97
+59,7454,GPQA,Extended,97
+59,7660,GPQA,Extended,97
+60,623,MATH,Intermediate Algebra,6
+60,735,MATH,Intermediate Algebra,6
+60,832,MATH,Number Theory,6
+60,7118,GPQA,Diamond,6
+60,7516,GPQA,Extended,6
+60,7994,GPQA,Main,6
+61,1766,BBH,date_understanding,254
+61,1827,BBH,date_understanding,254
+61,1887,BBH,date_understanding,254
+61,1889,BBH,date_understanding,254
+61,1893,BBH,date_understanding,254
+61,1895,BBH,date_understanding,254
+61,1899,BBH,date_understanding,254
+61,1920,BBH,date_understanding,254
+61,1950,BBH,date_understanding,254
+61,1961,BBH,date_understanding,254
+62,1543,BBH,causal_judgement,14
+62,1548,BBH,causal_judgement,14
+62,1597,BBH,causal_judgement,14
+62,1604,BBH,causal_judgement,14
+62,1607,BBH,causal_judgement,14
+62,1638,BBH,causal_judgement,14
+62,1641,BBH,causal_judgement,14
+62,1687,BBH,causal_judgement,14
+62,1693,BBH,causal_judgement,14
+62,1709,BBH,causal_judgement,14
+63,324,MATH,Counting & Probability,4
+63,8241,IFEval,IFEval,4
+63,8430,IFEval,IFEval,4
+63,8728,IFEval,IFEval,4
+64,7589,GPQA,Extended,4
+64,7755,GPQA,Extended,4
+64,8055,GPQA,Main,4
+64,8230,GPQA,Main,4
+65,1191,MATH,Precalculus,19
+65,1196,MATH,Precalculus,19
+65,1202,MATH,Precalculus,19
+65,1215,MATH,Precalculus,19
+65,1237,MATH,Precalculus,19
+65,7073,GPQA,Diamond,19
+65,7223,GPQA,Diamond,19
+65,7260,GPQA,Extended,19
+65,7561,GPQA,Extended,19
+65,7873,GPQA,Main,19
+66,1310,BBH,boolean_expressions,266
+66,1312,BBH,boolean_expressions,266
+66,1335,BBH,boolean_expressions,266
+66,1361,BBH,boolean_expressions,266
+66,1369,BBH,boolean_expressions,266
+66,1378,BBH,boolean_expressions,266
+66,1410,BBH,boolean_expressions,266
+66,1422,BBH,boolean_expressions,266
+66,1462,BBH,boolean_expressions,266
+66,1466,BBH,boolean_expressions,266
+67,1595,BBH,causal_judgement,24
+67,1675,BBH,causal_judgement,24
+67,1706,BBH,causal_judgement,24
+67,7269,GPQA,Extended,24
+67,7360,GPQA,Extended,24
+67,8283,IFEval,IFEval,24
+67,8355,IFEval,IFEval,24
+67,8589,IFEval,IFEval,24
+67,9346,MuSR,Team Allocation,24
+67,9393,MuSR,Team Allocation,24
+68,7106,GPQA,Diamond,11
+68,7175,GPQA,Diamond,11
+68,7446,GPQA,Extended,11
+68,7462,GPQA,Extended,11
+68,7476,GPQA,Extended,11
+68,7619,GPQA,Extended,11
+68,7700,GPQA,Extended,11
+68,8080,GPQA,Main,11
+68,8148,GPQA,Main,11
+68,8461,IFEval,IFEval,11
+69,3350,BBH,logical_deduction_seven_objects,361
+69,3422,BBH,logical_deduction_seven_objects,361
+69,4218,BBH,object_counting,361
+69,4271,BBH,object_counting,361
+69,4313,BBH,object_counting,361
+69,4323,BBH,object_counting,361
+69,4362,BBH,object_counting,361
+69,4425,BBH,object_counting,361
+69,4432,BBH,object_counting,361
+69,8501,IFEval,IFEval,361
+70,7436,GPQA,Extended,12
+70,9021,MuSR,Object Placements,12
+70,9121,MuSR,Object Placements,12
+70,9122,MuSR,Object Placements,12
+70,9124,MuSR,Object Placements,12
+70,9157,MuSR,Object Placements,12
+70,9180,MuSR,Object Placements,12
+70,9225,MuSR,Object Placements,12
+70,9271,MuSR,Object Placements,12
+70,9272,MuSR,Object Placements,12
+71,1566,BBH,causal_judgement,4
+71,6214,BBH,tracking_shuffled_objects_five_objects,4
+71,6497,BBH,tracking_shuffled_objects_seven_objects,4
+71,8345,IFEval,IFEval,4
+72,411,MATH,Counting & Probability,91
+72,815,MATH,Number Theory,91
+72,854,MATH,Number Theory,91
+72,887,MATH,Number Theory,91
+72,889,MATH,Number Theory,91
+72,913,MATH,Number Theory,91
+72,1030,MATH,Prealgebra,91
+72,1078,MATH,Prealgebra,91
+72,1079,MATH,Prealgebra,91
+72,1116,MATH,Prealgebra,91
+73,580,MATH,Intermediate Algebra,6
+73,582,MATH,Intermediate Algebra,6
+73,643,MATH,Intermediate Algebra,6
+73,659,MATH,Intermediate Algebra,6
+73,669,MATH,Intermediate Algebra,6
+73,806,MATH,Intermediate Algebra,6
+74,7220,GPQA,Diamond,6
+74,7246,GPQA,Extended,6
+74,7521,GPQA,Extended,6
+74,7763,GPQA,Extended,6
+74,7998,GPQA,Main,6
+74,8209,GPQA,Main,6
+75,7213,GPQA,Diamond,63
+75,7225,GPQA,Diamond,63
+75,7268,GPQA,Extended,63
+75,7343,GPQA,Extended,63
+75,7572,GPQA,Extended,63
+75,7576,GPQA,Extended,63
+75,7747,GPQA,Extended,63
+75,7864,GPQA,Main,63
+75,8068,GPQA,Main,63
+75,8196,GPQA,Main,63
+76,44,MATH,Algebra,79
+76,78,MATH,Algebra,79
+76,222,MATH,Algebra,79
+76,567,MATH,Intermediate Algebra,79
+76,629,MATH,Intermediate Algebra,79
+76,633,MATH,Intermediate Algebra,79
+76,642,MATH,Intermediate Algebra,79
+76,653,MATH,Intermediate Algebra,79
+76,689,MATH,Intermediate Algebra,79
+76,786,MATH,Intermediate Algebra,79
+77,283,MATH,Algebra,5
+77,974,MATH,Prealgebra,5
+77,1006,MATH,Prealgebra,5
+77,1087,MATH,Prealgebra,5
+77,1108,MATH,Prealgebra,5
+78,221,MATH,Algebra,13
+78,273,MATH,Algebra,13
+78,364,MATH,Counting & Probability,13
+78,957,MATH,Number Theory,13
+78,968,MATH,Prealgebra,13
+78,980,MATH,Prealgebra,13
+78,986,MATH,Prealgebra,13
+78,1066,MATH,Prealgebra,13
+78,1150,MATH,Prealgebra,13
+78,8501,IFEval,IFEval,13
+79,889,MATH,Number Theory,4
+79,4543,BBH,penguins_in_a_table,4
+79,8320,IFEval,IFEval,4
+79,8331,IFEval,IFEval,4
+80,404,MATH,Counting & Probability,5
+80,3781,BBH,movie_recommendation,5
+80,8737,IFEval,IFEval,5
+80,9303,MuSR,Team Allocation,5
+80,9521,MuSR,Team Allocation,5
+81,2065,BBH,disambiguation_qa,1880
+81,2136,BBH,disambiguation_qa,1880
+81,2178,BBH,disambiguation_qa,1880
+81,2781,BBH,hyperbaton,1880
+81,2784,BBH,hyperbaton,1880
+81,3372,BBH,logical_deduction_seven_objects,1880
+81,5525,BBH,snarks,1880
+81,6918,BBH,web_of_lies,1880
+81,6992,BBH,web_of_lies,1880
+81,8270,IFEval,IFEval,1880
+82,7368,GPQA,Extended,5
+82,7436,GPQA,Extended,5
+82,7591,GPQA,Extended,5
+82,7879,GPQA,Main,5
+82,8056,GPQA,Main,5
+83,7258,GPQA,Extended,9
+83,7260,GPQA,Extended,9
+83,7275,GPQA,Extended,9
+83,7347,GPQA,Extended,9
+83,7474,GPQA,Extended,9
+83,7490,GPQA,Extended,9
+83,7565,GPQA,Extended,9
+83,7798,GPQA,Main,9
+83,7960,GPQA,Main,9
+84,7344,GPQA,Extended,3
+84,8439,IFEval,IFEval,3
+84,8694,IFEval,IFEval,3
+85,8303,IFEval,IFEval,1
+86,8438,IFEval,IFEval,2
+86,8503,IFEval,IFEval,2
+87,8757,IFEval,IFEval,1
+88,8374,IFEval,IFEval,3
+88,8406,IFEval,IFEval,3
+88,8541,IFEval,IFEval,3
+89,8309,IFEval,IFEval,2
+89,8346,IFEval,IFEval,2
+90,996,MATH,Prealgebra,3
+90,1071,MATH,Prealgebra,3
+90,8416,IFEval,IFEval,3
+91,8337,IFEval,IFEval,1
+92,45,MATH,Algebra,2
+92,8388,IFEval,IFEval,2
+93,8508,IFEval,IFEval,1
+94,9331,MuSR,Team Allocation,1
+95,7762,GPQA,Extended,2
+95,8192,GPQA,Main,2
+96,8718,IFEval,IFEval,2
+96,8744,IFEval,IFEval,2
+97,314,MATH,Counting & Probability,2
+97,371,MATH,Counting & Probability,2
+98,8252,IFEval,IFEval,3
+98,8423,IFEval,IFEval,3
+98,8517,IFEval,IFEval,3
+99,166,MATH,Algebra,2
+99,8736,IFEval,IFEval,2
+100,7360,GPQA,Extended,1

@@ -1,0 +1,142 @@
+{
+  "checkpoint": "cdm_exploration/checkpoints/expanded/text_conditioned_protocolB_llmsplit3048.pt",
+  "reference_trained_theta_norm": 1.6657614707946777,
+  "n_test_llms": 100,
+  "results": [
+    {
+      "setting": "original (lr=0.01, steps=50)",
+      "lr": 0.01,
+      "steps": 50,
+      "N": 10,
+      "auc": 0.5564021083827257,
+      "theta_raw_mean_abs": 0.0487975999712944,
+      "final_loss": 0.5591188669204712
+    },
+    {
+      "setting": "original (lr=0.01, steps=50)",
+      "lr": 0.01,
+      "steps": 50,
+      "N": 100,
+      "auc": 0.582466084657331,
+      "theta_raw_mean_abs": 0.17025719583034515,
+      "final_loss": 0.5972810983657837
+    },
+    {
+      "setting": "original (lr=0.01, steps=50)",
+      "lr": 0.01,
+      "steps": 50,
+      "N": 500,
+      "auc": 0.5924200286689034,
+      "theta_raw_mean_abs": 0.277649849653244,
+      "final_loss": 0.6076195240020752
+    },
+    {
+      "setting": "more steps (lr=0.01, steps=500)",
+      "lr": 0.01,
+      "steps": 500,
+      "N": 10,
+      "auc": 0.5663804424268659,
+      "theta_raw_mean_abs": 0.1983625590801239,
+      "final_loss": 0.22277843952178955
+    },
+    {
+      "setting": "more steps (lr=0.01, steps=500)",
+      "lr": 0.01,
+      "steps": 500,
+      "N": 100,
+      "auc": 0.6382006365790798,
+      "theta_raw_mean_abs": 0.6749593615531921,
+      "final_loss": 0.3698752224445343
+    },
+    {
+      "setting": "more steps (lr=0.01, steps=500)",
+      "lr": 0.01,
+      "steps": 500,
+      "N": 500,
+      "auc": 0.6740274705363783,
+      "theta_raw_mean_abs": 1.0056835412979126,
+      "final_loss": 0.44089460372924805
+    },
+    {
+      "setting": "higher lr (lr=0.05, steps=50)",
+      "lr": 0.05,
+      "steps": 50,
+      "N": 10,
+      "auc": 0.5757554730980842,
+      "theta_raw_mean_abs": 0.17221187055110931,
+      "final_loss": 0.23012779653072357
+    },
+    {
+      "setting": "higher lr (lr=0.05, steps=50)",
+      "lr": 0.05,
+      "steps": 50,
+      "N": 100,
+      "auc": 0.6381031622030645,
+      "theta_raw_mean_abs": 0.572723388671875,
+      "final_loss": 0.3809655010700226
+    },
+    {
+      "setting": "higher lr (lr=0.05, steps=50)",
+      "lr": 0.05,
+      "steps": 50,
+      "N": 500,
+      "auc": 0.6725590261008372,
+      "theta_raw_mean_abs": 0.8661547899246216,
+      "final_loss": 0.44883719086647034
+    },
+    {
+      "setting": "both (lr=0.05, steps=500)",
+      "lr": 0.05,
+      "steps": 500,
+      "N": 10,
+      "auc": 0.5721964089798293,
+      "theta_raw_mean_abs": 0.338222861289978,
+      "final_loss": 0.1840640902519226
+    },
+    {
+      "setting": "both (lr=0.05, steps=500)",
+      "lr": 0.05,
+      "steps": 500,
+      "N": 100,
+      "auc": 0.6430410191628719,
+      "theta_raw_mean_abs": 1.0689092874526978,
+      "final_loss": 0.36523905396461487
+    },
+    {
+      "setting": "both (lr=0.05, steps=500)",
+      "lr": 0.05,
+      "steps": 500,
+      "N": 500,
+      "auc": 0.677829441463533,
+      "theta_raw_mean_abs": 1.5155410766601562,
+      "final_loss": 0.4338078200817108
+    },
+    {
+      "setting": "very long (lr=0.1, steps=2000)",
+      "lr": 0.1,
+      "steps": 2000,
+      "N": 10,
+      "auc": 0.5752419198583627,
+      "theta_raw_mean_abs": 0.5794803500175476,
+      "final_loss": 0.18482427299022675
+    },
+    {
+      "setting": "very long (lr=0.1, steps=2000)",
+      "lr": 0.1,
+      "steps": 2000,
+      "N": 100,
+      "auc": 0.6445934144661385,
+      "theta_raw_mean_abs": 1.702474594116211,
+      "final_loss": 0.3630858361721039
+    },
+    {
+      "setting": "very long (lr=0.1, steps=2000)",
+      "lr": 0.1,
+      "steps": 2000,
+      "N": 500,
+      "auc": 0.6812419492244415,
+      "theta_raw_mean_abs": 2.3956987857818604,
+      "final_loss": 0.43241211771965027
+    }
+  ]
+}

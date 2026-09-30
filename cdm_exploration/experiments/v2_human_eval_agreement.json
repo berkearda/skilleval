@@ -1,0 +1,81 @@
+{
+  "experiment": "human_eval_agreement",
+  "n_pairs": 780,
+  "n_skills": 100,
+  "n_annotators": 3,
+  "all_sheets_have_the_same_pairs_as_the_blank_sheet": true,
+  "n_pairs_judged_by_all_three": 779,
+  "per_annotator": {
+    "A": {
+      "n_judged": 779,
+      "n_yes": 625,
+      "accept_micro": 0.8023106546854942,
+      "accept_macro_per_skill": 0.78075,
+      "unreadable": [
+        {
+          "skill_id": 36,
+          "item_idx": 748,
+          "raw": ""
+        }
+      ]
+    },
+    "B": {
+      "n_judged": 780,
+      "n_yes": 627,
+      "accept_micro": 0.8038461538461539,
+      "accept_macro_per_skill": 0.7905833333333332,
+      "unreadable": []
+    },
+    "C": {
+      "n_judged": 780,
+      "n_yes": 642,
+      "accept_micro": 0.823076923076923,
+      "accept_macro_per_skill": 0.8065833333333332,
+      "unreadable": []
+    }
+  },
+  "majority": {
+    "n_pairs": 780,
+    "n_accepted": 652,
+    "accept_micro": 0.8358974358974359,
+    "accept_macro_per_skill": 0.8165833333333333,
+    "n_skills_below_50pct": 5
+  },
+  "all_three_agree_pct": 86.77792041078305,
+  "cohen_kappa_pairwise": {
+    "A-B": 0.6389555744184473,
+    "A-C": 0.7220323954931771,
+    "B-C": 0.784684333593141
+  },
+  "cohen_kappa_mean": 0.7152241011682552,
+  "fleiss_kappa": 0.7140995795424849,
+  "krippendorff_alpha_nominal": 0.7142792734003298,
+  "lowest_skills_by_majority": [
+    {
+      "skill_id": 54,
+      "name": "count combinations and arrangements",
+      "accept": 0.2
+    },
+    {
+      "skill_id": 71,
+      "name": "draft personalized messages for recipients",
+      "accept": 0.25
+    },
+    {
+      "skill_id": 98,
+      "name": "rephrase statements with formal tone",
+      "accept": 0.333
+    },
+    {
+      "skill_id": 82,
+      "name": "evaluate data sets for properties",
+      "accept": 0.4
+    },
+    {
+      "skill_id": 44,
+      "name": "determine activation conditions for systems",
+      "accept": 0.429
+    }
+  ],
+  "verified": true
+}

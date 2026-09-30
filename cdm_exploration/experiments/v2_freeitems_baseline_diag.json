@@ -1,0 +1,61 @@
+{
+  "experiment": "freeitems_baseline_diag",
+  "checkpoint": "cdm_exploration/checkpoints/expanded/text_conditioned_protocolA_K100_freeitems.pt",
+  "job": 14849752,
+  "reported": {
+    "auc": 0.8524013767764622,
+    "acc": 0.783144624073078,
+    "rmse": 0.38716338396397876
+  },
+  "recomputed_from_checkpoint": {
+    "auc": 0.8524013863490286,
+    "acc": 0.783144624073078,
+    "rmse": 0.3871634006500244
+  },
+  "reproduced": true,
+  "degenerate_behaviour": {
+    "alpha_min": 2.440861806007888e-07,
+    "alpha_max": 0.9999997615814209,
+    "alpha_median": 0.999363124370575,
+    "share_alpha_below_001": 0.021526829780531345,
+    "share_alpha_above_099": 0.6346739472855193,
+    "train_acc_of_items_with_alpha_below_001": 0.37644552017419397,
+    "train_acc_spread_of_those_items": 0.04422869765623677,
+    "difficulty_mean": 0.5099077820777893,
+    "difficulty_std_across_items": 0.40674301981925964,
+    "corr_difficulty_vs_train_item_accuracy": -0.894152521118594,
+    "corr_alpha_vs_train_item_accuracy": 0.008197758832092719,
+    "sampled_items": 500,
+    "share_items_flat_across_llms_sd_below_001": 0.104,
+    "median_prediction_sd_across_llms": 0.12162933871150017,
+    "theta_mean": 0.409660279750824,
+    "theta_std": 0.21299207210540771
+  },
+  "naive_alternatives_same_split": {
+    "global_mean": {
+      "auc": 0.5,
+      "acc": 0.6005633172563992,
+      "rmse": 0.4897826611995697
+    },
+    "llm_mean": {
+      "auc": 0.6089191209554683,
+      "acc": 0.6141464161956742,
+      "rmse": 0.4810774044188375
+    },
+    "item_mean": {
+      "auc": 0.8187424802785822,
+      "acc": 0.748754276405703,
+      "rmse": 0.4109999984810411
+    },
+    "llm_plus_item_logit": {
+      "auc": 0.8380585819146092,
+      "acc": 0.7662095615141121,
+      "rmse": 0.39869233068890664
+    }
+  },
+  "reference_auc": {
+    "skilleval_id": 0.8173464299611566,
+    "irt_2pl_id": 0.8616011066940056
+  },
+  "verified": true
+}

@@ -1,0 +1,30 @@
+{
+  "experiment": "reference_answer_ablation_final",
+  "n_items": 2470,
+  "design": "all arms: question_full_text[:1500], QMATRIX prompt, gpt-4o-mini, temperature 0",
+  "noise_floor_token_j": 0.7320910397404033,
+  "noise_floor_exact_j": 0.4740736456525931,
+  "effect_token_j": 0.3681869236888617,
+  "effect_exact_j": 0.05671390013495277,
+  "replication_fulltext_vs_ref_token_j": 0.3656813353421672,
+  "solution_effect_vs_noise": -0.36390411605154166,
+  "by_benchmark": {
+    "MATH": {
+      "noise_token_j": 0.7300322007230994,
+      "effect_token_j": 0.3515711024945986,
+      "delta": -0.37846109822850077
+    },
+    "GPQA": {
+      "noise_token_j": 0.7342984191566068,
+      "effect_token_j": 0.38600153735183845,
+      "delta": -0.3482968818047683
+    }
+  },
+  "novel_vocab_share": 0.4379472612149082,
+  "supersedes": [
+    "v2_refablation_analysis.json",
+    "v2_refablation_controls.json"
+  ],
+  "note": "the submitted Q-matrix extraction (2026-03-29) used the 200-char question_preview and is not a valid control for this ablation",
+  "verified": true
+}

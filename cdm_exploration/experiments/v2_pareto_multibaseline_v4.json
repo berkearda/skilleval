@@ -1,0 +1,2104 @@
+{
+  "experiment": "pareto_multibaseline",
+  "smoke": false,
+  "n_llms": 3811,
+  "n_test_items": 1905,
+  "thresholds": [
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95
+  ],
+  "strongest": {
+    "name": "MaziyarPanahi__calme-3.2-instruct-78b",
+    "test_acc": 0.6157480314960629,
+    "cost_gflops": 79872.0
+  },
+  "methods": {
+    "cdmeval": {
+      "sweep": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4692913385826772,
+          "mean_cost": 652.0396598425051,
+          "n_unique_picks": 46,
+          "fallback_rate": 0.02152230971128609
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.48346456692913387,
+          "mean_cost": 1313.6866435695677,
+          "n_unique_picks": 80,
+          "fallback_rate": 0.03464566929133858
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.49816272965879266,
+          "mean_cost": 3995.5120041995688,
+          "n_unique_picks": 117,
+          "fallback_rate": 0.06509186351706037
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.5039370078740157,
+          "mean_cost": 5396.1397417323915,
+          "n_unique_picks": 118,
+          "fallback_rate": 0.08976377952755905
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.5128608923884515,
+          "mean_cost": 7121.299687139216,
+          "n_unique_picks": 120,
+          "fallback_rate": 0.12808398950131233
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.5343832020997376,
+          "mean_cost": 10175.099901312436,
+          "n_unique_picks": 121,
+          "fallback_rate": 0.2031496062992126
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.5464566929133858,
+          "mean_cost": 11342.333043569652,
+          "n_unique_picks": 129,
+          "fallback_rate": 0.2440944881889764
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.552755905511811,
+          "mean_cost": 12270.038341207444,
+          "n_unique_picks": 130,
+          "fallback_rate": 0.2719160104986877
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.5490813648293963,
+          "mean_cost": 13287.679865616887,
+          "n_unique_picks": 138,
+          "fallback_rate": 0.30866141732283464
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5606299212598426,
+          "mean_cost": 14137.081146456772,
+          "n_unique_picks": 141,
+          "fallback_rate": 0.33438320209973754
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.5700787401574803,
+          "mean_cost": 15193.719063517134,
+          "n_unique_picks": 142,
+          "fallback_rate": 0.35380577427821525
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.5784776902887139,
+          "mean_cost": 16189.994733858342,
+          "n_unique_picks": 142,
+          "fallback_rate": 0.3826771653543307
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5973753280839895,
+          "mean_cost": 17314.015613648364,
+          "n_unique_picks": 139,
+          "fallback_rate": 0.4272965879265092
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.6031496062992125,
+          "mean_cost": 18339.14281994754,
+          "n_unique_picks": 141,
+          "fallback_rate": 0.47506561679790027
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.6152230971128609,
+          "mean_cost": 19938.404518635158,
+          "n_unique_picks": 147,
+          "fallback_rate": 0.5286089238845144
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.6194225721784777,
+          "mean_cost": 23129.726051443526,
+          "n_unique_picks": 148,
+          "fallback_rate": 0.5874015748031496
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.6383202099737533,
+          "mean_cost": 26307.54744776898,
+          "n_unique_picks": 141,
+          "fallback_rate": 0.6965879265091863
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.65249343832021,
+          "mean_cost": 29709.24319580052,
+          "n_unique_picks": 137,
+          "fallback_rate": 0.8446194225721785
+        }
+      ],
+      "normalized": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4692913385826772,
+          "mean_cost": 652.0396598425051,
+          "n_unique_picks": 46,
+          "fallback_rate": 0.02152230971128609,
+          "cost_pct": 0.816355743993521,
+          "acc_pct": 76.2148337595908
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.48346456692913387,
+          "mean_cost": 1313.6866435695677,
+          "n_unique_picks": 80,
+          "fallback_rate": 0.03464566929133858,
+          "cost_pct": 1.6447398882832125,
+          "acc_pct": 78.51662404092072
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.49816272965879266,
+          "mean_cost": 3995.5120041995688,
+          "n_unique_picks": 117,
+          "fallback_rate": 0.06509186351706037,
+          "cost_pct": 5.002393835386078,
+          "acc_pct": 80.90366581415176
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.5039370078740157,
+          "mean_cost": 5396.1397417323915,
+          "n_unique_picks": 118,
+          "fallback_rate": 0.08976377952755905,
+          "cost_pct": 6.755984251968639,
+          "acc_pct": 81.84143222506395
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.5128608923884515,
+          "mean_cost": 7121.299687139216,
+          "n_unique_picks": 120,
+          "fallback_rate": 0.12808398950131233,
+          "cost_pct": 8.915890032976783,
+          "acc_pct": 83.29070758738278
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.5343832020997376,
+          "mean_cost": 10175.099901312436,
+          "n_unique_picks": 121,
+          "fallback_rate": 0.2031496062992126,
+          "cost_pct": 12.739257688942853,
+          "acc_pct": 86.78601875532823
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.5464566929133858,
+          "mean_cost": 11342.333043569652,
+          "n_unique_picks": 129,
+          "fallback_rate": 0.2440944881889764,
+          "cost_pct": 14.200637324180754,
+          "acc_pct": 88.74680306905371
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.552755905511811,
+          "mean_cost": 12270.038341207444,
+          "n_unique_picks": 130,
+          "fallback_rate": 0.2719160104986877,
+          "cost_pct": 15.362127330237685,
+          "acc_pct": 89.769820971867
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.5490813648293963,
+          "mean_cost": 13287.679865616887,
+          "n_unique_picks": 138,
+          "fallback_rate": 0.30866141732283464,
+          "cost_pct": 16.63621778046986,
+          "acc_pct": 89.17306052855926
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5606299212598426,
+          "mean_cost": 14137.081146456772,
+          "n_unique_picks": 141,
+          "fallback_rate": 0.33438320209973754,
+          "cost_pct": 17.6996709065214,
+          "acc_pct": 91.04859335038364
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.5700787401574803,
+          "mean_cost": 15193.719063517134,
+          "n_unique_picks": 142,
+          "fallback_rate": 0.35380577427821525,
+          "cost_pct": 19.022584965340965,
+          "acc_pct": 92.58312020460359
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.5784776902887139,
+          "mean_cost": 16189.994733858342,
+          "n_unique_picks": 142,
+          "fallback_rate": 0.3826771653543307,
+          "cost_pct": 20.269925297799407,
+          "acc_pct": 93.94714407502131
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5973753280839895,
+          "mean_cost": 17314.015613648364,
+          "n_unique_picks": 139,
+          "fallback_rate": 0.4272965879265092,
+          "cost_pct": 21.67720304192754,
+          "acc_pct": 97.01619778346122
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.6031496062992125,
+          "mean_cost": 18339.14281994754,
+          "n_unique_picks": 141,
+          "fallback_rate": 0.47506561679790027,
+          "cost_pct": 22.960665589878232,
+          "acc_pct": 97.9539641943734
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.6152230971128609,
+          "mean_cost": 19938.404518635158,
+          "n_unique_picks": 147,
+          "fallback_rate": 0.5286089238845144,
+          "cost_pct": 24.962946362473907,
+          "acc_pct": 99.91474850809891
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.6194225721784777,
+          "mean_cost": 23129.726051443526,
+          "n_unique_picks": 148,
+          "fallback_rate": 0.5874015748031496,
+          "cost_pct": 28.95849115014464,
+          "acc_pct": 100.59676044330776
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.6383202099737533,
+          "mean_cost": 26307.54744776898,
+          "n_unique_picks": 141,
+          "fallback_rate": 0.6965879265091863,
+          "cost_pct": 32.93713372366909,
+          "acc_pct": 103.66581415174767
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.65249343832021,
+          "mean_cost": 29709.24319580052,
+          "n_unique_picks": 137,
+          "fallback_rate": 0.8446194225721785,
+          "cost_pct": 37.19606770307558,
+          "acc_pct": 105.9676044330776
+        }
+      ]
+    },
+    "irtnet_d100": {
+      "sweep": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4587926509186352,
+          "mean_cost": 53.68232650918726,
+          "n_unique_picks": 4,
+          "fallback_rate": 0.0010498687664041995
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.4608923884514436,
+          "mean_cost": 127.84196535433368,
+          "n_unique_picks": 5,
+          "fallback_rate": 0.0026246719160104987
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.4645669291338583,
+          "mean_cost": 525.0432335957851,
+          "n_unique_picks": 8,
+          "fallback_rate": 0.011548556430446194
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.46771653543307085,
+          "mean_cost": 1380.7524619422886,
+          "n_unique_picks": 9,
+          "fallback_rate": 0.025196850393700787
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.47874015748031495,
+          "mean_cost": 2757.870664567036,
+          "n_unique_picks": 9,
+          "fallback_rate": 0.048818897637795275
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.48293963254593175,
+          "mean_cost": 4569.776579527676,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.08503937007874016
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.48923884514435695,
+          "mean_cost": 7244.473717585423,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.13228346456692913
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.494488188976378,
+          "mean_cost": 9527.861484514557,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.17795275590551182
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.5118110236220472,
+          "mean_cost": 11770.396758005363,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.220997375328084
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5133858267716536,
+          "mean_cost": 13898.95088713921,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.2719160104986877
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.5333333333333333,
+          "mean_cost": 16243.557190551264,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.32230971128608926
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.5543307086614173,
+          "mean_cost": 17435.6824020998,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.3648293963254593
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5700787401574803,
+          "mean_cost": 18727.800004199482,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.4131233595800525
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.5963254593175853,
+          "mean_cost": 19980.16544251966,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.5028871391076115
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.6199475065616797,
+          "mean_cost": 21159.454370603653,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.6251968503937008
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.6167979002624672,
+          "mean_cost": 21932.394834645656,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.7758530183727034
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.6188976377952756,
+          "mean_cost": 22468.82516325459,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.8908136482939633
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.6173228346456693,
+          "mean_cost": 22851.542072440945,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.968503937007874
+        }
+      ],
+      "normalized": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4587926509186352,
+          "mean_cost": 53.68232650918726,
+          "n_unique_picks": 4,
+          "fallback_rate": 0.0010498687664041995,
+          "cost_pct": 0.06721044484824126,
+          "acc_pct": 74.50980392156865
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.4608923884514436,
+          "mean_cost": 127.84196535433368,
+          "n_unique_picks": 5,
+          "fallback_rate": 0.0026246719160104987,
+          "cost_pct": 0.1600585503735147,
+          "acc_pct": 74.85080988917308
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.4645669291338583,
+          "mean_cost": 525.0432335957851,
+          "n_unique_picks": 8,
+          "fallback_rate": 0.011548556430446194,
+          "cost_pct": 0.6573558112927997,
+          "acc_pct": 75.44757033248082
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.46771653543307085,
+          "mean_cost": 1380.7524619422886,
+          "n_unique_picks": 9,
+          "fallback_rate": 0.025196850393700787,
+          "cost_pct": 1.7287065078404056,
+          "acc_pct": 75.95907928388748
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.47874015748031495,
+          "mean_cost": 2757.870664567036,
+          "n_unique_picks": 9,
+          "fallback_rate": 0.048818897637795275,
+          "cost_pct": 3.452862911366982,
+          "acc_pct": 77.74936061381075
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.48293963254593175,
+          "mean_cost": 4569.776579527676,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.08503937007874016,
+          "cost_pct": 5.721374924288456,
+          "acc_pct": 78.43137254901961
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.48923884514435695,
+          "mean_cost": 7244.473717585423,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.13228346456692913,
+          "cost_pct": 9.070104313883993,
+          "acc_pct": 79.45439045183291
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.494488188976378,
+          "mean_cost": 9527.861484514557,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.17795275590551182,
+          "cost_pct": 11.928913116629804,
+          "acc_pct": 80.30690537084399
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.5118110236220472,
+          "mean_cost": 11770.396758005363,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.220997375328084,
+          "cost_pct": 14.736574466653348,
+          "acc_pct": 83.12020460358056
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5133858267716536,
+          "mean_cost": 13898.95088713921,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.2719160104986877,
+          "cost_pct": 17.4015310586178,
+          "acc_pct": 83.3759590792839
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.5333333333333333,
+          "mean_cost": 16243.557190551264,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.32230971128608926,
+          "cost_pct": 20.336985665253486,
+          "acc_pct": 86.615515771526
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.5543307086614173,
+          "mean_cost": 17435.6824020998,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.3648293963254593,
+          "cost_pct": 21.82953025102639,
+          "acc_pct": 90.02557544757033
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5700787401574803,
+          "mean_cost": 18727.800004199482,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.4131233595800525,
+          "cost_pct": 23.447265630257768,
+          "acc_pct": 92.58312020460359
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.5963254593175853,
+          "mean_cost": 19980.16544251966,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.5028871391076115,
+          "cost_pct": 25.01523117302642,
+          "acc_pct": 96.845694799659
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.6199475065616797,
+          "mean_cost": 21159.454370603653,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.6251968503937008,
+          "cost_pct": 26.491704690759782,
+          "acc_pct": 100.68201193520888
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.6167979002624672,
+          "mean_cost": 21932.394834645656,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.7758530183727034,
+          "cost_pct": 27.459428629113653,
+          "acc_pct": 100.17050298380221
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.6188976377952756,
+          "mean_cost": 22468.82516325459,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.8908136482939633,
+          "cost_pct": 28.13104111986001,
+          "acc_pct": 100.51150895140665
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.6173228346456693,
+          "mean_cost": 22851.542072440945,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.968503937007874,
+          "cost_pct": 28.61020391681809,
+          "acc_pct": 100.25575447570334
+        }
+      ]
+    },
+    "irtnet_d232": {
+      "sweep": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4587926509186352,
+          "mean_cost": 49.38421417322961,
+          "n_unique_picks": 4,
+          "fallback_rate": 0.0005249343832020997
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.45984251968503936,
+          "mean_cost": 152.56954960629807,
+          "n_unique_picks": 7,
+          "fallback_rate": 0.0031496062992125984
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.4624671916010499,
+          "mean_cost": 520.2247895012974,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.009448818897637795
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.4666666666666667,
+          "mean_cost": 1405.20482939636,
+          "n_unique_picks": 14,
+          "fallback_rate": 0.02257217847769029
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.47401574803149604,
+          "mean_cost": 3025.032533333446,
+          "n_unique_picks": 14,
+          "fallback_rate": 0.04409448818897638
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.48031496062992124,
+          "mean_cost": 4645.0005333334575,
+          "n_unique_picks": 14,
+          "fallback_rate": 0.07086614173228346
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.48241469816272964,
+          "mean_cost": 7675.627708136607,
+          "n_unique_picks": 15,
+          "fallback_rate": 0.11863517060367454
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.48923884514435695,
+          "mean_cost": 10857.773555905635,
+          "n_unique_picks": 14,
+          "fallback_rate": 0.16850393700787403
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.5007874015748032,
+          "mean_cost": 13409.927189501428,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.210498687664042
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5170603674540682,
+          "mean_cost": 16323.275456168085,
+          "n_unique_picks": 12,
+          "fallback_rate": 0.26456692913385826
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.5364829396325459,
+          "mean_cost": 18996.869039370038,
+          "n_unique_picks": 15,
+          "fallback_rate": 0.30236220472440944
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.5601049868766405,
+          "mean_cost": 21527.440730708553,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.3543307086614173
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5826771653543307,
+          "mean_cost": 24603.08305301823,
+          "n_unique_picks": 14,
+          "fallback_rate": 0.3979002624671916
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.6005249343832021,
+          "mean_cost": 29040.87543936992,
+          "n_unique_picks": 12,
+          "fallback_rate": 0.49133858267716535
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.6236220472440945,
+          "mean_cost": 34319.38741417313,
+          "n_unique_picks": 12,
+          "fallback_rate": 0.6152230971128609
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.6230971128608924,
+          "mean_cost": 38572.312592125956,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.7711286089238845
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.6246719160104987,
+          "mean_cost": 41137.39335223097,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.889763779527559
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.6225721784776903,
+          "mean_cost": 43506.831521259846,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.9706036745406824
+        }
+      ],
+      "normalized": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4587926509186352,
+          "mean_cost": 49.38421417322961,
+          "n_unique_picks": 4,
+          "fallback_rate": 0.0005249343832020997,
+          "cost_pct": 0.0618291944276212,
+          "acc_pct": 74.50980392156865
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.45984251968503936,
+          "mean_cost": 152.56954960629807,
+          "n_unique_picks": 7,
+          "fallback_rate": 0.0031496062992125984,
+          "cost_pct": 0.19101756511205187,
+          "acc_pct": 74.68030690537086
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.4624671916010499,
+          "mean_cost": 520.2247895012974,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.009448818897637795,
+          "cost_pct": 0.6513231038427703,
+          "acc_pct": 75.10656436487639
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.4666666666666667,
+          "mean_cost": 1405.20482939636,
+          "n_unique_picks": 14,
+          "fallback_rate": 0.02257217847769029,
+          "cost_pct": 1.7593209502658753,
+          "acc_pct": 75.78857630008527
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.47401574803149604,
+          "mean_cost": 3025.032533333446,
+          "n_unique_picks": 14,
+          "fallback_rate": 0.04409448818897638,
+          "cost_pct": 3.787350427350568,
+          "acc_pct": 76.98209718670077
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.48031496062992124,
+          "mean_cost": 4645.0005333334575,
+          "n_unique_picks": 14,
+          "fallback_rate": 0.07086614173228346,
+          "cost_pct": 5.8155555555557115,
+          "acc_pct": 78.00511508951406
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.48241469816272964,
+          "mean_cost": 7675.627708136607,
+          "n_unique_picks": 15,
+          "fallback_rate": 0.11863517060367454,
+          "cost_pct": 9.609910491957892,
+          "acc_pct": 78.3461210571185
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.48923884514435695,
+          "mean_cost": 10857.773555905635,
+          "n_unique_picks": 14,
+          "fallback_rate": 0.16850393700787403,
+          "cost_pct": 13.593967292550124,
+          "acc_pct": 79.45439045183291
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.5007874015748032,
+          "mean_cost": 13409.927189501428,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.210498687664042,
+          "cost_pct": 16.78927182179165,
+          "acc_pct": 81.3299232736573
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5170603674540682,
+          "mean_cost": 16323.275456168085,
+          "n_unique_picks": 12,
+          "fallback_rate": 0.26456692913385826,
+          "cost_pct": 20.436793189313008,
+          "acc_pct": 83.97271952259166
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.5364829396325459,
+          "mean_cost": 18996.869039370038,
+          "n_unique_picks": 15,
+          "fallback_rate": 0.30236220472440944,
+          "cost_pct": 23.784140924692053,
+          "acc_pct": 87.12702472293266
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.5601049868766405,
+          "mean_cost": 21527.440730708553,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.3543307086614173,
+          "cost_pct": 26.95242479305458,
+          "acc_pct": 90.96334185848254
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5826771653543307,
+          "mean_cost": 24603.08305301823,
+          "n_unique_picks": 14,
+          "fallback_rate": 0.3979002624671916,
+          "cost_pct": 30.803138838414245,
+          "acc_pct": 94.62915601023018
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.6005249343832021,
+          "mean_cost": 29040.87543936992,
+          "n_unique_picks": 12,
+          "fallback_rate": 0.49133858267716535,
+          "cost_pct": 36.35926912982011,
+          "acc_pct": 97.52770673486786
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.6236220472440945,
+          "mean_cost": 34319.38741417313,
+          "n_unique_picks": 12,
+          "fallback_rate": 0.6152230971128609,
+          "cost_pct": 42.967983040581345,
+          "acc_pct": 101.27877237851663
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.6230971128608924,
+          "mean_cost": 38572.312592125956,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.7711286089238845,
+          "cost_pct": 48.292658994548724,
+          "acc_pct": 101.19352088661553
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.6246719160104987,
+          "mean_cost": 41137.39335223097,
+          "n_unique_picks": 10,
+          "fallback_rate": 0.889763779527559,
+          "cost_pct": 51.50414832761289,
+          "acc_pct": 101.44927536231884
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.6225721784776903,
+          "mean_cost": 43506.831521259846,
+          "n_unique_picks": 11,
+          "fallback_rate": 0.9706036745406824,
+          "cost_pct": 54.47069250959016,
+          "acc_pct": 101.10826939471443
+        }
+      ]
+    },
+    "embedllm_d232": {
+      "sweep": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 1.0239999999999467,
+          "n_unique_picks": 1,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 1.0239999999999467,
+          "n_unique_picks": 1,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 5.860720209973537,
+          "n_unique_picks": 3,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.45774278215223096,
+          "mean_cost": 72.77280419947633,
+          "n_unique_picks": 16,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.473490813648294,
+          "mean_cost": 482.67597270339826,
+          "n_unique_picks": 46,
+          "fallback_rate": 0.0031496062992125984
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.48661417322834644,
+          "mean_cost": 1560.4824692913612,
+          "n_unique_picks": 65,
+          "fallback_rate": 0.01837270341207349
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.49396325459317586,
+          "mean_cost": 3990.9978036746375,
+          "n_unique_picks": 70,
+          "fallback_rate": 0.06036745406824147
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.50498687664042,
+          "mean_cost": 6081.076409448919,
+          "n_unique_picks": 71,
+          "fallback_rate": 0.11758530183727034
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.5307086614173229,
+          "mean_cost": 8152.843960105069,
+          "n_unique_picks": 104,
+          "fallback_rate": 0.17795275590551182
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5721784776902887,
+          "mean_cost": 10239.622114435757,
+          "n_unique_picks": 114,
+          "fallback_rate": 0.23202099737532808
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.6015748031496063,
+          "mean_cost": 13113.767038320255,
+          "n_unique_picks": 120,
+          "fallback_rate": 0.28503937007874014
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.6283464566929133,
+          "mean_cost": 16370.04779842524,
+          "n_unique_picks": 132,
+          "fallback_rate": 0.35328083989501313
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.6335958005249344,
+          "mean_cost": 20119.75518740158,
+          "n_unique_picks": 141,
+          "fallback_rate": 0.4272965879265092
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.6503937007874016,
+          "mean_cost": 24110.198794750624,
+          "n_unique_picks": 131,
+          "fallback_rate": 0.5186351706036746
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.6797900262467191,
+          "mean_cost": 28420.435183202106,
+          "n_unique_picks": 120,
+          "fallback_rate": 0.6288713910761154
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.6897637795275591,
+          "mean_cost": 31846.45429081365,
+          "n_unique_picks": 115,
+          "fallback_rate": 0.7328083989501313
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.700262467191601,
+          "mean_cost": 36663.823319685034,
+          "n_unique_picks": 110,
+          "fallback_rate": 0.836745406824147
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.7007874015748031,
+          "mean_cost": 37355.090511286086,
+          "n_unique_picks": 106,
+          "fallback_rate": 0.9963254593175853
+        }
+      ],
+      "normalized": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 1.0239999999999467,
+          "n_unique_picks": 1,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.0012820512820512155,
+          "acc_pct": 74.08354646206308
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 1.0239999999999467,
+          "n_unique_picks": 1,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.0012820512820512155,
+          "acc_pct": 74.08354646206308
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 5.860720209973537,
+          "n_unique_picks": 3,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.007337640487246515,
+          "acc_pct": 74.08354646206308
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.45774278215223096,
+          "mean_cost": 72.77280419947633,
+          "n_unique_picks": 16,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.09111178410391166,
+          "acc_pct": 74.33930093776641
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.473490813648294,
+          "mean_cost": 482.67597270339826,
+          "n_unique_picks": 46,
+          "fallback_rate": 0.0031496062992125984,
+          "cost_pct": 0.6043118648630287,
+          "acc_pct": 76.89684569479967
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.48661417322834644,
+          "mean_cost": 1560.4824692913612,
+          "n_unique_picks": 65,
+          "fallback_rate": 0.01837270341207349,
+          "cost_pct": 1.95372905309916,
+          "acc_pct": 79.02813299232737
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.49396325459317586,
+          "mean_cost": 3990.9978036746375,
+          "n_unique_picks": 70,
+          "fallback_rate": 0.06036745406824147,
+          "cost_pct": 4.996742041860274,
+          "acc_pct": 80.22165387894289
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.50498687664042,
+          "mean_cost": 6081.076409448919,
+          "n_unique_picks": 71,
+          "fallback_rate": 0.11758530183727034,
+          "cost_pct": 7.613527155259564,
+          "acc_pct": 82.01193520886616
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.5307086614173229,
+          "mean_cost": 8152.843960105069,
+          "n_unique_picks": 104,
+          "fallback_rate": 0.17795275590551182,
+          "cost_pct": 10.207386768961674,
+          "acc_pct": 86.18925831202048
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5721784776902887,
+          "mean_cost": 10239.622114435757,
+          "n_unique_picks": 114,
+          "fallback_rate": 0.23202099737532808,
+          "cost_pct": 12.820039706575217,
+          "acc_pct": 92.92412617220802
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.6015748031496063,
+          "mean_cost": 13113.767038320255,
+          "n_unique_picks": 120,
+          "fallback_rate": 0.28503937007874014,
+          "cost_pct": 16.41847836328157,
+          "acc_pct": 97.69820971867009
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.6283464566929133,
+          "mean_cost": 16370.04779842524,
+          "n_unique_picks": 132,
+          "fallback_rate": 0.35328083989501313,
+          "cost_pct": 20.495352311730315,
+          "acc_pct": 102.04603580562659
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.6335958005249344,
+          "mean_cost": 20119.75518740158,
+          "n_unique_picks": 141,
+          "fallback_rate": 0.4272965879265092,
+          "cost_pct": 25.189997981021612,
+          "acc_pct": 102.89855072463769
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.6503937007874016,
+          "mean_cost": 24110.198794750624,
+          "n_unique_picks": 131,
+          "fallback_rate": 0.5186351706036746,
+          "cost_pct": 30.186046167305967,
+          "acc_pct": 105.62659846547315
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.6797900262467191,
+          "mean_cost": 28420.435183202106,
+          "n_unique_picks": 120,
+          "fallback_rate": 0.6288713910761154,
+          "cost_pct": 35.58247594050744,
+          "acc_pct": 110.40068201193523
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.6897637795275591,
+          "mean_cost": 31846.45429081365,
+          "n_unique_picks": 115,
+          "fallback_rate": 0.7328083989501313,
+          "cost_pct": 39.87186284406757,
+          "acc_pct": 112.02046035805628
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.700262467191601,
+          "mean_cost": 36663.823319685034,
+          "n_unique_picks": 110,
+          "fallback_rate": 0.836745406824147,
+          "cost_pct": 45.90322430849989,
+          "acc_pct": 113.72549019607843
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.7007874015748031,
+          "mean_cost": 37355.090511286086,
+          "n_unique_picks": 106,
+          "fallback_rate": 0.9963254593175853,
+          "cost_pct": 46.768693047984385,
+          "acc_pct": 113.81074168797956
+        }
+      ]
+    },
+    "knn_k10": {
+      "sweep": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4645669291338583,
+          "mean_cost": 44.48083989501339,
+          "n_unique_picks": 36,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.4645669291338583,
+          "mean_cost": 44.48083989501339,
+          "n_unique_picks": 36,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.46404199475065616,
+          "mean_cost": 187.73118320209701,
+          "n_unique_picks": 60,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.46404199475065616,
+          "mean_cost": 187.73118320209701,
+          "n_unique_picks": 60,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.46981627296587924,
+          "mean_cost": 499.72382572177344,
+          "n_unique_picks": 112,
+          "fallback_rate": 0.0015748031496062992
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.46981627296587924,
+          "mean_cost": 499.72382572177344,
+          "n_unique_picks": 112,
+          "fallback_rate": 0.0015748031496062992
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.47926509186351707,
+          "mean_cost": 1135.847139107614,
+          "n_unique_picks": 223,
+          "fallback_rate": 0.007349081364829396
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.47926509186351707,
+          "mean_cost": 1135.847139107614,
+          "n_unique_picks": 223,
+          "fallback_rate": 0.007349081364829396
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.49291338582677163,
+          "mean_cost": 2275.2495202100267,
+          "n_unique_picks": 335,
+          "fallback_rate": 0.028871391076115485
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.49291338582677163,
+          "mean_cost": 2275.2495202100267,
+          "n_unique_picks": 335,
+          "fallback_rate": 0.028871391076115485
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.5123359580052493,
+          "mean_cost": 4415.765366929177,
+          "n_unique_picks": 468,
+          "fallback_rate": 0.07979002624671916
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.5123359580052493,
+          "mean_cost": 4415.765366929177,
+          "n_unique_picks": 468,
+          "fallback_rate": 0.07979002624671916
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5396325459317586,
+          "mean_cost": 7228.563283989506,
+          "n_unique_picks": 578,
+          "fallback_rate": 0.1805774278215223
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.5396325459317586,
+          "mean_cost": 7228.563283989506,
+          "n_unique_picks": 578,
+          "fallback_rate": 0.1805774278215223
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.5606299212598426,
+          "mean_cost": 10472.420585826774,
+          "n_unique_picks": 659,
+          "fallback_rate": 0.32388451443569555
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.5606299212598426,
+          "mean_cost": 10472.420585826774,
+          "n_unique_picks": 659,
+          "fallback_rate": 0.32388451443569555
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.6062992125984252,
+          "mean_cost": 15388.77843149607,
+          "n_unique_picks": 683,
+          "fallback_rate": 0.48923884514435695
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.6062992125984252,
+          "mean_cost": 15388.77843149607,
+          "n_unique_picks": 683,
+          "fallback_rate": 0.48923884514435695
+        }
+      ],
+      "normalized": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4645669291338583,
+          "mean_cost": 44.48083989501339,
+          "n_unique_picks": 36,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.055690154115351304,
+          "acc_pct": 75.44757033248082
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.4645669291338583,
+          "mean_cost": 44.48083989501339,
+          "n_unique_picks": 36,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.055690154115351304,
+          "acc_pct": 75.44757033248082
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.46404199475065616,
+          "mean_cost": 187.73118320209701,
+          "n_unique_picks": 60,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.23504004307153573,
+          "acc_pct": 75.36231884057972
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.46404199475065616,
+          "mean_cost": 187.73118320209701,
+          "n_unique_picks": 60,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.23504004307153573,
+          "acc_pct": 75.36231884057972
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.46981627296587924,
+          "mean_cost": 499.72382572177344,
+          "n_unique_picks": 112,
+          "fallback_rate": 0.0015748031496062992,
+          "cost_pct": 0.6256558314825889,
+          "acc_pct": 76.30008525149191
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.46981627296587924,
+          "mean_cost": 499.72382572177344,
+          "n_unique_picks": 112,
+          "fallback_rate": 0.0015748031496062992,
+          "cost_pct": 0.6256558314825889,
+          "acc_pct": 76.30008525149191
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.47926509186351707,
+          "mean_cost": 1135.847139107614,
+          "n_unique_picks": 223,
+          "fallback_rate": 0.007349081364829396,
+          "cost_pct": 1.422084258698435,
+          "acc_pct": 77.83461210571186
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.47926509186351707,
+          "mean_cost": 1135.847139107614,
+          "n_unique_picks": 223,
+          "fallback_rate": 0.007349081364829396,
+          "cost_pct": 1.422084258698435,
+          "acc_pct": 77.83461210571186
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.49291338582677163,
+          "mean_cost": 2275.2495202100267,
+          "n_unique_picks": 335,
+          "fallback_rate": 0.028871391076115485,
+          "cost_pct": 2.8486196917693647,
+          "acc_pct": 80.05115089514067
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.49291338582677163,
+          "mean_cost": 2275.2495202100267,
+          "n_unique_picks": 335,
+          "fallback_rate": 0.028871391076115485,
+          "cost_pct": 2.8486196917693647,
+          "acc_pct": 80.05115089514067
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.5123359580052493,
+          "mean_cost": 4415.765366929177,
+          "n_unique_picks": 468,
+          "fallback_rate": 0.07979002624671916,
+          "cost_pct": 5.528552392489454,
+          "acc_pct": 83.20545609548168
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.5123359580052493,
+          "mean_cost": 4415.765366929177,
+          "n_unique_picks": 468,
+          "fallback_rate": 0.07979002624671916,
+          "cost_pct": 5.528552392489454,
+          "acc_pct": 83.20545609548168
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5396325459317586,
+          "mean_cost": 7228.563283989506,
+          "n_unique_picks": 578,
+          "fallback_rate": 0.1805774278215223,
+          "cost_pct": 9.050184400026925,
+          "acc_pct": 87.63853367433931
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.5396325459317586,
+          "mean_cost": 7228.563283989506,
+          "n_unique_picks": 578,
+          "fallback_rate": 0.1805774278215223,
+          "cost_pct": 9.050184400026925,
+          "acc_pct": 87.63853367433931
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.5606299212598426,
+          "mean_cost": 10472.420585826774,
+          "n_unique_picks": 659,
+          "fallback_rate": 0.32388451443569555,
+          "cost_pct": 13.111504138905715,
+          "acc_pct": 91.04859335038364
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.5606299212598426,
+          "mean_cost": 10472.420585826774,
+          "n_unique_picks": 659,
+          "fallback_rate": 0.32388451443569555,
+          "cost_pct": 13.111504138905715,
+          "acc_pct": 91.04859335038364
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.6062992125984252,
+          "mean_cost": 15388.77843149607,
+          "n_unique_picks": 683,
+          "fallback_rate": 0.48923884514435695,
+          "cost_pct": 19.266799919240874,
+          "acc_pct": 98.46547314578007
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.6062992125984252,
+          "mean_cost": 15388.77843149607,
+          "n_unique_picks": 683,
+          "fallback_rate": 0.48923884514435695,
+          "cost_pct": 19.266799919240874,
+          "acc_pct": 98.46547314578007
+        }
+      ]
+    },
+    "cdmeval_calibrated": {
+      "sweep": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.45931758530183725,
+          "mean_cost": 117.11227296588383,
+          "n_unique_picks": 19,
+          "fallback_rate": 0.0015748031496062992
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.4650918635170604,
+          "mean_cost": 478.1913364829184,
+          "n_unique_picks": 49,
+          "fallback_rate": 0.01732283464566929
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.47401574803149604,
+          "mean_cost": 893.7945028871194,
+          "n_unique_picks": 70,
+          "fallback_rate": 0.029921259842519685
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.4755905511811024,
+          "mean_cost": 1278.6964829396545,
+          "n_unique_picks": 77,
+          "fallback_rate": 0.03989501312335958
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.4755905511811024,
+          "mean_cost": 1389.5249973753573,
+          "n_unique_picks": 79,
+          "fallback_rate": 0.04199475065616798
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.5086614173228347,
+          "mean_cost": 5310.727391076168,
+          "n_unique_picks": 119,
+          "fallback_rate": 0.11863517060367454
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.5086614173228347,
+          "mean_cost": 5442.95293648301,
+          "n_unique_picks": 119,
+          "fallback_rate": 0.12703412073490813
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.5086614173228347,
+          "mean_cost": 5442.95293648301,
+          "n_unique_picks": 119,
+          "fallback_rate": 0.12703412073490813
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.510236220472441,
+          "mean_cost": 8170.096075590617,
+          "n_unique_picks": 129,
+          "fallback_rate": 0.2887139107611549
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5244094488188976,
+          "mean_cost": 9355.631672441012,
+          "n_unique_picks": 125,
+          "fallback_rate": 0.3459317585301837
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.531758530183727,
+          "mean_cost": 10409.76307401581,
+          "n_unique_picks": 125,
+          "fallback_rate": 0.3952755905511811
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.5328083989501312,
+          "mean_cost": 11701.771556955431,
+          "n_unique_picks": 130,
+          "fallback_rate": 0.4608923884514436
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0
+        }
+      ],
+      "normalized": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.45931758530183725,
+          "mean_cost": 117.11227296588383,
+          "n_unique_picks": 19,
+          "fallback_rate": 0.0015748031496062992,
+          "cost_pct": 0.14662494111313581,
+          "acc_pct": 74.59505541346974
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.4650918635170604,
+          "mean_cost": 478.1913364829184,
+          "n_unique_picks": 49,
+          "fallback_rate": 0.01732283464566929,
+          "cost_pct": 0.5986970859411539,
+          "acc_pct": 75.53282182438194
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.47401574803149604,
+          "mean_cost": 893.7945028871194,
+          "n_unique_picks": 70,
+          "fallback_rate": 0.029921259842519685,
+          "cost_pct": 1.1190335823406443,
+          "acc_pct": 76.98209718670077
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.4755905511811024,
+          "mean_cost": 1278.6964829396545,
+          "n_unique_picks": 77,
+          "fallback_rate": 0.03989501312335958,
+          "cost_pct": 1.6009320950266106,
+          "acc_pct": 77.2378516624041
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.4755905511811024,
+          "mean_cost": 1389.5249973753573,
+          "n_unique_picks": 79,
+          "fallback_rate": 0.04199475065616798,
+          "cost_pct": 1.7396897503197082,
+          "acc_pct": 77.2378516624041
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.5086614173228347,
+          "mean_cost": 5310.727391076168,
+          "n_unique_picks": 119,
+          "fallback_rate": 0.11863517060367454,
+          "cost_pct": 6.649047715189512,
+          "acc_pct": 82.60869565217392
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.5086614173228347,
+          "mean_cost": 5442.95293648301,
+          "n_unique_picks": 119,
+          "fallback_rate": 0.12703412073490813,
+          "cost_pct": 6.814594521838704,
+          "acc_pct": 82.60869565217392
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.5086614173228347,
+          "mean_cost": 5442.95293648301,
+          "n_unique_picks": 119,
+          "fallback_rate": 0.12703412073490813,
+          "cost_pct": 6.814594521838704,
+          "acc_pct": 82.60869565217392
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.510236220472441,
+          "mean_cost": 8170.096075590617,
+          "n_unique_picks": 129,
+          "fallback_rate": 0.2887139107611549,
+          "cost_pct": 10.228986472844822,
+          "acc_pct": 82.86445012787725
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5244094488188976,
+          "mean_cost": 9355.631672441012,
+          "n_unique_picks": 125,
+          "fallback_rate": 0.3459317585301837,
+          "cost_pct": 11.713280839895097,
+          "acc_pct": 85.16624040920716
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.531758530183727,
+          "mean_cost": 10409.76307401581,
+          "n_unique_picks": 125,
+          "fallback_rate": 0.3952755905511811,
+          "cost_pct": 13.03305673329303,
+          "acc_pct": 86.35976129582268
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.5328083989501312,
+          "mean_cost": 11701.771556955431,
+          "n_unique_picks": 130,
+          "fallback_rate": 0.4608923884514436,
+          "cost_pct": 14.650655494986268,
+          "acc_pct": 86.5302642796249
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0,
+          "cost_pct": 21.804764789016744,
+          "acc_pct": 83.461210571185
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0,
+          "cost_pct": 21.804764789016744,
+          "acc_pct": 83.461210571185
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0,
+          "cost_pct": 21.804764789016744,
+          "acc_pct": 83.461210571185
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0,
+          "cost_pct": 21.804764789016744,
+          "acc_pct": 83.461210571185
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0,
+          "cost_pct": 21.804764789016744,
+          "acc_pct": 83.461210571185
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.5139107611548557,
+          "mean_cost": 17415.90173228345,
+          "n_unique_picks": 95,
+          "fallback_rate": 1.0,
+          "cost_pct": 21.804764789016744,
+          "acc_pct": 83.461210571185
+        }
+      ],
+      "val_ece_uncalibrated": 0.09529184273090602,
+      "val_ece_calibrated": 0.00014819867182573122,
+      "test_auc_uncalibrated": 0.7121140330284966,
+      "test_auc_calibrated": 0.7124021591409022,
+      "test_ece_uncalibrated": 0.1015934970644531,
+      "test_ece_calibrated": 0.013932493253844033
+    },
+    "embedllm_calibrated": {
+      "sweep": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 1.0239999999999467,
+          "n_unique_picks": 1,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 1.8297616797899208,
+          "n_unique_picks": 2,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 13.61516850393815,
+          "n_unique_picks": 6,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.4603674540682415,
+          "mean_cost": 123.67501102362644,
+          "n_unique_picks": 23,
+          "fallback_rate": 0.0
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.48136482939632547,
+          "mean_cost": 851.7777133858075,
+          "n_unique_picks": 62,
+          "fallback_rate": 0.004724409448818898
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.4797900262467192,
+          "mean_cost": 1760.9386666666971,
+          "n_unique_picks": 63,
+          "fallback_rate": 0.01994750656167979
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.49081364829396323,
+          "mean_cost": 3573.191827821548,
+          "n_unique_picks": 76,
+          "fallback_rate": 0.049868766404199474
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.5013123359580053,
+          "mean_cost": 5421.961205249362,
+          "n_unique_picks": 72,
+          "fallback_rate": 0.09133858267716535
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.5196850393700787,
+          "mean_cost": 7252.860304462048,
+          "n_unique_picks": 84,
+          "fallback_rate": 0.14645669291338584
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5800524934383202,
+          "mean_cost": 10189.214437795372,
+          "n_unique_picks": 113,
+          "fallback_rate": 0.2272965879265092
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.5968503937007874,
+          "mean_cost": 12535.783811023688,
+          "n_unique_picks": 118,
+          "fallback_rate": 0.27454068241469815
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.6167979002624672,
+          "mean_cost": 15930.169112860944,
+          "n_unique_picks": 137,
+          "fallback_rate": 0.34068241469816274
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.6283464566929133,
+          "mean_cost": 19202.508128084028,
+          "n_unique_picks": 141,
+          "fallback_rate": 0.4136482939632546
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.6388451443569554,
+          "mean_cost": 22250.884098687682,
+          "n_unique_picks": 143,
+          "fallback_rate": 0.48136482939632547
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.6577427821522309,
+          "mean_cost": 26214.023727034128,
+          "n_unique_picks": 134,
+          "fallback_rate": 0.589501312335958
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.6761154855643045,
+          "mean_cost": 29501.735643044623,
+          "n_unique_picks": 122,
+          "fallback_rate": 0.689238845144357
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.6866141732283465,
+          "mean_cost": 31600.478740157483,
+          "n_unique_picks": 118,
+          "fallback_rate": 0.7417322834645669
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.6929133858267716,
+          "mean_cost": 35616.38635170604,
+          "n_unique_picks": 113,
+          "fallback_rate": 0.8902887139107611
+        }
+      ],
+      "normalized": [
+        {
+          "threshold": 0.1,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 1.0239999999999467,
+          "n_unique_picks": 1,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.0012820512820512155,
+          "acc_pct": 74.08354646206308
+        },
+        {
+          "threshold": 0.15,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 1.8297616797899208,
+          "n_unique_picks": 2,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.0022908674877177492,
+          "acc_pct": 74.08354646206308
+        },
+        {
+          "threshold": 0.2,
+          "accuracy": 0.4561679790026247,
+          "mean_cost": 13.61516850393815,
+          "n_unique_picks": 6,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.017046234605291154,
+          "acc_pct": 74.08354646206308
+        },
+        {
+          "threshold": 0.25,
+          "accuracy": 0.4603674540682415,
+          "mean_cost": 123.67501102362644,
+          "n_unique_picks": 23,
+          "fallback_rate": 0.0,
+          "cost_pct": 0.1548415101958464,
+          "acc_pct": 74.76555839727196
+        },
+        {
+          "threshold": 0.3,
+          "accuracy": 0.48136482939632547,
+          "mean_cost": 851.7777133858075,
+          "n_unique_picks": 62,
+          "fallback_rate": 0.004724409448818898,
+          "cost_pct": 1.0664284272158047,
+          "acc_pct": 78.17561807331629
+        },
+        {
+          "threshold": 0.35,
+          "accuracy": 0.4797900262467192,
+          "mean_cost": 1760.9386666666971,
+          "n_unique_picks": 63,
+          "fallback_rate": 0.01994750656167979,
+          "cost_pct": 2.2047008547008926,
+          "acc_pct": 77.91986359761297
+        },
+        {
+          "threshold": 0.4,
+          "accuracy": 0.49081364829396323,
+          "mean_cost": 3573.191827821548,
+          "n_unique_picks": 76,
+          "fallback_rate": 0.049868766404199474,
+          "cost_pct": 4.473647620970487,
+          "acc_pct": 79.71014492753623
+        },
+        {
+          "threshold": 0.45,
+          "accuracy": 0.5013123359580053,
+          "mean_cost": 5421.961205249362,
+          "n_unique_picks": 72,
+          "fallback_rate": 0.09133858267716535,
+          "cost_pct": 6.7883128070529875,
+          "acc_pct": 81.4151747655584
+        },
+        {
+          "threshold": 0.5,
+          "accuracy": 0.5196850393700787,
+          "mean_cost": 7252.860304462048,
+          "n_unique_picks": 84,
+          "fallback_rate": 0.14645669291338584,
+          "cost_pct": 9.080604347533614,
+          "acc_pct": 84.39897698209718
+        },
+        {
+          "threshold": 0.55,
+          "accuracy": 0.5800524934383202,
+          "mean_cost": 10189.214437795372,
+          "n_unique_picks": 113,
+          "fallback_rate": 0.2272965879265092,
+          "cost_pct": 12.756929133858389,
+          "acc_pct": 94.20289855072464
+        },
+        {
+          "threshold": 0.6,
+          "accuracy": 0.5968503937007874,
+          "mean_cost": 12535.783811023688,
+          "n_unique_picks": 118,
+          "fallback_rate": 0.27454068241469815,
+          "cost_pct": 15.694841510195923,
+          "acc_pct": 96.93094629156012
+        },
+        {
+          "threshold": 0.65,
+          "accuracy": 0.6167979002624672,
+          "mean_cost": 15930.169112860944,
+          "n_unique_picks": 137,
+          "fallback_rate": 0.34068241469816274,
+          "cost_pct": 19.944622787536236,
+          "acc_pct": 100.17050298380221
+        },
+        {
+          "threshold": 0.7,
+          "accuracy": 0.6283464566929133,
+          "mean_cost": 19202.508128084028,
+          "n_unique_picks": 141,
+          "fallback_rate": 0.4136482939632546,
+          "cost_pct": 24.041601722861614,
+          "acc_pct": 102.04603580562659
+        },
+        {
+          "threshold": 0.75,
+          "accuracy": 0.6388451443569554,
+          "mean_cost": 22250.884098687682,
+          "n_unique_picks": 143,
+          "fallback_rate": 0.48136482939632547,
+          "cost_pct": 27.85817820849319,
+          "acc_pct": 103.75106564364877
+        },
+        {
+          "threshold": 0.8,
+          "accuracy": 0.6577427821522309,
+          "mean_cost": 26214.023727034128,
+          "n_unique_picks": 134,
+          "fallback_rate": 0.589501312335958,
+          "cost_pct": 32.820041725553544,
+          "acc_pct": 106.82011935208865
+        },
+        {
+          "threshold": 0.85,
+          "accuracy": 0.6761154855643045,
+          "mean_cost": 29501.735643044623,
+          "n_unique_picks": 122,
+          "fallback_rate": 0.689238845144357,
+          "cost_pct": 36.936267581936875,
+          "acc_pct": 109.80392156862746
+        },
+        {
+          "threshold": 0.9,
+          "accuracy": 0.6866141732283465,
+          "mean_cost": 31600.478740157483,
+          "n_unique_picks": 118,
+          "fallback_rate": 0.7417322834645669,
+          "cost_pct": 39.563900666262874,
+          "acc_pct": 111.50895140664963
+        },
+        {
+          "threshold": 0.95,
+          "accuracy": 0.6929133858267716,
+          "mean_cost": 35616.38635170604,
+          "n_unique_picks": 113,
+          "fallback_rate": 0.8902887139107611,
+          "cost_pct": 44.591829867420415,
+          "acc_pct": 112.53196930946292
+        }
+      ],
+      "val_ece_uncalibrated": 0.012944170785762764,
+      "val_ece_calibrated": 1.4023972908222058e-06,
+      "test_auc_uncalibrated": 0.7429274644865221,
+      "test_auc_calibrated": 0.7429185844763997,
+      "test_ece_uncalibrated": 0.010334736911840484,
+      "test_ece_calibrated": 0.010300102946706843
+    }
+  },
+  "verified": true
+}

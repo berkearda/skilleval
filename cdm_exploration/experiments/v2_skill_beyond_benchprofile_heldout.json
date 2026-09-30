@@ -1,0 +1,384 @@
+{
+  "experiment": "skill_theta_beyond_benchmark_profile_heldout",
+  "ckpt": "cdm_exploration/checkpoints/expanded/text_conditioned_protocolB.pt",
+  "design": "partial corr of theta_k with held-out skill-k acc, controlling for 5 per-benchmark train accuracies",
+  "min_heldout_items": 10,
+  "n_skills_evaluated": 41,
+  "mean_partial_r_given_scalar": 0.4263045385727839,
+  "mean_partial_r_given_benchprofile": 0.2243056094655787,
+  "median_partial_r_given_benchprofile": 0.15485123828813674,
+  "n_positive_given_benchprofile": 35,
+  "n_above_0.2_given_benchprofile": 19,
+  "per_skill": [
+    {
+      "skill": 0,
+      "n_heldout_items": 177,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.9548022598870056,
+      "r_theta_raw": 0.8686385736470259,
+      "r_theta_partial_scalar": 0.6297796965454854,
+      "r_theta_partial_benchprofile": 0.6338561968602886
+    },
+    {
+      "skill": 1,
+      "n_heldout_items": 38,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 0.868421052631579,
+      "r_theta_raw": 0.790715094136551,
+      "r_theta_partial_scalar": 0.6549044576062991,
+      "r_theta_partial_benchprofile": 0.26736177195148014
+    },
+    {
+      "skill": 2,
+      "n_heldout_items": 126,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 0.5714285714285714,
+      "r_theta_raw": 0.9061518298455645,
+      "r_theta_partial_scalar": 0.5941068713414098,
+      "r_theta_partial_benchprofile": 0.6970212882718805
+    },
+    {
+      "skill": 3,
+      "n_heldout_items": 34,
+      "dominant_benchmark": "GPQA",
+      "dom_bench_share": 0.9411764705882353,
+      "r_theta_raw": 0.6271695400671127,
+      "r_theta_partial_scalar": 0.3906772564203115,
+      "r_theta_partial_benchprofile": 0.32396280647439674
+    },
+    {
+      "skill": 5,
+      "n_heldout_items": 156,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.6538461538461539,
+      "r_theta_raw": 0.8444849149524241,
+      "r_theta_partial_scalar": 0.4179138646376205,
+      "r_theta_partial_benchprofile": 0.2680492560804455
+    },
+    {
+      "skill": 6,
+      "n_heldout_items": 102,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 0.9803921568627451,
+      "r_theta_raw": 0.9575123236348377,
+      "r_theta_partial_scalar": 0.9091485897505975,
+      "r_theta_partial_benchprofile": 0.2210914814184543
+    },
+    {
+      "skill": 7,
+      "n_heldout_items": 270,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.6592592592592592,
+      "r_theta_raw": 0.8170486746369225,
+      "r_theta_partial_scalar": 0.3380312052698413,
+      "r_theta_partial_benchprofile": 0.25252345328560577
+    },
+    {
+      "skill": 8,
+      "n_heldout_items": 17,
+      "dominant_benchmark": "IFEval",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.7272126114841524,
+      "r_theta_partial_scalar": 0.5458465042997872,
+      "r_theta_partial_benchprofile": -0.06048028196158818
+    },
+    {
+      "skill": 9,
+      "n_heldout_items": 23,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 0.6956521739130435,
+      "r_theta_raw": 0.7317190044887536,
+      "r_theta_partial_scalar": 0.5417212411626926,
+      "r_theta_partial_benchprofile": 0.26821281770108885
+    },
+    {
+      "skill": 10,
+      "n_heldout_items": 44,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.5454545454545454,
+      "r_theta_raw": 0.7762694109703436,
+      "r_theta_partial_scalar": 0.5753164282067343,
+      "r_theta_partial_benchprofile": 0.48868002514095904
+    },
+    {
+      "skill": 11,
+      "n_heldout_items": 19,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 0.9473684210526315,
+      "r_theta_raw": 0.5729289982861754,
+      "r_theta_partial_scalar": 0.4033832950492683,
+      "r_theta_partial_benchprofile": 0.06774571734438044
+    },
+    {
+      "skill": 12,
+      "n_heldout_items": 37,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.5945945945945946,
+      "r_theta_raw": 0.16145973969079938,
+      "r_theta_partial_scalar": -0.08768050331931188,
+      "r_theta_partial_benchprofile": -0.08160297303849387
+    },
+    {
+      "skill": 14,
+      "n_heldout_items": 30,
+      "dominant_benchmark": "GPQA",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.15582873897888078,
+      "r_theta_partial_scalar": 0.16285554164428312,
+      "r_theta_partial_benchprofile": 0.11050430993270696
+    },
+    {
+      "skill": 15,
+      "n_heldout_items": 14,
+      "dominant_benchmark": "GPQA",
+      "dom_bench_share": 0.8571428571428571,
+      "r_theta_raw": 0.11142557404176653,
+      "r_theta_partial_scalar": 0.06414784970538047,
+      "r_theta_partial_benchprofile": 0.04057284342007783
+    },
+    {
+      "skill": 17,
+      "n_heldout_items": 14,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 0.9285714285714286,
+      "r_theta_raw": 0.6954287906524406,
+      "r_theta_partial_scalar": 0.4806226456117388,
+      "r_theta_partial_benchprofile": -0.00035387657024667923
+    },
+    {
+      "skill": 18,
+      "n_heldout_items": 27,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.9259259259259259,
+      "r_theta_raw": 0.611938574156298,
+      "r_theta_partial_scalar": -0.21717131828249372,
+      "r_theta_partial_benchprofile": -0.18971367806953798
+    },
+    {
+      "skill": 19,
+      "n_heldout_items": 42,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.9127680985522961,
+      "r_theta_partial_scalar": 0.8389439383904624,
+      "r_theta_partial_benchprofile": 0.2510619771858189
+    },
+    {
+      "skill": 20,
+      "n_heldout_items": 254,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.7913385826771654,
+      "r_theta_raw": 0.9116208278862796,
+      "r_theta_partial_scalar": 0.257148448442052,
+      "r_theta_partial_benchprofile": 0.13222996868903425
+    },
+    {
+      "skill": 21,
+      "n_heldout_items": 10,
+      "dominant_benchmark": "IFEval",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.8092294310091229,
+      "r_theta_partial_scalar": 0.6639669460999047,
+      "r_theta_partial_benchprofile": 0.09969376468535021
+    },
+    {
+      "skill": 23,
+      "n_heldout_items": 77,
+      "dominant_benchmark": "IFEval",
+      "dom_bench_share": 0.987012987012987,
+      "r_theta_raw": 0.9574434909923875,
+      "r_theta_partial_scalar": 0.9300585774623089,
+      "r_theta_partial_benchprofile": 0.016203759737956496
+    },
+    {
+      "skill": 25,
+      "n_heldout_items": 27,
+      "dominant_benchmark": "GPQA",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": -0.1763760042336146,
+      "r_theta_partial_scalar": -0.15840265170267215,
+      "r_theta_partial_benchprofile": -0.15319017441359206
+    },
+    {
+      "skill": 29,
+      "n_heldout_items": 89,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.8089887640449438,
+      "r_theta_raw": 0.8859188527043612,
+      "r_theta_partial_scalar": 0.6014177241894068,
+      "r_theta_partial_benchprofile": 0.5146396592645169
+    },
+    {
+      "skill": 30,
+      "n_heldout_items": 11,
+      "dominant_benchmark": "GPQA",
+      "dom_bench_share": 0.5454545454545454,
+      "r_theta_raw": 0.26056338761808107,
+      "r_theta_partial_scalar": 0.030818552473507198,
+      "r_theta_partial_benchprofile": -0.058382741245937876
+    },
+    {
+      "skill": 32,
+      "n_heldout_items": 24,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.7916666666666666,
+      "r_theta_raw": 0.8969451693183937,
+      "r_theta_partial_scalar": 0.6256309952921794,
+      "r_theta_partial_benchprofile": 0.5303164049509129
+    },
+    {
+      "skill": 35,
+      "n_heldout_items": 32,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 0.9375,
+      "r_theta_raw": 0.8693302057825707,
+      "r_theta_partial_scalar": 0.7715935113928505,
+      "r_theta_partial_benchprofile": 0.4333254301467304
+    },
+    {
+      "skill": 36,
+      "n_heldout_items": 58,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.6639851008410822,
+      "r_theta_partial_scalar": 0.4479847734107548,
+      "r_theta_partial_benchprofile": 0.46965861975689754
+    },
+    {
+      "skill": 38,
+      "n_heldout_items": 14,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.7654260180454482,
+      "r_theta_partial_scalar": 0.5945113566828559,
+      "r_theta_partial_benchprofile": 0.02231960818826228
+    },
+    {
+      "skill": 41,
+      "n_heldout_items": 13,
+      "dominant_benchmark": "IFEval",
+      "dom_bench_share": 0.6153846153846154,
+      "r_theta_raw": 0.6989090702145736,
+      "r_theta_partial_scalar": 0.43056241272657186,
+      "r_theta_partial_benchprofile": 0.04746235272194299
+    },
+    {
+      "skill": 42,
+      "n_heldout_items": 99,
+      "dominant_benchmark": "GPQA",
+      "dom_bench_share": 0.898989898989899,
+      "r_theta_raw": 0.3377536613802059,
+      "r_theta_partial_scalar": 0.047308305840840004,
+      "r_theta_partial_benchprofile": 0.05293554085147673
+    },
+    {
+      "skill": 44,
+      "n_heldout_items": 13,
+      "dominant_benchmark": "GPQA",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.0038028192651581695,
+      "r_theta_partial_scalar": 0.011999587982311755,
+      "r_theta_partial_benchprofile": 0.018510978114376304
+    },
+    {
+      "skill": 45,
+      "n_heldout_items": 39,
+      "dominant_benchmark": "GPQA",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.8112435225571251,
+      "r_theta_partial_scalar": 0.4176265859149375,
+      "r_theta_partial_benchprofile": 0.33782943563887907
+    },
+    {
+      "skill": 47,
+      "n_heldout_items": 49,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.9591836734693877,
+      "r_theta_raw": 0.39833686803242585,
+      "r_theta_partial_scalar": 0.07298424421998508,
+      "r_theta_partial_benchprofile": 0.08100899452264343
+    },
+    {
+      "skill": 60,
+      "n_heldout_items": 24,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.6937219631933609,
+      "r_theta_partial_scalar": 0.12124061512720505,
+      "r_theta_partial_benchprofile": 0.13972335421201715
+    },
+    {
+      "skill": 64,
+      "n_heldout_items": 17,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.5882352941176471,
+      "r_theta_raw": 0.5449178204664169,
+      "r_theta_partial_scalar": 0.5171731448131172,
+      "r_theta_partial_benchprofile": 0.520221415821399
+    },
+    {
+      "skill": 68,
+      "n_heldout_items": 50,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.8191548685819486,
+      "r_theta_partial_scalar": 0.4406141485298218,
+      "r_theta_partial_benchprofile": 0.45481680630499655
+    },
+    {
+      "skill": 74,
+      "n_heldout_items": 57,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.9298245614035088,
+      "r_theta_raw": 0.9333884760519782,
+      "r_theta_partial_scalar": 0.8792655409105561,
+      "r_theta_partial_benchprofile": 0.872597692614251
+    },
+    {
+      "skill": 78,
+      "n_heldout_items": 82,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.9512195121951219,
+      "r_theta_raw": 0.8396200565493315,
+      "r_theta_partial_scalar": 0.6012194192870306,
+      "r_theta_partial_benchprofile": 0.5667869894954601
+    },
+    {
+      "skill": 84,
+      "n_heldout_items": 22,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.8638368386188445,
+      "r_theta_partial_scalar": 0.7523686259959868,
+      "r_theta_partial_benchprofile": 0.15485123828813674
+    },
+    {
+      "skill": 89,
+      "n_heldout_items": 14,
+      "dominant_benchmark": "GPQA",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.2254522450478435,
+      "r_theta_partial_scalar": 0.21569339319058717,
+      "r_theta_partial_benchprofile": 0.196478315661472
+    },
+    {
+      "skill": 90,
+      "n_heldout_items": 19,
+      "dominant_benchmark": "MATH",
+      "dom_bench_share": 1.0,
+      "r_theta_raw": 0.7567646857445298,
+      "r_theta_partial_scalar": 0.6101369296810562,
+      "r_theta_partial_benchprofile": 0.07101925655267537
+    },
+    {
+      "skill": 97,
+      "n_heldout_items": 385,
+      "dominant_benchmark": "BBH",
+      "dom_bench_share": 0.974025974025974,
+      "r_theta_raw": 0.8941393009320966,
+      "r_theta_partial_scalar": 0.35301732948087683,
+      "r_theta_partial_benchprofile": 0.11698018210115446
+    }
+  ],
+  "verified": true
+}

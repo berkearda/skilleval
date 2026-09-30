@@ -1,0 +1,22 @@
+{
+  "experiment": "refablation_quality",
+  "judge": "gpt-4.1-mini",
+  "n_judged": 800,
+  "semantic": {
+    "mean": 0.6787154939131216,
+    "median": 0.6784271597862244,
+    "frac_above_0.8": 0.14210526315789473,
+    "by_bench": {
+      "MATH": 0.6735757024775089,
+      "GPQA": 0.6842261092274781
+    }
+  },
+  "quality": {
+    "solution_aware_win": 0.4675,
+    "question_only_win": 0.51875,
+    "tie": 0.01375,
+    "position_set1": 238,
+    "position_set2": 551
+  },
+  "verified": true
+}

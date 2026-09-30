@@ -1,0 +1,41 @@
+{
+  "experiment": "transfer_skill_coverage",
+  "held_out": [
+    "MuSR",
+    "IFEval"
+  ],
+  "n_training_items": 8231,
+  "n_skills_without_training_items": 15,
+  "per_held_out_benchmark": {
+    "MuSR": {
+      "n_items": 756,
+      "n_skills_used": 17,
+      "n_skills_used_without_training_items": 2,
+      "pct_item_skill_links_on_untrained_skills": 0.31645569620253167,
+      "pct_items_touching_an_untrained_skill": 0.3968253968253968,
+      "pct_items_with_only_untrained_skills": 0.0
+    },
+    "IFEval": {
+      "n_items": 536,
+      "n_skills_used": 62,
+      "n_skills_used_without_training_items": 14,
+      "pct_item_skill_links_on_untrained_skills": 11.895910780669144,
+      "pct_items_touching_an_untrained_skill": 22.94776119402985,
+      "pct_items_with_only_untrained_skills": 1.6791044776119404
+    }
+  },
+  "input_excerpt": {
+    "max_chars": 200,
+    "n_items": 9523,
+    "n_distinct_excerpts": 7111,
+    "pct_items_sharing_their_excerpt": 33.79187230914628,
+    "pct_sharing_by_benchmark": {
+      "BBH": 53.77538621767054,
+      "GPQA": 8.305369127516778,
+      "IFEval": 1.3059701492537312,
+      "MATH": 0.3129890453834116,
+      "MuSR": 1.3227513227513228
+    }
+  },
+  "verified": true
+}

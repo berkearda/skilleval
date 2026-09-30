@@ -1,0 +1,34 @@
+{
+  "experiment": "reference_answer_ablation_analysis",
+  "n_items": 2470,
+  "overall": {
+    "exact_jaccard": 0.02186234817813765,
+    "token_jaccard": 0.2789530286256942,
+    "identical_set_rate": 0.0004048582995951417
+  },
+  "by_benchmark": {
+    "MATH": {
+      "n": 1278,
+      "exact_jaccard": 0.03570683359415754,
+      "token_jaccard": 0.32456405188966375
+    },
+    "GPQA": {
+      "n": 1192,
+      "exact_jaccard": 0.007019015659955258,
+      "token_jaccard": 0.2300512771732168
+    }
+  },
+  "stem_reveals_split": {
+    "median_coverage": 0.2,
+    "stem_reveals": {
+      "n": 1208,
+      "token_jaccard": 0.2925010813356305
+    },
+    "stem_hides": {
+      "n": 1262,
+      "token_jaccard": 0.2659846865705412
+    }
+  },
+  "cluster_change_rate": 2155,
+  "verified": true
+}

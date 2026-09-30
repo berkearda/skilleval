@@ -1,0 +1,83 @@
+{
+  "config": {
+    "n_llms": 3811,
+    "n_items": 9523,
+    "K": 100
+  },
+  "results": {
+    "cdm_val_auc": 0.7170448230889644,
+    "irt_val_auc": 0.6045758242933198,
+    "ground_truth_correct_rate": 0.3946344020038692,
+    "cdm_pred_mean": 0.38452911376953125,
+    "cdm_calibration_bias": -0.010105288234337928,
+    "irt_pred_mean": 0.463134765625,
+    "irt_calibration_bias": 0.06850036362113082,
+    "routing_diversity": {
+      "0.30": {
+        "cdm_unique_llms": 120,
+        "cdm_top_llm_share": 0.6451443569553805,
+        "irt_unique_llms": 1,
+        "irt_top_llm_share": 1.0
+      },
+      "0.50": {
+        "cdm_unique_llms": 138,
+        "cdm_top_llm_share": 0.44251968503937006,
+        "irt_unique_llms": 1,
+        "irt_top_llm_share": 1.0
+      },
+      "0.55": {
+        "cdm_unique_llms": 141,
+        "cdm_top_llm_share": 0.4026246719160105,
+        "irt_unique_llms": 1,
+        "irt_top_llm_share": 1.0
+      },
+      "0.65": {
+        "cdm_unique_llms": 142,
+        "cdm_top_llm_share": 0.3270341207349081,
+        "irt_unique_llms": 1,
+        "irt_top_llm_share": 1.0
+      },
+      "0.70": {
+        "cdm_unique_llms": 139,
+        "cdm_top_llm_share": 0.27664041994750654,
+        "irt_unique_llms": 1,
+        "irt_top_llm_share": 1.0
+      },
+      "0.90": {
+        "cdm_unique_llms": 141,
+        "cdm_top_llm_share": 0.2162729658792651,
+        "irt_unique_llms": 1,
+        "irt_top_llm_share": 1.0
+      }
+    },
+    "irt_t065_degenerate_routing": {
+      "threshold": 0.65,
+      "dominant_llm": "fblgit__TheBeagle-v2beta-32B-MGS",
+      "share_routed_to_dominant": 1.0,
+      "dominant_llm_test_acc": 0.5952755905511811,
+      "dominant_llm_acc_pct_of_strongest": 96.67519181585678,
+      "dominant_llm_cost_pct_of_strongest": 2.564102564102564
+    },
+    "strongest": {
+      "llm": "MaziyarPanahi__calme-3.2-instruct-78b",
+      "test_acc": 0.6157480314960629,
+      "cost_gflops": 79872.0
+    },
+    "single_model_dominators_at_irt_pareto_point": [
+      {
+        "llm": "hotmailuser__RombosBeagle-v2beta-MGS-32B",
+        "cost_gflops": 2048.0,
+        "test_acc": 0.5979002624671916,
+        "cost_pct": 2.564102564102564,
+        "acc_pct": 97.10144927536233
+      },
+      {
+        "llm": "fblgit__TheBeagle-v2beta-32B-MGS",
+        "cost_gflops": 2048.0,
+        "test_acc": 0.5952755905511811,
+        "cost_pct": 2.564102564102564,
+        "acc_pct": 96.67519181585678
+      }
+    ]
+  }
+}

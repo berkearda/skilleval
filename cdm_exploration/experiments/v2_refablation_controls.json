@@ -1,0 +1,13 @@
+{
+  "experiment": "refablation_controls",
+  "n_subset": 400,
+  "noise_floor_token_jaccard": 0.4451819494176863,
+  "effect_token_jaccard": 0.2742375284917445,
+  "difference": 0.1709444209259418,
+  "noise_floor_exact": 0.177625,
+  "effect_exact": 0.01675,
+  "cluster_change_armA": 0.8,
+  "cluster_change_armB": 0.8675,
+  "cluster_metric_valid": false,
+  "verified": true
+}

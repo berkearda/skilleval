@@ -1,0 +1,3471 @@
+{
+  "experiment": "skill_prerequisites",
+  "method": "odds_ratio",
+  "OR_threshold": 10.0,
+  "asymmetry_threshold": 0.3,
+  "n_llms": 3811,
+  "K": 100,
+  "n_edges_raw": 1031,
+  "n_edges_reduced": 304,
+  "n_roots": 18,
+  "n_leaves": 13,
+  "n_isolated": 14,
+  "max_depth": 5,
+  "n_components": 2,
+  "roots": [
+    {
+      "idx": 31,
+      "name": "Applying Nernst Equation To Redox Potential",
+      "mastery": 0.027289425347677775
+    },
+    {
+      "idx": 36,
+      "name": "Interpreting Directional Commands For Navigation",
+      "mastery": 0.6683285226974547
+    },
+    {
+      "idx": 43,
+      "name": "Evaluating Climate Control System Activation Condi",
+      "mastery": 0.2254001574389924
+    },
+    {
+      "idx": 48,
+      "name": "Analyzing Historical Context Of Sunni Shia Split",
+      "mastery": 0.3256363159275781
+    },
+    {
+      "idx": 51,
+      "name": "Articulating Customer Rights Under Consumer Protec",
+      "mastery": 0.7313041196536342
+    },
+    {
+      "idx": 52,
+      "name": "Identifying Alphabetical Order Of Names In Table",
+      "mastery": 0.6465494620834427
+    },
+    {
+      "idx": 53,
+      "name": "Avoiding Sensitive Terms In Condolence Messages",
+      "mastery": 0.6182104434531619
+    },
+    {
+      "idx": 56,
+      "name": "Separating Versions With Specific Delimiters",
+      "mastery": 0.32773550249278405
+    },
+    {
+      "idx": 63,
+      "name": "Applying Synonyms To Replace Restricted Vocabulary",
+      "mastery": 0.6426134872736814
+    },
+    {
+      "idx": 70,
+      "name": "Analyzing User Access Patterns Over Time",
+      "mastery": 0.8315402781422199
+    },
+    {
+      "idx": 72,
+      "name": "Applying Discrete Group Approximations To Gauge Th",
+      "mastery": 0.1353975334557859
+    },
+    {
+      "idx": 74,
+      "name": "Applying De Morgan Laws To Boolean Logic",
+      "mastery": 0.8950406717397008
+    },
+    {
+      "idx": 75,
+      "name": "Constructing Bash Scripts For File Downloads",
+      "mastery": 0.18236683285226973
+    },
+    {
+      "idx": 80,
+      "name": "Applying Mutation Rate To Genetic Equilibrium",
+      "mastery": 0.17738126475990554
+    },
+    {
+      "idx": 82,
+      "name": "Optimizing User Experience Based On Feedback",
+      "mastery": 0.6622933613224875
+    },
+    {
+      "idx": 87,
+      "name": "Applying Mott Gurney Equation To Device Characteri",
+      "mastery": 0.14956704277092628
+    },
+    {
+      "idx": 95,
+      "name": "Interpreting Luminescence Behavior In Zinc Silicat",
+      "mastery": 0.2862765678299659
+    },
+    {
+      "idx": 98,
+      "name": "Analyzing Fragmentation Patterns In Ei Ms",
+      "mastery": 0.18394122277617422
+    }
+  ],
+  "leaves": [
+    {
+      "idx": 1,
+      "name": "Applying Inequality Theorems To Minimize Expressio",
+      "mastery": 0.0002623983206507478
+    },
+    {
+      "idx": 2,
+      "name": "Analyzing Coordinates To Determine Shape Type",
+      "mastery": 0.0002623983206507478
+    },
+    {
+      "idx": 3,
+      "name": "Applying Linear Combination Of Operators In Quantu",
+      "mastery": 0.004460771451062713
+    },
+    {
+      "idx": 16,
+      "name": "Analyzing Geometric Interpretations Of Matrix Oper",
+      "mastery": 0.0010495932826029913
+    },
+    {
+      "idx": 38,
+      "name": "Applying Recursion To Define Number Sequences",
+      "mastery": 0.0007871949619522435
+    },
+    {
+      "idx": 40,
+      "name": "Applying Albedo Concepts To Temperature Difference",
+      "mastery": 0.0010495932826029913
+    },
+    {
+      "idx": 44,
+      "name": "Applying Molarity Concepts To Solution Mixing",
+      "mastery": 0.0002623983206507478
+    },
+    {
+      "idx": 46,
+      "name": "Crafting Concise Descriptions Of Professional Acti",
+      "mastery": 0.14458147467856206
+    },
+    {
+      "idx": 64,
+      "name": "Recognizing Symmetry In Two Dimensional Figures",
+      "mastery": 0.0002623983206507478
+    },
+    {
+      "idx": 73,
+      "name": "Calculating Eigenvalues Of Quantum Operators",
+      "mastery": 0.0007871949619522435
+    },
+    {
+      "idx": 86,
+      "name": "Applying Interpolation To Estimate Values",
+      "mastery": 0.0013119916032537393
+    },
+    {
+      "idx": 89,
+      "name": "Applying Snell'S Law To Light Refraction In Media",
+      "mastery": 0.0005247966413014956
+    },
+    {
+      "idx": 96,
+      "name": "Balancing Instrumentation For Optimal Sound Qualit",
+      "mastery": 0.007084754657570191
+    }
+  ],
+  "edges": [
+    {
+      "from": 0,
+      "to": 3,
+      "from_name": "Inferring Time Intervals From Sequential Events",
+      "to_name": "Applying Linear Combination Of Operators In Quantu",
+      "OR": 20.80191693290735,
+      "lift": 10.935437589670014,
+      "p_a_given_b": 0.47058823529411764,
+      "asymmetry": 0.4218077474892396
+    },
+    {
+      "from": 0,
+      "to": 9,
+      "from_name": "Inferring Time Intervals From Sequential Events",
+      "to_name": "Applying Combinatorial Principles To Dice Rolls",
+      "OR": 48.50786326396082,
+      "lift": 14.787694013303769,
+      "p_a_given_b": 0.6363636363636364,
+      "asymmetry": 0.4229490022172949
+    },
+    {
+      "from": 0,
+      "to": 10,
+      "from_name": "Inferring Time Intervals From Sequential Events",
+      "to_name": "Applying Set Theory To Count Unique Items",
+      "OR": 100.90367346938775,
+      "lift": 18.073848238482384,
+      "p_a_given_b": 0.7777777777777778,
+      "asymmetry": 0.521680216802168
+    },
+    {
+      "from": 0,
+      "to": 17,
+      "from_name": "Inferring Time Intervals From Sequential Events",
+      "to_name": "Calculating Ratios Of Segments In Triangles",
+      "OR": 49.21266427718041,
+      "lift": 15.288029525032092,
+      "p_a_given_b": 0.6578947368421053,
+      "asymmetry": 0.5054557124518614
+    },
+    {
+      "from": 0,
+      "to": 30,
+      "from_name": "Inferring Time Intervals From Sequential Events",
+      "to_name": "Applying Relativity To Calculate Velocity Vectors",
+      "OR": 143.88116218147178,
+      "lift": 19.443877551020407,
+      "p_a_given_b": 0.8367346938775511,
+      "asymmetry": 0.5867346938775511
+    },
+    {
+      "from": 0,
+      "to": 84,
+      "from_name": "Inferring Time Intervals From Sequential Events",
+      "to_name": "Converting Repeating Decimals To Fractions",
+      "OR": 23.27668346312414,
+      "lift": 11.286933797909407,
+      "p_a_given_b": 0.4857142857142857,
+      "asymmetry": 0.3820557491289199
+    },
+    {
+      "from": 0,
+      "to": 96,
+      "from_name": "Inferring Time Intervals From Sequential Events",
+      "to_name": "Balancing Instrumentation For Optimal Sound Qualit",
+      "OR": 68.86297577854671,
+      "lift": 17.21318879855465,
+      "p_a_given_b": 0.7407407407407407,
+      "asymmetry": 0.6187895212285456
+    },
+    {
+      "from": 4,
+      "to": 16,
+      "from_name": "Applying Wetting Theory To Liquid Droplets",
+      "to_name": "Analyzing Geometric Interpretations Of Matrix Oper",
+      "OR": 19.865753424657534,
+      "lift": 10.355978260869565,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.4891304347826087
+    },
+    {
+      "from": 4,
+      "to": 38,
+      "from_name": "Applying Wetting Theory To Liquid Droplets",
+      "to_name": "Applying Recursion To Define Number Sequences",
+      "OR": 33.118721461187214,
+      "lift": 13.807971014492752,
+      "p_a_given_b": 0.6666666666666666,
+      "asymmetry": 0.6557971014492753
+    },
+    {
+      "from": 4,
+      "to": 86,
+      "from_name": "Applying Wetting Theory To Liquid Droplets",
+      "to_name": "Applying Interpolation To Estimate Values",
+      "OR": 14.185909980430528,
+      "lift": 8.284782608695652,
+      "p_a_given_b": 0.4,
+      "asymmetry": 0.3891304347826087
+    },
+    {
+      "from": 4,
+      "to": 90,
+      "from_name": "Applying Wetting Theory To Liquid Droplets",
+      "to_name": "Applying Properties Of Complex Numbers In Equation",
+      "OR": 19.762942779291553,
+      "lift": 10.355978260869565,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.4945652173913043
+    },
+    {
+      "from": 5,
+      "to": 27,
+      "from_name": "Evaluating Sporting Event Plausibility Based On Co",
+      "to_name": "Manipulating Algebraic Expressions For Variance",
+      "OR": 11.931062245031058,
+      "lift": 3.5287037037037035,
+      "p_a_given_b": 0.6666666666666666,
+      "asymmetry": 0.3583333333333333
+    },
+    {
+      "from": 5,
+      "to": 44,
+      "from_name": "Evaluating Sporting Event Plausibility Based On Co",
+      "to_name": "Applying Molarity Concepts To Solution Mixing",
+      "OR": 12.890201528839471,
+      "lift": 5.293055555555555,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9986111111111111
+    },
+    {
+      "from": 5,
+      "to": 62,
+      "from_name": "Evaluating Sporting Event Plausibility Based On Co",
+      "to_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "OR": 22.202038422649142,
+      "lift": 4.153578317901235,
+      "p_a_given_b": 0.7847222222222222,
+      "asymmetry": 0.4708333333333333
+    },
+    {
+      "from": 5,
+      "to": 78,
+      "from_name": "Evaluating Sporting Event Plausibility Based On Co",
+      "to_name": "Distinguishing Fruits From Non Fruits",
+      "OR": 49.37780247575978,
+      "lift": 4.5969824961948245,
+      "p_a_given_b": 0.8684931506849315,
+      "asymmetry": 0.4282153729071537
+    },
+    {
+      "from": 5,
+      "to": 92,
+      "from_name": "Evaluating Sporting Event Plausibility Based On Co",
+      "to_name": "Applying Fraction Multiplication To Unit Prices",
+      "OR": 13.762241431395514,
+      "lift": 3.7,
+      "p_a_given_b": 0.6990291262135923,
+      "asymmetry": 0.39902912621359227
+    },
+    {
+      "from": 6,
+      "to": 16,
+      "from_name": "Applying Quadratic Formula To Find Roots",
+      "to_name": "Analyzing Geometric Interpretations Of Matrix Oper",
+      "OR": 330.1304347826087,
+      "lift": 146.57692307692307,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.34615384615384615
+    },
+    {
+      "from": 6,
+      "to": 26,
+      "from_name": "Applying Quadratic Formula To Find Roots",
+      "to_name": "Applying Properties Of Rectangles To Find Dimensio",
+      "OR": 843.8888888888889,
+      "lift": 219.8653846153846,
+      "p_a_given_b": 0.75,
+      "asymmetry": 0.5192307692307692
+    },
+    {
+      "from": 6,
+      "to": 38,
+      "from_name": "Applying Quadratic Formula To Find Roots",
+      "to_name": "Applying Recursion To Define Number Sequences",
+      "OR": 550.3623188405797,
+      "lift": 195.43589743589743,
+      "p_a_given_b": 0.6666666666666666,
+      "asymmetry": 0.5128205128205128
+    },
+    {
+      "from": 6,
+      "to": 90,
+      "from_name": "Applying Quadratic Formula To Find Roots",
+      "to_name": "Applying Properties Of Complex Numbers In Equation",
+      "OR": 1651.5217391304348,
+      "lift": 293.15384615384613,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.8461538461538461
+    },
+    {
+      "from": 7,
+      "to": 12,
+      "from_name": "Identifying Themes In Science Fiction Movies",
+      "to_name": "Evaluating Consistency In League Punishments",
+      "OR": 61.68920943371999,
+      "lift": 1.916484294241998,
+      "p_a_given_b": 0.9700598802395209,
+      "asymmetry": 0.4661718553561617
+    },
+    {
+      "from": 7,
+      "to": 18,
+      "from_name": "Identifying Themes In Science Fiction Movies",
+      "to_name": "Identifying Penguin Attributes From Tabular Data",
+      "OR": 83.80004369435797,
+      "lift": 1.9289076305339061,
+      "p_a_given_b": 0.9763481551561022,
+      "asymmetry": 0.4413559312058689
+    },
+    {
+      "from": 7,
+      "to": 20,
+      "from_name": "Identifying Themes In Science Fiction Movies",
+      "to_name": "Inferring Object Locations From Contextual Clues",
+      "OR": 87.68350592940757,
+      "lift": 1.9357867788443015,
+      "p_a_given_b": 0.9798301486199575,
+      "asymmetry": 0.5013438863078787
+    },
+    {
+      "from": 7,
+      "to": 60,
+      "from_name": "Identifying Themes In Science Fiction Movies",
+      "to_name": "Extracting Data From Table Headers",
+      "OR": 37.37574053961967,
+      "lift": 1.8510180643617657,
+      "p_a_given_b": 0.936923076923077,
+      "asymmetry": 0.3055078358655342
+    },
+    {
+      "from": 7,
+      "to": 66,
+      "from_name": "Identifying Themes In Science Fiction Movies",
+      "to_name": "Applying Pattern Recognition To Algorithmic Output",
+      "OR": 10.28836212331358,
+      "lift": 1.788960866672381,
+      "p_a_given_b": 0.905511811023622,
+      "asymmetry": 0.7862790479339382
+    },
+    {
+      "from": 7,
+      "to": 68,
+      "from_name": "Identifying Themes In Science Fiction Movies",
+      "to_name": "Calculating Future Dates From Anniversary Informat",
+      "OR": 18.275005949809028,
+      "lift": 1.7649630606924982,
+      "p_a_given_b": 0.8933649289099526,
+      "asymmetry": 0.3070507764993772
+    },
+    {
+      "from": 8,
+      "to": 28,
+      "from_name": "Maintaining Consistent Tone In Creative Writing",
+      "to_name": "Articulating Feature Vs Bug Distinction",
+      "OR": 88.40492202203282,
+      "lift": 2.6653248993674525,
+      "p_a_given_b": 0.9574468085106383,
+      "asymmetry": 0.3986447632221066
+    },
+    {
+      "from": 8,
+      "to": 46,
+      "from_name": "Maintaining Consistent Tone In Creative Writing",
+      "to_name": "Crafting Concise Descriptions Of Professional Acti",
+      "OR": 74.9048824119726,
+      "lift": 2.682739000343356,
+      "p_a_given_b": 0.9637023593466425,
+      "asymmetry": 0.5758279984993087
+    },
+    {
+      "from": 8,
+      "to": 54,
+      "from_name": "Maintaining Consistent Tone In Creative Writing",
+      "to_name": "Analyzing Door Count Distribution In Car Types",
+      "OR": 17.408690305390447,
+      "lift": 2.5248271527341295,
+      "p_a_given_b": 0.9069767441860465,
+      "asymmetry": 0.8500008493723138
+    },
+    {
+      "from": 8,
+      "to": 65,
+      "from_name": "Maintaining Consistent Tone In Creative Writing",
+      "to_name": "Analyzing Historical Significance Of Chess Program",
+      "OR": 13.075663028885057,
+      "lift": 2.3265930163740385,
+      "p_a_given_b": 0.8357664233576643,
+      "asymmetry": 0.5012156563744649
+    },
+    {
+      "from": 9,
+      "to": 19,
+      "from_name": "Applying Combinatorial Principles To Dice Rolls",
+      "to_name": "Applying Divisibility Rules To Integer Sets",
+      "OR": 749.0866290018832,
+      "lift": 60.052121212121214,
+      "p_a_given_b": 0.8666666666666667,
+      "asymmetry": 0.393939393939394
+    },
+    {
+      "from": 10,
+      "to": 6,
+      "from_name": "Applying Set Theory To Count Unique Items",
+      "to_name": "Applying Quadratic Formula To Find Roots",
+      "OR": 124.71652003910069,
+      "lift": 43.43019943019944,
+      "p_a_given_b": 0.6153846153846154,
+      "asymmetry": 0.4672364672364673
+    },
+    {
+      "from": 10,
+      "to": 24,
+      "from_name": "Applying Set Theory To Count Unique Items",
+      "to_name": "Analyzing Effects Of Vertical Stretch On Graphs",
+      "OR": 92.67901234567901,
+      "lift": 39.20781893004116,
+      "p_a_given_b": 0.5555555555555556,
+      "asymmetry": 0.462962962962963
+    },
+    {
+      "from": 10,
+      "to": 40,
+      "from_name": "Applying Set Theory To Count Unique Items",
+      "to_name": "Applying Albedo Concepts To Temperature Difference",
+      "OR": 71.53333333333333,
+      "lift": 35.28703703703704,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.46296296296296297
+    },
+    {
+      "from": 10,
+      "to": 86,
+      "from_name": "Applying Set Theory To Count Unique Items",
+      "to_name": "Applying Interpolation To Estimate Values",
+      "OR": 102.09126213592234,
+      "lift": 42.34444444444444,
+      "p_a_given_b": 0.6,
+      "asymmetry": 0.5444444444444444
+    },
+    {
+      "from": 12,
+      "to": 27,
+      "from_name": "Evaluating Consistency In League Punishments",
+      "to_name": "Manipulating Algebraic Expressions For Variance",
+      "OR": 14.701692187775011,
+      "lift": 3.0381459303614995,
+      "p_a_given_b": 0.7987987987987988,
+      "asymmetry": 0.5333297369225513
+    },
+    {
+      "from": 12,
+      "to": 45,
+      "from_name": "Evaluating Consistency In League Punishments",
+      "to_name": "Identifying Mutations In Nucleotide Sequences",
+      "OR": 33.369078693125964,
+      "lift": 3.3150197659156397,
+      "p_a_given_b": 0.8715953307392996,
+      "asymmetry": 0.42448954231614594
+    },
+    {
+      "from": 12,
+      "to": 65,
+      "from_name": "Evaluating Consistency In League Punishments",
+      "to_name": "Analyzing Historical Significance Of Chess Program",
+      "OR": 17.992568353861575,
+      "lift": 3.012176377172662,
+      "p_a_given_b": 0.791970802919708,
+      "asymmetry": 0.35883707038477786
+    },
+    {
+      "from": 12,
+      "to": 78,
+      "from_name": "Evaluating Consistency In League Punishments",
+      "to_name": "Distinguishing Fruits From Non Fruits",
+      "OR": 25.71080800723918,
+      "lift": 3.2928006999699235,
+      "p_a_given_b": 0.8657534246575342,
+      "asymmetry": 0.5503841631804883
+    },
+    {
+      "from": 12,
+      "to": 83,
+      "from_name": "Evaluating Consistency In League Punishments",
+      "to_name": "Incorporating Friends Name In Personalized Message",
+      "OR": 25.67072380808918,
+      "lift": 3.1751239971212106,
+      "p_a_given_b": 0.8348134991119005,
+      "asymmetry": 0.3657516228643955
+    },
+    {
+      "from": 12,
+      "to": 92,
+      "from_name": "Evaluating Consistency In League Punishments",
+      "to_name": "Applying Fraction Multiplication To Unit Prices",
+      "OR": 16.105350056484085,
+      "lift": 3.101796407185629,
+      "p_a_given_b": 0.8155339805825242,
+      "asymmetry": 0.5640369745945003
+    },
+    {
+      "from": 15,
+      "to": 90,
+      "from_name": "Interpreting Numerical Values In Context",
+      "to_name": "Applying Properties Of Complex Numbers In Equation",
+      "OR": 585.1538461538462,
+      "lift": 272.2142857142857,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.35714285714285715
+    },
+    {
+      "from": 17,
+      "to": 6,
+      "from_name": "Calculating Ratios Of Segments In Triangles",
+      "to_name": "Applying Quadratic Formula To Find Roots",
+      "OR": 138.003663003663,
+      "lift": 54.00202429149797,
+      "p_a_given_b": 0.5384615384615384,
+      "asymmetry": 0.35425101214574894
+    },
+    {
+      "from": 17,
+      "to": 15,
+      "from_name": "Calculating Ratios Of Segments In Triangles",
+      "to_name": "Interpreting Numerical Values In Context",
+      "OR": 82.5868544600939,
+      "lift": 42.98120300751879,
+      "p_a_given_b": 0.42857142857142855,
+      "asymmetry": 0.34962406015037595
+    },
+    {
+      "from": 17,
+      "to": 24,
+      "from_name": "Calculating Ratios Of Segments In Triangles",
+      "to_name": "Analyzing Effects Of Vertical Stretch On Graphs",
+      "OR": 89.37154150197628,
+      "lift": 44.57309941520467,
+      "p_a_given_b": 0.4444444444444444,
+      "asymmetry": 0.3391812865497076
+    },
+    {
+      "from": 17,
+      "to": 40,
+      "from_name": "Calculating Ratios Of Segments In Triangles",
+      "to_name": "Applying Albedo Concepts To Temperature Difference",
+      "OR": 103.32876712328768,
+      "lift": 50.14473684210526,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.4473684210526316
+    },
+    {
+      "from": 17,
+      "to": 73,
+      "from_name": "Calculating Ratios Of Segments In Triangles",
+      "to_name": "Calculating Eigenvalues Of Quantum Operators",
+      "OR": 60.344,
+      "lift": 33.42982456140351,
+      "p_a_given_b": 0.3333333333333333,
+      "asymmetry": 0.3070175438596491
+    },
+    {
+      "from": 17,
+      "to": 86,
+      "from_name": "Calculating Ratios Of Segments In Triangles",
+      "to_name": "Applying Interpolation To Estimate Values",
+      "OR": 148.73521126760562,
+      "lift": 60.17368421052631,
+      "p_a_given_b": 0.6,
+      "asymmetry": 0.5210526315789473
+    },
+    {
+      "from": 18,
+      "to": 27,
+      "from_name": "Identifying Penguin Attributes From Tabular Data",
+      "to_name": "Manipulating Algebraic Expressions For Variance",
+      "OR": 14.87122695486332,
+      "lift": 2.934195311678755,
+      "p_a_given_b": 0.8138138138138138,
+      "asymmetry": 0.5574278157059613
+    },
+    {
+      "from": 18,
+      "to": 45,
+      "from_name": "Identifying Penguin Attributes From Tabular Data",
+      "to_name": "Identifying Mutations In Nucleotide Sequences",
+      "OR": 138.84605581750986,
+      "lift": 3.486239595949184,
+      "p_a_given_b": 0.9669260700389105,
+      "asymmetry": 0.49672739454222176
+    },
+    {
+      "from": 18,
+      "to": 65,
+      "from_name": "Identifying Penguin Attributes From Tabular Data",
+      "to_name": "Analyzing Historical Significance Of Chess Program",
+      "OR": 25.136223755021604,
+      "lift": 3.0594006587988316,
+      "p_a_given_b": 0.8485401459854015,
+      "asymmetry": 0.408615831888902
+    },
+    {
+      "from": 18,
+      "to": 78,
+      "from_name": "Identifying Penguin Attributes From Tabular Data",
+      "to_name": "Distinguishing Fruits From Non Fruits",
+      "OR": 48.65092370110687,
+      "lift": 3.3486580008035145,
+      "p_a_given_b": 0.9287671232876712,
+      "asymmetry": 0.6080481072044167
+    },
+    {
+      "from": 18,
+      "to": 83,
+      "from_name": "Identifying Penguin Attributes From Tabular Data",
+      "to_name": "Incorporating Friends Name In Personalized Message",
+      "OR": 41.29199972671996,
+      "lift": 3.2276475362591603,
+      "p_a_given_b": 0.8952042628774423,
+      "asymmetry": 0.41838307082446213
+    },
+    {
+      "from": 18,
+      "to": 85,
+      "from_name": "Identifying Penguin Attributes From Tabular Data",
+      "to_name": "Applying Set Theory To Divisor Subsets",
+      "OR": 12.039496279336005,
+      "lift": 2.871903246548469,
+      "p_a_given_b": 0.7965367965367965,
+      "asymmetry": 0.6224592184857085
+    },
+    {
+      "from": 18,
+      "to": 92,
+      "from_name": "Identifying Penguin Attributes From Tabular Data",
+      "to_name": "Applying Fraction Multiplication To Unit Prices",
+      "OR": 21.597462514417533,
+      "lift": 3.115421002838221,
+      "p_a_given_b": 0.8640776699029126,
+      "asymmetry": 0.6114759669700838
+    },
+    {
+      "from": 19,
+      "to": 6,
+      "from_name": "Applying Divisibility Rules To Integer Sets",
+      "to_name": "Applying Quadratic Formula To Find Roots",
+      "OR": 5834.314285714286,
+      "lift": 127.03333333333335,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.5666666666666667
+    },
+    {
+      "from": 19,
+      "to": 24,
+      "from_name": "Applying Divisibility Rules To Integer Sets",
+      "to_name": "Analyzing Effects Of Vertical Stretch On Graphs",
+      "OR": 116.59862778730704,
+      "lift": 56.459259259259255,
+      "p_a_given_b": 0.4444444444444444,
+      "asymmetry": 0.3111111111111111
+    },
+    {
+      "from": 19,
+      "to": 40,
+      "from_name": "Applying Divisibility Rules To Integer Sets",
+      "to_name": "Applying Albedo Concepts To Temperature Difference",
+      "OR": 132.6140350877193,
+      "lift": 63.51666666666667,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.43333333333333335
+    },
+    {
+      "from": 19,
+      "to": 86,
+      "from_name": "Applying Divisibility Rules To Integer Sets",
+      "to_name": "Applying Interpolation To Estimate Values",
+      "OR": 192.4109090909091,
+      "lift": 76.22,
+      "p_a_given_b": 0.6,
+      "asymmetry": 0.5
+    },
+    {
+      "from": 20,
+      "to": 27,
+      "from_name": "Inferring Object Locations From Contextual Clues",
+      "to_name": "Manipulating Algebraic Expressions For Variance",
+      "OR": 12.974742284521541,
+      "lift": 3.085869308799245,
+      "p_a_given_b": 0.7627627627627628,
+      "asymmetry": 0.493123696945353
+    },
+    {
+      "from": 20,
+      "to": 45,
+      "from_name": "Inferring Object Locations From Contextual Clues",
+      "to_name": "Identifying Mutations In Nucleotide Sequences",
+      "OR": 88.3410520528452,
+      "lift": 3.7859075400464284,
+      "p_a_given_b": 0.9357976653696498,
+      "asymmetry": 0.4251819541169959
+    },
+    {
+      "from": 20,
+      "to": 65,
+      "from_name": "Inferring Object Locations From Contextual Clues",
+      "to_name": "Analyzing Historical Significance Of Chess Program",
+      "OR": 20.56334454019657,
+      "lift": 3.2040347451454427,
+      "p_a_given_b": 0.791970802919708,
+      "asymmetry": 0.33124893455452753
+    },
+    {
+      "from": 20,
+      "to": 78,
+      "from_name": "Inferring Object Locations From Contextual Clues",
+      "to_name": "Distinguishing Fruits From Non Fruits",
+      "OR": 89.94451630471782,
+      "lift": 3.846136171945438,
+      "p_a_given_b": 0.9506849315068493,
+      "asymmetry": 0.582319751039758
+    },
+    {
+      "from": 20,
+      "to": 83,
+      "from_name": "Inferring Object Locations From Contextual Clues",
+      "to_name": "Incorporating Friends Name In Personalized Message",
+      "OR": 39.08170293364327,
+      "lift": 3.4995210673786548,
+      "p_a_given_b": 0.8650088809946714,
+      "asymmetry": 0.34802374299042516
+    },
+    {
+      "from": 20,
+      "to": 92,
+      "from_name": "Inferring Object Locations From Contextual Clues",
+      "to_name": "Applying Fraction Multiplication To Unit Prices",
+      "OR": 16.340052795776337,
+      "lift": 3.2469922151450814,
+      "p_a_given_b": 0.8025889967637541,
+      "asymmetry": 0.5393193576979367
+    },
+    {
+      "from": 21,
+      "to": 28,
+      "from_name": "Adapting Language For Age Appropriate Audience",
+      "to_name": "Articulating Feature Vs Bug Distinction",
+      "OR": 108.28923293455313,
+      "lift": 2.5388234262608482,
+      "p_a_given_b": 0.9699624530663329,
+      "asymmetry": 0.4376822332861131
+    },
+    {
+      "from": 21,
+      "to": 46,
+      "from_name": "Adapting Language For Age Appropriate Audience",
+      "to_name": "Crafting Concise Descriptions Of Professional Acti",
+      "OR": 72.9923616090373,
+      "lift": 2.5319386829141823,
+      "p_a_given_b": 0.9673321234119783,
+      "asymmetry": 0.6012606948405497
+    },
+    {
+      "from": 21,
+      "to": 54,
+      "from_name": "Adapting Language For Age Appropriate Audience",
+      "to_name": "Analyzing Door Count Distribution In Car Types",
+      "OR": 21.1388694850373,
+      "lift": 2.434832609251214,
+      "p_a_given_b": 0.9302325581395349,
+      "asymmetry": 0.8752875031944799
+    },
+    {
+      "from": 21,
+      "to": 65,
+      "from_name": "Adapting Language For Age Appropriate Audience",
+      "to_name": "Analyzing Historical Significance Of Chess Program",
+      "OR": 13.397195072526603,
+      "lift": 2.2353362877997913,
+      "p_a_given_b": 0.8540145985401459,
+      "asymmetry": 0.5325860271115745
+    },
+    {
+      "from": 22,
+      "to": 17,
+      "from_name": "Calculating Work Done In Variable Force Scenarios",
+      "to_name": "Calculating Ratios Of Segments In Triangles",
+      "OR": 15.124680119142509,
+      "lift": 2.9655489530277306,
+      "p_a_given_b": 0.868421052631579,
+      "asymmetry": 0.8388511601584607
+    },
+    {
+      "from": 22,
+      "to": 84,
+      "from_name": "Calculating Work Done In Variable Force Scenarios",
+      "to_name": "Converting Repeating Decimals To Fractions",
+      "OR": 13.732209346107183,
+      "lift": 2.9270353302611363,
+      "p_a_given_b": 0.8571428571428571,
+      "asymmetry": 0.8302611367127496
+    },
+    {
+      "from": 23,
+      "to": 17,
+      "from_name": "Maintaining Word Count Constraints In Responses",
+      "to_name": "Calculating Ratios Of Segments In Triangles",
+      "OR": 16.129575113142053,
+      "lift": 3.101736299511666,
+      "p_a_given_b": 0.868421052631579,
+      "asymmetry": 0.8374932175800326
+    },
+    {
+      "from": 23,
+      "to": 46,
+      "from_name": "Maintaining Word Count Constraints In Responses",
+      "to_name": "Crafting Concise Descriptions Of Professional Acti",
+      "OR": 76.37405782733285,
+      "lift": 3.357783496650037,
+      "p_a_given_b": 0.9401088929219601,
+      "asymmetry": 0.45463560332495917
+    },
+    {
+      "from": 23,
+      "to": 54,
+      "from_name": "Maintaining Word Count Constraints In Responses",
+      "to_name": "Analyzing Door Count Distribution In Car Types",
+      "OR": 11.687354750512645,
+      "lift": 2.9071946993308777,
+      "p_a_given_b": 0.813953488372093,
+      "asymmetry": 0.7483489897779037
+    },
+    {
+      "from": 24,
+      "to": 90,
+      "from_name": "Analyzing Effects Of Vertical Stretch On Graphs",
+      "to_name": "Applying Properties Of Complex Numbers In Equation",
+      "OR": 447.2352941176471,
+      "lift": 211.72222222222223,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.3888888888888889
+    },
+    {
+      "from": 26,
+      "to": 1,
+      "from_name": "Applying Properties Of Rectangles To Find Dimensio",
+      "to_name": "Applying Inequality Theorems To Minimize Expressio",
+      "OR": 3263.5714285714284,
+      "lift": 952.75,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.75
+    },
+    {
+      "from": 26,
+      "to": 2,
+      "from_name": "Applying Properties Of Rectangles To Find Dimensio",
+      "to_name": "Analyzing Coordinates To Determine Shape Type",
+      "OR": 3263.5714285714284,
+      "lift": 952.75,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.75
+    },
+    {
+      "from": 26,
+      "to": 64,
+      "from_name": "Applying Properties Of Rectangles To Find Dimensio",
+      "to_name": "Recognizing Symmetry In Two Dimensional Figures",
+      "OR": 3263.5714285714284,
+      "lift": 952.75,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.75
+    },
+    {
+      "from": 27,
+      "to": 0,
+      "from_name": "Manipulating Algebraic Expressions For Variance",
+      "to_name": "Inferring Time Intervals From Sequential Events",
+      "OR": 26.534560432488092,
+      "lift": 7.3272357723577235,
+      "p_a_given_b": 0.6402439024390244,
+      "asymmetry": 0.3249285871237091
+    },
+    {
+      "from": 27,
+      "to": 39,
+      "from_name": "Manipulating Algebraic Expressions For Variance",
+      "to_name": "Summing Coefficients Of Polynomial Expression",
+      "OR": 63.28812246571598,
+      "lift": 9.304426377597109,
+      "p_a_given_b": 0.8130081300813008,
+      "asymmetry": 0.5127078297810005
+    },
+    {
+      "from": 27,
+      "to": 49,
+      "from_name": "Manipulating Algebraic Expressions For Variance",
+      "to_name": "Applying Properties Of Matrix Norms To Vectors",
+      "OR": 26.712564969886973,
+      "lift": 7.702991452991453,
+      "p_a_given_b": 0.6730769230769231,
+      "asymmetry": 0.4628667128667129
+    },
+    {
+      "from": 27,
+      "to": 54,
+      "from_name": "Manipulating Algebraic Expressions For Variance",
+      "to_name": "Analyzing Door Count Distribution In Car Types",
+      "OR": 11.826161790017212,
+      "lift": 5.722222222222222,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.3708708708708709
+    },
+    {
+      "from": 27,
+      "to": 57,
+      "from_name": "Manipulating Algebraic Expressions For Variance",
+      "to_name": "Applying Divisibility Rules To Factorials",
+      "OR": 58.85218673218673,
+      "lift": 8.908848968729208,
+      "p_a_given_b": 0.7784431137724551,
+      "asymmetry": 0.38805272338206476
+    },
+    {
+      "from": 27,
+      "to": 58,
+      "from_name": "Manipulating Algebraic Expressions For Variance",
+      "to_name": "Calculating Compound Interest With Quarterly Compo",
+      "OR": 29.148700131783876,
+      "lift": 7.747008547008547,
+      "p_a_given_b": 0.676923076923077,
+      "asymmetry": 0.4126588126588127
+    },
+    {
+      "from": 27,
+      "to": 93,
+      "from_name": "Manipulating Algebraic Expressions For Variance",
+      "to_name": "Ensuring Consistent Section Headers In Document St",
+      "OR": 10.077084194570759,
+      "lift": 5.41010101010101,
+      "p_a_given_b": 0.4727272727272727,
+      "asymmetry": 0.3946491946491946
+    },
+    {
+      "from": 28,
+      "to": 6,
+      "from_name": "Articulating Feature Vs Bug Distinction",
+      "to_name": "Applying Quadratic Formula To Find Roots",
+      "OR": 31.867724867724867,
+      "lift": 4.4028112063155875,
+      "p_a_given_b": 0.9230769230769231,
+      "asymmetry": 0.9080581496100896
+    },
+    {
+      "from": 28,
+      "to": 24,
+      "from_name": "Articulating Feature Vs Bug Distinction",
+      "to_name": "Analyzing Effects Of Vertical Stretch On Graphs",
+      "OR": 11.39621451104101,
+      "lift": 3.7097761090251704,
+      "p_a_given_b": 0.7777777777777778,
+      "asymmetry": 0.7690168265887916
+    },
+    {
+      "from": 28,
+      "to": 44,
+      "from_name": "Articulating Feature Vs Bug Distinction",
+      "to_name": "Applying Molarity Concepts To Solution Mixing",
+      "OR": 11.318096430807765,
+      "lift": 4.769712140175219,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9987484355444305
+    },
+    {
+      "from": 29,
+      "to": 8,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Maintaining Consistent Tone In Creative Writing",
+      "OR": 16.672616012238652,
+      "lift": 1.5642450675977722,
+      "p_a_given_b": 0.9181884587289992,
+      "asymmetry": 0.3562751820191199
+    },
+    {
+      "from": 29,
+      "to": 12,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Evaluating Consistency In League Punishments",
+      "OR": 118.7334403853874,
+      "lift": 1.68661871607701,
+      "p_a_given_b": 0.9900199600798403,
+      "asymmetry": 0.5465689095657589
+    },
+    {
+      "from": 29,
+      "to": 18,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Identifying Penguin Attributes From Tabular Data",
+      "OR": 109.59119496855345,
+      "lift": 1.6842799075833503,
+      "p_a_given_b": 0.988647114474929,
+      "asymmetry": 0.5215036187216882
+    },
+    {
+      "from": 29,
+      "to": 20,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Inferring Object Locations From Contextual Clues",
+      "OR": 106.42857142857143,
+      "lift": 1.6855357730961718,
+      "p_a_given_b": 0.9893842887473461,
+      "asymmetry": 0.572754874353068
+    },
+    {
+      "from": 29,
+      "to": 21,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Adapting Language For Age Appropriate Audience",
+      "OR": 15.318176602387956,
+      "lift": 1.545661563514715,
+      "p_a_given_b": 0.9072802197802198,
+      "asymmetry": 0.31675719787588363
+    },
+    {
+      "from": 29,
+      "to": 23,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Maintaining Word Count Constraints In Responses",
+      "OR": 31.30914578661323,
+      "lift": 1.6381584487525342,
+      "p_a_given_b": 0.9615745079662605,
+      "asymmetry": 0.502924530317624
+    },
+    {
+      "from": 29,
+      "to": 41,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Organizing Information Based On Given Clues",
+      "OR": 23.619989018994268,
+      "lift": 1.6144261082648554,
+      "p_a_given_b": 0.9476439790575916,
+      "asymmetry": 0.4621723652891517
+    },
+    {
+      "from": 29,
+      "to": 60,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Extracting Data From Table Headers",
+      "OR": 50.21896206420502,
+      "lift": 1.6525122932498884,
+      "p_a_given_b": 0.97,
+      "asymmetry": 0.4062986142154671
+    },
+    {
+      "from": 29,
+      "to": 61,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Embedding Asterisk Symbols For Visual Separation",
+      "OR": 11.465094165191896,
+      "lift": 1.5306713949359065,
+      "p_a_given_b": 0.8984812150279776,
+      "asymmetry": 0.39602256505032896
+    },
+    {
+      "from": 29,
+      "to": 68,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Calculating Future Dates From Anniversary Informat",
+      "OR": 14.010702264936464,
+      "lift": 1.554251314069495,
+      "p_a_given_b": 0.9123222748815166,
+      "asymmetry": 0.3960057795753029
+    },
+    {
+      "from": 29,
+      "to": 94,
+      "from_name": "Identifying Sarcasm In Verbal Expressions",
+      "to_name": "Iterating Weight Loss Over Multiple Weeks",
+      "OR": 21.820844453964927,
+      "lift": 1.6337563405247848,
+      "p_a_given_b": 0.9589905362776026,
+      "asymmetry": 0.6871979569302624
+    },
+    {
+      "from": 30,
+      "to": 6,
+      "from_name": "Applying Relativity To Calculate Velocity Vectors",
+      "to_name": "Applying Quadratic Formula To Find Roots",
+      "OR": 74.82222222222222,
+      "lift": 35.89638932496076,
+      "p_a_given_b": 0.46153846153846156,
+      "asymmetry": 0.3390894819466248
+    },
+    {
+      "from": 30,
+      "to": 40,
+      "from_name": "Applying Relativity To Calculate Velocity Vectors",
+      "to_name": "Applying Albedo Concepts To Temperature Difference",
+      "OR": 188.74910394265234,
+      "lift": 58.33163265306123,
+      "p_a_given_b": 0.75,
+      "asymmetry": 0.6887755102040817
+    },
+    {
+      "from": 30,
+      "to": 86,
+      "from_name": "Applying Relativity To Calculate Velocity Vectors",
+      "to_name": "Applying Interpolation To Estimate Values",
+      "OR": 113.21935483870968,
+      "lift": 46.665306122448975,
+      "p_a_given_b": 0.6,
+      "asymmetry": 0.5387755102040817
+    },
+    {
+      "from": 31,
+      "to": 44,
+      "from_name": "Applying Nernst Equation To Redox Potential",
+      "to_name": "Applying Molarity Concepts To Solution Mixing",
+      "OR": 107.46376811594203,
+      "lift": 36.64423076923077,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9903846153846154
+    },
+    {
+      "from": 32,
+      "to": 8,
+      "from_name": "Identifying Humorous Wordplay In Artist Names",
+      "to_name": "Maintaining Consistent Tone In Creative Writing",
+      "OR": 10.858829186200264,
+      "lift": 1.4926651091635732,
+      "p_a_given_b": 0.8926223520818115,
+      "asymmetry": 0.356422264324023
+    },
+    {
+      "from": 32,
+      "to": 12,
+      "from_name": "Identifying Humorous Wordplay In Artist Names",
+      "to_name": "Evaluating Consistency In League Punishments",
+      "OR": 74.80033693142822,
+      "lift": 1.647191356646076,
+      "p_a_given_b": 0.9850299401197605,
+      "asymmetry": 0.5519452538538545
+    },
+    {
+      "from": 32,
+      "to": 18,
+      "from_name": "Identifying Humorous Wordplay In Artist Names",
+      "to_name": "Identifying Penguin Attributes From Tabular Data",
+      "OR": 77.28971996917092,
+      "lift": 1.6469118930899251,
+      "p_a_given_b": 0.9848628192999054,
+      "asymmetry": 0.5280835301379923
+    },
+    {
+      "from": 32,
+      "to": 20,
+      "from_name": "Identifying Humorous Wordplay In Artist Names",
+      "to_name": "Inferring Object Locations From Contextual Clues",
+      "OR": 100.34322820037106,
+      "lift": 1.6544728057990943,
+      "p_a_given_b": 0.9893842887473461,
+      "asymmetry": 0.5804329943199656
+    },
+    {
+      "from": 32,
+      "to": 21,
+      "from_name": "Identifying Humorous Wordplay In Artist Names",
+      "to_name": "Adapting Language For Age Appropriate Audience",
+      "OR": 10.347943450610789,
+      "lift": 1.4769786488193684,
+      "p_a_given_b": 0.8832417582417582,
+      "asymmetry": 0.3189591781627762
+    },
+    {
+      "from": 32,
+      "to": 23,
+      "from_name": "Identifying Humorous Wordplay In Artist Names",
+      "to_name": "Maintaining Word Count Constraints In Responses",
+      "OR": 16.976918066953235,
+      "lift": 1.56722086217298,
+      "p_a_given_b": 0.9372071227741331,
+      "asymmetry": 0.49841818025548457
+    },
+    {
+      "from": 32,
+      "to": 41,
+      "from_name": "Identifying Humorous Wordplay In Artist Names",
+      "to_name": "Organizing Information Based On Given Clues",
+      "OR": 15.624832355459466,
+      "lift": 1.5540307703617597,
+      "p_a_given_b": 0.9293193717277487,
+      "asymmetry": 0.462009147945388
+    },
+    {
+      "from": 32,
+      "to": 60,
+      "from_name": "Identifying Humorous Wordplay In Artist Names",
+      "to_name": "Extracting Data From Table Headers",
+      "OR": 56.03438363736871,
+      "lift": 1.6297758801093598,
+      "p_a_given_b": 0.9746153846153847,
+      "asymmetry": 0.418669794444257
+    },
+    {
+      "from": 32,
+      "to": 68,
+      "from_name": "Identifying Humorous Wordplay In Artist Names",
+      "to_name": "Calculating Future Dates From Anniversary Informat",
+      "OR": 13.562179109199949,
+      "lift": 1.5295704235457057,
+      "p_a_given_b": 0.9146919431279621,
+      "asymmetry": 0.40657434769136713
+    },
+    {
+      "from": 32,
+      "to": 94,
+      "from_name": "Identifying Humorous Wordplay In Artist Names",
+      "to_name": "Iterating Weight Loss Over Multiple Weeks",
+      "OR": 17.158862710010936,
+      "lift": 1.5904597317712261,
+      "p_a_given_b": 0.9511041009463722,
+      "asymmetry": 0.6865143686076272
+    },
+    {
+      "from": 33,
+      "to": 23,
+      "from_name": "Adapting Tone For Dialogue In Urdu Language",
+      "to_name": "Maintaining Word Count Constraints In Responses",
+      "OR": 26.718417915089937,
+      "lift": 2.0079172048786806,
+      "p_a_given_b": 0.9109653233364574,
+      "asymmetry": 0.3487906558986321
+    },
+    {
+      "from": 33,
+      "to": 28,
+      "from_name": "Adapting Tone For Dialogue In Urdu Language",
+      "to_name": "Articulating Feature Vs Bug Distinction",
+      "OR": 24.02206549118388,
+      "lift": 2.0331277312372102,
+      "p_a_given_b": 0.9224030037546934,
+      "asymmetry": 0.49614505118095137
+    },
+    {
+      "from": 33,
+      "to": 37,
+      "from_name": "Adapting Tone For Dialogue In Urdu Language",
+      "to_name": "Assessing Causal Relationships In Fertilizer Use",
+      "OR": 10.80605549932437,
+      "lift": 1.8443007046659035,
+      "p_a_given_b": 0.8367346938775511,
+      "asymmetry": 0.36247211435181365
+    },
+    {
+      "from": 33,
+      "to": 86,
+      "from_name": "Adapting Tone For Dialogue In Urdu Language",
+      "to_name": "Applying Interpolation To Estimate Values",
+      "OR": 13.283560452305016,
+      "lift": 2.2041642567958357,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9971081550028918
+    },
+    {
+      "from": 35,
+      "to": 19,
+      "from_name": "Evaluating Function Values At Specific Points",
+      "to_name": "Applying Divisibility Rules To Integer Sets",
+      "OR": 557.9535864978903,
+      "lift": 50.81333333333333,
+      "p_a_given_b": 0.8666666666666667,
+      "asymmetry": 0.4666666666666667
+    },
+    {
+      "from": 35,
+      "to": 84,
+      "from_name": "Evaluating Function Values At Specific Points",
+      "to_name": "Converting Repeating Decimals To Fractions",
+      "OR": 465.0990516332982,
+      "lift": 48.57978021978022,
+      "p_a_given_b": 0.8285714285714286,
+      "asymmetry": 0.38241758241758245
+    },
+    {
+      "from": 36,
+      "to": 12,
+      "from_name": "Interpreting Directional Commands For Navigation",
+      "to_name": "Evaluating Consistency In League Punishments",
+      "OR": 13.741485952753559,
+      "lift": 1.418619376872482,
+      "p_a_given_b": 0.9481037924151696,
+      "asymmetry": 0.575115963596952
+    },
+    {
+      "from": 37,
+      "to": 46,
+      "from_name": "Assessing Causal Relationships In Fertilizer Use",
+      "to_name": "Crafting Concise Descriptions Of Professional Acti",
+      "OR": 13.523663489432241,
+      "lift": 2.8865865402422313,
+      "p_a_given_b": 0.7422867513611615,
+      "asymmetry": 0.3249398125856513
+    },
+    {
+      "from": 37,
+      "to": 90,
+      "from_name": "Assessing Causal Relationships In Fertilizer Use",
+      "to_name": "Applying Properties Of Complex Numbers In Equation",
+      "OR": 14.468574348492591,
+      "lift": 3.888775510204082,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9979591836734694
+    },
+    {
+      "from": 39,
+      "to": 3,
+      "from_name": "Summing Coefficients Of Polynomial Expression",
+      "to_name": "Applying Linear Combination Of Operators In Quantu",
+      "OR": 35.92576419213974,
+      "lift": 16.40315638450502,
+      "p_a_given_b": 0.5294117647058824,
+      "asymmetry": 0.4562410329985653
+    },
+    {
+      "from": 39,
+      "to": 9,
+      "from_name": "Summing Coefficients Of Polynomial Expression",
+      "to_name": "Applying Combinatorial Principles To Dice Rolls",
+      "OR": 315.32494481236205,
+      "lift": 27.040354767184034,
+      "p_a_given_b": 0.8727272727272727,
+      "asymmetry": 0.4824833702882483
+    },
+    {
+      "from": 39,
+      "to": 10,
+      "from_name": "Summing Coefficients Of Polynomial Expression",
+      "to_name": "Applying Set Theory To Count Unique Items",
+      "OR": 68.98119634827633,
+      "lift": 19.50828063836194,
+      "p_a_given_b": 0.6296296296296297,
+      "asymmetry": 0.35320686540198737
+    },
+    {
+      "from": 39,
+      "to": 17,
+      "from_name": "Summing Coefficients Of Polynomial Expression",
+      "to_name": "Calculating Ratios Of Segments In Triangles",
+      "OR": 120.90810359231412,
+      "lift": 23.64548566538297,
+      "p_a_given_b": 0.7631578947368421,
+      "asymmetry": 0.527385537013265
+    },
+    {
+      "from": 39,
+      "to": 30,
+      "from_name": "Summing Coefficients Of Polynomial Expression",
+      "to_name": "Applying Relativity To Calculate Velocity Vectors",
+      "OR": 61.384752502399564,
+      "lift": 18.96963663514186,
+      "p_a_given_b": 0.6122448979591837,
+      "asymmetry": 0.36834245893479345
+    },
+    {
+      "from": 39,
+      "to": 35,
+      "from_name": "Summing Coefficients Of Polynomial Expression",
+      "to_name": "Evaluating Function Values At Specific Points",
+      "OR": 123.19289878113408,
+      "lift": 22.4036272670419,
+      "p_a_given_b": 0.7230769230769231,
+      "asymmetry": 0.34096310193871165
+    },
+    {
+      "from": 39,
+      "to": 96,
+      "from_name": "Summing Coefficients Of Polynomial Expression",
+      "to_name": "Balancing Instrumentation For Optimal Sound Qualit",
+      "OR": 26.569506726457398,
+      "lift": 13.77055103884372,
+      "p_a_given_b": 0.4444444444444444,
+      "asymmetry": 0.34688346883468835
+    },
+    {
+      "from": 41,
+      "to": 17,
+      "from_name": "Organizing Information Based On Given Clues",
+      "to_name": "Calculating Ratios Of Segments In Triangles",
+      "OR": 10.009592111160915,
+      "lift": 2.712891521998714,
+      "p_a_given_b": 0.8157894736842105,
+      "asymmetry": 0.7887388628639662
+    },
+    {
+      "from": 41,
+      "to": 46,
+      "from_name": "Organizing Information Based On Given Clues",
+      "to_name": "Crafting Concise Descriptions Of Professional Acti",
+      "OR": 50.72193566094701,
+      "lift": 3.0780304254045476,
+      "p_a_given_b": 0.925589836660617,
+      "asymmetry": 0.4805636586501458
+    },
+    {
+      "from": 43,
+      "to": 9,
+      "from_name": "Evaluating Climate Control System Activation Condi",
+      "to_name": "Applying Combinatorial Principles To Dice Rolls",
+      "OR": 10.275124807785478,
+      "lift": 3.3072494443856493,
+      "p_a_given_b": 0.7454545454545455,
+      "asymmetry": 0.6977246269446502
+    },
+    {
+      "from": 43,
+      "to": 10,
+      "from_name": "Evaluating Climate Control System Activation Condi",
+      "to_name": "Applying Set Theory To Count Unique Items",
+      "OR": 10.015295280974522,
+      "lift": 3.2863363946018196,
+      "p_a_given_b": 0.7407407407407407,
+      "asymmetry": 0.6941749665847453
+    },
+    {
+      "from": 43,
+      "to": 17,
+      "from_name": "Evaluating Climate Control System Activation Condi",
+      "to_name": "Calculating Ratios Of Segments In Triangles",
+      "OR": 14.931925165962584,
+      "lift": 3.6192941608970037,
+      "p_a_given_b": 0.8157894736842105,
+      "asymmetry": 0.7797009987133141
+    },
+    {
+      "from": 45,
+      "to": 0,
+      "from_name": "Identifying Mutations In Nucleotide Sequences",
+      "to_name": "Inferring Time Intervals From Sequential Events",
+      "OR": 23.100775533453096,
+      "lift": 5.470378191135997,
+      "p_a_given_b": 0.7378048780487805,
+      "asymmetry": 0.5023963177374964
+    },
+    {
+      "from": 45,
+      "to": 4,
+      "from_name": "Identifying Mutations In Nucleotide Sequences",
+      "to_name": "Applying Wetting Theory To Liquid Droplets",
+      "OR": 10.96231941420938,
+      "lift": 4.311632972424293,
+      "p_a_given_b": 0.5815217391304348,
+      "asymmetry": 0.37335053290475384
+    },
+    {
+      "from": 45,
+      "to": 39,
+      "from_name": "Identifying Mutations In Nucleotide Sequences",
+      "to_name": "Summing Coefficients Of Polynomial Expression",
+      "OR": 13.861209211274685,
+      "lift": 4.8223719591281515,
+      "p_a_given_b": 0.6504065040650406,
+      "asymmetry": 0.49476448071873713
+    },
+    {
+      "from": 45,
+      "to": 44,
+      "from_name": "Identifying Mutations In Nucleotide Sequences",
+      "to_name": "Applying Molarity Concepts To Solution Mixing",
+      "OR": 19.264849074975658,
+      "lift": 7.414396887159533,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9980544747081712
+    },
+    {
+      "from": 45,
+      "to": 49,
+      "from_name": "Identifying Mutations In Nucleotide Sequences",
+      "to_name": "Applying Properties Of Matrix Norms To Vectors",
+      "OR": 19.0333198357147,
+      "lift": 5.346920832086202,
+      "p_a_given_b": 0.7211538461538461,
+      "asymmetry": 0.5752394492666866
+    },
+    {
+      "from": 45,
+      "to": 57,
+      "from_name": "Identifying Mutations In Nucleotide Sequences",
+      "to_name": "Applying Divisibility Rules To Factorials",
+      "OR": 10.405368824723663,
+      "lift": 4.262168270462965,
+      "p_a_given_b": 0.5748502994011976,
+      "asymmetry": 0.3880798713856334
+    },
+    {
+      "from": 45,
+      "to": 62,
+      "from_name": "Identifying Mutations In Nucleotide Sequences",
+      "to_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "OR": 39.676322195476864,
+      "lift": 5.792497568093385,
+      "p_a_given_b": 0.78125,
+      "asymmetry": 0.3435068093385214
+    },
+    {
+      "from": 48,
+      "to": 6,
+      "from_name": "Analyzing Historical Context Of Sunni Shia Split",
+      "to_name": "Applying Quadratic Formula To Find Roots",
+      "OR": 17.41561610410736,
+      "lift": 2.8346866670798985,
+      "p_a_given_b": 0.9230769230769231,
+      "asymmetry": 0.9134073018037563
+    },
+    {
+      "from": 48,
+      "to": 24,
+      "from_name": "Analyzing Historical Context Of Sunni Shia Split",
+      "to_name": "Analyzing Effects Of Vertical Stretch On Graphs",
+      "OR": 11.804215646534253,
+      "lift": 2.7296982720028646,
+      "p_a_given_b": 0.8888888888888888,
+      "asymmetry": 0.8824424747067776
+    },
+    {
+      "from": 48,
+      "to": 73,
+      "from_name": "Analyzing Historical Context Of Sunni Shia Split",
+      "to_name": "Calculating Eigenvalues Of Quantum Operators",
+      "OR": 14.5284618490109,
+      "lift": 3.070910556003223,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9975825946817083
+    },
+    {
+      "from": 49,
+      "to": 17,
+      "from_name": "Applying Properties Of Matrix Norms To Vectors",
+      "to_name": "Calculating Ratios Of Segments In Triangles",
+      "OR": 54.299914456800686,
+      "lift": 20.250759109311744,
+      "p_a_given_b": 0.5526315789473685,
+      "asymmetry": 0.35070850202429155
+    },
+    {
+      "from": 49,
+      "to": 19,
+      "from_name": "Applying Properties Of Matrix Norms To Vectors",
+      "to_name": "Applying Divisibility Rules To Integer Sets",
+      "OR": 54.733333333333334,
+      "lift": 20.765064102564104,
+      "p_a_given_b": 0.5666666666666667,
+      "asymmetry": 0.4032051282051282
+    },
+    {
+      "from": 49,
+      "to": 84,
+      "from_name": "Applying Properties Of Matrix Norms To Vectors",
+      "to_name": "Converting Repeating Decimals To Fractions",
+      "OR": 51.025518341307816,
+      "lift": 19.892582417582418,
+      "p_a_given_b": 0.5428571428571428,
+      "asymmetry": 0.3601648351648351
+    },
+    {
+      "from": 49,
+      "to": 96,
+      "from_name": "Applying Properties Of Matrix Norms To Vectors",
+      "to_name": "Balancing Instrumentation For Optimal Sound Qualit",
+      "OR": 37.582249858677216,
+      "lift": 17.64351851851852,
+      "p_a_given_b": 0.48148148148148145,
+      "asymmetry": 0.35648148148148145
+    },
+    {
+      "from": 50,
+      "to": 6,
+      "from_name": "Embedding Comments With Security Keywords In Code ",
+      "to_name": "Applying Quadratic Formula To Find Roots",
+      "OR": 17.146210596914823,
+      "lift": 2.8052999631947,
+      "p_a_given_b": 0.9230769230769231,
+      "asymmetry": 0.9135075450864925
+    },
+    {
+      "from": 51,
+      "to": 4,
+      "from_name": "Articulating Customer Rights Under Consumer Protec",
+      "to_name": "Applying Wetting Theory To Liquid Droplets",
+      "OR": 10.718366324229516,
+      "lift": 1.3228303770612002,
+      "p_a_given_b": 0.967391304347826,
+      "asymmetry": 0.9035233459696417
+    },
+    {
+      "from": 51,
+      "to": 8,
+      "from_name": "Articulating Customer Rights Under Consumer Protec",
+      "to_name": "Maintaining Consistent Tone In Creative Writing",
+      "OR": 31.2512572816955,
+      "lift": 1.3384536312415753,
+      "p_a_given_b": 0.9788166544923301,
+      "asymmetry": 0.4980129228812788
+    },
+    {
+      "from": 51,
+      "to": 12,
+      "from_name": "Articulating Customer Rights Under Consumer Protec",
+      "to_name": "Evaluating Consistency In League Punishments",
+      "OR": 10.730250592374524,
+      "lift": 1.3032796982282295,
+      "p_a_given_b": 0.9530938123752495,
+      "asymmetry": 0.610431451413642
+    },
+    {
+      "from": 51,
+      "to": 21,
+      "from_name": "Articulating Customer Rights Under Consumer Protec",
+      "to_name": "Adapting Language For Age Appropriate Audience",
+      "OR": 25.80498201247812,
+      "lift": 1.3307928392024195,
+      "p_a_given_b": 0.9732142857142857,
+      "asymmetry": 0.46478227997334565
+    },
+    {
+      "from": 51,
+      "to": 33,
+      "from_name": "Articulating Customer Rights Under Consumer Protec",
+      "to_name": "Adapting Tone For Dialogue In Urdu Language",
+      "OR": 11.470270699372866,
+      "lift": 1.280424087460516,
+      "p_a_given_b": 0.9363794100636206,
+      "asymmetry": 0.3554680358260892
+    },
+    {
+      "from": 51,
+      "to": 50,
+      "from_name": "Articulating Customer Rights Under Consumer Protec",
+      "to_name": "Embedding Comments With Security Keywords In Code ",
+      "OR": 10.900727542758359,
+      "lift": 1.2965411293834612,
+      "p_a_given_b": 0.9481658692185008,
+      "asymmetry": 0.5215422596024262
+    },
+    {
+      "from": 51,
+      "to": 59,
+      "from_name": "Articulating Customer Rights Under Consumer Protec",
+      "to_name": "Applying Combinatorial Principles To Pet Ownership",
+      "OR": 12.899541518949206,
+      "lift": 1.2870295959878955,
+      "p_a_given_b": 0.9412100456621004,
+      "asymmetry": 0.3495344087765604
+    },
+    {
+      "from": 51,
+      "to": 61,
+      "from_name": "Articulating Customer Rights Under Consumer Protec",
+      "to_name": "Embedding Asterisk Symbols For Visual Separation",
+      "OR": 19.200956899356846,
+      "lift": 1.3247907594269042,
+      "p_a_given_b": 0.9688249400479616,
+      "asymmetry": 0.5339487290684137
+    },
+    {
+      "from": 51,
+      "to": 88,
+      "from_name": "Articulating Customer Rights Under Consumer Protec",
+      "to_name": "Analyzing Sentiment In Financial Statements",
+      "OR": 12.778188516015582,
+      "lift": 1.2883462185916588,
+      "p_a_given_b": 0.9421728971962616,
+      "asymmetry": 0.363414375488332
+    },
+    {
+      "from": 52,
+      "to": 12,
+      "from_name": "Identifying Alphabetical Order Of Names In Table",
+      "to_name": "Evaluating Consistency In League Punishments",
+      "OR": 203.2783649657158,
+      "lift": 1.5404977382896545,
+      "p_a_given_b": 0.9960079840319361,
+      "asymmetry": 0.5909755164994686
+    },
+    {
+      "from": 52,
+      "to": 18,
+      "from_name": "Identifying Alphabetical Order Of Names In Table",
+      "to_name": "Identifying Penguin Attributes From Tabular Data",
+      "OR": 673.3296651283872,
+      "lift": 1.5452088120016219,
+      "p_a_given_b": 0.9990539262062441,
+      "asymmetry": 0.5704824976348155
+    },
+    {
+      "from": 52,
+      "to": 20,
+      "from_name": "Identifying Alphabetical Order Of Names In Table",
+      "to_name": "Inferring Object Locations From Contextual Clues",
+      "OR": 236.57962260617128,
+      "lift": 1.541746370667549,
+      "p_a_given_b": 0.9968152866242038,
+      "asymmetry": 0.6157276242865415
+    },
+    {
+      "from": 52,
+      "to": 23,
+      "from_name": "Identifying Alphabetical Order Of Names In Table",
+      "to_name": "Maintaining Word Count Constraints In Responses",
+      "OR": 13.42160892542572,
+      "lift": 1.4524511922004892,
+      "p_a_given_b": 0.9390815370196813,
+      "asymmetry": 0.5324256928638371
+    },
+    {
+      "from": 52,
+      "to": 41,
+      "from_name": "Identifying Alphabetical Order Of Names In Table",
+      "to_name": "Organizing Information Based On Given Clues",
+      "OR": 11.167934382923226,
+      "lift": 1.4319538173432154,
+      "p_a_given_b": 0.9258289703315882,
+      "asymmetry": 0.49522832098093883
+    },
+    {
+      "from": 52,
+      "to": 60,
+      "from_name": "Identifying Alphabetical Order Of Names In Table",
+      "to_name": "Extracting Data From Table Headers",
+      "OR": 1000.8733018733019,
+      "lift": 1.5454823301698302,
+      "p_a_given_b": 0.9992307692307693,
+      "asymmetry": 0.47203921078921085
+    },
+    {
+      "from": 52,
+      "to": 68,
+      "from_name": "Identifying Alphabetical Order Of Names In Table",
+      "to_name": "Calculating Future Dates From Anniversary Informat",
+      "OR": 14.831874853844354,
+      "lift": 1.4501577855398946,
+      "p_a_given_b": 0.9375987361769352,
+      "asymmetry": 0.45586172318992224
+    },
+    {
+      "from": 52,
+      "to": 91,
+      "from_name": "Identifying Alphabetical Order Of Names In Table",
+      "to_name": "Calculating Handshake Combinations In Group Intera",
+      "OR": 10.270878921191143,
+      "lift": 1.4400050380653828,
+      "p_a_given_b": 0.9310344827586207,
+      "asymmetry": 0.6132585087326466
+    },
+    {
+      "from": 52,
+      "to": 94,
+      "from_name": "Identifying Alphabetical Order Of Names In Table",
+      "to_name": "Iterating Weight Loss Over Multiple Weeks",
+      "OR": 12.262008309334204,
+      "lift": 1.4637275185382441,
+      "p_a_given_b": 0.9463722397476341,
+      "asymmetry": 0.7028657462411405
+    },
+    {
+      "from": 53,
+      "to": 23,
+      "from_name": "Avoiding Sensitive Terms In Condolence Messages",
+      "to_name": "Maintaining Word Count Constraints In Responses",
+      "OR": 13.09366676000316,
+      "lift": 1.5023561450713885,
+      "p_a_given_b": 0.9287722586691659,
+      "asymmetry": 0.508144075307536
+    },
+    {
+      "from": 53,
+      "to": 28,
+      "from_name": "Avoiding Sensitive Terms In Condolence Messages",
+      "to_name": "Articulating Feature Vs Bug Distinction",
+      "OR": 11.18543902406183,
+      "lift": 1.502175894741092,
+      "p_a_given_b": 0.9286608260325406,
+      "asymmetry": 0.6137202487829652
+    },
+    {
+      "from": 53,
+      "to": 41,
+      "from_name": "Avoiding Sensitive Terms In Condolence Messages",
+      "to_name": "Organizing Information Based On Given Clues",
+      "OR": 11.933896353166986,
+      "lift": 1.487714705612198,
+      "p_a_given_b": 0.9197207678883071,
+      "asymmetry": 0.47235234683567556
+    },
+    {
+      "from": 54,
+      "to": 38,
+      "from_name": "Analyzing Door Count Distribution In Car Types",
+      "to_name": "Applying Recursion To Define Number Sequences",
+      "OR": 73.46153846153847,
+      "lift": 29.542635658914726,
+      "p_a_given_b": 0.6666666666666666,
+      "asymmetry": 0.6434108527131782
+    },
+    {
+      "from": 54,
+      "to": 86,
+      "from_name": "Analyzing Door Count Distribution In Car Types",
+      "to_name": "Applying Interpolation To Estimate Values",
+      "OR": 31.46661031276416,
+      "lift": 17.725581395348836,
+      "p_a_given_b": 0.4,
+      "asymmetry": 0.37674418604651166
+    },
+    {
+      "from": 54,
+      "to": 90,
+      "from_name": "Analyzing Door Count Distribution In Car Types",
+      "to_name": "Applying Properties Of Complex Numbers In Equation",
+      "OR": 43.56140350877193,
+      "lift": 22.156976744186046,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.4883720930232558
+    },
+    {
+      "from": 56,
+      "to": 6,
+      "from_name": "Separating Versions With Specific Delimiters",
+      "to_name": "Applying Quadratic Formula To Find Roots",
+      "OR": 17.24915824915825,
+      "lift": 2.816530147194679,
+      "p_a_given_b": 0.9230769230769231,
+      "asymmetry": 0.913469236928004
+    },
+    {
+      "from": 56,
+      "to": 15,
+      "from_name": "Separating Versions With Specific Delimiters",
+      "to_name": "Interpreting Numerical Values In Context",
+      "OR": 30.935613682092555,
+      "lift": 3.051240992794235,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9943955164131305
+    },
+    {
+      "from": 56,
+      "to": 24,
+      "from_name": "Separating Versions With Specific Delimiters",
+      "to_name": "Analyzing Effects Of Vertical Stretch On Graphs",
+      "OR": 39.248286981056026,
+      "lift": 3.051240992794235,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9927942353883107
+    },
+    {
+      "from": 56,
+      "to": 46,
+      "from_name": "Separating Versions With Specific Delimiters",
+      "to_name": "Crafting Concise Descriptions Of Professional Acti",
+      "OR": 12.77287966456289,
+      "lift": 2.4642508925470685,
+      "p_a_given_b": 0.8076225045372051,
+      "asymmetry": 0.4513374765147871
+    },
+    {
+      "from": 57,
+      "to": 3,
+      "from_name": "Applying Divisibility Rules To Factorials",
+      "to_name": "Applying Linear Combination Of Operators In Quantu",
+      "OR": 32.333333333333336,
+      "lift": 13.423740753786547,
+      "p_a_given_b": 0.5882352941176471,
+      "asymmetry": 0.528355054596689
+    },
+    {
+      "from": 57,
+      "to": 9,
+      "from_name": "Applying Divisibility Rules To Factorials",
+      "to_name": "Applying Combinatorial Principles To Dice Rolls",
+      "OR": 472.9220779220779,
+      "lift": 21.575612411540558,
+      "p_a_given_b": 0.9454545454545454,
+      "asymmetry": 0.6340772999455634
+    },
+    {
+      "from": 57,
+      "to": 10,
+      "from_name": "Applying Divisibility Rules To Factorials",
+      "to_name": "Applying Set Theory To Count Unique Items",
+      "OR": 124.72353961827646,
+      "lift": 18.59436682191173,
+      "p_a_given_b": 0.8148148148148148,
+      "asymmetry": 0.5513417609225992
+    },
+    {
+      "from": 57,
+      "to": 17,
+      "from_name": "Applying Divisibility Rules To Factorials",
+      "to_name": "Calculating Ratios Of Segments In Triangles",
+      "OR": 164.81683001013857,
+      "lift": 19.817680428616452,
+      "p_a_given_b": 0.868421052631579,
+      "asymmetry": 0.6708162622124173
+    },
+    {
+      "from": 57,
+      "to": 30,
+      "from_name": "Applying Divisibility Rules To Factorials",
+      "to_name": "Applying Relativity To Calculate Velocity Vectors",
+      "OR": 74.66539923954373,
+      "lift": 16.76597824758646,
+      "p_a_given_b": 0.7346938775510204,
+      "asymmetry": 0.5191250152755713
+    },
+    {
+      "from": 57,
+      "to": 35,
+      "from_name": "Applying Divisibility Rules To Factorials",
+      "to_name": "Evaluating Function Values At Specific Points",
+      "OR": 170.76380952380953,
+      "lift": 19.309534776600646,
+      "p_a_given_b": 0.8461538461538461,
+      "asymmetry": 0.5168125287885768
+    },
+    {
+      "from": 57,
+      "to": 96,
+      "from_name": "Applying Divisibility Rules To Factorials",
+      "to_name": "Balancing Instrumentation For Optimal Sound Qualit",
+      "OR": 29.536393442622952,
+      "lift": 12.677977378576182,
+      "p_a_given_b": 0.5555555555555556,
+      "asymmetry": 0.46573519627411847
+    },
+    {
+      "from": 58,
+      "to": 9,
+      "from_name": "Calculating Compound Interest With Quarterly Compo",
+      "to_name": "Applying Combinatorial Principles To Dice Rolls",
+      "OR": 130.49696589244613,
+      "lift": 22.386293706293706,
+      "p_a_given_b": 0.7636363636363637,
+      "asymmetry": 0.4405594405594406
+    },
+    {
+      "from": 58,
+      "to": 10,
+      "from_name": "Calculating Compound Interest With Quarterly Compo",
+      "to_name": "Applying Set Theory To Count Unique Items",
+      "OR": 49.28589757297124,
+      "lift": 16.829202279202278,
+      "p_a_given_b": 0.5740740740740741,
+      "asymmetry": 0.33561253561253557
+    },
+    {
+      "from": 58,
+      "to": 17,
+      "from_name": "Calculating Compound Interest With Quarterly Compo",
+      "to_name": "Calculating Ratios Of Segments In Triangles",
+      "OR": 58.18601262748907,
+      "lift": 18.51497975708502,
+      "p_a_given_b": 0.631578947368421,
+      "asymmetry": 0.4469635627530364
+    },
+    {
+      "from": 58,
+      "to": 30,
+      "from_name": "Calculating Compound Interest With Quarterly Compo",
+      "to_name": "Applying Relativity To Calculate Velocity Vectors",
+      "OR": 43.214707461084274,
+      "lift": 16.153375196232336,
+      "p_a_given_b": 0.5510204081632653,
+      "asymmetry": 0.3433281004709575
+    },
+    {
+      "from": 58,
+      "to": 35,
+      "from_name": "Calculating Compound Interest With Quarterly Compo",
+      "to_name": "Evaluating Function Values At Specific Points",
+      "OR": 112.65010519501537,
+      "lift": 21.197278106508875,
+      "p_a_given_b": 0.7230769230769231,
+      "asymmetry": 0.36153846153846153
+    },
+    {
+      "from": 58,
+      "to": 96,
+      "from_name": "Calculating Compound Interest With Quarterly Compo",
+      "to_name": "Balancing Instrumentation For Optimal Sound Qualit",
+      "OR": 21.378597692405222,
+      "lift": 11.943304843304842,
+      "p_a_given_b": 0.4074074074074074,
+      "asymmetry": 0.3227920227920228
+    },
+    {
+      "from": 59,
+      "to": 23,
+      "from_name": "Applying Combinatorial Principles To Pet Ownership",
+      "to_name": "Maintaining Word Count Constraints In Responses",
+      "OR": 61.97249362547104,
+      "lift": 2.0834895345204623,
+      "p_a_given_b": 0.9578256794751641,
+      "asymmetry": 0.3744923461418307
+    },
+    {
+      "from": 59,
+      "to": 28,
+      "from_name": "Applying Combinatorial Principles To Pet Ownership",
+      "to_name": "Articulating Feature Vs Bug Distinction",
+      "OR": 30.406413259779843,
+      "lift": 2.0418288271298026,
+      "p_a_given_b": 0.9386733416770964,
+      "asymmetry": 0.5105911498962745
+    },
+    {
+      "from": 59,
+      "to": 37,
+      "from_name": "Applying Combinatorial Principles To Pet Ownership",
+      "to_name": "Assessing Causal Relationships In Fertilizer Use",
+      "OR": 16.41816718492775,
+      "lift": 1.9199719271270153,
+      "p_a_given_b": 0.8826530612244898,
+      "asymmetry": 0.3889316000372752
+    },
+    {
+      "from": 59,
+      "to": 41,
+      "from_name": "Applying Combinatorial Principles To Pet Ownership",
+      "to_name": "Organizing Information Based On Given Clues",
+      "OR": 38.79431989687553,
+      "lift": 2.0252780168463667,
+      "p_a_given_b": 0.931064572425829,
+      "asymmetry": 0.32204630758564634
+    },
+    {
+      "from": 59,
+      "to": 65,
+      "from_name": "Applying Combinatorial Principles To Pet Ownership",
+      "to_name": "Analyzing Historical Significance Of Chess Program",
+      "OR": 10.233194213703959,
+      "lift": 1.889431890144319,
+      "p_a_given_b": 0.8686131386861314,
+      "asymmetry": 0.5969236409692364
+    },
+    {
+      "from": 60,
+      "to": 5,
+      "from_name": "Extracting Data From Table Headers",
+      "to_name": "Evaluating Sporting Event Plausibility Based On Co",
+      "OR": 61.66187355400086,
+      "lift": 2.75646047008547,
+      "p_a_given_b": 0.9402777777777778,
+      "asymmetry": 0.419508547008547
+    },
+    {
+      "from": 60,
+      "to": 45,
+      "from_name": "Extracting Data From Table Headers",
+      "to_name": "Identifying Mutations In Nucleotide Sequences",
+      "OR": 167.3907506037249,
+      "lift": 2.8802080215504335,
+      "p_a_given_b": 0.9824902723735408,
+      "asymmetry": 0.5940287339120023
+    },
+    {
+      "from": 60,
+      "to": 65,
+      "from_name": "Extracting Data From Table Headers",
+      "to_name": "Analyzing Historical Significance Of Chess Program",
+      "OR": 20.14715126430835,
+      "lift": 2.5570718697361032,
+      "p_a_given_b": 0.8722627737226277,
+      "asymmetry": 0.5045704660303201
+    },
+    {
+      "from": 60,
+      "to": 83,
+      "from_name": "Extracting Data From Table Headers",
+      "to_name": "Incorporating Friends Name In Personalized Message",
+      "OR": 35.91981883930766,
+      "lift": 2.697223664435032,
+      "p_a_given_b": 0.9200710479573713,
+      "asymmetry": 0.5216095094958328
+    },
+    {
+      "from": 60,
+      "to": 85,
+      "from_name": "Extracting Data From Table Headers",
+      "to_name": "Applying Set Theory To Divisor Subsets",
+      "OR": 10.212055787309525,
+      "lift": 2.411222111222111,
+      "p_a_given_b": 0.8225108225108225,
+      "asymmetry": 0.6763569763569763
+    },
+    {
+      "from": 61,
+      "to": 28,
+      "from_name": "Embedding Asterisk Symbols For Visual Separation",
+      "to_name": "Articulating Feature Vs Bug Distinction",
+      "OR": 62.13461747741865,
+      "lift": 2.825225176554626,
+      "p_a_given_b": 0.9274092615769712,
+      "asymmetry": 0.33508312248824224
+    },
+    {
+      "from": 61,
+      "to": 46,
+      "from_name": "Embedding Asterisk Symbols For Visual Separation",
+      "to_name": "Crafting Concise Descriptions Of Professional Acti",
+      "OR": 53.3328754998016,
+      "lift": 2.8639128624505115,
+      "p_a_given_b": 0.9401088929219601,
+      "asymmetry": 0.5260401479179633
+    },
+    {
+      "from": 62,
+      "to": 3,
+      "from_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "to_name": "Applying Linear Combination Of Operators In Quantu",
+      "OR": 22.426195426195427,
+      "lift": 8.562295751633988,
+      "p_a_given_b": 0.6470588235294118,
+      "asymmetry": 0.6088643790849674
+    },
+    {
+      "from": 62,
+      "to": 15,
+      "from_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "to_name": "Interpreting Numerical Values In Context",
+      "OR": 54.03244837758112,
+      "lift": 11.342261904761905,
+      "p_a_given_b": 0.8571428571428571,
+      "asymmetry": 0.8363095238095237
+    },
+    {
+      "from": 62,
+      "to": 16,
+      "from_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "to_name": "Analyzing Geometric Interpretations Of Matrix Oper",
+      "OR": 12.291448516579406,
+      "lift": 6.616319444444445,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.4930555555555556
+    },
+    {
+      "from": 62,
+      "to": 40,
+      "from_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "to_name": "Applying Albedo Concepts To Temperature Difference",
+      "OR": 12.291448516579406,
+      "lift": 6.616319444444445,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.4930555555555556
+    },
+    {
+      "from": 62,
+      "to": 73,
+      "from_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "to_name": "Calculating Eigenvalues Of Quantum Operators",
+      "OR": 86.39054290718039,
+      "lift": 13.23263888888889,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9895833333333334
+    },
+    {
+      "from": 63,
+      "to": 8,
+      "from_name": "Applying Synonyms To Replace Restricted Vocabulary",
+      "to_name": "Maintaining Consistent Tone In Creative Writing",
+      "OR": 14.577602537159796,
+      "lift": 1.4492953549711411,
+      "p_a_given_b": 0.9313367421475529,
+      "asymmetry": 0.4107160806530654
+    },
+    {
+      "from": 63,
+      "to": 12,
+      "from_name": "Applying Synonyms To Replace Restricted Vocabulary",
+      "to_name": "Evaluating Consistency In League Punishments",
+      "OR": 13.208213079810612,
+      "lift": 1.461409968955515,
+      "p_a_given_b": 0.9391217564870259,
+      "asymmetry": 0.5548832918075649
+    },
+    {
+      "from": 63,
+      "to": 21,
+      "from_name": "Applying Synonyms To Replace Restricted Vocabulary",
+      "to_name": "Adapting Language For Age Appropriate Audience",
+      "OR": 13.366775421965917,
+      "lift": 1.4353730946472885,
+      "p_a_given_b": 0.9223901098901099,
+      "asymmetry": 0.37400301311591644
+    },
+    {
+      "from": 63,
+      "to": 23,
+      "from_name": "Applying Synonyms To Replace Restricted Vocabulary",
+      "to_name": "Maintaining Word Count Constraints In Responses",
+      "OR": 19.77088418843541,
+      "lift": 1.4875991309881853,
+      "p_a_given_b": 0.9559512652296157,
+      "asymmetry": 0.5394547360340256
+    },
+    {
+      "from": 63,
+      "to": 41,
+      "from_name": "Applying Synonyms To Replace Restricted Vocabulary",
+      "to_name": "Organizing Information Based On Given Clues",
+      "OR": 21.53238484661775,
+      "lift": 1.4896086089916674,
+      "p_a_given_b": 0.9572425828970331,
+      "asymmetry": 0.5093046490464819
+    },
+    {
+      "from": 63,
+      "to": 61,
+      "from_name": "Applying Synonyms To Replace Restricted Vocabulary",
+      "to_name": "Embedding Asterisk Symbols For Visual Separation",
+      "OR": 11.866531610934253,
+      "lift": 1.4379728556884996,
+      "p_a_given_b": 0.9240607513988809,
+      "asymmetry": 0.45203135164387886
+    },
+    {
+      "from": 65,
+      "to": 0,
+      "from_name": "Analyzing Historical Significance Of Chess Program",
+      "to_name": "Inferring Time Intervals From Sequential Events",
+      "OR": 21.771395076201642,
+      "lift": 5.17337991810575,
+      "p_a_given_b": 0.7439024390243902,
+      "asymmetry": 0.5212747017981129
+    },
+    {
+      "from": 65,
+      "to": 39,
+      "from_name": "Analyzing Historical Significance Of Chess Program",
+      "to_name": "Summing Coefficients Of Polynomial Expression",
+      "OR": 21.761872199528533,
+      "lift": 5.258189424959943,
+      "p_a_given_b": 0.7560975609756098,
+      "asymmetry": 0.5863895317785295
+    },
+    {
+      "from": 65,
+      "to": 44,
+      "from_name": "Analyzing Historical Significance Of Chess Program",
+      "to_name": "Applying Molarity Concepts To Solution Mixing",
+      "OR": 17.882191780821916,
+      "lift": 6.954379562043795,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9981751824817519
+    },
+    {
+      "from": 65,
+      "to": 49,
+      "from_name": "Analyzing Historical Significance Of Chess Program",
+      "to_name": "Applying Properties Of Matrix Norms To Vectors",
+      "OR": 14.439681175275455,
+      "lift": 4.747701431779899,
+      "p_a_given_b": 0.6826923076923077,
+      "asymmetry": 0.5531302638966873
+    },
+    {
+      "from": 65,
+      "to": 57,
+      "from_name": "Analyzing Historical Significance Of Chess Program",
+      "to_name": "Applying Divisibility Rules To Factorials",
+      "OR": 17.327822585271274,
+      "lift": 4.872229992569605,
+      "p_a_given_b": 0.7005988023952096,
+      "asymmetry": 0.48709515276017307
+    },
+    {
+      "from": 65,
+      "to": 58,
+      "from_name": "Analyzing Historical Significance Of Chess Program",
+      "to_name": "Calculating Compound Interest With Quarterly Compo",
+      "OR": 15.710206389595703,
+      "lift": 4.81457046603032,
+      "p_a_given_b": 0.6923076923076923,
+      "asymmetry": 0.5280741156653566
+    },
+    {
+      "from": 66,
+      "to": 40,
+      "from_name": "Applying Pattern Recognition To Algorithmic Output",
+      "to_name": "Applying Albedo Concepts To Temperature Difference",
+      "OR": 14.08118811881188,
+      "lift": 7.501968503937008,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.4921259842519685
+    },
+    {
+      "from": 66,
+      "to": 90,
+      "from_name": "Applying Pattern Recognition To Algorithmic Output",
+      "to_name": "Applying Properties Of Complex Numbers In Equation",
+      "OR": 14.029585798816568,
+      "lift": 7.501968503937008,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.49606299212598426
+    },
+    {
+      "from": 68,
+      "to": 5,
+      "from_name": "Calculating Future Dates From Anniversary Informat",
+      "to_name": "Evaluating Sporting Event Plausibility Based On Co",
+      "OR": 58.25110766216088,
+      "lift": 2.809583991574513,
+      "p_a_given_b": 0.9333333333333333,
+      "asymmetry": 0.40252764612954184
+    },
+    {
+      "from": 68,
+      "to": 45,
+      "from_name": "Calculating Future Dates From Anniversary Informat",
+      "to_name": "Identifying Mutations In Nucleotide Sequences",
+      "OR": 310.6834083408341,
+      "lift": 2.98098579428452,
+      "p_a_given_b": 0.9902723735408561,
+      "asymmetry": 0.5882186610606033
+    },
+    {
+      "from": 68,
+      "to": 65,
+      "from_name": "Calculating Future Dates From Anniversary Informat",
+      "to_name": "Analyzing Historical Significance Of Chess Program",
+      "OR": 15.386883834397647,
+      "lift": 2.515881389744122,
+      "p_a_given_b": 0.8357664233576643,
+      "asymmetry": 0.47399707106698497
+    },
+    {
+      "from": 68,
+      "to": 83,
+      "from_name": "Calculating Future Dates From Anniversary Informat",
+      "to_name": "Incorporating Friends Name In Personalized Message",
+      "OR": 40.112132480310414,
+      "lift": 2.780354622466531,
+      "p_a_given_b": 0.9236234458259325,
+      "asymmetry": 0.5128809497753796
+    },
+    {
+      "from": 70,
+      "to": 78,
+      "from_name": "Analyzing User Access Patterns Over Time",
+      "to_name": "Distinguishing Fruits From Non Fruits",
+      "OR": 14.872834053293209,
+      "lift": 1.1861137647674171,
+      "p_a_given_b": 0.9863013698630136,
+      "asymmetry": 0.8727008649718808
+    },
+    {
+      "from": 72,
+      "to": 4,
+      "from_name": "Applying Discrete Group Approximations To Gauge Th",
+      "to_name": "Applying Wetting Theory To Liquid Droplets",
+      "OR": 15.226086786513779,
+      "lift": 4.816734074823053,
+      "p_a_given_b": 0.6521739130434783,
+      "asymmetry": 0.4196157735085946
+    },
+    {
+      "from": 74,
+      "to": 7,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Identifying Themes In Science Fiction Movies",
+      "OR": 47.83056552604291,
+      "lift": 1.1114757108060267,
+      "p_a_given_b": 0.9948159668221876,
+      "asymmetry": 0.4322243514601237
+    },
+    {
+      "from": 74,
+      "to": 22,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Calculating Work Done In Variable Force Scenarios",
+      "OR": 12.724541063523228,
+      "lift": 1.1032517608538264,
+      "p_a_given_b": 0.9874551971326165,
+      "asymmetry": 0.6643827843504413
+    },
+    {
+      "from": 74,
+      "to": 29,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Identifying Sarcasm In Verbal Expressions",
+      "OR": 69.93818971235602,
+      "lift": 1.1122731723222627,
+      "p_a_given_b": 0.9955297273133661,
+      "asymmetry": 0.3426420111011116
+    },
+    {
+      "from": 74,
+      "to": 32,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Identifying Humorous Wordplay In Artist Names",
+      "OR": 73.87639887464833,
+      "lift": 1.1123652164762867,
+      "p_a_given_b": 0.9956121105748135,
+      "asymmetry": 0.3304112897011694
+    },
+    {
+      "from": 74,
+      "to": 33,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Adapting Tone For Dialogue In Urdu Language",
+      "OR": 14.090717334526039,
+      "lift": 1.1004666459464405,
+      "p_a_given_b": 0.9849624060150376,
+      "asymmetry": 0.4856953289115489
+    },
+    {
+      "from": 74,
+      "to": 50,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Embedding Comments With Security Keywords In Code ",
+      "OR": 12.471339881089248,
+      "lift": 1.1021212916088627,
+      "p_a_given_b": 0.9864433811802232,
+      "asymmetry": 0.6237931319864385
+    },
+    {
+      "from": 74,
+      "to": 59,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Applying Combinatorial Principles To Pet Ownership",
+      "OR": 13.895895210629869,
+      "lift": 1.1000494973956139,
+      "p_a_given_b": 0.9845890410958904,
+      "asymmetry": 0.47887224250310234
+    },
+    {
+      "from": 74,
+      "to": 77,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Calculating Oscillation Frequency Of Quantum Parti",
+      "OR": 27.04175410277105,
+      "lift": 1.1137207819705621,
+      "p_a_given_b": 0.9968253968253968,
+      "asymmetry": 0.9047702810235791
+    },
+    {
+      "from": 74,
+      "to": 88,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Analyzing Sentiment In Financial Statements",
+      "OR": 17.353642464670223,
+      "lift": 1.1035628614953819,
+      "p_a_given_b": 0.9877336448598131,
+      "asymmetry": 0.4919845976595785
+    },
+    {
+      "from": 74,
+      "to": 91,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Calculating Handshake Combinations In Group Intera",
+      "OR": 28.663062946418936,
+      "lift": 1.1119536674206796,
+      "p_a_given_b": 0.995243757431629,
+      "asymmetry": 0.74986117167965
+    },
+    {
+      "from": 74,
+      "to": 97,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Evaluating Truthfulness Of Nested Statements",
+      "OR": 73.3814385150812,
+      "lift": 1.1120267490290725,
+      "p_a_given_b": 0.9953091684434968,
+      "asymmetry": 0.3110523522605593
+    },
+    {
+      "from": 74,
+      "to": 99,
+      "from_name": "Applying De Morgan Laws To Boolean Logic",
+      "to_name": "Identifying Transformations In Quantum Field Theor",
+      "OR": 10.465172976567064,
+      "lift": 1.1009174049524137,
+      "p_a_given_b": 0.9853658536585366,
+      "asymmetry": 0.6892650034679766
+    },
+    {
+      "from": 75,
+      "to": 89,
+      "from_name": "Constructing Bash Scripts For File Downloads",
+      "to_name": "Applying Snell'S Law To Light Refraction In Media",
+      "OR": 22.46935832732516,
+      "lift": 5.483453237410072,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9971223021582734
+    },
+    {
+      "from": 77,
+      "to": 3,
+      "from_name": "Calculating Oscillation Frequency Of Quantum Parti",
+      "to_name": "Applying Linear Combination Of Operators In Quantu",
+      "OR": 10.14762516046213,
+      "lift": 5.693370681605976,
+      "p_a_given_b": 0.47058823529411764,
+      "asymmetry": 0.4451914098972922
+    },
+    {
+      "from": 78,
+      "to": 0,
+      "from_name": "Distinguishing Fruits From Non Fruits",
+      "to_name": "Inferring Time Intervals From Sequential Events",
+      "OR": 68.10121695650575,
+      "lift": 8.59480454393585,
+      "p_a_given_b": 0.823170731707317,
+      "asymmetry": 0.4533077180086869
+    },
+    {
+      "from": 78,
+      "to": 39,
+      "from_name": "Distinguishing Fruits From Non Fruits",
+      "to_name": "Summing Coefficients Of Polynomial Expression",
+      "OR": 18.211526518444913,
+      "lift": 6.366521884396926,
+      "p_a_given_b": 0.6097560975609756,
+      "asymmetry": 0.4042766455061811
+    },
+    {
+      "from": 78,
+      "to": 49,
+      "from_name": "Distinguishing Fruits From Non Fruits",
+      "to_name": "Applying Properties Of Matrix Norms To Vectors",
+      "OR": 27.246153846153845,
+      "lift": 7.328846153846153,
+      "p_a_given_b": 0.7019230769230769,
+      "asymmetry": 0.5019230769230769
+    },
+    {
+      "from": 78,
+      "to": 57,
+      "from_name": "Distinguishing Fruits From Non Fruits",
+      "to_name": "Applying Divisibility Rules To Factorials",
+      "OR": 15.532479527122714,
+      "lift": 5.814502501845623,
+      "p_a_given_b": 0.5568862275449101,
+      "asymmetry": 0.3020917069969649
+    },
+    {
+      "from": 78,
+      "to": 58,
+      "from_name": "Distinguishing Fruits From Non Fruits",
+      "to_name": "Calculating Compound Interest With Quarterly Compo",
+      "OR": 10.875060786294094,
+      "lift": 5.14023182297155,
+      "p_a_given_b": 0.49230769230769234,
+      "asymmetry": 0.3169652265542677
+    },
+    {
+      "from": 80,
+      "to": 62,
+      "from_name": "Applying Mutation Rate To Genetic Equilibrium",
+      "to_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "OR": 12.075140467756324,
+      "lift": 3.7192328238001315,
+      "p_a_given_b": 0.6597222222222222,
+      "asymmetry": 0.37865713346482577
+    },
+    {
+      "from": 80,
+      "to": 78,
+      "from_name": "Applying Mutation Rate To Genetic Equilibrium",
+      "to_name": "Distinguishing Fruits From Non Fruits",
+      "OR": 13.413511681628927,
+      "lift": 3.722343357380238,
+      "p_a_given_b": 0.6602739726027397,
+      "asymmetry": 0.3037650968630947
+    },
+    {
+      "from": 82,
+      "to": 4,
+      "from_name": "Optimizing User Experience Based On Feedback",
+      "to_name": "Applying Wetting Theory To Liquid Droplets",
+      "OR": 17.845293695858608,
+      "lift": 1.4688748880314202,
+      "p_a_given_b": 0.9728260869565217,
+      "asymmetry": 0.9019069110452698
+    },
+    {
+      "from": 82,
+      "to": 8,
+      "from_name": "Optimizing User Experience Based On Feedback",
+      "to_name": "Maintaining Consistent Tone In Creative Writing",
+      "OR": 34.25502527482173,
+      "lift": 1.4657878956611128,
+      "p_a_given_b": 0.970781592403214,
+      "asymmetry": 0.44423642600067836
+    },
+    {
+      "from": 82,
+      "to": 12,
+      "from_name": "Optimizing User Experience Based On Feedback",
+      "to_name": "Evaluating Consistency In League Punishments",
+      "OR": 16.281492830969935,
+      "lift": 1.4405879208302887,
+      "p_a_given_b": 0.9540918163672655,
+      "asymmetry": 0.575327949489294
+    },
+    {
+      "from": 82,
+      "to": 21,
+      "from_name": "Optimizing User Experience Based On Feedback",
+      "to_name": "Adapting Language For Age Appropriate Audience",
+      "OR": 40.45486756007658,
+      "lift": 1.469461031242925,
+      "p_a_given_b": 0.9732142857142857,
+      "asymmetry": 0.41180382612633004
+    },
+    {
+      "from": 82,
+      "to": 23,
+      "from_name": "Optimizing User Experience Based On Feedback",
+      "to_name": "Maintaining Word Count Constraints In Responses",
+      "OR": 79.85801838610827,
+      "lift": 1.4943388828075221,
+      "p_a_given_b": 0.9896907216494846,
+      "asymmetry": 0.571307203424445
+    },
+    {
+      "from": 82,
+      "to": 37,
+      "from_name": "Optimizing User Experience Based On Feedback",
+      "to_name": "Assessing Causal Relationships In Fertilizer Use",
+      "OR": 19.329168461869884,
+      "lift": 1.451357579481872,
+      "p_a_given_b": 0.9612244897959183,
+      "asymmetry": 0.5880073741065364
+    },
+    {
+      "from": 82,
+      "to": 41,
+      "from_name": "Optimizing User Experience Based On Feedback",
+      "to_name": "Organizing Information Based On Given Clues",
+      "OR": 66.66128453534266,
+      "lift": 1.4901417595273854,
+      "p_a_given_b": 0.9869109947643979,
+      "asymmetry": 0.5388127380290573
+    },
+    {
+      "from": 82,
+      "to": 61,
+      "from_name": "Optimizing User Experience Based On Feedback",
+      "to_name": "Embedding Asterisk Symbols For Visual Separation",
+      "OR": 23.274680053516192,
+      "lift": 1.4519709113849968,
+      "p_a_given_b": 0.9616306954436451,
+      "asymmetry": 0.4850062897384153
+    },
+    {
+      "from": 82,
+      "to": 94,
+      "from_name": "Optimizing User Experience Based On Feedback",
+      "to_name": "Iterating Weight Loss Over Multiple Weeks",
+      "OR": 12.10665199559868,
+      "lift": 1.433695201147845,
+      "p_a_given_b": 0.9495268138801262,
+      "asymmetry": 0.7110165127707759
+    },
+    {
+      "from": 83,
+      "to": 0,
+      "from_name": "Incorporating Friends Name In Personalized Message",
+      "to_name": "Inferring Time Intervals From Sequential Events",
+      "OR": 26.97925412081233,
+      "lift": 5.324470389464108,
+      "p_a_given_b": 0.7865853658536586,
+      "asymmetry": 0.5574557033314561
+    },
+    {
+      "from": 83,
+      "to": 39,
+      "from_name": "Incorporating Friends Name In Personalized Message",
+      "to_name": "Summing Coefficients Of Polynomial Expression",
+      "OR": 13.242690387719101,
+      "lift": 4.512729425695677,
+      "p_a_given_b": 0.6666666666666666,
+      "asymmetry": 0.5210183540556542
+    },
+    {
+      "from": 83,
+      "to": 49,
+      "from_name": "Incorporating Friends Name In Personalized Message",
+      "to_name": "Applying Properties Of Matrix Norms To Vectors",
+      "OR": 11.642900302114803,
+      "lift": 4.360858723869382,
+      "p_a_given_b": 0.6442307692307693,
+      "asymmetry": 0.5252254406339665
+    },
+    {
+      "from": 83,
+      "to": 62,
+      "from_name": "Incorporating Friends Name In Personalized Message",
+      "to_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "OR": 17.90465030220797,
+      "lift": 4.583240822972173,
+      "p_a_given_b": 0.6770833333333334,
+      "asymmetry": 0.33072454114860866
+    },
+    {
+      "from": 84,
+      "to": 6,
+      "from_name": "Converting Repeating Decimals To Fractions",
+      "to_name": "Applying Quadratic Formula To Find Roots",
+      "OR": 1338.8297872340424,
+      "lift": 100.50989010989012,
+      "p_a_given_b": 0.9230769230769231,
+      "asymmetry": 0.5802197802197803
+    },
+    {
+      "from": 84,
+      "to": 24,
+      "from_name": "Converting Repeating Decimals To Fractions",
+      "to_name": "Analyzing Effects Of Vertical Stretch On Graphs",
+      "OR": 97.96103896103897,
+      "lift": 48.39365079365079,
+      "p_a_given_b": 0.4444444444444444,
+      "asymmetry": 0.33015873015873015
+    },
+    {
+      "from": 84,
+      "to": 86,
+      "from_name": "Converting Repeating Decimals To Fractions",
+      "to_name": "Applying Interpolation To Estimate Values",
+      "OR": 162.59384615384616,
+      "lift": 65.33142857142857,
+      "p_a_given_b": 0.6,
+      "asymmetry": 0.5142857142857142
+    },
+    {
+      "from": 85,
+      "to": 9,
+      "from_name": "Applying Set Theory To Divisor Subsets",
+      "to_name": "Applying Combinatorial Principles To Dice Rolls",
+      "OR": 44.328295946477766,
+      "lift": 11.698465171192444,
+      "p_a_given_b": 0.7090909090909091,
+      "asymmetry": 0.5402597402597402
+    },
+    {
+      "from": 85,
+      "to": 10,
+      "from_name": "Applying Set Theory To Divisor Subsets",
+      "to_name": "Applying Set Theory To Count Unique Items",
+      "OR": 32.996215828276895,
+      "lift": 10.69304152637486,
+      "p_a_given_b": 0.6481481481481481,
+      "asymmetry": 0.49663299663299665
+    },
+    {
+      "from": 85,
+      "to": 17,
+      "from_name": "Applying Set Theory To Divisor Subsets",
+      "to_name": "Calculating Ratios Of Segments In Triangles",
+      "OR": 18.664941537281962,
+      "lift": 8.683071314650261,
+      "p_a_given_b": 0.5263157894736842,
+      "asymmetry": 0.4397357028935976
+    },
+    {
+      "from": 85,
+      "to": 30,
+      "from_name": "Applying Set Theory To Divisor Subsets",
+      "to_name": "Applying Relativity To Calculate Velocity Vectors",
+      "OR": 23.186275069996,
+      "lift": 9.427334570191713,
+      "p_a_given_b": 0.5714285714285714,
+      "asymmetry": 0.4502164502164502
+    },
+    {
+      "from": 85,
+      "to": 35,
+      "from_name": "Applying Set Theory To Divisor Subsets",
+      "to_name": "Evaluating Function Values At Specific Points",
+      "OR": 36.4974358974359,
+      "lift": 10.913952713952714,
+      "p_a_given_b": 0.6615384615384615,
+      "asymmetry": 0.47539127539127535
+    },
+    {
+      "from": 85,
+      "to": 96,
+      "from_name": "Applying Set Theory To Divisor Subsets",
+      "to_name": "Balancing Instrumentation For Optimal Sound Qualit",
+      "OR": 17.617283950617285,
+      "lift": 8.554433221099888,
+      "p_a_given_b": 0.5185185185185185,
+      "asymmetry": 0.4579124579124579
+    },
+    {
+      "from": 87,
+      "to": 1,
+      "from_name": "Applying Mott Gurney Equation To Device Characteri",
+      "to_name": "Applying Inequality Theorems To Minimize Expressio",
+      "OR": 17.07550482879719,
+      "lift": 6.685964912280701,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9982456140350877
+    },
+    {
+      "from": 87,
+      "to": 2,
+      "from_name": "Applying Mott Gurney Equation To Device Characteri",
+      "to_name": "Analyzing Coordinates To Determine Shape Type",
+      "OR": 17.07550482879719,
+      "lift": 6.685964912280701,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9982456140350877
+    },
+    {
+      "from": 87,
+      "to": 30,
+      "from_name": "Applying Mott Gurney Equation To Device Characteri",
+      "to_name": "Applying Relativity To Calculate Velocity Vectors",
+      "OR": 12.183706835799859,
+      "lift": 4.502792696025778,
+      "p_a_given_b": 0.673469387755102,
+      "asymmetry": 0.6155746509129968
+    },
+    {
+      "from": 87,
+      "to": 64,
+      "from_name": "Applying Mott Gurney Equation To Device Characteri",
+      "to_name": "Recognizing Symmetry In Two Dimensional Figures",
+      "OR": 17.07550482879719,
+      "lift": 6.685964912280701,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9982456140350877
+    },
+    {
+      "from": 88,
+      "to": 54,
+      "from_name": "Analyzing Sentiment In Financial Statements",
+      "to_name": "Analyzing Door Count Distribution In Car Types",
+      "OR": 15.881894216044293,
+      "lift": 2.0707454901108453,
+      "p_a_given_b": 0.9302325581395349,
+      "asymmetry": 0.883503586176918
+    },
+    {
+      "from": 88,
+      "to": 58,
+      "from_name": "Analyzing Sentiment In Financial Statements",
+      "to_name": "Calculating Compound Interest With Quarterly Compo",
+      "OR": 13.619227568518847,
+      "lift": 2.037693206326384,
+      "p_a_given_b": 0.9153846153846154,
+      "asymmetry": 0.8458752695902229
+    },
+    {
+      "from": 90,
+      "to": 1,
+      "from_name": "Applying Properties Of Complex Numbers In Equation",
+      "to_name": "Applying Inequality Theorems To Minimize Expressio",
+      "OR": 7619.0,
+      "lift": 1905.5,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.5
+    },
+    {
+      "from": 90,
+      "to": 2,
+      "from_name": "Applying Properties Of Complex Numbers In Equation",
+      "to_name": "Analyzing Coordinates To Determine Shape Type",
+      "OR": 7619.0,
+      "lift": 1905.5,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.5
+    },
+    {
+      "from": 90,
+      "to": 64,
+      "from_name": "Applying Properties Of Complex Numbers In Equation",
+      "to_name": "Recognizing Symmetry In Two Dimensional Figures",
+      "OR": 7619.0,
+      "lift": 1905.5,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.5
+    },
+    {
+      "from": 91,
+      "to": 27,
+      "from_name": "Calculating Handshake Combinations In Group Intera",
+      "to_name": "Manipulating Algebraic Expressions For Variance",
+      "OR": 12.949533133016704,
+      "lift": 3.306777645659929,
+      "p_a_given_b": 0.7297297297297297,
+      "asymmetry": 0.44078799370119226
+    },
+    {
+      "from": 91,
+      "to": 92,
+      "from_name": "Calculating Handshake Combinations In Group Intera",
+      "to_name": "Applying Fraction Multiplication To Unit Prices",
+      "OR": 12.962176689597356,
+      "lift": 3.328973444312327,
+      "p_a_given_b": 0.7346278317152104,
+      "asymmetry": 0.4647110659601569
+    },
+    {
+      "from": 92,
+      "to": 39,
+      "from_name": "Applying Fraction Multiplication To Unit Prices",
+      "to_name": "Summing Coefficients Of Polynomial Expression",
+      "OR": 71.02823338242015,
+      "lift": 10.027100271002709,
+      "p_a_given_b": 0.8130081300813008,
+      "asymmetry": 0.48938353461204515
+    },
+    {
+      "from": 92,
+      "to": 49,
+      "from_name": "Applying Fraction Multiplication To Unit Prices",
+      "to_name": "Applying Properties Of Matrix Norms To Vectors",
+      "OR": 39.9412825425448,
+      "lift": 9.012820512820511,
+      "p_a_given_b": 0.7307692307692307,
+      "asymmetry": 0.48481453821259646
+    },
+    {
+      "from": 92,
+      "to": 57,
+      "from_name": "Applying Fraction Multiplication To Unit Prices",
+      "to_name": "Applying Divisibility Rules To Factorials",
+      "OR": 41.73010158158673,
+      "lift": 8.64071856287425,
+      "p_a_given_b": 0.7005988023952096,
+      "asymmetry": 0.3219580256961804
+    },
+    {
+      "from": 92,
+      "to": 58,
+      "from_name": "Applying Fraction Multiplication To Unit Prices",
+      "to_name": "Calculating Compound Interest With Quarterly Compo",
+      "OR": 26.818566283257812,
+      "lift": 7.874358974358973,
+      "p_a_given_b": 0.6384615384615384,
+      "asymmetry": 0.36985312422205624
+    },
+    {
+      "from": 93,
+      "to": 26,
+      "from_name": "Ensuring Consistent Section Headers In Document St",
+      "to_name": "Applying Properties Of Rectangles To Find Dimensio",
+      "OR": 70.17757009345794,
+      "lift": 34.64545454545455,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.4636363636363636
+    },
+    {
+      "from": 93,
+      "to": 38,
+      "from_name": "Ensuring Consistent Section Headers In Document St",
+      "to_name": "Applying Recursion To Define Number Sequences",
+      "OR": 41.33394495412844,
+      "lift": 23.096969696969698,
+      "p_a_given_b": 0.3333333333333333,
+      "asymmetry": 0.3151515151515151
+    },
+    {
+      "from": 93,
+      "to": 90,
+      "from_name": "Ensuring Consistent Section Headers In Document St",
+      "to_name": "Applying Properties Of Complex Numbers In Equation",
+      "OR": 68.90825688073394,
+      "lift": 34.64545454545455,
+      "p_a_given_b": 0.5,
+      "asymmetry": 0.4818181818181818
+    },
+    {
+      "from": 94,
+      "to": 27,
+      "from_name": "Iterating Weight Loss Over Multiple Weeks",
+      "to_name": "Manipulating Algebraic Expressions For Variance",
+      "OR": 57.322122322122325,
+      "lift": 5.198738170347003,
+      "p_a_given_b": 0.8648648648648649,
+      "asymmetry": 0.41060618978600055
+    },
+    {
+      "from": 94,
+      "to": 44,
+      "from_name": "Iterating Weight Loss Over Multiple Weeks",
+      "to_name": "Applying Molarity Concepts To Solution Mixing",
+      "OR": 15.04735595895817,
+      "lift": 6.011041009463722,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.998422712933754
+    },
+    {
+      "from": 94,
+      "to": 92,
+      "from_name": "Iterating Weight Loss Over Multiple Weeks",
+      "to_name": "Applying Fraction Multiplication To Unit Prices",
+      "OR": 10.792968877339556,
+      "lift": 3.6766561514195577,
+      "p_a_given_b": 0.6116504854368932,
+      "asymmetry": 0.31354322991638844
+    },
+    {
+      "from": 95,
+      "to": 40,
+      "from_name": "Interpreting Luminescence Behavior In Zinc Silicat",
+      "to_name": "Applying Albedo Concepts To Temperature Difference",
+      "OR": 22.51448275862069,
+      "lift": 3.4931255728689274,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9963336388634281
+    },
+    {
+      "from": 97,
+      "to": 12,
+      "from_name": "Evaluating Truthfulness Of Nested Statements",
+      "to_name": "Evaluating Consistency In League Punishments",
+      "OR": 72.94322728138692,
+      "lift": 1.6024530895564948,
+      "p_a_given_b": 0.9860279441117764,
+      "asymmetry": 0.5647059824913073
+    },
+    {
+      "from": 97,
+      "to": 18,
+      "from_name": "Evaluating Truthfulness Of Nested Statements",
+      "to_name": "Identifying Penguin Attributes From Tabular Data",
+      "OR": 138.89845965381912,
+      "lift": 1.6128597450643796,
+      "p_a_given_b": 0.9924314096499527,
+      "asymmetry": 0.5450966548525114
+    },
+    {
+      "from": 97,
+      "to": 20,
+      "from_name": "Evaluating Truthfulness Of Nested Statements",
+      "to_name": "Inferring Object Locations From Contextual Clues",
+      "OR": 1969.6134663341645,
+      "lift": 1.6251599147121536,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.5982942430703625
+    },
+    {
+      "from": 97,
+      "to": 41,
+      "from_name": "Evaluating Truthfulness Of Nested Statements",
+      "to_name": "Organizing Information Based On Given Clues",
+      "OR": 10.42762125525132,
+      "lift": 1.4776759433944713,
+      "p_a_given_b": 0.9092495636998255,
+      "asymmetry": 0.46489988352924977
+    },
+    {
+      "from": 97,
+      "to": 60,
+      "from_name": "Evaluating Truthfulness Of Nested Statements",
+      "to_name": "Extracting Data From Table Headers",
+      "OR": 121.6345543603847,
+      "lift": 1.607658192553715,
+      "p_a_given_b": 0.9892307692307692,
+      "asymmetry": 0.4408299163523044
+    },
+    {
+      "from": 97,
+      "to": 68,
+      "from_name": "Evaluating Truthfulness Of Nested Statements",
+      "to_name": "Calculating Future Dates From Anniversary Informat",
+      "OR": 19.02113239583662,
+      "lift": 1.528882668579917,
+      "p_a_given_b": 0.9407582938388626,
+      "asymmetry": 0.432869168039289
+    },
+    {
+      "from": 97,
+      "to": 94,
+      "from_name": "Evaluating Truthfulness Of Nested Statements",
+      "to_name": "Iterating Weight Loss Over Multiple Weeks",
+      "OR": 12.294154653824043,
+      "lift": 1.5251895098639296,
+      "p_a_given_b": 0.9384858044164038,
+      "asymmetry": 0.6847544611328218
+    },
+    {
+      "from": 98,
+      "to": 1,
+      "from_name": "Analyzing Fragmentation Patterns In Ei Ms",
+      "to_name": "Applying Inequality Theorems To Minimize Expressio",
+      "OR": 13.32119914346895,
+      "lift": 5.436519258202568,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9985734664764622
+    },
+    {
+      "from": 98,
+      "to": 2,
+      "from_name": "Analyzing Fragmentation Patterns In Ei Ms",
+      "to_name": "Analyzing Coordinates To Determine Shape Type",
+      "OR": 13.32119914346895,
+      "lift": 5.436519258202568,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9985734664764622
+    },
+    {
+      "from": 98,
+      "to": 64,
+      "from_name": "Analyzing Fragmentation Patterns In Ei Ms",
+      "to_name": "Recognizing Symmetry In Two Dimensional Figures",
+      "OR": 13.32119914346895,
+      "lift": 5.436519258202568,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9985734664764622
+    },
+    {
+      "from": 99,
+      "to": 62,
+      "from_name": "Identifying Transformations In Quantum Field Theor",
+      "to_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+      "OR": 17.754231659454565,
+      "lift": 3.1112838753387533,
+      "p_a_given_b": 0.8368055555555556,
+      "asymmetry": 0.6016836043360434
+    },
+    {
+      "from": 99,
+      "to": 90,
+      "from_name": "Identifying Transformations In Quantum Field Theor",
+      "to_name": "Applying Properties Of Complex Numbers In Equation",
+      "OR": 13.612603810454324,
+      "lift": 3.7180487804878046,
+      "p_a_given_b": 1.0,
+      "asymmetry": 0.9980487804878049
+    }
+  ],
+  "depth_per_skill": {
+    "0": 3,
+    "1": 4,
+    "2": 4,
+    "3": 4,
+    "4": 3,
+    "5": 2,
+    "6": 5,
+    "7": 1,
+    "8": 2,
+    "9": 4,
+    "10": 4,
+    "11": 0,
+    "12": 2,
+    "13": 0,
+    "14": 0,
+    "15": 3,
+    "16": 3,
+    "17": 4,
+    "18": 2,
+    "19": 5,
+    "20": 2,
+    "21": 2,
+    "22": 1,
+    "23": 2,
+    "24": 5,
+    "25": 0,
+    "26": 4,
+    "27": 3,
+    "28": 2,
+    "29": 1,
+    "30": 4,
+    "31": 0,
+    "32": 1,
+    "33": 1,
+    "34": 0,
+    "35": 4,
+    "36": 0,
+    "37": 2,
+    "38": 4,
+    "39": 3,
+    "40": 3,
+    "41": 2,
+    "42": 0,
+    "43": 0,
+    "44": 3,
+    "45": 2,
+    "46": 3,
+    "47": 0,
+    "48": 0,
+    "49": 3,
+    "50": 1,
+    "51": 0,
+    "52": 0,
+    "53": 0,
+    "54": 3,
+    "55": 0,
+    "56": 0,
+    "57": 3,
+    "58": 3,
+    "59": 1,
+    "60": 2,
+    "61": 2,
+    "62": 3,
+    "63": 0,
+    "64": 4,
+    "65": 2,
+    "66": 2,
+    "67": 0,
+    "68": 2,
+    "69": 0,
+    "70": 0,
+    "71": 0,
+    "72": 0,
+    "73": 3,
+    "74": 0,
+    "75": 0,
+    "76": 0,
+    "77": 1,
+    "78": 3,
+    "79": 0,
+    "80": 0,
+    "81": 0,
+    "82": 0,
+    "83": 2,
+    "84": 5,
+    "85": 2,
+    "86": 5,
+    "87": 0,
+    "88": 1,
+    "89": 1,
+    "90": 4,
+    "91": 1,
+    "92": 3,
+    "93": 3,
+    "94": 2,
+    "95": 0,
+    "96": 4,
+    "97": 1,
+    "98": 0,
+    "99": 1
+  },
+  "mastery_rate_per_skill": {
+    "0": 0.04303332458672265,
+    "1": 0.0002623983206507478,
+    "2": 0.0002623983206507478,
+    "3": 0.004460771451062713,
+    "4": 0.0482812909997376,
+    "5": 0.18892679086853845,
+    "6": 0.003411178168459722,
+    "7": 0.5061663605352926,
+    "8": 0.3592233009708738,
+    "9": 0.01443190763579113,
+    "10": 0.014169509315140383,
+    "11": 0.0,
+    "12": 0.2629231172920493,
+    "13": 0.5116767252689582,
+    "14": 0.0,
+    "15": 0.0018367882445552348,
+    "16": 0.0010495932826029913,
+    "17": 0.009971136184728419,
+    "18": 0.2773550249278405,
+    "19": 0.007871949619522435,
+    "20": 0.24717921805300447,
+    "21": 0.38205195486748883,
+    "22": 0.2928365258462346,
+    "23": 0.27997900813434795,
+    "24": 0.0023615848858567303,
+    "25": 0.0,
+    "26": 0.0010495932826029913,
+    "27": 0.08737864077669903,
+    "28": 0.20965625819994751,
+    "29": 0.5869850432957229,
+    "30": 0.012857517711886644,
+    "31": 0.027289425347677775,
+    "32": 0.5980057727630543,
+    "33": 0.45368669640514303,
+    "34": 0.21962739438467593,
+    "35": 0.01705589084229861,
+    "36": 0.6683285226974547,
+    "37": 0.25715035423773286,
+    "38": 0.0007871949619522435,
+    "39": 0.032274993440041984,
+    "40": 0.0010495932826029913,
+    "41": 0.300708475465757,
+    "42": 0.0,
+    "43": 0.2254001574389924,
+    "44": 0.0002623983206507478,
+    "45": 0.1348727368144844,
+    "46": 0.14458147467856206,
+    "47": 0.0,
+    "48": 0.3256363159275781,
+    "49": 0.027289425347677775,
+    "50": 0.3290474940960378,
+    "51": 0.7313041196536342,
+    "52": 0.6465494620834427,
+    "53": 0.6182104434531619,
+    "54": 0.022566255575964315,
+    "55": 0.0,
+    "56": 0.32773550249278405,
+    "57": 0.043820519548674886,
+    "58": 0.03411178168459722,
+    "59": 0.4597218577801102,
+    "60": 0.3411178168459722,
+    "61": 0.32826029913408555,
+    "62": 0.07557071634741537,
+    "63": 0.6426134872736814,
+    "64": 0.0002623983206507478,
+    "65": 0.14379427971660982,
+    "66": 0.06664917344528995,
+    "67": 0.0,
+    "68": 0.33219627394384676,
+    "69": 0.0,
+    "70": 0.8315402781422199,
+    "71": 0.7824717921805301,
+    "72": 0.1353975334557859,
+    "73": 0.0007871949619522435,
+    "74": 0.8950406717397008,
+    "75": 0.18236683285226973,
+    "76": 0.012332721070585148,
+    "77": 0.08265547100498556,
+    "78": 0.09577538703752296,
+    "79": 0.0,
+    "80": 0.17738126475990554,
+    "81": 0.0060351613749672,
+    "82": 0.6622933613224875,
+    "83": 0.14773025452637104,
+    "84": 0.009183941222776174,
+    "85": 0.06061401207032275,
+    "86": 0.0013119916032537393,
+    "87": 0.14956704277092628,
+    "88": 0.4492259249540803,
+    "89": 0.0005247966413014956,
+    "90": 0.0005247966413014956,
+    "91": 0.22067698766727892,
+    "92": 0.08108108108108109,
+    "93": 0.01443190763579113,
+    "94": 0.16636053529257414,
+    "95": 0.2862765678299659,
+    "96": 0.007084754657570191,
+    "97": 0.6153240619260036,
+    "98": 0.18394122277617422,
+    "99": 0.26895827866701655
+  },
+  "depth_size_correlation": 0.22421028002630505,
+  "cross_family_jaccard": {
+    "gemma-llama": 0.10634648370497427,
+    "gemma-mistral": 0.09850107066381156,
+    "gemma-phi": 0.09437086092715231,
+    "gemma-qwen": 0.11055776892430279,
+    "llama-mistral": 0.20916030534351146,
+    "llama-phi": 0.24833997343957503,
+    "llama-qwen": 0.2260334212840809,
+    "mistral-phi": 0.1676300578034682,
+    "mistral-qwen": 0.15356489945155394,
+    "phi-qwen": 0.3055555555555556
+  },
+  "per_benchmark_depth": {
+    "MATH": {
+      "avg_depth": 2.403225806451613,
+      "max_depth": 5,
+      "n_skills": 62
+    },
+    "BBH": {
+      "avg_depth": 2.0476190476190474,
+      "max_depth": 5,
+      "n_skills": 42
+    },
+    "GPQA": {
+      "avg_depth": 1.9482758620689655,
+      "max_depth": 5,
+      "n_skills": 58
+    },
+    "MuSR": {
+      "avg_depth": 1.5294117647058822,
+      "max_depth": 4,
+      "n_skills": 17
+    },
+    "IFEval": {
+      "avg_depth": 1.7741935483870968,
+      "max_depth": 5,
+      "n_skills": 62
+    }
+  },
+  "mastery_source": "predicted",
+  "mastery_cut": 0.5,
+  "n_connected_skills": 86,
+  "spearman_depth_prevalence": -0.78834310034975,
+  "per_benchmark_primary_depth": {
+    "MATH": 3.103448275862069,
+    "BBH": 1.434782608695652,
+    "GPQA": 1.3478260869565217,
+    "MuSR": 1.3333333333333333,
+    "IFEval": 1.0909090909090908
+  }
+}

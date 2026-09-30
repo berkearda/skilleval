@@ -1,0 +1,141 @@
+{
+  "reference_trained_theta_norm": 1.8706378936767578,
+  "n_test_llms": 100,
+  "results": [
+    {
+      "setting": "original (lr=0.01, steps=50)",
+      "lr": 0.01,
+      "steps": 50,
+      "N": 10,
+      "auc": 0.5475847663514524,
+      "theta_raw_mean_abs": 0.04898830130696297,
+      "final_loss": 0.6259636282920837
+    },
+    {
+      "setting": "original (lr=0.01, steps=50)",
+      "lr": 0.01,
+      "steps": 50,
+      "N": 100,
+      "auc": 0.5684947809629908,
+      "theta_raw_mean_abs": 0.17098119854927063,
+      "final_loss": 0.6528439521789551
+    },
+    {
+      "setting": "original (lr=0.01, steps=50)",
+      "lr": 0.01,
+      "steps": 50,
+      "N": 500,
+      "auc": 0.5759773428671469,
+      "theta_raw_mean_abs": 0.27761104702949524,
+      "final_loss": 0.6607478260993958
+    },
+    {
+      "setting": "more steps (lr=0.01, steps=500)",
+      "lr": 0.01,
+      "steps": 500,
+      "N": 10,
+      "auc": 0.56181485106989,
+      "theta_raw_mean_abs": 0.21466584503650665,
+      "final_loss": 0.24263836443424225
+    },
+    {
+      "setting": "more steps (lr=0.01, steps=500)",
+      "lr": 0.01,
+      "steps": 500,
+      "N": 100,
+      "auc": 0.6373872813237024,
+      "theta_raw_mean_abs": 0.7270873188972473,
+      "final_loss": 0.37749022245407104
+    },
+    {
+      "setting": "more steps (lr=0.01, steps=500)",
+      "lr": 0.01,
+      "steps": 500,
+      "N": 500,
+      "auc": 0.6745018731855926,
+      "theta_raw_mean_abs": 1.0882734060287476,
+      "final_loss": 0.4430372714996338
+    },
+    {
+      "setting": "higher lr (lr=0.05, steps=50)",
+      "lr": 0.05,
+      "steps": 50,
+      "N": 10,
+      "auc": 0.569556572869999,
+      "theta_raw_mean_abs": 0.18026980757713318,
+      "final_loss": 0.2669716775417328
+    },
+    {
+      "setting": "higher lr (lr=0.05, steps=50)",
+      "lr": 0.05,
+      "steps": 50,
+      "N": 100,
+      "auc": 0.6351231157661558,
+      "theta_raw_mean_abs": 0.6051375269889832,
+      "final_loss": 0.39318665862083435
+    },
+    {
+      "setting": "higher lr (lr=0.05, steps=50)",
+      "lr": 0.05,
+      "steps": 50,
+      "N": 500,
+      "auc": 0.6707311917587107,
+      "theta_raw_mean_abs": 0.9175240397453308,
+      "final_loss": 0.45508241653442383
+    },
+    {
+      "setting": "both (lr=0.05, steps=500)",
+      "lr": 0.05,
+      "steps": 500,
+      "N": 10,
+      "auc": 0.5677000980086201,
+      "theta_raw_mean_abs": 0.36311614513397217,
+      "final_loss": 0.20321069657802582
+    },
+    {
+      "setting": "both (lr=0.05, steps=500)",
+      "lr": 0.05,
+      "steps": 500,
+      "N": 100,
+      "auc": 0.6422702365819201,
+      "theta_raw_mean_abs": 1.1483559608459473,
+      "final_loss": 0.3701387345790863
+    },
+    {
+      "setting": "both (lr=0.05, steps=500)",
+      "lr": 0.05,
+      "steps": 500,
+      "N": 500,
+      "auc": 0.6794731636487618,
+      "theta_raw_mean_abs": 1.6143184900283813,
+      "final_loss": 0.435831218957901
+    },
+    {
+      "setting": "very long (lr=0.1, steps=2000)",
+      "lr": 0.1,
+      "steps": 2000,
+      "N": 10,
+      "auc": 0.571930652872253,
+      "theta_raw_mean_abs": 0.6100518703460693,
+      "final_loss": 0.20359838008880615
+    },
+    {
+      "setting": "very long (lr=0.1, steps=2000)",
+      "lr": 0.1,
+      "steps": 2000,
+      "N": 100,
+      "auc": 0.6444366744643452,
+      "theta_raw_mean_abs": 1.7864338159561157,
+      "final_loss": 0.36905521154403687
+    },
+    {
+      "setting": "very long (lr=0.1, steps=2000)",
+      "lr": 0.1,
+      "steps": 2000,
+      "N": 500,
+      "auc": 0.6829229704129118,
+      "theta_raw_mean_abs": 2.522047281265259,
+      "final_loss": 0.4345812201499939
+    }
+  ]
+}
