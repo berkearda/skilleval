@@ -1,0 +1,409 @@
+{
+ "bank_size": 161,
+ "assigned": 7653,
+ "unassigned": 1870,
+ "mean_skills_per_q": 1.0772246177969425,
+ "surviving_skills": 99,
+ "moved": 2189,
+ "group_pass": 97,
+ "group_total": 99,
+ "group_mean": 0.9351851851851852,
+ "per_skill": {
+  "analyze detective murder mystery scenarios": {
+   "n": 197,
+   "group": 0.9166666666666666
+  },
+  "assess truthfulness in nested claims": {
+   "n": 297,
+   "group": 0.8333333333333334
+  },
+  "assign team members to roles based on traits": {
+   "n": 241,
+   "group": 1.0
+  },
+  "calculate areas of geometric regions": {
+   "n": 88,
+   "group": 1.0
+  },
+  "calculate chemical solution properties": {
+   "n": 24,
+   "group": 0.9166666666666666
+  },
+  "calculate distances between geometric objects": {
+   "n": 4,
+   "group": 1.0
+  },
+  "calculate distances between points": {
+   "n": 12,
+   "group": 1.0
+  },
+  "calculate number of valid team combinations": {
+   "n": 21,
+   "group": 1.0
+  },
+  "calculate physical quantities in systems": {
+   "n": 6,
+   "group": 1.0
+  },
+  "calculate probabilities of discrete events": {
+   "n": 12,
+   "group": 1.0
+  },
+  "calculate properties of geometric figures": {
+   "n": 7,
+   "group": 1.0
+  },
+  "calculate quantum state properties": {
+   "n": 25,
+   "group": 1.0
+  },
+  "calculate values from mathematical expressions": {
+   "n": 9,
+   "group": 0.6666666666666666
+  },
+  "calculate volumes of geometric solids": {
+   "n": 10,
+   "group": 0.9166666666666666
+  },
+  "classify translation error type": {
+   "n": 244,
+   "group": 1.0
+  },
+  "complete the square for quadratic expressions": {
+   "n": 5,
+   "group": 1.0
+  },
+  "compose creative text with constraints": {
+   "n": 176,
+   "group": 1.0
+  },
+  "compose responses exclusively in specified languages": {
+   "n": 36,
+   "group": 0.9166666666666666
+  },
+  "compose structured written responses": {
+   "n": 108,
+   "group": 1.0
+  },
+  "compose structured written responses with placeholders": {
+   "n": 161,
+   "group": 0.5
+  },
+  "compose text with specific language requirements": {
+   "n": 21,
+   "group": 1.0
+  },
+  "compute sums of defined sequences": {
+   "n": 12,
+   "group": 1.0
+  },
+  "compute vector relationships using angles": {
+   "n": 5,
+   "group": 1.0
+  },
+  "count geometric configurations with constraints": {
+   "n": 6,
+   "group": 1.0
+  },
+  "count musical instruments in a list": {
+   "n": 53,
+   "group": 1.0
+  },
+  "count objects in list": {
+   "n": 258,
+   "group": 1.0
+  },
+  "count permutations with restrictions": {
+   "n": 15,
+   "group": 1.0
+  },
+  "count remaining items after removal by category": {
+   "n": 65,
+   "group": 1.0
+  },
+  "count seating arrangements with adjacency restrictions": {
+   "n": 4,
+   "group": 1.0
+  },
+  "create professional documents for job applications": {
+   "n": 7,
+   "group": 0.9166666666666666
+  },
+  "determine angle measures in geometry": {
+   "n": 11,
+   "group": 1.0
+  },
+  "determine chemical properties of materials": {
+   "n": 21,
+   "group": 1.0
+  },
+  "determine conditions for real solutions": {
+   "n": 14,
+   "group": 1.0
+  },
+  "determine dates from given references": {
+   "n": 230,
+   "group": 1.0
+  },
+  "determine dimensions of geometric shapes": {
+   "n": 15,
+   "group": 1.0
+  },
+  "determine dimensions of geometric solids": {
+   "n": 4,
+   "group": 0.9166666666666666
+  },
+  "determine eigenvalues of matrix operators": {
+   "n": 13,
+   "group": 1.0
+  },
+  "determine extreme values in geometry": {
+   "n": 17,
+   "group": 1.0
+  },
+  "determine final player position after swaps": {
+   "n": 9,
+   "group": 0.9166666666666666
+  },
+  "determine function properties from graphs": {
+   "n": 5,
+   "group": 0.9166666666666666
+  },
+  "determine geometric properties from coordinates": {
+   "n": 16,
+   "group": 1.0
+  },
+  "determine geometric relationships using coordinates": {
+   "n": 19,
+   "group": 1.0
+  },
+  "determine integer properties through factorization": {
+   "n": 8,
+   "group": 1.0
+  },
+  "determine interactions between physical entities": {
+   "n": 6,
+   "group": 1.0
+  },
+  "determine outcomes from experimental data": {
+   "n": 5,
+   "group": 0.5833333333333334
+  },
+  "determine outputs from algorithmic patterns": {
+   "n": 4,
+   "group": 0.6666666666666666
+  },
+  "determine polynomial degrees from equations": {
+   "n": 4,
+   "group": 1.0
+  },
+  "determine polynomial properties from roots": {
+   "n": 6,
+   "group": 1.0
+  },
+  "determine possible visit times": {
+   "n": 282,
+   "group": 0.8333333333333334
+  },
+  "determine pronoun antecedent": {
+   "n": 250,
+   "group": 1.0
+  },
+  "determine properties of complex numbers": {
+   "n": 18,
+   "group": 0.9166666666666666
+  },
+  "determine properties of physical systems": {
+   "n": 6,
+   "group": 1.0
+  },
+  "determine rational function properties": {
+   "n": 6,
+   "group": 1.0
+  },
+  "determine return to starting point after movements": {
+   "n": 253,
+   "group": 0.9166666666666666
+  },
+  "determine trigonometric values from equations": {
+   "n": 13,
+   "group": 1.0
+  },
+  "determine values from algebraic expressions": {
+   "n": 63,
+   "group": 0.8333333333333334
+  },
+  "determine variable values from equations": {
+   "n": 41,
+   "group": 0.9166666666666666
+  },
+  "determine vector line equations": {
+   "n": 4,
+   "group": 1.0
+  },
+  "evaluate boolean expressions with negations": {
+   "n": 261,
+   "group": 0.9166666666666666
+  },
+  "evaluate complex number expressions": {
+   "n": 11,
+   "group": 0.8333333333333334
+  },
+  "evaluate deductive validity of logical arguments": {
+   "n": 259,
+   "group": 1.0
+  },
+  "explain concepts using clear language": {
+   "n": 5,
+   "group": 0.8333333333333334
+  },
+  "extract data from tabular formats": {
+   "n": 10,
+   "group": 0.6666666666666666
+  },
+  "extract penguin attributes from tables": {
+   "n": 8,
+   "group": 0.8333333333333334
+  },
+  "find color of object right of another": {
+   "n": 73,
+   "group": 1.0
+  },
+  "find domain of function expressions": {
+   "n": 15,
+   "group": 0.6666666666666666
+  },
+  "find function values from functional equations": {
+   "n": 7,
+   "group": 1.0
+  },
+  "find inverse function expressions": {
+   "n": 4,
+   "group": 0.16666666666666666
+  },
+  "find movies similar to given examples": {
+   "n": 253,
+   "group": 0.9166666666666666
+  },
+  "find number of solutions to equations": {
+   "n": 9,
+   "group": 1.0
+  },
+  "find possible time intervals for visits": {
+   "n": 20,
+   "group": 1.0
+  },
+  "find probability of event": {
+   "n": 66,
+   "group": 1.0
+  },
+  "find range of functions": {
+   "n": 6,
+   "group": 0.9166666666666666
+  },
+  "find values in logarithmic equations": {
+   "n": 11,
+   "group": 0.75
+  },
+  "identify color of object": {
+   "n": 36,
+   "group": 1.0
+  },
+  "identify correct adjective order": {
+   "n": 250,
+   "group": 1.0
+  },
+  "identify molecular symmetry group from reaction description": {
+   "n": 10,
+   "group": 0.9166666666666666
+  },
+  "identify object locations in narratives": {
+   "n": 164,
+   "group": 0.75
+  },
+  "identify organic reaction products": {
+   "n": 296,
+   "group": 0.9166666666666666
+  },
+  "identify sarcastic statements": {
+   "n": 178,
+   "group": 1.0
+  },
+  "identify shape from svg path coordinates": {
+   "n": 250,
+   "group": 1.0
+  },
+  "infer object location from narrative": {
+   "n": 9,
+   "group": 1.0
+  },
+  "infer order from logical statements": {
+   "n": 804,
+   "group": 0.75
+  },
+  "judge causation from described scenarios": {
+   "n": 117,
+   "group": 1.0
+  },
+  "judge intentionality from described actions": {
+   "n": 17,
+   "group": 1.0
+  },
+  "judge sentence plausibility in sports context": {
+   "n": 250,
+   "group": 1.0
+  },
+  "optimize values of algebraic expressions": {
+   "n": 38,
+   "group": 0.75
+  },
+  "select humorous name edit": {
+   "n": 252,
+   "group": 1.0
+  },
+  "simplify radical expressions with integers": {
+   "n": 12,
+   "group": 1.0
+  },
+  "simplify trigonometric expressions with identities": {
+   "n": 10,
+   "group": 1.0
+  },
+  "solve equations involving complex numbers": {
+   "n": 14,
+   "group": 1.0
+  },
+  "solve optimization problems with constraints": {
+   "n": 31,
+   "group": 1.0
+  },
+  "solve trigonometric equations": {
+   "n": 8,
+   "group": 1.0
+  },
+  "track gift swaps in exchange": {
+   "n": 183,
+   "group": 1.0
+  },
+  "track item exchanges among people": {
+   "n": 361,
+   "group": 1.0
+  },
+  "track partner swaps in dance": {
+   "n": 252,
+   "group": 1.0
+  },
+  "track position swaps in soccer": {
+   "n": 113,
+   "group": 1.0
+  },
+  "write markdown formatted text": {
+   "n": 29,
+   "group": 1.0
+  },
+  "write poem about specific topic": {
+   "n": 6,
+   "group": 1.0
+  }
+ }
+}

@@ -1,0 +1,5945 @@
+{
+ "judge": "gemini-3.6-flash",
+ "results": [
+  {
+   "pair": [
+    "c_0005",
+    "c_0476"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0005",
+    "c_0523"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates formal symbolic boolean expressions using operator precedence rules, whereas Skill B sequentially propagates truth values along a chain of claims regarding the truthfulness or deceitfulness of entities.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0005",
+    "c_0569"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0005",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates boolean algebraic expressions using precedence and logical connectives, whereas Skill B checks a natural language assertion against stated text or context facts to determine if it is true or false.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0005",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Skill A computes logical truth values using boolean precedence operations, whereas Skill B performs information retrieval on text to locate named entities and extract their described attributes or spatial positions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_0129"
+   ],
+   "merge": false,
+   "rule": "Skill A applies Vieta's formulas and symmetric polynomial relations between coefficients and roots, whereas Skill B applies integer number theory operations such as modular arithmetic, prime factorization, GCD, or LCM.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_0172"
+   ],
+   "merge": false,
+   "rule": "Skill A applies Vieta's formulas and symmetric root identities to relate polynomial roots and coefficients, whereas Skill B substitutes strategic numerical or algebraic inputs into functional equations or composite functions to evaluate them.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_0215"
+   ],
+   "merge": false,
+   "rule": "Skill A uses symmetric functions of roots and Vieta's relations to bridge polynomial coefficients and roots, whereas Skill B simplifies or rewrites algebraic expressions using standard algebraic identities, expansion, or factorization.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_0232"
+   ],
+   "merge": false,
+   "rule": "Skill A relies specifically on Vieta's formulas connecting polynomial roots to coefficients, whereas Skill B solves for unknown parameters by equating corresponding coefficients of identical algebraic expressions or solving generic systems of equations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_0289"
+   ],
+   "merge": false,
+   "rule": "Skill A uses symmetric functions of roots and Vieta's polynomial relations, whereas Skill B operates specifically on complex numbers using properties like modulus, arguments, conjugates, or roots of unity.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_0428"
+   ],
+   "merge": false,
+   "rule": "Skill A manipulates polynomial roots and coefficients using Vieta's formulas, whereas Skill B computes spatial/geometric properties like point coordinates, inter-point distances, or locus equations in coordinate geometry.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_0655"
+   ],
+   "merge": false,
+   "rule": "Skill A uses Vieta's formulas to establish algebraic relations among polynomial roots and coefficients, whereas Skill B analyzes discriminants, domain/range limits, or system solvability criteria to determine valid parameter intervals or constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_0734"
+   ],
+   "merge": false,
+   "rule": "A applies Vieta's formulas or symmetric functions of roots to equate root combinations to polynomial coefficients, whereas B substitutes specific given points or functional conditions into an expression to construct and solve a system of equations for unknown parameters.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_0839"
+   ],
+   "merge": false,
+   "rule": "A manipulates symmetric functions of roots and polynomial coefficients, whereas B translates geometric properties (such as areas, lengths, or vector projections) into algebraic equations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_0922"
+   ],
+   "merge": false,
+   "rule": "A uses Vieta's formulas relating root expressions to coefficients, whereas B uses polynomial interpolation or finite difference techniques on given input-output pairs to determine the value of a polynomial at a target point.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_1133"
+   ],
+   "merge": false,
+   "rule": "A applies Vieta's formulas to establish relationships between root symmetric functions and polynomial coefficients, whereas B uses algebraic elimination or substitution to simultaneously satisfy a given system of equations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0009",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "A expresses polynomial coefficients in terms of symmetric root functions via Vieta's formulas, whereas B performs standard algebraic operations (such as term rearrangement, factoring, or applying exponent rules) to solve general equations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0019"
+   ],
+   "merge": false,
+   "rule": "A calculates spatial quantities using geometric formulas or coordinate distance functions, whereas B computes elapsed time or time differences using temporal subtraction and clock arithmetic.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0038"
+   ],
+   "merge": false,
+   "rule": "Solver in A computes quantitative spatial metrics (e.g., lengths, areas, volumes) via geometric formulas, whereas solver in B evaluates the factual accuracy of propositions by checking them against biological domain knowledge.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0059"
+   ],
+   "merge": false,
+   "rule": "Solver in A calculates geometric dimensions using spatial formulas and coordinate equations, whereas solver in B analyzes number-theoretic properties like prime factorizations, GCDs, and LCMs to solve discrete integer constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0080"
+   ],
+   "merge": false,
+   "rule": "Solver in A derives geometric measurements using spatial theorems and equations, whereas solver in B performs arithmetic addition on explicit numerical values extracted directly from text or data tables.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0103"
+   ],
+   "merge": false,
+   "rule": "Solver in A solves for continuous or spatial geometric measurements using geometric formulas, whereas solver in B computes remainders, residues, or inverses using modular congruence arithmetic under an integer modulus.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0129"
+   ],
+   "merge": false,
+   "rule": "Solver in A calculates quantitative geometric dimensions using spatial formulas, whereas solver in B identifies values satisfying repeating periodic cycles or divisibility rules via common multiples and divisors.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0133"
+   ],
+   "merge": false,
+   "rule": "Solver in A calculates scalar metric values (such as lengths, areas, or distances) using geometric formulas, whereas solver in B parses sequential vector path commands to identify and classify the visual figure formed.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0218"
+   ],
+   "merge": false,
+   "rule": "Solver in A calculates numerical scalar quantities (such as lengths, areas, or distances) using geometric formulas, whereas solver in B tracks a sequence of directional displacements to check whether the accumulated net vector displacement equals zero (returning to the start point).",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0255"
+   ],
+   "merge": false,
+   "rule": "Solver in A calculates quantitative geometric dimensions (such as area, distance, or perimeter) via algebraic formulas, whereas solver in B analyzes vertex sequences and path structures to classify an object into a shape category.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0428"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "Solver in A applies geometric formulas or spatial equations to derive quantitative measurements, whereas solver in B excludes elements from a discrete collection based on target criteria and counts the remaining items.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Solver in A calculates explicit quantitative measurements using geometric or algebraic equations, whereas solver in B evaluates a system of qualitative or comparative relational statements to deduce the relative or absolute position of elements.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0714"
+   ],
+   "merge": false,
+   "rule": "Solver in A calculates quantitative geometric measurements using formulas, whereas solver in B performs comparative evaluation across a set of values or positions to identify the extreme or maximum value.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "c_0011 performs mathematical computations on geometric figures to yield numerical spatial values, whereas c_0731 evaluates logical statements or conditions to determine a boolean truth value.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0773"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0828"
+   ],
+   "merge": false,
+   "rule": "c_0011 performs quantitative geometric calculations, whereas c_0828 duplicates string text from the prompt verbatim without mathematical processing.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0839"
+   ],
+   "merge": false,
+   "rule": "c_0011 directly evaluates geometric formulas to calculate specific quantitative values, whereas c_0839 translates geometric properties into vector or algebraic equations and manipulates those systems to solve for unknown parameters.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0860"
+   ],
+   "merge": false,
+   "rule": "c_0011 applies spatial metric formulas to geometric shapes, whereas c_0860 establishes proportional ratios and unit rates to scale general non-spatial quantities.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0890"
+   ],
+   "merge": false,
+   "rule": "c_0011 computes geometric measurements using spatial formulas, whereas c_0890 performs calendar arithmetic by tracking days and shifting dates according to calendar structure rules.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Skill A applies geometric or spatial formulas to compute continuous quantitative magnitudes (e.g., area, distance), whereas Skill B processes relational ordering constraints to determine the ordinal rank of an item in a linear sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Skill A applies mathematical or spatial formulas to calculate a geometric measurement, whereas Skill B compares a derived result or retrieved fact against multiple-choice options to select the matching answer choice.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates mathematical formulas to calculate quantitative geometric properties, whereas Skill B applies symbolic or formal logic rules to evaluate whether a conclusion validly follows from quantified premises.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Skill A performs mathematical calculations on geometric dimensions or coordinates, whereas Skill B parses text passages to locate mentioned entities and extract their explicitly stated attributes.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1133"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates explicit geometric formulas to calculate specific magnitudes like area or distance, whereas Skill B performs algebraic manipulations (e.g., elimination, substitution, or root-finding) to solve simultaneous systems of equations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1150"
+   ],
+   "merge": false,
+   "rule": "Skill A uses spatial formulas to compute geometric dimensions or distances, whereas Skill B applies modular calendar arithmetic to shift a baseline date forward or backward by a temporal offset.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "c_1198 requires factorizing integers into prime bases and computing their exponents, whereas c_0011 applies spatial formulas to calculate geometric magnitudes such as lengths, areas, or volumes.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1214"
+   ],
+   "merge": false,
+   "rule": "c_1214 requires identifying or parameterizing integer triples satisfying a^2 + b^2 = c^2, whereas c_0011 calculates continuous spatial metrics like distances, areas, or volumes of geometric figures.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1220"
+   ],
+   "merge": false,
+   "rule": "c_1220 compares linear slopes or direction vectors to evaluate orientation relationships (parallelism or perpendicularity), whereas c_0011 calculates scalar spatial measurements such as distances, lengths, or areas.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "c_1442 performs algebraic variable isolation, substitution, or system manipulation to solve for unknown variables, whereas c_0011 evaluates spatial metric formulas to compute geometric quantities like area, volume, or distance.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "c_1497 parses sequential execution commands (e.g., directional drawing paths) to classify shape identities, whereas c_0011 computes numerical metric dimensions of shapes.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "c_1564 performs tabular retrieval to look up schedule entries in timetables, whereas c_0011 applies mathematical formulas to calculate geometric dimensions or distances.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1693"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0019",
+    "c_0103"
+   ],
+   "merge": false,
+   "rule": "Calculating temporal offsets performs arithmetic subtraction on time points to find elapsed time, whereas evaluating modular arithmetic expressions computes remainders and congruences relative to an integer modulus.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0019",
+    "c_0347"
+   ],
+   "merge": false,
+   "rule": "Calculating temporal offsets evaluates the difference between two given points in time, whereas identifying temporal gaps scans across a sequence of scheduled event intervals to locate unscheduled time windows between consecutive events.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0019",
+    "c_0890"
+   ],
+   "merge": false,
+   "rule": "Calculating temporal offsets performs direct subtraction between two clock times, whereas calculating date and time intervals steps forward or backward through calendar structures while applying variable month length and leap year rules.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0019",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Calculating temporal offsets performs numeric subtraction on temporal values, whereas identifying positional ranks resolves transitive and relative relational constraints to place discrete items in sequential order.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0019",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Calculating temporal offsets performs arithmetic to determine elapsed time, whereas selecting an option matches a calculated value or retrieved fact against a list of multiple-choice choices.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0019",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Calculating temporal offsets computes the difference between two time points, whereas evaluating and summing multiple values computes individual mathematical terms and adds them together.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0019",
+    "c_1150"
+   ],
+   "merge": false,
+   "rule": "Calculating temporal offsets solves for an unknown interval given two fixed time points, whereas calculating relative calendar dates applies a known temporal offset to a starting date to calculate a new target date.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0019",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "Calculating temporal offsets performs time-based arithmetic difference calculations, whereas solving algebraic equations requires symbolic variable manipulation and algebraic simplification or substitution.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0019",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "Calculating temporal offsets requires mathematical computation of time differences, whereas retrieving transit schedule information involves table/text lookup to extract explicitly stated facts without temporal arithmetic.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0064"
+   ],
+   "merge": false,
+   "rule": "Evaluating relational statements for item ordering requires logical deduction from explicitly provided directional or comparative premises, whereas evaluating adjective sequence correctness requires recalling and applying implicit grammatical rules governing adjective order in English.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0132"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "Skill A involves deducing linear item sequence positions from comparative constraints, whereas Skill B involves set filtering by categorical criteria followed by counting remaining elements.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0711"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "Skill A deduces static relative or absolute positions from simultaneous relational constraints, whereas Skill B sequentially tracks dynamic state changes and item transfers across a chronological series of events.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0880"
+   ],
+   "merge": false,
+   "rule": "Skill A solves static constraint satisfaction to establish linear sequence order, whereas Skill B executes step-by-step state simulation of sequential movements or swaps over time.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0891"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Skill A involves inferring linear or spatial sequence positions from directional/comparative statements, whereas Skill B involves determining logical validity of syllogistic arguments using quantified premises (e.g., all, some, none).",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0028",
+    "c_0216"
+   ],
+   "merge": false,
+   "rule": "Updating tabular data requires executing sequential insertion and deletion operations to modify a structured data object, whereas calculating outcome probabilities requires applying combinatorial counting formulas to determine the ratio of favorable to total outcomes.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0028",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Updating tabular data involves executing procedural instructions to mutate structured records, whereas evaluating deductive validity involves determining whether a conclusion logically follows from quantified premises using formal deductive logic.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0028",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Updating tabular data requires performing insertion and deletion structural edits on a dataset, whereas evaluating and summing multiple values requires evaluating numerical conditions or expressions and calculating their total arithmetic sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0034",
+    "c_0347"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0034",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Identifying missing chronological intervals requires calculating the unoccupied complement of a set of known bounded intervals along a single continuous axis, whereas identifying relative position requires integrating comparative relational statements to deduce the position of discrete items.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0034",
+    "c_0952"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_0185"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_0251"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_0469"
+   ],
+   "merge": false,
+   "rule": "Evaluating biological mechanisms requires retrieving and applying scientific domain knowledge to verify statement accuracy, whereas tracking item possession requires sequentially updating state mappings of object locations across a temporal series of transfer events.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "Evaluating biological mechanisms involves assessing the factual validity of scientific propositions, whereas counting filtered items involves applying set inclusion/exclusion criteria to a group of objects and calculating the cardinality of the remaining set.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_0676"
+   ],
+   "merge": false,
+   "rule": "Evaluating biological mechanisms requires verifying the factual truth of qualitative assertions about cellular or physiological processes, whereas interpreting patterns of inheritance involves calculating quantitative probabilities, linkage distances, or recombination frequencies from pedigree or genomic data.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_0828"
+   ],
+   "merge": false,
+   "rule": "Evaluating biological mechanisms requires domain-specific factual reasoning and validation, whereas replicating prompt text requires verbatim string duplication subject to output-formatting structural constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "A requires retrieving domain knowledge to evaluate the factual truth of biological propositions, whereas B requires analyzing linear or spatial relational constraints to determine an element's rank or position in a sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_0914"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating the factual validity of biological assertions using domain knowledge, whereas B requires selecting the multiple-choice option that matches an already derived value or retrieved piece of information.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "A requires applying scientific domain knowledge to judge proposition accuracy, whereas B requires scanning text to extract an attribute explicitly linked to a target item.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "A requires verifying biological claims using domain knowledge, whereas B requires reading and extracting target values from structured timetable or schedule data.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_0129"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_0147"
+   ],
+   "merge": false,
+   "rule": "A decomposes integers into prime power factorizations to manipulate prime exponents or divisor counting formulas, whereas B applies modular arithmetic congruences or digit-based divisibility tests.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_0289"
+   ],
+   "merge": false,
+   "rule": "A operates on integer prime factorizations and divisor properties in number theory, whereas B operates on complex numbers using imaginary units, polar representations, modulus, or roots of unity.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_0303"
+   ],
+   "merge": false,
+   "rule": "A analyzes prime factor structures independently of base representations, whereas B extracts or analyzes positional base-10 digits and place-value structures.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_0454"
+   ],
+   "merge": false,
+   "rule": "A computes counts using prime power exponent formulas and divisor functions, whereas B computes counts using general combinatorial methods such as permutations, combinations, or set partitions.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_0496"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_0693"
+   ],
+   "merge": false,
+   "rule": "A analyzes prime factorizations and multiplicative integer structures, whereas B executes the step-by-step long division algorithm to compute quotients and remainders.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Skill A analyzes multiplicative integer structure through prime factorizations, GCDs, LCMs, or divisors, whereas Skill B evaluates explicit expressions into individual numerical values and computes their sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_1195"
+   ],
+   "merge": false,
+   "rule": "Skill A applies prime factorization and divisor arithmetic to analyze integer properties, whereas Skill B applies recurrences, index formulas, or periodicity rules to evaluate terms in a sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "Skill A computes overall counts, GCDs, or LCMs using complete divisor/factor structures, whereas Skill B calculates the explicit exponent multiplicity of a specific prime factor within factorials or large products.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_1365"
+   ],
+   "merge": false,
+   "rule": "Skill A counts valid integers by analyzing prime factorizations and divisor structures, whereas Skill B counts valid integers using modular congruences, range bounds, or digit properties.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "Skill A solves integer problems using prime factor decomposition and multiplicative number theory, whereas Skill B solves for unknown variables using algebraic transformations such as substitution, elimination, or system manipulation.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "Skill A determines discrete counts or integer values through prime factor and divisor analysis, whereas Skill B applies inequalities or calculus/bounding techniques to find the maximum or minimum value of a function.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_0133"
+   ],
+   "merge": false,
+   "rule": "Evaluating adjective sequence correctness requires applying linguistic rules of pre-nominal modifier hierarchy to textual phrases, whereas identifying shapes from vector path data requires parsing 2D coordinate commands to reconstruct geometric geometry.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_0149"
+   ],
+   "merge": false,
+   "rule": "Evaluating adjective sequence correctness requires checking word order against grammatical modifier ordering rules, whereas evaluating lexical similarity requires measuring orthographic, phonetic, or string-edit proximity between words or phrases.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "Evaluating adjective sequence correctness requires validating text against syntactic ordering conventions, whereas counting items after filtering requires set subtraction on a collection based on attribute filters and calculating the resulting set size.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Evaluating adjective sequence correctness requires validating word order against static grammatical ordering conventions, whereas identifying relative position from constraints requires solving a system of relational logical conditions to deduce item positions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_0779"
+   ],
+   "merge": false,
+   "rule": "Evaluating adjective sequence correctness requires analyzing monolingual noun phrases against grammatical syntax rules, whereas identifying error types in translated text requires cross-lingual comparison of source and target texts to categorize semantic discrepancies.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Evaluating adjective sequence correctness requires verifying that modifiers follow standard semantic-grammatical sequence conventions, whereas identifying positional ranks requires resolving transitive relational logic clues to compute an item's specific numeric or ordinal index.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Solvers of A categorize adjectives into syntactic classes (e.g., opinion, size, color) to verify if their sequence follows standard grammatical order rules, whereas solvers of B retrieve or calculate a target state/fact and match it to a target choice without evaluating grammatical ordering.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Solvers of A evaluate a series of adjectives against standard syntactic order rules, whereas solvers of B apply formal deductive inference rules to quantified premises to determine logical validity.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Solvers of A evaluate whether a list of adjectives follows syntactic ordering constraints, whereas solvers of B scan a text passage to locate a target entity and extract its directly stated attributes or spatial relations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_1725"
+   ],
+   "merge": false,
+   "rule": "Solvers of A evaluate a sequence of adjectives against syntactic order rules, whereas solvers of B perform pairwise text comparison across two versions to detect and classify translation discrepancies.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0068",
+    "c_0218"
+   ],
+   "merge": false,
+   "rule": "Solvers of A track state variables across execution steps to evaluate a boolean guard condition for loop exit, whereas solvers of B perform vector addition of directional steps to test whether cumulative spatial displacement equals zero.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0068",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Solvers of A simulate iterative state updates to identify when a termination condition is met, whereas solvers of B integrate multiple pairwise comparative constraints to determine an item's position in an ordered structure.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0068",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Evaluating loop termination requires iteratively simulating state transitions until a halting condition is met, whereas identifying the truth value of a proposition evaluates a logical predicate directly against a given state or text without iterative state execution.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0068",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Evaluating loop termination involves tracking dynamic state changes across repeated function calls or loop cycles to find a halting point, whereas identifying positional ranks involves applying transitive order constraints to deduce relative or absolute positions in a static linear sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0080",
+    "c_0084"
+   ],
+   "merge": false,
+   "rule": "Summing explicit numerical quantities performs direct addition on explicitly listed numbers, whereas sequence progression calculation applies closed-form algebraic series formulas (e.g., arithmetic or geometric progression formulas) or recurrence relations to derive totals or terms.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0080",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "Summing explicit numerical quantities executes basic arithmetic addition on given values, whereas calculating angle measures and trig ratios requires applying geometric theorems, spatial symmetry, and trigonometric identities to solve for unknown geometric values.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0080",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Summing explicit numerical quantities adds numbers directly present in the source material, whereas evaluating and summing requires first evaluating expressions, functions, or conditional rules to compute the value of each term before adding them together.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0080",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "Summing explicit numerical quantities calculates the total of explicit numerical inputs via addition, whereas solving algebraic equations manipulates expressions containing unknown variables or parameters to isolate and solve for unknowns.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0080",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "c_0080 performs addition on a set of explicit numerical values extracted from text or tables to find a total sum, whereas c_1693 evaluates formulas or solves constraint equations to compute an unknown numerical value.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0084",
+    "c_0102"
+   ],
+   "merge": false,
+   "rule": "c_0084 applies standard arithmetic and geometric progression formulas, whereas c_0102 analyzes multi-term or alternating recurrence relations to detect periodic patterns or derive closed-form expressions.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0084",
+    "c_0129"
+   ],
+   "merge": false,
+   "rule": "c_0084 applies sequence progression formulas to find terms or sums, whereas c_0129 applies number-theoretic operations such as prime factorization, GCD/LCM, or modular arithmetic to solve divisibility and cycle constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0084",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "c_0084 uses algebraic formulas to evaluate discrete number sequences, whereas c_0773 applies geometric theorems and trigonometric identities to compute angle measures and side ratios.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0084",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "c_0084 applies closed-form arithmetic and geometric sequence formulas, whereas c_1102 individually evaluates separate numerical expressions across multiple given conditions and sums the resulting values.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0084",
+    "c_1195"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0084",
+    "c_1253"
+   ],
+   "merge": false,
+   "rule": "Skill A applies closed-form algebraic formulas for arithmetic or geometric progressions, whereas Skill B evaluates nested recursive fraction expansions or convergent recurrences.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0085",
+    "c_0129"
+   ],
+   "merge": false,
+   "rule": "Skill A calculates event likelihoods or expected values using probability measures, whereas Skill B uses number-theoretic operations such as modular arithmetic, GCD/LCM, and prime factorizations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0085",
+    "c_0185"
+   ],
+   "merge": false,
+   "rule": "Skill A performs mathematical probability and expectation calculations, whereas Skill B traces biological mechanisms to analyze how genetic mutations affect gene expression, protein function, or phenotypic traits.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0085",
+    "c_0216"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0085",
+    "c_0260"
+   ],
+   "merge": false,
+   "rule": "Skill A computes classical expectations using probability distributions or outcome ratios, whereas Skill B applies quantum mechanical linear algebra operators, state vectors, and bra-ket projections.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0085",
+    "c_0676"
+   ],
+   "merge": false,
+   "rule": "Skill A computes probabilities directly from defined mathematical outcome spaces, whereas Skill B parses biological transmission models (such as pedigrees, gene linkage, and recombination maps) to deduce inheritance probabilities.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0085",
+    "c_0721"
+   ],
+   "merge": false,
+   "rule": "c_0721 computes counts of multiset selections using combinations-with-repetition formulas (such as stars-and-bars), whereas c_0085 calculates event probabilities as ratios of outcomes or expected values as probability-weighted sums.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0085",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "c_1102 evaluates explicit numerical or algebraic expressions across multiple given conditions and sums them, whereas c_0085 calculates probability ratios or probability-weighted expectations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0085",
+    "c_1195"
+   ],
+   "merge": false,
+   "rule": "c_1195 evaluates sequence terms, patterns, or recurrence relations to derive discrete sequence properties, whereas c_0085 calculates probabilities or expected values over sample spaces.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0085",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "c_1198 determines prime factor multiplicities and exponents (e.g., using prime decomposition or Legendre's formula), whereas c_0085 calculates probabilities or expected values.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0094",
+    "c_0115"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0094",
+    "c_0476"
+   ],
+   "merge": false,
+   "rule": "c_0476 evaluates a boolean logic expression to a single truth value by applying operator precedence to variable truth assignments, whereas c_0094 evaluates logical argument entailment to determine if a conclusion necessarily follows from premises.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0094",
+    "c_1049"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0102",
+    "c_0269"
+   ],
+   "merge": false,
+   "rule": "Skill A requires algebraically manipulating or solving recurrence relations to find closed-form terms or sums, whereas Skill B requires identifying cycle lengths and performing periodic mapping or modular index reduction.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0102",
+    "c_1195"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_0129"
+   ],
+   "merge": false,
+   "rule": "Skill A directly evaluates arithmetic expressions or modular inverses under a specified modulus, whereas Skill B computes greatest common divisors, least common multiples, or prime factorizations to find unknown values satisfying divisibility constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_0147"
+   ],
+   "merge": false,
+   "rule": "Skill A calculates a specific residue or modular inverse for an expression, whereas Skill B uses combinatorial logic to count or enumerate integers and digit combinations that satisfy divisibility rules.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_0269"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates algebraic expressions under explicit modular arithmetic rules, whereas Skill B identifies the empirical or functional period length of a repeating system to map indices to cycle positions.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_0289"
+   ],
+   "merge": false,
+   "rule": "A requires reducing integer expressions modulo a fixed integer using congruence properties and residue arithmetic, whereas B requires manipulating complex numbers using imaginary units, conjugate pairs, polar forms, or roots of unity.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_0454"
+   ],
+   "merge": false,
+   "rule": "A requires performing arithmetic operations modulo an integer to determine a numerical residue or inverse, whereas B requires applying combinatorial counting principles to determine the total count of valid arrangements or configurations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_0693"
+   ],
+   "merge": false,
+   "rule": "A requires simplifying expressions using modular congruence properties and residue arithmetic, whereas B requires executing the digit-by-digit long division algorithm to compute quotients and remainders.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_0890"
+   ],
+   "merge": false,
+   "rule": "A requires performing arithmetic under a fixed integer modulus, whereas B requires tracking accumulated time across non-uniform calendar boundaries such as variable month lengths and leap years.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating integer expressions under modular arithmetic, whereas B requires resolving transitive or spatial relational clues to determine an item's position in an ordered sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "A requires performing congruence calculations to derive a residue or modular inverse, whereas B requires matching a derived result or fact to its corresponding choice from a list of options.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_1150"
+   ],
+   "merge": false,
+   "rule": "c_0103 applies algebraic congruence arithmetic under a fixed integer modulus, whereas c_1150 performs additions or subtractions across non-uniform, piecewise calendar boundaries (such as varying month lengths and leap years).",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_1195"
+   ],
+   "merge": false,
+   "rule": "c_0103 computes remainder classes and modular inverses under modular congruences, whereas c_1195 evaluates term-to-term recurrences, closed-form summation formulas, or structural properties of indexed sequences.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0103",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "c_0103 evaluates expressions under modular arithmetic congruences, whereas c_1198 computes prime-power valuations (v_p(n)) through integer prime factorization or prime counting formulas like Legendre's formula.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0111",
+    "c_1033"
+   ],
+   "merge": false,
+   "rule": "c_0111 maps spectral peaks, chemical shifts, and splitting patterns to molecular graph structures using structural correlation rules, whereas c_1033 applies continuous quantitative physical equations (such as Doppler shift, Stefan-Boltzmann law, or distance modulus) to spectral line profiles and brightness metrics.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0111",
+    "c_1061"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0111",
+    "c_1075"
+   ],
+   "merge": false,
+   "rule": "c_0111 deduces molecular structure from radiation-matter interaction data, whereas c_1075 selects chemical reagents and reaction pathways to achieve functional group transformations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0111",
+    "c_1368"
+   ],
+   "merge": false,
+   "rule": "Interpreting spectroscopic data requires mapping empirical spectral signals (e.g., peak positions, splitting patterns, chemical shifts) to molecular fragments, whereas evaluating molecular chirality requires analyzing 3D stereocenters and geometric symmetry elements (such as mirror planes or inversion centers).",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0112",
+    "c_0309"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0112",
+    "c_1265"
+   ],
+   "merge": false,
+   "rule": "Troubleshooting experimental setups requires fault diagnosis to identify procedural or technical errors causing an unexpected failure, whereas interpreting experimental outcomes requires inferential reasoning from valid assay readout data to conclude a biological state or mechanism.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0115",
+    "c_0276"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0115",
+    "c_0476"
+   ],
+   "merge": false,
+   "rule": "Evaluating boolean logic expressions requires reducing truth-functional connectives using operator precedence to determine a binary truth value, whereas identifying a perpetrator requires constraint satisfaction and process-of-elimination across discrete entities based on narrative clues.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0115",
+    "c_0708"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0115",
+    "c_0711"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0115",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "c_0854 requires sequentially updating dynamic states through a chronological series of step-by-step events, whereas c_0115 requires evaluating static relational constraints to deduce entity assignments.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0115",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "c_1049 evaluates the formal validity of quantified logical statements (involving terms like all, some, or none), whereas c_0115 integrates relational constraints to solve a concrete matching or elimination problem.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0118",
+    "c_0119"
+   ],
+   "merge": false,
+   "rule": "c_0119 requires mapping values or equations across different coordinate systems or mathematical frameworks (such as converting polar to Cartesian), whereas c_0118 applies identity rewrite rules to simplify or solve equations within a single system.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0118",
+    "c_0129"
+   ],
+   "merge": false,
+   "rule": "c_0129 utilizes discrete number-theoretic principles such as modular cycles, divisibility, or prime factorizations, whereas c_0118 applies functional identities and algebraic transformations to simplify or solve continuous relations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0118",
+    "c_0215"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0118",
+    "c_0289"
+   ],
+   "merge": false,
+   "rule": "Skill A involves applying periodic and angle-addition functional identities to simplify expressions or solve for unknown angles, whereas Skill B involves applying complex-field operations (such as conjugation, modulus computation, and roots-of-unity properties) to solve equations or simplify expressions involving complex numbers.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0118",
+    "c_0428"
+   ],
+   "merge": false,
+   "rule": "Skill A applies symbolic trigonometric identities and algebraic transformations to solve pure trigonometric equations, whereas Skill B projects geometric configurations onto a coordinate frame to derive and solve system equations for unknown spatial coordinates, distances, or loci.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0118",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "Skill A performs symbolic identity transformations to simplify or solve equations in terms of trigonometric functions, whereas Skill B applies geometric theorems and spatial properties (such as triangle angle sums, congruence, or symmetry) to calculate specific numerical angle values or geometric ratios.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0119",
+    "c_0215"
+   ],
+   "merge": false,
+   "rule": "Skill A maps expressions or equations across different mathematical frameworks using explicit translation formulas (such as converting between Cartesian and polar coordinates or trigonometric and algebraic forms), whereas Skill B applies intra-framework algebraic laws (such as expansion, factoring, or collecting like terms) to simplify an expression.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0119",
+    "c_0428"
+   ],
+   "merge": false,
+   "rule": "Skill A re-encodes a given mathematical object or equation from one coordinate/representation system into another, whereas Skill B formulates and solves algebraic/trigonometric equations derived from geometric configurations to calculate specific spatial dimensions or coordinates.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0119",
+    "c_0839"
+   ],
+   "merge": false,
+   "rule": "Skill A transforms an existing equation or expression between representation frameworks (e.g., polar to Cartesian), whereas Skill B translates geometric conditions (such as area, orthogonality, or projections) into vector or algebraic equations to solve for unknown parameters.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_0149"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating whether a single-word alteration creates a pun or wordplay effect relative to a base phrase, whereas B requires measuring or comparing string or phonetic similarity between lexical items without assessing humor or semantic wordplay.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_0200"
+   ],
+   "merge": false,
+   "rule": "A requires selecting from options a phrase containing a wordplay-creating single-word modification, whereas B requires drafting text that satisfies explicit structural, lexical, or formatting inclusion and exclusion rules.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_0281"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating options to identify a single-word alteration that forms a pun, whereas B requires generating original creative text while adhering to multiple explicit formatting or lexical constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_0379"
+   ],
+   "merge": false,
+   "rule": "A requires identifying an option that creates a pun via single-word modification, whereas B requires drafting original text that adopts a specified persona while conforming to explicit structural rules.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_0468"
+   ],
+   "merge": false,
+   "rule": "A requires selecting an option that achieves wordplay via single-word substitution, whereas B requires formatting generated text to satisfy explicit casing, punctuation, delimiter, or structural constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_0585"
+   ],
+   "merge": false,
+   "rule": "A requires recognizing phonetic or lexical wordplay where a single word is substituted to create a pun, whereas B requires analyzing pragmatic irony to identify statements that express the opposite of their literal meaning.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_0643"
+   ],
+   "merge": false,
+   "rule": "Skill A requires evaluating multiple-choice candidate options to identify a humorous wordplay edit or pun, whereas Skill B requires generating original multi-sentence text that adheres to explicit lexical and structural formatting constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_0828"
+   ],
+   "merge": false,
+   "rule": "Skill A requires selecting an option containing a single-word pun or alteration, whereas Skill B requires copying a specified portion of the prompt verbatim to the beginning of the generated response.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_1521"
+   ],
+   "merge": false,
+   "rule": "Skill A requires selecting a candidate option that creates a single-word pun or phonetic shift, whereas Skill B requires rewriting an entire provided text to match a specified style or tone under mechanical constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_1598"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0147"
+   ],
+   "merge": false,
+   "rule": "Skill A requires determining a specific unknown target value using least common multiples, greatest common divisors, or cycle lengths, whereas Skill B requires calculating the total count of integers within a range or set that satisfy given divisibility or modular conditions.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0166"
+   ],
+   "merge": false,
+   "rule": "Skill A requires applying number-theoretic operations such as LCM, GCD, or modular arithmetic to find numerical values, whereas Skill B requires step-by-step tracking of discrete item positions through a sequence of explicit permutations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0172"
+   ],
+   "merge": false,
+   "rule": "The solver performs algebraic substitution and equation manipulation on functional expressions, whereas in the other pair the solver applies integer number-theoretic operations such as LCM, GCD, or prime factorization.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0216"
+   ],
+   "merge": false,
+   "rule": "The solver calculates a probability ratio by dividing favorable outcome counts by total outcome counts, whereas in the other pair the solver solves for a specific deterministic value using divisibility or periodicity constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0269"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0289"
+   ],
+   "merge": false,
+   "rule": "The solver applies complex-number operations such as polar representation, roots of unity, or complex modulus, whereas in the other pair the solver uses real integer arithmetic properties like GCD, LCM, or prime factors.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0454"
+   ],
+   "merge": false,
+   "rule": "The solver counts the total quantity of valid arrangements or configurations, whereas in the other pair the solver calculates a specific unknown number constrained by divisibility or modular cycle conditions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0469"
+   ],
+   "merge": false,
+   "rule": "The solver sequentially tracks and updates ownership state across explicit transfer steps, whereas in the other pair the solver computes an unknown value using mathematical periodicity or divisibility rules.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0476"
+   ],
+   "merge": false,
+   "rule": "Skill A requires applying number-theoretic principles (such as LCM, GCD, or prime factorization) to compute numerical or cyclic values, whereas Skill B requires evaluating compound boolean logic propositions using standard logical connectives and operator precedence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0496"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0523"
+   ],
+   "merge": false,
+   "rule": "Skill A solves for values using modular cycles, divisibility, or prime factors, whereas Skill B tracks and resolves logical truth values through a chain of statements evaluating whether agents or propositions are truthful or deceitful.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0693"
+   ],
+   "merge": false,
+   "rule": "Skill A applies structural number-theoretic properties to constrain or derive unknown values, whereas Skill B mechanically executes the multi-step arithmetic algorithm of long division to determine a quotient and remainder.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Skill A computes numerical values using arithmetic divisibility and repeating cycles, whereas Skill B deduce spatial, temporal, or ordinal positions of entities by integrating relational ordering constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "Skill A applies discrete number-theoretic properties such as GCD, LCM, and prime factorizations, whereas Skill B applies geometric theorems and trigonometric functions to calculate continuous angle measures and trigonometric ratios.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "Skill A applies discrete number-theoretic operations (such as modular arithmetic, LCM/GCD, or prime factorization) to identify unknown parameters, whereas Skill B sequentially updates state variables to track entity locations or assignments across a step-by-step timeline.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_0860"
+   ],
+   "merge": false,
+   "rule": "Skill A uses integer modular arithmetic and divisibility properties to resolve periodic or prime-factor constraints, whereas Skill B sets up continuous linear equations based on multiplicative rates and proportions.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1019"
+   ],
+   "merge": false,
+   "rule": "Skill A identifies specific discrete values that satisfy periodicity or divisibility rules, whereas Skill B optimizes a functional expression to find its maximum or minimum value given boundary constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Skill A performs mathematical calculations using number theory, whereas Skill B analyzes logical argument structures containing quantifiers to evaluate formal validity.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Skill A uses modular arithmetic or number-theoretic constraints to deduce unknown periodic parameters, whereas Skill B explicitly evaluates multiple individual terms and computes their arithmetic sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1133"
+   ],
+   "merge": false,
+   "rule": "Skill A solves for discrete targets using divisibility, prime factorization, or modular cycles, whereas Skill B uses algebraic transformations (such as elimination or substitution) to solve systems of continuous equations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1195"
+   ],
+   "merge": false,
+   "rule": "Skill A applies number-theoretic operations (GCD, LCM, modular arithmetic) to find a specific unknown value, whereas Skill B calculates terms, sums, or recurrence relations on an indexed sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "Skill B calculates the exponent (multiplicity/p-adic valuation) of a specific prime in a number or product, whereas Skill A finds an unknown integer or time using GCD, LCM, or modular cycle alignment.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1253"
+   ],
+   "merge": false,
+   "rule": "Skill B evaluates or converts nested continued fraction expressions, whereas Skill A uses GCD, LCM, prime factorization, or periodic cycles to solve for an unknown integer or coordinate.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1338"
+   ],
+   "merge": false,
+   "rule": "Skill B simplifies a known fraction by dividing numerator and denominator by their greatest common divisor, whereas Skill A solves for an unknown value subject to divisibility or periodicity conditions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1365"
+   ],
+   "merge": false,
+   "rule": "Skill B calculates the total count (cardinality) of integers satisfying specified bounds or conditions, whereas Skill A solves for a single specific target value.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1386"
+   ],
+   "merge": false,
+   "rule": "Skill B calculates total event counts by aggregating frequencies across pairwise combinations of set elements, whereas Skill A finds an unknown value using LCM, GCD, or periodic cycle rules.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0129",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "Skill A requires applying number-theoretic operations (such as computing GCD/LCM, prime factorizations, or modular congruences) on discrete integer constraints, whereas Skill B requires applying algebraic equality transformations (such as substitution, elimination, or expanding polynomial expressions) to solve equations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0130",
+    "c_1630"
+   ],
+   "merge": false,
+   "rule": "Skill A uses cyclic shift and linearity identities specific to the trace operator (e.g., Tr(AB) = Tr(BA)) to simplify trace expressions, whereas Skill B evaluates scalar matrix invariants (such as determinants) or verifies structural definitions (such as symmetry, hermiticity, or unitarity).",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0132",
+    "c_0166"
+   ],
+   "merge": false,
+   "rule": "Skill A integrates static comparative inequalities to construct a transitive linear ordering or rank, whereas Skill B sequentially executes a chronological series of explicit pairwise element swaps starting from an initial state to track position changes.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0132",
+    "c_0469"
+   ],
+   "merge": false,
+   "rule": "Skill A combines static comparative inequality relations to determine relative rank, whereas Skill B tracks the step-by-step temporal transfer of a physical or logical item across agents or locations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0132",
+    "c_0476"
+   ],
+   "merge": false,
+   "rule": "Skill A applies transitivity to comparative inequality relations to deduce order or rank, whereas Skill B evaluates boolean truth values of compound expressions using logical operators (AND, OR, NOT) and precedence rules.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0132",
+    "c_0523"
+   ],
+   "merge": false,
+   "rule": "Skill A integrates comparative magnitude inequalities to establish a relative ranking among items, whereas Skill B propagates binary truth/falsehood assignments through a chain of assertions regarding statement veracity.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0132",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "c_0132 requires chaining comparative inequality relationships to place items in rank order, whereas c_0619 requires filtering a set according to attribute exclusion rules and counting the size of the remaining set.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0132",
+    "c_0711"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0132",
+    "c_0891"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0132",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "c_0132 requires ordering items along a scalar continuum using transitive inequalities, whereas c_1049 requires evaluating logical set inclusion and validity using quantified statements (such as all, some, or none).",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_0218"
+   ],
+   "merge": false,
+   "rule": "c_0133 requires analyzing path geometry to classify and name a specific shape, whereas c_0218 requires computing net directional displacement to evaluate whether the final coordinate matches the starting coordinate.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_0255"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_0428"
+   ],
+   "merge": false,
+   "rule": "A parses sequential drawing commands to recognize and name a geometric shape, whereas B sets up and solves systems of algebraic or trigonometric equations to compute numerical coordinates, distances, or dimensions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "A interprets vector path rendering code to classify a geometric shape, whereas B applies categorical inclusion/exclusion rules to a collection of discrete items and computes the size of the remaining set.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "A traces spatial path execution instructions to name a figure, whereas B resolves logical relational statements (e.g., comparative or spatial constraints) to deduce the position of an item.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "A parses vector path code to identify a figure, whereas B applies trigonometric formulas and geometric theorems to compute numerical angle measures or ratios.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_0839"
+   ],
+   "merge": false,
+   "rule": "A reads explicit path definition data to classify a geometric figure, whereas B performs algebraic and vector transformations to solve for symbolic variables or parameter relationships.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "A interprets path execution commands to identify a shape, whereas B tracks transitive ordering clues to establish the ordinal rank or position of an item in a sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_1497"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0146",
+    "c_0734"
+   ],
+   "merge": false,
+   "rule": "Applying boundary conditions requires using differential equations to find a general solution with integration constants and substituting boundary/initial values to solve for those constants, whereas determining equation coefficients sets up algebraic systems directly from given coordinate points, projections, or recurrence relations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_0289"
+   ],
+   "merge": false,
+   "rule": "Counting or identifying integers satisfying divisibility conditions operates via modular arithmetic and integer divisibility rules, whereas manipulating complex numbers operates on two-dimensional complex representations using complex algebra, polar coordinates, or roots of unity.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_0303"
+   ],
+   "merge": false,
+   "rule": "Counting integers satisfying divisibility conditions uses modular congruences to count valid numbers in a range, whereas identifying structural properties of numbers analyzes base-10 positional digits and prime factorization exponents to count trailing zeros or extract specific digits.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_0454"
+   ],
+   "merge": false,
+   "rule": "Counting integers satisfying divisibility conditions filters integer values using modular arithmetic, whereas counting valid combinations applies combinatorial principles (such as permutations, combinations, and inclusion-exclusion) to count arrangements or set configurations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_0496"
+   ],
+   "merge": false,
+   "rule": "Counting integers satisfying divisibility conditions checks for specified integer multiples or congruences, whereas identifying values without common divisors evaluates coprimality using greatest common divisor (GCD) calculations or Euler's totient function.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_0693"
+   ],
+   "merge": false,
+   "rule": "c_0147 requires applying divisibility criteria or modular arithmetic to identify or count valid integers, whereas c_0693 requires executing the multi-step algorithm of integer long division to compute a quotient and remainder.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "c_0147 requires testing integers against modular or divisibility rules to count qualifying cases, whereas c_1102 requires evaluating multiple discrete expressions and adding their computed values together.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_1195"
+   ],
+   "merge": false,
+   "rule": "c_0147 requires applying divisibility rules or modular equivalences to count or identify satisfying integers, whereas c_1195 requires using sequence formulas or recurrences to compute specific terms, indices, or structural properties.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "c_0147 requires using modular congruences or divisibility conditions to count satisfying integers, whereas c_1198 requires performing prime factorization or applying exponent formulas (e.g., Legendre's formula) to find the multiplicity of prime factors.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_1365"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "c_0147 requires applying divisibility or modular conditions to count or identify satisfying integers, whereas c_1442 requires algebraic manipulation (such as elimination, substitution, or factoring) to solve equations or systems of equations for unknown variables.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "Skill A requires applying modular arithmetic, divisibility tests, or prime factorizations to count or identify integer solutions, whereas Skill B requires applying algebraic inequalities, calculus, or geometric principles to optimize extreme values or parameter bounds.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0149",
+    "c_0281"
+   ],
+   "merge": false,
+   "rule": "Skill A requires measuring and comparing string or phonetic distances between given lexical options, whereas Skill B requires generating original text that satisfies specified structural, stylistic, or formatting constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0149",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Skill A requires calculating string or phonetic similarity between word forms, whereas Skill B requires integrating relational and comparative constraints to deduce the position of items in an ordered sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0149",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Skill A compares string or phonetic features between lexical options, whereas Skill B applies transitive relational logic to determine the exact positional rank of items in a linear sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0149",
+    "c_1241"
+   ],
+   "merge": false,
+   "rule": "Skill A measures the degree of string or phonetic match between given lexical items, whereas Skill B searches a text corpus to verify whether specified words co-occur within the same context.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0149",
+    "c_1598"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates string edit distance or phonetic similarity between options regardless of semantic validity, whereas Skill B analyzes single-character edits to determine whether the resulting modification produces a semantically meaningful word versus an invalid typo.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0149",
+    "c_1725"
+   ],
+   "merge": false,
+   "rule": "Skill A measures string or phonetic proximity (such as edit distance or sound similarity) between words or phrases, whereas Skill B compares a source text and its target translation to classify semantic, factual, or structural discrepancies into predefined error categories.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0161",
+    "c_0303"
+   ],
+   "merge": false,
+   "rule": "Skill A performs arithmetic and place-value conversions on numbers expressed in non-decimal bases, whereas Skill B analyzes prime factorizations and decimal representation properties (such as trailing zeros or specific base-10 positional digits).",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0161",
+    "c_0779"
+   ],
+   "merge": false,
+   "rule": "Skill A performs base conversions and arithmetic operations in non-decimal positional number systems, whereas Skill B evaluates natural language source-translation text pairs to classify linguistic translation errors.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0161",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "Skill A manipulates digits and evaluates values using non-decimal base place-value rules, whereas Skill B computes prime factorizations and prime multiplicities of integers, factorials, or product configurations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0161",
+    "c_1725"
+   ],
+   "merge": false,
+   "rule": "Skill A executes arithmetic operations on numbers represented in non-decimal bases, whereas Skill B identifies and classifies discrepancies between a source text and its translated version.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0476"
+   ],
+   "merge": false,
+   "rule": "Skill A sequentially traces the transpositions of discrete items across a step-by-step swap chain, whereas Skill B evaluates truth values of compound logical expressions using boolean operator precedence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0523"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains requires tracking transpositions of discrete elements, whereas evaluating alternating truth statements requires evaluating logical negation and truth values down a dependency chain.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains involves executing step-by-step pairwise state updates across a sequence, whereas counting items after filtering involves set filtering based on attributes followed by cardinality counting.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains sequentially applies state transitions step-by-step over time, whereas identifying relative position from constraints resolves static constraint satisfaction logic to deduce an overall arrangement.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains requires tracking state changes through sequential dynamic swaps, whereas identifying truth value of a binary proposition requires verifying factual alignment of a claim against provided text.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0732"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains involves formal state-tracking logic across steps, whereas explaining creative generation choices involves providing metacognitive explanations for text generation.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0854"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0862"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains requires tracking sequential swap operations over an initial state to update item assignments over time, whereas evaluating athletic action-entity compatibility requires verifying sports domain terminology and physical actions against a named athlete's sport.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0880"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains involves updating discrete element mappings through a sequence of pairwise swap operations, whereas tracking spatial and state transformations involves updating geometric coordinates or orientations in a spatial layout based on physical movements and relocations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains tracks dynamic state updates through a chronological sequence of swap operations, whereas identifying positional ranks solves static spatial or transitive order constraints to determine fixed positions in a linear order.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains updates item assignments through sequential pairwise exchange operations, whereas evaluating deductive validity of quantified arguments applies formal logical inference rules to verify whether a conclusion logically follows from quantified premises.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains involves applying step-by-step swap transformations to track element positions, whereas evaluating and summing multiple values involves evaluating numerical expressions and performing arithmetic addition.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains tracks sequential state changes through a series of swap operations, whereas identifying item attributes from text performs information retrieval and reading comprehension to extract reported properties from a text passage.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0172",
+    "c_0215"
+   ],
+   "merge": false,
+   "rule": "Skill A substitutes target inputs into a relation to evaluate numerical values or derive an explicit function rule, whereas Skill B applies algebraic identities, factorization, or expansion to rewrite a symbolic expression into an equivalent simplified form without evaluating at target inputs.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0172",
+    "c_0232"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0172",
+    "c_0655"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0172",
+    "c_0734"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0172",
+    "c_0922"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0172",
+    "c_1442"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0183",
+    "c_0212"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0183",
+    "c_0417"
+   ],
+   "merge": false,
+   "rule": "c_0183 requires applying chemical transformation mechanisms to deduce molecular structures or reaction outcomes, whereas c_0417 requires solving algebraic equations using thermodynamic conservation laws or equilibrium constants to compute quantitative system parameters such as pH, temperature, or concentration.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0183",
+    "c_0477"
+   ],
+   "merge": false,
+   "rule": "c_0183 requires applying chemical reaction mechanisms to predict molecular structures or product identities, whereas c_0477 requires applying stoichiometric arithmetic and mole-ratio conversions to balanced chemical equations to compute quantitative masses, volumes, or yields.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0183",
+    "c_1075"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0185",
+    "c_0676"
+   ],
+   "merge": false,
+   "rule": "c_0185 requires tracing molecular cause-and-effect mechanisms to determine how a sequence/structural alteration affects protein function or phenotype, whereas c_0676 requires applying probabilistic and combinatorial calculations (such as Mendelian cross ratios or recombination frequencies) to pedigree and transmission data.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0185",
+    "c_1265"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0196",
+    "c_1630"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0197",
+    "c_0860"
+   ],
+   "merge": false,
+   "rule": "Evaluating proportional equivalence tests whether fully specified ratios are equal, whereas calculating quantities using rates sets up an equation with an unknown variable and algebraically solves for that missing quantity.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0197",
+    "c_0907"
+   ],
+   "merge": false,
+   "rule": "Evaluating mathematical conjectures involves establishing the truth or falsity of general mathematical statements through formal proof, deduction, or counterexample search, whereas evaluating proportional equivalence involves simplifying or cross-multiplying specific given ratios to verify numerical or algebraic equality.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_0281"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_0379"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_0468"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_0643"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_0828"
+   ],
+   "merge": false,
+   "rule": "c_0828 requires verbatim copying of prompt text to the start of the response, whereas c_0200 requires generating text that satisfies specified inclusion and exclusion rules.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_0836"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_1174"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_1521"
+   ],
+   "merge": false,
+   "rule": "c_1521 requires transforming and preserving the semantic content of a provided input text, whereas c_0200 involves generating new text from scratch under specified constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_1668"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_1691"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0211",
+    "c_0221"
+   ],
+   "merge": false,
+   "rule": "c_0221 involves coupling angular momentum quantum numbers using vector addition rules or calculating state multiplicities, whereas c_0211 involves evaluating selection rules to test whether a transition between specified initial and final states is allowed.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0211",
+    "c_0260"
+   ],
+   "merge": false,
+   "rule": "c_0260 involves applying linear algebra and operator calculations to compute expectation values, eigenvalues, or state projections, whereas c_0211 involves checking quantum number conservation laws and selection rules to determine permitted state transitions.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0211",
+    "c_0388"
+   ],
+   "merge": false,
+   "rule": "c_0388 involves applying conversion formulas, dimensional analysis, or scientific constants to compute numerical physical metrics, whereas c_0211 involves evaluating quantum selection rules to determine permissible transitions or decay paths.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0211",
+    "c_0954"
+   ],
+   "merge": false,
+   "rule": "c_0954 involves evaluating statistical mechanics partition function sums or Boltzmann population distributions, whereas c_0211 involves evaluating quantum selection rules and state conservation laws for individual transition or decay events.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0211",
+    "c_1115"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0212",
+    "c_1075"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0215",
+    "c_0232"
+   ],
+   "merge": false,
+   "rule": "c_0215 performs equivalence transformations to rewrite a single expression, whereas c_0232 equates algebraic expressions or conditions to solve for unknown parameter values.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0215",
+    "c_0289"
+   ],
+   "merge": false,
+   "rule": "c_0215 applies general real algebraic identity transformations, whereas c_0289 performs complex-plane operations such as polar form conversion, modulus manipulation, or root-of-unity analysis.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0215",
+    "c_0655"
+   ],
+   "merge": false,
+   "rule": "c_0215 simplifies or rewrites an expression into an equivalent target form, whereas c_0655 solves equations and inequalities to determine solution sets, domain/range limits, or parameter valid ranges.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0215",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "c_0215 manipulates expressions into equivalent forms without solving for unknowns, whereas c_1442 sets up and solves single or multi-variable systems of equations to find exact unknown values.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0215",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "c_0215 transforms expressions into algebraically equivalent forms, whereas c_1629 applies optimization techniques and bounds (such as inequalities or calculus) to find extreme values.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_0454"
+   ],
+   "merge": false,
+   "rule": "A requires identifying both the favorable outcome count and total sample space count to calculate their ratio as a probability, whereas B requires computing a single total count of configurations satisfying given criteria.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "A requires calculating favorable and total outcomes using combinatorial counting to compute a probability ratio, whereas B performs set subtraction to count remaining items after excluding a specific subset.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_0721"
+   ],
+   "merge": false,
+   "rule": "A computes a probability fraction by taking the ratio of favorable to total outcomes, whereas B applies combinations-with-repetition formulas to count unordered selections with replacement.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "A calculates a quantitative probability value using combinatorial counting and division, whereas B evaluates the formal logical validity of deductive arguments involving quantifiers.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "A computes a probability ratio of favorable to total outcome counts, whereas B evaluates a series of individual mathematical terms and computes their total sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_1195"
+   ],
+   "merge": false,
+   "rule": "A calculates outcome probabilities via counting ratios, whereas B analyzes recurrence relations or sequence formulas to evaluate specific terms or structural properties of discrete sequences.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "A counts favorable and total outcome sets to compute a probability ratio, whereas B factorizes numbers into prime bases to determine exponents, multiplicities, or divisor properties.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_1386"
+   ],
+   "merge": false,
+   "rule": "A computes a probability fraction by dividing favorable outcome counts by total possible counts, whereas B computes an aggregate absolute count by summing interaction frequencies across pairs.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "A counts discrete set combinations to calculate a probability fraction, whereas B parses spatial movement instructions to identify a geometric shape.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "A evaluates outcome counts relative to a sample space to produce a probability ratio, whereas B applies deterministic arithmetic or constraint formulas to evaluate a direct numerical quantity.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0218",
+    "c_0255"
+   ],
+   "merge": false,
+   "rule": "A sums vector displacements along a path to test whether net displacement is zero (returning to origin), whereas B analyzes side counts, lengths, and angles along a path to classify the specific type of geometric polygon.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0218",
+    "c_0428"
+   ],
+   "merge": false,
+   "rule": "A evaluates cumulative directional displacements to check for path closure, whereas B sets up and solves spatial or trigonometric equations to derive numerical coordinates, distances, or path curves.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0218",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "Skill A calculates the cumulative vector displacement across a sequence of movement steps to check if the net position equals the origin, whereas Skill B computes specific numerical angles or trigonometric ratios using geometric identities and triangle properties.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0218",
+    "c_0839"
+   ],
+   "merge": false,
+   "rule": "Skill A tracks sequential vector steps to check for zero net displacement, whereas Skill B translates spatial geometric relationships (such as areas, projections, or vector alignments) into algebraic equations to solve for unknown quantities.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0218",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "Skill A checks whether the total displacement vector of a path equals zero, whereas Skill B evaluates side lengths, internal turn angles, and vertex symmetries along the path to classify the resulting geometric shape.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0221",
+    "c_0260"
+   ],
+   "merge": false,
+   "rule": "Skill A applies quantum angular momentum coupling rules and selection rules to evaluate spin states and multiplicities, whereas Skill B performs vector-matrix operations (such as inner products and matrix projections) to compute operator expectation values and state probabilities.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0232",
+    "c_0289"
+   ],
+   "merge": false,
+   "rule": "Skill A solves systems of equations over real scalar parameters, whereas Skill B performs complex number operations\u2014such as separating real and imaginary components, taking complex conjugates, or using polar form\u2014to solve equations involving complex quantities.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0232",
+    "c_0655"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0232",
+    "c_0734"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0232",
+    "c_0839"
+   ],
+   "merge": false,
+   "rule": "Skill B requires translating geometric relationships (such as lengths, areas, orthogonality, or projections) into algebraic equations, whereas Skill A operates directly on given algebraic equations or identities.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0232",
+    "c_0922"
+   ],
+   "merge": false,
+   "rule": "Skill B uses structural properties of polynomials or interpolation techniques to evaluate an unknown polynomial at a target point, whereas Skill A solves explicitly for unknown scalar parameters within an algebraic equation.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0232",
+    "c_1122"
+   ],
+   "merge": false,
+   "rule": "Skill B applies vector algebra operations (such as dot products, cross products, or component decomposition) to solve vector equations, whereas Skill A operates strictly on scalar algebraic equations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0232",
+    "c_1133"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0232",
+    "c_1442"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0232",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "Solving for unknown parameters requires equating algebraic expressions or setting up systems of equations to solve for fixed values, whereas optimizing a quantity requires applying inequalities or extremal principles to maximize or minimize an objective function under constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0251",
+    "c_0316"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0251",
+    "c_0344"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0251",
+    "c_0676"
+   ],
+   "merge": false,
+   "rule": "Evaluating cellular and molecular mechanisms involves tracing qualitative biochemical pathways and functional interaction cascades, whereas interpreting inheritance patterns involves applying combinatorial and probabilistic calculations (e.g., recombination frequencies, linkage distances, or Mendelian ratios) to pedigree and genomic data.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0251",
+    "c_0914"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0251",
+    "c_1265"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0255",
+    "c_0428"
+   ],
+   "merge": false,
+   "rule": "Skill A parses vector drawing commands to classify a shape's geometric identity, whereas Skill B sets up and solves algebraic or trigonometric equations to compute spatial coordinates, distances, or path equations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0255",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "Skill A parses vector command data to classify a geometric shape, whereas Skill B applies geometric theorems and trigonometric identities to compute numerical angle measures or ratios.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0255",
+    "c_0839"
+   ],
+   "merge": false,
+   "rule": "Skill A interprets sequential path drawing commands to identify a shape, whereas Skill B algebraically translates between geometric properties (such as orthogonality or projections) and algebraic/vector equations to solve for unknown parameters.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0255",
+    "c_1497"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0260",
+    "c_0338"
+   ],
+   "merge": false,
+   "rule": "Skill A operates on quantum mechanical state vectors and operators using linear algebra, whereas Skill B evaluates definite calculus integrals over spatial probability density functions to normalize distributions or compute continuous expectation values.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0260",
+    "c_0439"
+   ],
+   "merge": false,
+   "rule": "Skill A computes quantum state probabilities and matrix expectation values using quantum operator algebra, whereas Skill B computes relativistic conversions between reference frames using Lorentz transformation equations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0260",
+    "c_0759"
+   ],
+   "merge": false,
+   "rule": "Skill A applies quantum mechanical operators to state vectors or density matrices via inner products or matrix multiplication to compute expectation values, state probabilities, or state transformations, whereas Skill B performs subsystem partition operations (such as partial traces, partial transpositions, or Schmidt decompositions) to evaluate correlations, separability, or entanglement entropy.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0260",
+    "c_1278"
+   ],
+   "merge": false,
+   "rule": "Skill A uses quantum mechanical operator algebra and state projections to compute quantum probabilities and expectation values, whereas Skill B sets up and solves algebraic balance equations for conserved scalar or vector quantities (such as mass, charge, momentum, or particle count) across system transformations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0260",
+    "c_1630"
+   ],
+   "merge": false,
+   "rule": "Skill A applies matrix operators to quantum state vectors or density matrices to derive physical expectation values or probabilities, whereas Skill B performs purely algebraic checks or calculations on a standalone matrix to evaluate its intrinsic properties (such as calculating its determinant or checking Hermiticity or unitarity).",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0260",
+    "c_1686"
+   ],
+   "merge": false,
+   "rule": "Skill A performs operator calculations (such as inner products or matrix products) on quantum states to compute physical expectation values or state probabilities, whereas Skill B solves or verifies eigenvalue equations to associate specific quantum wavefunctions or eigenstates with their corresponding eigenvalues, operators, or quantum numbers.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0261",
+    "c_1033"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0269",
+    "c_0582"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0269",
+    "c_1195"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0312"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0379"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating narrative constraints to deduce and select a correct entity, whereas B requires generating text that adopts a specific persona and satisfies structural constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0643"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating narrative constraints to deduce and select a correct entity, whereas B requires generating text that satisfies explicit lexical and formatting constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0708"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "A requires assigning entities to discrete categorical roles based on narrative conditions, whereas B requires ordering or locating items along a continuous spatial, temporal, or scalar axis using relative comparisons.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating static narrative constraints and traits to deduce entity roles, whereas B requires sequentially updating a dynamic state representation across a temporal sequence of movements or transfers.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "A requires matching entities to specific categorical roles using trait and circumstantial constraints, whereas B requires constructing or evaluating a 1D linear sequence based on relative spatial or transitive positional clues.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_0379"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_0468"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_0550"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_0585"
+   ],
+   "merge": false,
+   "rule": "A requires composing original text that satisfies explicit structural and lexical rules, whereas B requires analyzing pre-written options to detect sarcasm or semantic inversion.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_0643"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_0836"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Composing text requires generating original written output under structural rules, whereas selecting an option requires evaluating multiple-choice choices to identify the one matching a computed state or retrieved fact.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_1174"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_1521"
+   ],
+   "merge": false,
+   "rule": "Composing creative text requires generating original content from scratch under constraints, whereas transforming text requires rewriting a provided source text while preserving its underlying semantic content under constraints.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_1598"
+   ],
+   "merge": false,
+   "rule": "Composing creative text requires generating new written content under constraints, whereas distinguishing semantic edits from typos requires analyzing provided text options to identify valid lexical modifications versus random typographical errors.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_1668"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "c_1691 requires extracting and condensing key information from a provided source text into a summary, whereas c_0281 requires generating original text from scratch without source condensation.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0281",
+    "c_1698"
+   ],
+   "merge": false,
+   "rule": "c_1698 requires encoding musical elements into formal notation syntax, whereas c_0281 requires generating natural language text under specified lexical or structural rules.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0284",
+    "c_0476"
+   ],
+   "merge": false,
+   "rule": "c_0284 requires interpreting natural language semantics to resolve pronoun antecedents, whereas c_0476 requires evaluating formal boolean logic expressions using truth values and operator precedence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0284",
+    "c_0732"
+   ],
+   "merge": false,
+   "rule": "c_0284 requires resolving linguistic coreference for ambiguous pronouns, whereas c_0732 requires articulating the reasoning and choices behind how content was generated.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0284",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "c_0284 requires mapping pronouns to referent noun phrases in text, whereas c_0891 requires applying relational order constraints to locate an element's position within a linear sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0284",
+    "c_1010"
+   ],
+   "merge": false,
+   "rule": "Resolving pronoun reference ambiguity requires parsing sentence structure to identify the antecedent of a pronoun, whereas evaluating causal attribution requires counterfactual and normative reasoning to judge an agent's or event's causal responsibility for an outcome.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0284",
+    "c_1725"
+   ],
+   "merge": false,
+   "rule": "Resolving pronoun reference ambiguity requires identifying which noun phrase a pronoun refers to within a text, whereas identifying translation error categories requires cross-referencing a source text with a translation to classify discrepancies into an error taxonomy.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0289",
+    "c_0428"
+   ],
+   "merge": false,
+   "rule": "Manipulating complex numbers involves performing algebraic operations on complex-valued variables, whereas calculating coordinates and distances involves applying Cartesian spatial geometry formulas to determine geometric coordinates, curves, or inter-point distances.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0289",
+    "c_0655"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0289",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "Manipulating complex numbers involves algebraic equation solving over complex expressions, whereas calculating angle measures and trigonometric ratios involves using geometric properties and trigonometric relations to find angle sizes or trigonometric values.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0289",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Manipulating complex numbers involves solving algebraic equations or simplifying complex expressions, whereas evaluating and summing multiple values involves computing individual terms sequentially under given conditions and calculating their total sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0289",
+    "c_1195"
+   ],
+   "merge": false,
+   "rule": "A requires performing complex-arithmetic transformations (such as polar conversions, real/imaginary part separation, or roots-of-unity operations), whereas B requires evaluating discrete recurrence relations or term-indexing patterns across a sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0289",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "A requires manipulating complex-plane variables or complex algebraic identities, whereas B requires calculating prime-power valuations ($p$-adic multiplicity) within integer or factorial factorizations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0289",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "A requires complex-specific field operations (such as modulus-argument decomposition, complex conjugation, or equating real and imaginary components), whereas B solves equations using standard algebraic substitutions and real-variable transformations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0289",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "A solves equality systems to find exact roots or parameter values, whereas B applies bounding techniques or calculus to maximize or minimize a target quantity under constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0303",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "A extracts specific positional digits or base-10 representation features of a number, whereas B computes the exact exponent power of a prime factor dividing an integer or factorial product.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0303",
+    "c_1365"
+   ],
+   "merge": false,
+   "rule": "A evaluates structural or positional digit properties of an individual value, whereas B enumerates the total count of distinct integers within a set or range that satisfy given boundary or modular conditions.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0309",
+    "c_0561"
+   ],
+   "merge": false,
+   "rule": "c_0309 performs diagnostic reasoning from observed experimental symptoms to identify root causes of procedural or chemical failure, whereas c_0561 analyzes nucleic acid sequence properties (such as Tm, complementarity, and secondary structures) to select or validate PCR primers.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0309",
+    "c_1265"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0312",
+    "c_0643"
+   ],
+   "merge": false,
+   "rule": "c_0312 solves logical constraint satisfaction problems to assign individuals to roles, whereas c_0643 composes original written text adhering to explicit structural, lexical, or orthographic constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0312",
+    "c_0708"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0312",
+    "c_1480"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0314",
+    "c_0402"
+   ],
+   "merge": false,
+   "rule": "c_0314 applies classical electrodynamics and vector calculus to compute spatial physical field quantities, whereas c_0402 evaluates loop integrals, ultraviolet/infrared singularities, and regularization techniques in quantum field theory.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0316",
+    "c_0901"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0316",
+    "c_1033"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0316",
+    "c_1585"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0325",
+    "c_0860"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0344",
+    "c_0914"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0347",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "A calculates the length of unassigned intervals between chronologically ordered events using given start and end times, whereas B deduces the position or order of items by evaluating relational and comparative constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0347",
+    "c_0952"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0361",
+    "c_0439"
+   ],
+   "merge": false,
+   "rule": "One requires applying exponential functions to calculate decay rates or quantity changes over time, whereas the other requires applying Lorentz transformations and relativistic kinematic equations to convert quantities between inertial reference frames.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_0468"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_0550"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_0643"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_0708"
+   ],
+   "merge": false,
+   "rule": "One requires generating a written text response constrained by stylistic and formatting rules, whereas the other requires solving a logical matching problem to evaluate relational conditions and assign personnel to tasks.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_0836"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_1174"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_1521"
+   ],
+   "merge": false,
+   "rule": "Skill A involves generating original text content from scratch, whereas Skill B involves rewriting and transforming an existing source text while preserving its underlying meaning.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_1598"
+   ],
+   "merge": false,
+   "rule": "Skill A involves generating original text under constraints, whereas Skill B involves analyzing provided text options to differentiate meaningful semantic edits from typographical errors.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_1668"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "Skill A involves generating original content from scratch, whereas Skill B involves extracting and condensing information from a provided source text into a summary.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0382",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Skill A requires inferring an agent's mental state and intent regarding foreseen side effects using moral and psychological frameworks, whereas Skill B requires verifying whether a given proposition directly matches factual statements or logical conditions in the text.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0382",
+    "c_1010"
+   ],
+   "merge": false,
+   "rule": "Skill A attributes mental states (intent and foresight) to an agent regarding a side effect, whereas Skill B evaluates counterfactual dependencies and normative interventions to assign causal responsibility between events.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0388",
+    "c_0417"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0388",
+    "c_0439"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0388",
+    "c_1278"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0388",
+    "c_1603"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0402",
+    "c_0548"
+   ],
+   "merge": false,
+   "rule": "c_0402 requires analyzing momentum-space loop integrals or power-counting to evaluate UV/IR divergence behavior, whereas c_0548 requires performing functional derivatives or algebraic manipulations on Lagrangian densities to extract equations of motion or interaction parameters.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0402",
+    "c_1115"
+   ],
+   "merge": false,
+   "rule": "c_0402 requires evaluating the mathematical convergence or divergence of momentum loop integrals in field theories, whereas c_1115 requires checking conservation laws, quantum numbers, and selection rules to determine whether a physical process is permissible.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0417",
+    "c_1278"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0428",
+    "c_0454"
+   ],
+   "merge": false,
+   "rule": "c_0428 requires setting up and solving continuous algebraic or trigonometric equations to calculate spatial coordinates, distances, or curves, whereas c_0454 requires applying combinatorial rules and discrete counting principles to determine the total number of valid configurations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0428",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "c_0428 requires using coordinate metrics, distance formulas, or parametric path equations to calculate spatial positions and lengths, whereas c_0773 requires applying angular theorems, angle-sum rules, or trigonometric identity evaluations to calculate angle measures or trigonometric function values.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0428",
+    "c_0839"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0428",
+    "c_1133"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0428",
+    "c_1220"
+   ],
+   "merge": false,
+   "rule": "Evaluating line parallelism and perpendicularity requires testing whether line slopes or direction vectors satisfy equality or negative reciprocity conditions, whereas calculating coordinates, distances, and curves requires setting up and solving algebraic or trigonometric equation systems to find unknown numerical values or equations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0428",
+    "c_1442"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0435",
+    "c_0475"
+   ],
+   "merge": false,
+   "rule": "Assessing athletic action possibility requires evaluating the biomechanical and physical feasibility of a human body movement, whereas evaluating statement plausibility via terminology matching requires checking semantic correspondence between domain-specific terms/rules and their given context.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0435",
+    "c_0585"
+   ],
+   "merge": false,
+   "rule": "Identifying sarcastic statements requires analyzing pragmatic irony to determine if an utterance's intended meaning contradicts its literal wording, whereas evaluating statement plausibility via terminology matching checks if a statement's literal terminology matches domain conventions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0435",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Identifying the truth value of a binary proposition requires verifying statement validity or selecting an entity based on explicit scenario constraints in the text, whereas evaluating statement plausibility via terminology matching assesses whether domain concepts match world-knowledge terminology.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0435",
+    "c_0780"
+   ],
+   "merge": false,
+   "rule": "Skill A requires checking whether terms and actions match domain knowledge to assess factual/logical plausibility, whereas Skill B requires evaluating the positive, negative, or neutral emotional tone of text.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0435",
+    "c_0862"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0435",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Skill A requires cross-referencing domain knowledge to judge statement plausibility, whereas Skill B requires scanning a provided text passage to extract explicit properties or spatial relations of a specified entity.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0435",
+    "c_1598"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates domain-level conceptual consistency, whereas Skill B performs character- and word-level string analysis to distinguish deliberate semantic modifications from orthographic errors or typos.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0439",
+    "c_0827"
+   ],
+   "merge": false,
+   "rule": "Skill A involves performing numerical calculations using relativistic frame-transformation equations, whereas Skill B involves selecting or formulating mathematical expressions for signal transit time and retarded potentials based on distance and propagation velocity.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0439",
+    "c_1115"
+   ],
+   "merge": false,
+   "rule": "Skill A involves calculating quantitative values via relativistic kinematic formulas, whereas Skill B involves checking discrete conservation laws, quantum numbers, or selection rules to verify if a physical process is allowed.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0439",
+    "c_1603"
+   ],
+   "merge": false,
+   "rule": "One applies Lorentz transformation and velocity-addition equations to convert position, time, or velocity quantities between different inertial reference frames, whereas the other applies energy-momentum conservation equations to initial and final states in particle collisions or decays.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0454",
+    "c_0619"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0454",
+    "c_1195"
+   ],
+   "merge": false,
+   "rule": "One applies recurrence relations or sequence functions to calculate specific terms, indices, or aggregate sums of a sequence, whereas the other applies combinatorial principles to determine the total count of valid configurations or objects.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0454",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "One uses prime factorization rules or Legendre's formula to determine the power or multiplicity of prime factors in a number or factorial, whereas the other uses combinatorial rules to count valid configurations or arrangements.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0454",
+    "c_1365"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0454",
+    "c_1386"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0454",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "c_0454 requires calculating the total count of discrete valid configurations using combinatorial enumeration, whereas c_1629 requires determining the extreme (maximum or minimum) value of an objective quantity using algebraic or geometric optimization principles.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0468",
+    "c_0550"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0468",
+    "c_0643"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0468",
+    "c_1174"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0468",
+    "c_1521"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0468",
+    "c_1618"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0468",
+    "c_1668"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0468",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "Pair 2 B requires extracting and condensing key information from source text (summarization) alongside constraint adherence, whereas Pair 2 A requires applying structural and stylistic formatting constraints during text generation without source condensation.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0476"
+   ],
+   "merge": false,
+   "rule": "Pair 3 A requires updating entity-location state mappings through a chronological sequence of transfer events, whereas Pair 3 B requires evaluating boolean expressions using formal operator precedence and truth tables.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0523"
+   ],
+   "merge": false,
+   "rule": "Pair 4 A tracks dynamic state updates of item locations across time, whereas Pair 4 B computes logical parity/inversion through a chain of truth-teller and liar assertions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "Pair 5 A tracks sequential state changes of item locations across sequential transfers, whereas Pair 5 B filters a collection based on predicate attributes and tallies the cardinality of the matching subset.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Pair 6 A updates item locations sequentially through time-ordered transfer events, whereas Pair 6 B solves a constraint satisfaction problem to determine positions along a static spatial, temporal, or scalar ordering.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Tracking item possession requires sequentially updating state mappings step-by-step through a chronological sequence, whereas identifying the truth value of a binary proposition evaluates a single static assertion or choice against provided facts.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0732"
+   ],
+   "merge": false,
+   "rule": "Tracking item possession maintains dynamic state updates over a series of events, whereas explaining creative generation choices generates meta-textual rationale for text generation decisions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0854"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0880"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Tracking item possession updates variable mappings sequentially along a temporal sequence of transfers, whereas identifying positional ranks solves static spatial or transitive order constraints to establish a linear arrangement.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Tracking item possession simulates state changes chronologically over time, whereas evaluating deductive validity assesses formal logical entailment between quantified premises and conclusions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Skill A requires sequentially tracking dynamic state updates across a series of transfer events over time, whereas Skill B involves extracting static properties or spatial relationships directly from text.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "Skill A requires sequentially updating state and possession across dynamic transfer events, whereas Skill B involves looking up specific entries in a structured reference schedule or table.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0475",
+    "c_0862"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates the physical or biomechanical feasibility of an action, whereas Skill B verifies the semantic compatibility of action terminology with the formal rules and concepts of a sport.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0569"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates logical connectives to determine a truth value, whereas Skill B filters elements out of a set according to criteria and counts the cardinality of the remaining set.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates boolean expressions to arrive at a single truth value, whereas Skill B integrates comparative relational constraints to determine spatial, temporal, or ordinal positions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Skill A applies formal boolean operator precedence and truth-table rules to evaluate compound logical expressions, whereas Skill B compares a natural-language statement against a given text to verify its factual accuracy or choose between binary options.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0732"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates formal boolean expressions using logical operators and precedence rules to return a truth value, whereas Skill B generates a natural-language explanation detailing the intent and methodology behind text generation choices.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "Skill A computes the truth value of static boolean expressions using operator precedence, whereas Skill B tracks dynamic updates to entity-location bindings sequentially across a chronological series of event steps.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0862"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates formal boolean logical expressions using truth tables and precedence rules, whereas Skill B retrieves real-world sports knowledge to verify whether a described physical action matches a specific athlete's sport.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0880"
+   ],
+   "merge": false,
+   "rule": "Skill A computes boolean truth values by reducing logical connectives according to operator precedence, whereas Skill B sequentially transforms an array or network of spatial positions through a series of physical swaps and movements.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates compound truth values using boolean algebra and logical connectives, whereas Skill B resolves transitive spatial or ordinal constraints to construct a linear ordering and determine relative positions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Evaluating boolean logic expressions requires applying truth tables and operator precedence rules to compute a boolean truth value, whereas selecting an option corresponding to a derived state requires comparing a solved outcome or retrieved fact against multiple-choice choices to identify the matching option.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Evaluating boolean logic expressions determines the truth value of a propositional statement given explicit variable truth assignments, whereas evaluating quantified arguments assesses whether a conclusion validly follows from quantified premises ('all', 'some', 'none') across potential domain interpretations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Evaluating boolean logic expressions applies formal logical connectives and precedence rules to calculate a boolean result, whereas identifying item attributes from text performs reading comprehension to extract stated physical or spatial properties of entities from narrative prose.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0477",
+    "c_0860"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0496",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "Identifying values without common divisors evaluates relative primality by verifying whether two integers share a greatest common divisor of one, whereas finding prime factor exponents computes the exact power or multiplicity of a prime factor in an integer or factorial factorization.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0502",
+    "c_0839"
+   ],
+   "merge": false,
+   "rule": "Determining a geometric transformation's underlying feature extracts invariant vectors, subspaces, or mapped coordinates directly from a linear transformation matrix, whereas manipulating geometric and algebraic representations formulates and solves algebraic equations derived from geometric measurement properties such as distances, areas, and projections.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0514",
+    "c_0827"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0523",
+    "c_0569"
+   ],
+   "merge": false,
+   "rule": "Evaluating alternating truth statements requires sequentially propagating truth values through relational assertions about speaker honesty, whereas evaluating boolean logic expressions requires applying operator precedence rules to evaluate logical tree structures built with formal operators (AND, OR, NOT).",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0523",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "Evaluating truth statements performs logical inference across chained claims to find a true/false state, whereas counting items after filtering performs set exclusion based on attribute criteria followed by tallying remaining elements.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0523",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Evaluating truth statements resolves binary meta-logical assertions of veracity, whereas identifying relative position constructs a spatial, temporal, or scalar sequence from comparative alignment constraints.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0523",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Evaluating alternating truth statements requires tracing sequential dependencies across multiple claims of honesty and deceit, whereas identifying the truth value of a binary proposition involves directly verifying a single target statement against factual text or context.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0523",
+    "c_0732"
+   ],
+   "merge": false,
+   "rule": "Evaluating alternating truth statements involves formal logical evaluation to derive a true/false value, whereas explaining creative generation choices involves metacognitive reflection to articulate the rationale and methodology behind constructed text.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0523",
+    "c_0880"
+   ],
+   "merge": false,
+   "rule": "Evaluating alternating truth statements requires applying sequential boolean negation across a chain of meta-claims about truthfulness, whereas tracking spatial transformations requires updating positional coordinates or item mappings across a sequence of movements or swaps.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0523",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Evaluating alternating truth statements requires evaluating logical truth dependencies across a sequence of claims, whereas selecting an option corresponding to a derived state requires comparing a resolved value against candidate options to select the matching multiple-choice choice.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0523",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Evaluating alternating truth statements requires composing boolean identity/negation operations down a linear chain of claims, whereas evaluating quantified deductive validity requires applying categorical logic to evaluate set containment and quantifier scope (e.g., all/some/none) between premises and conclusions.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0523",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Evaluating alternating truth statements requires calculating truth values through a sequence of boolean assertions, whereas identifying item attributes requires reading text to retrieve explicitly declared or spatially related properties of a specific object.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0528",
+    "c_0585"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0528",
+    "c_0780"
+   ],
+   "merge": false,
+   "rule": "Identifying semantic inversion requires detecting structural negations, antonyms, or semantic polarity flips relative to a literal statement, whereas evaluating contextual valence requires categorizing the overall emotional sentiment (positive, negative, or neutral) of a text segment.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0528",
+    "c_1598"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates whether the semantic polarity or meaning of a statement has been inverted or negated, whereas Skill B analyzes string- and word-level edits to distinguish meaningful word substitutions from non-word typographical errors.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0548",
+    "c_1115"
+   ],
+   "merge": false,
+   "rule": "Skill A mathematically manipulates an algebraic Lagrangian function to derive equations of motion or system parameters, whereas Skill B applies physical conservation laws and quantum selection rules to evaluate whether a particle interaction or decay is permissible.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0550",
+    "c_0643"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0550",
+    "c_1174"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0550",
+    "c_1521"
+   ],
+   "merge": false,
+   "rule": "Skill A requires generating original text content from scratch under mechanical constraints, whereas Skill B requires transforming and preserving the semantic content of a provided source text.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0569",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates the truth value of compound logical propositions using Boolean operators, whereas Skill B deduces the spatial, temporal, or scalar ordering of items from comparative relational statements.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0569",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Evaluating boolean logic expressions requires applying formal logical connectives (AND, OR, NOT) and precedence rules to truth values, whereas identifying the truth value of a binary proposition requires checking whether a natural language statement factually matches a given scenario.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0569",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Evaluating boolean logic expressions requires evaluating truth values using logical connectives, whereas identifying positional ranks requires resolving spatial or transitive order relations to locate an item's position in a sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0569",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Evaluating boolean logic expressions computes a truth value using boolean operator rules, whereas evaluating and summing multiple values performs arithmetic evaluation and addition to determine a numerical total.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0569",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Evaluating boolean logic expressions requires evaluating formal boolean operators, whereas identifying item attributes requires searching textual context to extract an entity's stated or spatial properties.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0585",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Identifying sarcastic statements requires detecting non-literal pragmatic irony where intended meaning contradicts literal wording, whereas identifying the truth value of a binary proposition evaluates the literal factual accuracy of a statement against given context.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0585",
+    "c_0780"
+   ],
+   "merge": false,
+   "rule": "Identifying sarcastic statements requires recognizing pragmatic irony where literal meaning is inverted, whereas evaluating contextual valence requires classifying the overall affective sentiment (positive, negative, neutral) of a statement within context.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0585",
+    "c_1598"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating pragmatic irony and intended non-literal meaning, whereas B requires inspecting string-level modifications to distinguish valid word replacements from orthographic typos.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0619",
+    "c_0714"
+   ],
+   "merge": false,
+   "rule": "A requires applying filter criteria to a set and computing the total count of matching items, whereas B requires comparing elements along an ordinal metric to locate the single extreme or maximum value.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0619",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "A requires filtering a set to determine a cardinal count of elements, whereas B requires evaluating a logical statement to determine its boolean truth value (true or false).",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0619",
+    "c_0828"
+   ],
+   "merge": false,
+   "rule": "A requires filtering elements and tallying a subset, whereas B requires verbatim extraction and duplication of prompt text at the start of the output.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0619",
+    "c_0880"
+   ],
+   "merge": false,
+   "rule": "A requires aggregating a static count of items matching target criteria, whereas B requires step-by-step sequential simulation of dynamic state or position changes over time.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0619",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "A requires set exclusion logic to calculate a numerical count, whereas B requires mapping a known or retrieved result to its corresponding multiple-choice option choice.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0619",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating inclusion and exclusion criteria across a set of discrete items to count the cardinality of the remaining subset, whereas B requires evaluating formal logical validity between quantified premises and a proposed conclusion.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0619",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating filter criteria across multiple candidate items to tally the size of a matching subset, whereas B requires locating a specific single entity in text to extract its direct or spatial property.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0619",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "A requires filtering discrete items by attribute criteria and counting the resulting set, whereas B requires setting up and algebraically manipulating equations or systems of equations to solve for unknown variables.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0619",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating attribute-based inclusion and exclusion criteria on a collection of discrete entities to tally a count, whereas B requires evaluating mathematical formulas or performing arithmetic operations on numeric inputs to derive a value.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_0708"
+   ],
+   "merge": false,
+   "rule": "A requires composing original natural language text under explicit lexical, structural, and character constraints, whereas B requires evaluating relational rules and preferences in a text to solve a constraint satisfaction assignment problem mapping people to roles.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "A requires generating text adhering to explicit lexical and structural formatting constraints, whereas B requires evaluating a statement against factual context to determine its binary truth value.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_0836"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_1174"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_1502"
+   ],
+   "merge": false,
+   "rule": "A requires generating text that adheres to explicit surface-level structural and lexical constraints, whereas B requires evaluating business plans and pitches for commercial, financial, and strategic viability.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_1521"
+   ],
+   "merge": false,
+   "rule": "A involves constructing new text from scratch under mechanical constraints, whereas B involves reformulating an existing source text to adopt a new tone or style while preserving its core semantic content.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_1618"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_1668"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "A requires composing original text directly from prompt instructions, whereas B requires reading a provided source passage to extract and condense its core semantic content into a summary while adhering to constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_1698"
+   ],
+   "merge": false,
+   "rule": "A requires generating natural language text under lexical and structural rules, whereas B requires encoding musical elements (notes, chords, rhythms) into formal text-based musical notation syntax.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0655",
+    "c_0734"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0655",
+    "c_1019"
+   ],
+   "merge": false,
+   "rule": "A requires finding exact values or parameter intervals where algebraic equations or solvability conditions are satisfied, whereas B requires optimizing an objective expression to determine its maximum or minimum value under constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0655",
+    "c_1133"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0655",
+    "c_1442"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0655",
+    "c_1563"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0655",
+    "c_1574"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0655",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "A algebraically solves equations or inequalities to determine the set of valid parameter values or roots, whereas B applies extreme-value methods (such as derivatives, AM-GM, or geometric bounds) to optimize and find the maximum or minimum value of a target quantity.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0655",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "A requires setting up and algebraically solving equations or system constraints for unknown variables, whereas B performs forward arithmetic evaluation or direct formula substitution using known inputs to calculate a numerical result.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0676",
+    "c_1265"
+   ],
+   "merge": false,
+   "rule": "A applies probability logic, pedigree rules, and recombination frequency calculations to trace trait transmission across generations, whereas B evaluates physical molecular assay outputs (such as gel bands or expression levels) to infer biochemical mechanisms or cellular states.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0676",
+    "c_1700"
+   ],
+   "merge": false,
+   "rule": "A tracks inheritance patterns and linkage across generations to determine genotype probabilities, whereas B compares single- and double-mutant phenotype measurements against baselines (epistasis analysis) to construct functional or regulatory pathway hierarchies.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0693",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Skill A requires executing the long division algorithm to compute a quotient and remainder, whereas Skill B requires evaluating individual expressions and calculating their arithmetic sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0693",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "Skill A requires performing multi-digit integer division to determine a quotient and remainder, whereas Skill B requires prime-factoring numbers to find the exponents or multiplicities of prime factors.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0708",
+    "c_0711"
+   ],
+   "merge": false,
+   "rule": "Skill A requires solving bipartite assignment constraints to pair entities with tasks, whereas Skill B requires integrating comparative relational constraints to arrange entities along a spatial, temporal, or scalar continuum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0708",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "Skill A requires evaluating static logical constraints to assign entities to roles, whereas Skill B requires step-by-step tracking and updating of entity states or locations across a temporal sequence of events.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0731"
+   ],
+   "merge": false,
+   "rule": "Skill A requires deducing relative ordering or positions from comparative statements, whereas Skill B requires evaluating whether a given statement is true or false based on narrative facts.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0732"
+   ],
+   "merge": false,
+   "rule": "Skill A requires applying relational constraint logic to solve positional ordering, whereas Skill B requires articulating the qualitative reasoning and choices behind text generation.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "A requires solving a set of static relational constraints simultaneously to deduce positions, whereas B requires executing a step-by-step chronological simulation to track state changes over time.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0862"
+   ],
+   "merge": false,
+   "rule": "A requires solving logical relational constraints to determine position, whereas B requires retrieving domain-specific knowledge to evaluate whether an athletic action matches standard sport terminology.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0880"
+   ],
+   "merge": false,
+   "rule": "A requires integrating static comparative rules to resolve spatial or scalar arrangements, whereas B requires sequentially updating locations through a given series of explicit swap or movement events.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0891"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0952"
+   ],
+   "merge": false,
+   "rule": "A requires deducing relative positions using logical constraints, whereas B requires performing interval arithmetic on explicit start/end times to identify unallocated gaps.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "A requires ordering entities along a spatial, temporal, or scalar continuum based on comparative clues, whereas B requires evaluating syllogistic logic and set membership using quantified statements (e.g., 'all', 'some', 'none').",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Skill A requires deducing relative order or positioning by integrating relational logical constraints, whereas Skill B requires evaluating expressions or conditions to compute numerical values and calculating their sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_1480"
+   ],
+   "merge": false,
+   "rule": "Skill A requires chaining comparative or relative statements to determine an item's position along a sequence or spatial arrangement, whereas Skill B requires testing candidate entities against fixed capacity limits, physical boundaries, or logical exclusions to validate or assign discrete roles.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "Skill A requires solving relational logic constraints to deduce an item's relative position, whereas Skill B requires locating and directly extracting explicit data entries from a transit timetable or schedule.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_1725"
+   ],
+   "merge": false,
+   "rule": "Skill A requires integrating relational logical constraints to determine spatial, temporal, or scalar ordering, whereas Skill B requires comparing source and target texts to classify translation discrepancies into predefined error types.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0714",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Skill A requires comparing items or measurements within a dataset to identify a single extreme value or physical boundary, whereas Skill B requires evaluating multiple individual values and calculating their total sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0721",
+    "c_1386"
+   ],
+   "merge": false,
+   "rule": "Skill A requires applying multiset combination formulas (stars and bars) to count selections where items can be repeated, whereas Skill B requires enumerating pairwise interactions among set elements and multiplying by given event frequencies.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0721",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "Skill A requires applying combinatorial counting formulas (such as stars and bars) for unordered selection with replacement, whereas Skill B requires setting up and algebraically manipulating equations or system variables.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0731",
+    "c_0780"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates the factual or logical truth of a proposition against scenario constraints, whereas Skill B assesses the emotional sentiment or affective tone (positive, negative, or neutral) of text.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0731",
+    "c_0828"
+   ],
+   "merge": false,
+   "rule": "Skill A requires evaluating whether a statement is logically or factually true or false, whereas Skill B requires verbatim text copying and prefix formatting at the start of the response.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0731",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates the factual validity of a proposition, whereas Skill B uses transitive or spatial relational clues to construct linear orderings and determine an item's specific rank position.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0731",
+    "c_0977"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0731",
+    "c_1010"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates the factual truth value of a binary claim, whereas Skill B applies counterfactual and normative reasoning to attribute causal responsibility for an outcome among multiple factors.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0731",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Evaluating deductive validity requires analyzing quantified premises to determine logical entailment, whereas identifying the truth value of a binary proposition involves verifying whether a factual claim directly matches the provided text.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0731",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Evaluating and summing multiple values requires performing numerical calculations and arithmetic addition, whereas identifying the truth value of a binary proposition involves assessing a boolean claim or selecting between two textual options.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0732",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Identifying positional ranks requires resolving transitive or spatial order relations to locate an element in a sequence, whereas explaining creative generation choices requires articulating the rationale behind text generation.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0732",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Evaluating deductive validity requires checking logical necessity from quantified premises, whereas explaining creative generation choices requires describing the qualitative methodology behind text creation.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0734",
+    "c_0769"
+   ],
+   "merge": false,
+   "rule": "Formulating systems of equations consists of constructing simultaneous symbolic equations to represent constraints without solving them, whereas determining equation coefficients requires solving systems of equations to calculate numerical parameter values.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0734",
+    "c_0839"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0734",
+    "c_0922"
+   ],
+   "merge": false,
+   "rule": "A sets up and solves a system of algebraic equations to explicitly find unknown coefficients of an equation, whereas B applies polynomial interpolation formulas, finite differences, or polynomial identities to evaluate a polynomial at a target point.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0734",
+    "c_1122"
+   ],
+   "merge": false,
+   "rule": "A solves systems of scalar algebraic equations to find unknown scalar parameters, whereas B manipulates vector algebra (such as dot products, cross products, and vector linear combinations) to solve equations where the unknowns are vectors.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0734",
+    "c_1133"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0734",
+    "c_1442"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0759",
+    "c_1630"
+   ],
+   "merge": false,
+   "rule": "A evaluates quantum mechanical state properties using quantum-specific operations (such as partial traces, Schmidt decompositions, or entanglement entropy measures), whereas B evaluates linear algebra properties of matrices (such as determinants, matrix rank, hermiticity, or unitarity).",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0769",
+    "c_1133"
+   ],
+   "merge": false,
+   "rule": "A translates contextual constraints and problem conditions into a symbolic system of equations, whereas B performs algebraic manipulations (such as elimination or substitution) on an existing system of equations to solve for the unknown variables.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0769",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "Formulating equations translates problem constraints into symbolic algebraic equations without isolating variables, whereas solving equations manipulates established algebraic equations through arithmetic operations to determine variable values.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0773",
+    "c_0839"
+   ],
+   "merge": false,
+   "rule": "Calculating angle measures applies trigonometric identities and Euclidean geometry properties directly within geometric figures, whereas manipulating geometric and algebraic representations maps spatial configurations into coordinate, matrix, or vector equations to solve for unknown parameters.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0773",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Evaluating and summing multiple values computes discrete term values according to given conditions and aggregates them into a total sum, whereas calculating angle measures applies geometric theorems and trigonometric ratios to deduce unknown angular quantities.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0773",
+    "c_1288"
+   ],
+   "merge": false,
+   "rule": "Calculating via dot products executes vector component multiplications and vector norms to determine angles or projections, whereas calculating angle measures uses synthetic geometric theorems or trigonometric identities on geometric figures.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0773",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "Solving algebraic equations performs symbolic transformations (such as substitution, factoring, or term isolation) to solve for variables, whereas calculating angle measures applies geometric shape properties and trigonometric ratios to evaluate missing angles.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0773",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "Identifying shapes from path commands sequentially interprets a series of movement or drawing instructions to reconstruct and classify a shape, whereas calculating angle measures applies geometric theorems to evaluate specific numerical angle values in static figures.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0773",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "Skill A requires calculating a specific unknown angle measure or trigonometric ratio using geometric identities and spatial theorems, whereas Skill B requires finding an optimal extreme value (maximum or minimum) or parameter bound using inequality or calculus optimization techniques.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0779",
+    "c_1449"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0779",
+    "c_1689"
+   ],
+   "merge": false,
+   "rule": "Skill A requires mapping a specific textual discrepancy to a predefined taxonomy of translation error types, whereas Skill B requires evaluating textual entailment to determine whether a claim lacks logical or evidential support in a reference text.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0779",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "Skill A requires comparing parallel texts to classify linguistic discrepancies, whereas Skill B requires executing mathematical computations or formulas to generate a numerical value.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0779",
+    "c_1725"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0780",
+    "c_1598"
+   ],
+   "merge": false,
+   "rule": "Skill A requires determining the affective polarity or sentiment (positive, negative, neutral) of text in context, whereas Skill B requires evaluating orthographic and lexical edits to distinguish meaningful word changes from unintentional typographical errors.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0828",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Skill A requires verbatim duplication of designated prompt text at the very beginning of the response, whereas Skill B requires reasoning over transitive or linear relations to determine the positional rank of an item in a sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0828",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Skill A requires reproducing prompt text verbatim as an output prefix, whereas Skill B requires evaluating multiple-choice candidate options to select the one matching a computed outcome or retrieved fact.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0828",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Skill A requires verbatim duplication of designated prompt text at the start of the output, whereas Skill B requires reading comprehension to locate an entity in text and extract its associated attribute or property.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0828",
+    "c_1698"
+   ],
+   "merge": false,
+   "rule": "Skill A requires verbatim duplication of prompt text at the beginning of the output, whereas Skill B requires translating or structuring musical information into domain-specific musical notation syntax.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0836",
+    "c_1668"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0836",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "Skill A involves constructing rubric criteria under generation constraints, whereas Skill B involves extracting and condensing essential information from a source text into a summary under constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0839",
+    "c_1122"
+   ],
+   "merge": false,
+   "rule": "A requires formulating algebraic or vector equations from geometric definitions or properties, whereas B performs vector algebra operations directly on a given vector equation to isolate unknown vectors or scalar coefficients.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0839",
+    "c_1133"
+   ],
+   "merge": false,
+   "rule": "A requires mapping geometric concepts into algebraic or vector equations, whereas B computes common solutions by simultaneously solving a given system of algebraic equations or constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0839",
+    "c_1288"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0839",
+    "c_1442"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0839",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "A solves for fixed unknown parameters by setting up equality relations, whereas B determines extreme values (maxima/minima) or optimal bounds using optimization techniques or inequalities under constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0846",
+    "c_1115"
+   ],
+   "merge": false,
+   "rule": "A determines the theoretical approximations or boundary conditions under which a mathematical model or equation is valid, whereas B evaluates whether a physical reaction or decay process is permissible by checking conservation laws and selection rules.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0854",
+    "c_0862"
+   ],
+   "merge": false,
+   "rule": "Skill A requires step-by-step mental simulation of dynamic state updates over a temporal sequence, whereas Skill B requires evaluating semantic alignment between an action and domain-specific terminology.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0854",
+    "c_0880"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0854",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Skill A involves tracking sequential state transitions through a series of temporal events, whereas Skill B involves solving static relational and transitive constraints to deduce a fixed linear order.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0854",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "Skill A requires tracking entity transitions sequentially through dynamic events, whereas Skill B requires applying formal rules of deductive logic to quantify static premises.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0854",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "Skill A involves step-by-step state simulation through a narrative sequence, whereas Skill B involves direct data retrieval from a structured table or timetable.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0860",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Skill A requires proportional and rate-based multiplicative reasoning to solve for unknown variables, whereas Skill B requires evaluating independent numerical terms and performing additive aggregation.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0860",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "A requires applying arithmetic ratio scaling or unit rates directly to given values, whereas B requires setting up and symbolically manipulating variable equations or systems using algebraic transformations.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0862",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating described actions against background real-world knowledge of sport terminology, whereas B requires evaluating formal logical validity across explicitly stated quantified premises.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0862",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating whether an action aligns with real-world knowledge of sport-specific gameplay, whereas B requires locating entities within a text passage to extract stated or spatial attributes.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0880",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "A requires sequentially simulating dynamic state updates or relocations across a chronological series of events, whereas B requires resolving relational constraints to construct or deduce positions within a static linear ordering.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_0880",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "A requires step-by-step tracking of dynamic physical movements or state transformations through time, whereas B requires applying formal deductive logic to evaluate argument validity from quantified premises.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0880",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "A requires tracking dynamic state transformations across sequential events, whereas B requires direct lookup and data extraction from a static tabular transit schedule.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0890",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "To calculate date and time intervals, the solver applies calendar rules (such as month lengths and leap years) to compute elapsed time or target dates, whereas to identify positional ranks, the solver resolves relational and spatial constraints to place items in a linear sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0890",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "To calculate date and time intervals, the solver performs calendar-based temporal arithmetic, whereas to select an option corresponding to a derived state or retrieved fact, the solver matches a previously determined value or fact against a set of multiple-choice answer choices.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0890",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "To calculate date and time intervals, the solver tracks time progression across calendar boundaries, whereas to evaluate and sum multiple values, the solver individually calculates distinct numerical terms and adds them together.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0890",
+    "c_1150"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0890",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "To calculate date and time intervals, the solver steps through days, months, or years using calendar constraints, whereas to solve algebraic equations and systems, the solver performs symbolic manipulation and variable substitution on equations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0890",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "To calculate date and time intervals, the solver performs arithmetic operations across temporal boundaries, whereas to retrieve transit schedule information, the solver performs a direct table lookup to extract explicit timetable details.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0891",
+    "c_1010"
+   ],
+   "merge": false,
+   "rule": "A requires deducing the relative or absolute position of items along a linear sequence using spatial or transitive relations, whereas B requires applying counterfactual reasoning and normative principles to determine causal responsibility for an outcome.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0891",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "A requires arranging or traversing elements along a linear sequence to identify positional ranks, whereas B requires evaluating logical validity of premises and conclusions using rules of quantified formal logic.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0891",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "A requires resolving relative order constraints to determine an item's position in a sequence, whereas B requires evaluating numerical conditions or algebraic expressions and calculating their total sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0891",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "A requires inferring sequence order from spatial or transitive relational clues, whereas B requires locating and extracting specific explicit entries (e.g., times, routes) directly from a tabular transit timetable.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0891",
+    "c_1725"
+   ],
+   "merge": false,
+   "rule": "A requires ordering items along a continuous linear sequence based on spatial or transitive clues, whereas B requires comparing a original text with its translated counterpart to classify discrepancies into error taxonomy categories.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0900",
+    "c_1630"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_0901",
+    "c_1033"
+   ],
+   "merge": false,
+   "rule": "A requires evaluating physical, instrumental, or atmospheric limits against observational requirements to select viable targets or modes, whereas B requires applying physical relations to spectral features or photometric metrics to infer physical state properties.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0952",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "A requires scanning a sequential timeline to locate unassigned time intervals between events, whereas B requires evaluating whether a conclusion logically follows from quantified premises using formal deductive logic.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0954",
+    "c_1585"
+   ],
+   "merge": false,
+   "rule": "A requires calculating state occupancies or partition functions by summing Boltzmann factors over discrete microstates, whereas B requires solving continuum differential or algebraic balance equations governing physical equilibrium.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1049"
+   ],
+   "merge": false,
+   "rule": "A requires matching a derived result or retrieved fact against multiple-choice options, whereas B requires analyzing the formal logical entailment of a conclusion from quantified premises.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "A requires matching a derived result or retrieved fact against multiple-choice options, whereas B requires calculating individual numerical terms from expressions and computing their total sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "A requires matching a derived result or retrieved fact against multiple-choice options, whereas B requires algebraically manipulating equations and systems of equations to solve for unknown variables.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1564"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "A involves matching a known or computed result to a provided set of multiple-choice options, whereas B involves performing mathematical computations to generate a numerical value directly.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_0983",
+    "c_1480"
+   ],
+   "merge": false,
+   "rule": "A selects or eliminates constraints from a set of rules based on applicability, whereas B tests candidate entities or dimensions against constraints to find a valid assignment or configuration.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1019",
+    "c_1133"
+   ],
+   "merge": false,
+   "rule": "A optimizes an objective function or expression to determine its maximum or minimum value under constraints, whereas B satisfies simultaneous equations to solve for exact variable values or intersection points.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1019",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "A identifies the peak or trough value (maximum/minimum) of an expression under restrictions, whereas B algebraically solves equations to find exact numerical values or variable solutions.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1019",
+    "c_1574"
+   ],
+   "merge": false,
+   "rule": "A calculates the optimal maximum or minimum point of an expression, whereas B evaluates inequalities and boundary conditions to determine the entire feasible domain or range of valid values.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1019",
+    "c_1629"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1033",
+    "c_1585"
+   ],
+   "merge": false,
+   "rule": "One requires analyzing spectral features or brightness metrics (such as line ratios, shifts, or magnitudes) to infer physical properties, whereas the other requires setting up and solving differential or algebraic equations of hydrostatic or thermal equilibrium.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1049",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "One requires applying formal logic rules to check whether a conclusion is validly entailed by quantified premises, whereas the other requires evaluating mathematical expressions to produce numerical values and calculating their arithmetic sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1049",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "One requires evaluating logical entailment between premises and conclusions, whereas the other requires tracing coordinate-based path execution instructions to reconstruct and recognize a geometric shape.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1061",
+    "c_1075"
+   ],
+   "merge": false,
+   "rule": "One requires mapping molecular symmetry and spin couplings to predict or analyze peak multiplicities and signal counts, whereas the other requires selecting chemical reagents and steps to plan or complete a synthetic reaction sequence.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1102",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "One requires computing numerical values from mathematical expressions and summing them, whereas the other requires parsing written text to locate a specified entity and extract its stated or spatial properties.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1102",
+    "c_1150"
+   ],
+   "merge": false,
+   "rule": "c_1150 requires applying calendar modular arithmetic (accounting for month lengths, leap years, or day-of-week cycles) to adjust a date by a temporal offset, whereas c_1102 requires evaluating numerical expressions and computing their total sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1102",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "c_1198 requires performing prime factorization or applying prime-exponent formulas (such as Legendre's formula) to find the multiplicity of a prime factor, whereas c_1102 requires evaluating multiple expressions and summing their results.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1102",
+    "c_1253"
+   ],
+   "merge": false,
+   "rule": "c_1253 requires collapsing a nested fractional structure recursively from the bottom up, whereas c_1102 requires evaluating independent expressions and calculating their sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1102",
+    "c_1338"
+   ],
+   "merge": false,
+   "rule": "c_1338 requires finding the greatest common divisor of a numerator and denominator and dividing both by it, whereas c_1102 requires evaluating multiple values and adding them together.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1102",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "c_1564 requires looking up and extracting explicit entry data directly from a timetable or schedule, whereas c_1102 requires computing numerical values according to formulas or conditions and calculating their sum.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1102",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "c_1102 requires an explicit aggregation step of calculating the total sum across multiple generated values, whereas c_1693 requires generating specific individual values from constraints or formulas without summing them.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1115",
+    "c_1494"
+   ],
+   "merge": false,
+   "rule": "Evaluating physical process validity requires checking conservation laws or selection rules to test whether a specific process or decay is permissible, whereas distinguishing physical forces requires comparing physical properties to classify the type of interaction acting in a system.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1119",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "Identifying item attributes from text requires retrieving qualitative properties or spatial relationships directly from a passage, whereas generating numerical values requires performing mathematical calculations or formula evaluations.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1122",
+    "c_1288"
+   ],
+   "merge": false,
+   "rule": "Solving vector equations requires algebraically manipulating vector expressions to solve for unknown vector variables or scalar coefficients, whereas calculating geometric angles and projections requires applying dot product formulas to compute scalar geometric properties.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1133",
+    "c_1442"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1133",
+    "c_1563"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1133",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "Solving systems of equations requires finding specific values or roots that satisfy equality relations, whereas optimizing a quantity requires determining maximum or minimum extreme values under constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1133",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "A requires performing algebraic manipulation to solve for unknown variables within interdependent equations or constraints, whereas B requires directly evaluating a given formula or performing arithmetic computation to calculate a value.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1150",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "A requires performing calendar date adjustments using temporal offsets and calendar rules, whereas B requires applying algebraic manipulation to solve equations for unknown variables.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1150",
+    "c_1564"
+   ],
+   "merge": false,
+   "rule": "A requires applying temporal arithmetic to shift calendar dates backward or forward, whereas B requires scanning and retrieving explicit time or route information from a structured transit schedule.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1174",
+    "c_1521"
+   ],
+   "merge": false,
+   "rule": "A requires adhering to mechanical output formatting and layout constraints during text generation, whereas B requires performing stylistic text-to-text transformation to adapt the tone or register of an existing source text while preserving its underlying meaning.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1174",
+    "c_1618"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1174",
+    "c_1668"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1174",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "Skill A involves satisfying structural, mechanical, or formatting rules on output across arbitrary generative tasks, whereas Skill B specifically requires analyzing and condensing source information into a reduced-length summary under constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1195",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "Skill A computes terms, sums, or properties of ordered sequences generated by recurrence relations or patterns, whereas Skill B determines the power or multiplicity of prime factors dividing an integer, product, or factorial.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1195",
+    "c_1365"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates terms or aggregate sums of sequential processes defined by recurrences, whereas Skill B determines the cardinality of a set of integers that meet logical, modular, or bounded numerical predicates.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1198",
+    "c_1338"
+   ],
+   "merge": false,
+   "rule": "Skill A calculates prime factor multiplicities within numbers or products, whereas Skill B computes common factors to divide numerator and denominator to simplify a fraction.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1198",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "Skill A analyzes number-theoretic prime factorizations and prime powers, whereas Skill B performs symbolic algebraic manipulations and substitutions to solve systems of equations for unknown variables.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1198",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "Skill A computes the power or multiplicity of prime factors within an integer expression, whereas Skill B applies optimization techniques or algebraic inequalities to determine extreme values of a constrained function.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1220",
+    "c_1274"
+   ],
+   "merge": false,
+   "rule": "Evaluating collinearity tests whether three or more point coordinates share a single line (e.g., checking if slopes between point pairs are equal or determinant equals zero), whereas evaluating line parallelism/perpendicularity compares the relative direction or slope relationship between two distinct lines or vectors.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1253",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "Evaluating continued fractions involves expanding or recursively simplifying nested fraction representations, whereas solving algebraic equations involves performing symbolic operations (such as variable isolation, factoring, or system elimination) to find unknown values.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1278",
+    "c_1603"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1365",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "Counting discrete values determines the total number/cardinality of elements satisfying conditions, whereas optimizing a quantity determines extreme values (maxima or minima) using algebraic inequalities, calculus, or geometric bounds.",
+   "why": "competition+similar"
+  },
+  {
+   "pair": [
+    "c_1365",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "Counting discrete values calculates the total count of items satisfying given criteria, whereas generating numerical values evaluates explicit formulas or procedural rules to produce specific target numbers.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1368",
+    "c_1674"
+   ],
+   "merge": false,
+   "rule": "Evaluating molecular chirality analyzes geometric stereocenters and lack of internal symmetry elements (such as planes or inversion centers), whereas evaluating molecular polarizability analyzes electron cloud size and ease of deformation under an external electric field.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1442",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "In A, the solver performs symbolic algebraic manipulation on equations to isolate unknown parameters, whereas in B, the solver sequentially traces coordinate drawing commands to track path boundaries and identify the resulting geometric shape.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1442",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "In A, the solver applies equality transformations to solve for fixed unknown values, whereas in B, the solver applies optimization techniques or inequality bounds to find maximum or minimum values of a target function under constraints.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1449",
+    "c_1725"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1497",
+    "c_1693"
+   ],
+   "merge": false,
+   "rule": "In A, the solver traces spatial vector path commands to categorize a geometric shape, whereas in B, the solver evaluates mathematical constraints or rules to calculate a numerical value.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1521",
+    "c_1598"
+   ],
+   "merge": false,
+   "rule": "In A, the solver constructs a rewritten text to fulfill specific stylistic and structural instructions, whereas in B, the solver evaluates candidate text options to classify whether a change is an intentional semantic modification or a typographical error.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1521",
+    "c_1618"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1521",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "B requires the solver to extract and filter key facts from a source text to reduce overall content volume (condense), whereas A requires the solver to rephrase existing text to adjust tone or style without filtering or condensing content.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1563",
+    "c_1574"
+   ],
+   "merge": true,
+   "rule": null,
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1618",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "B requires the solver to condense source information by selecting main points, whereas A requires the solver to translate or explain text in a specified foreign language.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1668",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "B requires the solver to extract and condense key information from source text, whereas A requires the solver to generate a prompt response while adhering to formatting and length constraints without performing text condensation.",
+   "why": "+similar"
+  },
+  {
+   "pair": [
+    "c_1689",
+    "c_1725"
+   ],
+   "merge": false,
+   "rule": "A requires the solver to verify whether target claims are factually supported by source evidence, whereas B requires the solver to classify identified translation discrepancies into a predefined taxonomy of translation error types.",
+   "why": "competition"
+  },
+  {
+   "pair": [
+    "c_1693",
+    "c_1725"
+   ],
+   "merge": false,
+   "rule": "A requires the solver to perform mathematical calculations to compute numerical outputs, whereas B requires the solver to compare translated texts to categorize translation errors.",
+   "why": "competition"
+  }
+ ]
+}

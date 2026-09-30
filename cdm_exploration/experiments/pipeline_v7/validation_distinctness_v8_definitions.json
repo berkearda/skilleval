@@ -1,0 +1,429 @@
+{
+ "judge": "gemini-3.6-flash",
+ "results": [
+  {
+   "pair": [
+    "c_0005",
+    "c_0476"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "One calculates spatial extents (lengths, areas, volumes) using metric distance and spatial formulas, whereas the other evaluates angular values or trigonometric functions using angle-sum relationships and trigonometric identities."
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "One applies geometric figure properties and spatial measurement formulas to calculate geometric dimensions, whereas the other applies symbolic manipulation and arithmetic equivalence rules to solve or simplify algebraic equations."
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0276"
+   ],
+   "merge": false,
+   "rule": "One constructs a linear sequence by evaluating relative and absolute ordering constraints, whereas the other evaluates qualitative narrative evidence and traits to perform role matching or fault attribution."
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0711"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0891"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0034",
+    "c_0952"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0038",
+    "c_0309"
+   ],
+   "merge": false,
+   "rule": "One infers underlying biological mechanisms and functional pathways from empirical observations, whereas the other performs root-cause analysis on unexpected results to identify procedural or methodological failure points."
+  },
+  {
+   "pair": [
+    "c_0059",
+    "c_0147"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0111",
+    "c_0183"
+   ],
+   "merge": false,
+   "rule": "One translates quantitative spectral signals (chemical shifts, absorption bands, splitting) into structural molecular fragments, whereas the other applies chemical reaction mechanisms and electron-pushing logic to transform reactants into products."
+  },
+  {
+   "pair": [
+    "c_0115",
+    "c_0276"
+   ],
+   "merge": false,
+   "rule": "In c_0115, the solver evaluates plausible circumstantial factors (motive, means, and opportunity) to deduce a crime suspect, whereas in c_0276, the solver applies deterministic constraint satisfaction to map individuals to specific roles or tasks based on described traits and rules."
+  },
+  {
+   "pair": [
+    "c_0115",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "In c_0115, the solver evaluates circumstantial narrative evidence to deduce a culprit, whereas in c_0854, the solver updates state variables chronologically through an explicit sequence of transfers or swaps."
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_0255"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_1497"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0147",
+    "c_0216"
+   ],
+   "merge": false,
+   "rule": "In c_0147, the solver uses number-theoretic properties (such as divisibility rules, modular arithmetic, or prime factors) to count or identify satisfying integers, whereas in c_0216, the solver uses general combinatorial principles (e.g., permutations, combinations) to count valid outcomes under arbitrary constraints."
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0469"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "In c_0166, the operation specifically requires tracking symmetric pairwise swap operations between entities, whereas in c_0854, the solver updates variable states through general, non-swap state transitions, mutations, or transfers."
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "In c_0166, the solver tracks step-by-step entity exchanges across a sequence, whereas in c_0977, the solver compares an already-derived answer against a set of multiple-choice options to identify the match."
+  },
+  {
+   "pair": [
+    "c_0183",
+    "c_0212"
+   ],
+   "merge": false,
+   "rule": "In c_0183, the solver predicts the reactivity, mechanisms, or outcome of a single chemical reaction step, whereas in c_0212, the solver traces a multi-step reaction pathway or synthetic chain to deduce missing reagents, intermediates, or end-products across consecutive steps."
+  },
+  {
+   "pair": [
+    "c_0215",
+    "c_1133"
+   ],
+   "merge": false,
+   "rule": "In c_0215, the solver substitutes values into an expression and simplifies it to evaluate a result, whereas in c_1133, the solver algebraically manipulates equations or inequalities to isolate and find the unknown variable values or solution sets."
+  },
+  {
+   "pair": [
+    "c_0215",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "A substitutes given values or terms into an expression and simplifies it, whereas B applies algebraic transformations and exponent rules to solve for an unknown variable in an equation."
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_0454"
+   ],
+   "merge": false,
+   "rule": "A applies combinatorial principles (e.g., permutations, combinations) to calculate the total number of valid outcomes under constraints, whereas B reads a text description to extract and tally explicit objects meeting concrete criteria."
+  },
+  {
+   "pair": [
+    "c_0216",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "A uses counting and combinatorial rules to find the total count of valid arrangements or choices, whereas B applies algebraic operations to isolate and solve for an unknown variable."
+  },
+  {
+   "pair": [
+    "c_0218",
+    "c_0255"
+   ],
+   "merge": false,
+   "rule": "A tracks a path's net displacement to verify if the final coordinates match the starting coordinates, whereas B evaluates geometric properties (angles, side lengths, vertices) of a path sequence to classify the geometric shape."
+  },
+  {
+   "pair": [
+    "c_0218",
+    "c_0880"
+   ],
+   "merge": false,
+   "rule": "A performs a boolean comparison checking whether cumulative displacement equals zero, whereas B calculates and outputs the precise final coordinates or location vector after a sequence of movements."
+  },
+  {
+   "pair": [
+    "c_0255",
+    "c_1497"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0708"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "A solves static constraint-satisfaction problems by matching entities based on narrative clues, whereas B sequentially updates state vectors over time through explicit chronological swap or transfer operations."
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "A evaluates character traits and circumstantial evidence to satisfy logical constraints, whereas B uses positional indexing rules to identify an item at a specific ordinal or relative rank in a sequence."
+  },
+  {
+   "pair": [
+    "c_0382",
+    "c_1010"
+   ],
+   "merge": false,
+   "rule": "A models theory-of-mind parameters (agent mental states, foresight, and desires) to judge intentionality, whereas B evaluates counterfactual dependencies and physical causal mechanisms to judge event causation."
+  },
+  {
+   "pair": [
+    "c_0454",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Task A involves parsing text to filter discrete objects meeting qualitative conditions and counting them, whereas Task B involves evaluating mathematical expressions or functions to compute numerical values and calculating their arithmetic sum or average."
+  },
+  {
+   "pair": [
+    "c_0454",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "Task A involves filtering and counting textually described objects that satisfy criteria, whereas Task B involves tracing 2D spatial coordinate commands in sequence to recognize the resulting geometric shape."
+  },
+  {
+   "pair": [
+    "c_0468",
+    "c_0643"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0468",
+    "c_1521"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0854"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Task A dynamically tracks state transitions across a chronological sequence of swaps, whereas Task B compares a known result against a list of options to select the matching multiple-choice answer."
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0523"
+   ],
+   "merge": false,
+   "rule": "Task A parses formal logical syntax using boolean operator precedence (AND, OR, NOT), whereas Task B evaluates truth values by propagating assertions sequentially down a relational chain of meta-statements about truthfulness or deceit."
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_1521"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0643",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "Task A generates novel text from scratch under specified mechanical constraints, whereas Task B extracts and compresses key information from a source text to create a summary while adhering to constraints."
+  },
+  {
+   "pair": [
+    "c_0708",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "Task A solves a static constraint-satisfaction problem to match individuals to roles based on qualitative traits and conflicts, whereas Task B simulates a chronological sequence of explicit transfer events to track changing states over time."
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "In A, the solver must deduce an order by integrating a system of comparative relational constraints, whereas in B, the solver directly indexes or locates an item at a given position within an already defined linear sequence."
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "In A, the solver integrates relational constraints to determine an item's position, whereas in B, the solver compares a previously calculated answer against candidate choices to select the matching option."
+  },
+  {
+   "pair": [
+    "c_0779",
+    "c_1725"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0890",
+    "c_1150"
+   ],
+   "merge": false,
+   "rule": "In A, the solver performs calendar arithmetic adjusting for varying month lengths and leap years, whereas in B, the solver resolves a chain of relative linguistic temporal offsets relative to an anchor date."
+  },
+  {
+   "pair": [
+    "c_0891",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "In A, the solver traverses or indexes a sequence to identify the item at a specific position, whereas in B, the solver matches a previously computed result to one of the provided multiple-choice options."
+  },
+  {
+   "pair": [
+    "c_0891",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "In A, the solver retrieves an item from a 1D linear sequence based on positional rank, whereas in B, the solver traces a series of 2D directional drawing commands to determine the resulting geometric shape."
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "In A, the solver matches a computed result against multiple-choice options, whereas in B, the solver parses descriptive text to locate a target object and extract a specified property attribute."
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1150"
+   ],
+   "merge": false,
+   "rule": "In A, the solver selects the multiple-choice option corresponding to a derived answer, whereas in B, the solver computes a calendar date by resolving sequential temporal offsets from a starting date."
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "In A, the solver matches a derived value against a set of multiple-choice options, whereas in B, the solver tracks 2D movement commands to identify the enclosed geometric shape."
+  },
+  {
+   "pair": [
+    "c_1102",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "In A, the solver evaluates mathematical expressions for multiple items and computes their aggregate sum or average, whereas in B, the solver traces 2D path commands to recognize a geometric shape."
+  },
+  {
+   "pair": [
+    "c_1133",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "In A, the solver finds the set of values or intervals that satisfy an equation or inequality relation. In B, the solver applies algebraic identities, exponent laws, or simplification rules to rewrite or evaluate an expression."
+  },
+  {
+   "pair": [
+    "c_1133",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "In A, the solver identifies the specific variable values or intervals where an equation or inequality holds true. In B, the solver optimizes a target quantity to determine its global or local maximum or minimum value."
+  },
+  {
+   "pair": [
+    "c_1521",
+    "c_1691"
+   ],
+   "merge": false,
+   "rule": "In A, the solver generates or rewrites text to satisfy mechanical or stylistic constraints without requiring source-content condensation. In B, the solver must perform information distillation by extracting and condensing core points from source material while satisfying constraints."
+  }
+ ]
+}

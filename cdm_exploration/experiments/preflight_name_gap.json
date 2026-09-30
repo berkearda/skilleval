@@ -1,0 +1,106 @@
+{
+ "rows": [
+  {
+   "name": "apply chemical concepts",
+   "arm": "trusted",
+   "own": 1.0,
+   "stranger": 0.0,
+   "gap": 1.0
+  },
+  {
+   "name": "apply reasoning to find the answer",
+   "arm": "vague",
+   "own": 1.0,
+   "stranger": 0.8,
+   "gap": 0.19999999999999996
+  },
+  {
+   "name": "apply scientific principles",
+   "arm": "trusted",
+   "own": 0.9,
+   "stranger": 0.2,
+   "gap": 0.7
+  },
+  {
+   "name": "assign team roles based on preferences",
+   "arm": "trusted",
+   "own": 1.0,
+   "stranger": 0.0,
+   "gap": 1.0
+  },
+  {
+   "name": "compose song lyrics for various themes",
+   "arm": "trusted",
+   "own": 0.6,
+   "stranger": 0.0,
+   "gap": 0.6
+  },
+  {
+   "name": "determine possible time interval for event given constraints",
+   "arm": "trusted",
+   "own": 1.0,
+   "stranger": 0.1,
+   "gap": 0.9
+  },
+  {
+   "name": "determine relative order",
+   "arm": "trusted",
+   "own": 1.0,
+   "stranger": 0.2,
+   "gap": 0.8
+  },
+  {
+   "name": "evaluate causation in scenarios",
+   "arm": "trusted",
+   "own": 1.0,
+   "stranger": 0.0,
+   "gap": 1.0
+  },
+  {
+   "name": "follow the given instructions",
+   "arm": "vague",
+   "own": 1.0,
+   "stranger": 0.5,
+   "gap": 0.5
+  },
+  {
+   "name": "identify causation in given scenarios",
+   "arm": "trusted",
+   "own": 1.0,
+   "stranger": 0.2,
+   "gap": 0.8
+  },
+  {
+   "name": "identify humorous wordplay",
+   "arm": "trusted",
+   "own": 1.0,
+   "stranger": 0.0,
+   "gap": 1.0
+  },
+  {
+   "name": "interpreting directional commands for navigation",
+   "arm": "trusted",
+   "own": 0.9,
+   "stranger": 0.1,
+   "gap": 0.8
+  },
+  {
+   "name": "solve the given problem",
+   "arm": "vague",
+   "own": 1.0,
+   "stranger": 1.0,
+   "gap": 0.0
+  },
+  {
+   "name": "understand the question and respond",
+   "arm": "vague",
+   "own": 1.0,
+   "stranger": 1.0,
+   "gap": 0.0
+  }
+ ],
+ "threshold": 0.55,
+ "n_own": 10,
+ "n_stranger": 10,
+ "overlap": false
+}

@@ -1,0 +1,409 @@
+{
+ "note": "The submitted K=100 skill list as a codebook, so the Step 6 checks can score it. Only names exist; the definition field repeats the name. 33 of 100 names are cut at 50 characters in every saved copy.",
+ "source_qmatrix": "cdm_exploration/data/cdm_ready/qmatrix_v2_K100.npy",
+ "source_names": "cdm_exploration/data/cdm_ready/cluster_labels_v2_K100.json",
+ "row_order": "row i is item_idx i (response_matrix_v2_full_items.json)",
+ "codes": {
+  "k100_000": {
+   "name": "Inferring Time Intervals From Sequential Events",
+   "definition": "Inferring Time Intervals From Sequential Events"
+  },
+  "k100_001": {
+   "name": "Applying Inequality Theorems To Minimize Expressio",
+   "definition": "Applying Inequality Theorems To Minimize Expressio"
+  },
+  "k100_002": {
+   "name": "Analyzing Coordinates To Determine Shape Type",
+   "definition": "Analyzing Coordinates To Determine Shape Type"
+  },
+  "k100_003": {
+   "name": "Applying Linear Combination Of Operators In Quantu",
+   "definition": "Applying Linear Combination Of Operators In Quantu"
+  },
+  "k100_004": {
+   "name": "Applying Wetting Theory To Liquid Droplets",
+   "definition": "Applying Wetting Theory To Liquid Droplets"
+  },
+  "k100_005": {
+   "name": "Evaluating Sporting Event Plausibility Based On Co",
+   "definition": "Evaluating Sporting Event Plausibility Based On Co"
+  },
+  "k100_006": {
+   "name": "Applying Quadratic Formula To Find Roots",
+   "definition": "Applying Quadratic Formula To Find Roots"
+  },
+  "k100_007": {
+   "name": "Identifying Themes In Science Fiction Movies",
+   "definition": "Identifying Themes In Science Fiction Movies"
+  },
+  "k100_008": {
+   "name": "Maintaining Consistent Tone In Creative Writing",
+   "definition": "Maintaining Consistent Tone In Creative Writing"
+  },
+  "k100_009": {
+   "name": "Applying Combinatorial Principles To Dice Rolls",
+   "definition": "Applying Combinatorial Principles To Dice Rolls"
+  },
+  "k100_010": {
+   "name": "Applying Set Theory To Count Unique Items",
+   "definition": "Applying Set Theory To Count Unique Items"
+  },
+  "k100_011": {
+   "name": "Applying Trigonometric Identities To Solve Equatio",
+   "definition": "Applying Trigonometric Identities To Solve Equatio"
+  },
+  "k100_012": {
+   "name": "Evaluating Consistency In League Punishments",
+   "definition": "Evaluating Consistency In League Punishments"
+  },
+  "k100_013": {
+   "name": "Evaluating Conditions For Automated Shutdown",
+   "definition": "Evaluating Conditions For Automated Shutdown"
+  },
+  "k100_014": {
+   "name": "Calculating Decay Length From Energy And Mass",
+   "definition": "Calculating Decay Length From Energy And Mass"
+  },
+  "k100_015": {
+   "name": "Interpreting Numerical Values In Context",
+   "definition": "Interpreting Numerical Values In Context"
+  },
+  "k100_016": {
+   "name": "Analyzing Geometric Interpretations Of Matrix Oper",
+   "definition": "Analyzing Geometric Interpretations Of Matrix Oper"
+  },
+  "k100_017": {
+   "name": "Calculating Ratios Of Segments In Triangles",
+   "definition": "Calculating Ratios Of Segments In Triangles"
+  },
+  "k100_018": {
+   "name": "Identifying Penguin Attributes From Tabular Data",
+   "definition": "Identifying Penguin Attributes From Tabular Data"
+  },
+  "k100_019": {
+   "name": "Applying Divisibility Rules To Integer Sets",
+   "definition": "Applying Divisibility Rules To Integer Sets"
+  },
+  "k100_020": {
+   "name": "Inferring Object Locations From Contextual Clues",
+   "definition": "Inferring Object Locations From Contextual Clues"
+  },
+  "k100_021": {
+   "name": "Adapting Language For Age Appropriate Audience",
+   "definition": "Adapting Language For Age Appropriate Audience"
+  },
+  "k100_022": {
+   "name": "Calculating Work Done In Variable Force Scenarios",
+   "definition": "Calculating Work Done In Variable Force Scenarios"
+  },
+  "k100_023": {
+   "name": "Maintaining Word Count Constraints In Responses",
+   "definition": "Maintaining Word Count Constraints In Responses"
+  },
+  "k100_024": {
+   "name": "Analyzing Effects Of Vertical Stretch On Graphs",
+   "definition": "Analyzing Effects Of Vertical Stretch On Graphs"
+  },
+  "k100_025": {
+   "name": "Calculating Orbital Period Ratio Between Planets",
+   "definition": "Calculating Orbital Period Ratio Between Planets"
+  },
+  "k100_026": {
+   "name": "Applying Properties Of Rectangles To Find Dimensio",
+   "definition": "Applying Properties Of Rectangles To Find Dimensio"
+  },
+  "k100_027": {
+   "name": "Manipulating Algebraic Expressions For Variance",
+   "definition": "Manipulating Algebraic Expressions For Variance"
+  },
+  "k100_028": {
+   "name": "Articulating Feature Vs Bug Distinction",
+   "definition": "Articulating Feature Vs Bug Distinction"
+  },
+  "k100_029": {
+   "name": "Identifying Sarcasm In Verbal Expressions",
+   "definition": "Identifying Sarcasm In Verbal Expressions"
+  },
+  "k100_030": {
+   "name": "Applying Relativity To Calculate Velocity Vectors",
+   "definition": "Applying Relativity To Calculate Velocity Vectors"
+  },
+  "k100_031": {
+   "name": "Applying Nernst Equation To Redox Potential",
+   "definition": "Applying Nernst Equation To Redox Potential"
+  },
+  "k100_032": {
+   "name": "Identifying Humorous Wordplay In Artist Names",
+   "definition": "Identifying Humorous Wordplay In Artist Names"
+  },
+  "k100_033": {
+   "name": "Adapting Tone For Dialogue In Urdu Language",
+   "definition": "Adapting Tone For Dialogue In Urdu Language"
+  },
+  "k100_034": {
+   "name": "Identifying Interstellar Medium Types In Astronomy",
+   "definition": "Identifying Interstellar Medium Types In Astronomy"
+  },
+  "k100_035": {
+   "name": "Evaluating Function Values At Specific Points",
+   "definition": "Evaluating Function Values At Specific Points"
+  },
+  "k100_036": {
+   "name": "Interpreting Directional Commands For Navigation",
+   "definition": "Interpreting Directional Commands For Navigation"
+  },
+  "k100_037": {
+   "name": "Assessing Causal Relationships In Fertilizer Use",
+   "definition": "Assessing Causal Relationships In Fertilizer Use"
+  },
+  "k100_038": {
+   "name": "Applying Recursion To Define Number Sequences",
+   "definition": "Applying Recursion To Define Number Sequences"
+  },
+  "k100_039": {
+   "name": "Summing Coefficients Of Polynomial Expression",
+   "definition": "Summing Coefficients Of Polynomial Expression"
+  },
+  "k100_040": {
+   "name": "Applying Albedo Concepts To Temperature Difference",
+   "definition": "Applying Albedo Concepts To Temperature Difference"
+  },
+  "k100_041": {
+   "name": "Organizing Information Based On Given Clues",
+   "definition": "Organizing Information Based On Given Clues"
+  },
+  "k100_042": {
+   "name": "Identifying Structural Isomers In Organic Compound",
+   "definition": "Identifying Structural Isomers In Organic Compound"
+  },
+  "k100_043": {
+   "name": "Evaluating Climate Control System Activation Condi",
+   "definition": "Evaluating Climate Control System Activation Condi"
+  },
+  "k100_044": {
+   "name": "Applying Molarity Concepts To Solution Mixing",
+   "definition": "Applying Molarity Concepts To Solution Mixing"
+  },
+  "k100_045": {
+   "name": "Identifying Mutations In Nucleotide Sequences",
+   "definition": "Identifying Mutations In Nucleotide Sequences"
+  },
+  "k100_046": {
+   "name": "Crafting Concise Descriptions Of Professional Acti",
+   "definition": "Crafting Concise Descriptions Of Professional Acti"
+  },
+  "k100_047": {
+   "name": "Tracking Object Trades Among Multiple Participants",
+   "definition": "Tracking Object Trades Among Multiple Participants"
+  },
+  "k100_048": {
+   "name": "Analyzing Historical Context Of Sunni Shia Split",
+   "definition": "Analyzing Historical Context Of Sunni Shia Split"
+  },
+  "k100_049": {
+   "name": "Applying Properties Of Matrix Norms To Vectors",
+   "definition": "Applying Properties Of Matrix Norms To Vectors"
+  },
+  "k100_050": {
+   "name": "Embedding Comments With Security Keywords In Code ",
+   "definition": "Embedding Comments With Security Keywords In Code "
+  },
+  "k100_051": {
+   "name": "Articulating Customer Rights Under Consumer Protec",
+   "definition": "Articulating Customer Rights Under Consumer Protec"
+  },
+  "k100_052": {
+   "name": "Identifying Alphabetical Order Of Names In Table",
+   "definition": "Identifying Alphabetical Order Of Names In Table"
+  },
+  "k100_053": {
+   "name": "Avoiding Sensitive Terms In Condolence Messages",
+   "definition": "Avoiding Sensitive Terms In Condolence Messages"
+  },
+  "k100_054": {
+   "name": "Analyzing Door Count Distribution In Car Types",
+   "definition": "Analyzing Door Count Distribution In Car Types"
+  },
+  "k100_055": {
+   "name": "Applying Edington Limit To Black Hole Mass Ratio",
+   "definition": "Applying Edington Limit To Black Hole Mass Ratio"
+  },
+  "k100_056": {
+   "name": "Separating Versions With Specific Delimiters",
+   "definition": "Separating Versions With Specific Delimiters"
+  },
+  "k100_057": {
+   "name": "Applying Divisibility Rules To Factorials",
+   "definition": "Applying Divisibility Rules To Factorials"
+  },
+  "k100_058": {
+   "name": "Calculating Compound Interest With Quarterly Compo",
+   "definition": "Calculating Compound Interest With Quarterly Compo"
+  },
+  "k100_059": {
+   "name": "Applying Combinatorial Principles To Pet Ownership",
+   "definition": "Applying Combinatorial Principles To Pet Ownership"
+  },
+  "k100_060": {
+   "name": "Extracting Data From Table Headers",
+   "definition": "Extracting Data From Table Headers"
+  },
+  "k100_061": {
+   "name": "Embedding Asterisk Symbols For Visual Separation",
+   "definition": "Embedding Asterisk Symbols For Visual Separation"
+  },
+  "k100_062": {
+   "name": "Applying Maxwell Equations To Electromagnetic Fiel",
+   "definition": "Applying Maxwell Equations To Electromagnetic Fiel"
+  },
+  "k100_063": {
+   "name": "Applying Synonyms To Replace Restricted Vocabulary",
+   "definition": "Applying Synonyms To Replace Restricted Vocabulary"
+  },
+  "k100_064": {
+   "name": "Recognizing Symmetry In Two Dimensional Figures",
+   "definition": "Recognizing Symmetry In Two Dimensional Figures"
+  },
+  "k100_065": {
+   "name": "Analyzing Historical Significance Of Chess Program",
+   "definition": "Analyzing Historical Significance Of Chess Program"
+  },
+  "k100_066": {
+   "name": "Applying Pattern Recognition To Algorithmic Output",
+   "definition": "Applying Pattern Recognition To Algorithmic Output"
+  },
+  "k100_067": {
+   "name": "Ph\u00e2n T\u00edch Ng\u1eef C\u1ea3nh C\u1ee7a Nhi\u1ec7m V\u1ee5 X\u00e3 H\u1ed9i",
+   "definition": "Ph\u00e2n T\u00edch Ng\u1eef C\u1ea3nh C\u1ee7a Nhi\u1ec7m V\u1ee5 X\u00e3 H\u1ed9i"
+  },
+  "k100_068": {
+   "name": "Calculating Future Dates From Anniversary Informat",
+   "definition": "Calculating Future Dates From Anniversary Informat"
+  },
+  "k100_069": {
+   "name": "Applying Percentage Rates To Income Segments",
+   "definition": "Applying Percentage Rates To Income Segments"
+  },
+  "k100_070": {
+   "name": "Analyzing User Access Patterns Over Time",
+   "definition": "Analyzing User Access Patterns Over Time"
+  },
+  "k100_071": {
+   "name": "Applying Random Variable Concepts To Sleep Pattern",
+   "definition": "Applying Random Variable Concepts To Sleep Pattern"
+  },
+  "k100_072": {
+   "name": "Applying Discrete Group Approximations To Gauge Th",
+   "definition": "Applying Discrete Group Approximations To Gauge Th"
+  },
+  "k100_073": {
+   "name": "Calculating Eigenvalues Of Quantum Operators",
+   "definition": "Calculating Eigenvalues Of Quantum Operators"
+  },
+  "k100_074": {
+   "name": "Applying De Morgan Laws To Boolean Logic",
+   "definition": "Applying De Morgan Laws To Boolean Logic"
+  },
+  "k100_075": {
+   "name": "Constructing Bash Scripts For File Downloads",
+   "definition": "Constructing Bash Scripts For File Downloads"
+  },
+  "k100_076": {
+   "name": "Analyzing Surface Properties Of Materials",
+   "definition": "Analyzing Surface Properties Of Materials"
+  },
+  "k100_077": {
+   "name": "Calculating Oscillation Frequency Of Quantum Parti",
+   "definition": "Calculating Oscillation Frequency Of Quantum Parti"
+  },
+  "k100_078": {
+   "name": "Distinguishing Fruits From Non Fruits",
+   "definition": "Distinguishing Fruits From Non Fruits"
+  },
+  "k100_079": {
+   "name": "Coordinating Workflow Between Service Providers",
+   "definition": "Coordinating Workflow Between Service Providers"
+  },
+  "k100_080": {
+   "name": "Applying Mutation Rate To Genetic Equilibrium",
+   "definition": "Applying Mutation Rate To Genetic Equilibrium"
+  },
+  "k100_081": {
+   "name": "Evaluating Possible Storage Options Based On Story",
+   "definition": "Evaluating Possible Storage Options Based On Story"
+  },
+  "k100_082": {
+   "name": "Optimizing User Experience Based On Feedback",
+   "definition": "Optimizing User Experience Based On Feedback"
+  },
+  "k100_083": {
+   "name": "Incorporating Friends Name In Personalized Message",
+   "definition": "Incorporating Friends Name In Personalized Message"
+  },
+  "k100_084": {
+   "name": "Converting Repeating Decimals To Fractions",
+   "definition": "Converting Repeating Decimals To Fractions"
+  },
+  "k100_085": {
+   "name": "Applying Set Theory To Divisor Subsets",
+   "definition": "Applying Set Theory To Divisor Subsets"
+  },
+  "k100_086": {
+   "name": "Applying Interpolation To Estimate Values",
+   "definition": "Applying Interpolation To Estimate Values"
+  },
+  "k100_087": {
+   "name": "Applying Mott Gurney Equation To Device Characteri",
+   "definition": "Applying Mott Gurney Equation To Device Characteri"
+  },
+  "k100_088": {
+   "name": "Analyzing Sentiment In Financial Statements",
+   "definition": "Analyzing Sentiment In Financial Statements"
+  },
+  "k100_089": {
+   "name": "Applying Snell'S Law To Light Refraction In Media",
+   "definition": "Applying Snell'S Law To Light Refraction In Media"
+  },
+  "k100_090": {
+   "name": "Applying Properties Of Complex Numbers In Equation",
+   "definition": "Applying Properties Of Complex Numbers In Equation"
+  },
+  "k100_091": {
+   "name": "Calculating Handshake Combinations In Group Intera",
+   "definition": "Calculating Handshake Combinations In Group Intera"
+  },
+  "k100_092": {
+   "name": "Applying Fraction Multiplication To Unit Prices",
+   "definition": "Applying Fraction Multiplication To Unit Prices"
+  },
+  "k100_093": {
+   "name": "Ensuring Consistent Section Headers In Document St",
+   "definition": "Ensuring Consistent Section Headers In Document St"
+  },
+  "k100_094": {
+   "name": "Iterating Weight Loss Over Multiple Weeks",
+   "definition": "Iterating Weight Loss Over Multiple Weeks"
+  },
+  "k100_095": {
+   "name": "Interpreting Luminescence Behavior In Zinc Silicat",
+   "definition": "Interpreting Luminescence Behavior In Zinc Silicat"
+  },
+  "k100_096": {
+   "name": "Balancing Instrumentation For Optimal Sound Qualit",
+   "definition": "Balancing Instrumentation For Optimal Sound Qualit"
+  },
+  "k100_097": {
+   "name": "Evaluating Truthfulness Of Nested Statements",
+   "definition": "Evaluating Truthfulness Of Nested Statements"
+  },
+  "k100_098": {
+   "name": "Analyzing Fragmentation Patterns In Ei Ms",
+   "definition": "Analyzing Fragmentation Patterns In Ei Ms"
+  },
+  "k100_099": {
+   "name": "Identifying Transformations In Quantum Field Theor",
+   "definition": "Identifying Transformations In Quantum Field Theor"
+  }
+ },
+ "alias": {}
+}

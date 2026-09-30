@@ -1,0 +1,992 @@
+{
+ "judge": "gpt-4.1-mini",
+ "n_val": 20,
+ "n_grp": 12,
+ "rows": [
+  {
+   "skill": "analyze causation scenario",
+   "n_items": 46,
+   "validity": 1.0,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "analyze murder mystery narrative",
+   "n_items": 249,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "apply chemical concepts",
+   "n_items": 536,
+   "validity": 0.7,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "apply scientific principles",
+   "n_items": 71,
+   "validity": 0.9,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "applying inequality theorems to minimize expressio",
+   "n_items": 117,
+   "validity": 0.3,
+   "group": 0.75,
+   "certified": false
+  },
+  {
+   "skill": "applying interpolation to estimate values",
+   "n_items": 6,
+   "validity": 0.3333333333333333,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "applying maxwell equations to electromagnetic fiel",
+   "n_items": 31,
+   "validity": 0.45,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "applying properties of complex numbers in equation",
+   "n_items": 79,
+   "validity": 0.7,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "assign team roles based on preferences",
+   "n_items": 267,
+   "validity": 0.95,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "calculate area volume ratios",
+   "n_items": 8,
+   "validity": 0.75,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "calculate geometric properties of shapes",
+   "n_items": 303,
+   "validity": 0.45,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "calculate handshake counts",
+   "n_items": 4,
+   "validity": 0.5,
+   "group": 0.75,
+   "certified": false
+  },
+  {
+   "skill": "calculate integer sums from conditions",
+   "n_items": 6,
+   "validity": 0.6666666666666666,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate physical properties from scenarios",
+   "n_items": 228,
+   "validity": 0.7,
+   "group": 0.6666666666666666,
+   "certified": true
+  },
+  {
+   "skill": "calculate probabilities for random events",
+   "n_items": 131,
+   "validity": 0.05,
+   "group": 0.8333333333333334,
+   "certified": false
+  },
+  {
+   "skill": "calculate probabilities of random events",
+   "n_items": 4,
+   "validity": 0.75,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "calculate quantum state properties",
+   "n_items": 121,
+   "validity": 0.6,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "calculate ratios from totals",
+   "n_items": 7,
+   "validity": 0.8571428571428571,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate total values from equations",
+   "n_items": 22,
+   "validity": 0.65,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "calculating handshake combinations in group intera",
+   "n_items": 5,
+   "validity": 0.6,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "choose correct multiple-choice answer from scientific data",
+   "n_items": 36,
+   "validity": 1.0,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "classify translation error type",
+   "n_items": 248,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compose creative narratives with structure",
+   "n_items": 19,
+   "validity": 0.631578947368421,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compose creative text with constraints",
+   "n_items": 61,
+   "validity": 0.85,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "compose formal written communications",
+   "n_items": 16,
+   "validity": 0.875,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compose song lyrics for various themes",
+   "n_items": 18,
+   "validity": 0.8333333333333334,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compose structured business pitches",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compose text in specified languages",
+   "n_items": 12,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compose text with specific word counts",
+   "n_items": 9,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "compose various poetic forms",
+   "n_items": 25,
+   "validity": 0.65,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "compose various types of emails",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compute date from elapsed days",
+   "n_items": 4,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compute remainder modulo integer",
+   "n_items": 5,
+   "validity": 0.6,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "count arrangements of distinguishable objects",
+   "n_items": 9,
+   "validity": 0.2222222222222222,
+   "group": 0.8333333333333334,
+   "certified": false
+  },
+  {
+   "skill": "count factors with specific properties",
+   "n_items": 7,
+   "validity": 0.7142857142857143,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "count perfect square factors of integers",
+   "n_items": 5,
+   "validity": 0.8,
+   "group": 0.5833333333333334,
+   "certified": true
+  },
+  {
+   "skill": "count permutations with numeric constraints",
+   "n_items": 22,
+   "validity": 0.65,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "count total objects in collections",
+   "n_items": 347,
+   "validity": 0.65,
+   "group": 0.5833333333333334,
+   "certified": true
+  },
+  {
+   "skill": "create engaging product advertisement content",
+   "n_items": 23,
+   "validity": 0.8,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "create formatted content with specific guidelines",
+   "n_items": 34,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "create humorous content with specific themes",
+   "n_items": 31,
+   "validity": 0.6,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "create riddles with specific formats",
+   "n_items": 12,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "create structured bullet point lists",
+   "n_items": 17,
+   "validity": 0.5294117647058824,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "create travel itineraries for trips",
+   "n_items": 12,
+   "validity": 0.75,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "create various written templates",
+   "n_items": 18,
+   "validity": 0.7222222222222222,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "deduce rankings from logical statements",
+   "n_items": 41,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine eigenvalues of matrix operators",
+   "n_items": 19,
+   "validity": 0.631578947368421,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "determine integer properties of expressions",
+   "n_items": 85,
+   "validity": 0.85,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine inverse function values",
+   "n_items": 9,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine molecular symmetry group from chemical reaction description",
+   "n_items": 7,
+   "validity": 0.7142857142857143,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine possible time interval for event given constraints",
+   "n_items": 170,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine possible visit times",
+   "n_items": 265,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine relative order",
+   "n_items": 29,
+   "validity": 1.0,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "determine values from algorithmic patterns",
+   "n_items": 4,
+   "validity": 0.75,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine values from mathematical expressions",
+   "n_items": 668,
+   "validity": 0.75,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "evaluate causal relationships in scenarios",
+   "n_items": 14,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "evaluate causation in scenarios",
+   "n_items": 39,
+   "validity": 0.95,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "evaluate complex number expression",
+   "n_items": 6,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "evaluate experimental outcomes",
+   "n_items": 187,
+   "validity": 0.25,
+   "group": 0.8333333333333334,
+   "certified": false
+  },
+  {
+   "skill": "evaluate function value",
+   "n_items": 21,
+   "validity": 0.4,
+   "group": 0.8333333333333334,
+   "certified": false
+  },
+  {
+   "skill": "evaluate logical expression",
+   "n_items": 251,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "evaluate logical validity of arguments",
+   "n_items": 41,
+   "validity": 0.9,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "evaluate truthfulness in chain of statements",
+   "n_items": 67,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "evaluate truthfulness in nested statements",
+   "n_items": 259,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "extract penguin attributes from table",
+   "n_items": 49,
+   "validity": 0.9,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "extract penguin attributes from table (2)",
+   "n_items": 122,
+   "validity": 0.7,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "extract penguin attributes from tables",
+   "n_items": 102,
+   "validity": 0.35,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "find domain of function",
+   "n_items": 22,
+   "validity": 0.75,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "find extreme values of expressions",
+   "n_items": 11,
+   "validity": 0.8181818181818182,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find range of function",
+   "n_items": 12,
+   "validity": 0.9166666666666666,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "find similar movies by themes",
+   "n_items": 251,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find values satisfying recurrence relation",
+   "n_items": 19,
+   "validity": 0.631578947368421,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "format responses in json structure",
+   "n_items": 19,
+   "validity": 0.6842105263157895,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "generate creative name suggestions",
+   "n_items": 9,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify causation in given scenarios",
+   "n_items": 96,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify correct answers",
+   "n_items": 4,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify error type in german-english translation",
+   "n_items": 5,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify humorous edits of names",
+   "n_items": 21,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "identify humorous word edits",
+   "n_items": 199,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify humorous wordplay",
+   "n_items": 231,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify humorous wordplay (2)",
+   "n_items": 105,
+   "validity": 0.65,
+   "group": 0.6666666666666666,
+   "certified": true
+  },
+  {
+   "skill": "identify pronoun antecedent",
+   "n_items": 250,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify sarcastic statements",
+   "n_items": 177,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify shape type from svg path data",
+   "n_items": 56,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identifying transformations in quantum field theor",
+   "n_items": 9,
+   "validity": 0.4444444444444444,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "infer time intervals from constraints",
+   "n_items": 12,
+   "validity": 1.0,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "inferring object locations from contextual clues",
+   "n_items": 1330,
+   "validity": 0.65,
+   "group": 0.6666666666666666,
+   "certified": true
+  },
+  {
+   "skill": "interpret svg path to identify shape",
+   "n_items": 265,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "interpreting directional commands for navigation",
+   "n_items": 261,
+   "validity": 1.0,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "judge causation (14)",
+   "n_items": 7,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "judge causation (6)",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "judge causation (7)",
+   "n_items": 5,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "judge deductive validity of logical arguments",
+   "n_items": 214,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "judge sentence plausibility",
+   "n_items": 254,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "predict typical causal judgments",
+   "n_items": 20,
+   "validity": 0.95,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "repeat prompt then answer",
+   "n_items": 16,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "select correct adjective order",
+   "n_items": 251,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "simplify algebraic expressions",
+   "n_items": 5,
+   "validity": 0.2,
+   "group": 0.8333333333333334,
+   "certified": false
+  },
+  {
+   "skill": "solve functional equation",
+   "n_items": 12,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "solve geometry counting problems",
+   "n_items": 9,
+   "validity": 0.7777777777777778,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "solve integer side length triangle problems",
+   "n_items": 4,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "summarize content with specific formats",
+   "n_items": 9,
+   "validity": 0.8888888888888888,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "track ball swaps in game",
+   "n_items": 53,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "track final owner after swaps",
+   "n_items": 38,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "track gift swaps in exchange",
+   "n_items": 154,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "track item exchanges among players",
+   "n_items": 173,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "track partner swaps in dance",
+   "n_items": 162,
+   "validity": 0.9,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "track position swaps among team members",
+   "n_items": 100,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "track position swaps in soccer",
+   "n_items": 111,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "transform algebraic expressions into standard form",
+   "n_items": 27,
+   "validity": 0.45,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "write cover letter",
+   "n_items": 6,
+   "validity": 0.8333333333333334,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write creative articles with specific formats",
+   "n_items": 22,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write informal text with style constraints",
+   "n_items": 76,
+   "validity": 0.8,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "write letter with style constraints",
+   "n_items": 4,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write text with language constraints",
+   "n_items": 19,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write text with length constraints",
+   "n_items": 31,
+   "validity": 0.65,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write text with letter frequency constraints",
+   "n_items": 16,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write text with markdown formatting",
+   "n_items": 22,
+   "validity": 0.9,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write text with placeholders",
+   "n_items": 11,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write text with punctuation constraints",
+   "n_items": 9,
+   "validity": 0.6666666666666666,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write text with specific word usage",
+   "n_items": 22,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  }
+ ],
+ "flagged": [
+  {
+   "skill": "Applying Set Theory To Count Unique Items and Divisor Subsets",
+   "flag": "irreducible",
+   "n_items": 183
+  },
+  {
+   "skill": "answer typical causation questions",
+   "flag": "irreducible",
+   "n_items": 13
+  },
+  {
+   "skill": "answer yes/no/maybe with phrase",
+   "flag": "irreducible",
+   "n_items": 10
+  },
+  {
+   "skill": "apply trigonometric identities",
+   "flag": "name_unfixable",
+   "n_items": 83
+  },
+  {
+   "skill": "approximate matrix exponential functions",
+   "flag": "name_unfixable",
+   "n_items": 9
+  },
+  {
+   "skill": "calculating future dates from anniversary informat",
+   "flag": "name_unfixable",
+   "n_items": 254
+  },
+  {
+   "skill": "create engaging quiz questions",
+   "flag": "irreducible",
+   "n_items": 4
+  },
+  {
+   "skill": "create evaluation rubrics for various tasks",
+   "flag": "name_unfixable",
+   "n_items": 12
+  },
+  {
+   "skill": "critique written content for clarity",
+   "flag": "irreducible",
+   "n_items": 11
+  },
+  {
+   "skill": "determine contact angle measurements",
+   "flag": "irreducible",
+   "n_items": 21
+  },
+  {
+   "skill": "evaluate causation in historical contexts",
+   "flag": "irreducible",
+   "n_items": 4
+  },
+  {
+   "skill": "evaluate data sets",
+   "flag": "name_unfixable",
+   "n_items": 5
+  },
+  {
+   "skill": "evaluate deductive validity of argument",
+   "flag": "irreducible",
+   "n_items": 15
+  },
+  {
+   "skill": "explain concepts with examples",
+   "flag": "irreducible",
+   "n_items": 31
+  },
+  {
+   "skill": "find gcd, lcm, or related number theory values",
+   "flag": "name_unfixable",
+   "n_items": 7
+  },
+  {
+   "skill": "find maximum values of quadratic functions",
+   "flag": "name_unfixable",
+   "n_items": 53
+  },
+  {
+   "skill": "find values for geometric relationships",
+   "flag": "irreducible",
+   "n_items": 138
+  },
+  {
+   "skill": "identify football fan affiliations",
+   "flag": "name_unfixable",
+   "n_items": 15
+  },
+  {
+   "skill": "interpreting numerical values in context",
+   "flag": "irreducible",
+   "n_items": 69
+  },
+  {
+   "skill": "perform arithmetic with fractions or decimals",
+   "flag": "name_unfixable",
+   "n_items": 11
+  },
+  {
+   "skill": "solve algebraic equation or system",
+   "flag": "name_unfixable",
+   "n_items": 40
+  },
+  {
+   "skill": "solve number theory divisibility problems",
+   "flag": "name_unfixable",
+   "n_items": 21
+  },
+  {
+   "skill": "solve optimization problems",
+   "flag": "name_unfixable",
+   "n_items": 28
+  },
+  {
+   "skill": "sum or product infinite series",
+   "flag": "name_unfixable",
+   "n_items": 24
+  },
+  {
+   "skill": "write short answer with constraints",
+   "flag": "irreducible",
+   "n_items": 15
+  },
+  {
+   "skill": "write text with capitalization constraints",
+   "flag": "irreducible",
+   "n_items": 13
+  }
+ ],
+ "n_residue": 310,
+ "mean_validity": 0.8065521553105669,
+ "mean_group": 0.9256198347107438,
+ "n_certified": 108,
+ "n_failed": 13,
+ "spend_usd": 0.425
+}

@@ -1,0 +1,67 @@
+{
+ "tag": "final",
+ "cap": 60,
+ "stop_merges": 10,
+ "live_before": 1319,
+ "live_after": 970,
+ "rounds": [
+  {
+   "round": 1,
+   "live_before": 1319,
+   "live_after": 1262,
+   "ops": {
+    "MERGE": 57,
+    "RENAME": 3
+   },
+   "churn": 0.04382546476713729
+  },
+  {
+   "round": 2,
+   "live_before": 1262,
+   "live_after": 1203,
+   "ops": {
+    "MERGE": 59,
+    "RENAME": 1
+   },
+   "churn": 0.06222449370727656
+  },
+  {
+   "round": 3,
+   "live_before": 1203,
+   "live_after": 1145,
+   "ops": {
+    "MERGE": 58,
+    "RENAME": 2
+   },
+   "churn": 0.04983070337954386
+  },
+  {
+   "round": 4,
+   "live_before": 1145,
+   "live_after": 1085,
+   "ops": {
+    "MERGE": 60
+   },
+   "churn": 0.057305308886475434
+  },
+  {
+   "round": 5,
+   "live_before": 1085,
+   "live_after": 1025,
+   "ops": {
+    "MERGE": 60
+   },
+   "churn": 0.010924423433207691
+  },
+  {
+   "round": 6,
+   "live_before": 1025,
+   "live_after": 970,
+   "ops": {
+    "MERGE": 55,
+    "RENAME": 5
+   },
+   "churn": 0.004983070337954386
+  }
+ ]
+}

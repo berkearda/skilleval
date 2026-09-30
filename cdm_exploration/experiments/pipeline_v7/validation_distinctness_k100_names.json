@@ -1,0 +1,397 @@
+{
+ "judge": "gemini-3.6-flash",
+ "results": [
+  {
+   "pair": [
+    "k100_000",
+    "k100_005"
+   ],
+   "merge": false,
+   "rule": "A calculates or deduces time durations between sequential temporal markers, whereas B evaluates the logical possibility or realism of a scenario against domain rules and constraints."
+  },
+  {
+   "pair": [
+    "k100_000",
+    "k100_007"
+   ],
+   "merge": false,
+   "rule": "A calculates quantitative time intervals along a temporal sequence, whereas B extracts high-level abstract thematic concepts from narrative media descriptions."
+  },
+  {
+   "pair": [
+    "k100_000",
+    "k100_020"
+   ],
+   "merge": false,
+   "rule": "A computes 1D temporal durations between ordered events, whereas B infers 2D/3D spatial positions and relative arrangements of objects from relational constraints."
+  },
+  {
+   "pair": [
+    "k100_000",
+    "k100_047"
+   ],
+   "merge": false,
+   "rule": "A computes temporal durations from sequential time data, whereas B updates state mappings of item ownership across multi-agent transfer transactions."
+  },
+  {
+   "pair": [
+    "k100_001",
+    "k100_006"
+   ],
+   "merge": false,
+   "rule": "A applies bounding rules (e.g., AM-GM, Cauchy-Schwarz) to find extreme values of expressions, whereas B substitutes polynomial coefficients into a fixed algebraic formula to calculate equation roots."
+  },
+  {
+   "pair": [
+    "k100_001",
+    "k100_035"
+   ],
+   "merge": false,
+   "rule": "A uses inequality theorems to determine upper or lower bounds of an expression, whereas B performs direct evaluation by substituting specific numerical inputs into a function."
+  },
+  {
+   "pair": [
+    "k100_002",
+    "k100_006"
+   ],
+   "merge": false,
+   "rule": "A computes distance, slope, or vector properties from point coordinates to classify a geometric figure, whereas B substitutes algebraic coefficients into the quadratic formula to solve for roots."
+  },
+  {
+   "pair": [
+    "k100_002",
+    "k100_011"
+   ],
+   "merge": false,
+   "rule": "A uses coordinate arithmetic (distances/slopes) to classify static shapes, whereas B applies trigonometric transformation identities to simplify and solve equations involving angular functions."
+  },
+  {
+   "pair": [
+    "k100_002",
+    "k100_016"
+   ],
+   "merge": false,
+   "rule": "A analyzes point coordinates to classify static geometric figures, whereas B maps linear algebra operators (matrices) to spatial transformations like rotation, scaling, or reflection."
+  },
+  {
+   "pair": [
+    "k100_002",
+    "k100_064"
+   ],
+   "merge": false,
+   "rule": "A computes quantitative geometric properties from vertex coordinates to determine shape identity, whereas B tests planar figures for structural invariance under reflectional or rotational operations."
+  },
+  {
+   "pair": [
+    "k100_003",
+    "k100_014"
+   ],
+   "merge": false,
+   "rule": "A requires applying linear combinations of operators to quantum state vectors, whereas B requires evaluating algebraic kinematic formulas relating relativistic mass, energy, and lifetime to calculate decay distance."
+  },
+  {
+   "pair": [
+    "k100_005",
+    "k100_007"
+   ],
+   "merge": false,
+   "rule": "A evaluates whether a narrative sequence of actions conforms to domain rules or constraints, whereas B abstracts high-level motifs and thematic concepts from narrative content."
+  },
+  {
+   "pair": [
+    "k100_005",
+    "k100_012"
+   ],
+   "merge": false,
+   "rule": "A checks whether a single event scenario is rule-compliant or physically possible, whereas B performs comparative analysis across multiple past cases to verify uniform enforcement of penalty standards."
+  },
+  {
+   "pair": [
+    "k100_005",
+    "k100_020"
+   ],
+   "merge": false,
+   "rule": "A evaluates the plausibility of an event against contextual domain rules, whereas B solves a spatial constraint satisfaction problem to deduce physical object coordinates."
+  },
+  {
+   "pair": [
+    "k100_005",
+    "k100_097"
+   ],
+   "merge": false,
+   "rule": "A assesses real-world domain plausibility of a scenario, whereas B recursively evaluates nested attribution and truth-value logic statements."
+  },
+  {
+   "pair": [
+    "k100_006",
+    "k100_019"
+   ],
+   "merge": false,
+   "rule": "A computes roots of second-degree equations using a fixed algebraic root formula, whereas B applies integer modular arithmetic and digit-based criteria to test divisibility."
+  },
+  {
+   "pair": [
+    "k100_006",
+    "k100_035"
+   ],
+   "merge": false,
+   "rule": "A performs inverse evaluation to find unknown inputs where a function equals zero using the quadratic formula, whereas B performs forward evaluation by substituting given input values directly into an expression."
+  },
+  {
+   "pair": [
+    "k100_006",
+    "k100_039"
+   ],
+   "merge": false,
+   "rule": "A solves for equation roots using the quadratic formula, whereas B sums the numerical coefficients of a polynomial (or evaluates the polynomial at x = 1)."
+  },
+  {
+   "pair": [
+    "k100_006",
+    "k100_090"
+   ],
+   "merge": false,
+   "rule": "A applies the quadratic formula specifically to solve second-degree equations, whereas B uses complex arithmetic identities and representations (e.g., i^2 = -1, complex conjugation, Euler's formula) to simplify or solve complex-valued expressions."
+  },
+  {
+   "pair": [
+    "k100_007",
+    "k100_008"
+   ],
+   "merge": false,
+   "rule": "A performs text comprehension to extract underlying abstract themes, whereas B performs text generation or revision to maintain stylistic and emotional consistency."
+  },
+  {
+   "pair": [
+    "k100_007",
+    "k100_012"
+   ],
+   "merge": false,
+   "rule": "Identifying themes requires abstracting overarching conceptual motifs from narrative text, whereas evaluating punishment consistency requires comparing disciplinary decisions against standards or precedents to identify variances."
+  },
+  {
+   "pair": [
+    "k100_007",
+    "k100_020"
+   ],
+   "merge": false,
+   "rule": "Identifying themes requires abstracting core conceptual motifs from narrative summaries, whereas inferring locations requires using relational spatial constraints to deduce physical coordinates."
+  },
+  {
+   "pair": [
+    "k100_007",
+    "k100_023"
+   ],
+   "merge": false,
+   "rule": "Identifying themes requires semantic synthesis of underlying narrative concepts, whereas maintaining word count constraints requires monitoring and editing text length to satisfy precise quantitative bounds."
+  },
+  {
+   "pair": [
+    "k100_007",
+    "k100_029"
+   ],
+   "merge": false,
+   "rule": "Identifying themes involves extracting central narrative motifs from text, whereas identifying sarcasm involves detecting pragmatic discrepancies between literal linguistic meaning and underlying intent."
+  },
+  {
+   "pair": [
+    "k100_007",
+    "k100_047"
+   ],
+   "merge": false,
+   "rule": "Identifying themes requires abstracting central concepts from narrative content, whereas tracking trades requires sequentially updating state mappings of item ownership across transactional steps."
+  },
+  {
+   "pair": [
+    "k100_007",
+    "k100_097"
+   ],
+   "merge": false,
+   "rule": "Identifying themes involves extracting abstract motifs from narrative material, whereas evaluating nested statements involves recursively evaluating boolean truth values of embedded propositions."
+  },
+  {
+   "pair": [
+    "k100_008",
+    "k100_023"
+   ],
+   "merge": false,
+   "rule": "Maintaining consistent tone requires controlling stylistic and attitudinal register throughout text generation, whereas maintaining word count constraints requires tracking and enforcing quantitative length limits."
+  },
+  {
+   "pair": [
+    "k100_009",
+    "k100_010"
+   ],
+   "merge": false,
+   "rule": "Applying combinatorial principles to dice involves calculating outcome probabilities across independent multi-stage events, whereas applying set theory involves using set operations like inclusion-exclusion to eliminate double-counting across overlapping sets."
+  },
+  {
+   "pair": [
+    "k100_009",
+    "k100_012"
+   ],
+   "merge": false,
+   "rule": "Applying combinatorial principles requires mathematical calculation of discrete outcome spaces, whereas evaluating punishment consistency requires qualitative comparison of administrative actions against policy benchmarks."
+  },
+  {
+   "pair": [
+    "k100_010",
+    "k100_078"
+   ],
+   "merge": false,
+   "rule": "Applying set theory involves calculating group sizes using set-algebraic rules, whereas distinguishing fruits involves evaluating biological/semantic attributes to perform taxonomic classification."
+  },
+  {
+   "pair": [
+    "k100_018",
+    "k100_020"
+   ],
+   "merge": false,
+   "rule": "One extracts cell values across structured table rows and columns, while the other deduces spatial positions from relational narrative constraints."
+  },
+  {
+   "pair": [
+    "k100_018",
+    "k100_060"
+   ],
+   "merge": false,
+   "rule": "One queries data values located within table rows, while the other reads top-level schema labels/column names from table headers."
+  },
+  {
+   "pair": [
+    "k100_019",
+    "k100_057"
+   ],
+   "merge": false,
+   "rule": "One applies arithmetic divisibility tests directly to explicit integers, while the other analyzes prime factor exponent representations within factorial decompositions."
+  },
+  {
+   "pair": [
+    "k100_019",
+    "k100_084"
+   ],
+   "merge": false,
+   "rule": "One performs modular arithmetic checks on integer sets, while the other performs algebraic transformation on repeating decimal strings to convert them into fractional ratios."
+  },
+  {
+   "pair": [
+    "k100_020",
+    "k100_036"
+   ],
+   "merge": false,
+   "rule": "One solves constraint-satisfaction problems to place static objects, while the other sequentially tracks movement vectors step-by-step along a path."
+  },
+  {
+   "pair": [
+    "k100_020",
+    "k100_047"
+   ],
+   "merge": false,
+   "rule": "One infers static spatial arrangements, while the other tracks sequential state changes of item ownership through sequential exchange transactions."
+  },
+  {
+   "pair": [
+    "k100_020",
+    "k100_097"
+   ],
+   "merge": false,
+   "rule": "One resolves spatial relational constraints, while the other recursively evaluates boolean truth values of nested meta-statements."
+  },
+  {
+   "pair": [
+    "k100_021",
+    "k100_023"
+   ],
+   "merge": false,
+   "rule": "One adjusts vocabulary and structural complexity for target audience comprehension, while the other tracks and enforces numerical length constraints on generated text."
+  },
+  {
+   "pair": [
+    "k100_023",
+    "k100_029"
+   ],
+   "merge": false,
+   "rule": "One measures and limits output token counts, while the other evaluates contextual pragmatics to detect discrepancy between literal phrasing and intended meaning."
+  },
+  {
+   "pair": [
+    "k100_023",
+    "k100_041"
+   ],
+   "merge": false,
+   "rule": "One enforces word count limits on generated output, while the other applies logical rules to sort and structure unstructured items into target categories or orders."
+  },
+  {
+   "pair": [
+    "k100_023",
+    "k100_097"
+   ],
+   "merge": false,
+   "rule": "A requires monitoring and constraining the length of generated text against numerical bounds, whereas B requires evaluating the logical truth values of recursively nested statements."
+  },
+  {
+   "pair": [
+    "k100_025",
+    "k100_089"
+   ],
+   "merge": false,
+   "rule": "A requires calculating fractional power scaling ratios, whereas B requires applying trigonometric functions (sine/arcsine) to solve angle relationships across interfaces."
+  },
+  {
+   "pair": [
+    "k100_029",
+    "k100_032"
+   ],
+   "merge": false,
+   "rule": "A requires detecting pragmatic conflict between literal phrasing and contextual intent, whereas B requires parsing phonetic similarities and semantic double meanings (puns) in text."
+  },
+  {
+   "pair": [
+    "k100_029",
+    "k100_097"
+   ],
+   "merge": false,
+   "rule": "A requires inferring pragmatic context and speaker intent to detect irony, whereas B requires evaluating boolean truth values across formal nested logic statements."
+  },
+  {
+   "pair": [
+    "k100_032",
+    "k100_097"
+   ],
+   "merge": false,
+   "rule": "A requires recognizing phonetic or linguistic puns within proper nouns, whereas B requires resolving the truth conditions of recursively nested logical assertions."
+  },
+  {
+   "pair": [
+    "k100_042",
+    "k100_044"
+   ],
+   "merge": false,
+   "rule": "A requires comparing structural graph topologies and atomic connectivity, whereas B requires calculating weighted arithmetic sums of concentrations and solution volumes."
+  },
+  {
+   "pair": [
+    "k100_042",
+    "k100_097"
+   ],
+   "merge": false,
+   "rule": "A requires analyzing topological graph connectivity of molecular structures, whereas B requires evaluating nested boolean logic statements."
+  },
+  {
+   "pair": [
+    "k100_047",
+    "k100_097"
+   ],
+   "merge": false,
+   "rule": "A requires updating state-tracking registers of item ownership across sequential transaction events, whereas B requires evaluating logical truth values across nested assertions."
+  },
+  {
+   "pair": [
+    "k100_052",
+    "k100_060"
+   ],
+   "merge": false,
+   "rule": "A requires performing lexicographical character comparisons to verify sequence, whereas B requires parsing tabular grid structures to retrieve visual header labels."
+  }
+ ]
+}

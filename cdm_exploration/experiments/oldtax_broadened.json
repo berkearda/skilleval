@@ -1,0 +1,812 @@
+{
+ "rows": [
+  {
+   "id": 1,
+   "old": "Inferring Time Intervals From Sequential Events",
+   "name": "track entity states through sequential events",
+   "kind": "broadened",
+   "n": 948,
+   "fit": 0.96
+  },
+  {
+   "id": 2,
+   "old": "Applying Inequality Theorems To Minimize Expressio",
+   "name": "determine value ranges of algebraic expressions",
+   "kind": "broadened",
+   "n": 121,
+   "fit": 0.92
+  },
+  {
+   "id": 3,
+   "old": "Analyzing Coordinates To Determine Shape Type",
+   "name": "determine properties of geometric figures",
+   "kind": "broadened",
+   "n": 648,
+   "fit": 0.8
+  },
+  {
+   "id": 4,
+   "old": "Applying Linear Combination Of Operators In Quantu",
+   "name": "calculate quantum state properties",
+   "kind": "specific",
+   "n": 174,
+   "fit": 0.88
+  },
+  {
+   "id": 5,
+   "old": "Applying Wetting Theory To Liquid Droplets",
+   "name": "compute physical quantities from formulas",
+   "kind": "broadened",
+   "n": 21,
+   "fit": 0.6190476190476191
+  },
+  {
+   "id": 6,
+   "old": "Evaluating Sporting Event Plausibility Based On Co",
+   "name": "evaluate sentence plausibility in context",
+   "kind": "specific",
+   "n": 831,
+   "fit": 0.8
+  },
+  {
+   "id": 7,
+   "old": "Applying Quadratic Formula To Find Roots",
+   "name": "find values from equations",
+   "kind": "specific",
+   "n": 451,
+   "fit": 0.88
+  },
+  {
+   "id": 8,
+   "old": "Identifying Themes In Science Fiction Movies",
+   "name": "find similar movie titles by themes",
+   "kind": "specific",
+   "n": 1359,
+   "fit": 0.24
+  },
+  {
+   "id": 9,
+   "old": "Maintaining Consistent Tone In Creative Writing",
+   "name": "compose structured written responses",
+   "kind": "specific",
+   "n": 85,
+   "fit": 0.84
+  },
+  {
+   "id": 10,
+   "old": "Applying Combinatorial Principles To Dice Rolls",
+   "name": "count combinatorial outcomes",
+   "kind": "broadened",
+   "n": 113,
+   "fit": 0.76
+  },
+  {
+   "id": 11,
+   "old": "Applying Set Theory To Count Unique Items",
+   "name": "count distinct items in collections",
+   "kind": "specific",
+   "n": 186,
+   "fit": 0.76
+  },
+  {
+   "id": 12,
+   "old": "Applying Trigonometric Identities To Solve Equatio",
+   "name": "manipulate trigonometric expressions for results",
+   "kind": "specific",
+   "n": 83,
+   "fit": 0.76
+  },
+  {
+   "id": 13,
+   "old": "Evaluating Consistency In League Punishments",
+   "name": "evaluate causal relationships in scenarios",
+   "kind": "specific",
+   "n": 207,
+   "fit": 0.76
+  },
+  {
+   "id": 14,
+   "old": "Evaluating Conditions For Automated Shutdown",
+   "name": "evaluate conditions for outcomes",
+   "kind": "specific",
+   "n": 25,
+   "fit": 0.92
+  },
+  {
+   "id": 15,
+   "old": "Calculating Decay Length From Energy And Mass",
+   "name": "calculating decay length from energy and mass",
+   "kind": "specific",
+   "n": 112,
+   "fit": 0.2
+  },
+  {
+   "id": 16,
+   "old": "Interpreting Numerical Values In Context",
+   "name": "calculate values from provided data",
+   "kind": "specific",
+   "n": 69,
+   "fit": 0.84
+  },
+  {
+   "id": 17,
+   "old": "Analyzing Geometric Interpretations Of Matrix Oper",
+   "name": "determine relationships between geometric entities",
+   "kind": "specific",
+   "n": 56,
+   "fit": 0.92
+  },
+  {
+   "id": 18,
+   "old": "Calculating Ratios Of Segments In Triangles",
+   "name": "solve quantitative word problems",
+   "kind": "broadened",
+   "n": 61,
+   "fit": 0.72
+  },
+  {
+   "id": 19,
+   "old": "Identifying Penguin Attributes From Tabular Data",
+   "name": "extract attribute values from tables",
+   "kind": "specific",
+   "n": 127,
+   "fit": 0.72
+  },
+  {
+   "id": 20,
+   "old": "Applying Divisibility Rules To Integer Sets",
+   "name": "determine integer properties from conditions",
+   "kind": "specific",
+   "n": 225,
+   "fit": 0.88
+  },
+  {
+   "id": 21,
+   "old": "Inferring Object Locations From Contextual Clues",
+   "name": "determine object states from descriptions",
+   "kind": "broadened",
+   "n": 1330,
+   "fit": 1.0
+  },
+  {
+   "id": 22,
+   "old": "Adapting Language For Age Appropriate Audience",
+   "name": "craft engaging messages for varied audiences",
+   "kind": "specific",
+   "n": 68,
+   "fit": 0.92
+  },
+  {
+   "id": 23,
+   "old": "Calculating Work Done In Variable Force Scenarios",
+   "name": "determine effects of variable factors",
+   "kind": "specific",
+   "n": 17,
+   "fit": 0.8235294117647058
+  },
+  {
+   "id": 24,
+   "old": "Maintaining Word Count Constraints In Responses",
+   "name": "compose structured written responses",
+   "kind": "specific",
+   "n": 418,
+   "fit": 0.96
+  },
+  {
+   "id": 25,
+   "old": "Analyzing Effects Of Vertical Stretch On Graphs",
+   "name": "determine function values from transformations",
+   "kind": "specific",
+   "n": 25,
+   "fit": 0.28
+  },
+  {
+   "id": 26,
+   "old": "Calculating Orbital Period Ratio Between Planets",
+   "name": "calculate physical properties from data",
+   "kind": "specific",
+   "n": 134,
+   "fit": 0.88
+  },
+  {
+   "id": 27,
+   "old": "Applying Properties Of Rectangles To Find Dimensio",
+   "name": "calculate dimensions from given conditions",
+   "kind": "specific",
+   "n": 30,
+   "fit": 0.72
+  },
+  {
+   "id": 28,
+   "old": "Manipulating Algebraic Expressions For Variance",
+   "name": "compute averages from data sets",
+   "kind": "specific",
+   "n": 22,
+   "fit": 0.5
+  },
+  {
+   "id": 29,
+   "old": "Articulating Feature Vs Bug Distinction",
+   "name": "create structured content with specific requirements",
+   "kind": "specific",
+   "n": 8,
+   "fit": 1.0
+  },
+  {
+   "id": 30,
+   "old": "Identifying Sarcasm In Verbal Expressions",
+   "name": "identify humor in text",
+   "kind": "broadened",
+   "n": 485,
+   "fit": 0.84
+  },
+  {
+   "id": 31,
+   "old": "Applying Relativity To Calculate Velocity Vectors",
+   "name": "calculate relative speeds in frames",
+   "kind": "specific",
+   "n": 46,
+   "fit": 0.36
+  },
+  {
+   "id": 32,
+   "old": "Applying Nernst Equation To Redox Potential",
+   "name": "calculate equilibrium concentrations from conditions",
+   "kind": "specific",
+   "n": 6,
+   "fit": 0.5
+  },
+  {
+   "id": 33,
+   "old": "Identifying Humorous Wordplay In Artist Names",
+   "name": "generate humorous phrase modifications",
+   "kind": "specific",
+   "n": 123,
+   "fit": 0.64
+  },
+  {
+   "id": 34,
+   "old": "Adapting Tone For Dialogue In Urdu Language",
+   "name": "compose responses in designated languages",
+   "kind": "specific",
+   "n": 20,
+   "fit": 1.0
+  },
+  {
+   "id": 35,
+   "old": "Identifying Interstellar Medium Types In Astronomy",
+   "name": "interpret spectroscopic measurements",
+   "kind": "broadened",
+   "n": 19,
+   "fit": 0.5789473684210527
+  },
+  {
+   "id": 36,
+   "old": "Evaluating Function Values At Specific Points",
+   "name": "evaluate function expressions at specific inputs",
+   "kind": "specific",
+   "n": 106,
+   "fit": 0.56
+  },
+  {
+   "id": 37,
+   "old": "Interpreting Directional Commands For Navigation",
+   "name": "determine return to starting point",
+   "kind": "specific",
+   "n": 298,
+   "fit": 0.8
+  },
+  {
+   "id": 38,
+   "old": "Assessing Causal Relationships In Fertilizer Use",
+   "name": "evaluate potential outcomes from scenarios",
+   "kind": "specific",
+   "n": 7,
+   "fit": 0.7142857142857143
+  },
+  {
+   "id": 39,
+   "old": "Applying Recursion To Define Number Sequences",
+   "name": "compute values from sequences",
+   "kind": "specific",
+   "n": 80,
+   "fit": 0.8
+  },
+  {
+   "id": 40,
+   "old": "Summing Coefficients Of Polynomial Expression",
+   "name": "determine values from mathematical expressions",
+   "kind": "specific",
+   "n": 45,
+   "fit": 0.92
+  },
+  {
+   "id": 41,
+   "old": "Applying Albedo Concepts To Temperature Difference",
+   "name": "solve natural science problems",
+   "kind": "broadened",
+   "n": 48,
+   "fit": 0.92
+  },
+  {
+   "id": 42,
+   "old": "Organizing Information Based On Given Clues",
+   "name": "generate structured content with specific criteria",
+   "kind": "specific",
+   "n": 58,
+   "fit": 0.76
+  },
+  {
+   "id": 43,
+   "old": "Identifying Structural Isomers In Organic Compound",
+   "name": "apply organic chemistry knowledge",
+   "kind": "broadened",
+   "n": 488,
+   "fit": 0.88
+  },
+  {
+   "id": 44,
+   "old": "Evaluating Climate Control System Activation Condi",
+   "name": "determine activation conditions for systems",
+   "kind": "specific",
+   "n": 7,
+   "fit": 0.42857142857142855
+  },
+  {
+   "id": 45,
+   "old": "Applying Molarity Concepts To Solution Mixing",
+   "name": "compute quantitative chemistry values",
+   "kind": "broadened",
+   "n": 83,
+   "fit": 0.68
+  },
+  {
+   "id": 46,
+   "old": "Identifying Mutations In Nucleotide Sequences",
+   "name": "determine sequence differences in genetic data",
+   "kind": "specific",
+   "n": 193,
+   "fit": 0.24
+  },
+  {
+   "id": 47,
+   "old": "Crafting Concise Descriptions Of Professional Acti",
+   "name": "compose professional application materials",
+   "kind": "specific",
+   "n": 14,
+   "fit": 0.7857142857142857
+  },
+  {
+   "id": 48,
+   "old": "Tracking Object Trades Among Multiple Participants",
+   "name": "determine object arrangements from relations",
+   "kind": "broadened",
+   "n": 252,
+   "fit": 0.8
+  },
+  {
+   "id": 49,
+   "old": "Applying Properties Of Matrix Norms To Vectors",
+   "name": "calculate vector properties with matrices",
+   "kind": "specific",
+   "n": 5,
+   "fit": 0.6
+  },
+  {
+   "id": 50,
+   "old": "Articulating Customer Rights Under Consumer Protec",
+   "name": "compose written responses for various contexts",
+   "kind": "specific",
+   "n": 8,
+   "fit": 0.625
+  },
+  {
+   "id": 51,
+   "old": "Identifying Alphabetical Order Of Names In Table",
+   "name": "extract specific data from tables",
+   "kind": "specific",
+   "n": 53,
+   "fit": 0.8
+  },
+  {
+   "id": 52,
+   "old": "Analyzing Door Count Distribution In Car Types",
+   "name": "compute numeric math answers",
+   "kind": "broadened",
+   "n": 5,
+   "fit": 0.6
+  },
+  {
+   "id": 53,
+   "old": "Applying Edington Limit To Black Hole Mass Ratio",
+   "name": "find values under specified conditions",
+   "kind": "specific",
+   "n": 11,
+   "fit": 0.9090909090909091
+  },
+  {
+   "id": 54,
+   "old": "Applying Divisibility Rules To Factorials",
+   "name": "count trailing zeros in factorials",
+   "kind": "specific",
+   "n": 32,
+   "fit": 0.08
+  },
+  {
+   "id": 55,
+   "old": "Calculating Compound Interest With Quarterly Compo",
+   "name": "calculate total amounts with growth",
+   "kind": "specific",
+   "n": 20,
+   "fit": 0.7
+  },
+  {
+   "id": 56,
+   "old": "Extracting Data From Table Headers",
+   "name": "extract specific data from tables",
+   "kind": "specific",
+   "n": 137,
+   "fit": 0.72
+  },
+  {
+   "id": 57,
+   "old": "Embedding Asterisk Symbols For Visual Separation",
+   "name": "repeat request verbatim before answering",
+   "kind": "specific",
+   "n": 4,
+   "fit": 0.75
+  },
+  {
+   "id": 58,
+   "old": "Applying Maxwell Equations To Electromagnetic Fiel",
+   "name": "calculate field properties from potentials",
+   "kind": "specific",
+   "n": 31,
+   "fit": 0.68
+  },
+  {
+   "id": 59,
+   "old": "Recognizing Symmetry In Two Dimensional Figures",
+   "name": "identify geometric shapes from svg paths",
+   "kind": "specific",
+   "n": 97,
+   "fit": 0.48
+  },
+  {
+   "id": 60,
+   "old": "Applying Pattern Recognition To Algorithmic Output",
+   "name": "determine output values from input functions",
+   "kind": "specific",
+   "n": 6,
+   "fit": 0.8333333333333334
+  },
+  {
+   "id": 61,
+   "old": "Calculating Future Dates From Anniversary Informat",
+   "name": "calculate dates from given points",
+   "kind": "specific",
+   "n": 254,
+   "fit": 0.96
+  },
+  {
+   "id": 62,
+   "old": "Analyzing User Access Patterns Over Time",
+   "name": "determine access consequences based on conditions",
+   "kind": "specific",
+   "n": 14,
+   "fit": 0.5
+  },
+  {
+   "id": 63,
+   "old": "Applying Random Variable Concepts To Sleep Pattern",
+   "name": "compose engaging written content",
+   "kind": "specific",
+   "n": 4,
+   "fit": 0.75
+  },
+  {
+   "id": 64,
+   "old": "Applying Discrete Group Approximations To Gauge Th",
+   "name": "evaluate gauge group characteristics",
+   "kind": "specific",
+   "n": 4,
+   "fit": 1.0
+  },
+  {
+   "id": 65,
+   "old": "Calculating Eigenvalues Of Quantum Operators",
+   "name": "compute properties of matrices",
+   "kind": "broadened",
+   "n": 19,
+   "fit": 0.9473684210526315
+  },
+  {
+   "id": 66,
+   "old": "Applying De Morgan Laws To Boolean Logic",
+   "name": "evaluate boolean expressions with negations",
+   "kind": "specific",
+   "n": 266,
+   "fit": 1.0
+  },
+  {
+   "id": 67,
+   "old": "Analyzing Surface Properties Of Materials",
+   "name": "evaluate material properties under conditions",
+   "kind": "specific",
+   "n": 24,
+   "fit": 0.3333333333333333
+  },
+  {
+   "id": 68,
+   "old": "Calculating Oscillation Frequency Of Quantum Parti",
+   "name": "compute physics quantities",
+   "kind": "broadened",
+   "n": 11,
+   "fit": 0.9090909090909091
+  },
+  {
+   "id": 69,
+   "old": "Distinguishing Fruits From Non Fruits",
+   "name": "count distinct objects in a collection",
+   "kind": "specific",
+   "n": 361,
+   "fit": 0.68
+  },
+  {
+   "id": 70,
+   "old": "Evaluating Possible Storage Options Based On Story",
+   "name": "locate required items for activities",
+   "kind": "specific",
+   "n": 12,
+   "fit": 0.9166666666666666
+  },
+  {
+   "id": 71,
+   "old": "Incorporating Friends Name In Personalized Message",
+   "name": "draft personalized messages for recipients",
+   "kind": "specific",
+   "n": 4,
+   "fit": 0.25
+  },
+  {
+   "id": 72,
+   "old": "Converting Repeating Decimals To Fractions",
+   "name": "solve integer number theory problems",
+   "kind": "broadened",
+   "n": 91,
+   "fit": 0.8
+  },
+  {
+   "id": 73,
+   "old": "Applying Interpolation To Estimate Values",
+   "name": "evaluate polynomial values at specific inputs",
+   "kind": "specific",
+   "n": 6,
+   "fit": 0.6666666666666666
+  },
+  {
+   "id": 74,
+   "old": "Applying Mott Gurney Equation To Device Characteri",
+   "name": "apply equations to device behavior",
+   "kind": "specific",
+   "n": 6,
+   "fit": 0.8333333333333334
+  },
+  {
+   "id": 75,
+   "old": "Applying Snell'S Law To Light Refraction In Media",
+   "name": "solve observational astrophysics problems",
+   "kind": "broadened",
+   "n": 63,
+   "fit": 0.56
+  },
+  {
+   "id": 76,
+   "old": "Applying Properties Of Complex Numbers In Equation",
+   "name": "manipulate complex number expressions",
+   "kind": "specific",
+   "n": 79,
+   "fit": 0.68
+  },
+  {
+   "id": 77,
+   "old": "Calculating Handshake Combinations In Group Intera",
+   "name": "count combinatorial interactions in scenarios",
+   "kind": "broadened",
+   "n": 5,
+   "fit": 0.8
+  },
+  {
+   "id": 78,
+   "old": "Applying Fraction Multiplication To Unit Prices",
+   "name": "calculate price changes using percentages",
+   "kind": "specific",
+   "n": 13,
+   "fit": 0.38461538461538464
+  },
+  {
+   "id": 79,
+   "old": "Ensuring Consistent Section Headers In Document St",
+   "name": "create structured sections in documents",
+   "kind": "specific",
+   "n": 4,
+   "fit": 0.5
+  },
+  {
+   "id": 80,
+   "old": "Balancing Instrumentation For Optimal Sound Qualit",
+   "name": "choose option meeting constraints",
+   "kind": "broadened",
+   "n": 5,
+   "fit": 1.0
+  },
+  {
+   "id": 81,
+   "old": "Evaluating Truthfulness Of Nested Statements",
+   "name": "determine truth values of statements",
+   "kind": "specific",
+   "n": 1880,
+   "fit": 0.44
+  },
+  {
+   "id": 82,
+   "old": "Analyzing Fragmentation Patterns In Ei Ms",
+   "name": "evaluate data sets for properties",
+   "kind": "specific",
+   "n": 5,
+   "fit": 0.6
+  },
+  {
+   "id": 83,
+   "old": "Identifying Transformations In Quantum Field Theor",
+   "name": "interpret mathematical expressions in physics",
+   "kind": "specific",
+   "n": 9,
+   "fit": 1.0
+  }
+ ],
+ "mean": 0.7199830696986503,
+ "wmean": 0.7170634005763689,
+ "n_broadened": 20,
+ "n_low": 19,
+ "small_rows": [
+  {
+   "id": null,
+   "old": "Analyzing Historical Context Of Sunni Shia Split",
+   "name": "compare beliefs across denominations",
+   "kind": "small",
+   "n": 3,
+   "fit": 0.6666666666666666
+  },
+  {
+   "id": null,
+   "old": "Embedding Comments With Security Keywords In Code ",
+   "name": "demonstrate code vulnerabilities with corrections",
+   "kind": "small",
+   "n": 1,
+   "fit": 1.0
+  },
+  {
+   "id": null,
+   "old": "Avoiding Sensitive Terms In Condolence Messages",
+   "name": "expand condolence messages with care",
+   "kind": "small",
+   "n": 2,
+   "fit": 1.0
+  },
+  {
+   "id": null,
+   "old": "Separating Versions With Specific Delimiters",
+   "name": "generate funny text variations",
+   "kind": "small",
+   "n": 1,
+   "fit": 1.0
+  },
+  {
+   "id": null,
+   "old": "Applying Combinatorial Principles To Pet Ownership",
+   "name": "generate responses for pet situations",
+   "kind": "small",
+   "n": 3,
+   "fit": 0.6666666666666666
+  },
+  {
+   "id": null,
+   "old": "Applying Synonyms To Replace Restricted Vocabulary",
+   "name": "rephrase sentences with varied vocabulary",
+   "kind": "small",
+   "n": 2,
+   "fit": 0.5
+  },
+  {
+   "id": null,
+   "old": "Analyzing Historical Significance Of Chess Program",
+   "name": "calculate total game counts",
+   "kind": "small",
+   "n": 3,
+   "fit": 0.6666666666666666
+  },
+  {
+   "id": null,
+   "old": "Ph\u00e2n T\u00edch Ng\u1eef C\u1ea3nh C\u1ee7a Nhi\u1ec7m V\u1ee5 X\u00e3 H\u1ed9i",
+   "name": "give funny critiques of sentences",
+   "kind": "small",
+   "n": 1,
+   "fit": 1.0
+  },
+  {
+   "id": null,
+   "old": "Applying Percentage Rates To Income Segments",
+   "name": "calculate tax amounts for income segments",
+   "kind": "small",
+   "n": 2,
+   "fit": 1.0
+  },
+  {
+   "id": null,
+   "old": "Constructing Bash Scripts For File Downloads",
+   "name": "create bash scripts for file transfers",
+   "kind": "small",
+   "n": 1,
+   "fit": 1.0
+  },
+  {
+   "id": null,
+   "old": "Coordinating Workflow Between Service Providers",
+   "name": "assign roles based on team strengths",
+   "kind": "small",
+   "n": 1,
+   "fit": 1.0
+  },
+  {
+   "id": null,
+   "old": "Applying Mutation Rate To Genetic Equilibrium",
+   "name": "evaluate genetic equilibrium conditions",
+   "kind": "small",
+   "n": 2,
+   "fit": 1.0
+  },
+  {
+   "id": null,
+   "old": "Optimizing User Experience Based On Feedback",
+   "name": "critique marketing messages for effectiveness",
+   "kind": "small",
+   "n": 2,
+   "fit": 1.0
+  },
+  {
+   "id": null,
+   "old": "Applying Set Theory To Divisor Subsets",
+   "name": "count subsets of composite numbers",
+   "kind": "small",
+   "n": 2,
+   "fit": 0.5
+  },
+  {
+   "id": null,
+   "old": "Analyzing Sentiment In Financial Statements",
+   "name": "rephrase statements with formal tone",
+   "kind": "small",
+   "n": 3,
+   "fit": 0.3333333333333333
+  },
+  {
+   "id": null,
+   "old": "Iterating Weight Loss Over Multiple Weeks",
+   "name": "calculate weight changes over weeks",
+   "kind": "small",
+   "n": 2,
+   "fit": 0.5
+  },
+  {
+   "id": null,
+   "old": "Interpreting Luminescence Behavior In Zinc Silicat",
+   "name": "interpret luminescence effects on materials",
+   "kind": "small",
+   "n": 1,
+   "fit": 1.0
+  }
+ ],
+ "mean_all100": 0.735919281183213,
+ "wmean_all100": 0.7171391604370327
+}

@@ -1,0 +1,331 @@
+{
+ "judge": "gemini-3.6-flash",
+ "sample": 10,
+ "sheet": "gold/gold_sheet_2_labelled.md",
+ "codebook": "codebook_v2_amended_b150.json",
+ "labels": "item_labels_b150.jsonl",
+ "batch_composition_reproducible": false,
+ "see": "T-115",
+ "n_paired": 42,
+ "human_accept": 40,
+ "judge_accept": 32,
+ "agreement": 32,
+ "judge_stricter": 9,
+ "human_stricter": 1,
+ "cells": {
+  "both_accept": 31,
+  "human_only": 9,
+  "judge_only": 1,
+  "both_reject": 1
+ },
+ "anchored_items": [
+  "1708",
+  "3549",
+  "4194",
+  "528",
+  "5285",
+  "7096",
+  "7227",
+  "768",
+  "7940",
+  "8918",
+  "9034"
+ ],
+ "per_assignment": [
+  {
+   "item_idx": 172,
+   "code": "c_0149",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 314,
+   "code": "c_0519",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 528,
+   "code": "c_1152",
+   "human": true,
+   "anchored": true,
+   "judge": true
+  },
+  {
+   "item_idx": 768,
+   "code": "c_0157",
+   "human": true,
+   "anchored": true,
+   "judge": false
+  },
+  {
+   "item_idx": 910,
+   "code": "c_0358",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 4194,
+   "code": "c_0322",
+   "human": false,
+   "anchored": true,
+   "judge": false
+  },
+  {
+   "item_idx": 5285,
+   "code": "c_0632",
+   "human": true,
+   "anchored": true,
+   "judge": false
+  },
+  {
+   "item_idx": 7216,
+   "code": "c_0656",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 7225,
+   "code": "c_1147",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 7227,
+   "code": "c_0426",
+   "human": true,
+   "anchored": true,
+   "judge": false
+  },
+  {
+   "item_idx": 7328,
+   "code": "c_1175",
+   "human": true,
+   "anchored": false,
+   "judge": false
+  },
+  {
+   "item_idx": 7528,
+   "code": "c_1179",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 7699,
+   "code": "c_0544",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 7939,
+   "code": "c_1064",
+   "human": true,
+   "anchored": false,
+   "judge": false
+  },
+  {
+   "item_idx": 7940,
+   "code": "c_0253",
+   "human": true,
+   "anchored": true,
+   "judge": false
+  },
+  {
+   "item_idx": 8263,
+   "code": "c_0874",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 8276,
+   "code": "c_0577",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 8276,
+   "code": "c_1160",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 8618,
+   "code": "c_0380",
+   "human": true,
+   "anchored": false,
+   "judge": false
+  },
+  {
+   "item_idx": 9034,
+   "code": "c_0016",
+   "human": true,
+   "anchored": true,
+   "judge": true
+  },
+  {
+   "item_idx": 9074,
+   "code": "c_0016",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 53,
+   "code": "c_0449",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 350,
+   "code": "c_0023",
+   "human": true,
+   "anchored": false,
+   "judge": false
+  },
+  {
+   "item_idx": 1324,
+   "code": "c_0010",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 1705,
+   "code": "c_0078",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 1919,
+   "code": "c_0165",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 2206,
+   "code": "c_0271",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 2216,
+   "code": "c_0035",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 2539,
+   "code": "c_0128",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 2840,
+   "code": "c_0034",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 2987,
+   "code": "c_0493",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 3459,
+   "code": "c_0493",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 3549,
+   "code": "c_0011",
+   "human": true,
+   "anchored": true,
+   "judge": true
+  },
+  {
+   "item_idx": 3825,
+   "code": "c_1035",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 4128,
+   "code": "c_0088",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 4281,
+   "code": "c_0237",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 7096,
+   "code": "c_1103",
+   "human": true,
+   "anchored": true,
+   "judge": false
+  },
+  {
+   "item_idx": 7435,
+   "code": "c_0051",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 7930,
+   "code": "c_0051",
+   "human": true,
+   "anchored": false,
+   "judge": true
+  },
+  {
+   "item_idx": 8918,
+   "code": "c_0008",
+   "human": true,
+   "anchored": true,
+   "judge": true
+  },
+  {
+   "item_idx": 1708,
+   "code": "c_0078",
+   "human": true,
+   "anchored": true,
+   "judge": true
+  },
+  {
+   "item_idx": 1708,
+   "code": "c_0144",
+   "human": false,
+   "anchored": true,
+   "judge": true
+  }
+ ],
+ "errors": []
+}

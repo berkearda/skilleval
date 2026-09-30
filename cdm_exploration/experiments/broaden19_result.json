@@ -1,0 +1,192 @@
+[
+ {
+  "id": 8,
+  "old": "Identifying Themes In Science Fiction Movies",
+  "name": "find similar movie titles by themes",
+  "kind": "specific",
+  "n": 1359,
+  "fit": 0.24,
+  "broad_name": "identify relationships among entities",
+  "broad_fit": 0.88
+ },
+ {
+  "id": 15,
+  "old": "Calculating Decay Length From Energy And Mass",
+  "name": "calculating decay length from energy and mass",
+  "kind": "specific",
+  "n": 112,
+  "fit": 0.2,
+  "broad_name": "analyze physical phenomena",
+  "broad_fit": 0.88
+ },
+ {
+  "id": 25,
+  "old": "Analyzing Effects Of Vertical Stretch On Graphs",
+  "name": "determine function values from transformations",
+  "kind": "specific",
+  "n": 25,
+  "fit": 0.28,
+  "broad_name": "analyze mathematical relationships",
+  "broad_fit": 0.92
+ },
+ {
+  "id": 28,
+  "old": "Manipulating Algebraic Expressions For Variance",
+  "name": "compute averages from data sets",
+  "kind": "specific",
+  "n": 22,
+  "fit": 0.5,
+  "broad_name": "perform mathematical calculations",
+  "broad_fit": 0.8636363636363636
+ },
+ {
+  "id": 31,
+  "old": "Applying Relativity To Calculate Velocity Vectors",
+  "name": "calculate relative speeds in frames",
+  "kind": "specific",
+  "n": 46,
+  "fit": 0.36,
+  "broad_name": "solve quantitative word problems",
+  "broad_fit": 0.8
+ },
+ {
+  "id": 32,
+  "old": "Applying Nernst Equation To Redox Potential",
+  "name": "calculate equilibrium concentrations from conditions",
+  "kind": "specific",
+  "n": 6,
+  "fit": 0.5,
+  "broad_name": "analyze quantitative relationships",
+  "broad_fit": 1.0
+ },
+ {
+  "id": 35,
+  "old": "Identifying Interstellar Medium Types In Astronomy",
+  "name": "interpret spectroscopic measurements",
+  "kind": "broadened",
+  "n": 19,
+  "fit": 0.5789473684210527,
+  "broad_name": "analyze scientific data",
+  "broad_fit": 0.8421052631578947
+ },
+ {
+  "id": 36,
+  "old": "Evaluating Function Values At Specific Points",
+  "name": "evaluate function expressions at specific inputs",
+  "kind": "specific",
+  "n": 106,
+  "fit": 0.56,
+  "broad_name": "solve mathematical problems",
+  "broad_fit": 0.96
+ },
+ {
+  "id": 44,
+  "old": "Evaluating Climate Control System Activation Condi",
+  "name": "determine activation conditions for systems",
+  "kind": "specific",
+  "n": 7,
+  "fit": 0.42857142857142855,
+  "broad_name": "evaluate causal relationships",
+  "broad_fit": 0.42857142857142855
+ },
+ {
+  "id": 46,
+  "old": "Identifying Mutations In Nucleotide Sequences",
+  "name": "determine sequence differences in genetic data",
+  "kind": "specific",
+  "n": 193,
+  "fit": 0.24,
+  "broad_name": "analyze biological processes",
+  "broad_fit": 0.88
+ },
+ {
+  "id": 54,
+  "old": "Applying Divisibility Rules To Factorials",
+  "name": "count trailing zeros in factorials",
+  "kind": "specific",
+  "n": 32,
+  "fit": 0.08,
+  "broad_name": "count combinations and arrangements",
+  "broad_fit": 0.28
+ },
+ {
+  "id": 59,
+  "old": "Recognizing Symmetry In Two Dimensional Figures",
+  "name": "identify geometric shapes from svg paths",
+  "kind": "specific",
+  "n": 97,
+  "fit": 0.48,
+  "broad_name": "analyze geometric shapes and paths",
+  "broad_fit": 0.8
+ },
+ {
+  "id": 62,
+  "old": "Analyzing User Access Patterns Over Time",
+  "name": "determine access consequences based on conditions",
+  "kind": "specific",
+  "n": 14,
+  "fit": 0.5,
+  "broad_name": "reason about causal relationships",
+  "broad_fit": 1.0
+ },
+ {
+  "id": 67,
+  "old": "Analyzing Surface Properties Of Materials",
+  "name": "evaluate material properties under conditions",
+  "kind": "specific",
+  "n": 24,
+  "fit": 0.3333333333333333,
+  "broad_name": "analyze causal relationships",
+  "broad_fit": 0.9166666666666666
+ },
+ {
+  "id": 71,
+  "old": "Incorporating Friends Name In Personalized Message",
+  "name": "draft personalized messages for recipients",
+  "kind": "specific",
+  "n": 4,
+  "fit": 0.25,
+  "broad_name": "analyze social interactions",
+  "broad_fit": 0.25
+ },
+ {
+  "id": 75,
+  "old": "Applying Snell'S Law To Light Refraction In Media",
+  "name": "solve observational astrophysics problems",
+  "kind": "broadened",
+  "n": 63,
+  "fit": 0.56,
+  "broad_name": "analyze scientific data",
+  "broad_fit": 1.0
+ },
+ {
+  "id": 78,
+  "old": "Applying Fraction Multiplication To Unit Prices",
+  "name": "calculate price changes using percentages",
+  "kind": "specific",
+  "n": 13,
+  "fit": 0.38461538461538464,
+  "broad_name": "solve quantitative word problems",
+  "broad_fit": 1.0
+ },
+ {
+  "id": 79,
+  "old": "Ensuring Consistent Section Headers In Document St",
+  "name": "create structured sections in documents",
+  "kind": "specific",
+  "n": 4,
+  "fit": 0.5,
+  "broad_name": "extract and organize information",
+  "broad_fit": 1.0
+ },
+ {
+  "id": 81,
+  "old": "Evaluating Truthfulness Of Nested Statements",
+  "name": "determine truth values of statements",
+  "kind": "specific",
+  "n": 1880,
+  "fit": 0.44,
+  "broad_name": "analyze logical relationships",
+  "broad_fit": 0.64
+ }
+]

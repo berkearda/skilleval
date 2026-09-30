@@ -1,0 +1,24 @@
+{
+ "skills": [
+  "track item ownership through swaps",
+  "classify translation error type",
+  "assess user login consequences",
+  "count musical instruments in a list",
+  "determine final player position after swaps",
+  "determine distances from geometric conditions",
+  "determine deductive validity of family relation arguments",
+  "compose creative text with constraints",
+  "calculate quantum state properties",
+  "calculate areas of geometric shapes",
+  "infer order of objects from spatial clues",
+  "calculate distances between geometric objects"
+ ],
+ "rates": {
+  "plain_own": 0.9083333333333333,
+  "plain_stranger": 0.041666666666666664,
+  "strict_own": 0.9,
+  "strict_stranger": 0.03333333333333333
+ },
+ "gap_strict": 0.8666666666666667,
+ "gap_plain": 0.8666666666666667
+}

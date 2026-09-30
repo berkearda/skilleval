@@ -1,0 +1,1576 @@
+{
+ "judge": "gemini-3.6-flash",
+ "sample": 10,
+ "field": "definition",
+ "holdout_only": false,
+ "results": [
+  {
+   "code": "c_0011",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0313",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0454",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0084",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_1133",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0172",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0215",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4
+  },
+  {
+   "code": "c_1442",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0428",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0860",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0734",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0655",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0289",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_1629",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_1102",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.1
+  },
+  {
+   "code": "c_0216",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.2
+  },
+  {
+   "code": "c_1338",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_1019",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0147",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.3
+  },
+  {
+   "code": "c_0009",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0582",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0269",
+   "sent": 9,
+   "returned": 9,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7777777777777778
+  },
+  {
+   "code": "c_1195",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0085",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7
+  },
+  {
+   "code": "c_1365",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_1563",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.42857142857142855
+  },
+  {
+   "code": "c_1411",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333
+  },
+  {
+   "code": "c_1253",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.5
+  },
+  {
+   "code": "c_1220",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0325",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.7142857142857143
+  },
+  {
+   "code": "c_0553",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0059",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0260",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4
+  },
+  {
+   "code": "c_1574",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.14285714285714285
+  },
+  {
+   "code": "c_0129",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7
+  },
+  {
+   "code": "c_0361",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7
+  },
+  {
+   "code": "c_1497",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.1
+  },
+  {
+   "code": "c_0232",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0303",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.16666666666666666
+  },
+  {
+   "code": "c_0034",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_1214",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 2,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0708",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0102",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.42857142857142855
+  },
+  {
+   "code": "c_0496",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 6,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0721",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.42857142857142855
+  },
+  {
+   "code": "c_0316",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0103",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_1198",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0569",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0773",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0664",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0118",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0839",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_1106",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333
+  },
+  {
+   "code": "c_0502",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.75
+  },
+  {
+   "code": "c_0922",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.6666666666666666
+  },
+  {
+   "code": "c_1001",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 2,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1480",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.75
+  },
+  {
+   "code": "c_0880",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0161",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0080",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0115",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0119",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.5
+  },
+  {
+   "code": "c_1150",
+   "error": "truncated at max_out: thinking=3838 output=158; raise max_out or shrink the batch"
+  },
+  {
+   "code": "c_0890",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0060",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333
+  },
+  {
+   "code": "c_1386",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0769",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.6666666666666666
+  },
+  {
+   "code": "c_0388",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_1288",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.2
+  },
+  {
+   "code": "c_1630",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.8571428571428571
+  },
+  {
+   "code": "c_0900",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.75
+  },
+  {
+   "code": "c_1122",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0476",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0005",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0523",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1010",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0382",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0276",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4
+  },
+  {
+   "code": "c_0738",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0731",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0977",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0891",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7
+  },
+  {
+   "code": "c_0284",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0094",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1049",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0132",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0255",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0133",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0218",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0064",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0024",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0711",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0025",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1174",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0862",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0068",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0619",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_1570",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0435",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0028",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7
+  },
+  {
+   "code": "c_0714",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_1449",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1119",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0854",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0122",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1598",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0779",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1725",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0528",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.7142857142857143
+  },
+  {
+   "code": "c_1618",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.16666666666666666
+  },
+  {
+   "code": "c_0585",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0475",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.7142857142857143
+  },
+  {
+   "code": "c_0952",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0347",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0166",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0469",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0183",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0314",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_1115",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0185",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_1700",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.8571428571428571
+  },
+  {
+   "code": "c_0251",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0038",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_1603",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_1265",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0309",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7
+  },
+  {
+   "code": "c_1368",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0417",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0846",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0212",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7
+  },
+  {
+   "code": "c_0439",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_1033",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4
+  },
+  {
+   "code": "c_1061",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1075",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0338",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0112",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4
+  },
+  {
+   "code": "c_0111",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0211",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7
+  },
+  {
+   "code": "c_1036",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 8,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0402",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0477",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0168",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0221",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_0827",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0514",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.2
+  },
+  {
+   "code": "c_0224",
+   "sent": 9,
+   "returned": 9,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.3333333333333333
+  },
+  {
+   "code": "c_0997",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0901",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0581",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_1278",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.6666666666666666
+  },
+  {
+   "code": "c_1296",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 8,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1697",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0196",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 3,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0548",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8
+  },
+  {
+   "code": "c_0759",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0954",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 8,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1008",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 3,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1708",
+   "sent": 9,
+   "returned": 9,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4444444444444444
+  },
+  {
+   "code": "c_0676",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 8,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1054",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0842",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.6666666666666666
+  },
+  {
+   "code": "c_1283",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.5
+  },
+  {
+   "code": "c_1631",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.3333333333333333
+  },
+  {
+   "code": "c_1674",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0865",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0643",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7
+  },
+  {
+   "code": "c_0914",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 7,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0699",
+   "sent": 9,
+   "returned": 9,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6666666666666666
+  },
+  {
+   "code": "c_0561",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1717",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0146",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_1441",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0809",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.4
+  },
+  {
+   "code": "c_0337",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_1550",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0261",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1052",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 2,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1494",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_1691",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0468",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0379",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.3
+  },
+  {
+   "code": "c_0828",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0200",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4
+  },
+  {
+   "code": "c_0281",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6
+  },
+  {
+   "code": "c_0176",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 3,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0836",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9
+  },
+  {
+   "code": "c_1521",
+   "sent": 9,
+   "returned": 9,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7777777777777778
+  },
+  {
+   "code": "c_0550",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0
+  },
+  {
+   "code": "c_0732",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.5
+  },
+  {
+   "code": "c_1668",
+   "error": "truncated at max_out: thinking=3836 output=160; raise max_out or shrink the batch"
+  },
+  {
+   "code": "c_1352",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 2,
+   "precision": 1.0
+  },
+  {
+   "code": "c_0149",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0378",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 2,
+   "precision": 1.0
+  },
+  {
+   "code": "c_1740",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.5
+  },
+  {
+   "code": "c_1502",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.5
+  },
+  {
+   "code": "c_0312",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0
+  }
+ ]
+}

@@ -1,0 +1,509 @@
+{
+ "judge": "gemini-3.6-flash",
+ "results": [
+  {
+   "pair": [
+    "c_0005",
+    "c_0476"
+   ],
+   "merge": false,
+   "rule": "Evaluating compound boolean expressions requires combining multiple independent truth values using binary logical operators (AND, OR) within structured expression trees, whereas evaluating truth value chains requires tracking and updating a single binary state through a linear sequence of unary inversion or identity transformations."
+  },
+  {
+   "pair": [
+    "c_0005",
+    "c_0569"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0428"
+   ],
+   "merge": false,
+   "rule": "Skill A computes static scalar values (such as length, area, or volume) for a defined geometric figure, whereas Skill B derives algebraic equations or coordinate constraints representing a path or set of points (a locus)."
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0773"
+   ],
+   "merge": false,
+   "rule": "Skill A computes spatial size metrics (such as area, volume, or side lengths) using dimension-based formulas, whereas Skill B determines angular measures or trigonometric ratios using angle-sum theorems, parallel line properties, or angle-chasing techniques."
+  },
+  {
+   "pair": [
+    "c_0019",
+    "c_1150"
+   ],
+   "merge": false,
+   "rule": "A subtracts two known points in time to compute the temporal offset between them, whereas B applies a known temporal offset to an anchor date to compute a target date."
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0132"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0276"
+   ],
+   "merge": false,
+   "rule": "A arranges items into a linear sequence based on relative or directional constraints, whereas B performs bipartite matching to pair discrete entities from one set to another based on trait constraints."
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0711"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0024",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "A integrates logical constraints to construct a full sequence from scratch, whereas B retrieves an item from a specific index or rank within a sequence that is already ordered."
+  },
+  {
+   "pair": [
+    "c_0034",
+    "c_0347"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0034",
+    "c_0952"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0085",
+    "c_1442"
+   ],
+   "merge": false,
+   "rule": "Skill A requires defining sample spaces or probability distributions and computing probability-weighted sums or integrals over random variables, whereas Skill B requires applying arithmetic and modular algebra rules to simplify or evaluate deterministic algebraic or numerical expressions."
+  },
+  {
+   "pair": [
+    "c_0094",
+    "c_1049"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0111",
+    "c_0183"
+   ],
+   "merge": false,
+   "rule": "Interpreting spectroscopic data requires mapping empirical data points (such as absorption bands or chemical shifts) to functional groups and structural fragments, whereas predicting chemical reaction products requires applying chemical transformation rules and mechanisms to starting materials to determine resulting structures."
+  },
+  {
+   "pair": [
+    "c_0111",
+    "c_1061"
+   ],
+   "merge": false,
+   "rule": "Interpreting spectroscopic data involves reading experimental peak values to deduce unknown molecular features, whereas inferring or counting NMR features involves analyzing molecular symmetry and chemical environments in a given structure to predict signal counts and splitting patterns."
+  },
+  {
+   "pair": [
+    "c_0115",
+    "c_0276"
+   ],
+   "merge": false,
+   "rule": "Evaluating alibis involves detecting logical contradictions, timeline impossibilities, or false claims among conflicting statements, whereas matching individuals to tasks involves solving a constraint-satisfaction assignment problem based on specified rules and preferences."
+  },
+  {
+   "pair": [
+    "c_0115",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "Evaluating suspect alibis involves analyzing contradictory claims and physical evidence to deduce guilt, whereas tracking state changes involves sequentially updating entity state variables (such as location or possession) across a chronological series of events."
+  },
+  {
+   "pair": [
+    "c_0122",
+    "c_1598"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0132",
+    "c_0711"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0132",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "A requires constructing a linear order by chaining pairwise relational comparisons, whereas B requires retrieving or identifying the item at a specific rank within an already ordered sequence."
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_0255"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0133",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "A requires parsing coordinate-based path parameters to recognize a geometric figure, whereas B requires evaluating logical conditions across structured table rows to determine the total count of matching entries."
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0469"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains requires executing reciprocal pairwise transpositions where two entities exchange items or positions simultaneously, whereas tracking item possession follows the unidirectional transfer of a specific item from entity to entity."
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains requires applying dual reciprocal updates per step (swapping two assignments at once), whereas tracking state changes and relocations involves applying individual attribute, status, or location updates sequentially across events."
+  },
+  {
+   "pair": [
+    "c_0166",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Resolving permutation chains involves executing a sequence of position updates to calculate a final state, whereas matching a determined value to a choice involves comparing a known result against multiple-choice options to identify the corresponding option letter."
+  },
+  {
+   "pair": [
+    "c_0183",
+    "c_0212"
+   ],
+   "merge": false,
+   "rule": "Predicting reaction products operates in the forward direction by applying mechanistic transformation rules to known starting materials and reagents, whereas determining reaction pathways requires inverse deduction\u2014analyzing spectroscopic data or target structures to infer missing reactants, missing reagents, or retrosynthetic steps."
+  },
+  {
+   "pair": [
+    "c_0183",
+    "c_1061"
+   ],
+   "merge": false,
+   "rule": "Predicting reaction products involves transforming chemical structures by applying reaction mechanisms, whereas inferring NMR spectral features involves analyzing molecular symmetry, chemical equivalence, and spin-spin coupling rules of a molecular structure."
+  },
+  {
+   "pair": [
+    "c_0200",
+    "c_0379"
+   ],
+   "merge": false,
+   "rule": "c_0379 requires modulating tone, perspective, and register to simulate a specific persona or audience voice, whereas c_0200 requires tracking and applying explicit quantitative or lexical boundary conditions (e.g., word counts, forbidden letters/words) during generation."
+  },
+  {
+   "pair": [
+    "c_0218",
+    "c_0255"
+   ],
+   "merge": false,
+   "rule": "A requires step-by-step vector integration (accumulating turns and distances) to evaluate net position or loop closure, whereas B requires extracting geometric features (such as side counts, equal lengths, and angles) from coordinate paths to assign a shape category."
+  },
+  {
+   "pair": [
+    "c_0218",
+    "c_0880"
+   ],
+   "merge": false,
+   "rule": "A computes continuous directional and distance vectors in 2D space, whereas B tracks discrete state transitions, permutations, or relational moves among entities."
+  },
+  {
+   "pair": [
+    "c_0255",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "A parses spatial command sequences to identify structural geometric properties, whereas B applies logical boolean filters to tabular data records to compute a numerical count."
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0312"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0708"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "Skill A requires evaluating a set of static logical constraints simultaneously to solve a mapping problem, whereas Skill B requires sequentially applying a series of state transitions over time to update dynamic associations."
+  },
+  {
+   "pair": [
+    "c_0276",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Skill A requires performing bipartite matching between two distinct categorical sets based on attributes, whereas Skill B requires arranging elements along a single linear continuum to determine an ordinal or positional rank."
+  },
+  {
+   "pair": [
+    "c_0312",
+    "c_0708"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0347",
+    "c_0952"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_0468"
+   ],
+   "merge": false,
+   "rule": "Skill A requires modulating tone and content to simulate a designated persona or audience perspective, whereas Skill B requires applying exact Markdown formatting syntax (such as specific list characters, headers, or dividers) to structure text."
+  },
+  {
+   "pair": [
+    "c_0379",
+    "c_0643"
+   ],
+   "merge": false,
+   "rule": "Skill A requires adopting a designated persona or audience perspective to guide voice and tone, whereas Skill B requires satisfying structural, lexical, or formatting rules without assuming a persona."
+  },
+  {
+   "pair": [
+    "c_0435",
+    "c_0862"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0454",
+    "c_0619"
+   ],
+   "merge": false,
+   "rule": "Skill A requires applying combinatorial rules or mathematical constraints to determine the number of valid hypothetical configurations, whereas Skill B requires applying set difference by filtering out items in a specified category from an explicit collection and counting the remainder."
+  },
+  {
+   "pair": [
+    "c_0454",
+    "c_1102"
+   ],
+   "merge": false,
+   "rule": "Skill A requires finding the count of abstract valid states using algebraic, geometric, or number-theoretic constraints, whereas Skill B requires tallying discrete items or summing explicit numerical quantities according to direct aggregation rules."
+  },
+  {
+   "pair": [
+    "c_0468",
+    "c_0643"
+   ],
+   "merge": false,
+   "rule": "A requires inserting specific markup syntax tags and structural markers into the output, whereas B requires generating natural language text while satisfying lexical, stylistic, or semantic constraints."
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0880"
+   ],
+   "merge": false,
+   "rule": "A requires updating discrete agent-to-item ownership assignments across sequential transfer events, whereas B requires updating spatial coordinates, relative positions, or physical state configurations through geometric or relational shifts."
+  },
+  {
+   "pair": [
+    "c_0469",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "A requires updating entity-state mappings across sequential item transfer events, whereas B requires comparing a computed result against candidate multiple-choice options to identify the matching choice letter."
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0523"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0476",
+    "c_0569"
+   ],
+   "merge": false,
+   "rule": "Evaluating truth chains requires sequential state propagation along a linear dependency path, whereas evaluating boolean logic expressions requires tree-structured evaluation using operator precedence rules across multiple logical operators (AND, OR, NOT)."
+  },
+  {
+   "pair": [
+    "c_0528",
+    "c_0780"
+   ],
+   "merge": false,
+   "rule": "Identifying semantic inversion requires detecting a relational flip or opposition between two concepts or statements, whereas evaluating contextual valence requires categorizing the emotional sentiment of a single target text along a positive-to-negative scale."
+  },
+  {
+   "pair": [
+    "c_0619",
+    "c_1497"
+   ],
+   "merge": true,
+   "rule": null
+  },
+  {
+   "pair": [
+    "c_0708",
+    "c_0854"
+   ],
+   "merge": false,
+   "rule": "Skill A requires evaluating static constraint rules simultaneously to find a valid assignment of entities to roles, whereas Skill B requires updating dynamic state variables sequentially across a chronological series of events."
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0891"
+   ],
+   "merge": false,
+   "rule": "Skill A requires synthesizing partial relative constraints to reconstruct a full linear sequence from scratch, whereas Skill B requires querying or identifying the specific item at a targeted rank within an already established or given order."
+  },
+  {
+   "pair": [
+    "c_0711",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Skill A requires deducing spatial or logical relations to order a set of items, whereas Skill B requires mapping an already computed result to a corresponding multiple-choice option letter."
+  },
+  {
+   "pair": [
+    "c_0779",
+    "c_1449"
+   ],
+   "merge": false,
+   "rule": "Skill A requires checking whether proper nouns in a translation accurately match the source text (binary detection/verification of named entity accuracy), whereas Skill B requires classifying an existing translation discrepancy into a specific category within an error taxonomy."
+  },
+  {
+   "pair": [
+    "c_0779",
+    "c_1725"
+   ],
+   "merge": false,
+   "rule": "Skill A requires verifying the correctness of named entity translations specifically, whereas Skill B requires classifying a given translation error into one of several predefined taxonomy categories."
+  },
+  {
+   "pair": [
+    "c_0891",
+    "c_0977"
+   ],
+   "merge": false,
+   "rule": "Skill A requires determining an item based on its ordinal or spatial position within a sequence, whereas Skill B requires comparing a pre-determined target value against a list of options to select the matching multiple-choice label."
+  },
+  {
+   "pair": [
+    "c_0891",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "Skill A indexes into an ordered sequence to retrieve the item occupying a specific relative or absolute position, whereas Skill B evaluates predicate conditions across rows in a dataset and tallies the total count of satisfying rows."
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1119"
+   ],
+   "merge": false,
+   "rule": "Skill A compares a target value against labeled multiple-choice options to identify and output the matching option letter, whereas Skill B scans text to locate a named entity and extract its described property."
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1150"
+   ],
+   "merge": false,
+   "rule": "Skill A matches a derived result to a set of candidate options to select a choice letter, whereas Skill B performs calendar arithmetic by applying a temporal offset to an anchor date to compute a new date."
+  },
+  {
+   "pair": [
+    "c_0977",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "Skill A maps a pre-calculated result to a discrete list of multiple-choice option letters, whereas Skill B evaluates rows of a structured dataset against logical conditions to compute a count."
+  },
+  {
+   "pair": [
+    "c_1019",
+    "c_1629"
+   ],
+   "merge": false,
+   "rule": "Skill A determines extreme values over continuous domains using algebraic inequalities or calculus, whereas Skill B determines extreme values over discrete integer domains using number-theoretic properties, divisibility, or integer bounding."
+  },
+  {
+   "pair": [
+    "c_1102",
+    "c_1497"
+   ],
+   "merge": false,
+   "rule": "To count conditional table rows, the solver must trace and execute sequential dataset mutations (adding or deleting structured rows) and evaluate predicate conditions across table attributes for each row, whereas counting and combining quantities requires directly aggregating given numerical values or counting discrete elements based on non-tabular criteria without maintaining or mutating a structured relational dataset state."
+  },
+  {
+   "pair": [
+    "c_1195",
+    "c_1198"
+   ],
+   "merge": false,
+   "rule": "Sequence analysis requires evaluating index-based state transitions, recurrences, or periodic cycles to compute terms or sums, whereas prime factor exponent analysis requires decomposing numbers into prime power factorizations and evaluating p-adic valuations or divisibility constraints on exponents."
+  },
+  {
+   "pair": [
+    "c_1449",
+    "c_1725"
+   ],
+   "merge": true,
+   "rule": null
+  }
+ ]
+}

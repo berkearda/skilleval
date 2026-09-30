@@ -1,0 +1,2423 @@
+{
+ "judge": "gemini-3.6-flash",
+ "sample": 10,
+ "field": "definition",
+ "holdout_only": true,
+ "results": [
+  {
+   "code": "c_0627",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0313",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0454",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0084",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_1133",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0056",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_1442",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.3,
+   "precision_on_returned": 0.3
+  },
+  {
+   "code": "c_0428",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.3,
+   "precision_on_returned": 0.3
+  },
+  {
+   "code": "c_0860",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0734",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0921",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0655",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0289",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0057",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_1102",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_1629",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0216",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0851",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.2,
+   "precision_on_returned": 0.2
+  },
+  {
+   "code": "c_0431",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.14285714285714285,
+   "precision_on_returned": 0.14285714285714285
+  },
+  {
+   "code": "c_0793",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1706",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7,
+   "precision_on_returned": 0.7
+  },
+  {
+   "code": "c_0055",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0178",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0204",
+   "error": "truncated at max_out: thinking=3836 output=160; raise max_out or shrink the batch"
+  },
+  {
+   "code": "c_0628",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_1019",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0009",
+   "error": "truncated at max_out: thinking=3836 output=160; raise max_out or shrink the batch"
+  },
+  {
+   "code": "c_0502",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.6666666666666666,
+   "precision_on_returned": 0.6666666666666666
+  },
+  {
+   "code": "c_0453",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0099",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.75,
+   "precision_on_returned": 0.75
+  },
+  {
+   "code": "c_0215",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0301",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0269",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.6666666666666666,
+   "precision_on_returned": 0.6666666666666666
+  },
+  {
+   "code": "c_0329",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_1323",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0011",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_1273",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4,
+   "precision_on_returned": 0.4
+  },
+  {
+   "code": "c_0085",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0433",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_1365",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.3,
+   "precision_on_returned": 0.3
+  },
+  {
+   "code": "c_0807",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_1374",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_1624",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333,
+   "precision_on_returned": 0.3333333333333333
+  },
+  {
+   "code": "c_1495",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0325",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 5,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0059",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0880",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1201",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0268",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0361",
+   "sent": 9,
+   "returned": 9,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7777777777777778,
+   "precision_on_returned": 0.7777777777777778
+  },
+  {
+   "code": "c_0853",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0510",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333,
+   "precision_on_returned": 0.3333333333333333
+  },
+  {
+   "code": "c_0232",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333,
+   "precision_on_returned": 0.3333333333333333
+  },
+  {
+   "code": "c_1195",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.4,
+   "precision_on_returned": 0.4
+  },
+  {
+   "code": "c_0303",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.6666666666666666,
+   "precision_on_returned": 0.6666666666666666
+  },
+  {
+   "code": "c_1599",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_1020",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_1198",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0102",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.25,
+   "precision_on_returned": 0.25
+  },
+  {
+   "code": "c_0496",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 3,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0721",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0511",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.25,
+   "precision_on_returned": 0.25
+  },
+  {
+   "code": "c_0034",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0260",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0120",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_1433",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.25,
+   "precision_on_returned": 0.25
+  },
+  {
+   "code": "c_0951",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.1,
+   "precision_on_returned": 0.1
+  },
+  {
+   "code": "c_0183",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.3,
+   "precision_on_returned": 0.3
+  },
+  {
+   "code": "c_0103",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0100",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0118",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0773",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0839",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7,
+   "precision_on_returned": 0.7
+  },
+  {
+   "code": "c_0054",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_1730",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0147",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0922",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.6666666666666666,
+   "precision_on_returned": 0.6666666666666666
+  },
+  {
+   "code": "c_1480",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0060",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.8333333333333334,
+   "precision_on_returned": 0.8333333333333334
+  },
+  {
+   "code": "c_0777",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0080",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0115",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1150",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0890",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_1386",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.6666666666666666,
+   "precision_on_returned": 0.6666666666666666
+  },
+  {
+   "code": "c_0096",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0088",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0013",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.25,
+   "precision_on_returned": 0.25
+  },
+  {
+   "code": "c_1166",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333,
+   "precision_on_returned": 0.3333333333333333
+  },
+  {
+   "code": "c_0119",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_1288",
+   "sent": 9,
+   "returned": 9,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4444444444444444,
+   "precision_on_returned": 0.4444444444444444
+  },
+  {
+   "code": "c_1630",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.6666666666666666,
+   "precision_on_returned": 0.6666666666666666
+  },
+  {
+   "code": "c_0900",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.4,
+   "precision_on_returned": 0.4
+  },
+  {
+   "code": "c_1534",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.2,
+   "precision_on_returned": 0.2
+  },
+  {
+   "code": "c_0021",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0005",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0073",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_1486",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0569",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0476",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1010",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1695",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0381",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0382",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_1073",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1316",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.8571428571428571,
+   "precision_on_returned": 0.8571428571428571
+  },
+  {
+   "code": "c_0731",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0093",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0977",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0421",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0891",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0952",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0965",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0284",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1445",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0765",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0094",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1049",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0132",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0471",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.2,
+   "precision_on_returned": 0.2
+  },
+  {
+   "code": "c_0644",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0665",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0255",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0133",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0519",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0957",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0064",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0024",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0066",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.8333333333333334,
+   "precision_on_returned": 0.8333333333333334
+  },
+  {
+   "code": "c_1503",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0711",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0835",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1596",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7,
+   "precision_on_returned": 0.7
+  },
+  {
+   "code": "c_0446",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0177",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0025",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1449",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0306",
+   "sent": 9,
+   "returned": 9,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5555555555555556,
+   "precision_on_returned": 0.5555555555555556
+  },
+  {
+   "code": "c_0862",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0739",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.1,
+   "precision_on_returned": 0.1
+  },
+  {
+   "code": "c_0002",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0218",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_1540",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0069",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4,
+   "precision_on_returned": 0.4
+  },
+  {
+   "code": "c_0619",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0740",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0535",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0,
+   "precision_on_returned": 0.0
+  },
+  {
+   "code": "c_1497",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0893",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0028",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0714",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_1119",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0854",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.3,
+   "precision_on_returned": 0.3
+  },
+  {
+   "code": "c_0122",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1598",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0192",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0993",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_1725",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0779",
+   "error": "truncated at max_out: thinking=3841 output=155; raise max_out or shrink the batch"
+  },
+  {
+   "code": "c_1277",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1618",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333,
+   "precision_on_returned": 0.3333333333333333
+  },
+  {
+   "code": "c_1221",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0108",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0435",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0585",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0528",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.6666666666666666,
+   "precision_on_returned": 0.6666666666666666
+  },
+  {
+   "code": "c_0967",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1046",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 5,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0708",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0475",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 3,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1416",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_1694",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0347",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0274",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0166",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0469",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7,
+   "precision_on_returned": 0.7
+  },
+  {
+   "code": "c_1337",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 6,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1590",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0523",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1644",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 8,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0895",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0185",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0111",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0038",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_1115",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.3,
+   "precision_on_returned": 0.3
+  },
+  {
+   "code": "c_1603",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.2,
+   "precision_on_returned": 0.2
+  },
+  {
+   "code": "c_0350",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.1,
+   "precision_on_returned": 0.1
+  },
+  {
+   "code": "c_0391",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0309",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1528",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0417",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7,
+   "precision_on_returned": 0.7
+  },
+  {
+   "code": "c_0905",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.3333333333333333,
+   "precision_on_returned": 0.3333333333333333
+  },
+  {
+   "code": "c_0846",
+   "sent": 9,
+   "returned": 9,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4444444444444444,
+   "precision_on_returned": 0.4444444444444444
+  },
+  {
+   "code": "c_0436",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0212",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0234",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0224",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.4,
+   "precision_on_returned": 0.4
+  },
+  {
+   "code": "c_0388",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.875,
+   "precision_on_returned": 0.875
+  },
+  {
+   "code": "c_0439",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_1061",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_1075",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0112",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0220",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0670",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 7,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0211",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0360",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0477",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7,
+   "precision_on_returned": 0.7
+  },
+  {
+   "code": "c_0658",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0827",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0351",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0251",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.1,
+   "precision_on_returned": 0.1
+  },
+  {
+   "code": "c_0209",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_0140",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0587",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0995",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.4,
+   "precision_on_returned": 0.4
+  },
+  {
+   "code": "c_0901",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_1483",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 5,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0920",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 4,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0914",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0,
+   "precision_on_returned": 0.0
+  },
+  {
+   "code": "c_1296",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 7,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0759",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0954",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1012",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 3,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0548",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.8571428571428571,
+   "precision_on_returned": 0.8571428571428571
+  },
+  {
+   "code": "c_1272",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 2,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0785",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_1708",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0676",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0419",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333,
+   "precision_on_returned": 0.3333333333333333
+  },
+  {
+   "code": "c_0894",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 3,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1631",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.6666666666666666,
+   "precision_on_returned": 0.6666666666666666
+  },
+  {
+   "code": "c_1377",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0,
+   "precision_on_returned": 0.0
+  },
+  {
+   "code": "c_0514",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 2,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1697",
+   "sent": 5,
+   "returned": 5,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.6,
+   "precision_on_returned": 0.6
+  },
+  {
+   "code": "c_0699",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0561",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.7142857142857143,
+   "precision_on_returned": 0.7142857142857143
+  },
+  {
+   "code": "c_0944",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0844",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.75,
+   "precision_on_returned": 0.75
+  },
+  {
+   "code": "c_1382",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 3,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0261",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 2,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0856",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_1390",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1691",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 3,
+   "precision": 0.42857142857142855,
+   "precision_on_returned": 0.42857142857142855
+  },
+  {
+   "code": "c_0468",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_1321",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0078",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0,
+   "precision_on_returned": 0.0
+  },
+  {
+   "code": "c_0311",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0363",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 8,
+   "precision": 0.8,
+   "precision_on_returned": 0.8
+  },
+  {
+   "code": "c_0828",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 9,
+   "precision": 0.9,
+   "precision_on_returned": 0.9
+  },
+  {
+   "code": "c_1425",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 4,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0379",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 2,
+   "precision": 0.2,
+   "precision_on_returned": 0.2
+  },
+  {
+   "code": "c_0643",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_1017",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0299",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 5,
+   "precision": 0.5,
+   "precision_on_returned": 0.5
+  },
+  {
+   "code": "c_0200",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0281",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 7,
+   "precision": 0.7,
+   "precision_on_returned": 0.7
+  },
+  {
+   "code": "c_0702",
+   "sent": 4,
+   "returned": 4,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.25,
+   "precision_on_returned": 0.25
+  },
+  {
+   "code": "c_1251",
+   "sent": 8,
+   "returned": 8,
+   "missing": 0,
+   "matched": 6,
+   "precision": 0.75,
+   "precision_on_returned": 0.75
+  },
+  {
+   "code": "c_0836",
+   "sent": 6,
+   "returned": 6,
+   "missing": 0,
+   "matched": 6,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0732",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333,
+   "precision_on_returned": 0.3333333333333333
+  },
+  {
+   "code": "c_1668",
+   "sent": 3,
+   "returned": 3,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.3333333333333333,
+   "precision_on_returned": 0.3333333333333333
+  },
+  {
+   "code": "c_1391",
+   "sent": 2,
+   "returned": 2,
+   "missing": 0,
+   "matched": 2,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0464",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 1,
+   "precision": 0.1,
+   "precision_on_returned": 0.1
+  },
+  {
+   "code": "c_0297",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_1047",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0790",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0286",
+   "sent": 7,
+   "returned": 7,
+   "missing": 0,
+   "matched": 0,
+   "precision": 0.0,
+   "precision_on_returned": 0.0
+  },
+  {
+   "code": "c_0276",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0266",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  },
+  {
+   "code": "c_0312",
+   "sent": 10,
+   "returned": 10,
+   "missing": 0,
+   "matched": 10,
+   "precision": 1.0,
+   "precision_on_returned": 1.0
+  }
+ ]
+}

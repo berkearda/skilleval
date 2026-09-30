@@ -1,0 +1,1039 @@
+1) solve algebraic equation for product | find product from given algebraic condition | 1
+2) count permutations with order restrictions | count arrangements with adjacency and order constraints | 2
+3) count permutations with logical conditions | count sequences satisfying logical or conditions | 3
+4) count distinct colorings under rotation | count colorings modulo rotational symmetry | 4
+5) find generating function for sequence | find function generating given sequence | 5
+6) maximize variable under quadratic constraints | find max variable given quadratic equalities | 6
+7) find number of solutions to system | count solutions to nonlinear system of equations | 7
+8) solve word problem with ratios | find quantity from ratio and total constraints | 8
+9) count placements with row or column condition | count placements with row or column restrictions | 9
+10) calculate percentage from population data | find percent children from given demographic data | 10
+11) calculate angle in circle graph | find central angle from group count and total | 11
+12) interpret causation in scenario | judge typical causal explanation in story | 12
+13) evaluate deductive validity of argument | judge argument validity from premises | 13
+14) evaluate deductive validity of argument | judge argument validity from premises | 14
+15) evaluate deductive validity of argument | judge argument validity from premises | 15
+16) evaluate deductive validity of argument | judge argument validity from premises | 16
+17) evaluate deductive validity of argument | judge argument validity from premises | 17
+18) evaluate deductive validity of argument | judge argument validity from premises | 18
+19) deduce order from positional clues | find object position from order statements | 19
+20) deduce order from positional clues | find object position from order statements | 20
+21) deduce order from positional clues | find object position from order statements | 21
+22) deduce order from positional clues | find object position from order statements | 22
+23) deduce order from positional clues | find object position from order statements | 23
+24) deduce order from positional clues | find object position from order statements | 24
+25) deduce order from positional clues | find object position from order statements | 25
+26) deduce order from positional clues | find object position from order statements | 26
+27) deduce order from positional clues | find object position from order statements | 27
+28) deduce order from positional clues | find object position from order statements | 28
+29) deduce order from positional clues | find object position from order statements | 29
+30) deduce order from positional clues | find object position from order statements | 30
+31) deduce order from positional clues | find object position from order statements | 31
+32) deduce order from positional clues | find object position from order statements | 32
+33) deduce order from positional clues | find object position from order statements | 33
+34) deduce order from positional clues | find object position from order statements | 34
+35) deduce order from positional clues | find object position from order statements | 35
+36) deduce order from positional clues | find object position from order statements | 36
+37) deduce order from positional clues | find object position from order statements | 37
+38) deduce order from positional clues | find object position from order statements | 38
+39) deduce order from positional clues | find object position from order statements | 39
+40) deduce order from positional clues | find object position from order statements | 40
+41) deduce order from positional clues | find object position from order statements | 41
+42) deduce order from positional clues | find object position from order statements | 42
+43) deduce order from positional clues | find object position from order statements | 43
+44) deduce order from positional clues | find object position from order statements | 44
+45) deduce order from positional clues | find object position from order statements | 45
+46) deduce order from positional clues | find object position from order statements | 46
+47) deduce order from positional clues | find object position from order statements | 47
+48) deduce order from positional clues | find object position from order statements | 48
+49) deduce order from positional clues | find object position from order statements | 49
+50) deduce order from positional clues | find object position from order statements | 50
+51) deduce order from positional clues | find object position from order statements | 51
+52) deduce order from positional clues | find object position from order statements | 52
+53) deduce order from positional clues | find object position from order statements | 53
+54) deduce order from positional clues | find object position from order statements | 54
+55) deduce order from positional clues | find object position from order statements | 55
+56) deduce order from positional clues | find object position from order statements | 56
+57) deduce order from positional clues | find object position from order statements | 57
+58) deduce order from positional clues | find object position from order statements | 58
+59) deduce order from positional clues | find object position from order statements | 59
+60) deduce order from positional clues | find object position from order statements | 60
+61) deduce order from positional clues | find object position from order statements | 61
+62) deduce order from positional clues | find object position from order statements | 62
+63) deduce order from positional clues | find object position from order statements | 63
+64) deduce order from positional clues | find object position from order statements | 64
+65) deduce order from positional clues | find object position from order statements | 65
+66) deduce order from positional clues | find object position from order statements | 66
+67) deduce order from positional clues | find object position from order statements | 67
+68) deduce order from positional clues | find object position from order statements | 68
+69) deduce order from positional clues | find object position from order statements | 69
+70) deduce order from positional clues | find object position from order statements | 70
+71) deduce order from positional clues | find object position from order statements | 71
+72) deduce order from positional clues | find object position from order statements | 72
+73) deduce order from positional clues | find object position from order statements | 73
+74) deduce order from positional clues | find object position from order statements | 74
+75) deduce order from positional clues | find object position from order statements | 75
+76) deduce order from positional clues | find object position from order statements | 76
+77) deduce order from positional clues | find object position from order statements | 77
+78) deduce order from positional clues | find object position from order statements | 78
+79) deduce order from positional clues | find object position from order statements | 79
+80) deduce order from positional clues | find object position from order statements | 80
+81) deduce order from positional clues | find object position from order statements | 81
+82) deduce order from positional clues | find object position from order statements | 82
+83) deduce order from positional clues | find object position from order statements | 83
+84) deduce order from positional clues | find object position from order statements | 84
+85) deduce order from positional clues | find object position from order statements | 85
+86) deduce order from positional clues | find object position from order statements | 86
+87) deduce order from positional clues | find object position from order statements | 87
+88) deduce order from positional clues | find object position from order statements | 88
+89) deduce order from positional clues | find object position from order statements | 89
+90) deduce order from positional clues | find object position from order statements | 90
+91) deduce order from positional clues | find object position from order statements | 91
+92) deduce order from positional clues | find object position from order statements | 92
+93) deduce order from positional clues | find object position from order statements | 93
+94) deduce order from positional clues | find object position from order statements | 94
+95) deduce order from positional clues | find object position from order statements | 95
+96) deduce order from positional clues | find object position from order statements | 96
+97) deduce order from positional clues | find object position from order statements | 97
+98) deduce order from positional clues | find object position from order statements | 98
+99) deduce order from positional clues | find object position from order statements | 99
+100) deduce order from positional clues | find object position from order statements | 100
+101) deduce order from positional clues | find object position from order statements | 101
+102) deduce order from positional clues | find object position from order statements | 102
+103) deduce order from positional clues | find object position from order statements | 103
+104) deduce order from positional clues | find object position from order statements | 104
+105) deduce order from positional clues | find object position from order statements | 105
+106) deduce order from positional clues | find object position from order statements | 106
+107) deduce order from positional clues | find object position from order statements | 107
+108) deduce order from positional clues | find object position from order statements | 108
+109) deduce order from positional clues | find object position from order statements | 109
+110) deduce order from positional clues | find object position from order statements | 110
+111) deduce order from positional clues | find object position from order statements | 111
+112) deduce order from positional clues | find object position from order statements | 112
+113) deduce order from positional clues | find object position from order statements | 113
+114) deduce order from positional clues | find object position from order statements | 114
+115) deduce order from positional clues | find object position from order statements | 115
+116) deduce order from positional clues | find object position from order statements | 116
+117) deduce order from positional clues | find object position from order statements | 117
+118) deduce order from positional clues | find object position from order statements | 118
+119) deduce order from positional clues | find object position from order statements | 119
+120) deduce order from positional clues | find object position from order statements | 120
+121) deduce order from positional clues | find object position from order statements | 121
+122) deduce order from positional clues | find object position from order statements | 122
+123) deduce order from positional clues | find object position from order statements | 123
+124) deduce order from positional clues | find object position from order statements | 124
+125) deduce order from positional clues | find object position from order statements | 125
+126) deduce order from positional clues | find object position from order statements | 126
+127) deduce order from positional clues | find object position from order statements | 127
+128) deduce order from positional clues | find object position from order statements | 128
+129) deduce order from positional clues | find object position from order statements | 129
+130) deduce order from positional clues | find object position from order statements | 130
+131) deduce order from positional clues | find object position from order statements | 131
+132) deduce order from positional clues | find object position from order statements | 132
+133) deduce order from positional clues | find object position from order statements | 133
+134) deduce order from positional clues | find object position from order statements | 134
+135) deduce order from positional clues | find object position from order statements | 135
+136) deduce order from positional clues | find object position from order statements | 136
+137) deduce order from positional clues | find object position from order statements | 137
+138) deduce order from positional clues | find object position from order statements | 138
+139) deduce order from positional clues | find object position from order statements | 139
+140) deduce order from positional clues | find object position from order statements | 140
+141) deduce order from positional clues | find object position from order statements | 141
+142) deduce order from positional clues | find object position from order statements | 142
+143) deduce order from positional clues | find object position from order statements | 143
+144) deduce order from positional clues | find object position from order statements | 144
+145) deduce order from positional clues | find object position from order statements | 145
+146) deduce order from positional clues | find object position from order statements | 146
+147) deduce order from positional clues | find object position from order statements | 147
+148) deduce order from positional clues | find object position from order statements | 148
+149) deduce order from positional clues | find object position from order statements | 149
+150) deduce order from positional clues | find object position from order statements | 150
+151) deduce order from positional clues | find object position from order statements | 151
+152) deduce order from positional clues | find object position from order statements | 152
+153) deduce order from positional clues | find object position from order statements | 153
+154) deduce order from positional clues | find object position from order statements | 154
+155) deduce order from positional clues | find object position from order statements | 155
+156) deduce order from positional clues | find object position from order statements | 156
+157) deduce order from positional clues | find object position from order statements | 157
+158) deduce order from positional clues | find object position from order statements | 158
+159) deduce order from positional clues | find object position from order statements | 159
+160) deduce order from positional clues | find object position from order statements | 160
+161) deduce order from positional clues | find object position from order statements | 161
+162) deduce order from positional clues | find object position from order statements | 162
+163) deduce order from positional clues | find object position from order statements | 163
+164) deduce order from positional clues | find object position from order statements | 164
+165) deduce order from positional clues | find object position from order statements | 165
+166) deduce order from positional clues | find object position from order statements | 166
+167) deduce order from positional clues | find object position from order statements | 167
+168) deduce order from positional clues | find object position from order statements | 168
+169) deduce order from positional clues | find object position from order statements | 169
+170) deduce order from positional clues | find object position from order statements | 170
+171) deduce order from positional clues | find object position from order statements | 171
+172) deduce order from positional clues | find object position from order statements | 172
+173) deduce order from positional clues | find object position from order statements | 173
+174) deduce order from positional clues | find object position from order statements | 174
+175) deduce order from positional clues | find object position from order statements | 175
+176) deduce order from positional clues | find object position from order statements | 176
+177) deduce order from positional clues | find object position from order statements | 177
+178) deduce order from positional clues | find object position from order statements | 178
+179) deduce order from positional clues | find object position from order statements | 179
+180) deduce order from positional clues | find object position from order statements | 180
+181) deduce order from positional clues | find object position from order statements | 181
+182) deduce order from positional clues | find object position from order statements | 182
+183) deduce order from positional clues | find object position from order statements | 183
+184) deduce order from positional clues | find object position from order statements | 184
+185) deduce order from positional clues | find object position from order statements | 185
+186) deduce order from positional clues | find object position from order statements | 186
+187) deduce order from positional clues | find object position from order statements | 187
+188) deduce order from positional clues | find object position from order statements | 188
+189) deduce order from positional clues | find object position from order statements | 189
+190) deduce order from positional clues | find object position from order statements | 190
+191) deduce order from positional clues | find object position from order statements | 191
+192) deduce order from positional clues | find object position from order statements | 192
+193) deduce order from positional clues | find object position from order statements | 193
+194) deduce order from positional clues | find object position from order statements | 194
+195) deduce order from positional clues | find object position from order statements | 195
+196) deduce order from positional clues | find object position from order statements | 196
+197) deduce order from positional clues | find object position from order statements | 197
+198) deduce order from positional clues | find object position from order statements | 198
+199) deduce order from positional clues | find object position from order statements | 199
+200) deduce order from positional clues | find object position from order statements | 200
+201) deduce order from positional clues | find object position from order statements | 201
+202) deduce order from positional clues | find object position from order statements | 202
+203) deduce order from positional clues | find object position from order statements | 203
+204) deduce order from positional clues | find object position from order statements | 204
+205) deduce order from positional clues | find object position from order statements | 205
+206) deduce order from positional clues | find object position from order statements | 206
+207) deduce order from positional clues | find object position from order statements | 207
+208) deduce order from positional clues | find object position from order statements | 208
+209) deduce order from positional clues | find object position from order statements | 209
+210) deduce order from positional clues | find object position from order statements | 210
+211) deduce order from positional clues | find object position from order statements | 211
+212) deduce order from positional clues | find object position from order statements | 212
+213) deduce order from positional clues | find object position from order statements | 213
+214) deduce order from positional clues | find object position from order statements | 214
+215) deduce order from positional clues | find object position from order statements | 215
+216) deduce order from positional clues | find object position from order statements | 216
+217) deduce order from positional clues | find object position from order statements | 217
+218) deduce order from positional clues | find object position from order statements | 218
+219) deduce order from positional clues | find object position from order statements | 219
+220) deduce order from positional clues | find object position from order statements | 220
+221) deduce order from positional clues | find object position from order statements | 221
+222) deduce order from positional clues | find object position from order statements | 222
+223) deduce order from positional clues | find object position from order statements | 223
+224) deduce order from positional clues | find object position from order statements | 224
+225) deduce order from positional clues | find object position from order statements | 225
+226) deduce order from positional clues | find object position from order statements | 226
+227) deduce order from positional clues | find object position from order statements | 227
+228) deduce order from positional clues | find object position from order statements | 228
+229) deduce order from positional clues | find object position from order statements | 229
+230) deduce order from positional clues | find object position from order statements | 230
+231) deduce order from positional clues | find object position from order statements | 231
+232) deduce order from positional clues | find object position from order statements | 232
+233) deduce order from positional clues | find object position from order statements | 233
+234) deduce order from positional clues | find object position from order statements | 234
+235) deduce order from positional clues | find object position from order statements | 235
+236) deduce order from positional clues | find object position from order statements | 236
+237) deduce order from positional clues | find object position from order statements | 237
+238) deduce order from positional clues | find object position from order statements | 238
+239) deduce order from positional clues | find object position from order statements | 239
+240) deduce order from positional clues | find object position from order statements | 240
+241) deduce order from positional clues | find object position from order statements | 241
+242) deduce order from positional clues | find object position from order statements | 242
+243) deduce order from positional clues | find object position from order statements | 243
+244) deduce order from positional clues | find object position from order statements | 244
+245) deduce order from positional clues | find object position from order statements | 245
+246) deduce order from positional clues | find object position from order statements | 246
+247) deduce order from positional clues | find object position from order statements | 247
+248) deduce order from positional clues | find object position from order statements | 248
+249) deduce order from positional clues | find object position from order statements | 249
+250) deduce order from positional clues | find object position from order statements | 250
+251) deduce order from positional clues | find object position from order statements | 251
+252) deduce order from positional clues | find object position from order statements | 252
+253) deduce order from positional clues | find object position from order statements | 253
+254) deduce order from positional clues | find object position from order statements | 254
+255) deduce order from positional clues | find object position from order statements | 255
+256) deduce order from positional clues | find object position from order statements | 256
+257) deduce order from positional clues | find object position from order statements | 257
+258) deduce order from positional clues | find object position from order statements | 258
+259) deduce order from positional clues | find object position from order statements | 259
+260) deduce order from positional clues | find object position from order statements | 260
+261) deduce order from positional clues | find object position from order statements | 261
+262) deduce order from positional clues | find object position from order statements | 262
+263) deduce order from positional clues | find object position from order statements | 263
+264) deduce order from positional clues | find object position from order statements | 264
+265) deduce order from positional clues | find object position from order statements | 265
+266) deduce order from positional clues | find object position from order statements | 266
+267) deduce order from positional clues | find object position from order statements | 267
+268) deduce order from positional clues | find object position from order statements | 268
+269) deduce order from positional clues | find object position from order statements | 269
+270) deduce order from positional clues | find object position from order statements | 270
+271) deduce order from positional clues | find object position from order statements | 271
+272) deduce order from positional clues | find object position from order statements | 272
+273) deduce order from positional clues | find object position from order statements | 273
+274) deduce order from positional clues | find object position from order statements | 274
+275) deduce order from positional clues | find object position from order statements | 275
+276) deduce order from positional clues | find object position from order statements | 276
+277) deduce order from positional clues | find object position from order statements | 277
+278) deduce order from positional clues | find object position from order statements | 278
+279) deduce order from positional clues | find object position from order statements | 279
+280) deduce order from positional clues | find object position from order statements | 280
+281) deduce order from positional clues | find object position from order statements | 281
+282) deduce order from positional clues | find object position from order statements | 282
+283) deduce order from positional clues | find object position from order statements | 283
+284) deduce order from positional clues | find object position from order statements | 284
+285) deduce order from positional clues | find object position from order statements | 285
+286) deduce order from positional clues | find object position from order statements | 286
+287) deduce order from positional clues | find object position from order statements | 287
+288) deduce order from positional clues | find object position from order statements | 288
+289) deduce order from positional clues | find object position from order statements | 289
+290) deduce order from positional clues | find object position from order statements | 290
+291) deduce order from positional clues | find object position from order statements | 291
+292) deduce order from positional clues | find object position from order statements | 292
+293) deduce order from positional clues | find object position from order statements | 293
+294) deduce order from positional clues | find object position from order statements | 294
+295) deduce order from positional clues | find object position from order statements | 295
+296) deduce order from positional clues | find object position from order statements | 296
+297) deduce order from positional clues | find object position from order statements | 297
+298) deduce order from positional clues | find object position from order statements | 298
+299) deduce order from positional clues | find object position from order statements | 299
+300) deduce order from positional clues | find object position from order statements | 300
+301) deduce order from positional clues | find object position from order statements | 301
+302) deduce order from positional clues | find object position from order statements | 302
+303) deduce order from positional clues | find object position from order statements | 303
+304) deduce order from positional clues | find object position from order statements | 304
+305) deduce order from positional clues | find object position from order statements | 305
+306) deduce order from positional clues | find object position from order statements | 306
+307) deduce order from positional clues | find object position from order statements | 307
+308) deduce order from positional clues | find object position from order statements | 308
+309) deduce order from positional clues | find object position from order statements | 309
+310) deduce order from positional clues | find object position from order statements | 310
+311) deduce order from positional clues | find object position from order statements | 311
+312) deduce order from positional clues | find object position from order statements | 312
+313) deduce order from positional clues | find object position from order statements | 313
+314) deduce order from positional clues | find object position from order statements | 314
+315) deduce order from positional clues | find object position from order statements | 315
+316) deduce order from positional clues | find object position from order statements | 316
+317) deduce order from positional clues | find object position from order statements | 317
+318) deduce order from positional clues | find object position from order statements | 318
+319) deduce order from positional clues | find object position from order statements | 319
+320) deduce order from positional clues | find object position from order statements | 320
+321) deduce order from positional clues | find object position from order statements | 321
+322) deduce order from positional clues | find object position from order statements | 322
+323) deduce order from positional clues | find object position from order statements | 323
+324) deduce order from positional clues | find object position from order statements | 324
+325) deduce order from positional clues | find object position from order statements | 325
+326) deduce order from positional clues | find object position from order statements | 326
+327) deduce order from positional clues | find object position from order statements | 327
+328) deduce order from positional clues | find object position from order statements | 328
+329) deduce order from positional clues | find object position from order statements | 329
+330) deduce order from positional clues | find object position from order statements | 330
+331) deduce order from positional clues | find object position from order statements | 331
+332) deduce order from positional clues | find object position from order statements | 332
+333) deduce order from positional clues | find object position from order statements | 333
+334) deduce order from positional clues | find object position from order statements | 334
+335) deduce order from positional clues | find object position from order statements | 335
+336) deduce order from positional clues | find object position from order statements | 336
+337) deduce order from positional clues | find object position from order statements | 337
+338) deduce order from positional clues | find object position from order statements | 338
+339) deduce order from positional clues | find object position from order statements | 339
+340) deduce order from positional clues | find object position from order statements | 340
+341) deduce order from positional clues | find object position from order statements | 341
+342) deduce order from positional clues | find object position from order statements | 342
+343) deduce order from positional clues | find object position from order statements | 343
+344) deduce order from positional clues | find object position from order statements | 344
+345) deduce order from positional clues | find object position from order statements | 345
+346) deduce order from positional clues | find object position from order statements | 346
+347) deduce order from positional clues | find object position from order statements | 347
+348) deduce order from positional clues | find object position from order statements | 348
+349) deduce order from positional clues | find object position from order statements | 349
+350) deduce order from positional clues | find object position from order statements | 350
+351) deduce order from positional clues | find object position from order statements | 351
+352) deduce order from positional clues | find object position from order statements | 352
+353) deduce order from positional clues | find object position from order statements | 353
+354) deduce order from positional clues | find object position from order statements | 354
+355) deduce order from positional clues | find object position from order statements | 355
+356) deduce order from positional clues | find object position from order statements | 356
+357) deduce order from positional clues | find object position from order statements | 357
+358) deduce order from positional clues | find object position from order statements | 358
+359) deduce order from positional clues | find object position from order statements | 359
+360) deduce order from positional clues | find object position from order statements | 360
+361) deduce order from positional clues | find object position from order statements | 361
+362) deduce order from positional clues | find object position from order statements | 362
+363) deduce order from positional clues | find object position from order statements | 363
+364) deduce order from positional clues | find object position from order statements | 364
+365) deduce order from positional clues | find object position from order statements | 365
+366) deduce order from positional clues | find object position from order statements | 366
+367) deduce order from positional clues | find object position from order statements | 367
+368) deduce order from positional clues | find object position from order statements | 368
+369) deduce order from positional clues | find object position from order statements | 369
+370) deduce order from positional clues | find object position from order statements | 370
+371) deduce order from positional clues | find object position from order statements | 371
+372) deduce order from positional clues | find object position from order statements | 372
+373) deduce order from positional clues | find object position from order statements | 373
+374) deduce order from positional clues | find object position from order statements | 374
+375) deduce order from positional clues | find object position from order statements | 375
+376) deduce order from positional clues | find object position from order statements | 376
+377) deduce order from positional clues | find object position from order statements | 377
+378) deduce order from positional clues | find object position from order statements | 378
+379) deduce order from positional clues | find object position from order statements | 379
+380) deduce order from positional clues | find object position from order statements | 380
+381) deduce order from positional clues | find object position from order statements | 381
+382) deduce order from positional clues | find object position from order statements | 382
+383) deduce order from positional clues | find object position from order statements | 383
+384) deduce order from positional clues | find object position from order statements | 384
+385) deduce order from positional clues | find object position from order statements | 385
+386) deduce order from positional clues | find object position from order statements | 386
+387) deduce order from positional clues | find object position from order statements | 387
+388) deduce order from positional clues | find object position from order statements | 388
+389) deduce order from positional clues | find object position from order statements | 389
+390) deduce order from positional clues | find object position from order statements | 390
+391) deduce order from positional clues | find object position from order statements | 391
+392) deduce order from positional clues | find object position from order statements | 392
+393) deduce order from positional clues | find object position from order statements | 393
+394) deduce order from positional clues | find object position from order statements | 394
+395) deduce order from positional clues | find object position from order statements | 395
+396) deduce order from positional clues | find object position from order statements | 396
+397) deduce order from positional clues | find object position from order statements | 397
+398) deduce order from positional clues | find object position from order statements | 398
+399) deduce order from positional clues | find object position from order statements | 399
+400) deduce order from positional clues | find object position from order statements | 400
+401) deduce order from positional clues | find object position from order statements | 401
+402) deduce order from positional clues | find object position from order statements | 402
+403) deduce order from positional clues | find object position from order statements | 403
+404) deduce order from positional clues | find object position from order statements | 404
+405) deduce order from positional clues | find object position from order statements | 405
+406) deduce order from positional clues | find object position from order statements | 406
+407) deduce order from positional clues | find object position from order statements | 407
+408) deduce order from positional clues | find object position from order statements | 408
+409) deduce order from positional clues | find object position from order statements | 409
+410) deduce order from positional clues | find object position from order statements | 410
+411) deduce order from positional clues | find object position from order statements | 411
+412) deduce order from positional clues | find object position from order statements | 412
+413) deduce order from positional clues | find object position from order statements | 413
+414) deduce order from positional clues | find object position from order statements | 414
+415) deduce order from positional clues | find object position from order statements | 415
+416) deduce order from positional clues | find object position from order statements | 416
+417) deduce order from positional clues | find object position from order statements | 417
+418) deduce order from positional clues | find object position from order statements | 418
+419) deduce order from positional clues | find object position from order statements | 419
+420) deduce order from positional clues | find object position from order statements | 420
+421) deduce order from positional clues | find object position from order statements | 421
+422) deduce order from positional clues | find object position from order statements | 422
+423) deduce order from positional clues | find object position from order statements | 423
+424) deduce order from positional clues | find object position from order statements | 424
+425) deduce order from positional clues | find object position from order statements | 425
+426) deduce order from positional clues | find object position from order statements | 426
+427) deduce order from positional clues | find object position from order statements | 427
+428) deduce order from positional clues | find object position from order statements | 428
+429) deduce order from positional clues | find object position from order statements | 429
+430) deduce order from positional clues | find object position from order statements | 430
+431) deduce order from positional clues | find object position from order statements | 431
+432) deduce order from positional clues | find object position from order statements | 432
+433) deduce order from positional clues | find object position from order statements | 433
+434) deduce order from positional clues | find object position from order statements | 434
+435) deduce order from positional clues | find object position from order statements | 435
+436) deduce order from positional clues | find object position from order statements | 436
+437) deduce order from positional clues | find object position from order statements | 437
+438) deduce order from positional clues | find object position from order statements | 438
+439) deduce order from positional clues | find object position from order statements | 439
+440) deduce order from positional clues | find object position from order statements | 440
+441) deduce order from positional clues | find object position from order statements | 441
+442) deduce order from positional clues | find object position from order statements | 442
+443) deduce order from positional clues | find object position from order statements | 443
+444) deduce order from positional clues | find object position from order statements | 444
+445) deduce order from positional clues | find object position from order statements | 445
+446) deduce order from positional clues | find object position from order statements | 446
+447) deduce order from positional clues | find object position from order statements | 447
+448) deduce order from positional clues | find object position from order statements | 448
+449) deduce order from positional clues | find object position from order statements | 449
+450) deduce order from positional clues | find object position from order statements | 450
+451) deduce order from positional clues | find object position from order statements | 451
+452) deduce order from positional clues | find object position from order statements | 452
+453) deduce order from positional clues | find object position from order statements | 453
+454) deduce order from positional clues | find object position from order statements | 454
+455) deduce order from positional clues | find object position from order statements | 455
+456) deduce order from positional clues | find object position from order statements | 456
+457) deduce order from positional clues | find object position from order statements | 457
+458) deduce order from positional clues | find object position from order statements | 458
+459) deduce order from positional clues | find object position from order statements | 459
+460) deduce order from positional clues | find object position from order statements | 460
+461) deduce order from positional clues | find object position from order statements | 461
+462) deduce order from positional clues | find object position from order statements | 462
+463) deduce order from positional clues | find object position from order statements | 463
+464) deduce order from positional clues | find object position from order statements | 464
+465) deduce order from positional clues | find object position from order statements | 465
+466) deduce order from positional clues | find object position from order statements | 466
+467) deduce order from positional clues | find object position from order statements | 467
+468) deduce order from positional clues | find object position from order statements | 468
+469) deduce order from positional clues | find object position from order statements | 469
+470) deduce order from positional clues | find object position from order statements | 470
+471) deduce order from positional clues | find object position from order statements | 471
+472) deduce order from positional clues | find object position from order statements | 472
+473) deduce order from positional clues | find object position from order statements | 473
+474) deduce order from positional clues | find object position from order statements | 474
+475) deduce order from positional clues | find object position from order statements | 475
+476) deduce order from positional clues | find object position from order statements | 476
+477) deduce order from positional clues | find object position from order statements | 477
+478) deduce order from positional clues | find object position from order statements | 478
+479) deduce order from positional clues | find object position from order statements | 479
+480) deduce order from positional clues | find object position from order statements | 480
+481) deduce order from positional clues | find object position from order statements | 481
+482) deduce order from positional clues | find object position from order statements | 482
+483) deduce order from positional clues | find object position from order statements | 483
+484) deduce order from positional clues | find object position from order statements | 484
+485) deduce order from positional clues | find object position from order statements | 485
+486) deduce order from positional clues | find object position from order statements | 486
+487) deduce order from positional clues | find object position from order statements | 487
+488) deduce order from positional clues | find object position from order statements | 488
+489) deduce order from positional clues | find object position from order statements | 489
+490) deduce order from positional clues | find object position from order statements | 490
+491) deduce order from positional clues | find object position from order statements | 491
+492) deduce order from positional clues | find object position from order statements | 492
+493) deduce order from positional clues | find object position from order statements | 493
+494) deduce order from positional clues | find object position from order statements | 494
+495) deduce order from positional clues | find object position from order statements | 495
+496) deduce order from positional clues | find object position from order statements | 496
+497) deduce order from positional clues | find object position from order statements | 497
+498) deduce order from positional clues | find object position from order statements | 498
+499) deduce order from positional clues | find object position from order statements | 499
+500) deduce order from positional clues | find object position from order statements | 500
+501) deduce order from positional clues | find object position from order statements | 501
+502) deduce order from positional clues | find object position from order statements | 502
+503) deduce order from positional clues | find object position from order statements | 503
+504) deduce order from positional clues | find object position from order statements | 504
+505) deduce order from positional clues | find object position from order statements | 505
+506) deduce order from positional clues | find object position from order statements | 506
+507) deduce order from positional clues | find object position from order statements | 507
+508) deduce order from positional clues | find object position from order statements | 508
+509) deduce order from positional clues | find object position from order statements | 509
+510) deduce order from positional clues | find object position from order statements | 510
+511) deduce order from positional clues | find object position from order statements | 511
+512) deduce order from positional clues | find object position from order statements | 512
+513) deduce order from positional clues | find object position from order statements | 513
+514) deduce order from positional clues | find object position from order statements | 514
+515) deduce order from positional clues | find object position from order statements | 515
+516) deduce order from positional clues | find object position from order statements | 516
+517) deduce order from positional clues | find object position from order statements | 517
+518) deduce order from positional clues | find object position from order statements | 518
+519) deduce order from positional clues | find object position from order statements | 519
+520) deduce order from positional clues | find object position from order statements | 520
+521) deduce order from positional clues | find object position from order statements | 521
+522) deduce order from positional clues | find object position from order statements | 522
+523) deduce order from positional clues | find object position from order statements | 523
+524) deduce order from positional clues | find object position from order statements | 524
+525) deduce order from positional clues | find object position from order statements | 525
+526) deduce order from positional clues | find object position from order statements | 526
+527) deduce order from positional clues | find object position from order statements | 527
+528) deduce order from positional clues | find object position from order statements | 528
+529) deduce order from positional clues | find object position from order statements | 529
+530) deduce order from positional clues | find object position from order statements | 530
+531) deduce order from positional clues | find object position from order statements | 531
+532) deduce order from positional clues | find object position from order statements | 532
+533) deduce order from positional clues | find object position from order statements | 533
+534) deduce order from positional clues | find object position from order statements | 534
+535) deduce order from positional clues | find object position from order statements | 535
+536) deduce order from positional clues | find object position from order statements | 536
+537) deduce order from positional clues | find object position from order statements | 537
+538) deduce order from positional clues | find object position from order statements | 538
+539) deduce order from positional clues | find object position from order statements | 539
+540) deduce order from positional clues | find object position from order statements | 540
+541) deduce order from positional clues | find object position from order statements | 541
+542) deduce order from positional clues | find object position from order statements | 542
+543) deduce order from positional clues | find object position from order statements | 543
+544) deduce order from positional clues | find object position from order statements | 544
+545) deduce order from positional clues | find object position from order statements | 545
+546) deduce order from positional clues | find object position from order statements | 546
+547) deduce order from positional clues | find object position from order statements | 547
+548) deduce order from positional clues | find object position from order statements | 548
+549) deduce order from positional clues | find object position from order statements | 549
+550) deduce order from positional clues | find object position from order statements | 550
+551) deduce order from positional clues | find object position from order statements | 551
+552) deduce order from positional clues | find object position from order statements | 552
+553) deduce order from positional clues | find object position from order statements | 553
+554) deduce order from positional clues | find object position from order statements | 554
+555) deduce order from positional clues | find object position from order statements | 555
+556) deduce order from positional clues | find object position from order statements | 556
+557) deduce order from positional clues | find object position from order statements | 557
+558) deduce order from positional clues | find object position from order statements | 558
+559) deduce order from positional clues | find object position from order statements | 559
+560) deduce order from positional clues | find object position from order statements | 560
+561) deduce order from positional clues | find object position from order statements | 561
+562) deduce order from positional clues | find object position from order statements | 562
+563) deduce order from positional clues | find object position from order statements | 563
+564) deduce order from positional clues | find object position from order statements | 564
+565) deduce order from positional clues | find object position from order statements | 565
+566) deduce order from positional clues | find object position from order statements | 566
+567) deduce order from positional clues | find object position from order statements | 567
+568) deduce order from positional clues | find object position from order statements | 568
+569) deduce order from positional clues | find object position from order statements | 569
+570) deduce order from positional clues | find object position from order statements | 570
+571) deduce order from positional clues | find object position from order statements | 571
+572) deduce order from positional clues | find object position from order statements | 572
+573) deduce order from positional clues | find object position from order statements | 573
+574) deduce order from positional clues | find object position from order statements | 574
+575) deduce order from positional clues | find object position from order statements | 575
+576) deduce order from positional clues | find object position from order statements | 576
+577) deduce order from positional clues | find object position from order statements | 577
+578) deduce order from positional clues | find object position from order statements | 578
+579) deduce order from positional clues | find object position from order statements | 579
+580) deduce order from positional clues | find object position from order statements | 580
+581) deduce order from positional clues | find object position from order statements | 581
+582) deduce order from positional clues | find object position from order statements | 582
+583) deduce order from positional clues | find object position from order statements | 583
+584) deduce order from positional clues | find object position from order statements | 584
+585) deduce order from positional clues | find object position from order statements | 585
+586) deduce order from positional clues | find object position from order statements | 586
+587) deduce order from positional clues | find object position from order statements | 587
+588) deduce order from positional clues | find object position from order statements | 588
+589) deduce order from positional clues | find object position from order statements | 589
+590) deduce order from positional clues | find object position from order statements | 590
+591) deduce order from positional clues | find object position from order statements | 591
+592) deduce order from positional clues | find object position from order statements | 592
+593) deduce order from positional clues | find object position from order statements | 593
+594) deduce order from positional clues | find object position from order statements | 594
+595) deduce order from positional clues | find object position from order statements | 595
+596) deduce order from positional clues | find object position from order statements | 596
+597) deduce order from positional clues | find object position from order statements | 597
+598) deduce order from positional clues | find object position from order statements | 598
+599) deduce order from positional clues | find object position from order statements | 599
+600) deduce order from positional clues | find object position from order statements | 600
+601) deduce order from positional clues | find object position from order statements | 601
+602) deduce order from positional clues | find object position from order statements | 602
+603) deduce order from positional clues | find object position from order statements | 603
+604) deduce order from positional clues | find object position from order statements | 604
+605) deduce order from positional clues | find object position from order statements | 605
+606) deduce order from positional clues | find object position from order statements | 606
+607) deduce order from positional clues | find object position from order statements | 607
+608) deduce order from positional clues | find object position from order statements | 608
+609) deduce order from positional clues | find object position from order statements | 609
+610) deduce order from positional clues | find object position from order statements | 610
+611) deduce order from positional clues | find object position from order statements | 611
+612) deduce order from positional clues | find object position from order statements | 612
+613) deduce order from positional clues | find object position from order statements | 613
+614) deduce order from positional clues | find object position from order statements | 614
+615) deduce order from positional clues | find object position from order statements | 615
+616) deduce order from positional clues | find object position from order statements | 616
+617) deduce order from positional clues | find object position from order statements | 617
+618) deduce order from positional clues | find object position from order statements | 618
+619) deduce order from positional clues | find object position from order statements | 619
+620) deduce order from positional clues | find object position from order statements | 620
+621) deduce order from positional clues | find object position from order statements | 621
+622) deduce order from positional clues | find object position from order statements | 622
+623) deduce order from positional clues | find object position from order statements | 623
+624) deduce order from positional clues | find object position from order statements | 624
+625) deduce order from positional clues | find object position from order statements | 625
+626) deduce order from positional clues | find object position from order statements | 626
+627) deduce order from positional clues | find object position from order statements | 627
+628) deduce order from positional clues | find object position from order statements | 628
+629) deduce order from positional clues | find object position from order statements | 629
+630) deduce order from positional clues | find object position from order statements | 630
+631) deduce order from positional clues | find object position from order statements | 631
+632) deduce order from positional clues | find object position from order statements | 632
+633) deduce order from positional clues | find object position from order statements | 633
+634) deduce order from positional clues | find object position from order statements | 634
+635) deduce order from positional clues | find object position from order statements | 635
+636) deduce order from positional clues | find object position from order statements | 636
+637) deduce order from positional clues | find object position from order statements | 637
+638) deduce order from positional clues | find object position from order statements | 638
+639) deduce order from positional clues | find object position from order statements | 639
+640) deduce order from positional clues | find object position from order statements | 640
+641) deduce order from positional clues | find object position from order statements | 641
+642) deduce order from positional clues | find object position from order statements | 642
+643) deduce order from positional clues | find object position from order statements | 643
+644) count objects in list | count total objects from list | 644 645 646 647 648 649 650
+651) find max value in table column | find oldest penguin from table | 651
+652) find value by table lookup | find penguin by height from table | 652
+653) find last alphabetic entry in table | find last giraffe alphabetically | 653 658
+654) count rows in table | count giraffes in table | 654 657
+655) count rows with condition | count giraffes older than 5 years | 655
+656) count rows with condition | count penguins younger than 10 years | 656
+659) count species in tables | count species in tables | 659
+660) count total animals in tables | count animals in tables | 660
+661) sum values in table column | sum penguin ages | 661
+662) count rows with condition | count penguins older than 5 years | 662
+663) sum values in table column | sum giraffe ages | 663
+664) count rows in table | count penguins in table | 664
+665) count objects by color after removal | count grey objects after removing notebooks | 665
+666) find color of object to right | find color right of cup | 666 669 691 697 709 716 818
+667) find color of object to left | find color left of jug | 667 677 720 746 749 774 805 827
+668) count objects by color | count non-magenta items right of red | 668
+670) count objects by color | count objects neither black nor blue | 670
+671) find color of rightmost object | find color rightmost object | 671 719
+672) find color of object | find color of envelope | 672
+673) yes/no question about color | is mug grey? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+674) find color of furthest object | find color furthest from grey | 674 675 709 715 728 729 747 748 751 755 758 764 767 769 773 778 781 785 788 792 796 799 801 804 808 811 815 819 823 826 830 833 837 839 843 846 849 852 855 858 860 862 865 867 870 873 876 879 882 885 886 889 891 894 897 900 901 904 907 910 913 915 918 921 924 927 930 933 936 939 942 945 949 952 955 958 961 964 967 970 973 976 979 982 985 988 991 994 997 1000 1003 1006 1009 1012 1015 1018 1021 1024 1027 1030 1033 1036 1039 1042 1045 1048 1051 1054 1057 1060 1063 1066 1069 1072 1075 1078 1081 1084 1087 1090 1093 1096 1099 1102 1105 1108 1111 1114 1117 1120 1123 1126 1129 1132 1135 1138 1141 1144 1147 1150 1153 1156 1159 1162 1165 1168 1171 1174 1177 1180 1183 1186 1189 1192 1195 1198 1201 1204 1207 1210 1213 1216 1219 1222 1225 1228 1231 1234 1237 1240 1243 1246 1249 1252 1255 1258 1261 1264 1267 1270 1273 1276 1279 1282 1285 1288 1291 1294 1297 1300 1303
+676) count objects by color | count non-turquoise objects left of yellow | 676
+678) count objects by color | count mugs after removing red items | 678
+679) count objects by color | count yellow items after removing keychains | 679
+680) find color of object | find color of pen | 680
+681) find color of object furthest from another | find color furthest from pen | 681
+682) find color of rightmost object | find color rightmost object | 682
+683) count objects by color | count scrunchiephone chargers after removing black | 683
+684) count objects by color | count silver items after removing keychains | 684
+685) count objects by color | count objects neither yellow nor green | 685
+686) count objects by color | count non-purple objects left of textbook | 686
+687) find color of object left of another | find color left of brown thing | 687
+688) find color of object | find color of pencil | 688
+689) count objects by color | count non-teal objects left of yellow | 689
+690) count objects by color | count mugs after removing silver | 690
+691) find color of object to right | find color right of cup | 666 669 691 697 709 716 818
+692) count objects by color | count non-burgundy objects left of yellow | 692
+693) count objects by color | count silver items after removing paperclips | 693
+694) count objects by color | count turquoise objects after removing notebooks | 694
+695) find color of leftmost object | find color leftmost object | 695
+696) yes/no question about color | is paperclip fuchsia? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+697) find color of rightmost object | find color rightmost object | 673 697
+698) count objects by color | count paperclips after removing teal | 698
+699) find color of object | find color of sheet of paper | 699
+700) find color of object furthest from another | find color furthest from purple | 700
+701) find color of object right of another | find color right of scrunchiephone charger | 701
+702) find color of object left of another | find color left of paperclip | 702
+703) find color of leftmost object | find color leftmost object | 703
+704) count objects by color | count objects neither red nor brown | 704
+705) count objects by color | count yellow items after removing plates | 705
+706) count objects by color | count objects neither orange nor brown | 706
+707) find color of object left of another | find color left of bracelet | 707
+708) yes/no question about color | is teddy bear orange? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+709) find color of object furthest from another | find color furthest from puzzle | 674 675 709 715 728 729 747 748 751 755 758 764 767 769 773 778 781 785 788 792 796 799 801 804 808 811 815 819 823 826 830 833 837 839 843 846 849 852 855 858 860 862 865 867 870 873 876 879 882 885 886 889 891 894 897 900 901 904 907 910 913 915 918 921 924 927 930 933 936 939 942 945 949 952 955 958 961 964 967 970 973 976 979 982 985 988 991 994 997 1000 1003 1006 1009 1012 1015 1018 1021 1024 1027 1030 1033 1036 1039 1042 1045 1048 1051 1054 1057 1060 1063 1066 1069 1072 1075 1078 1081 1084 1087 1090 1093 1096 1099 1102 1105 1108 1111 1114 1117 1120 1123 1126 1129 1132 1135 1138 1141 1144 1147 1150 1153 1156 1159 1162 1165 1168 1171 1174 1177 1180 1183 1186 1189 1192 1195 1198 1201 1204 1207 1210 1213 1216 1219 1222 1225 1228 1231 1234 1237 1240 1243 1246 1249 1252 1255 1258 1261 1264 1267 1270 1273 1276 1279 1282 1285 1288 1291 1294 1297 1300 1303
+710) find color of object left of another | find color left of teal object | 710
+711) yes/no question about color | is booklet mauve? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+712) find color of rightmost object | find color rightmost object | 712
+713) count objects by color | count mugs after removing grey | 713
+714) find color of object furthest from another | find color furthest from fidget spinner | 714
+715) find color of object furthest from another | find color furthest from puzzle | 674 675 709 715 728 729 747 748 751 755 758 764 767 769 773 778 781 785 788 792 796 799 801 804 808 811 815 819 823 826 830 833 837 839 843 846 849 852 855 858 860 862 865 867 870 873 876 879 882 885 886 889 891 894 897 900 901 904 907 910 913 915 918 921 924 927 930 933 936 939 942 945 949 952 955 958 961 964 967 970 973 976 979 982 985 988 991 994 997 1000 1003 1006 1009 1012 1015 1018 1021 1024 1027 1030 1033 1036 1039 1042 1045 1048 1051 1054 1057 1060 1063 1066 1069 1072 1075 1078 1081 1084 1087 1090 1093 1096 1099 1102 1105 1108 1111 1114 1117 1120 1123 1126 1129 1132 1135 1138 1141 1144 1147 1150 1153 1156 1159 1162 1165 1168 1171 1174 1177 1180 1183 1186 1189 1192 1195 1198 1201 1204 1207 1210 1213 1216 1219 1222 1225 1228 1231 1234 1237 1240 1243 1246 1249 1252 1255 1258 1261 1264 1267 1270 1273 1276 1279 1282 1285 1288 1291 1294 1297 1300 1303
+716) yes/no question about color | is pair of sunglasses pink? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+717) find color of object left of another | find color left of brown thing | 687
+718) count objects by color | count objects neither yellow nor black | 718
+719) find color of rightmost object | find color rightmost object | 671 719
+720) find color of object left of another | find color left of silver thing | 720
+721) count objects by color | count notebooks after removing mauve | 721
+722) count objects by color | count notebooks after removing mauve | 722
+723) count objects by color | count mauve items after removing dog leashes | 723
+724) find color of object left of another | find color left of bracelet | 707 724
+725) count objects by color | count non-turquoise items left of yellow | 725
+726) count objects by color | count non-turquoise items left of sheet of paper | 726
+727) find color of object left of another | find color left of brown thing | 727
+728) find color of object furthest from another | find color furthest from paperclip | 728
+729) find color of object furthest from another | find color furthest from puzzle | 674 675 709 715 728 729 747 748 751 755 758 764 767 769 773 778 781 785 788 792 796 799 801 804 808 811 815 819 823 826 830 833 837 839 843 846 849 852 855 858 860 862 865 867 870 873 876 879 882 885 886 889 891 894 897 900 901 904 907 910 913 915 918 921 924 927 930 933 936 939 942 945 949 952 955 958 961 964 967 970 973 976 979 982 985 988 991 994 997 1000 1003 1006 1009 1012 1015 1018 1021 1024 1027 1030 1033 1036 1039 1042 1045 1048 1051 1054 1057 1060 1063 1066 1069 1072 1075 1078 1081 1084 1087 1090 1093 1096 1099 1102 1105 1108 1111 1114 1117 1120 1123 1126 1129 1132 1135 1138 1141 1144 1147 1150 1153 1156 1159 1162 1165 1168 1171 1174 1177 1180 1183 1186 1189 1192 1195 1198 1201 1204 1207 1210 1213 1216 1219 1222 1225 1228 1231 1234 1237 1240 1243 1246 1249 1252 1255 1258 1261 1264 1267 1270 1273 1276 1279 1282 1285 1288 1291 1294 1297 1300 1303
+730) yes/no question about color | is mug grey? | 673 697 730
+731) count objects by color | count green things after removing teddy bears | 731
+732) count objects by color | count mauve things after removing cat toys | 732
+733) count objects by color | count non-gold items right of pencil | 733
+734) find color of object left of another | find color left of pair of sunglasses | 734
+735) yes/no question about color | is cup red? | 735
+736) yes/no question about color | is mug mauve? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+737) count objects by color | count non-purple things left of yellow | 737
+738) count objects by color | count yellow items after removing envelopes | 738
+739) count objects by color | count booklets after removing pink | 739
+740) find color of object furthest from another | find color furthest from purple | 674 675 709 715 728 729 747 748 751 755 758 764 767 769 773 778 781 785 788 792 796 799 801 804 808 811 815 819 823 826 830 833 837 839 843 846 849 852 855 858 860 862 865 867 870 873 876 879 882 885 886 889 891 894 897 900 901 904 907 910 913 915 918 921 924 927 930 933 936 939 942 945 949 952 955 958 961 964 967 970 973 976 979 982 985 988 991 994 997 1000 1003 1006 1009 1012 1015 1018 1021 1024 1027 1030 1033 1036 1039 1042 1045 1048 1051 1054 1057 1060 1063 1066 1069 1072 1075 1078 1081 1084 1087 1090 1093 1096 1099 1102 1105 1108 1111 1114 1117 1120 1123 1126 1129 1132 1135 1138 1141 1144 1147 1150 1153 1156 1159 1162 1165 1168 1171 1174 1177 1180 1183 1186 1189 1192 1195 1198 1201 1204 1207 1210 1213 1216 1219 1222 1225 1228 1231 1234 1237 1240 1243 1246 1249 1252 1255 1258 1261 1264 1267 1270 1273 1276 1279 1282 1285 1288 1291 1294 1297 1300 1303
+741) count objects by color | count non-yellow things right of silver | 741
+742) yes/no question about color | is teddy bear mauve? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+743) count objects by color | count fuchsia items after removing keychains | 743
+744) find color of object furthest from another | find color furthest from purple | 674 675 709 715 728 729 747 748 751 755 758 764 767 769 773 778 781 785 788 792 796 799 801 804 808 811 815 819 823 826 830 833 837 839 843 846 849 852 855 858 860 862 865 867 870 873 876 879 882 885 886 889 891 894 897 900 901 904 907 910 913 915 918 921 924 927 930 933 936 939 942 945 949 952 955 958 961 964 967 970 973 976 979 982 985 988 991 994 997 1000 1003 1006 1009 1012 1015 1018 1021 1024 1027 1030 1033 1036 1039 1042 1045 1048 1051 1054 1057 1060 1063 1066 1069 1072 1075 1078 1081 1084 1087 1090 1093 1096 1099 1102 1105 1108 1111 1114 1117 1120 1123 1126 1129 1132 1135 1138 1141 1144 1147 1150 1153 1156 1159 1162 1165 1168 1171 1174 1177 1180 1183 1186 1189 1192 1195 1198 1201 1204 1207 1210 1213 1216 1219 1222 1225 1228 1231 1234 1237 1240 1243 1246 1249 1252 1255 1258 1261 1264 1267 1270 1273 1276 1279 1282 1285 1288 1291 1294 1297 1300 1303
+745) find color of object left of another | find color left of red object | 745
+746) find color of object left of another | find color left of brown thing | 746
+747) find color of object left of another | find color left of brown thing | 747
+748) yes/no question about color | is pen magenta? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+749) find color of object left of another | find color left of jug | 667 677 720 746 749 774 805 827
+750) count objects by color | count necklaces after removing burgundy | 750
+751) find color of object furthest from another | find color furthest from magenta | 674 675 709 715 728 729 747 748 751 755 758 764 767 769 773 778 781 785 788 792 796 799 801 804 808 811 815 819 823 826 830 833 837 839 843 846 849 852 855 858 860 862 865 867 870 873 876 879 882 885 886 889 891 894 897 900 901 904 907 910 913 915 918 921 924 927 930 933 936 939 942 945 949 952 955 958 961 964 967 970 973 976 979 982 985 988 991 994 997 1000 1003 1006 1009 1012 1015 1018 1021 1024 1027 1030 1033 1036 1039 1042 1045 1048 1051 1054 1057 1060 1063 1066 1069 1072 1075 1078 1081 1084 1087 1090 1093 1096 1099 1102 1105 1108 1111 1114 1117 1120 1123 1126 1129 1132 1135 1138 1141 1144 1147 1150 1153 1156 1159 1162 1165 1168 1171 1174 1177 1180 1183 1186 1189 1192 1195 1198 1201 1204 1207 1210 1213 1216 1219 1222 1225 1228 1231 1234 1237 1240 1243 1246 1249 1252 1255 1258 1261 1264 1267 1270 1273 1276 1279 1282 1285 1288 1291 1294 1297 1300 1303
+752) count objects by color | count paperclips after removing grey | 752
+753) count objects by color | count non-mauve things right of yellow | 753
+754) find color of object right of another | find color right of crayon | 754
+755) find color of object | find color of scrunchiephone charger | 755
+756) count objects by color | count teal items after removing dog leashes | 756
+757) find color of object left of another | find color left of turquoise object | 757
+758) find color of object left of another | find color left of silver object | 758
+759) count objects by color | count gold objects after removing dog leashes | 759
+760) count objects by color | count objects neither purple nor blue | 760
+761) find color of object furthest from another | find color furthest from dog leash | 761
+762) count objects by color | count pink items after removing envelopes | 762
+763) count objects by color | count green items after removing textbooks | 763
+764) find color of object | find color of plate | 764
+765) find color of object left of another | find color left of necklace | 765
+766) find color of leftmost object | find color leftmost object | 766
+767) find color of object furthest from another | find color furthest from blue | 767
+768) yes/no question about color | is dog leash turquoise? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+769) find color of object furthest from another | find color furthest from purple | 674 675 709 715 728 729 747 748 751 755 758 764 767 769 773 778 781 785 788 792 796 799 801 804 808 811 815 819 823 826 830 833 837 839 843 846 849 852 855 858 860 862 865 867 870 873 876 879 882 885 886 889 891 894 897 900 901 904 907 910 913 915 918 921 924 927 930 933 936 939 942 945 949 952 955 958 961 964 967 970 973 976 979 982 985 988 991 994 997 1000 1003 1006 1009 1012 1015 1018 1021 1024 1027 1030 1033 1036 1039 1042 1045 1048 1051 1054 1057 1060 1063 1066 1069 1072 1075 1078 1081 1084 1087 1090 1093 1096 1099 1102 1105 1108 1111 1114 1117 1120 1123 1126 1129 1132 1135 1138 1141 1144 1147 1150 1153 1156 1159 1162 1165 1168 1171 1174 1177 1180 1183 1186 1189 1192 1195 1198 1201 1204 1207 1210 1213 1216 1219 1222 1225 1228 1231 1234 1237 1240 1243 1246 1249 1252 1255 1258 1261 1264 1267 1270 1273 1276 1279 1282 1285 1288 1291 1294 1297 1300 1303
+770) find color of object furthest from another | find color furthest from purple | 674 675 709 715 728 729 747 748 751 755 758 764 767 769 773 778 781 785 788 792 796 799 801 804 808 811 815 819 823 826 830 833 837 839 843 846 849 852 855 858 860 862 865 867 870 873 876 879 882 885 886 889 891 894 897 900 901 904 907 910 913 915 918 921 924 927 930 933 936 939 942 945 949 952 955 958 961 964 967 970 973 976 979 982 985 988 991 994 997 1000 1003 1006 1009 1012 1015 1018 1021 1024 1027 1030 1033 1036 1039 1042 1045 1048 1051 1054 1057 1060 1063 1066 1069 1072 1075 1078 1081 1084 1087 1090 1093 1096 1099 1102 1105 1108 1111 1114 1117 1120 1123 1126 1129 1132 1135 1138 1141 1144 1147 1150 1153 1156 1159 1162 1165 1168 1171 1174 1177 1180 1183 1186 1189 1192 1195 1198 1201 1204 1207 1210 1213 1216 1219 1222 1225 1228 1231 1234 1237 1240 1243 1246 1249 1252 1255 1258 1261 1264 1267 1270 1273 1276 1279 1282 1285 1288 1291 1294 1297 1300 1303
+771) deduce order from positional clues | find object position from order statements | 771
+772) deduce order from positional clues | find object position from order statements | 772
+773) deduce order from positional clues | find object position from order statements | 773
+774) deduce order from positional clues | find object position from order statements | 774
+775) deduce order from positional clues | find object position from order statements | 775
+776) deduce order from positional clues | find object position from order statements | 776
+777) deduce order from positional clues | find object position from order statements | 777
+778) deduce order from positional clues | find object position from order statements | 778
+779) deduce order from positional clues | find object position from order statements | 779
+780) deduce order from positional clues | find object position from order statements | 780
+781) deduce order from positional clues | find object position from order statements | 781
+782) deduce order from positional clues | find object position from order statements | 782
+783) deduce order from positional clues | find object position from order statements | 783
+784) deduce order from positional clues | find object position from order statements | 784
+785) deduce order from positional clues | find object position from order statements | 785
+786) deduce order from positional clues | find object position from order statements | 786
+787) deduce order from positional clues | find object position from order statements | 787
+788) deduce order from positional clues | find object position from order statements | 788
+789) deduce order from positional clues | find object position from order statements | 789
+790) deduce order from positional clues | find object position from order statements | 790
+791) count objects by color | count burgundy items after removing pencils | 791
+792) count objects by color | count puzzles after removing magenta | 792
+793) find color of object | find color of fidget spinner | 793
+794) count objects by color | count objects neither brown nor black | 794
+795) find color of object | find color of paperclip | 795
+796) count objects by color | count pens after removing orange | 796
+797) find color of object furthest from another | find color furthest from red | 797
+798) find color of object furthest from another | find color furthest from teddy bear | 798
+799) count objects by color | count black objects after removing jugs | 799
+800) yes/no question about color | is crayon turquoise? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+801) find color of object furthest from another | find color furthest from sheet of paper | 801
+802) yes/no question about color | is pair of sunglasses silver? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+803) count objects by color | count non-magenta objects right of yellow | 803
+804) find color of object left of another | find color left of purple object | 804
+805) find color of object left of another | find color left of black object | 805
+806) yes/no question about color | is envelope grey? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+807) find color of leftmost object | find color leftmost object | 807
+808) find color of object left of another | find color left of pen | 808
+809) count objects by color | count non-yellow items right of fidget spinner | 809
+810) count objects by color | count mugs after removing silver | 810
+811) count objects by color | count gold items after removing pencils | 811
+812) count objects by color | count non-magenta things left of necklace | 812
+813) count objects by color | count pairs of sunglasses after removing silver | 813
+814) count objects by color | count items neither red nor orange | 814
+815) count objects by color | count green objects after removing fidget spinners | 815
+816) count objects by color | count dog leashes after removing silver | 816
+817) yes/no question about color | is stress ball red? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+818) find color of object left of another | find color left of jug | 667 677 720 746 749 774 805 827 818
+819) count objects by color | count orange items after removing scrunchiephone chargers | 819
+820) count objects by color | count orange items after removing cat toys | 820
+821) count objects by color | count silver objects after removing plates | 821
+822) find color of object furthest from another | find color furthest from bracelet | 822
+823) yes/no question about color | is cat toy yellow? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+824) yes/no question about color | is scrunchiephone charger grey? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+825) count objects by color | count brown things after removing bracelets | 825
+826) find color of object right of another | find color right of burgundy thing | 826
+827) count objects by color | count sheets of paper after removing yellow | 827
+828) find color of object | find color of fidget spinner | 828
+829) count objects by color | count pens after removing orange | 829
+830) count objects by color | count objects neither purple nor black | 830
+831) count objects by color | count objects neither green nor brown | 831
+832) find color of object furthest from another | find color furthest from cup | 832
+833) find color of object furthest from another | find color furthest from green | 833
+834) find color of object right of another | find color right of pencil | 834
+835) find color of object | find color of paperclip | 835
+836) count objects by color | count puzzles after removing blue | 836
+837) find color of object | find color of textbook | 837
+838) yes/no question about color | is dog leash turquoise? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+839) count objects by color | count non-mauve objects left of magenta | 839
+840) count objects by color | count non-purple objects right of grey | 840
+841) count objects by color | count non-brown objects right of mauve | 841
+842) find color of leftmost object | find color leftmost object | 842
+843) find color of leftmost object | find color leftmost object | 843
+844) count objects by color | count objects neither red nor brown | 844
+845) find color of leftmost object | find color leftmost object | 845
+846) find color of object right of another | find color right of red object | 846
+847) find color of object furthest from another | find color furthest from blue | 847
+848) find color of object right of another | find color right of burgundy object | 848
+849) find color of object left of another | find color left of gold object | 849
+850) find color of object right of another | find color right of gold object | 850
+851) find color of object | find color of booklet | 851
+852) find color of leftmost object | find color leftmost object | 852
+853) find color of object right of another | find color right of burgundy object | 853
+854) yes/no question about color | is paperclip grey? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+856) find color of object left of another | find color left of cup | 856
+857) count objects by color | count magenta objects after removing scrunchiephone chargers | 857
+858) find color of object | find color of paperclip | 858
+859) yes/no question about color | is bracelet fuchsia? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+860) find color of rightmost object | find color rightmost object | 860
+861) count objects by color | count envelopes after removing fuchsia | 861
+862) find color of object furthest from another | find color furthest from plate | 862
+863) find color of object right of another | find color right of teddy bear | 863
+864) find color of object furthest from another | find color furthest from silver | 864
+865) count objects by color | count mauve objects after removing keychains | 865
+866) count objects by color | count objects neither black nor purple | 866
+867) find color of object right of another | find color right of cup | 867
+868) find color of object | find color of jug | 868
+869) find color of object right of another | find color right of notebook | 869
+870) find color of object | find color of dog leash | 870
+871) find color of object | find color of plate | 871
+872) yes/no question about color | is booklet fuchsia? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+873) find color of object | find color of keychain | 873
+874) count objects by color | count non-teal items left of scrunchiephone charger | 874
+875) find color of object left of another | find color left of stress ball | 875
+876) find color of rightmost object | find color rightmost object | 876
+877) find color of object | find color of cat toy | 877
+878) find color of object furthest from another | find color furthest from paperclip | 878
+879) find color of object right of another | find color right of pink object | 879
+880) count objects by color | count scrunchiephone chargers after removing yellow | 880
+881) find color of object right of another | find color right of paperclip | 881
+882) find color of object | find color of fidget spinner | 882
+883) count objects by color | count objects neither brown nor black | 883
+884) yes/no question about color | is stress ball burgundy? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+885) count objects by color | count burgundy things after removing notebooks | 885
+886) count objects by color | count non-yellow things left of sunglasses | 886
+887) count objects by color | count textbooks after removing blue | 887
+888) find color of object furthest from another | find color furthest from scrunchiephone charger | 888
+889) count objects by color | count orange items after removing envelopes | 889
+890) yes/no question about color | is notebook black? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+891) find color of object furthest from another | find color furthest from paperclip | 891
+892) count objects by color | count non-grey objects left of blue | 892
+893) count objects by color | count non-brown objects left of necklace | 893
+894) find color of leftmost object | find color leftmost object | 894
+895) yes/no question about color | is pencil blue? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+896) yes/no question about color | is booklet mauve? | 673 708 716 730 736 802 808 835 842 854 872 890 896 909 916 935 948 972 1000 1007 1014 1017 1020 1023 1025 1028 1033 1038 1042 1043 1048 1050 1052 1057 1066 1074 1083 1091 1095 1103 1107 1111 1115 1123 1127 1135 1143 1151 1155 1163 1167 1171 1175 1183 1187 1191 1195 1203 1207 1215 1219 1223 1227 1231 1235 1243 1247 1251 1255 1263 1267 1271 1275 1279 1283 1287 1291 1295 1299 1303
+897) find color of object left of another | find color left of orange object | 897
+898) find color of object left of another | find color left of gold object | 898
+899) count objects by color | count non-red objects right of grey | 899
+900) count objects by color | count cups after removing yellow | 900
+901) find color of object furthest from another | find color furthest from burgundy | 901
+902) find color of object | find color of keychain | 902
+903) count objects by color | count envelopes after removing brown | 903
+904) find color of leftmost object | find color leftmost object | 904
+905) find color of object | find color of pair of sunglasses | 905
+906) find color of object | find color of necklace | 906
+907) find color of object right of another | find color right of fuchsia object | 907
+908) find color of object furthest from another | find color furthest from scrunchiephone charger | 908
+909) find color of object right of another | find color right of pink object | 909
+910) find color of object furthest from another | find color furthest from scrunchiephone charger | 910
+911) count objects by color | count non-black things left of turquoise | 911
+912) find color of object | find color of pair of sunglasses | 912
+913) find color of object right of another | find color right of notebook | 913
+914) count objects by color | count magenta objects after removing paperclips | 914
+915) time range inference from timeline | find possible restaurant visit time | 915
+916) time range inference from timeline | find possible art show visit time | 916
+917) track final item after swaps | find final book of Dave after swaps | 917
+918) track final item after swaps | find final gift of Claire after swaps | 918
+919) track final item after swaps | find final ball of Claire after swaps | 919
+920) track final item after swaps | find final ball of Claire after swaps | 920
+921) track final item after swaps | find final ball of Alice after swaps | 921
+922) track final item after swaps | find final gift of Bob after swaps | 922
+923) track final item after swaps | find final ball of Claire after swaps | 923
+924) track final item after swaps | find final gift of Bob after swaps | 924
+925) track final item after swaps | find final ball of Alice after swaps | 925
+926) track final item after swaps | find final gift of Bob after swaps | 926
+927) track final item after swaps | find final gift of Bob after swaps | 927
+928) track final item after swaps | find final ball of Eve after swaps | 928
+929) track final item after swaps | find final ball of Eve after swaps | 929
+930) track final item after swaps | find final ball of Bob after swaps | 930
+931) track final item after swaps | find final gift of Eve after swaps | 931
+932) track final item after swaps | find final gift of Dave after swaps | 932
+933) track final item after swaps | find final gift of Dave after swaps | 933
+934) track final item after swaps | find final gift of Eve after swaps | 934
+935) track final item after swaps | find final gift of Dave after swaps | 935
+936) track final item after swaps | find final ball of Alice after swaps | 936
+937) track final item after swaps | find final ball of Bob after swaps | 937
+938) track final item after swaps | find final ball of Bob after swaps | 938
+939) track final item after swaps | find final ball of Alice after swaps | 939
+940) track final item after swaps | find final ball of Alice after swaps | 940
+941) track final item after swaps | find final gift of Eve after swaps | 941
+942) track final item after swaps | find final gift of Eve after swaps | 942
+943) track final item after swaps | find final gift of Eve after swaps | 943
+944) track final item after swaps | find final gift of Bob after swaps | 944
+945) track final item after swaps | find final gift of Eve after swaps | 945
+946) track final item after swaps | find final ball of Claire after swaps | 946
+947) track final item after swaps | find final gift of Claire after swaps | 947
+948) track final item after swaps | find final ball of Claire after swaps | 948
+949) track final item after swaps | find final ball of Dave after swaps | 949
+950) track final item after swaps | find final ball of Alice after swaps | 950
+951) track final item after swaps | find final ball of Bob after swaps | 951
+952) track final item after swaps | find final ball of Bob after swaps | 952
+953) track final item after swaps | find final gift of Claire after swaps | 953
+954) track final item after swaps | find final ball of Eve after swaps | 954
+955) track final item after swaps | find final gift of Bob after swaps | 955
+956) track final item after swaps | find final gift of Alice after swaps | 956
+957) track final item after swaps | find final ball of Bob after swaps | 957
+958) track final item after swaps | find final ball of Bob after swaps | 958
+959) track final item after swaps | find final ball of Bob after swaps | 959
+960) track final item after swaps | find final ball of Claire after swaps | 960
+961) track final item after swaps | find final ball of Eve after swaps | 961
+962) track final item after swaps | find final gift of Claire after swaps | 962
+963) track final item after swaps | find final ball of Bob after swaps | 963
+964) track final item after swaps | find final gift of Alice after swaps | 964
+965) track final item after swaps | find final ball of Dave after swaps | 965
+966) track final item after swaps | find final gift of Claire after swaps | 966
+967) track final item after swaps | find final gift of Bob after swaps | 967
+968) track final item after swaps | find final ball of Claire after swaps | 968
+969) track final item after swaps | find final ball of Alice after swaps | 969
+970) track final item after swaps | find final ball of Eve after swaps | 970
+971) track final item after swaps | find final ball of Dave after swaps | 971
+972) track final item after swaps | find final ball of Claire after swaps | 972
+973) track final item after swaps | find final gift of Eve after swaps | 973
+974) track final item after swaps | find final gift of Bob after swaps | 974
+975) track final item after swaps | find final gift of Claire after swaps | 975
+976) track final item after swaps | find final ball of Claire after swaps | 976
+977) track final item after swaps | find final gift of Dave after swaps | 977
+978) track final item after swaps | find final gift of Claire after swaps | 978
+979) track final item after swaps | find final gift of Alice after swaps | 979
+980) track final item after swaps | find final gift of Bob after swaps | 980
+981) track final item after swaps | find final gift of Dave after swaps | 981
+982) track final item after swaps | find final ball of Claire after swaps | 982
+983) track final item after swaps | find final ball of Bob after swaps | 983
+984) track final item after swaps | find final ball of Dave after swaps | 984
+985) track final item after swaps | find final gift of Bob after swaps | 985
+986) track final item after swaps | find final ball of Alice after swaps | 986
+987) track final item after swaps | find final gift of Claire after swaps | 987
+988) track final item after swaps | find final ball of Dave after swaps | 988
+989) track final item after swaps | find final gift of Alice after swaps | 989
+990) track final item after swaps | find final ball of Dave after swaps | 990
+991) track final item after swaps | find final ball of Claire after swaps | 991
+992) track final item after swaps | find final gift of Eve after swaps | 992
+993) track final item after swaps | find final ball of Dave after swaps | 993
+994) track final item after swaps | find final ball of Bob after swaps | 994
+995) track final item after swaps | find final ball of Claire after swaps | 995
+996) track final partner after swaps | find final partner of Alice | 996
+997) track final item after swaps | find final ball of Eve after swaps | 997
+998) track final item after swaps | find final ball of Eve after swaps | 998
+999) track final item after swaps | find final ball of Gertrude after swaps | 999
+1000) track final item after swaps | find final ball of Alice after swaps | 1000
+1001) track final item after swaps | find final ball of Gertrude after swaps | 1001
+1002) track final item after swaps | find final ball of Alice after swaps | 1002
+1003) track final partner after swaps | find final partner of Bob | 1003
+1004) track final item after swaps | find final ball of Dave after swaps | 1004
+1005) track final item after swaps | find final ball of Eve after swaps | 1005
+1006) track final item after swaps | find final ball of Eve after swaps | 1006
+1007) track final item after swaps | find final ball of Dave after swaps | 1007
+1008) track final item after swaps | find final ball of Bob after swaps | 1008
+1009) track final item after swaps | find final ball of Alice after swaps | 1009
+1010) track final item after swaps | find final ball of Gertrude after swaps | 1010
+1011) track final item after swaps | find final ball of Claire after swaps | 1011
+1012) track final item after swaps | find final ball of Claire after swaps | 1012
+1013) track final item after swaps | find final ball of Fred after swaps | 1013
+1014) track final item after swaps | find final book of Claire after swaps | 1014
+1015) track final item after swaps | find final book of Alice after swaps | 1015
+1016) track final item after swaps | find final ball of Bob after swaps | 1016
+1017) track final item after swaps | find final ball of Claire after swaps | 1017
+1018) track final gift after swaps | find final gift of Alice | 1018
+1019) track final gift after swaps | find final gift of Claire | 1019
+1020) track final gift after swaps | find final gift of Bob | 1020
+1021) track final ball after swaps | find final ball of Alice | 1021
+1022) track final position after swaps | find final position of Claire | 1022
+1023) track final ball after swaps | find final ball of Claire | 1023
+1024) track final ball after swaps | find final ball of Claire | 1024
+1025) track final gift after swaps | find final gift of Alice | 1025
+1026) track final ball after swaps | find final ball of Bob | 1026
+1027) track final gift after swaps | find final gift of Bob | 1027
+1028) track final gift after swaps | find final gift of Claire | 1028
+1029) track final ball after swaps | find final ball of Claire | 1029
+1030) track final gift after swaps | find final gift of Bob | 1030
+1031) track final gift after swaps | find final gift of Alice | 1031
+1032) track final ball after swaps | find final ball of Claire | 1032
+1033) track final gift after swaps | find final gift of Bob | 1033
+1034) track final ball after swaps | find final ball of Bob | 1034
+1035) track final position after swaps | find final position of Claire | 1035
+1036) track final ball after swaps | find final ball of Bob | 1036
+1037) track final gift after swaps | find final gift of Claire | 1037
+1038) track final gift after swaps | find final gift of Claire | 1038
+1039) track final gift after swaps | find final gift of Claire | 1039
+1040) track final ball after swaps | find final ball of Bob | 1040
+1041) track final ball after swaps | find final ball of Alice | 1041
+1042) track final ball after swaps | find final ball of Alice | 1042
+1043) track final gift after swaps | find final gift of Bob | 1043
+1044) track final ball after swaps | find final ball of Alice | 1044
+1045) track final ball after swaps | find final ball of Bob | 1045
+1046) track final position after swaps | find final position of Claire | 1046
+1047) track final ball after swaps | find final ball of Claire | 1047
+1048) track final gift after swaps | find final gift of Claire | 1048
+1049) track final ball after swaps | find final ball of Claire | 1049
+1050) track final ball after swaps | find final ball of Bob | 1050
+1051) track final position after swaps | find final position of Bob | 1051

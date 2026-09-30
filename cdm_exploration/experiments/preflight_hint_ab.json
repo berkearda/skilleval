@@ -1,0 +1,198 @@
+{
+ "hint": "Note: the questions are grouped by the operation or instruction they require, which may have nothing to do with their topic or subject area.",
+ "trials_per_skill": 6,
+ "arms": {
+  "instr": {
+   "skills": [
+    {
+     "skill": "applying inequality theorems to minimize expressio",
+     "no_hint": 0.5,
+     "with_hint": 0.8333333333333334,
+     "trials": 6
+    },
+    {
+     "skill": "compose creative text with constraints",
+     "no_hint": 0.5,
+     "with_hint": 0.6666666666666666,
+     "trials": 6
+    },
+    {
+     "skill": "compose formal written communications",
+     "no_hint": 0.5,
+     "with_hint": 0.6666666666666666,
+     "trials": 6
+    },
+    {
+     "skill": "determine values from mathematical expressions",
+     "no_hint": 0.16666666666666666,
+     "with_hint": 0.6666666666666666,
+     "trials": 6
+    },
+    {
+     "skill": "explain concepts with examples",
+     "no_hint": 0.16666666666666666,
+     "with_hint": 0.3333333333333333,
+     "trials": 6
+    },
+    {
+     "skill": "identify humorous wordplay (2)",
+     "no_hint": 0.3333333333333333,
+     "with_hint": 0.5,
+     "trials": 6
+    },
+    {
+     "skill": "inferring object locations from contextual clues",
+     "no_hint": 0.0,
+     "with_hint": 0.5,
+     "trials": 6
+    },
+    {
+     "skill": "inferring time intervals from sequential events",
+     "no_hint": 0.3333333333333333,
+     "with_hint": 0.8333333333333334,
+     "trials": 6
+    },
+    {
+     "skill": "summarize content with specific formats",
+     "no_hint": 0.5,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "write creative articles with specific formats",
+     "no_hint": 0.3333333333333333,
+     "with_hint": 0.8333333333333334,
+     "trials": 6
+    },
+    {
+     "skill": "write informal text with style constraints",
+     "no_hint": 0.5,
+     "with_hint": 0.6666666666666666,
+     "trials": 6
+    },
+    {
+     "skill": "write text with capitalization constraints",
+     "no_hint": 0.5,
+     "with_hint": 0.3333333333333333,
+     "trials": 6
+    },
+    {
+     "skill": "write text with language constraints",
+     "no_hint": 0.16666666666666666,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "write text with placeholders",
+     "no_hint": 0.5,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "write text with punctuation constraints",
+     "no_hint": 0.3333333333333333,
+     "with_hint": 0.8333333333333334,
+     "trials": 6
+    }
+   ],
+   "mean_no_hint": 0.3555555555555555,
+   "mean_with_hint": 0.711111111111111
+  },
+  "control": {
+   "skills": [
+    {
+     "skill": "apply geometric concepts",
+     "no_hint": 0.8333333333333334,
+     "with_hint": 0.6666666666666666,
+     "trials": 6
+    },
+    {
+     "skill": "apply scientific principles",
+     "no_hint": 0.8333333333333334,
+     "with_hint": 0.8333333333333334,
+     "trials": 6
+    },
+    {
+     "skill": "applying interpolation to estimate values",
+     "no_hint": 1.0,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "applying maxwell equations to electromagnetic fiel",
+     "no_hint": 1.0,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "approximate matrix exponential functions",
+     "no_hint": 0.8333333333333334,
+     "with_hint": 0.6666666666666666,
+     "trials": 6
+    },
+    {
+     "skill": "calculating handshake combinations in group intera",
+     "no_hint": 1.0,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "choose correct multiple-choice answer from scientific data",
+     "no_hint": 0.8333333333333334,
+     "with_hint": 0.8333333333333334,
+     "trials": 6
+    },
+    {
+     "skill": "determine molecular symmetry group from chemical reaction description",
+     "no_hint": 1.0,
+     "with_hint": 0.8333333333333334,
+     "trials": 6
+    },
+    {
+     "skill": "evaluate experimental outcomes",
+     "no_hint": 1.0,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "evaluate truthfulness in chain of statements",
+     "no_hint": 1.0,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "extracting data from table headers",
+     "no_hint": 1.0,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "identify causation in given scenarios",
+     "no_hint": 1.0,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "identify humorous word edits",
+     "no_hint": 0.8333333333333334,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "judge deductive validity of logical arguments",
+     "no_hint": 0.8333333333333334,
+     "with_hint": 1.0,
+     "trials": 6
+    },
+    {
+     "skill": "write text with specific word usage",
+     "no_hint": 0.8333333333333334,
+     "with_hint": 0.8333333333333334,
+     "trials": 6
+    }
+   ],
+   "mean_no_hint": 0.9222222222222223,
+   "mean_with_hint": 0.9111111111111111
+  }
+ }
+}

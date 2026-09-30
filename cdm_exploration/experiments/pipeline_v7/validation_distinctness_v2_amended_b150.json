@@ -1,0 +1,621 @@
+{
+ "judge": "gemini-3.6-flash",
+ "results": [
+  {
+   "pair": [
+    "c_0001",
+    "c_0011"
+   ],
+   "merge": false,
+   "rule": "Tracking state sequentially updates an internal model across a series of events, whereas evaluating options against derived state compares candidate choices against a determined final constraint or state."
+  },
+  {
+   "pair": [
+    "c_0002",
+    "c_0321"
+   ],
+   "merge": false,
+   "rule": "Resolving allocation constraints solves combinatorial assignment rules to pair discrete entities to roles, whereas inferring implicit character traits uses narrative text comprehension to deduce latent human attributes from described behaviors."
+  },
+  {
+   "pair": [
+    "c_0002",
+    "c_0411"
+   ],
+   "merge": false,
+   "rule": "Resolving allocation constraints solves interdependent multi-entity assignment problems subject to global capacity or mutual exclusion limits, whereas evaluating task suitability assesses a single entity's features against a set of role criteria independently."
+  },
+  {
+   "pair": [
+    "c_0002",
+    "c_1136"
+   ],
+   "merge": false,
+   "rule": "Resolving allocation constraints constructs valid entity-to-slot mappings based on constraint satisfaction, whereas applying process of elimination systematically tests and discards non-viable options."
+  },
+  {
+   "pair": [
+    "c_0003",
+    "c_0004"
+   ],
+   "merge": false,
+   "rule": "Extracting specific information locates and retrieves target attributes or values from a source text, whereas filtering items tests a list of distinct items against a predicate condition to return the satisfying subset."
+  },
+  {
+   "pair": [
+    "c_0003",
+    "c_0014"
+   ],
+   "merge": false,
+   "rule": "Extracting specific information locates requested target attributes within a single source, whereas detecting phrase divergence aligns two text versions to identify semantic or structural discrepancies."
+  },
+  {
+   "pair": [
+    "c_0003",
+    "c_0064"
+   ],
+   "merge": false,
+   "rule": "Extracting specific information directly reads explicitly stated values from text, whereas resolving spatial relations constructs a mental geometric model from spatial prepositions to deduce relative object positions."
+  },
+  {
+   "pair": [
+    "c_0003",
+    "c_0237"
+   ],
+   "merge": false,
+   "rule": "Extracting specific information identifies and retrieves specific attribute values, whereas counting elements tallies occurrences across a collection to compute a numerical sum."
+  },
+  {
+   "pair": [
+    "c_0003",
+    "c_0597"
+   ],
+   "merge": false,
+   "rule": "Extracting specific information searches unstructured text for target values, whereas manipulating tabular data performs row-and-column grid indexing and structural manipulations on formatted tables."
+  },
+  {
+   "pair": [
+    "c_0004",
+    "c_0237"
+   ],
+   "merge": false,
+   "rule": "Filtering items extracts and returns the subset of matching objects, whereas counting elements computes a numerical total of matching instances."
+  },
+  {
+   "pair": [
+    "c_0005",
+    "c_0035"
+   ],
+   "merge": false,
+   "rule": "Translating natural language to logic maps unstructured text into formal logical syntax, whereas evaluating logical validity applies inference rules to formal or structured premises to determine if a conclusion necessarily follows."
+  },
+  {
+   "pair": [
+    "c_0007",
+    "c_0011"
+   ],
+   "merge": false,
+   "rule": "Deducing transitive relations chains partial binary comparisons to construct a relational ordering, whereas evaluating options against derived state compares discrete multiple-choice candidates against an already established state or constraint set."
+  },
+  {
+   "pair": [
+    "c_0007",
+    "c_0064"
+   ],
+   "merge": false,
+   "rule": "Deducing transitive relations derives 1D relative order by chaining binary inequalities (e.g., A > B, B > C), whereas resolving spatial relations decodes spatial prepositions to map objects into multi-dimensional geometric arrangements or reference frames."
+  },
+  {
+   "pair": [
+    "c_0007",
+    "c_0396"
+   ],
+   "merge": false,
+   "rule": "Deducing transitive relations infers relative relative order between entities via pairwise relational chaining, whereas mapping ordinal labels assigns position indices (e.g., first, second) to positions in an already ordered sequence."
+  },
+  {
+   "pair": [
+    "c_0007",
+    "c_0493"
+   ],
+   "merge": false,
+   "rule": "Deducing transitive relations reconstructs ordering from indirect pairwise logical constraints, whereas ranking and sorting directly orders elements by evaluating explicit quantitative or alphabetical values."
+  },
+  {
+   "pair": [
+    "c_0008",
+    "c_0486"
+   ],
+   "merge": false,
+   "rule": "Synthesizing circumstantial evidence integrates fragmentary, heterogeneous narrative details to reconstruct an unstated event sequence, whereas evaluating opportunity and means verifies whether specific prerequisite conditions (time, access, resources) are satisfied for a given agent."
+  },
+  {
+   "pair": [
+    "c_0008",
+    "c_1136"
+   ],
+   "merge": false,
+   "rule": "Synthesizing circumstantial evidence constructs a coherent hypothesis by combining scattered narrative clues, whereas process of elimination systematically disqualifies candidate options that violate explicit constraints."
+  },
+  {
+   "pair": [
+    "c_0010",
+    "c_0035"
+   ],
+   "merge": false,
+   "rule": "Evaluating boolean logic evaluates the truth value of an expression for given concrete variable assignments, whereas evaluating logical validity tests whether an argument structure guarantees truth preservation under all possible truth assignments."
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0049"
+   ],
+   "merge": false,
+   "rule": "Evaluating options against derived state verifies candidate multiple-choice choices against a pre-derived model, whereas identifying organic reactions applies chemical mechanism rules to transform functional groups and predict reaction products."
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0064"
+   ],
+   "merge": false,
+   "rule": "Evaluating options against derived state filters given candidate answers against a pre-computed state, whereas resolving spatial relations interprets spatial prepositions to construct physical/geometric layouts."
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0396"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates multiple-choice options against a pre-derived target state to select the correct answer, whereas Skill B assigns ordinal position labels to elements within an ordered sequence."
+  },
+  {
+   "pair": [
+    "c_0011",
+    "c_0493"
+   ],
+   "merge": false,
+   "rule": "Skill A checks candidate options against a derived condition to find a matching answer, whereas Skill B sorts a collection of items into a sequence based on pairwise attribute comparisons."
+  },
+  {
+   "pair": [
+    "c_0012",
+    "c_1035"
+   ],
+   "merge": false,
+   "rule": "Skill A extracts common conceptual themes or shared attributes across items, whereas Skill B measures candidate options against explicit positive or negative reference examples to pick the closest match."
+  },
+  {
+   "pair": [
+    "c_0014",
+    "c_0495"
+   ],
+   "merge": false,
+   "rule": "Skill A aligns parallel text units to spot semantic discrepancies or translation errors, whereas Skill B inspects text against reference material or context to identify missing content."
+  },
+  {
+   "pair": [
+    "c_0014",
+    "c_0607"
+   ],
+   "merge": false,
+   "rule": "Skill A compares existing parallel texts to find semantic inconsistencies, whereas Skill B generates equivalent text in a different language from a source text."
+  },
+  {
+   "pair": [
+    "c_0022",
+    "c_0805"
+   ],
+   "merge": false,
+   "rule": "Skill A breaks down a target integer into its prime factors, whereas Skill B constructs or identifies numbers that satisfy a given system of mathematical constraints."
+  },
+  {
+   "pair": [
+    "c_0023",
+    "c_0531"
+   ],
+   "merge": false,
+   "rule": "Skill A systematically counts or enumerates valid discrete configurations, whereas Skill B calculates relative likelihood values by forming ratios of event measures over sample spaces."
+  },
+  {
+   "pair": [
+    "c_0026",
+    "c_0128"
+   ],
+   "merge": false,
+   "rule": "Skill A applies coordinate geometry formulas to numerical point pairs to calculate polygon metrics, whereas Skill B parses formal string syntax (such as SVG path directives) to extract drawing commands and coordinates."
+  },
+  {
+   "pair": [
+    "c_0026",
+    "c_0259"
+   ],
+   "merge": false,
+   "rule": "Skill A computes numerical geometric properties from vertex coordinates, whereas Skill B matches figure characteristics against defined criteria to classify the shape into a category."
+  },
+  {
+   "pair": [
+    "c_0028",
+    "c_0449"
+   ],
+   "merge": false,
+   "rule": "Skill A substitutes polynomial coefficients into root-coefficient identities (Vieta's formulas), whereas Skill B applies general algebraic expansion, factoring, or simplification rules to transform an expression."
+  },
+  {
+   "pair": [
+    "c_0033",
+    "c_0165"
+   ],
+   "merge": false,
+   "rule": "A performs arithmetic calculations on temporal quantities, whereas B parses natural language date strings into structured calendar representations or formats structured dates into text."
+  },
+  {
+   "pair": [
+    "c_0033",
+    "c_0934"
+   ],
+   "merge": false,
+   "rule": "A performs arithmetic operations (addition or subtraction) across dates or time spans, whereas B retrieves or determines the fixed number of days within a specified calendar month."
+  },
+  {
+   "pair": [
+    "c_0035",
+    "c_0605"
+   ],
+   "merge": false,
+   "rule": "A determines whether a multi-premise argument's conclusion validly follows from its premises, whereas B transforms a single logical expression into a logically equivalent statement using replacement rules."
+  },
+  {
+   "pair": [
+    "c_0040",
+    "c_0679"
+   ],
+   "merge": false,
+   "rule": "A analyzes character-level string manipulations or phonetic distance, whereas B interprets semantic and pragmatic context to evaluate humor and punchline mechanics."
+  },
+  {
+   "pair": [
+    "c_0044",
+    "c_0621"
+   ],
+   "merge": false,
+   "rule": "A infers a speaker's underlying goal or communicative strategy, whereas B categorizes whether expression meanings align with their literal definitions or non-literal metaphorical usages."
+  },
+  {
+   "pair": [
+    "c_0045",
+    "c_0182"
+   ],
+   "merge": false,
+   "rule": "A evaluates whether a scenario is contextually or physically plausible using general real-world commonsense, whereas B checks whether an action complies with explicit formal rules and mechanics of a specific sport."
+  },
+  {
+   "pair": [
+    "c_0045",
+    "c_0354"
+   ],
+   "merge": false,
+   "rule": "A evaluates the overall real-world or situational plausibility of a scenario, whereas B identifies linguistic type violations, semantic contradictions, or category errors within sentence structures."
+  },
+  {
+   "pair": [
+    "c_0048",
+    "c_0369"
+   ],
+   "merge": false,
+   "rule": "A finds intersecting regions or unoccupied gaps across set calendar schedules, whereas B applies relative temporal constraints to solve for valid start and end bounds of an event."
+  },
+  {
+   "pair": [
+    "c_0048",
+    "c_0424"
+   ],
+   "merge": false,
+   "rule": "A computes interval intersections and available time slots from schedule sets, whereas B sorts discrete events into a linear chronological order based on timeline references."
+  },
+  {
+   "pair": [
+    "c_0048",
+    "c_1136"
+   ],
+   "merge": false,
+   "rule": "A computes set-based temporal overlaps or open slots, whereas B systematically tests discrete candidate options against logical criteria to rule out non-viable choices."
+  },
+  {
+   "pair": [
+    "c_0049",
+    "c_0053"
+   ],
+   "merge": false,
+   "rule": "Skill A applies chemical transformation rules to predict or classify reaction outcomes from reactants, whereas Skill B interprets empirical spectroscopic signal patterns (e.g., NMR splitting, IR absorption frequencies) to construct a molecular graph."
+  },
+  {
+   "pair": [
+    "c_0049",
+    "c_0058"
+   ],
+   "merge": false,
+   "rule": "Skill A predicts or classifies bond-breaking and bond-forming chemical transformations, whereas Skill B performs geometric symmetry operations (e.g., reflection planes, inversion centers) on a static 3D molecular structure."
+  },
+  {
+   "pair": [
+    "c_0049",
+    "c_0279"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates functional group transformations and reaction mechanisms, whereas Skill B applies local priority rules (e.g., Cahn-Ingold-Prelog) to assign absolute or relative stereochemical labels (R/S, E/Z) to specific stereocenters or double bonds."
+  },
+  {
+   "pair": [
+    "c_0049",
+    "c_0460"
+   ],
+   "merge": false,
+   "rule": "Skill A applies chemical reactivity principles to predict reaction mechanisms or products, whereas Skill B translates formal textual nomenclature syntax (IUPAC rules) into chemical graph structures."
+  },
+  {
+   "pair": [
+    "c_0049",
+    "c_0461"
+   ],
+   "merge": false,
+   "rule": "Skill A identifies reaction mechanisms or predicts overall products based on reagent reactivity, whereas Skill B performs atom-by-atom graph mapping to trace specific carbon skeleton rearrangements and connectivity shifts between reactants and products."
+  },
+  {
+   "pair": [
+    "c_0053",
+    "c_0460"
+   ],
+   "merge": false,
+   "rule": "Skill A infers structural fragments from empirical physical signal measurements (e.g., peak shifts and multiplicities), whereas Skill B parses formal systematic naming text using deterministic nomenclature rules."
+  },
+  {
+   "pair": [
+    "c_0058",
+    "c_0461"
+   ],
+   "merge": false,
+   "rule": "Skill A analyzes geometric symmetry elements (planes, axes, inversion centers) within a static 3D molecule, whereas Skill B tracks atomic graph connectivity changes across a chemical transformation."
+  },
+  {
+   "pair": [
+    "c_0062",
+    "c_0111"
+   ],
+   "merge": false,
+   "rule": "Skill A enforces rigid, explicit structural or mechanical rules (e.g., exact length, specific templates, excluded characters), whereas Skill B adjusts linguistic register, style, and vocabulary to fit a target audience tone."
+  },
+  {
+   "pair": [
+    "c_0062",
+    "c_0319"
+   ],
+   "merge": false,
+   "rule": "Skill A generates text while strictly validating against explicit structural or formatting boundaries, whereas Skill B generates fluent, contextually appropriate text unconstrained by explicit mechanical rules."
+  },
+  {
+   "pair": [
+    "c_0064",
+    "c_0396"
+   ],
+   "merge": false,
+   "rule": "Skill A interprets multi-dimensional spatial prepositions (e.g., above, left of, behind) to resolve relative physical object positions, whereas Skill B maps items in a linear order to 1D ordinal rank labels (e.g., first, second, third)."
+  },
+  {
+   "pair": [
+    "c_0078",
+    "c_0144"
+   ],
+   "merge": false,
+   "rule": "A attributes causality, intent, or blameworthiness to agents or factors for an observed outcome, whereas B alters a historical condition in a scenario to simulate a hypothetical alternative outcome."
+  },
+  {
+   "pair": [
+    "c_0088",
+    "c_0306"
+   ],
+   "merge": false,
+   "rule": "A updates linear positional coordinates using translation vectors, whereas B updates directional heading or angular orientation using rotational transformations."
+  },
+  {
+   "pair": [
+    "c_0117",
+    "c_0449"
+   ],
+   "merge": false,
+   "rule": "A equates terms of corresponding powers between equivalent expressions to set up equations for unknown parameters, whereas B applies rewrite rules and identities to simplify or transform a single expression."
+  },
+  {
+   "pair": [
+    "c_0128",
+    "c_0259"
+   ],
+   "merge": false,
+   "rule": "A parses formatted text path commands (such as SVG directives) to compute structural coordinates, whereas B evaluates geometric attributes (such as side counts and interior angles) to assign a shape category."
+  },
+  {
+   "pair": [
+    "c_0141",
+    "c_0237"
+   ],
+   "merge": false,
+   "rule": "A assigns symbolic class labels to items based on matching criteria, whereas B tallies discrete elements or pattern matches to return a numeric count."
+  },
+  {
+   "pair": [
+    "c_0144",
+    "c_0410"
+   ],
+   "merge": false,
+   "rule": "A alters a past event or condition to simulate a hypothetical alternative timeline, whereas B evaluates the forward consequences of an action starting from the actual current state."
+  },
+  {
+   "pair": [
+    "c_0148",
+    "c_0449"
+   ],
+   "merge": false,
+   "rule": "A finds variable values that satisfy a system of equality constraints, whereas B rearranges or simplifies an algebraic expression into an equivalent form without solving for unknown variables."
+  },
+  {
+   "pair": [
+    "c_0165",
+    "c_0934"
+   ],
+   "merge": false,
+   "rule": "A parses natural language temporal descriptions to identify a calendar date, whereas B looks up or calculates the total number of days (28\u201331) in a specified month."
+  },
+  {
+   "pair": [
+    "c_0237",
+    "c_0453"
+   ],
+   "merge": false,
+   "rule": "A tallies individual occurrences or elements in a set to find a quantity, whereas B executes arithmetic calculations on numerical operands following operator precedence."
+  },
+  {
+   "pair": [
+    "c_0271",
+    "c_0334"
+   ],
+   "merge": false,
+   "rule": "A links multiple referring expressions in a text to a single shared entity, whereas B identifies and delineates multiple distinct possible interpretations of an ambiguous text unit."
+  },
+  {
+   "pair": [
+    "c_0304",
+    "c_0449"
+   ],
+   "merge": false,
+   "rule": "A involves determining maximum or minimum values subject to constraint bounds, whereas B involves applying equivalence laws to simplify or rewrite symbolic expressions without seeking extrema."
+  },
+  {
+   "pair": [
+    "c_0309",
+    "c_1100"
+   ],
+   "merge": false,
+   "rule": "A performs quantitative or statistical comparisons on numerical performance metrics, whereas B evaluates qualitative decision-making, positioning, and strategic choices against operational goals."
+  },
+  {
+   "pair": [
+    "c_0321",
+    "c_0411"
+   ],
+   "merge": false,
+   "rule": "A infers unstated latent capabilities or traits from descriptive textual evidence, whereas B compares known entity capabilities against target requirements to assess compatibility or qualification."
+  },
+  {
+   "pair": [
+    "c_0365",
+    "c_0419"
+   ],
+   "merge": false,
+   "rule": "A identifies and deduplicates discrete entity referents within a context, whereas B isolates and contrasts the specific attributes or properties belonging to entities."
+  },
+  {
+   "pair": [
+    "c_0369",
+    "c_1136"
+   ],
+   "merge": false,
+   "rule": "A computes valid temporal start, end, or duration intervals by combining chronological constraints, whereas B systematically prunes invalid options from a discrete candidate pool using logical contradictions."
+  },
+  {
+   "pair": [
+    "c_0411",
+    "c_1136"
+   ],
+   "merge": false,
+   "rule": "A matches entity attributes against specific operational criteria to determine qualification, whereas B systematically eliminates choices that violate logical constraints to identify a remaining valid answer."
+  },
+  {
+   "pair": [
+    "c_0424",
+    "c_1136"
+   ],
+   "merge": false,
+   "rule": "A orders a collection of events into a linear temporal sequence, whereas B tests candidate options against logical conditions to discard non-viable choices."
+  },
+  {
+   "pair": [
+    "c_0449",
+    "c_0453"
+   ],
+   "merge": false,
+   "rule": "A applies algebraic rules to transform symbolic expressions containing variables, whereas B carries out arithmetic operations on explicit concrete numbers to calculate a scalar result."
+  },
+  {
+   "pair": [
+    "c_0449",
+    "c_0644"
+   ],
+   "merge": false,
+   "rule": "A transforms expressions into equivalent symbolic forms, whereas B isolates and solves for the specific variable values that satisfy a non-linear equality."
+  },
+  {
+   "pair": [
+    "c_0458",
+    "c_0761"
+   ],
+   "merge": false,
+   "rule": "A classifies words based on conceptual thematic roles in an event (e.g., Agent, Patient), whereas B classifies words based on formal grammatical relations in sentence structure (e.g., Subject, Direct Object)."
+  },
+  {
+   "pair": [
+    "c_0460",
+    "c_0461"
+   ],
+   "merge": false,
+   "rule": "Skill A decodes a systematic text string into a static molecular graph or formula, whereas Skill B tracks modifications to graph edges and nodes (bonds and atoms) across a sequence of reaction steps."
+  },
+  {
+   "pair": [
+    "c_0486",
+    "c_1136"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates whether a candidate satisfies specific feasibility preconditions (such as access or time availability), whereas Skill B systematically rules out invalid options from a candidate set using logical constraints."
+  },
+  {
+   "pair": [
+    "c_0505",
+    "c_0850"
+   ],
+   "merge": false,
+   "rule": "Skill A tests self-isometry of a single geometric figure (mapping a shape onto itself via reflection or rotation), whereas Skill B compares corresponding measurements and transformations between two or more distinct figures to determine if one maps onto the other."
+  },
+  {
+   "pair": [
+    "c_0531",
+    "c_0620"
+   ],
+   "merge": false,
+   "rule": "Skill A computes a ratio of favorable outcome measures to total sample space measures, whereas Skill B computes the absolute count of ordered or unordered arrangements using combinatorial formulas."
+  },
+  {
+   "pair": [
+    "c_0567",
+    "c_0597"
+   ],
+   "merge": false,
+   "rule": "Skill A evaluates whether numeric values satisfy given mathematical inequalities or bounds, whereas Skill B navigates structured two-dimensional grid layouts to query or extract specific rows, columns, or cells."
+  },
+  {
+   "pair": [
+    "c_0597",
+    "c_0657"
+   ],
+   "merge": false,
+   "rule": "Skill A parses and extracts structural components from two-dimensional table formats, whereas Skill B compares elements in a numerical set or list to isolate the maximum or minimum value."
+  },
+  {
+   "pair": [
+    "c_1052",
+    "c_1112"
+   ],
+   "merge": false,
+   "rule": "Skill A constructs or manipulates algebraic vector and operator representations, whereas Skill B computes a scalar expectation value by evaluating the inner product of a state vector with an operated state vector."
+  }
+ ]
+}

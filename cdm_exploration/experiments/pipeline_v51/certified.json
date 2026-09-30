@@ -1,0 +1,1544 @@
+{
+ "judge": "gpt-4.1-mini",
+ "n_val": 20,
+ "n_grp": 12,
+ "rows": [
+  {
+   "skill": "analyze detective murder mystery scenarios",
+   "n_items": 270,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "analyze piecewise function conditions",
+   "n_items": 8,
+   "validity": 0.875,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "apply semiconductor equations to current behavior",
+   "n_items": 6,
+   "validity": 0.5,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "assess truthfulness in nested claims",
+   "n_items": 283,
+   "validity": 0.9,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "assess user login consequences",
+   "n_items": 14,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "assign roles based on narrative details",
+   "n_items": 14,
+   "validity": 0.6428571428571429,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "assign team members to roles based on traits",
+   "n_items": 250,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "calculate angle measure from triangle conditions",
+   "n_items": 16,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate angle measures",
+   "n_items": 31,
+   "validity": 0.8,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "calculate area from dimensions of shapes",
+   "n_items": 20,
+   "validity": 0.7,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "calculate area from triangle properties",
+   "n_items": 6,
+   "validity": 0.6666666666666666,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate area of region bounded by inequalities",
+   "n_items": 6,
+   "validity": 0.6666666666666666,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "calculate area ratios for shapes",
+   "n_items": 16,
+   "validity": 0.375,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "calculate areas of geometric regions",
+   "n_items": 13,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate areas of geometric shapes",
+   "n_items": 31,
+   "validity": 0.8,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate chemical solution properties",
+   "n_items": 83,
+   "validity": 0.5,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "calculate costs from quantities",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate decimal values as fractions",
+   "n_items": 7,
+   "validity": 0.5714285714285714,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate dimensions of geometric shapes",
+   "n_items": 30,
+   "validity": 0.45,
+   "group": 0.6666666666666666,
+   "certified": false
+  },
+  {
+   "skill": "calculate distances between geometric objects",
+   "n_items": 13,
+   "validity": 0.8461538461538461,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate distances between points",
+   "n_items": 10,
+   "validity": 0.8,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate lengths in geometric contexts",
+   "n_items": 35,
+   "validity": 0.7,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate light interactions with materials",
+   "n_items": 63,
+   "validity": 0.25,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "calculate number of valid team combinations",
+   "n_items": 10,
+   "validity": 0.5,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "calculate physical quantities in systems",
+   "n_items": 6,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "calculate probabilities of discrete events",
+   "n_items": 5,
+   "validity": 0.6,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate properties from graphical data",
+   "n_items": 25,
+   "validity": 0.55,
+   "group": 0.5,
+   "certified": false
+  },
+  {
+   "skill": "calculate properties of geometric figures",
+   "n_items": 8,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate quantum state properties",
+   "n_items": 174,
+   "validity": 0.65,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "calculate quantum system properties",
+   "n_items": 11,
+   "validity": 0.6363636363636364,
+   "group": 0.6666666666666666,
+   "certified": true
+  },
+  {
+   "skill": "calculate sums of roots from equations",
+   "n_items": 12,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "calculate total pairwise interactions",
+   "n_items": 8,
+   "validity": 0.75,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "calculate values from mathematical expressions",
+   "n_items": 11,
+   "validity": 1.0,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "calculate values from polynomial expressions",
+   "n_items": 45,
+   "validity": 0.5,
+   "group": 0.5,
+   "certified": false
+  },
+  {
+   "skill": "calculate volume of three-dimensional shapes",
+   "n_items": 7,
+   "validity": 0.42857142857142855,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "calculate volumes of geometric solids",
+   "n_items": 9,
+   "validity": 0.5555555555555556,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "classify translation error type",
+   "n_items": 252,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "complete the square for quadratic expressions",
+   "n_items": 9,
+   "validity": 0.8888888888888888,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compose creative text with constraints",
+   "n_items": 123,
+   "validity": 0.9,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compose responses exclusively in specified languages",
+   "n_items": 20,
+   "validity": 0.9,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "compose responses with specific requirements",
+   "n_items": 6,
+   "validity": 1.0,
+   "group": 0.5833333333333334,
+   "certified": true
+  },
+  {
+   "skill": "compose structured narratives with specified formats",
+   "n_items": 11,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "compose structured written responses",
+   "n_items": 85,
+   "validity": 0.85,
+   "group": 0.6666666666666666,
+   "certified": true
+  },
+  {
+   "skill": "compose structured written responses with placeholders",
+   "n_items": 418,
+   "validity": 0.65,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "compose text with specific language requirements",
+   "n_items": 23,
+   "validity": 0.9,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "compute sums of defined sequences",
+   "n_items": 80,
+   "validity": 0.25,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "compute vector relationships using angles",
+   "n_items": 9,
+   "validity": 0.4444444444444444,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "count arrangements with rotational symmetry",
+   "n_items": 13,
+   "validity": 0.8461538461538461,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "count distinct chemical products",
+   "n_items": 5,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "count geometric configurations with constraints",
+   "n_items": 23,
+   "validity": 0.65,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "count musical instruments in a list",
+   "n_items": 48,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "count non-colored objects in a sequence",
+   "n_items": 20,
+   "validity": 0.65,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "count objects in list",
+   "n_items": 207,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "count permutations with restrictions",
+   "n_items": 9,
+   "validity": 0.4444444444444444,
+   "group": 0.5833333333333334,
+   "certified": false
+  },
+  {
+   "skill": "count remaining items after removal by category",
+   "n_items": 80,
+   "validity": 0.75,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "count seating arrangements with adjacency restrictions",
+   "n_items": 7,
+   "validity": 0.8571428571428571,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "count ways to form groups with restrictions",
+   "n_items": 8,
+   "validity": 0.625,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "create professional documents for job applications",
+   "n_items": 14,
+   "validity": 0.8571428571428571,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "create structured documentation for tasks",
+   "n_items": 8,
+   "validity": 0.625,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "deduce order from positional clues",
+   "n_items": 639,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine angle measures in geometry",
+   "n_items": 6,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine chemical properties of materials",
+   "n_items": 19,
+   "validity": 0.3684210526315789,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "determine circle parameters from equations",
+   "n_items": 6,
+   "validity": 0.5,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "determine conditions for device activation",
+   "n_items": 25,
+   "validity": 0.8,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "determine conditions for real solutions",
+   "n_items": 27,
+   "validity": 0.4,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "determine correct physical equations",
+   "n_items": 5,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine dates from given references",
+   "n_items": 254,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine deductive validity of family relation arguments",
+   "n_items": 51,
+   "validity": 0.7,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine dimensions of geometric shapes",
+   "n_items": 71,
+   "validity": 0.9,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine dimensions of geometric solids",
+   "n_items": 32,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine distances from geometric conditions",
+   "n_items": 25,
+   "validity": 0.65,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine distinct function values across domains",
+   "n_items": 8,
+   "validity": 0.625,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine domains of real functions",
+   "n_items": 15,
+   "validity": 0.7333333333333333,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine eigenvalues of matrix operators",
+   "n_items": 19,
+   "validity": 0.6842105263157895,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine equations of geometric curves",
+   "n_items": 10,
+   "validity": 0.9,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine extreme values in geometry",
+   "n_items": 16,
+   "validity": 0.5625,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine final player position after swaps",
+   "n_items": 134,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine function properties from graphs",
+   "n_items": 5,
+   "validity": 0.6,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine function values from equations",
+   "n_items": 7,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine geometric configurations from conditions",
+   "n_items": 14,
+   "validity": 0.7857142857142857,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "determine geometric properties from conditions",
+   "n_items": 25,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine geometric properties from coordinates",
+   "n_items": 56,
+   "validity": 0.75,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine geometric relationships using coordinates",
+   "n_items": 14,
+   "validity": 0.5,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "determine integer properties through factorization",
+   "n_items": 16,
+   "validity": 0.875,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "determine interactions between physical entities",
+   "n_items": 21,
+   "validity": 0.95,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine interactions in quantum field theories",
+   "n_items": 4,
+   "validity": 0.5,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "determine molecular characteristics from experimental data",
+   "n_items": 5,
+   "validity": 0.4,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "determine order ranking from statements",
+   "n_items": 89,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine outcomes from experimental data",
+   "n_items": 10,
+   "validity": 0.4,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "determine outputs from algorithmic patterns",
+   "n_items": 6,
+   "validity": 0.8333333333333334,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "determine parameters from equations",
+   "n_items": 27,
+   "validity": 0.85,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine polynomial degrees from equations",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine polynomial properties from roots",
+   "n_items": 16,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine polynomial values from conditions",
+   "n_items": 6,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine polynomial values from conditions (2)",
+   "n_items": 12,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine position of object in sequence",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine possible time interval from events",
+   "n_items": 13,
+   "validity": 0.9230769230769231,
+   "group": 0.5833333333333334,
+   "certified": true
+  },
+  {
+   "skill": "determine possible visit times",
+   "n_items": 255,
+   "validity": 0.95,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine pronoun antecedent",
+   "n_items": 251,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine properties of complex numbers",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine properties of number representations",
+   "n_items": 91,
+   "validity": 0.65,
+   "group": 0.6666666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine properties of physical systems",
+   "n_items": 29,
+   "validity": 0.8,
+   "group": 0.6666666666666666,
+   "certified": true
+  },
+  {
+   "skill": "determine properties of vector transformations",
+   "n_items": 5,
+   "validity": 0.4,
+   "group": 0.5,
+   "certified": false
+  },
+  {
+   "skill": "determine rational function properties",
+   "n_items": 11,
+   "validity": 0.6363636363636364,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "determine relationships between curves",
+   "n_items": 14,
+   "validity": 0.9285714285714286,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine return to starting point after movements",
+   "n_items": 298,
+   "validity": 0.7,
+   "group": 0.6666666666666666,
+   "certified": false
+  },
+  {
+   "skill": "determine trigonometric values from equations",
+   "n_items": 83,
+   "validity": 0.4,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "determine values from algebraic expressions",
+   "n_items": 69,
+   "validity": 0.75,
+   "group": 0.5,
+   "certified": false
+  },
+  {
+   "skill": "determine variable values from equations",
+   "n_items": 11,
+   "validity": 0.7272727272727273,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "determine vector line equations",
+   "n_items": 8,
+   "validity": 0.5,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "determine volume to surface area ratios",
+   "n_items": 4,
+   "validity": 0.5,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "estimate redshift detection limits",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "evaluate boolean expressions with negations",
+   "n_items": 266,
+   "validity": 0.95,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "evaluate causal scenarios with typical responses",
+   "n_items": 157,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "evaluate causation among multiple agents",
+   "n_items": 6,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "evaluate causation scenarios",
+   "n_items": 30,
+   "validity": 0.95,
+   "group": 0.75,
+   "certified": true
+  },
+  {
+   "skill": "evaluate complex number expressions",
+   "n_items": 79,
+   "validity": 0.5,
+   "group": 0.8333333333333334,
+   "certified": false
+  },
+  {
+   "skill": "evaluate deductive argument validity",
+   "n_items": 235,
+   "validity": 0.95,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "evaluate deductive validity of logical arguments",
+   "n_items": 16,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "evaluate electromagnetic field properties",
+   "n_items": 31,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "evaluate experimental physics scenarios",
+   "n_items": 7,
+   "validity": 0.8571428571428571,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "explain concepts using clear language",
+   "n_items": 68,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "extract data from tabular formats",
+   "n_items": 157,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "extract penguin attributes from tables",
+   "n_items": 127,
+   "validity": 0.65,
+   "group": 0.5,
+   "certified": false
+  },
+  {
+   "skill": "find color of leftmost object",
+   "n_items": 5,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "find color of object right of another",
+   "n_items": 16,
+   "validity": 0.625,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find color of object to left",
+   "n_items": 21,
+   "validity": 0.6,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find color of rightmost object",
+   "n_items": 4,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find conditions for curve intersections",
+   "n_items": 6,
+   "validity": 0.5,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "find coordinates after transformations",
+   "n_items": 4,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find coordinates of points from geometric conditions",
+   "n_items": 12,
+   "validity": 0.9166666666666666,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find domain of function expressions",
+   "n_items": 15,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find equations of geometric objects",
+   "n_items": 7,
+   "validity": 0.7142857142857143,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find extreme values of expressions",
+   "n_items": 9,
+   "validity": 0.7777777777777778,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find function values from functional equations",
+   "n_items": 9,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find inverse function expressions",
+   "n_items": 16,
+   "validity": 0.6875,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "find movies similar to given examples",
+   "n_items": 254,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "find number of solutions to equations",
+   "n_items": 29,
+   "validity": 0.5,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "find point of intersection of lines in space",
+   "n_items": 7,
+   "validity": 0.2857142857142857,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "find possible time intervals for visits",
+   "n_items": 181,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find probability of event",
+   "n_items": 8,
+   "validity": 0.875,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "find range of functions",
+   "n_items": 7,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "find value of algebraic expression from complex numbers",
+   "n_items": 12,
+   "validity": 0.5,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "find values in logarithmic equations",
+   "n_items": 11,
+   "validity": 0.45454545454545453,
+   "group": 0.8333333333333334,
+   "certified": false
+  },
+  {
+   "skill": "find values of parameters for polynomial divisibility",
+   "n_items": 8,
+   "validity": 0.5,
+   "group": 1.0,
+   "certified": false
+  },
+  {
+   "skill": "identify color of object",
+   "n_items": 26,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "identify correct adjective order",
+   "n_items": 252,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify gauge group characteristics",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify humorous edits in titles",
+   "n_items": 123,
+   "validity": 0.6,
+   "group": 0.5,
+   "certified": false
+  },
+  {
+   "skill": "identify item location from narrative",
+   "n_items": 44,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify location of objects from descriptions",
+   "n_items": 11,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify molecular symmetry group from reaction description",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify object color mismatch",
+   "n_items": 11,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify object locations in narratives",
+   "n_items": 150,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify organic reaction products",
+   "n_items": 488,
+   "validity": 0.6,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "identify sarcastic statements",
+   "n_items": 180,
+   "validity": 0.9,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify shape from svg path coordinates",
+   "n_items": 56,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "identify shape from svg path description",
+   "n_items": 279,
+   "validity": 0.9,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "infer object location from narrative",
+   "n_items": 106,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "infer order from logical statements",
+   "n_items": 241,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "infer order of objects from spatial clues",
+   "n_items": 36,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "interpret physical equations in quantum contexts",
+   "n_items": 9,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "interview prime suspects for clues",
+   "n_items": 31,
+   "validity": 0.75,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "judge causation from described scenarios",
+   "n_items": 10,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "judge intentionality from described actions",
+   "n_items": 4,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "judge sentence plausibility in sports context",
+   "n_items": 251,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "locate missing personal items",
+   "n_items": 11,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "optimize values of algebraic expressions",
+   "n_items": 84,
+   "validity": 0.35,
+   "group": 0.9166666666666666,
+   "certified": false
+  },
+  {
+   "skill": "select correct finishing position from clues",
+   "n_items": 60,
+   "validity": 1.0,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "select humorous name edit",
+   "n_items": 246,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "simplify radical expressions with integers",
+   "n_items": 25,
+   "validity": 0.8,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "simplify trigonometric expressions with identities",
+   "n_items": 8,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "solve equations involving complex numbers",
+   "n_items": 27,
+   "validity": 0.7,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "solve for unknowns in function equations",
+   "n_items": 60,
+   "validity": 0.65,
+   "group": 0.8333333333333334,
+   "certified": true
+  },
+  {
+   "skill": "solve functional equations for unknown functions",
+   "n_items": 22,
+   "validity": 0.5,
+   "group": 0.6666666666666666,
+   "certified": false
+  },
+  {
+   "skill": "solve optimization problems with constraints",
+   "n_items": 14,
+   "validity": 0.8571428571428571,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "solve systems of equations for parameters",
+   "n_items": 13,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "solve trigonometric equations",
+   "n_items": 7,
+   "validity": 0.8571428571428571,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "track ball ownership after swaps",
+   "n_items": 80,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "track final holder after swaps",
+   "n_items": 58,
+   "validity": 1.0,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "track final item after swaps",
+   "n_items": 70,
+   "validity": 0.75,
+   "group": 0.9166666666666666,
+   "certified": true
+  },
+  {
+   "skill": "track gift swaps in exchange",
+   "n_items": 296,
+   "validity": 1.0,
+   "group": 0.75,
+   "certified": false
+  },
+  {
+   "skill": "track item exchanges among people",
+   "n_items": 154,
+   "validity": 1.0,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "track partner swaps in dance",
+   "n_items": 231,
+   "validity": 0.8,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "track position swaps in soccer",
+   "n_items": 121,
+   "validity": 0.95,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write markdown formatted text",
+   "n_items": 4,
+   "validity": 0.75,
+   "group": 1.0,
+   "certified": true
+  },
+  {
+   "skill": "write poem about specific topic",
+   "n_items": 16,
+   "validity": 0.9375,
+   "group": 1.0,
+   "certified": true
+  }
+ ],
+ "flagged": [
+  {
+   "skill": "Analyzing Door Count Distribution In Car Types",
+   "flag": "irreducible",
+   "n_items": 5
+  },
+  {
+   "skill": "Analyzing Surface Properties Of Materials",
+   "flag": "irreducible",
+   "n_items": 24
+  },
+  {
+   "skill": "Applying Divisibility Rules To Factorials",
+   "flag": "name_unfixable",
+   "n_items": 32
+  },
+  {
+   "skill": "Applying Divisibility Rules To Integer Sets",
+   "flag": "irreducible",
+   "n_items": 225
+  },
+  {
+   "skill": "Applying Random Variable Concepts To Sleep Pattern",
+   "flag": "irreducible",
+   "n_items": 4
+  },
+  {
+   "skill": "Articulating Customer Rights Under Consumer Protec",
+   "flag": "irreducible",
+   "n_items": 8
+  },
+  {
+   "skill": "Assessing Causal Relationships In Fertilizer Use",
+   "flag": "irreducible",
+   "n_items": 7
+  },
+  {
+   "skill": "Balancing Instrumentation For Optimal Sound Qualit",
+   "flag": "irreducible",
+   "n_items": 5
+  },
+  {
+   "skill": "Calculating Compound Interest With Quarterly Compo",
+   "flag": "name_unfixable",
+   "n_items": 20
+  },
+  {
+   "skill": "Calculating Decay Length From Energy And Mass",
+   "flag": "irreducible",
+   "n_items": 112
+  },
+  {
+   "skill": "Calculating Ratios Of Segments In Triangles",
+   "flag": "irreducible",
+   "n_items": 61
+  },
+  {
+   "skill": "Calculating Work Done In Variable Force Scenarios",
+   "flag": "irreducible",
+   "n_items": 17
+  },
+  {
+   "skill": "Embedding Asterisk Symbols For Visual Separation",
+   "flag": "irreducible",
+   "n_items": 4
+  },
+  {
+   "skill": "Ensuring Consistent Section Headers In Document St",
+   "flag": "irreducible",
+   "n_items": 4
+  },
+  {
+   "skill": "Evaluating Climate Control System Activation Condi",
+   "flag": "irreducible",
+   "n_items": 7
+  },
+  {
+   "skill": "Identifying Mutations In Nucleotide Sequences",
+   "flag": "irreducible",
+   "n_items": 193
+  },
+  {
+   "skill": "Incorporating Friends Name In Personalized Message",
+   "flag": "irreducible",
+   "n_items": 4
+  },
+  {
+   "skill": "Organizing Information Based On Given Clues",
+   "flag": "irreducible",
+   "n_items": 58
+  },
+  {
+   "skill": "analyze logical membership relations",
+   "flag": "irreducible",
+   "n_items": 22
+  },
+  {
+   "skill": "answer questions about typical causation scenarios",
+   "flag": "irreducible",
+   "n_items": 11
+  },
+  {
+   "skill": "calculate averages from data sets",
+   "flag": "irreducible",
+   "n_items": 22
+  },
+  {
+   "skill": "calculate physical quantities from scenarios",
+   "flag": "irreducible",
+   "n_items": 69
+  },
+  {
+   "skill": "calculate price adjustments for products",
+   "flag": "irreducible",
+   "n_items": 13
+  },
+  {
+   "skill": "calculate probability of event occurrence",
+   "flag": "irreducible",
+   "n_items": 117
+  },
+  {
+   "skill": "calculate quantities in varied contexts",
+   "flag": "irreducible",
+   "n_items": 8
+  },
+  {
+   "skill": "calculate relative velocities in physics",
+   "flag": "irreducible",
+   "n_items": 46
+  },
+  {
+   "skill": "calculate sums from number sets",
+   "flag": "irreducible",
+   "n_items": 6
+  },
+  {
+   "skill": "calculate sums of numerical data",
+   "flag": "irreducible",
+   "n_items": 9
+  },
+  {
+   "skill": "calculate time difference or date",
+   "flag": "name_unfixable",
+   "n_items": 13
+  },
+  {
+   "skill": "compute ratio or sum of parameters in geometric figures",
+   "flag": "name_unfixable",
+   "n_items": 8
+  },
+  {
+   "skill": "count ways to arrange objects in groups",
+   "flag": "irreducible",
+   "n_items": 11
+  },
+  {
+   "skill": "determine conditions for chemical reactions",
+   "flag": "name_unfixable",
+   "n_items": 48
+  },
+  {
+   "skill": "find area or length from circle or ellipse properties",
+   "flag": "name_unfixable",
+   "n_items": 7
+  },
+  {
+   "skill": "find area or perimeter of polygons from side lengths or angles",
+   "flag": "name_unfixable",
+   "n_items": 7
+  },
+  {
+   "skill": "find extreme values of functions",
+   "flag": "name_unfixable",
+   "n_items": 27
+  },
+  {
+   "skill": "find geometric lengths or angles using trigonometry",
+   "flag": "name_unfixable",
+   "n_items": 6
+  },
+  {
+   "skill": "find minimum values of functions",
+   "flag": "irreducible",
+   "n_items": 121
+  },
+  {
+   "skill": "find values from sequences or recursions",
+   "flag": "name_unfixable",
+   "n_items": 6
+  },
+  {
+   "skill": "find values of parameters for tangent or tangent length",
+   "flag": "name_unfixable",
+   "n_items": 6
+  },
+  {
+   "skill": "find volume or surface area of polyhedra or solids",
+   "flag": "name_unfixable",
+   "n_items": 4
+  },
+  {
+   "skill": "identify color of an object in a sequence",
+   "flag": "irreducible",
+   "n_items": 166
+  },
+  {
+   "skill": "repeat question and answer actor name",
+   "flag": "irreducible",
+   "n_items": 10
+  },
+  {
+   "skill": "solve equations involving exponents and radicals",
+   "flag": "name_unfixable",
+   "n_items": 10
+  },
+  {
+   "skill": "write creative text with constraints",
+   "flag": "irreducible",
+   "n_items": 110
+  }
+ ],
+ "n_residue": 282,
+ "mean_validity": 0.7902711046497988,
+ "mean_group": 0.9193404634581105,
+ "n_certified": 150,
+ "n_failed": 37,
+ "spend_usd": 0.688
+}

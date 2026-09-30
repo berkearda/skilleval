@@ -1,0 +1,3826 @@
+{
+ "version": 1,
+ "codes": {
+  "c_0001": {
+   "name": "tracking state across sequential events",
+   "definition": "Tracking the changing states, positions, or attributes of entities through a sequence of events or transactions.",
+   "include": [
+    "Tracking object positions, resolving final assignments from history, maintaining state across iterative transactions."
+   ],
+   "exclude": [
+    "Tracking state across concurrent events."
+   ],
+   "exemplars": [
+    "tracking object positions",
+    "tracking object positions through spatial transformations",
+    "tracking spatial sequences",
+    "retrieving terminal value from state mapping",
+    "tracking object positions through sequential swaps",
+    "maintaining dynamic state bindings in memory",
+    "resolving final assignment from history",
+    "maintaining state across iterative transactions",
+    "tracking binary state transitions through sequential dependency graphs",
+    "resolving final entity attribute mapping",
+    "resolving final entity attribute binding",
+    "resolving item custody"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0002": {
+   "name": "calculating spatial displacement",
+   "definition": "Calculating the distance or vector between an initial and final position.",
+   "include": [
+    "Calculating displacement in 1D, 2D, or 3D space."
+   ],
+   "exclude": [
+    "Calculating temporal offsets."
+   ],
+   "exemplars": [
+    "calculating displacement",
+    "tracking net displacement across orthogonal spatial grid movements",
+    "euclidean distance computer",
+    "tracking position coordinates through orthogonal directional displacements",
+    "evaluating spatial closure in two dimensional path traversal",
+    "evaluating distance"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0003": {
+   "name": "resolving identity mappings",
+   "definition": "Determining which entities correspond to each other across different representations or contexts.",
+   "include": [
+    "Resolving identity mapping, entity resolution."
+   ],
+   "exclude": [
+    "Extracting entities from text."
+   ],
+   "exemplars": [
+    "resolving identity mapping",
+    "mapping lexical units",
+    "mapping query target",
+    "deducing identity",
+    "target entity matching",
+    "cross referencing player team"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0004": {
+   "name": "detecting semantic anomalies",
+   "definition": "Identifying and classifying instances where text deviates from expected meaning or logical coherence.",
+   "include": [
+    "Detecting semantic anomalies, classifying semantic deviation types."
+   ],
+   "exclude": [
+    "Identifying orthographic variations."
+   ],
+   "exemplars": [
+    "detecting semantic anomalies",
+    "evaluating moral absurdity",
+    "event plausibility evaluation",
+    "categorizing semantic deviations",
+    "distinguishing normative expectations",
+    "resolution of pragmatic contradictions"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0005": {
+   "name": "evaluating compound boolean expressions",
+   "definition": "Evaluating the truth value of logical expressions involving multiple boolean operators.",
+   "include": [
+    "Resolving boolean disjunctions, resolving operator precedence."
+   ],
+   "exclude": [
+    "Evaluating candidate options against criteria."
+   ],
+   "exemplars": [
+    "resolving boolean disjunction",
+    "applying logical negation to truth values",
+    "computing boolean disjunction over evaluated subterms",
+    "precedence application",
+    "analyzing negation scope in disjunctive premises",
+    "evaluating logical negation in boolean chains"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0006": {
+   "name": "evaluating candidate options against criteria",
+   "definition": "Assessing multiple candidate answers or options against a set of derived states or criteria to find the correct one.",
+   "include": [
+    "Discriminating candidate options, evaluating option truth against derived state."
+   ],
+   "exclude": [
+    "Evaluating compound boolean expressions."
+   ],
+   "exemplars": [
+    "discriminating candidate options",
+    "filtering activities",
+    "mapping traits to requirements",
+    "evaluating personality traits for task suitability",
+    "verification of candidate options against derived sequence",
+    "mapping descriptions to options"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0007": {
+   "name": "tracking state across sequential events",
+   "definition": "Tracking the changing states, positions, or attributes of entities through a sequence of events or transactions.",
+   "include": [
+    "Tracking object positions, resolving final assignments from history, maintaining state across iterative transactions."
+   ],
+   "exclude": [
+    "Tracking state across concurrent events."
+   ],
+   "exemplars": [
+    "resolving final assignment from history"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0008": {
+   "name": "tracking state across concurrent events",
+   "definition": "Tracking the changing states of entities when multiple actions or events occur simultaneously.",
+   "include": [
+    "Resolving entity state changes under concurrent actions."
+   ],
+   "exclude": [
+    "Tracking state across sequential events."
+   ],
+   "exemplars": [
+    "resolving entity state changes under concurrent actions"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0009": {
+   "name": "deriving polynomial parameters from roots",
+   "definition": "Determining the coefficients or parameters of a polynomial equation using the properties of its roots.",
+   "include": [
+    "Finding quadratic coefficients, using root relations."
+   ],
+   "exclude": [
+    "Deriving parametric equations."
+   ],
+   "exemplars": [
+    "quadratic equation parameters using root relations",
+    "relation coefficients roots vieta"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0010": {
+   "name": "deriving polynomial parameters from roots",
+   "definition": "Determining the coefficients or parameters of a polynomial equation using the properties of its roots.",
+   "include": [
+    "Finding quadratic coefficients, using root relations."
+   ],
+   "exclude": [
+    "Deriving parametric equations."
+   ],
+   "exemplars": [
+    "determination of quadratic coefficient"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0011": {
+   "name": "calculating geometric properties of shapes",
+   "definition": "Calculating spatial properties such as area, volume, or slant height of 2D and 3D geometric figures.",
+   "include": [
+    "Slant height calculation, deriving triangle area."
+   ],
+   "exclude": [
+    "Extracting geometric properties from transformation matrices."
+   ],
+   "exemplars": [
+    "slant height calculation",
+    "surface area computation",
+    "computing area ratio",
+    "propagating surface ratios",
+    "sum interior angles in convex polygons",
+    "applying sine rule"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0012": {
+   "name": "simplifying algebraic expressions via substitution",
+   "definition": "Manipulating and simplifying mathematical expressions by substituting algebraic identities.",
+   "include": [
+    "Manipulating complex magnitudes via algebraic identity substitution."
+   ],
+   "exclude": [
+    "Deriving polynomial parameters from roots."
+   ],
+   "exemplars": [
+    "manipulating complex magnitudes via algebraic identity substitution",
+    "expression optimization",
+    "evaluating functional equations using substitution",
+    "variable substitution in functional equations",
+    "evaluating expressions via substitution"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0013": {
+   "name": "deriving parametric equations",
+   "definition": "Formulating parametric equations to represent curves or surfaces.",
+   "include": [
+    "Deriving parametric equations for conic sections."
+   ],
+   "exclude": [
+    "Deriving polynomial parameters from roots."
+   ],
+   "exemplars": [
+    "deriving parametric equations for conic sections"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0014": {
+   "name": "determining divisor counts via prime factorization",
+   "definition": "Using the prime factorization of a number to calculate its total number of divisors.",
+   "include": [
+    "Prime factorization of composite numbers to determine divisor counts."
+   ],
+   "exclude": [
+    "Simplifying algebraic expressions via substitution."
+   ],
+   "exemplars": [
+    "prime factorization of composite numbers to determine divisor counts"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0015": {
+   "name": "calculating geometric properties of shapes",
+   "definition": "Calculating spatial properties such as area, volume, or slant height of 2D and 3D geometric figures.",
+   "include": [
+    "Slant height calculation, deriving triangle area."
+   ],
+   "exclude": [
+    "Extracting geometric properties from transformation matrices."
+   ],
+   "exemplars": [
+    "deriving triangle area"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0016": {
+   "name": "extracting geometric properties from transformation matrices",
+   "definition": "Deriving geometric vectors or properties from mathematical transformation matrices.",
+   "include": [
+    "Extracting normal vectors from reflection matrices."
+   ],
+   "exclude": [
+    "Calculating geometric properties of shapes."
+   ],
+   "exemplars": [
+    "extracting normal vector from reflection matrix",
+    "matrix reflection determination"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0017": {
+   "name": "evaluating compound boolean expressions",
+   "definition": "Evaluating the truth value of logical expressions involving multiple boolean operators.",
+   "include": [
+    "Resolving boolean disjunctions, resolving operator precedence."
+   ],
+   "exclude": [
+    "Evaluating candidate options against criteria."
+   ],
+   "exemplars": [
+    "resolving operator precedence in compound boolean expressions"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0018": {
+   "name": "parsing sequential dependencies",
+   "definition": "Analyzing chains of dependencies or sequential links between elements.",
+   "include": [
+    "Chain parsing."
+   ],
+   "exclude": [
+    "Tracking state across sequential events."
+   ],
+   "exemplars": [
+    "chain parsing",
+    "tracing truth values through directed dependency chains",
+    "evaluating outcomes in chains"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0019": {
+   "name": "calculating temporal offsets",
+   "definition": "Determining the time difference or offset between two temporal points.",
+   "include": [
+    "Calculating temporal offset."
+   ],
+   "exclude": [
+    "Calculating spatial displacement."
+   ],
+   "exemplars": [
+    "calculating temporal offset",
+    "compute date offset",
+    "calculating calendar additions",
+    "calculating absolute dates from relative time offsets",
+    "performing backward temporal arithmetic across month boundaries"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0020": {
+   "name": "identifying redundant premises in logical arguments",
+   "definition": "Identifying premises in a logical argument or proof that are not necessary to derive the conclusion.",
+   "include": [
+    "Identifying redundant premises."
+   ],
+   "exclude": [
+    "Detecting semantic anomalies."
+   ],
+   "exemplars": [
+    "identifying redundant premises"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0021": {
+   "name": "extracting coordinates from structured data",
+   "definition": "Parsing and extracting spatial coordinates from structured formats or code.",
+   "include": [
+    "Parsing vector graphics coordinates."
+   ],
+   "exclude": [
+    "Extracting entities and attributes from text."
+   ],
+   "exemplars": [
+    "parsing vector graphics coordinates",
+    "retrieval genomic coordinates",
+    "parsing svg path coordinate data"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0022": {
+   "name": "identifying sequence patterns",
+   "definition": "Recognizing and distinguishing patterns within ordered sequences of elements.",
+   "include": [
+    "Distinguishing sequences."
+   ],
+   "exclude": [
+    "Parsing sequential dependencies."
+   ],
+   "exemplars": [
+    "distinguish sequences",
+    "relating terms to differences",
+    "identify sequence"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0023": {
+   "name": "evaluating candidate options against criteria",
+   "definition": "Assessing multiple candidate answers or options against a set of derived states or criteria to find the correct one.",
+   "include": [
+    "Discriminating candidate options, evaluating option truth against derived state."
+   ],
+   "exclude": [
+    "Evaluating compound boolean expressions."
+   ],
+   "exemplars": [
+    "evaluating option truth against derived state"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0024": {
+   "name": "resolving linear ordering under constraints",
+   "definition": "Determining the correct linear sequence of entities based on a set of relative constraints or inequalities.",
+   "include": [
+    "Resolving linear ordering under inequality constraints."
+   ],
+   "exclude": [
+    "Resolving scheduling constraints."
+   ],
+   "exemplars": [
+    "resolving linear ordering under inequality constraints",
+    "resolving transitive inequalities in linear sequences",
+    "ordering of objects by relative age constraints",
+    "satisfying multiple constraints in combinatorial ordering",
+    "ordering temporal intervals across sequential witness accounts",
+    "deduction of absolute positions from partial orders"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0025": {
+   "name": "mapping multidimensional similarity",
+   "definition": "Evaluating the similarity between items across multiple dimensions or attributes.",
+   "include": [
+    "Mapping multi-dimensional similarity in media catalogs."
+   ],
+   "exclude": [
+    "Identifying relational patterns."
+   ],
+   "exemplars": [
+    "mapping multi dimensional similarity in media catalogs",
+    "identifying cinematic similarities",
+    "evaluating film similarity",
+    "mapping multi dimensional similarity in vector spaces",
+    "mapping multi attribute similarity",
+    "mapping vector similarities in latent semantic spaces"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0026": {
+   "name": "resolving directional reversals",
+   "definition": "Determining the final direction or state after one or more reversals in orientation or direction.",
+   "include": [
+    "Resolving directional reversal."
+   ],
+   "exclude": [
+    "Tracking state across sequential events."
+   ],
+   "exemplars": [
+    "resolving directional reversal",
+    "detecting polar inversion",
+    "resolving parity alternations"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0027": {
+   "name": "extracting entities and attributes from text",
+   "definition": "Identifying and extracting specific entities, attributes, or pairs of information from unstructured text.",
+   "include": [
+    "Extracting listed entities, extracting attribute pairs, retrieving player positions."
+   ],
+   "exclude": [
+    "Extracting coordinates from structured data."
+   ],
+   "exemplars": [
+    "extracting listed entities from text",
+    "quantity extraction",
+    "parsing quantifiers and numerals in conjunctive lists",
+    "attribute values extraction",
+    "attribute retrieval",
+    "matching entities to attributes",
+    "extracting attribute pairs",
+    "retrieving player positions",
+    "parsing items",
+    "evaluating athlete position"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0028": {
+   "name": "updating tabular data",
+   "definition": "Modifying the contents of a table or structured dataset through insertions, deletions, or updates.",
+   "include": [
+    "Updating tabular data via insertion and deletion."
+   ],
+   "exclude": [
+    "Extracting entities and attributes from text."
+   ],
+   "exemplars": [
+    "updating tabular data via insertion and deletion",
+    "updating structured dataset"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0029": {
+   "name": "extracting entities and attributes from text",
+   "definition": "Identifying and extracting specific entities, attributes, or pairs of information from unstructured text.",
+   "include": [
+    "Extracting listed entities, extracting attribute pairs, retrieving player positions."
+   ],
+   "exclude": [
+    "Extracting coordinates from structured data."
+   ],
+   "exemplars": [
+    "extracting attribute pairs"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0030": {
+   "name": "identifying orthographic variations",
+   "definition": "Recognizing different spellings or orthographic representations of the same word or entity.",
+   "include": [
+    "Orthographic variation identification."
+   ],
+   "exclude": [
+    "Detecting semantic anomalies."
+   ],
+   "exemplars": [
+    "orthographic variation identification",
+    "matching variant strings"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0031": {
+   "name": "detecting semantic anomalies",
+   "definition": "Identifying and classifying instances where text deviates from expected meaning or logical coherence.",
+   "include": [
+    "Detecting semantic anomalies, classifying semantic deviation types."
+   ],
+   "exclude": [
+    "Identifying orthographic variations."
+   ],
+   "exemplars": [
+    "classifying semantic deviation types"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0032": {
+   "name": "detecting rhetorical devices",
+   "definition": "Identifying the use of rhetorical devices such as irony, hyperbole, or metaphor in text.",
+   "include": [
+    "Detecting irony via hyperbole."
+   ],
+   "exclude": [
+    "Detecting semantic anomalies."
+   ],
+   "exemplars": [
+    "detecting irony via hyperbole",
+    "substituting phonetic lexical humor",
+    "substitutions in word play alterations",
+    "contrasting literal truth",
+    "humor in linguistic parody variations",
+    "detection of ironic sentiment"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0033": {
+   "name": "extracting entities and attributes from text",
+   "definition": "Identifying and extracting specific entities, attributes, or pairs of information from unstructured text.",
+   "include": [
+    "Extracting listed entities, extracting attribute pairs, retrieving player positions."
+   ],
+   "exclude": [
+    "Extracting coordinates from structured data."
+   ],
+   "exemplars": [
+    "retrieving player positions"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0034": {
+   "name": "resolving scheduling constraints",
+   "definition": "Determining valid times or schedules by intersecting multiple activity constraints and boundaries.",
+   "include": [
+    "Intersecting activity schedules with boundary constraints."
+   ],
+   "exclude": [
+    "Resolving linear ordering under constraints."
+   ],
+   "exemplars": [
+    "intersecting activity schedules with boundary constraints",
+    "validating calendar date boundaries",
+    "resolving scheduling conflicts",
+    "deducing event free time from schedule gaps",
+    "filtering mutually exclusive options using temporal constraints",
+    "matching intervals"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0035": {
+   "name": "tracking state across sequential events",
+   "definition": "Tracking the changing states, positions, or attributes of entities through a sequence of events or transactions.",
+   "include": [
+    "Tracking object positions, resolving final assignments from history, maintaining state across iterative transactions."
+   ],
+   "exclude": [
+    "Tracking state across concurrent events."
+   ],
+   "exemplars": [
+    "maintaining state across iterative transactions"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0036": {
+   "name": "tracking state across sequential events",
+   "definition": "Tracking the changing states, positions, or attributes of entities through a sequence of events or transactions.",
+   "include": [
+    "Tracking object positions, resolving final assignments from history, maintaining state across iterative transactions."
+   ],
+   "exclude": [
+    "Tracking state across concurrent events."
+   ],
+   "exemplars": [
+    "tracking binary state transitions through sequential dependency graphs"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0037": {
+   "name": "identifying relational patterns",
+   "definition": "Recognizing and mapping abstract relationships or patterns between elements.",
+   "include": [
+    "Mapping relationships in patterns."
+   ],
+   "exclude": [
+    "Identifying sequence patterns."
+   ],
+   "exemplars": [
+    "mapping relationships in patterns",
+    "identifying patterns",
+    "mapping thematic patterns",
+    "pattern extraction",
+    "synthesizing thematic patterns across diverse media works"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0038": {
+   "name": "recalling factual knowledge",
+   "definition": "Retrieving specific factual knowledge, mechanisms, or distributions from memory.",
+   "include": [
+    "Recalling biological mechanisms, chemical mechanisms, or physiological distributions."
+   ],
+   "exclude": [
+    "Calculating quantities using formulas."
+   ],
+   "exemplars": [
+    "mechanism of antisense oligonucleotide splice switching",
+    "biochemical structure of pre mrna splicing",
+    "evaluating neurotransmitter function",
+    "identifying fluorescent probe cellular targets",
+    "mrna transcript maturation and stability component",
+    "regioselectivity in enamine formation",
+    "mechanisms of enamine alkylation",
+    "identifying hormone distribution",
+    "recognizing canonical animated classics in film databases",
+    "athlete association retrieval",
+    "evaluating mitochondrial assay biochemical specificity",
+    "analyzing cellular fractionation downstream assays",
+    "products of imine hydrolysis",
+    "predicting reaction products via grignard addition",
+    "mapping bicyclic systems to derivatives",
+    "retrieving cross domain metadata from cultural knowledge bases",
+    "retrieving factual statements"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0039": {
+   "name": "recalling factual knowledge",
+   "definition": "Retrieving specific factual knowledge, mechanisms, or distributions from memory.",
+   "include": [
+    "Recalling biological mechanisms, chemical mechanisms, or physiological distributions."
+   ],
+   "exclude": [
+    "Calculating quantities using formulas."
+   ],
+   "exemplars": [
+    "mechanisms of enamine alkylation"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0040": {
+   "name": "calculating quantities using domain formulas",
+   "definition": "Applying specialized formulas to calculate specific physical, chemical, or domain-specific quantities.",
+   "include": [
+    "Calculating buffer pH, luminosity scaling, gravitational potential energy."
+   ],
+   "exclude": [
+    "Calculating geometric properties of shapes."
+   ],
+   "exemplars": [
+    "calculating buffer ph",
+    "scaling analysis of hydrostatic equilibrium equations",
+    "solving eigenvalue problem for isotropic quantum harmonic oscillator",
+    "calculating mass from velocity",
+    "analyzing dynamics",
+    "applying time dilation formula"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0041": {
+   "name": "recalling factual knowledge",
+   "definition": "Retrieving specific factual knowledge, mechanisms, or distributions from memory.",
+   "include": [
+    "Recalling biological mechanisms, chemical mechanisms, or physiological distributions."
+   ],
+   "exclude": [
+    "Calculating quantities using formulas."
+   ],
+   "exemplars": [
+    "identifying hormone distribution"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0042": {
+   "name": "calculating quantities using domain formulas",
+   "definition": "Applying specialized formulas to calculate specific physical, chemical, or domain-specific quantities.",
+   "include": [
+    "Calculating buffer pH, luminosity scaling, gravitational potential energy."
+   ],
+   "exclude": [
+    "Calculating geometric properties of shapes."
+   ],
+   "exemplars": [
+    "calculating luminosity scaling"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0043": {
+   "name": "calculating quantities using domain formulas",
+   "definition": "Applying specialized formulas to calculate specific physical, chemical, or domain-specific quantities.",
+   "include": [
+    "Calculating buffer pH, luminosity scaling, gravitational potential energy."
+   ],
+   "exclude": [
+    "Calculating geometric properties of shapes."
+   ],
+   "exemplars": [
+    "calculating gravitational potential energy for uniform spheres"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0044": {
+   "name": "deducing spatial configurations of molecules",
+   "definition": "Determining the 3D spatial arrangement or stereochemistry of molecules based on domain rules.",
+   "include": [
+    "Deducing stereochemical inversion at centers."
+   ],
+   "exclude": [
+    "Calculating geometric properties of shapes."
+   ],
+   "exemplars": [
+    "deducing stereochemical inversion at centers",
+    "predicting reaction products sharpless epoxidation",
+    "accounting for chiral centers",
+    "stereochemical outcome of carbonyl reduction",
+    "detecting chirality"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0045": {
+   "name": "enforcing string constraints",
+   "definition": "Ensuring that a generated string or text meets specific character, formatting, or substring inclusion rules.",
+   "include": [
+    "Exact phrase inclusion, asterisk formatting, enforcing prefix constraints."
+   ],
+   "exclude": [
+    "Extracting entities and attributes from text."
+   ],
+   "exemplars": [
+    "exact phrase inclusion",
+    "sentence length restriction",
+    "enforcing format constraint",
+    "restricting output options",
+    "enforcing word count limits",
+    "maintaining language constraint"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0046": {
+   "name": "inferring implicit traits from narrative",
+   "definition": "Deducing underlying characteristics, competencies, or statuses of individuals based on narrative descriptions.",
+   "include": [
+    "Inferring wealth or personnel competencies from indirect descriptions."
+   ],
+   "exclude": [
+    "Extracting explicit entities and attributes from text."
+   ],
+   "exemplars": [
+    "expressing wealth indirectly via lifestyle narrative",
+    "evaluating proficiency",
+    "competency profiles from narrative feedback"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0047": {
+   "name": "enforcing string constraints",
+   "definition": "Ensuring that a generated string or text meets specific character, formatting, or substring inclusion rules.",
+   "include": [
+    "Exact phrase inclusion, asterisk formatting, enforcing prefix constraints."
+   ],
+   "exclude": [
+    "Extracting entities and attributes from text."
+   ],
+   "exemplars": [
+    "asterisk formatting",
+    "formatting syntax"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0048": {
+   "name": "enforcing string constraints",
+   "definition": "Ensuring that a generated string or text meets specific character, formatting, or substring inclusion rules.",
+   "include": [
+    "Exact phrase inclusion, asterisk formatting, enforcing prefix constraints."
+   ],
+   "exclude": [
+    "Extracting entities and attributes from text."
+   ],
+   "exemplars": [
+    "enforcing prefix constraint"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0049": {
+   "name": "resolving epistemic states of agents",
+   "definition": "Determining what information is known or accessible to different agents based on their observations.",
+   "include": [
+    "Resolving information access under agent observation constraints."
+   ],
+   "exclude": [
+    "Tracking state across sequential events."
+   ],
+   "exemplars": [
+    "resolving information access under agent observation constraints",
+    "belief state resolution"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0050": {
+   "name": "inferring implicit traits from narrative",
+   "definition": "Deducing underlying characteristics, competencies, or statuses of individuals based on narrative descriptions.",
+   "include": [
+    "Inferring wealth or personnel competencies from indirect descriptions."
+   ],
+   "exclude": [
+    "Extracting explicit entities and attributes from text."
+   ],
+   "exemplars": [
+    "personnel competencies from narrative"
+   ],
+   "created_batch": 0,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0051": {
+   "name": "tracking state across sequential events",
+   "definition": "Tracking the changing states, positions, or attributes of entities through a sequence of events or transactions.",
+   "include": [
+    "Tracking object positions",
+    "resolving final assignments from history",
+    "maintaining state across iterative transactions"
+   ],
+   "exclude": [
+    "Tracking state across concurrent events"
+   ],
+   "exemplars": [
+    "resolving final entity attribute mapping"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0052": {
+   "name": "recalling domain terminology",
+   "definition": "Retrieving and applying specific terminology or jargon related to a particular domain or field.",
+   "include": [
+    "Evaluating sports terminology",
+    "defining domain-specific terms"
+   ],
+   "exclude": [
+    "Recalling factual knowledge"
+   ],
+   "exemplars": [
+    "evaluating sports terminology",
+    "basketball terminology within game context"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0053": {
+   "name": "tracking state across sequential events",
+   "definition": "Tracking the changing states, positions, or attributes of entities through a sequence of events or transactions.",
+   "include": [
+    "Tracking object positions",
+    "resolving final assignments from history",
+    "maintaining state across iterative transactions"
+   ],
+   "exclude": [
+    "Tracking state across concurrent events"
+   ],
+   "exemplars": [
+    "resolving final entity attribute binding"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0054": {
+   "name": "resolving spatial relationships",
+   "definition": "Determining the relative or absolute spatial positions, orientations, or interactions of entities.",
+   "include": [
+    "Spatial resolution",
+    "resolving spatial agency"
+   ],
+   "exclude": [
+    "Calculating spatial displacement"
+   ],
+   "exemplars": [
+    "spatial resolution",
+    "mapping directional relations",
+    "resolving spatial relational constraints",
+    "resolving visibility constraints",
+    "resolving spatial relationships under mutual exclusion constraints",
+    "evaluating absolute positions"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0055": {
+   "name": "resolving integer constraints in algebraic expressions",
+   "definition": "Finding integer solutions or applying integer constraints to algebraic or radical expressions.",
+   "include": [
+    "Solving Diophantine equations",
+    "evaluating radical expressions with integer constraints"
+   ],
+   "exclude": [
+    "Simplifying algebraic expressions via substitution"
+   ],
+   "exemplars": [
+    "radical expressions with integer constraints",
+    "integer values from surd forms",
+    "bezout identity application",
+    "solving quadratic equations for integer solutions",
+    "solving linear systems for integer coordinates"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0056": {
+   "name": "evaluating mathematical functions",
+   "definition": "Calculating the output value of a mathematical function given specific input values.",
+   "include": [
+    "Evaluation of quadratic functions",
+    "calculating polynomial values"
+   ],
+   "exclude": [
+    "Deriving polynomial parameters from roots"
+   ],
+   "exemplars": [
+    "evaluation of quadratic function",
+    "evaluating iterated piecewise functions across domains"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0057": {
+   "name": "applying mathematical inequalities",
+   "definition": "Using mathematical inequalities to bound values, prove statements, or evaluate expressions.",
+   "include": [
+    "Applying triangle inequality to complex number sums"
+   ],
+   "exclude": [
+    "Evaluating numerical inequalities"
+   ],
+   "exemplars": [
+    "applying triangle inequality to complex number sums",
+    "analysis sums primes inequality"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0058": {
+   "name": "calculating linear equations from points",
+   "definition": "Determining the slope, intercept, or full equation of a line passing through specific points.",
+   "include": [
+    "Calculating slope and intercept of secant lines"
+   ],
+   "exclude": [
+    "Calculating geometric properties of shapes"
+   ],
+   "exemplars": [
+    "calculating slope and intercept of secant lines"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0059": {
+   "name": "resolving integer constraints via prime factorization",
+   "definition": "Using prime factorization properties to find integers that satisfy specific combinatorial or divisibility conditions.",
+   "include": [
+    "Identifying smallest integers satisfying combinatorial prime conditions"
+   ],
+   "exclude": [
+    "Determining divisor counts via prime factorization"
+   ],
+   "exemplars": [
+    "identifying smallest integers satisfying combinatorial prime conditions",
+    "finding smallest positive integers",
+    "calculation products prime combinations"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0060": {
+   "name": "calculating greatest common divisors",
+   "definition": "Determining the greatest common divisor (GCD) of a set of integers or integer vectors.",
+   "include": [
+    "Simplifying integer vector greatest common divisor"
+   ],
+   "exclude": [
+    "Determining divisor counts via prime factorization"
+   ],
+   "exemplars": [
+    "simplifying integer vector greatest common divisor"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0061": {
+   "name": "identifying causal relationships",
+   "definition": "Determining the direction of cause and effect between events, variables, or statements.",
+   "include": [
+    "Causal direction identification"
+   ],
+   "exclude": [
+    "Parsing sequential dependencies"
+   ],
+   "exemplars": [
+    "causal direction identification",
+    "evaluating counterfactual necessity in probabilistic causation",
+    "counterfactual condition evaluation",
+    "modeling counterfactual outcomes",
+    "commonsense causality interpretation",
+    "evaluating causal conditions"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0062": {
+   "name": "evaluating logical equivalences",
+   "definition": "Determining whether two logical statements or propositions are logically equivalent.",
+   "include": [
+    "Evaluating contrapositive equivalence in categorical logic"
+   ],
+   "exclude": [
+    "Evaluating compound boolean expressions"
+   ],
+   "exemplars": [
+    "evaluating contrapositive equivalence in categorical logic"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0063": {
+   "name": "parsing structured commands",
+   "definition": "Interpreting and extracting meaning or instructions from structured commands or code-like syntax.",
+   "include": [
+    "Decoding commands",
+    "parsing CLI arguments"
+   ],
+   "exclude": [
+    "Extracting coordinates from structured data"
+   ],
+   "exemplars": [
+    "decoding commands",
+    "parsing arc commands",
+    "svg path command parser",
+    "decoding svg path commands into cartesian coordinates"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0064": {
+   "name": "ordering adjectives by grammatical rules",
+   "definition": "Arranging multiple adjectives modifying a noun according to standard grammatical hierarchy rules.",
+   "include": [
+    "Synthesizing adjective hierarchy"
+   ],
+   "exclude": [
+    "Enforcing string constraints"
+   ],
+   "exemplars": [
+    "synthesizing adjective hierarchy",
+    "evaluating adjective ordering rules",
+    "evaluating adjective ordering rules in noun phrases"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0065": {
+   "name": "mapping relative positions to absolute coordinates",
+   "definition": "Converting relative spatial descriptions or positions into absolute indices or coordinates.",
+   "include": [
+    "Mapping relative spatial positions to absolute indices"
+   ],
+   "exclude": [
+    "Extracting coordinates from structured data"
+   ],
+   "exemplars": [
+    "mapping relative spatial positions to absolute indices"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0066": {
+   "name": "deducing entity identity from spatial constraints",
+   "definition": "Identifying specific entities based on their absolute or relative spatial positions and constraints.",
+   "include": [
+    "Deducing element identity from absolute positional clues"
+   ],
+   "exclude": [
+    "Resolving linear ordering under constraints"
+   ],
+   "exemplars": [
+    "deducing element identity from absolute positional clues",
+    "deducing target entity from deduced position"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0067": {
+   "name": "recalling factual knowledge",
+   "definition": "Retrieving specific factual knowledge, mechanisms, or distributions from memory.",
+   "include": [
+    "Recognizing canonical animated classics in film databases"
+   ],
+   "exclude": [
+    "Calculating quantities using formulas"
+   ],
+   "exemplars": [
+    "recognizing canonical animated classics in film databases",
+    "athlete association retrieval"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0068": {
+   "name": "evaluating loop termination conditions",
+   "definition": "Determining the conditions under which an iterative process, loop, or recursive function will terminate or return.",
+   "include": [
+    "Calculating return condition",
+    "evaluating while loop exits"
+   ],
+   "exclude": [
+    "Evaluating compound boolean expressions"
+   ],
+   "exemplars": [
+    "calculating return condition",
+    "evaluating coordinate equality to determine closed loop return"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0069": {
+   "name": "counting entities in text",
+   "definition": "Enumerating the occurrences of specific entities, items, or concepts within a text.",
+   "include": [
+    "Entity counting",
+    "counting listed items"
+   ],
+   "exclude": [
+    "Extracting entities and attributes from text"
+   ],
+   "exemplars": [
+    "entity counting",
+    "counting discrete entities in natural language item enumeration",
+    "punctuation frequency counting",
+    "counting discrete objects",
+    "extracting quantities from natural language enumeration"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0070": {
+   "name": "evaluating numerical inequalities",
+   "definition": "Assessing whether numerical values satisfy specific inequality conditions.",
+   "include": [
+    "Evaluating numerical inequalities across dataset rows"
+   ],
+   "exclude": [
+    "Applying mathematical inequalities"
+   ],
+   "exemplars": [
+    "evaluating numerical inequalities across dataset rows"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0071": {
+   "name": "detecting grammatical omissions",
+   "definition": "Identifying missing grammatical elements, such as proper nouns, articles, or punctuation, in a text.",
+   "include": [
+    "Detecting omission of proper nouns"
+   ],
+   "exclude": [
+    "Detecting semantic anomalies"
+   ],
+   "exemplars": [
+    "detecting omission of proper nouns",
+    "detecting omitted modifiers"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0072": {
+   "name": "mapping actions to roles",
+   "definition": "Associating specific actions, verbs, or tasks with the corresponding roles or responsibilities.",
+   "include": [
+    "Matching action verbs to responsibilities"
+   ],
+   "exclude": [
+    "Extracting entities and attributes from text"
+   ],
+   "exemplars": [
+    "matching action verbs to responsibilities",
+    "mapping athlete actions",
+    "synthesizing role descriptions",
+    "athlete sport scoring action mapping",
+    "matching capabilities to tasks"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0073": {
+   "name": "applying logical negation",
+   "definition": "Inverting the truth value or logical polarity of a statement, attribution, or boolean value.",
+   "include": [
+    "Inverting truth attributions",
+    "applying logical NOT"
+   ],
+   "exclude": [
+    "Evaluating compound boolean expressions"
+   ],
+   "exemplars": [
+    "inverting truth attributions",
+    "simplifying nested logical negation",
+    "resolving parity of negations",
+    "evaluating negation in recursive truth statements",
+    "simplifying negated boolean values",
+    "resolving nested negation in propositional logic statements"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0074": {
+   "name": "recalling factual knowledge",
+   "definition": "Retrieving specific factual knowledge, mechanisms, or distributions from memory.",
+   "include": [
+    "Evaluating mitochondrial assay biochemical specificity"
+   ],
+   "exclude": [
+    "Calculating quantities using formulas"
+   ],
+   "exemplars": [
+    "evaluating mitochondrial assay biochemical specificity",
+    "analyzing cellular fractionation downstream assays",
+    "protocols assay diffusion agar"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0075": {
+   "name": "recalling factual knowledge",
+   "definition": "Retrieving specific factual knowledge, mechanisms, or distributions from memory.",
+   "include": [
+    "Products of imine hydrolysis"
+   ],
+   "exclude": [
+    "Calculating quantities using formulas"
+   ],
+   "exemplars": [
+    "products of imine hydrolysis",
+    "predicting reaction products via grignard addition",
+    "identifying acid catalysis in carbonyl condensation",
+    "converting primary alcohols aldehydes pdc"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0076": {
+   "name": "calculating quantities using domain formulas",
+   "definition": "Applying specialized formulas to calculate specific physical, chemical, or domain-specific quantities.",
+   "include": [
+    "Determining equivalence point pH"
+   ],
+   "exclude": [
+    "Calculating geometric properties of shapes"
+   ],
+   "exemplars": [
+    "determining equivalence point ph",
+    "solving quantum infinite potential well energy eigenvalues"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0077": {
+   "name": "recalling factual knowledge",
+   "definition": "Retrieving specific factual knowledge, mechanisms, or distributions from memory.",
+   "include": [
+    "Mapping bicyclic systems to derivatives"
+   ],
+   "exclude": [
+    "Calculating quantities using formulas"
+   ],
+   "exemplars": [
+    "mapping bicyclic systems to derivatives"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0078": {
+   "name": "generating structured text",
+   "definition": "Producing text that adheres to a specific structural format, such as sections, headers, or lists.",
+   "include": [
+    "Structured section generation"
+   ],
+   "exclude": [
+    "Enforcing string constraints"
+   ],
+   "exemplars": [
+    "structured section generation",
+    "structuring table format",
+    "structured output sequencing",
+    "structuring email content"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0079": {
+   "name": "resolving spatial relationships",
+   "definition": "Determining the relative or absolute spatial positions, orientations, or interactions of entities.",
+   "include": [
+    "Resolving spatial agency"
+   ],
+   "exclude": [
+    "Calculating spatial displacement"
+   ],
+   "exemplars": [
+    "resolving spatial agency"
+   ],
+   "created_batch": 1,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0080": {
+   "name": "aggregating numerical quantities",
+   "definition": "Calculating the total sum or aggregate of multiple numerical values.",
+   "include": [
+    "Summing quantities",
+    "aggregating numerical data"
+   ],
+   "exclude": [
+    "Counting entities in text"
+   ],
+   "exemplars": [
+    "quantity aggregation",
+    "computing arithmetic sum over numerical set",
+    "calculating cumulative sum of extracted values",
+    "calculation of missing values via addition",
+    "aggregating discrete item counts across categories"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0081": {
+   "name": "calculating polynomial roots",
+   "definition": "Determining the roots or zeros of a polynomial equation.",
+   "include": [
+    "Computing quadratic roots",
+    "finding zeros of polynomials"
+   ],
+   "exclude": [
+    "Deriving polynomial parameters from roots"
+   ],
+   "exemplars": [
+    "computing quadratic roots",
+    "polynomial equation resolution",
+    "solving quadratic equations using the quadratic formula"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0082": {
+   "name": "factoring algebraic expressions",
+   "definition": "Decomposing mathematical expressions into products of simpler factors.",
+   "include": [
+    "Factoring symmetric polynomials",
+    "factoring quadratics"
+   ],
+   "exclude": [
+    "Simplifying algebraic expressions via substitution"
+   ],
+   "exemplars": [
+    "factoring symmetric polynomial expressions in complex conjugates",
+    "difference of cubes factorization"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0083": {
+   "name": "applying geometric transformations",
+   "definition": "Applying mathematical transformations such as translation, rotation, scaling, or reflection to spatial coordinates or shapes.",
+   "include": [
+    "Applying coordinate reflection transformations to points",
+    "rotating geometric figures"
+   ],
+   "exclude": [
+    "Extracting geometric properties from transformation matrices"
+   ],
+   "exemplars": [
+    "applying coordinate reflection transformations to points",
+    "tracking spatial coordinates through heading transformations"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0084": {
+   "name": "evaluating mathematical series",
+   "definition": "Calculating the sum of terms in a mathematical sequence or series.",
+   "include": [
+    "Summing discrete numerical sequence terms",
+    "evaluating infinite series"
+   ],
+   "exclude": [
+    "Identifying sequence patterns"
+   ],
+   "exemplars": [
+    "summing discrete numerical sequence terms",
+    "manipulating series"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0085": {
+   "name": "calculating probabilities",
+   "definition": "Calculating the likelihood of events occurring, including joint, conditional, or union probabilities.",
+   "include": [
+    "Computing union probability",
+    "calculating conditional probability"
+   ],
+   "exclude": [
+    "Evaluating numerical inequalities"
+   ],
+   "exemplars": [
+    "computing union probability",
+    "counting favorable outcomes",
+    "analyzing genetic cross ratios"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0086": {
+   "name": "evaluating joint effects",
+   "definition": "Assessing the combined impact or contribution of multiple factors or variables on an outcome.",
+   "include": [
+    "Analyzing joint contribution",
+    "evaluating synergistic effects"
+   ],
+   "exclude": [
+    "Identifying causal relationships"
+   ],
+   "exemplars": [
+    "analyzing joint contribution"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0087": {
+   "name": "detecting syntax errors",
+   "definition": "Identifying violations of syntax rules in programming languages, formal logic, or structured text.",
+   "include": [
+    "Detecting syntax violations",
+    "identifying malformed expressions"
+   ],
+   "exclude": [
+    "Detecting grammatical omissions"
+   ],
+   "exemplars": [
+    "detecting syntax violations",
+    "evaluating syntactic rules"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0088": {
+   "name": "parsing structured data formats",
+   "definition": "Extracting records, fields, or structured information from tabular data, JSON, CSV, or other structured text formats.",
+   "include": [
+    "Parsing structured tabular text into records",
+    "extracting JSON fields"
+   ],
+   "exclude": [
+    "Extracting entities and attributes from unstructured text"
+   ],
+   "exemplars": [
+    "parsing structured tabular text into records",
+    "extracting numerical attributes from tabular text",
+    "extraction of tabular numerical data"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0089": {
+   "name": "classifying text sentiment",
+   "definition": "Determining the emotional tone, polarity, or sentiment expressed in a text.",
+   "include": [
+    "Sentiment classification",
+    "identifying positive or negative tone"
+   ],
+   "exclude": [
+    "Detecting semantic anomalies"
+   ],
+   "exemplars": [
+    "sentiment classification",
+    "differentiating semantic polarity"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0090": {
+   "name": "evaluating set membership",
+   "definition": "Determining whether an element belongs to a specific mathematical, categorical, or character set.",
+   "include": [
+    "Evaluating character membership",
+    "checking set inclusion"
+   ],
+   "exclude": [
+    "Evaluating candidate options against criteria"
+   ],
+   "exemplars": [
+    "evaluating character membership",
+    "identifying membership"
+   ],
+   "created_batch": 2,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0091": {
+   "name": "categorizing entities into classes",
+   "definition": "Assigning objects, concepts, or entities into predefined categories or classes based on their attributes.",
+   "include": [
+    "Categorizing objects",
+    "Classifying entities by type"
+   ],
+   "exclude": [
+    "Evaluating set membership"
+   ],
+   "exemplars": [
+    "categorizing objects",
+    "categorizing objects by semantic taxonomies",
+    "categorizing objects by types"
+   ],
+   "created_batch": 3,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0092": {
+   "name": "simplifying textual clauses",
+   "definition": "Reducing or simplifying grammatical clauses in a sentence while preserving the core meaning.",
+   "include": [
+    "Clause reduction",
+    "Syntactic simplification"
+   ],
+   "exclude": [
+    "Identifying redundant premises in logical arguments"
+   ],
+   "exemplars": [
+    "clause reduction",
+    "reducing conjunctive and disjunctive clauses"
+   ],
+   "created_batch": 3,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0093": {
+   "name": "formatting dates and times",
+   "definition": "Converting or formatting date and time representations into specific string formats.",
+   "include": [
+    "Converting date formats",
+    "Formatting timestamps"
+   ],
+   "exclude": [
+    "Calculating temporal offsets"
+   ],
+   "exemplars": [
+    "convert date format",
+    "formatting calendar dates to standard numeric schema"
+   ],
+   "created_batch": 3,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0094": {
+   "name": "evaluating deductive validity",
+   "definition": "Determining whether a logical conclusion necessarily follows from its premises in a formal argument.",
+   "include": [
+    "Assessing deductive validity",
+    "Evaluating syllogisms"
+   ],
+   "exclude": [
+    "Evaluating logical equivalences"
+   ],
+   "exemplars": [
+    "assessing deductive validity of formal arguments",
+    "identifying logical necessity",
+    "evaluation of deductive validity of syllogistic inferences",
+    "evaluating modus tollens argument structure in propositional logic"
+   ],
+   "created_batch": 3,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0095": {
+   "name": "translating text to mathematical expressions",
+   "definition": "Converting natural language descriptions or comparisons into mathematical equations or inequalities.",
+   "include": [
+    "Translating textual comparisons into inequalities",
+    "Formulating equations from word problems"
+   ],
+   "exclude": [
+    "Evaluating numerical inequalities"
+   ],
+   "exemplars": [
+    "translation of textual comparisons into inequalities",
+    "translation of spatial relations into linear constraints",
+    "translating word problems into algebraic equations"
+   ],
+   "created_batch": 3,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0096": {
+   "name": "filtering data records",
+   "definition": "Filtering rows or records from a dataset based on specific conditions or criteria.",
+   "include": [
+    "Filtering records",
+    "querying tabular data"
+   ],
+   "exclude": [
+    "Parsing structured data formats"
+   ],
+   "exemplars": [
+    "filtering records",
+    "filtering items",
+    "filtering relevant entities by category label",
+    "filtering objects"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0097": {
+   "name": "filtering candidate options based on constraints",
+   "definition": "Assessing multiple candidate answers or options against a set of constraints to find the valid ones.",
+   "include": [
+    "Constraint filtering",
+    "eliminating invalid options"
+   ],
+   "exclude": [
+    "Enforcing string constraints"
+   ],
+   "exemplars": [
+    "constraint filtering",
+    "parsing single selection categorical response constraints"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0098": {
+   "name": "identifying integer divisors",
+   "definition": "Determining the set of integers that divide a given number without a remainder.",
+   "include": [
+    "Finding divisors of integers"
+   ],
+   "exclude": [
+    "Determining divisor counts via prime factorization"
+   ],
+   "exemplars": [
+    "finding divisors of integers",
+    "enumerating integer divisors of prime numbers"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0099": {
+   "name": "expanding algebraic expressions",
+   "definition": "Multiplying out brackets and applying the distributive law to expand mathematical expressions.",
+   "include": [
+    "Expanding equations",
+    "polynomial expansion"
+   ],
+   "exclude": [
+    "Factoring algebraic expressions"
+   ],
+   "exemplars": [
+    "expanding equation",
+    "expanding squares"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0100": {
+   "name": "applying geometric theorems",
+   "definition": "Using established geometric theorems and postulates to deduce properties, angles, or lengths of figures.",
+   "include": [
+    "Utilizing perpendicularity of radius to tangent lines",
+    "applying circle theorems"
+   ],
+   "exclude": [
+    "Calculating geometric properties of shapes"
+   ],
+   "exemplars": [
+    "utilize perpendicularity of radius to tangent lines",
+    "angle bisector parallel lines",
+    "right triangle similarity"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0101": {
+   "name": "converting complex equations to cartesian forms",
+   "definition": "Transforming equations involving complex variables and moduli into Cartesian coordinate equations.",
+   "include": [
+    "Translating complex modulus equations"
+   ],
+   "exclude": [
+    "Translating text to mathematical expressions"
+   ],
+   "exemplars": [
+    "translating complex modulus equations"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0102": {
+   "name": "deriving closed-form expressions for recurrence relations",
+   "definition": "Determining a non-recursive, closed-form mathematical expression for a sequence defined by a recurrence relation.",
+   "include": [
+    "Deriving polynomial forms from recurrence relations"
+   ],
+   "exclude": [
+    "Evaluating mathematical series"
+   ],
+   "exemplars": [
+    "deriving polynomial forms from recurrence relations"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0103": {
+   "name": "applying modular arithmetic",
+   "definition": "Using properties of congruences and modulo operations to simplify or solve integer expressions.",
+   "include": [
+    "Integer congruence reduction",
+    "solving modular equations"
+   ],
+   "exclude": [
+    "Resolving integer constraints via prime factorization"
+   ],
+   "exemplars": [
+    "integer congruence reduction"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0104": {
+   "name": "identifying integer divisors",
+   "definition": "Determining the set of integers that divide a given number without a remainder.",
+   "include": [
+    "Finding divisors of integers"
+   ],
+   "exclude": [
+    "Determining divisor counts via prime factorization"
+   ],
+   "exemplars": [
+    "finding divisors"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0105": {
+   "name": "calculating matrix eigenvalues",
+   "definition": "Determining the scalar eigenvalues associated with a square matrix or linear transformation.",
+   "include": [
+    "Eigenvalue computation",
+    "solving characteristic equations"
+   ],
+   "exclude": [
+    "Calculating polynomial roots"
+   ],
+   "exemplars": [
+    "eigenvalue computation"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0106": {
+   "name": "evaluating grammatical well-formedness",
+   "definition": "Assessing whether a natural language sentence or phrase adheres to standard grammatical and syntactic rules.",
+   "include": [
+    "Evaluating syntactic grammatical well-formedness"
+   ],
+   "exclude": [
+    "Detecting syntax errors in programming languages"
+   ],
+   "exemplars": [
+    "evaluate syntactic grammatical well formedness",
+    "evaluating syntactic ordering rules",
+    "distinguishing syntactic acceptability of modifier sequences",
+    "comparing syntactic acceptability"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0107": {
+   "name": "evaluating semantic equivalence",
+   "definition": "Assessing whether two texts, such as a source and a translation, convey the same meaning without semantic divergence.",
+   "include": [
+    "Comparing source and target for semantic divergence",
+    "evaluating translation accuracy"
+   ],
+   "exclude": [
+    "Detecting semantic anomalies"
+   ],
+   "exemplars": [
+    "comparing source and target for semantic divergence",
+    "categorizing translation deviation into typology classes"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0108": {
+   "name": "detecting terminology misuse",
+   "definition": "Identifying instances where domain-specific terminology or jargon is used incorrectly or inconsistently.",
+   "include": [
+    "Terminology mismatch detection"
+   ],
+   "exclude": [
+    "Recalling domain terminology"
+   ],
+   "exemplars": [
+    "terminology mismatch detection"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0109": {
+   "name": "predicting chemical reaction products",
+   "definition": "Determining the chemical products formed from specific reactants, reagents, and reaction conditions.",
+   "include": [
+    "Predicting oxidation products",
+    "determining regiochemistry",
+    "constructing alkenes"
+   ],
+   "exclude": [
+    "Deducing spatial configurations of molecules"
+   ],
+   "exemplars": [
+    "identifying oxidation products using pyridinium chlorochromate",
+    "executing corey chaykovsky reaction for epoxide formation",
+    "hydrogenating alkenes catalytic palladium",
+    "regioselectivity identification"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0110": {
+   "name": "predicting chemical reaction products",
+   "definition": "Determining the chemical products formed from specific reactants, reagents, and reaction conditions.",
+   "include": [
+    "Predicting oxidation products",
+    "determining regiochemistry",
+    "constructing alkenes"
+   ],
+   "exclude": [
+    "Deducing spatial configurations of molecules"
+   ],
+   "exemplars": [
+    "determining regiochemistry of alkylation reactions"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0111": {
+   "name": "interpreting chemical spectra",
+   "definition": "Analyzing data from mass spectrometry, NMR, or IR spectroscopy to deduce molecular structures or properties.",
+   "include": [
+    "Interpreting mass spectrometry data",
+    "analyzing NMR spectra"
+   ],
+   "exclude": [
+    "Deducing spatial configurations of molecules"
+   ],
+   "exemplars": [
+    "interpreting mass spectrometry data",
+    "predicting proton nmr splitting patterns for aromatic regioisomers",
+    "deducing molecular symmetry from spectral equivalence of protons",
+    "identifying impossible spectral data via isomer matching",
+    "interpreting infrared spectroscopy stretching frequencies",
+    "analyzing proton nmr splitting patterns"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0112": {
+   "name": "evaluating experimental evidence",
+   "definition": "Assessing experimental data, observations, or results to draw conclusions or validate hypotheses.",
+   "include": [
+    "Evaluating experimental evidence",
+    "analyzing empirical data"
+   ],
+   "exclude": [
+    "Identifying causal relationships"
+   ],
+   "exemplars": [
+    "evaluating experimental evidence",
+    "evaluating mechanistic evidence",
+    "evidence synthesis",
+    "evaluation of epigenetic markers of chromatin accessibility"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0113": {
+   "name": "predicting chemical reaction products",
+   "definition": "Determining the chemical products formed from specific reactants, reagents, and reaction conditions.",
+   "include": [
+    "Predicting oxidation products",
+    "determining regiochemistry",
+    "constructing alkenes"
+   ],
+   "exclude": [
+    "Deducing spatial configurations of molecules"
+   ],
+   "exemplars": [
+    "constructing alkenes wittig olefination"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0114": {
+   "name": "analyzing interpersonal dynamics",
+   "definition": "Evaluating the social interactions, relationships, and power dynamics between individuals in a narrative.",
+   "include": [
+    "Filtering interpersonal dynamics",
+    "assessing character relationships"
+   ],
+   "exclude": [
+    "Inferring implicit traits from narrative"
+   ],
+   "exemplars": [
+    "filtering interpersonal dynamics"
+   ],
+   "created_batch": 4,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0115": {
+   "name": "deducing entity identity from logical constraints",
+   "definition": "Identifying specific entities or their attributes by satisfying a set of logical constraints, such as alibis, motives, or relational clues.",
+   "include": [
+    "Integrating alibis and motives",
+    "Solving logic grid puzzles"
+   ],
+   "exclude": [
+    "Deducing entity identity from spatial constraints"
+   ],
+   "exemplars": [
+    "integrating alibis and motives",
+    "perpetrator identification",
+    "evaluating suspect motives and opportunity constraints"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0116": {
+   "name": "identifying missing elements in sequences",
+   "definition": "Detecting and identifying gaps or missing elements within an ordered sequence or pattern.",
+   "include": [
+    "Gap identification in sequences",
+    "Finding missing terms"
+   ],
+   "exclude": [
+    "Detecting grammatical omissions"
+   ],
+   "exemplars": [
+    "gap identification"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0117": {
+   "name": "counting unique elements in a sequence",
+   "definition": "Enumerating the number of distinct or unique items, parameters, or elements within a sequence or set.",
+   "include": [
+    "Counting distinct sequence parameters",
+    "Finding number of unique items"
+   ],
+   "exclude": [
+    "Counting total entities in text"
+   ],
+   "exemplars": [
+    "counting distinct sequence parameters"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0118": {
+   "name": "applying trigonometric identities",
+   "definition": "Using trigonometric identities and properties to simplify expressions or derive values.",
+   "include": [
+    "Cosine derivation via complementary angles",
+    "Applying Pythagorean identities"
+   ],
+   "exclude": [
+    "Applying geometric theorems"
+   ],
+   "exemplars": [
+    "cosine derivation via complementary angles"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0119": {
+   "name": "converting coordinate systems",
+   "definition": "Transforming coordinates from one system to another, such as between Cartesian, polar, or spherical systems.",
+   "include": [
+    "Converting Cartesian coordinates to polar",
+    "Spherical coordinate transformations"
+   ],
+   "exclude": [
+    "Mapping relative positions to absolute coordinates"
+   ],
+   "exemplars": [
+    "converting cartesian coordinates"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0120": {
+   "name": "evaluating integer divisibility",
+   "definition": "Determining whether one integer is divisible by another without a remainder based on divisibility rules or modular arithmetic.",
+   "include": [
+    "Testing divisibility",
+    "Applying divisibility rules"
+   ],
+   "exclude": [
+    "Identifying integer divisors"
+   ],
+   "exemplars": [
+    "testing divisibility",
+    "applying divisibility rule nine"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0121": {
+   "name": "translating natural language to formal logic",
+   "definition": "Converting natural language statements or arguments into formal logical notation, such as predicate or propositional logic.",
+   "include": [
+    "Translation of natural language into formal predicate logic",
+    "Formalizing syllogisms"
+   ],
+   "exclude": [
+    "Translating text to mathematical expressions"
+   ],
+   "exemplars": [
+    "translation of natural language into formal predicate logic",
+    "translating conditional propositions"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0122": {
+   "name": "analyzing morphological wordplay",
+   "definition": "Identifying and interpreting morphological alterations, phonetic insertions, or wordplay in text.",
+   "include": [
+    "Recognizing phonetic morpheme insertion in name parodies",
+    "Analyzing puns"
+   ],
+   "exclude": [
+    "Identifying orthographic variations"
+   ],
+   "exemplars": [
+    "recognizing phonetic morpheme insertion in name parodies",
+    "comparing string edit distance for humorous variants",
+    "phonetic substitution identification"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0123": {
+   "name": "interpreting astronomical spectra",
+   "definition": "Analyzing spectral lines and astronomical data to deduce properties of celestial objects.",
+   "include": [
+    "Evaluating surface gravity sensitivity in spectral lines",
+    "Analyzing stellar spectra"
+   ],
+   "exclude": [
+    "Interpreting chemical spectra"
+   ],
+   "exemplars": [
+    "evaluating surface gravity sensitivity in spectral lines",
+    "interpreting ionization equilibria for abundance analysis"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0124": {
+   "name": "summarizing narrative content",
+   "definition": "Condensing a narrative or text into a shorter summary that captures the main points or plot.",
+   "include": [
+    "Narrative content summarization",
+    "Generating plot summaries"
+   ],
+   "exclude": [
+    "Extracting entities and attributes from text"
+   ],
+   "exemplars": [
+    "narrative content summarization"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0125": {
+   "name": "expanding semantic meaning",
+   "definition": "Elaborating on or expanding the semantic meaning, implications, or context of a given text or concept.",
+   "include": [
+    "Semantic meaning expansion",
+    "Elaborating on concepts"
+   ],
+   "exclude": [
+    "Evaluating semantic equivalence"
+   ],
+   "exemplars": [
+    "semantic meaning expansion"
+   ],
+   "created_batch": 5,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0126": {
+   "name": "parsing sequential dependencies",
+   "definition": "Analyzing chains of dependencies or sequential links between elements.",
+   "include": [
+    "Chain parsing",
+    "Tracing truth values through directed dependency chains"
+   ],
+   "exclude": [
+    "Tracking state across sequential events"
+   ],
+   "exemplars": [
+    "evaluating truth chains"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0127": {
+   "name": "tracking state across sequential events",
+   "definition": "Tracking the changing states, positions, or attributes of entities through a sequence of events or transactions.",
+   "include": [
+    "Tracking object positions",
+    "Resolving final assignments from history",
+    "Maintaining state across iterative transactions"
+   ],
+   "exclude": [
+    "Tracking state across concurrent events"
+   ],
+   "exemplars": [
+    "resolving item custody"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0128": {
+   "name": "extracting geometric properties from diagrams",
+   "definition": "Identifying and extracting geometric relations, angles, or lengths from visual diagrams or image representations.",
+   "include": [
+    "Extracting angles from diagrams",
+    "Parsing geometric figures"
+   ],
+   "exclude": [
+    "Applying geometric theorems"
+   ],
+   "exemplars": [
+    "angle relation extraction from diagrams"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0129": {
+   "name": "applying gcd and lcm properties",
+   "definition": "Using the mathematical relationships between greatest common divisors and least common multiples to solve problems.",
+   "include": [
+    "Applying GCD-LCM product property",
+    "Solving equations with LCM and GCD"
+   ],
+   "exclude": [
+    "Calculating greatest common divisors"
+   ],
+   "exemplars": [
+    "applying gcd lcm product property"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0130": {
+   "name": "applying matrix trace properties",
+   "definition": "Using the properties of the trace of a matrix to evaluate expressions or solve linear algebra problems.",
+   "include": [
+    "Relating trace to eigenvalues",
+    "Evaluating matrix trace"
+   ],
+   "exclude": [
+    "Calculating matrix eigenvalues"
+   ],
+   "exemplars": [
+    "matrix trace relation"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0131": {
+   "name": "grounding temporal expressions",
+   "definition": "Resolving relative or ambiguous temporal phrases into absolute dates, times, or temporal anchors.",
+   "include": [
+    "Resolving temporal anchors",
+    "Grounding relative dates"
+   ],
+   "exclude": [
+    "Calculating temporal offsets"
+   ],
+   "exemplars": [
+    "resolving temporal anchors from ambiguous phrases",
+    "calculating absolute date from relative temporal anchors"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0132": {
+   "name": "applying transitive relations",
+   "definition": "Using the property of transitivity to deduce relationships between elements in a chain or sequence.",
+   "include": [
+    "Applying transitive relations in logic",
+    "Deducing transitive inequalities"
+   ],
+   "exclude": [
+    "Parsing sequential dependencies"
+   ],
+   "exemplars": [
+    "application of transitive relations in chain arguments"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0133": {
+   "name": "categorizing geometric shapes",
+   "definition": "Identifying and classifying geometric figures based on their properties, sides, or angles.",
+   "include": [
+    "Identifying polygons",
+    "Classifying triangles"
+   ],
+   "exclude": [
+    "Calculating geometric properties of shapes"
+   ],
+   "exemplars": [
+    "geometric shape identifier",
+    "identifying geometric shape from vertex connectivity"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0134": {
+   "name": "recalling factual knowledge",
+   "definition": "Retrieving specific factual knowledge, mechanisms, or distributions from memory.",
+   "include": [
+    "Recalling biological mechanisms",
+    "Retrieving cultural metadata"
+   ],
+   "exclude": [
+    "Calculating quantities using domain formulas"
+   ],
+   "exemplars": [
+    "retrieving cross domain metadata from cultural knowledge bases",
+    "retrieving factual statements"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0135": {
+   "name": "extracting entities and attributes from text",
+   "definition": "Identifying and extracting specific entities, attributes, or pairs of information from unstructured text.",
+   "include": [
+    "Extracting listed entities",
+    "Extracting attribute pairs",
+    "Parsing items from text"
+   ],
+   "exclude": [
+    "Extracting coordinates from structured data"
+   ],
+   "exemplars": [
+    "parsing items"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0136": {
+   "name": "evaluating string equality",
+   "definition": "Determining whether two strings are identical or match under specific comparison rules.",
+   "include": [
+    "Comparing strings for equality",
+    "Matching exact strings"
+   ],
+   "exclude": [
+    "Identifying orthographic variations"
+   ],
+   "exemplars": [
+    "string comparison"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0137": {
+   "name": "extracting entities and attributes from text",
+   "definition": "Identifying and extracting specific entities, attributes, or pairs of information from unstructured text.",
+   "include": [
+    "Extracting listed entities",
+    "Extracting attribute pairs",
+    "Retrieving player positions"
+   ],
+   "exclude": [
+    "Extracting coordinates from structured data"
+   ],
+   "exemplars": [
+    "evaluating athlete position"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 0,
+   "stable": false
+  },
+  "c_0138": {
+   "name": "analyzing graph connectivity",
+   "definition": "Evaluating the connections, paths, or interdependent relationships between nodes in a graph structure.",
+   "include": [
+    "Resolving entity relationships in graphs",
+    "Finding paths in networks"
+   ],
+   "exclude": [
+    "Identifying relational patterns"
+   ],
+   "exemplars": [
+    "resolving interdependent entity relationships in graphs",
+    "evaluating geometric closure in path networks"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0139": {
+   "name": "parsing chemical formulas",
+   "definition": "Extracting the number and types of atoms from a chemical formula or molecular representation.",
+   "include": [
+    "Counting atoms in molecules",
+    "Parsing molecular formulas"
+   ],
+   "exclude": [
+    "Counting entities in text"
+   ],
+   "exemplars": [
+    "counting carbon atoms in organic molecules",
+    "identifying elemental constituents in chemical formulae"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0140": {
+   "name": "evaluating chemical properties",
+   "definition": "Assessing the chemical properties, reactivity, or electronic effects of molecules or functional groups.",
+   "include": [
+    "Evaluating electron donation",
+    "Assessing inductive effects"
+   ],
+   "exclude": [
+    "Predicting chemical reaction products"
+   ],
+   "exemplars": [
+    "evaluating electron donation",
+    "analyzing electron withdrawal",
+    "ordering carbocation stability",
+    "applying huckel theory"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0141": {
+   "name": "enforcing content constraints",
+   "definition": "Ensuring that generated text adheres to specific thematic, topical, or semantic requirements.",
+   "include": [
+    "Incorporating thematic constraints",
+    "Enforcing topic relevance"
+   ],
+   "exclude": [
+    "Enforcing string constraints"
+   ],
+   "exemplars": [
+    "incorporating thematic constraints"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0142": {
+   "name": "inferring character motives",
+   "definition": "Deducing the underlying reasons, intentions, or motivations behind a character's actions in a narrative.",
+   "include": [
+    "Evaluating character motives",
+    "Inferring intentions"
+   ],
+   "exclude": [
+    "Analyzing interpersonal dynamics"
+   ],
+   "exemplars": [
+    "motive evaluation",
+    "differentiating intended outcomes",
+    "disentangling agent intent from side effects"
+   ],
+   "created_batch": 6,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0143": {
+   "name": "tracking dynamic state bindings",
+   "definition": "Tracking and updating the associations or states of entities dynamically in working memory over a sequence of operations.",
+   "include": [
+    "Maintaining dynamic state bindings in working memory",
+    "Tracking entity state mappings"
+   ],
+   "exclude": [
+    "Resolving epistemic states of agents"
+   ],
+   "exemplars": [
+    "maintaining dynamic state bindings in working memory",
+    "maintaining state matrix",
+    "state inference"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0144": {
+   "name": "simplifying rational expressions",
+   "definition": "Simplifying algebraic fractions by factoring and canceling common terms.",
+   "include": [
+    "Manipulating rational expressions to simplify fractions",
+    "Canceling common algebraic factors"
+   ],
+   "exclude": [
+    "Simplifying algebraic expressions via substitution"
+   ],
+   "exemplars": [
+    "manipulating rational expressions to simplify fractions"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0145": {
+   "name": "composing mathematical transformations",
+   "definition": "Combining multiple mathematical or geometric transformations by substituting one into another.",
+   "include": [
+    "Substituting transformations",
+    "Composing functions"
+   ],
+   "exclude": [
+    "Applying geometric transformations to points"
+   ],
+   "exemplars": [
+    "substituting transformations"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0146": {
+   "name": "applying boundary conditions",
+   "definition": "Using boundary or initial conditions to determine specific solutions to differential equations or physical systems.",
+   "include": [
+    "Boundary condition application",
+    "Solving initial value problems"
+   ],
+   "exclude": [
+    "Calculating quantities using domain formulas"
+   ],
+   "exemplars": [
+    "boundary condition application"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0147": {
+   "name": "solving divisibility constraints",
+   "definition": "Finding integer values that satisfy a set of divisibility or modular arithmetic conditions.",
+   "include": [
+    "Solving divisibility constraints",
+    "Finding integers satisfying modular conditions"
+   ],
+   "exclude": [
+    "Evaluating integer divisibility"
+   ],
+   "exemplars": [
+    "solving divisibility constraints"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0148": {
+   "name": "finding maximum or minimum values",
+   "definition": "Determining the highest or lowest possible value of a function, sequence, or set of numbers.",
+   "include": [
+    "Finding maximum value",
+    "Optimizing mathematical functions"
+   ],
+   "exclude": [
+    "Evaluating mathematical functions"
+   ],
+   "exemplars": [
+    "finding maximum value"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0149": {
+   "name": "evaluating lexical similarity",
+   "definition": "Assessing the string or phonetic similarity between words, phrases, or lexical options.",
+   "include": [
+    "Comparing lexical similarity across multiple options",
+    "Evaluating string distance"
+   ],
+   "exclude": [
+    "Identifying orthographic variations"
+   ],
+   "exemplars": [
+    "comparing lexical similarity across multiple options",
+    "phonetic evaluation"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0150": {
+   "name": "parsing syntactic structures",
+   "definition": "Analyzing the grammatical structure and syntactic relationships within a sentence or phrase.",
+   "include": [
+    "Syntactic correspondence parsing",
+    "Analyzing sentence syntax"
+   ],
+   "exclude": [
+    "Evaluating grammatical well-formedness"
+   ],
+   "exemplars": [
+    "syntactic correspondence parsing"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0151": {
+   "name": "sequencing chronological events",
+   "definition": "Ordering a set of events or historical occurrences into their correct chronological sequence.",
+   "include": [
+    "Chronological events sequencing",
+    "Ordering historical events"
+   ],
+   "exclude": [
+    "Tracking state across sequential events"
+   ],
+   "exemplars": [
+    "chronological events sequencing",
+    "extraction of temporal ordering from narrative clues"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0152": {
+   "name": "enumerating chemical isomers",
+   "definition": "Determining and counting the possible structural or stereoisomers for a given chemical formula.",
+   "include": [
+    "Enumerating constitutional isomers",
+    "Counting stereoisomers"
+   ],
+   "exclude": [
+    "Deducing spatial configurations of molecules"
+   ],
+   "exemplars": [
+    "enumerating constitutional isomers",
+    "stereoisomer count of organic molecules"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0153": {
+   "name": "parsing chemical nomenclature",
+   "definition": "Interpreting systematic chemical names to determine molecular structure or formula.",
+   "include": [
+    "Parsing nomenclature",
+    "Decoding IUPAC names"
+   ],
+   "exclude": [
+    "Parsing chemical formulas"
+   ],
+   "exemplars": [
+    "parsing nomenclature"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0154": {
+   "name": "evaluating chromatographic separation",
+   "definition": "Assessing the separation of compounds, such as enantiomers, using chromatographic techniques.",
+   "include": [
+    "Chromatographic resolution of chiral compounds",
+    "Evaluating retention times"
+   ],
+   "exclude": [
+    "Interpreting chemical spectra"
+   ],
+   "exemplars": [
+    "chromatographic resolution of chiral compounds"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0155": {
+   "name": "evaluating nucleic acid strand polarity",
+   "definition": "Determining or validating the directionality and polarity of DNA or RNA strands.",
+   "include": [
+    "Validation strand polarity",
+    "Determining 5' to 3' directionality"
+   ],
+   "exclude": [
+    "Recalling factual knowledge"
+   ],
+   "exemplars": [
+    "validation strand polarity"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0156": {
+   "name": "generating educational assessments",
+   "definition": "Creating quiz questions, tests, or educational assessment materials based on provided content.",
+   "include": [
+    "Generating quiz content",
+    "Creating multiple-choice questions"
+   ],
+   "exclude": [
+    "Generating structured text"
+   ],
+   "exemplars": [
+    "generating quiz content"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0157": {
+   "name": "evaluating constraint satisfiability",
+   "definition": "Determining whether a given set of logical, spatial, or mathematical constraints can be simultaneously satisfied without contradiction.",
+   "include": [
+    "Evaluating constraint consistency",
+    "Checking satisfiability of conditions"
+   ],
+   "exclude": [
+    "Filtering candidate options based on constraints"
+   ],
+   "exemplars": [
+    "evaluating constraint consistency",
+    "process feasibility analysis"
+   ],
+   "created_batch": 7,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0158": {
+   "name": "tracking spatial coordinates across movements",
+   "definition": "Tracking the changing spatial coordinates or positions of an entity through a sequence of movements or transformations.",
+   "include": [
+    "Tracking coordinates through sequential movements",
+    "Updating spatial positions"
+   ],
+   "exclude": [
+    "Extracting coordinates from structured data"
+   ],
+   "exemplars": [
+    "tracking spatial coordinates",
+    "maintaining reference frame"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0159": {
+   "name": "evaluating moral culpability",
+   "definition": "Assessing the moral responsibility, ethics, or culpability of an individual's actions within a given scenario.",
+   "include": [
+    "Evaluating moral absurdity",
+    "Assessing ethical responsibility"
+   ],
+   "exclude": [
+    "Evaluating deductive validity"
+   ],
+   "exemplars": [
+    "evaluating moral culpability"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0160": {
+   "name": "determining mathematical function properties",
+   "definition": "Identifying key characteristics of mathematical functions, such as domain, range, parity, or asymptotes.",
+   "include": [
+    "Finding function domain and range",
+    "Determining function parity"
+   ],
+   "exclude": [
+    "Evaluating mathematical functions",
+    "Finding maximum or minimum values"
+   ],
+   "exemplars": [
+    "determining function properties"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0161": {
+   "name": "converting number bases",
+   "definition": "Converting numerical values from one base representation to another, such as binary to decimal.",
+   "include": [
+    "Base conversion",
+    "Translating between binary, octal, decimal, and hex"
+   ],
+   "exclude": [
+    "Converting coordinate systems"
+   ],
+   "exemplars": [
+    "conversion of base number representations"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0162": {
+   "name": "calculating percentages and ratios",
+   "definition": "Computing percentages, proportions, or ratios from given numerical quantities.",
+   "include": [
+    "Calculating percentages",
+    "Computing ratios from raw numbers"
+   ],
+   "exclude": [
+    "Calculating probabilities"
+   ],
+   "exemplars": [
+    "computation of percentages from ratios"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0163": {
+   "name": "multiplying matrices and vectors",
+   "definition": "Performing matrix multiplication or multiplying a matrix by a vector to compute a resulting matrix or vector.",
+   "include": [
+    "Matrix-vector multiplication",
+    "Matrix multiplication"
+   ],
+   "exclude": [
+    "Applying geometric transformations"
+   ],
+   "exemplars": [
+    "matrix vector multiplication"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0164": {
+   "name": "evaluating factual accuracy",
+   "definition": "Assessing whether a statement or claim is true by comparing it against empirical reality or established facts.",
+   "include": [
+    "Fact-checking",
+    "Evaluating truth value against empirical reality"
+   ],
+   "exclude": [
+    "Evaluating deductive validity",
+    "Evaluating experimental evidence"
+   ],
+   "exemplars": [
+    "evaluating truth value against empirical reality",
+    "evaluating truth values"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0165": {
+   "name": "analyzing sports statistics and play styles",
+   "definition": "Evaluating and interpreting the career statistics, performance metrics, or play styles of athletes.",
+   "include": [
+    "Evaluating athlete career statistics",
+    "Analyzing play styles"
+   ],
+   "exclude": [
+    "Recalling domain terminology"
+   ],
+   "exemplars": [
+    "athlete career statistics and play styles"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0166": {
+   "name": "resolving permutation chains",
+   "definition": "Determining the final arrangement or state of elements after a sequence of permutations or swaps.",
+   "include": [
+    "Resolving multistep permutation chains",
+    "Tracking element positions through swaps"
+   ],
+   "exclude": [
+    "Parsing sequential dependencies"
+   ],
+   "exemplars": [
+    "resolving multistep permutation chains logically",
+    "tracking state transitions through swaps"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0167": {
+   "name": "evaluating nested logical implications",
+   "definition": "Assessing the truth value or logical consequences of complex, nested conditional statements.",
+   "include": [
+    "Evaluating logical implications across nested statements",
+    "Resolving nested conditionals"
+   ],
+   "exclude": [
+    "Evaluating compound boolean expressions"
+   ],
+   "exemplars": [
+    "logical implications across nested statements"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0168": {
+   "name": "calculating isotopic abundance",
+   "definition": "Determining the relative abundance or average atomic mass of isotopes in a chemical substance.",
+   "include": [
+    "Analyzing isotopic abundance",
+    "Calculating average atomic mass from isotopes"
+   ],
+   "exclude": [
+    "Interpreting chemical spectra"
+   ],
+   "exemplars": [
+    "analyzing isotopic abundance in chemical substances"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0169": {
+   "name": "counting graph nodes",
+   "definition": "Enumerating the number of nodes or vertices in a graph or network structure.",
+   "include": [
+    "Calculating node count",
+    "Counting vertices in a graph"
+   ],
+   "exclude": [
+    "Analyzing graph connectivity"
+   ],
+   "exemplars": [
+    "calculating node count"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0170": {
+   "name": "evaluating catalytic mechanisms",
+   "definition": "Analyzing the steps, intermediates, and kinetics of chemical reaction mechanisms involving catalysts.",
+   "include": [
+    "Catalyst mechanism evaluation",
+    "Analyzing catalytic cycles"
+   ],
+   "exclude": [
+    "Predicting chemical reaction products"
+   ],
+   "exemplars": [
+    "catalyst mechanism evaluation"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0171": {
+   "name": "enforcing vocabulary frequency constraints",
+   "definition": "Ensuring that specific words or vocabulary terms appear a required number of times within a generated text.",
+   "include": [
+    "Target vocabulary frequency satisfaction",
+    "Enforcing word count constraints for specific terms"
+   ],
+   "exclude": [
+    "Enforcing string constraints"
+   ],
+   "exemplars": [
+    "target vocabulary frequency satisfaction"
+   ],
+   "created_batch": 8,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0172": {
+   "name": "solving functional equations",
+   "definition": "Determining the algebraic form of a function that satisfies a given equation involving the function.",
+   "include": [
+    "Solving for f(x) in functional equations"
+   ],
+   "exclude": [
+    "Evaluating mathematical functions"
+   ],
+   "exemplars": [
+    "solving functional equations"
+   ],
+   "created_batch": 9,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0173": {
+   "name": "intersecting numerical intervals",
+   "definition": "Determining the common overlapping range or set of values that satisfy multiple numerical interval constraints.",
+   "include": [
+    "Finding intersection of inequalities",
+    "resolving overlapping numerical ranges"
+   ],
+   "exclude": [
+    "Resolving scheduling constraints"
+   ],
+   "exemplars": [
+    "intersection of multiple integer intervals"
+   ],
+   "created_batch": 9,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0174": {
+   "name": "solving systems of linear equations",
+   "definition": "Determining the values of multiple variables that simultaneously satisfy a set of linear equations.",
+   "include": [
+    "Solving simultaneous linear equations",
+    "finding intersection of lines"
+   ],
+   "exclude": [
+    "Calculating linear equations from points"
+   ],
+   "exemplars": [
+    "linear equation system solving"
+   ],
+   "created_batch": 9,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0175": {
+   "name": "calculating arithmetic differences",
+   "definition": "Computing the numerical difference or offset between two values.",
+   "include": [
+    "Calculating arithmetic offset",
+    "finding numerical difference"
+   ],
+   "exclude": [
+    "Calculating temporal offsets"
+   ],
+   "exemplars": [
+    "computing arithmetic offset"
+   ],
+   "created_batch": 9,
+   "unchanged_audits": 1,
+   "stable": false
+  },
+  "c_0176": {
+   "name": "adapting text register",
+   "definition": "Modifying the tone, style, or complexity of a text to suit a specific audience or context.",
+   "include": [
+    "Pedagogical audience adaptation",
+    "adjusting reading level"
+   ],
+   "exclude": [
+    "Enforcing content constraints"
+   ],
+   "exemplars": [
+    "pedagogical audience register adaptation"
+   ],
+   "created_batch": 9,
+   "unchanged_audits": 1,
+   "stable": false
+  }
+ },
+ "alias": {
+  "c_0039": "c_0038",
+  "c_0041": "c_0038",
+  "c_0067": "c_0038",
+  "c_0074": "c_0038",
+  "c_0075": "c_0038",
+  "c_0077": "c_0038",
+  "c_0134": "c_0038",
+  "c_0007": "c_0001",
+  "c_0035": "c_0001",
+  "c_0036": "c_0001",
+  "c_0051": "c_0001",
+  "c_0053": "c_0001",
+  "c_0127": "c_0001",
+  "c_0029": "c_0027",
+  "c_0033": "c_0027",
+  "c_0135": "c_0027",
+  "c_0137": "c_0027"
+ },
+ "assign": {
+  "tracking object positions": "c_0001",
+  "calculating displacement": "c_0002",
+  "resolving identity mapping": "c_0003",
+  "detecting semantic anomalies": "c_0004",
+  "resolving boolean disjunction": "c_0005",
+  "discriminating candidate options": "c_0006",
+  "resolving final assignment from history": "c_0007",
+  "resolving entity state changes under concurrent actions": "c_0008",
+  "quadratic equation parameters using root relations": "c_0009",
+  "determination of quadratic coefficient": "c_0010",
+  "slant height calculation": "c_0011",
+  "manipulating complex magnitudes via algebraic identity substitution": "c_0012",
+  "deriving parametric equations for conic sections": "c_0013",
+  "prime factorization of composite numbers to determine divisor counts": "c_0014",
+  "deriving triangle area": "c_0015",
+  "extracting normal vector from reflection matrix": "c_0016",
+  "resolving operator precedence in compound boolean expressions": "c_0017",
+  "chain parsing": "c_0018",
+  "calculating temporal offset": "c_0019",
+  "identifying redundant premises": "c_0020",
+  "parsing vector graphics coordinates": "c_0021",
+  "distinguish sequences": "c_0022",
+  "evaluating option truth against derived state": "c_0023",
+  "resolving linear ordering under inequality constraints": "c_0024",
+  "mapping multi dimensional similarity in media catalogs": "c_0025",
+  "resolving directional reversal": "c_0026",
+  "extracting listed entities from text": "c_0027",
+  "updating tabular data via insertion and deletion": "c_0028",
+  "extracting attribute pairs": "c_0029",
+  "orthographic variation identification": "c_0030",
+  "classifying semantic deviation types": "c_0031",
+  "detecting irony via hyperbole": "c_0032",
+  "retrieving player positions": "c_0033",
+  "intersecting activity schedules with boundary constraints": "c_0034",
+  "maintaining state across iterative transactions": "c_0035",
+  "tracking binary state transitions through sequential dependency graphs": "c_0036",
+  "mapping relationships in patterns": "c_0037",
+  "mechanism of antisense oligonucleotide splice switching": "c_0038",
+  "mechanisms of enamine alkylation": "c_0039",
+  "calculating buffer ph": "c_0040",
+  "identifying hormone distribution": "c_0041",
+  "calculating luminosity scaling": "c_0042",
+  "calculating gravitational potential energy for uniform spheres": "c_0043",
+  "deducing stereochemical inversion at centers": "c_0044",
+  "exact phrase inclusion": "c_0045",
+  "expressing wealth indirectly via lifestyle narrative": "c_0046",
+  "asterisk formatting": "c_0047",
+  "enforcing prefix constraint": "c_0048",
+  "resolving information access under agent observation constraints": "c_0049",
+  "personnel competencies from narrative": "c_0050",
+  "tracking object positions through spatial transformations": "c_0001",
+  "quantity extraction": "c_0027",
+  "resolving final entity attribute mapping": "c_0051",
+  "evaluating sports terminology": "c_0052",
+  "applying logical negation to truth values": "c_0005",
+  "identifying patterns": "c_0037",
+  "resolving final entity attribute binding": "c_0053",
+  "spatial resolution": "c_0054",
+  "radical expressions with integer constraints": "c_0055",
+  "evaluation of quadratic function": "c_0056",
+  "surface area computation": "c_0011",
+  "applying triangle inequality to complex number sums": "c_0057",
+  "calculating slope and intercept of secant lines": "c_0058",
+  "identifying smallest integers satisfying combinatorial prime conditions": "c_0059",
+  "computing area ratio": "c_0011",
+  "simplifying integer vector greatest common divisor": "c_0060",
+  "computing boolean disjunction over evaluated subterms": "c_0005",
+  "causal direction identification": "c_0061",
+  "validating calendar date boundaries": "c_0034",
+  "evaluating contrapositive equivalence in categorical logic": "c_0062",
+  "decoding commands": "c_0063",
+  "synthesizing adjective hierarchy": "c_0064",
+  "mapping relative spatial positions to absolute indices": "c_0065",
+  "deducing element identity from absolute positional clues": "c_0066",
+  "recognizing canonical animated classics in film databases": "c_0067",
+  "calculating return condition": "c_0068",
+  "entity counting": "c_0069",
+  "evaluating numerical inequalities across dataset rows": "c_0070",
+  "tracking spatial sequences": "c_0001",
+  "substituting phonetic lexical humor": "c_0032",
+  "detecting omission of proper nouns": "c_0071",
+  "detecting polar inversion": "c_0026",
+  "matching action verbs to responsibilities": "c_0072",
+  "resolving scheduling conflicts": "c_0034",
+  "retrieving terminal value from state mapping": "c_0001",
+  "inverting truth attributions": "c_0073",
+  "evaluating mitochondrial assay biochemical specificity": "c_0074",
+  "biochemical structure of pre mrna splicing": "c_0038",
+  "products of imine hydrolysis": "c_0075",
+  "determining equivalence point ph": "c_0076",
+  "evaluating neurotransmitter function": "c_0038",
+  "propagating surface ratios": "c_0011",
+  "scaling analysis of hydrostatic equilibrium equations": "c_0040",
+  "mapping bicyclic systems to derivatives": "c_0077",
+  "structured section generation": "c_0078",
+  "sentence length restriction": "c_0045",
+  "enforcing format constraint": "c_0045",
+  "restricting output options": "c_0045",
+  "resolving spatial agency": "c_0079",
+  "evaluating proficiency": "c_0046",
+  "tracking object positions through sequential swaps": "c_0001",
+  "quantity aggregation": "c_0080",
+  "maintaining dynamic state bindings in memory": "c_0001",
+  "mapping athlete actions": "c_0072",
+  "simplifying nested logical negation": "c_0073",
+  "identifying cinematic similarities": "c_0025",
+  "resolving final query": "c_0001",
+  "resolving entity state transitions under temporal constraints": "c_0001",
+  "integer values from surd forms": "c_0055",
+  "computing quadratic roots": "c_0081",
+  "sum interior angles in convex polygons": "c_0011",
+  "factoring symmetric polynomial expressions in complex conjugates": "c_0082",
+  "applying coordinate reflection transformations to points": "c_0083",
+  "summing discrete numerical sequence terms": "c_0084",
+  "computing union probability": "c_0085",
+  "applying sine rule": "c_0011",
+  "precedence application": "c_0005",
+  "analyzing joint contribution": "c_0086",
+  "compute date offset": "c_0019",
+  "analyzing negation scope in disjunctive premises": "c_0005",
+  "parsing arc commands": "c_0063",
+  "detecting syntax violations": "c_0087",
+  "resolving transitive inequalities in linear sequences": "c_0024",
+  "ordering of objects by relative age constraints": "c_0024",
+  "evaluating film similarity": "c_0025",
+  "tracking net displacement across orthogonal spatial grid movements": "c_0002",
+  "counting discrete entities in natural language item enumeration": "c_0069",
+  "parsing structured tabular text into records": "c_0088",
+  "mapping directional relations": "c_0054",
+  "matching variant strings": "c_0030",
+  "mapping lexical units": "c_0003",
+  "evaluating moral absurdity": "c_0004",
+  "event plausibility evaluation": "c_0004",
+  "deducing event free time from schedule gaps": "c_0034",
+  "updating state variables in dynamic matching": "c_0001",
+  "resolving parity of negations": "c_0073",
+  "identifying fluorescent probe cellular targets": "c_0038",
+  "mrna transcript maturation and stability component": "c_0038",
+  "regioselectivity in enamine formation": "c_0038",
+  "accounting concentration changes": "c_0001",
+  "solving eigenvalue problem for isotropic quantum harmonic oscillator": "c_0040",
+  "calculating mass from velocity": "c_0040",
+  "predicting reaction products sharpless epoxidation": "c_0044",
+  "mechanisms resistance antimicrobial": "c_0038",
+  "sentiment classification": "c_0089",
+  "enforcing word count limits": "c_0045",
+  "maintaining language constraint": "c_0045",
+  "evaluating character membership": "c_0090",
+  "object locations tracking": "c_0001",
+  "analyzing dynamics": "c_0040",
+  "tracking object locations": "c_0001",
+  "categorizing objects": "c_0091",
+  "managing state variables": "c_0001",
+  "filtering activities": "c_0006",
+  "evaluating logical negation in boolean chains": "c_0005",
+  "mapping thematic patterns": "c_0037",
+  "updating state in memory": "c_0001",
+  "resolving entity states": "c_0001",
+  "relating terms to differences": "c_0022",
+  "determining radius": "c_0011",
+  "calculate angles subtended by inscribed circle tangents": "c_0011",
+  "expression optimization": "c_0012",
+  "evaluating functional equations using substitution": "c_0012",
+  "bezout identity application": "c_0055",
+  "counting favorable outcomes": "c_0085",
+  "leveraging geometric ratios": "c_0011",
+  "clause reduction": "c_0092",
+  "evaluating counterfactual necessity in probabilistic causation": "c_0061",
+  "convert date format": "c_0093",
+  "assessing deductive validity of formal arguments": "c_0094",
+  "interpreting geometry": "c_0011",
+  "evaluating syntactic rules": "c_0087",
+  "satisfying multiple constraints in combinatorial ordering": "c_0024",
+  "translation of textual comparisons into inequalities": "c_0095",
+  "mapping multi dimensional similarity in vector spaces": "c_0025",
+  "accumulating directional heading changes during grid navigation": "c_0001",
+  "parsing quantifiers and numerals in conjunctive lists": "c_0027",
+  "extracting numerical attributes from tabular text": "c_0088",
+  "mapping query target": "c_0003",
+  "substitutions in word play alterations": "c_0032",
+  "categorizing semantic deviations": "c_0004",
+  "contrasting literal truth": "c_0032",
+  "athlete association retrieval": "c_0067",
+  "ordering temporal intervals across sequential witness accounts": "c_0024",
+  "resolving final entity relationships from history": "c_0001",
+  "evaluating negation in recursive truth statements": "c_0073",
+  "analyzing cellular fractionation downstream assays": "c_0074",
+  "predicting reaction products via grignard addition": "c_0075",
+  "identifying acid catalysis in carbonyl condensation": "c_0075",
+  "applying time dilation formula": "c_0040",
+  "calculating degeneracy of energy levels": "c_0040",
+  "computing mass ratios": "c_0040",
+  "converting primary alcohols aldehydes pdc": "c_0075",
+  "protocols assay diffusion agar": "c_0074",
+  "terminal phrase enforcement": "c_0045",
+  "synthesizing role descriptions": "c_0072",
+  "markdown highlighting frequency enforcement": "c_0045",
+  "enforcing output formatting": "c_0045",
+  "resolving entity state transitions from narrative clues": "c_0001",
+  "mapping traits to requirements": "c_0006",
+  "tracking object locations across sequential room transfers": "c_0001",
+  "filtering records": "c_0096",
+  "resolving final state from history": "c_0001",
+  "constraint filtering": "c_0097",
+  "computing conjunction truth values": "c_0005",
+  "pattern extraction": "c_0037",
+  "resolving final entity state from trace": "c_0001",
+  "resolving spatial relational constraints": "c_0054",
+  "finding divisors of integers": "c_0098",
+  "expanding equation": "c_0099",
+  "utilize perpendicularity of radius to tangent lines": "c_0100",
+  "translating complex modulus equations": "c_0101",
+  "deriving polynomial forms from recurrence relations": "c_0102",
+  "integer congruence reduction": "c_0103",
+  "finding divisors": "c_0104",
+  "eigenvalue computation": "c_0105",
+  "simplifying conjunction operators in propositional logic": "c_0005",
+  "parsing conjunctive boolean conditions for success": "c_0005",
+  "calculating calendar additions": "c_0019",
+  "identifying logical necessity": "c_0094",
+  "svg path command parser": "c_0063",
+  "evaluate syntactic grammatical well formedness": "c_0106",
+  "deducing identity": "c_0003",
+  "deduction of absolute positions from partial orders": "c_0024",
+  "synthesizing thematic patterns across diverse media works": "c_0037",
+  "evaluating coordinate equality to determine closed loop return": "c_0068",
+  "categorizing objects by semantic taxonomies": "c_0091",
+  "computing arithmetic sum over numerical set": "c_0080",
+  "attribute values extraction": "c_0027",
+  "humor in linguistic parody variations": "c_0032",
+  "comparing source and target for semantic divergence": "c_0107",
+  "detection of ironic sentiment": "c_0032",
+  "terminology mismatch detection": "c_0108",
+  "filtering mutually exclusive options using temporal constraints": "c_0034",
+  "querying final state from temporal history": "c_0001",
+  "tracing truth values through directed dependency chains": "c_0018",
+  "solving quantum infinite potential well energy eigenvalues": "c_0076",
+  "identifying oxidation products using pyridinium chlorochromate": "c_0109",
+  "determining regiochemistry of alkylation reactions": "c_0110",
+  "calculating relativistic speed": "c_0040",
+  "interpreting mass spectrometry data": "c_0111",
+  "evaluating experimental evidence": "c_0112",
+  "constructing alkenes wittig olefination": "c_0113",
+  "applying saha ionization equation to stellar atmospheres": "c_0040",
+  "punctuation frequency counting": "c_0069",
+  "structuring table format": "c_0078",
+  "minimum word count constraint satisfaction": "c_0045",
+  "restricting output to exact predefined phrase choices": "c_0045",
+  "filtering distractor events": "c_0001",
+  "filtering interpersonal dynamics": "c_0114",
+  "integrating alibis and motives": "c_0115",
+  "filtering items": "c_0096",
+  "tracking state transitions": "c_0001",
+  "gap identification": "c_0116",
+  "distinguishing normative expectations": "c_0004",
+  "mapping multi attribute similarity": "c_0025",
+  "simulating swap operations": "c_0001",
+  "resolving spatial state updates from character actions": "c_0001",
+  "counting distinct sequence parameters": "c_0117",
+  "enumerating integer divisors of prime numbers": "c_0098",
+  "cosine derivation via complementary angles": "c_0118",
+  "converting cartesian coordinates": "c_0119",
+  "solving quadratic equations for integer solutions": "c_0055",
+  "finding smallest positive integers": "c_0059",
+  "testing divisibility": "c_0120",
+  "polynomial equation resolution": "c_0081",
+  "parsing operator precedence in compound propositions": "c_0005",
+  "counterfactual condition evaluation": "c_0061",
+  "calculating absolute dates from relative time offsets": "c_0019",
+  "translation of natural language into formal predicate logic": "c_0121",
+  "euclidean distance computer": "c_0002",
+  "evaluating syntactic ordering rules": "c_0106",
+  "resolving constraint satisfaction problems in linear orderings": "c_0024",
+  "translation of spatial relations into linear constraints": "c_0095",
+  "mapping vector similarities in latent semantic spaces": "c_0025",
+  "tracking position coordinates through orthogonal directional displacements": "c_0002",
+  "categorizing objects by types": "c_0091",
+  "filtering relevant entities by category label": "c_0096",
+  "target entity matching": "c_0003",
+  "recognizing phonetic morpheme insertion in name parodies": "c_0122",
+  "categorizing translation deviation into typology classes": "c_0107",
+  "resolution of pragmatic contradictions": "c_0004",
+  "athlete sport scoring action mapping": "c_0072",
+  "matching intervals": "c_0034",
+  "updating state variables in sequential processes": "c_0001",
+  "evaluating truth value chains in boolean parity networks": "c_0005",
+  "calculating total system energy for excited configurations": "c_0040",
+  "executing corey chaykovsky reaction for epoxide formation": "c_0109",
+  "calculating relativistic doppler shift": "c_0040",
+  "predicting proton nmr splitting patterns for aromatic regioisomers": "c_0111",
+  "evaluating mechanistic evidence": "c_0112",
+  "analyzing genetic cross ratios": "c_0085",
+  "hydrogenating alkenes catalytic palladium": "c_0109",
+  "evaluating surface gravity sensitivity in spectral lines": "c_0123",
+  "structured output sequencing": "c_0078",
+  "narrative content summarization": "c_0124",
+  "semantic meaning expansion": "c_0125",
+  "parsing single selection categorical response constraints": "c_0097",
+  "tracking object locations across spatial transfers": "c_0001",
+  "evaluating personality traits for task suitability": "c_0006",
+  "evaluating adjective ordering rules": "c_0064",
+  "attribute retrieval": "c_0027",
+  "evaluating truth chains": "c_0126",
+  "mapping intervals to gaps": "c_0034",
+  "modeling counterfactual outcomes": "c_0061",
+  "synthesizing film attributes": "c_0025",
+  "managing state transitions in swaps": "c_0001",
+  "resolving item custody": "c_0127",
+  "translating word problems into algebraic equations": "c_0095",
+  "solving linear systems for integer coordinates": "c_0055",
+  "angle relation extraction from diagrams": "c_0128",
+  "manipulating series": "c_0084",
+  "variable substitution in functional equations": "c_0012",
+  "applying gcd lcm product property": "c_0129",
+  "extraction of tabular numerical data": "c_0088",
+  "matrix trace relation": "c_0130",
+  "simplifying negated boolean values": "c_0073",
+  "commonsense causality interpretation": "c_0061",
+  "resolving temporal anchors from ambiguous phrases": "c_0131",
+  "application of transitive relations in chain arguments": "c_0132",
+  "geometric shape identifier": "c_0133",
+  "identify sequence": "c_0022",
+  "mapping ordinal rankings to linear price positions": "c_0024",
+  "deduction of relative positions from inequality clues": "c_0024",
+  "retrieving cross domain metadata from cultural knowledge bases": "c_0134",
+  "evaluating spatial closure in two dimensional path traversal": "c_0002",
+  "parsing items": "c_0135",
+  "calculating cumulative sum of extracted values": "c_0080",
+  "matching entities to attributes": "c_0027",
+  "comparing string edit distance for humorous variants": "c_0122",
+  "string comparison": "c_0136",
+  "differentiating semantic polarity": "c_0089",
+  "evaluating athlete position": "c_0137",
+  "temporal intervals mapping": "c_0034",
+  "resolving interdependent entity relationships in graphs": "c_0138",
+  "resolving nested negation in propositional logic statements": "c_0073",
+  "accounting for chiral centers": "c_0044",
+  "counting carbon atoms in organic molecules": "c_0139",
+  "deriving visible surface fraction": "c_0011",
+  "deducing molecular symmetry from spectral equivalence of protons": "c_0111",
+  "stereochemical outcome of carbonyl reduction": "c_0044",
+  "retrieval genomic coordinates": "c_0021",
+  "evaluating electron donation": "c_0140",
+  "interpreting ionization equilibria for abundance analysis": "c_0123",
+  "enforcing character constraint": "c_0045",
+  "formatting syntax": "c_0047",
+  "incorporating thematic constraints": "c_0141",
+  "motive evaluation": "c_0142",
+  "resolving entity state from action sequences": "c_0001",
+  "extracting past experience from text": "c_0027",
+  "tracking positions": "c_0001",
+  "filtering objects": "c_0096",
+  "evaluating boolean truth values in nested statements": "c_0005",
+  "deducing event timing from exclusion constraints": "c_0034",
+  "evaluating causal conditions": "c_0061",
+  "mapping thematic similarities across cinematic catalogues": "c_0025",
+  "maintaining dynamic state bindings in working memory": "c_0143",
+  "belief state resolution": "c_0049",
+  "manipulating rational expressions to simplify fractions": "c_0144",
+  "relation coefficients roots vieta": "c_0009",
+  "angle bisector parallel lines": "c_0100",
+  "substituting transformations": "c_0145",
+  "boundary condition application": "c_0146",
+  "solving divisibility constraints": "c_0147",
+  "calculation of missing values via addition": "c_0080",
+  "matrix reflection determination": "c_0016",
+  "reducing conjunctive and disjunctive clauses": "c_0092",
+  "differentiating intended outcomes": "c_0142",
+  "formatting calendar dates to standard numeric schema": "c_0093",
+  "evaluation of deductive validity of syllogistic inferences": "c_0094",
+  "decoding svg path commands into cartesian coordinates": "c_0063",
+  "evaluating adjective ordering rules in noun phrases": "c_0064",
+  "resolving partial order inequalities under constraints": "c_0024",
+  "verification of candidate options against derived sequence": "c_0006",
+  "synthesis of thematic elements across diverse film catalogs": "c_0025",
+  "tracking spatial coordinates through heading transformations": "c_0083",
+  "counting discrete objects": "c_0069",
+  "finding maximum value": "c_0148",
+  "retrieving factual statements": "c_0134",
+  "comparing lexical similarity across multiple options": "c_0149",
+  "syntactic correspondence parsing": "c_0150",
+  "detecting irony via world knowledge violation": "c_0032",
+  "cross referencing player team": "c_0003",
+  "chronological events sequencing": "c_0151",
+  "maintaining entity state mappings in working memory": "c_0001",
+  "boolean negation in recursive truth assignments": "c_0073",
+  "enumerating constitutional isomers": "c_0152",
+  "parsing nomenclature": "c_0153",
+  "identifying elemental constituents in chemical formulae": "c_0139",
+  "identifying impossible spectral data via isomer matching": "c_0111",
+  "chromatographic resolution of chiral compounds": "c_0154",
+  "validation strand polarity": "c_0155",
+  "analyzing electron withdrawal": "c_0140",
+  "calculating radioactive decay with parallel decay constants": "c_0040",
+  "generating quiz content": "c_0156",
+  "lexical exclusion constraints enforcement": "c_0045",
+  "symbol enforcement": "c_0045",
+  "evidence synthesis": "c_0112",
+  "integrating temporal events": "c_0001",
+  "evaluating constraint consistency": "c_0157",
+  "tracking spatial coordinates": "c_0158",
+  "phonetic substitution identification": "c_0122",
+  "evaluating boolean chains": "c_0005",
+  "identifying unoccupied time slots": "c_0034",
+  "evaluating moral culpability": "c_0159",
+  "identifying membership": "c_0090",
+  "maintaining entity state associations across transitions": "c_0001",
+  "resolving visibility constraints": "c_0054",
+  "solving quadratic equations using the quadratic formula": "c_0081",
+  "analysis sums primes inequality": "c_0057",
+  "trapezoid area decomposition": "c_0011",
+  "expanding squares": "c_0099",
+  "determining function properties": "c_0160",
+  "conversion of base number representations": "c_0161",
+  "computation of percentages from ratios": "c_0162",
+  "matrix vector multiplication": "c_0163",
+  "resolving truth value of disjunction operator": "c_0005",
+  "parsing causal relationships": "c_0061",
+  "calculating absolute date from relative temporal anchors": "c_0131",
+  "translating conditional propositions": "c_0121",
+  "identifying geometric shape from vertex connectivity": "c_0133",
+  "distinguishing syntactic acceptability of modifier sequences": "c_0106",
+  "deducing target entity from deduced position": "c_0066",
+  "deducing missing element position from elimination": "c_0024",
+  "evaluation of inter item similarity against multiple references": "c_0025",
+  "evaluating geometric closure in path networks": "c_0138",
+  "extracting quantities from natural language enumeration": "c_0069",
+  "updating structured dataset": "c_0028",
+  "mapping descriptions to options": "c_0006",
+  "phonetic evaluation": "c_0149",
+  "detecting omitted modifiers": "c_0071",
+  "evaluating truth value against empirical reality": "c_0164",
+  "athlete career statistics and play styles": "c_0165",
+  "option validity evaluation": "c_0006",
+  "resolving multistep permutation chains logically": "c_0166",
+  "logical implications across nested statements": "c_0167",
+  "interpreting infrared spectroscopy stretching frequencies": "c_0111",
+  "detecting chirality": "c_0044",
+  "analyzing isotopic abundance in chemical substances": "c_0168",
+  "calculating node count": "c_0169",
+  "stereoisomer count of organic molecules": "c_0152",
+  "catalyst mechanism evaluation": "c_0170",
+  "ordering carbocation stability": "c_0140",
+  "applying exponential decay law to nuclei population": "c_0040",
+  "restricting vocabulary": "c_0045",
+  "target vocabulary frequency satisfaction": "c_0171",
+  "structuring email content": "c_0078",
+  "perpetrator identification": "c_0115",
+  "resolving spatial relationships under mutual exclusion constraints": "c_0054",
+  "matching capabilities to tasks": "c_0072",
+  "evaluating truth values": "c_0164",
+  "semantic distortion evaluation": "c_0004",
+  "resolving parity alternations": "c_0026",
+  "extraction of temporal ordering from narrative clues": "c_0151",
+  "evaluating outcomes in chains": "c_0018",
+  "mapping nearest neighbor similarity": "c_0025",
+  "maintaining state matrix": "c_0143",
+  "entity state resolution": "c_0001",
+  "difference of cubes factorization": "c_0082",
+  "calculation products prime combinations": "c_0059",
+  "right triangle similarity": "c_0100",
+  "evaluating iterated piecewise functions across domains": "c_0056",
+  "solving functional equations": "c_0172",
+  "intersection of multiple integer intervals": "c_0173",
+  "applying divisibility rule nine": "c_0120",
+  "linear equation system solving": "c_0174",
+  "computing conjunctive truth values": "c_0005",
+  "disentangling agent intent from side effects": "c_0142",
+  "performing backward temporal arithmetic across month boundaries": "c_0019",
+  "evaluating modus tollens argument structure in propositional logic": "c_0094",
+  "parsing svg path coordinate data": "c_0021",
+  "comparing syntactic acceptability": "c_0106",
+  "ordering vehicles age": "c_0024",
+  "evaluating absolute positions": "c_0054",
+  "evaluating distance": "c_0002",
+  "maintaining reference frame": "c_0158",
+  "aggregating discrete item counts across categories": "c_0080",
+  "computing arithmetic offset": "c_0175",
+  "retrieving object color attribute": "c_0027",
+  "entity recognition": "c_0027",
+  "detecting semantic inversion": "c_0073",
+  "differentiating pragmatic intent from literal semantics": "c_0032",
+  "basketball terminology within game context": "c_0052",
+  "tracking temporal intervals through schedule exclusion": "c_0034",
+  "tracking state transitions through swaps": "c_0166",
+  "recursively negating truth statements across hierarchical agents": "c_0073",
+  "analyzing proton nmr splitting patterns": "c_0111",
+  "applying cassie baxter model": "c_0040",
+  "regioselectivity identification": "c_0109",
+  "applying huckel theory": "c_0140",
+  "calculating attenuation": "c_0040",
+  "process feasibility analysis": "c_0157",
+  "evaluation of epigenetic markers of chromatin accessibility": "c_0112",
+  "computing activity from decay constant and population": "c_0040",
+  "formatting explicit labels": "c_0045",
+  "pedagogical audience register adaptation": "c_0176",
+  "evaluating expressions via substitution": "c_0012",
+  "evaluating suspect motives and opportunity constraints": "c_0115",
+  "state inference": "c_0143",
+  "competency profiles from narrative feedback": "c_0046"
+ },
+ "next": 177,
+ "journal": [
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0039",
+   "into": "c_0038",
+   "reason": "Exact duplicate: both represent the operation of recalling factual knowledge from memory."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0041",
+   "into": "c_0038",
+   "reason": "Exact duplicate: both represent the operation of recalling factual knowledge from memory."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0067",
+   "into": "c_0038",
+   "reason": "Exact duplicate: both represent the operation of recalling factual knowledge from memory."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0074",
+   "into": "c_0038",
+   "reason": "Exact duplicate: both represent the operation of recalling factual knowledge from memory."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0075",
+   "into": "c_0038",
+   "reason": "Exact duplicate: both represent the operation of recalling factual knowledge from memory."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0077",
+   "into": "c_0038",
+   "reason": "Exact duplicate: both represent the operation of recalling factual knowledge from memory."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0134",
+   "into": "c_0038",
+   "reason": "Exact duplicate: both represent the operation of recalling factual knowledge from memory."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0007",
+   "into": "c_0001",
+   "reason": "Exact duplicate: both represent the operation of tracking state across sequential events."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0035",
+   "into": "c_0001",
+   "reason": "Exact duplicate: both represent the operation of tracking state across sequential events."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0036",
+   "into": "c_0001",
+   "reason": "Exact duplicate: both represent the operation of tracking state across sequential events."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0051",
+   "into": "c_0001",
+   "reason": "Exact duplicate: both represent the operation of tracking state across sequential events."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0053",
+   "into": "c_0001",
+   "reason": "Exact duplicate: both represent the operation of tracking state across sequential events."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0127",
+   "into": "c_0001",
+   "reason": "Exact duplicate: both represent the operation of tracking state across sequential events."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0029",
+   "into": "c_0027",
+   "reason": "Exact duplicate: both represent the operation of extracting entities and attributes from text."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0033",
+   "into": "c_0027",
+   "reason": "Exact duplicate: both represent the operation of extracting entities and attributes from text."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0135",
+   "into": "c_0027",
+   "reason": "Exact duplicate: both represent the operation of extracting entities and attributes from text."
+  },
+  {
+   "op": "MERGE",
+   "version": 1,
+   "from": "c_0137",
+   "into": "c_0027",
+   "reason": "Exact duplicate: both represent the operation of extracting entities and attributes from text."
+  }
+ ]
+}

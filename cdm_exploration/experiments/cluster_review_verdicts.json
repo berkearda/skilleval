@@ -1,0 +1,902 @@
+[
+ {
+  "original_name": "Identifying Themes In Science Fiction Movies",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 7,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Movie Recommendation + Murder-Mystery Deduction + Pronoun Disambiguation + Temporal Ordering + Causal Judgment + Object Placement + Constrained Writing",
+  "rationale": "Eight unrelated subtasks with no shared skill."
+ },
+ {
+  "original_name": "Evaluating Truthfulness Of Nested Statements",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 6,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Truth-teller Logic + Word-order Grammar + Translation-error Detection + Humorous Name Edits + Sarcasm Detection",
+  "rationale": "Items span web_of_lies truth-chains, hyperbaton adjective order, translation-error spotting, ruin_names edits, snarks sarcasm, and logical deduction, which are distinct operations with no shared skill."
+ },
+ {
+  "original_name": "Calculating Work Done In Variable Force Scenarios",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 5,
+  "orig_name": "too_specific",
+  "renamed": "accurate",
+  "suggested_name": "SPLIT: Causal Judgment + Physics Work Computation + Constrained Writing + Social-Deduction (MuSR)",
+  "rationale": "Causal_judgment ~59% plus ~41% unrelated physics/IFEval/MuSR."
+ },
+ {
+  "original_name": "Analyzing Surface Properties Of Materials",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 5,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Team Allocation + Constrained Writing + Chemistry + Causal Reasoning + Object Placement",
+  "rationale": "Grab-bag, no shared skill."
+ },
+ {
+  "original_name": "Evaluating Consistency In League Punishments",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 4,
+  "orig_name": "wrong",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Causal Judgment + Sarcasm Detection + Spatial Placement + Mixed Science/Math QA",
+  "rationale": "Causal_judgement is only ~46% and the remainder splits across snarks, object placements, GPQA science, and counting, with no member about league punishments."
+ },
+ {
+  "original_name": "Applying Wetting Theory To Liquid Droplets",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 4,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "SPLIT: Surface Wetting/Contact-Angle + Particle &amp; Quantum Physics + Molecular Biology QA",
+  "rationale": "A contact-angle/wetting group (~40%) sits alongside particle physics, quantum-well, organic NMR, and Hi-C genomics items that share no reasoning operation."
+ },
+ {
+  "original_name": "Calculating Ratios Of Segments In Triangles",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 4,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Physics/Chemistry + Geometry Ratios + Arithmetic Word Problems + Instruction Following",
+  "rationale": "No shared skill."
+ },
+ {
+  "original_name": "Manipulating Algebraic Expressions For Variance",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 4,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Summary Statistics + Quantum Fisher-Information + Constrained Writing + Causal Judgment",
+  "rationale": "Fused by &#x27;average/variance&#x27; vocabulary."
+ },
+ {
+  "original_name": "Balancing Instrumentation For Optimal Sound Qualit",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 4,
+  "orig_name": "wrong",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Team-Role Assignment + Review Writing + Probability + Movie Matching",
+  "rationale": "No common operation."
+ },
+ {
+  "original_name": "Incorporating Friends Name In Personalized Message",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 3,
+  "orig_name": "too_specific",
+  "renamed": "wrong",
+  "suggested_name": "SPLIT: Object-Position Tracking + Causal Judgment + Personalized Message Writing",
+  "rationale": "The four items are a causal_judgement, two object-tracking puzzles, and one IFEval email, sharing no skill; &#x27;Social Interaction&#x27; fails to describe the tracking and causal members."
+ },
+ {
+  "original_name": "Evaluating Climate Control System Activation Condi",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 3,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "SPLIT: Causal Judgment + Constrained Generation + Arithmetic",
+  "rationale": "Fused by climate/weather vocabulary."
+ },
+ {
+  "original_name": "Applying Nernst Equation To Redox Potential",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 3,
+  "orig_name": "too_specific",
+  "renamed": "wrong",
+  "suggested_name": "SPLIT: Chemistry Equilibrium Calc + Relativistic Decay-Length + Graph Interpretation",
+  "rationale": "3 unrelated skills, rename misdescribes non-chemistry half."
+ },
+ {
+  "original_name": "Ensuring Consistent Section Headers In Document St",
+  "cluster_verdict": "multi_group_junk",
+  "subgroups": 3,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Format-Constrained Writing + Table Lookup + Digit Counting",
+  "rationale": "3 unrelated skills."
+ },
+ {
+  "original_name": "Evaluating Sporting Event Plausibility Based On Co",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "wrong",
+  "suggested_name": "SPLIT: Sports Statement Plausibility + Entity Position/Role Tracking",
+  "rationale": "Sports_understanding plausibility judgments (~30%) and object/position tracking plus team allocation are two unrelated skills fused; the renamed name covers only the tracking half."
+ },
+ {
+  "original_name": "Recognizing Symmetry In Two Dimensional Figures",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "SPLIT: Shape Identification from SVG Paths + Physical-Science QA",
+  "rationale": "Geometric_shapes SVG classification (~58%) is fused with unrelated GPQA chemistry/physics/quantum QA (~31%); the renamed name just lists two subject areas."
+ },
+ {
+  "original_name": "Identifying Interstellar Medium Types In Astronomy",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "SPLIT: Astrophysical Observation QA + Chemistry Calculation QA",
+  "rationale": "Astrophysics items (stars, galaxies, neutrinos) are fused with distinct chemistry-calculation items; the renamed name enumerates both subjects rather than an operation."
+ },
+ {
+  "original_name": "Assessing Causal Relationships In Fertilizer Use",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Constrained Creative Writing + Causal Judgment",
+  "rationale": "Four IFEval creative-writing items and three causal_judgement garden items are two distinct skills; the renamed name broadly enumerates both."
+ },
+ {
+  "original_name": "Analyzing Historical Context Of Sunni Shia Split",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "SPLIT: Constrained Essay Writing + Physics QA",
+  "rationale": "Two IFEval religion-comparison essays (a constrained-writing skill) are fused with one GPQA superstring-physics item; the renamed name labels a subject and ignores the physics member."
+ },
+ {
+  "original_name": "Iterating Weight Loss Over Multiple Weeks",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "wrong",
+  "suggested_name": "SPLIT: Exponential Decay Calculation + Constrained Song Writing",
+  "rationale": "One algebra decay problem and one IFEval no-commas song are unrelated skills, and the renamed name merely enumerates both topics."
+ },
+ {
+  "original_name": "Analyzing Coordinates To Determine Shape Type",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "SPLIT: Shape Identification from SVG Coordinates + Algebraic/Coordinate-Geometry Problem Solving",
+  "rationale": "Half SVG-path shape recognition, half algebraic manipulation."
+ },
+ {
+  "original_name": "Articulating Customer Rights Under Consumer Protec",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Constrained Instruction-Following Writing + Causal Judgment",
+  "rationale": "Five IFEval writing + two causal_judgment."
+ },
+ {
+  "original_name": "Distinguishing Fruits From Non Fruits",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "wrong",
+  "suggested_name": "SPLIT: Counting Objects By Category + Deducing Order From Constraints",
+  "rationale": "object_counting + fruit-stand deduction fused by &#x27;fruit&#x27;."
+ },
+ {
+  "original_name": "Tracking Object Trades Among Multiple Participants",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Tracking Object State Through Swaps + Evaluating Formal Argument Validity",
+  "rationale": "Tracking + 38-item formal_fallacies block."
+ },
+ {
+  "original_name": "Applying Set Theory To Count Unique Items",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "wrong",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Enumerating Listed Objects + Combinatorial Counting And Probability",
+  "rationale": "Trivial tallies + real combinatorics; no set theory."
+ },
+ {
+  "original_name": "Applying Properties Of Complex Numbers In Equation",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "SPLIT: Complex Number Arithmetic + Absolute-Value Equation Manipulation",
+  "rationale": "Fused by modulus notation."
+ },
+ {
+  "original_name": "Applying Albedo Concepts To Temperature Difference",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Physics Computation + Chemistry Reasoning",
+  "rationale": "Physics + chemistry under vague science label."
+ },
+ {
+  "original_name": "Applying Pattern Recognition To Algorithmic Output",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Inferring Numeric Rules From Examples + Assorted Algebra",
+  "rationale": "Rule inference + unrelated algebra."
+ },
+ {
+  "original_name": "Analyzing Door Count Distribution In Car Types",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "wrong",
+  "suggested_name": "SPLIT: Combinatorial Counting + Constrained Text Generation",
+  "rationale": "Fused by &#x27;car&#x27; theme."
+ },
+ {
+  "original_name": "Applying Random Variable Concepts To Sleep Pattern",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "wrong",
+  "suggested_name": "SPLIT: Creative And Blog Writing + Probability Of Random Events",
+  "rationale": "Fused by &#x27;sleep&#x27; topic."
+ },
+ {
+  "original_name": "Applying Combinatorial Principles To Pet Ownership",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "SPLIT: Combinatorial Word Problem + Constrained Advice Writing",
+  "rationale": "Fused by &#x27;pet&#x27; topic."
+ },
+ {
+  "original_name": "Inferring Time Intervals From Sequential Events",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "wrong",
+  "suggested_name": "SPLIT: Temporal Interval Deduction + Tracking Object Identities Through Swaps",
+  "rationale": "temporal_sequences + tracking_shuffled_objects fused."
+ },
+ {
+  "original_name": "Identifying Sarcasm In Verbal Expressions",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "accurate",
+  "suggested_name": "SPLIT: Detecting Humorous Incongruity + Format-Constrained Generation",
+  "rationale": "snarks+ruin_names one skill, ~25% IFEval writing distinct."
+ },
+ {
+  "original_name": "Identifying Humorous Wordplay In Artist Names",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "SPLIT: Identifying Meaning-Altering Edits + Format-Constrained Writing",
+  "rationale": "ruin_names+translation one skill, 18% IFEval distinct."
+ },
+ {
+  "original_name": "Interpreting Numerical Values In Context",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "wrong",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Quantitative Scientific Estimation + Elementary Number Manipulation",
+  "rationale": "77% GPQA order-of-magnitude derivation + 23% elementary MATH."
+ },
+ {
+  "original_name": "Organizing Information Based On Given Clues",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Format-Constrained Generation + Ordering From Constraints",
+  "rationale": "74% IFEval writing + logical_deduction ordering."
+ },
+ {
+  "original_name": "Applying Relativity To Calculate Velocity Vectors",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "SPLIT: Relative-Motion Computation + Astronomical Observation Estimation",
+  "rationale": "Motion-computation vs astro-observation."
+ },
+ {
+  "original_name": "Analyzing Historical Significance Of Chess Program",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "wrong",
+  "renamed": "topic_not_skill",
+  "suggested_name": "SPLIT: Combinatorial Counting + Review Writing",
+  "rationale": "Fused by &#x27;chess&#x27;; no history item."
+ },
+ {
+  "original_name": "Applying Percentage Rates To Income Segments",
+  "cluster_verdict": "two_groups",
+  "subgroups": 2,
+  "orig_name": "too_specific",
+  "renamed": "wrong",
+  "suggested_name": "SPLIT: Piecewise Percentage Computation + Constrained Expository Writing",
+  "rationale": "Tax algebra + IFEval tax explainer share only &#x27;tax&#x27;."
+ },
+ {
+  "original_name": "Interpreting Directional Commands For Navigation",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 2,
+  "orig_name": "accurate",
+  "renamed": "too_vague",
+  "suggested_name": "Simulating Step-by-Step Movement to Track Position",
+  "rationale": "84% navigate, ~15% ordering contamination."
+ },
+ {
+  "original_name": "Applying Quadratic Formula To Find Roots",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "Algebraic Equation Manipulation",
+  "rationale": "Nearly all items are algebraic equation/expression manipulation (roots, systems, extremal values), so one skill covers them despite the quadratic-only original name."
+ },
+ {
+  "original_name": "Applying De Morgan Laws To Boolean Logic",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "accurate",
+  "suggested_name": "Boolean Expression Evaluation",
+  "rationale": "About 94% are boolean_expressions evaluation with a couple of MATH stragglers; no De Morgan step is actually required, but &#x27;Logical Expression Evaluation&#x27; fits well."
+ },
+ {
+  "original_name": "Extracting Data From Table Headers",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "too_vague",
+  "suggested_name": "Tabular Data Lookup and Reasoning",
+  "rationale": "Essentially all items are penguins_in_a_table queries (plus one survey-table item), all one operation of reading and reasoning over a table."
+ },
+ {
+  "original_name": "Applying Inequality Theorems To Minimize Expressio",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "accurate",
+  "suggested_name": "Algebraic Optimization and Extremal Values",
+  "rationale": "All items ask for max/min/range/domain of algebraic expressions, a single optimization skill that the &#x27;minimize&#x27; phrasing under-describes but &#x27;Inequalities and Optimization&#x27; captures."
+ },
+ {
+  "original_name": "Applying Molarity Concepts To Solution Mixing",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Solution Equilibrium and Stoichiometry Calculation",
+  "rationale": "All items are quantitative chemistry problems (mostly solution/equilibrium plus a little organic), one skill, but &#x27;Advanced Chemistry Problem Solving&#x27; names a subject area."
+ },
+ {
+  "original_name": "Adapting Language For Age Appropriate Audience",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Constrained Text Generation (Format/Style Compliance)",
+  "rationale": "Every item is an IFEval task whose real demand is obeying precise format/style constraints, not the creative-writing or age-adaptation topics the names emphasize."
+ },
+ {
+  "original_name": "Analyzing Geometric Interpretations Of Matrix Oper",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Coordinate and Vector Geometry",
+  "rationale": "Items are analytic geometry with coordinates, vectors, and matrices (one GPQA physics stray); the renamed name lists two subject areas rather than the operation."
+ },
+ {
+  "original_name": "Summing Coefficients Of Polynomial Expression",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "Algebraic Expression Evaluation",
+  "rationale": "Most items compute a numeric target by manipulating algebraic expressions (coefficients, roots, values) with one GPQA contaminant, but &#x27;Algebra and Series Simplification&#x27; is broad."
+ },
+ {
+  "original_name": "Analyzing Effects Of Vertical Stretch On Graphs",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "Function Graph Interpretation",
+  "rationale": "Roughly three-quarters interpret function graphs (parabola, rational, polar, parametric) with a few stray stats/counting/IFEval items; the original names only one item and the renamed is generic."
+ },
+ {
+  "original_name": "Applying Fraction Multiplication To Unit Prices",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "accurate",
+  "suggested_name": "Percentage and Proportion Word Problems",
+  "rationale": "The majority are percentage/proportion word problems (commission, discounts, price-per-unit, growth) with scattered probability/algebra strays, and &#x27;Proportions and Percentages&#x27; names that operation."
+ },
+ {
+  "original_name": "Identifying Transformations In Quantum Field Theor",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Quantum Field Theory Problem Solving",
+  "rationale": "All items are QFT/particle-physics problems (Proca, gamma matrices, oblique parameters), one coherent domain, but &#x27;transformations&#x27; is too narrow and the renamed names a subject."
+ },
+ {
+  "original_name": "Applying Mott Gurney Equation To Device Characteri",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Applied Physics Problem Solving (Devices and Energy)",
+  "rationale": "All six are quantitative physics/energy-device questions (Mott-Gurney, thermoradiative cell, Dyson sphere), one operation, but &#x27;semiconductor&#x27; names only half and the renamed is a research-area label."
+ },
+ {
+  "original_name": "Applying Properties Of Matrix Norms To Vectors",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Vector and Matrix Computation",
+  "rationale": "Four of five items are vector/matrix computations (norms, angles, systems) with one GPQA physics stray; the renamed name states a subject area rather than the operation."
+ },
+ {
+  "original_name": "Avoiding Sensitive Terms In Condolence Messages",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Constrained Message Writing (Word Avoidance)",
+  "rationale": "Both IFEval items require writing a message while avoiding specified banned words; the shared skill is constraint-following, which &#x27;Empathetic Communication&#x27; mislabels as a soft-skill topic."
+ },
+ {
+  "original_name": "Ph\u00e2n T\u00edch Ng\u1eef C\u1ea3nh C\u1ee7a Nhi\u1ec7m V\u1ee5 X\u00e3 H\u1ed9i",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "wrong",
+  "renamed": "accurate",
+  "suggested_name": "Constrained Humorous Critique (Vietnamese)",
+  "rationale": "The single item asks for a constrained humorous critique in Vietnamese, which the renamed name describes but the original (&#x27;analyzing social-task context&#x27;) does not."
+ },
+ {
+  "original_name": "Maintaining Word Count Constraints In Responses",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Following Explicit Output-Format Constraints",
+  "rationale": "Nearly all IFEval format-constraint tasks; word count is one variety."
+ },
+ {
+  "original_name": "Calculating Future Dates From Anniversary Informat",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "accurate",
+  "suggested_name": "Calendar Date Arithmetic",
+  "rationale": "All date_understanding offset computations."
+ },
+ {
+  "original_name": "Identifying Mutations In Nucleotide Sequences",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Graduate Molecular-Biology Knowledge Application",
+  "rationale": "All GPQA molecular/cell-biology MCQs."
+ },
+ {
+  "original_name": "Calculating Orbital Period Ratio Between Planets",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Astrophysical Quantitative Reasoning",
+  "rationale": "All GPQA astronomy quantitative problems."
+ },
+ {
+  "original_name": "Applying Combinatorial Principles To Dice Rolls",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "Probability Computation",
+  "rationale": "Sampled items all probability; ~13% contamination in full set."
+ },
+ {
+  "original_name": "Converting Repeating Decimals To Fractions",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Integer and Digit Manipulation",
+  "rationale": "Elementary number-theory/digit-manipulation skill."
+ },
+ {
+  "original_name": "Applying Recursion To Define Number Sequences",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Sequence and Series Evaluation",
+  "rationale": "Recurrences, sequences, series sums unified by evaluating expressions."
+ },
+ {
+  "original_name": "Applying Snell'S Law To Light Refraction In Media",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Quantitative Physics Reasoning",
+  "rationale": "All GPQA physics MCQs sharing quantitative physics reasoning."
+ },
+ {
+  "original_name": "Identifying Alphabetical Order Of Names In Table",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "Tabular Data Lookup and Reasoning",
+  "rationale": "Nearly all penguins_in_a_table lookups."
+ },
+ {
+  "original_name": "Applying Divisibility Rules To Factorials",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "Discrete Math and Number-Theory Problem Solving",
+  "rationale": "Factorial divisibility, digit/base, binomial, counting; symbolic discrete-math."
+ },
+ {
+  "original_name": "Evaluating Conditions For Automated Shutdown",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "accurate",
+  "suggested_name": "Causal Judgment Reasoning",
+  "rationale": "All causal_judgment &#x27;typical person&#x27; questions."
+ },
+ {
+  "original_name": "Calculating Compound Interest With Quarterly Compo",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Exponential and Geometric Growth Word Problems",
+  "rationale": "Exponential/geometric growth word problems; ~20% outliers."
+ },
+ {
+  "original_name": "Evaluating Possible Storage Options Based On Story",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "too_vague",
+  "suggested_name": "Inferring Object Locations from Narrative",
+  "rationale": "11/12 MuSR Object Placements; &#x27;Organizational Skills&#x27; is boundless."
+ },
+ {
+  "original_name": "Applying Interpolation To Estimate Values",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "accurate",
+  "suggested_name": "Polynomial Interpolation",
+  "rationale": "All polynomial-interpolation/finite-difference problems."
+ },
+ {
+  "original_name": "Calculating Handshake Combinations In Group Intera",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "accurate",
+  "suggested_name": "Combinatorial Counting of Interactions",
+  "rationale": "4/5 combinatorial counting of pairwise interactions."
+ },
+ {
+  "original_name": "Analyzing Fragmentation Patterns In Ei Ms",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Chemistry Knowledge Application",
+  "rationale": "All GPQA chemistry MCQs."
+ },
+ {
+  "original_name": "Applying Discrete Group Approximations To Gauge Th",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Gauge-Theory / Fundamental-Forces Knowledge",
+  "rationale": "All particle-physics gauge-theory MCQs."
+ },
+ {
+  "original_name": "Analyzing Sentiment In Financial Statements",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "wrong",
+  "renamed": "too_vague",
+  "suggested_name": "Constrained Instruction-Following Writing",
+  "rationale": "All IFEval constrained-writing; none about financial statements."
+ },
+ {
+  "original_name": "Applying Set Theory To Divisor Subsets",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Set Counting / Inclusion-Exclusion",
+  "rationale": "Both set-counting problems."
+ },
+ {
+  "original_name": "Optimizing User Experience Based On Feedback",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "wrong",
+  "renamed": "accurate",
+  "suggested_name": "Critiquing Marketing Copy",
+  "rationale": "Both IFEval ad/pitch critiques under constraints."
+ },
+ {
+  "original_name": "Constructing Bash Scripts For File Downloads",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "accurate",
+  "suggested_name": "Constrained Creative Script Writing",
+  "rationale": "Single bash-script-under-constraints item."
+ },
+ {
+  "original_name": "Inferring Object Locations From Contextual Clues",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "too_vague",
+  "suggested_name": "Deducing Object Arrangements From Constraints",
+  "rationale": "All items infer positions/orderings/possession from textual constraints."
+ },
+ {
+  "original_name": "Identifying Structural Isomers In Organic Compound",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Predicting Organic Reaction Products And Structures",
+  "rationale": "~90% GPQA organic-chemistry."
+ },
+ {
+  "original_name": "Identifying Penguin Attributes From Tabular Data",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "too_vague",
+  "suggested_name": "Answering Queries From Tabular Data",
+  "rationale": "80% penguins_in_a_table."
+ },
+ {
+  "original_name": "Calculating Decay Length From Energy And Mass",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Quantitative Physics Problem Solving",
+  "rationale": "All GPQA physics quantity computation."
+ },
+ {
+  "original_name": "Maintaining Consistent Tone In Creative Writing",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Following Explicit Formatting Constraints In Generation",
+  "rationale": "92% IFEval format constraints."
+ },
+ {
+  "original_name": "Applying Maxwell Equations To Electromagnetic Fiel",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Solving Electromagnetism And Electrodynamics Problems",
+  "rationale": "All EM/electrodynamics problems."
+ },
+ {
+  "original_name": "Adapting Tone For Dialogue In Urdu Language",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "Responding In A Mandated Target Language",
+  "rationale": "All IFEval respond-in-language items."
+ },
+ {
+  "original_name": "Analyzing User Access Patterns Over Time",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "wrong",
+  "renamed": "accurate",
+  "suggested_name": "Judging Causation In Everyday Scenarios",
+  "rationale": "All 14 causal_judgement."
+ },
+ {
+  "original_name": "Applying Edington Limit To Black Hole Mass Ratio",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "Evaluating Sums, Products, And Algebraic Expressions",
+  "rationale": "Mostly MATH algebra/analysis, 1 astro stray."
+ },
+ {
+  "original_name": "Articulating Feature Vs Bug Distinction",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Generating Structured Documents To Format Specifications",
+  "rationale": "All IFEval structured-format generation."
+ },
+ {
+  "original_name": "Embedding Asterisk Symbols For Visual Separation",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "wrong",
+  "suggested_name": "Following Explicit Output-Format Constraints",
+  "rationale": "All IFEval format-constraint items."
+ },
+ {
+  "original_name": "Applying Mutation Rate To Genetic Equilibrium",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Solving Hardy-Weinberg Equilibrium Problems",
+  "rationale": "Both identical Hardy-Weinberg items."
+ },
+ {
+  "original_name": "Interpreting Luminescence Behavior In Zinc Silicat",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Reasoning About Chromatography Visualization Chemistry",
+  "rationale": "Single GPQA chemistry item."
+ },
+ {
+  "original_name": "Separating Versions With Specific Delimiters",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Constrained Creative Text Rewriting",
+  "rationale": "Single IFEval haiku-rewrite item."
+ },
+ {
+  "original_name": "Applying Divisibility Rules To Integer Sets",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Divisibility and Modular Arithmetic Reasoning",
+  "rationale": "All divisor/GCD/congruence reasoning."
+ },
+ {
+  "original_name": "Applying Linear Combination Of Operators In Quantu",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Applying Physics Formalism to Derive Quantities",
+  "rationale": "96% GPQA physics formalism."
+ },
+ {
+  "original_name": "Evaluating Function Values At Specific Points",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Manipulating Functions and Functional Equations",
+  "rationale": "11/12 function manipulation."
+ },
+ {
+  "original_name": "Applying Trigonometric Identities To Solve Equatio",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "too_vague",
+  "suggested_name": "Trigonometric Reasoning in Geometric Configurations",
+  "rationale": "10/12 trig, generic numbered rename."
+ },
+ {
+  "original_name": "Applying Properties Of Rectangles To Find Dimensio",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Geometric Measurement and Counting Under Integer Constraints",
+  "rationale": "10/12 geometry+counting."
+ },
+ {
+  "original_name": "Calculating Eigenvalues Of Quantum Operators",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Computing Matrix and Operator Properties",
+  "rationale": "11/12 matrix/operator computation across MATH+GPQA."
+ },
+ {
+  "original_name": "Crafting Concise Descriptions Of Professional Acti",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Resume/Cover-Letter Generation Under Constraints",
+  "rationale": "All IFEval resume/cover-letter under format constraints."
+ },
+ {
+  "original_name": "Calculating Oscillation Frequency Of Quantum Parti",
+  "cluster_verdict": "coherent_minor_contamination",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Computing Quantum Dynamical Quantities",
+  "rationale": "10/11 quantum dynamics, 1 IFEval stray."
+ },
+ {
+  "original_name": "Applying Synonyms To Replace Restricted Vocabulary",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "too_specific",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Lexically Constrained Text Generation",
+  "rationale": "Both word-constraint generation."
+ },
+ {
+  "original_name": "Embedding Comments With Security Keywords In Code",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "accurate",
+  "renamed": "topic_not_skill",
+  "suggested_name": "Writing Contrastive Code Examples Under Constraints",
+  "rationale": "Single IFEval code item."
+ },
+ {
+  "original_name": "Coordinating Workflow Between Service Providers",
+  "cluster_verdict": "coherent",
+  "subgroups": 1,
+  "orig_name": "wrong",
+  "renamed": "accurate",
+  "suggested_name": "Constraint-Based Team Role Assignment",
+  "rationale": "Single MuSR Team Allocation item."
+ }
+]

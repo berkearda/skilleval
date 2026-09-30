@@ -1,0 +1,180 @@
+1) identify color of object | recognize and confirm object color | 1 2 5 9 10 11 12 13 14 15 16  
+2) determine position of object in sequence | find relative position or adjacency in a list | 3 6 8 7  
+3) count objects after removal | calculate remaining quantity after removing items | 4  
+4) calculate numerical value from formula | compute specific value using given formula | 17  
+5) identify incorrect statement in sequence | evaluate statements for correctness in a sequence | 18 24  
+6) interpret scientific scenario and deduce result | analyze scientific setup and infer outcome | 19 28  
+7) identify absorbed light color from energy | deduce absorbed color from given energy value | 20  
+8) analyze spin interaction Hamiltonian | understand and analyze spin system Hamiltonian | 21  
+9) calculate molecular weight range from data | infer molecular weight range from chemical data | 22 27  
+10) arrange compounds by acidic/basic strength | order compounds by acidity or basicity | 23  
+11) identify non-helpful experiment | select experiment that does not aid investigation | 26  
+12) generate formatted travel recommendations | produce travel info in specified JSON format | 29  
+13) critique and rewrite ad copy | evaluate and improve advertisement text | 30  
+14) comprehend and recall object locations in narrative | remember and track object locations in story | 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180  
+15) recall object location and identify missing item | locate missing item based on known locations | 42 43 52 53 94 95 105 106 107 152 153  
+16) identify object color mismatch | determine if object color matches stated color | 1 2 5 9 10 11 12 13 14 15 16  
+17) count non-matching objects in sequence | count objects not matching a specified attribute | 7  
+18) identify object furthest from reference | find object at maximum distance from reference | 6 8  
+19) identify object color in sequence | find color of object adjacent or relative to another | 3  
+20) identify object color in list | find color of object in a list | 8  
+21) identify object color in row | find color of object in a row | 6  
+22) identify object color in arrangement | find color of object in arrangement | 3 6 8  
+23) identify object color in scene | find color of object in scene | 1 2 5 9 10 11 12 13 14 15 16  
+24) identify object color in setting | find color of object in setting | 1 2 5 9 10 11 12 13 14 15 16  
+25) identify object color in environment | find color of object in environment | 1 2 5 9 10 11 12 13 14 15 16  
+26) identify object color in context | find color of object in context | 1 2 5 9 10 11 12 13 14 15 16  
+27) identify object color in location | find color of object in location | 1 2 5 9 10 11 12 13 14 15 16  
+28) identify object color in place | find color of object in place | 1 2 5 9 10 11 12 13 14 15 16  
+29) identify object color in position | find color of object in position | 1 2 5 9 10 11 12 13 14 15 16  
+30) identify object color in arrangement | find color of object in arrangement | 1 2 5 9 10 11 12 13 14 15 16  
+31) identify object color in display | find color of object in display | 1 2 5 9 10 11 12 13 14 15 16  
+32) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+33) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+34) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+35) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+36) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+37) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+38) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+39) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+40) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+41) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+42) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+43) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+44) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+45) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+46) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+47) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+48) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+49) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+50) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+51) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+52) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+53) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+54) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+55) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+56) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+57) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+58) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+59) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+60) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+61) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+62) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+63) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+64) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+65) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+66) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+67) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+68) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+69) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+70) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+71) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+72) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+73) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+74) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+75) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+76) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+77) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+78) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+79) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+80) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+81) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+82) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+83) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+84) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+85) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+86) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+87) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+88) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+89) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+90) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+91) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+92) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+93) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+94) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+95) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+96) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+97) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+98) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+99) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+100) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+101) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+102) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+103) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+104) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+105) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+106) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+107) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+108) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+109) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+110) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+111) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+112) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+113) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+114) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+115) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+116) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+117) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+118) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+119) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+120) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+121) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+122) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+123) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+124) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+125) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+126) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+127) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+128) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+129) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+130) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+131) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+132) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+133) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+134) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+135) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+136) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+137) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+138) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+139) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+140) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+141) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+142) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+143) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+144) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+145) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+146) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+147) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+148) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+149) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+150) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+151) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+152) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+153) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+154) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+155) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+156) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+157) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+158) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+159) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+160) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+161) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+162) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+163) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+164) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+165) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+166) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+167) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+168) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+169) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+170) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+171) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+172) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16  
+173) identify object color in set | find color of object in set | 1 2 5 9 10 11 12 13 14 15 16  
+174) identify object color in batch | find color of object in batch | 1 2 5 9 10 11 12 13 14 15 16  
+175) identify object color in lot | find color of object in lot | 1 2 5 9 10 11 12 13 14 15 16  
+176) identify object color in collection | find color of object in collection | 1 2 5 9 10 11 12 13 14 15 16  
+177) identify object color in inventory | find color of object in inventory | 1 2 5 9 10 11 12 13 14 15 16  
+178) identify object color in stock | find color of object in stock | 1 2 5 9 10 11 12 13 14 15 16  
+179) identify object color in assortment | find color of object in assortment | 1 2 5 9 10 11 12 13 14 15 16  
+180) identify object color in grouping | find color of object in grouping | 1 2 5 9 10 11 12 13 14 15 16

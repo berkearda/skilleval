@@ -1,0 +1,133 @@
+[
+  {"cluster_id": "C001", "groups": [
+    {"skill_name": "write the whole response in a specified foreign language", "question_numbers": [1,2,3,4,5,6,8,9,10,11]},
+    {"skill_name": "translate a sentence and critique it while avoiding a banned word", "question_numbers": [7]},
+    {"skill_name": "hit a target character-frequency count in the text", "question_numbers": [12]}
+  ]},
+  {"cluster_id": "C005", "groups": [
+    {"skill_name": "answer a graduate-level science multiple-choice question", "question_numbers": [1,2,3,4,5]}
+  ]},
+  {"cluster_id": "C009", "groups": [
+    {"skill_name": "compose or rewrite text under keyword and length constraints", "question_numbers": [1,2]},
+    {"skill_name": "classify the sentiment of a sentence", "question_numbers": [3]}
+  ]},
+  {"cluster_id": "C013", "groups": [
+    {"skill_name": "compute a probability by counting outcomes", "question_numbers": [3,4,5,6,7,8,10,11,12]},
+    {"skill_name": "answer a graduate physics multiple-choice question", "question_numbers": [1,2,9]}
+  ]},
+  {"cluster_id": "C017", "groups": [
+    {"skill_name": "find the exponent of a prime in a factorial", "question_numbers": [1,5,7,11]},
+    {"skill_name": "count arrangements or permutations under constraints", "question_numbers": [4,8,12]},
+    {"skill_name": "find where two elaborate functions intersect", "question_numbers": [2]},
+    {"skill_name": "manipulate symmetric expressions to find a value", "question_numbers": [9]},
+    {"skill_name": "simplify a radical expression", "question_numbers": [6]},
+    {"skill_name": "find the largest term of a binomial expansion", "question_numbers": [3]},
+    {"skill_name": "evaluate an infinite series by telescoping", "question_numbers": [10]}
+  ]},
+  {"cluster_id": "C021", "groups": [
+    {"skill_name": "find the minimum or maximum of an algebraic expression", "question_numbers": [1,2,3,5,8,10,12]},
+    {"skill_name": "find the parameter making a piecewise function cover all outputs", "question_numbers": [6]},
+    {"skill_name": "solve an absolute-value equation", "question_numbers": [7]},
+    {"skill_name": "reconstruct a polynomial from its evaluations", "question_numbers": [11]},
+    {"skill_name": "answer a graduate physics multiple-choice question", "question_numbers": [4,9]}
+  ]},
+  {"cluster_id": "C025", "groups": [
+    {"skill_name": "answer a graduate chemistry multiple-choice question", "question_numbers": [1,2,3,4,5,6,7,8,9,10,11,12]}
+  ]},
+  {"cluster_id": "C029", "groups": [
+    {"skill_name": "infer a hidden numeric mapping rule and apply it", "question_numbers": [1,3,5]},
+    {"skill_name": "find a function that generates a given sequence", "question_numbers": [2]},
+    {"skill_name": "solve a two-player minimax optimization", "question_numbers": [4]},
+    {"skill_name": "find when consecutive polynomial values share a factor", "question_numbers": [6]}
+  ]},
+  {"cluster_id": "C033", "groups": [
+    {"skill_name": "count integer lattice points satisfying a condition", "question_numbers": [1,2,4,12]},
+    {"skill_name": "count squares in a grid figure", "question_numbers": [3,10]},
+    {"skill_name": "compute a length or area from geometric properties", "question_numbers": [5,7]},
+    {"skill_name": "count arrangements for a card layout", "question_numbers": [6]},
+    {"skill_name": "solve a magic square for an unknown", "question_numbers": [8]},
+    {"skill_name": "evaluate a matrix determinant over all inputs", "question_numbers": [9]},
+    {"skill_name": "deduce assignments from a descriptive narrative", "question_numbers": [11]}
+  ]},
+  {"cluster_id": "C037", "groups": [
+    {"skill_name": "answer a graduate physics or astronomy multiple-choice question", "question_numbers": [3,6,7,8,10,11,12]},
+    {"skill_name": "solve a rate, motion, or timing word problem", "question_numbers": [1,2,4,5]},
+    {"skill_name": "compute the arc length of a parametric path", "question_numbers": [9]}
+  ]},
+  {"cluster_id": "C041", "groups": [
+    {"skill_name": "compose text while including or avoiding specific words", "question_numbers": [1,2]}
+  ]},
+  {"cluster_id": "C045", "groups": [
+    {"skill_name": "write the whole response in a specified foreign language", "question_numbers": [1]},
+    {"skill_name": "format the response to explicit structural constraints", "question_numbers": [2,3,4,5,6,7,8]}
+  ]},
+  {"cluster_id": "C049", "groups": [
+    {"skill_name": "model growth over discrete time steps (interest, populations, sequences)", "question_numbers": [1,2,5,6,8,10,11]},
+    {"skill_name": "reason about geometric scaling of size versus count", "question_numbers": [3]},
+    {"skill_name": "find the range of a function", "question_numbers": [4]},
+    {"skill_name": "solve a projectile-motion word problem for time", "question_numbers": [7]},
+    {"skill_name": "find where two elaborate functions intersect", "question_numbers": [9]},
+    {"skill_name": "count the digits of a large number", "question_numbers": [12]}
+  ]},
+  {"cluster_id": "C053", "groups": [
+    {"skill_name": "count handshakes or pairwise interactions", "question_numbers": [1,2,5]},
+    {"skill_name": "compute time from a reading rate", "question_numbers": [3]},
+    {"skill_name": "sum geometric growth of a spreading process", "question_numbers": [4]}
+  ]},
+  {"cluster_id": "C057", "groups": [
+    {"skill_name": "judge causation as a typical person would", "question_numbers": [2,3,8,10,11,12]},
+    {"skill_name": "answer a graduate physics multiple-choice question", "question_numbers": [4,5]},
+    {"skill_name": "solve a work-rate word problem", "question_numbers": [1]},
+    {"skill_name": "deduce role assignments from a narrative", "question_numbers": [6]},
+    {"skill_name": "summarize text under a formatting constraint", "question_numbers": [7]},
+    {"skill_name": "rewrite and expand text in a specified language", "question_numbers": [9]}
+  ]},
+  {"cluster_id": "C061", "groups": [
+    {"skill_name": "write a resume or cover letter under explicit output constraints", "question_numbers": [1,2,3,4,5,6,7,8,9,10,11,12]}
+  ]},
+  {"cluster_id": "C065", "groups": [
+    {"skill_name": "answer a query by reading a data table", "question_numbers": [1]},
+    {"skill_name": "write content in a required section/format structure", "question_numbers": [2,4]},
+    {"skill_name": "count numbers meeting a digit-sum condition", "question_numbers": [3]}
+  ]},
+  {"cluster_id": "C069", "groups": [
+    {"skill_name": "solve a polynomial functional or composition equation", "question_numbers": [2,4,5]},
+    {"skill_name": "work with inverse functions", "question_numbers": [3,7,9]},
+    {"skill_name": "find the domain or range restrictions of a function", "question_numbers": [6,8,12]},
+    {"skill_name": "find the parameter making a rational function reducible", "question_numbers": [11]},
+    {"skill_name": "count distinct values obtainable by inserting parentheses", "question_numbers": [1]},
+    {"skill_name": "find a line through given points and evaluate it", "question_numbers": [10]}
+  ]},
+  {"cluster_id": "C073", "groups": [
+    {"skill_name": "answer a query by reading a penguin data table", "question_numbers": [1,2,3,4,5,6,7,8,9,10,11,12]}
+  ]},
+  {"cluster_id": "C077", "groups": [
+    {"skill_name": "answer a graduate molecular-biology multiple-choice question", "question_numbers": [1,2,3,4,5,6,7,8,9,10,11,12]}
+  ]},
+  {"cluster_id": "C081", "groups": [
+    {"skill_name": "track object positions after a sequence of swaps", "question_numbers": [1]},
+    {"skill_name": "write creative text under output constraints", "question_numbers": [2,9]},
+    {"skill_name": "recommend a similar movie from options", "question_numbers": [3]},
+    {"skill_name": "identify the culprit from a murder-mystery narrative", "question_numbers": [4,5,7,10]},
+    {"skill_name": "infer an answer from a descriptive character narrative", "question_numbers": [6]},
+    {"skill_name": "compute a shifted calendar date", "question_numbers": [8]},
+    {"skill_name": "resolve a chain of truth-teller and liar statements", "question_numbers": [11]},
+    {"skill_name": "identify which statement is sarcastic", "question_numbers": [12]}
+  ]},
+  {"cluster_id": "C085", "groups": [
+    {"skill_name": "deduce the possible time window from an activity timeline", "question_numbers": [1,4,8,10]},
+    {"skill_name": "track object positions after a sequence of swaps", "question_numbers": [2,5,6,7,9,12]},
+    {"skill_name": "identify the culprit from a murder-mystery narrative", "question_numbers": [3]},
+    {"skill_name": "judge the validity of a formal argument", "question_numbers": [11]}
+  ]},
+  {"cluster_id": "C089", "groups": [
+    {"skill_name": "write text while avoiding commas", "question_numbers": [1]},
+    {"skill_name": "compute compounded percentage change over periods", "question_numbers": [2]}
+  ]},
+  {"cluster_id": "C093", "groups": [
+    {"skill_name": "critique a piece of marketing copy", "question_numbers": [1,2]}
+  ]},
+  {"cluster_id": "C097", "groups": [
+    {"skill_name": "rewrite text into constrained creative variants", "question_numbers": [1]}
+  ]}
+]
