@@ -4,10 +4,17 @@ import { Check, Copy } from 'lucide-react'
 
 // BibTeX "Last, First" names, in the paper's author order; replace the entry with
 // the arXiv one once the paper is public.
-const AUTHORS = ['Arda, Berke']
+const AUTHORS = [
+  'Arda, Berke',
+  'Cui, Peng',
+  'Zheng, Qiaoyuan',
+  'Debelak, Rudolf',
+  'Akhtar, Mubashara',
+  'Sachan, Mrinmaya',
+]
 
-const BIBTEX = `@misc{skilleval,
-  title        = {SkillEval: Skill-Level Evaluation of Language Models with Cognitive Diagnosis Models},
+const BIBTEX = `@misc{arda2026skilleval,
+  title        = {SkillEval: Learning Interpretable Ability Profiles of LLMs via Cognitive Diagnosis Models},
   author       = {${AUTHORS.join(' and ')}},
   year         = {2026},
   howpublished = {\\url{https://github.com/berkearda/skilleval}},
