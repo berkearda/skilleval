@@ -1,6 +1,5 @@
 import { Fragment, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { PipelineDiagram } from '@/components/PipelineDiagram'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { AFFILIATIONS, AUTHORS, DATA_URL, PAPER_TITLE, REPO_URL } from '@/lib/citation'
@@ -250,6 +249,9 @@ export function HomePage() {
               <Link to="/leaderboard" className="text-brand hover:underline">
                 Leaderboard
               </Link>
+              <Link to="/about" className="text-brand hover:underline">
+                Method
+              </Link>
             </nav>
           </div>
           <div className="hidden shrink-0 lg:block">
@@ -403,20 +405,6 @@ export function HomePage() {
           </Link>
           .
         </p>
-      </section>
-
-      {/* How it works */}
-      <section className="mt-16">
-        <h2 className="text-xl font-semibold tracking-tight">How it works</h2>
-        <PipelineDiagram />
-        <div className="mt-4">
-          <Link
-            to="/about"
-            className="text-sm font-medium text-brand transition-colors hover:underline"
-          >
-            Read the method
-          </Link>
-        </div>
       </section>
 
       </div>

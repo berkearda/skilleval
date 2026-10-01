@@ -9,18 +9,39 @@ import type { Skill } from '@/lib/types'
 
 const BENCH_ORDER = ['MATH', 'BBH', 'GPQA', 'IFEval', 'MuSR']
 
-function SkillRow({ skill }: { skill: Skill }) {
+const ROW = 'grid grid-cols-[minmax(0,1fr)_64px_2.75rem] items-center gap-3 px-2'
+
+/** Column heads, shown once at the top of each column. */
+function HeadRow({ className = '' }: { className?: string }) {
+  return (
+    <li aria-hidden className={`${ROW} pb-1 text-xs text-muted-foreground ${className}`}>
+      <span>Skill</span>
+      <span />
+      <span className="text-right">Items</span>
+    </li>
+  )
+}
+
+function SkillRow({ skill, maxItems }: { skill: Skill; maxItems: number }) {
   return (
     <li>
       <Link
         to={`/skill/${skill.id}`}
-        className="flex items-baseline justify-between gap-3 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-brand"
+        className={`${ROW} rounded-md py-1.5 text-sm transition-colors hover:bg-accent hover:text-brand`}
       >
-        <span className="min-w-0">
-          {displaySkillLabel(skill.label_english ?? skill.label)}
+        <span className="min-w-0">{displaySkillLabel(skill.label_english ?? skill.label)}</span>
+        {/* bar length: items needing the skill, on one scale for all 100 skills */}
+        <span className="h-1.5 rounded-full bg-muted">
+          <span
+            className="block h-full rounded-full"
+            style={{
+              width: `${Math.max(3, (100 * skill.n_items) / maxItems)}%`,
+              backgroundColor: getBenchmarkColor(skill.primary_benchmark),
+            }}
+          />
         </span>
-        <span className="tabular shrink-0 font-mono text-xs text-muted-foreground">
-          {skill.n_items} items
+        <span className="tabular text-right font-mono text-xs text-muted-foreground">
+          {skill.n_items.toLocaleString()}
         </span>
       </Link>
     </li>
@@ -59,6 +80,7 @@ export function SkillsPage() {
   }, [skills, query])
 
   const total = groups.reduce((n, g) => n + g.skills.length, 0)
+  const maxItems = skills.reduce((m, s) => Math.max(m, s.n_items), 1)
 
   return (
     <div className="page py-10">
@@ -116,8 +138,10 @@ export function SkillsPage() {
                 </span>
               </div>
               <ul className="mt-3 grid gap-x-8 md:grid-cols-2">
+                <HeadRow />
+                <HeadRow className="hidden md:grid" />
                 {g.skills.map((s) => (
-                  <SkillRow key={s.id} skill={s} />
+                  <SkillRow key={s.id} skill={s} maxItems={maxItems} />
                 ))}
               </ul>
             </section>

@@ -35,7 +35,6 @@ function formatParams(p: number | null): string {
   return `${(p * 1000).toFixed(0)}M`
 }
 
-const kicker = 'text-xs font-medium text-muted-foreground'
 
 /** Save the model's 100-skill profile as a CSV file, built in the browser. */
 function downloadProfile(model: Model, skills: Skill[]) {
@@ -53,14 +52,9 @@ function downloadProfile(model: Model, skills: Skill[]) {
   URL.revokeObjectURL(url)
 }
 
-function MetaStat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-baseline gap-1.5">
-      <span className={kicker}>{label}</span>
-      <span className="tabular font-mono text-sm text-foreground">{value}</span>
-    </div>
-  )
-}
+const ACTION =
+  'inline-flex h-8 items-center gap-1.5 rounded-md border border-border bg-card px-3 text-xs font-medium text-foreground transition-colors hover:bg-surface-elevated'
+
 
 export function ModelPage() {
   const { id } = useParams<{ id: string }>()
@@ -103,6 +97,8 @@ export function ModelPage() {
       .sort((a, b) => b.theta - a.theta)
       .map((r, i) => ({ ...r, rank: i + 1 }))
   }, [model, skills])
+
+  const [showAll, setShowAll] = useState(false)
 
   const meanTheta = useMemo(() => {
     if (!model || model.theta.length === 0) return 0
@@ -152,6 +148,33 @@ export function ModelPage() {
   }
 
   const familyColor = getFamilyColor(model.family)
+
+  const renderRow = ({ skill, theta, rank }: { skill: Skill; theta: number; rank: number }) => {
+    const bg = getMasteryColor(theta, darkMode)
+    const fg = getMasteryTextColor(theta, darkMode)
+    const barColor = rgbToRgba(bg, darkMode ? 0.25 : 0.18)
+    return (
+      <li key={skill.id}>
+        <Link
+          to={`/skill/${skill.id}`}
+          className="group relative flex items-center gap-2 overflow-hidden rounded-md border border-border bg-card px-2 py-1 text-sm hover:bg-surface-elevated"
+        >
+          <span aria-hidden className="absolute inset-y-0 left-0" style={{ width: `${theta * 100}%`, backgroundColor: barColor }} />
+          <span className="tabular relative w-7 shrink-0 text-right font-mono text-[11px] text-muted-foreground">{rank}</span>
+          <span
+            className="tabular relative inline-flex h-6 w-12 shrink-0 items-center justify-center rounded font-mono text-xs"
+            style={{ backgroundColor: bg, color: fg }}
+          >
+            {theta.toFixed(2)}
+          </span>
+          <span className="relative truncate" title={skill.label_english ?? skill.label}>
+            {displaySkillLabel(skill.label_english ?? skill.label)}
+          </span>
+          <span className="relative ml-auto shrink-0 text-xs text-muted-foreground">{skill.primary_benchmark}</span>
+        </Link>
+      </li>
+    )
+  }
   const hfUrl = model.hf_id
     ? `https://huggingface.co/${model.hf_id.replace('__', '/')}`
     : null
@@ -171,54 +194,35 @@ export function ModelPage() {
         <h1 className="break-words text-2xl font-semibold tracking-tight sm:text-3xl">
           {model.name}
         </h1>
-        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
-          <span
-            className="inline-flex h-5 items-center rounded-full border px-2 text-[11px] font-semibold"
-            style={{
-              color: familyColor,
-              borderColor: `${familyColor}55`,
-              backgroundColor: `${familyColor}14`,
-            }}
-          >
-            {model.family}
+        <p className="tabular mt-2 flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
+          <span className="h-2 w-2 rounded-full" style={{ backgroundColor: familyColor }} aria-hidden />
+          <span>{model.family} family</span>
+          <span aria-hidden>·</span>
+          <span>{model.params != null ? formatParams(model.params) : 'size unknown'}</span>
+          <span aria-hidden>·</span>
+          <span>
+            {model.accuracy != null ? `${(model.accuracy * 100).toFixed(1)}% of items correct` : 'accuracy unknown'}
           </span>
-          <MetaStat label="Tier" value={model.tier} />
-          <MetaStat label="Size" value={formatParams(model.params)} />
-          <MetaStat
-            label="Accuracy"
-            value={
-              model.accuracy != null
-                ? `${(model.accuracy * 100).toFixed(1)}%`
-                : '—'
-            }
-          />
-          <MetaStat label="Mean mastery" value={meanTheta.toFixed(3)} />
-          {hfUrl ? (
-            <a
-              href={hfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm text-brand hover:underline"
-            >
-              Hugging Face
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          ) : null}
-          <Link
-            to={`/compare?m=${model.id}`}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 text-xs font-medium text-brand-foreground transition-colors hover:bg-brand/90"
-          >
+          <span aria-hidden>·</span>
+          <span>
+            mean mastery <span className="font-semibold text-foreground">{meanTheta.toFixed(3)}</span>
+          </span>
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link to={`/compare?m=${model.id}`} className={ACTION}>
             <GitCompareArrows className="h-3.5 w-3.5" />
-            Compare with...
+            Compare with other models
           </Link>
-          <button
-            type="button"
-            onClick={() => downloadProfile(model, skills)}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-surface-elevated"
-          >
+          <button type="button" onClick={() => downloadProfile(model, skills)} className={ACTION}>
             <Download className="h-3.5 w-3.5" />
             Download profile (CSV)
           </button>
+          {hfUrl ? (
+            <a href={hfUrl} target="_blank" rel="noopener noreferrer" className={ACTION}>
+              <ExternalLink className="h-3.5 w-3.5" />
+              Hugging Face
+            </a>
+          ) : null}
         </div>
       </header>
 
@@ -240,56 +244,28 @@ export function ModelPage() {
         </div>
 
         <div className="min-w-0 flex-1">
-          <h2 className="text-lg font-semibold tracking-tight">
-            All {ranked.length} skills, ranked by mastery
-          </h2>
+          <h2 className="text-lg font-semibold tracking-tight">Skills by mastery</h2>
           <p className="mt-1 text-xs text-muted-foreground">
             Mastery runs from 0 to 1. It is the model's estimated level on a
             skill, not the share of that skill's items it answered correctly.
           </p>
-          <ul className="mt-3 space-y-1">
-            {ranked.map(({ skill, theta, rank }) => {
-              const bg = getMasteryColor(theta, darkMode)
-              const fg = getMasteryTextColor(theta, darkMode)
-              const barColor = rgbToRgba(bg, darkMode ? 0.25 : 0.18)
-              return (
-                <li key={skill.id}>
-                  <Link
-                    to={`/skill/${skill.id}`}
-                    className="group relative flex items-center gap-2 overflow-hidden rounded-md border border-border bg-card px-2 py-1 text-sm hover:bg-surface-elevated"
-                  >
-                    <span
-                      aria-hidden
-                      className="absolute inset-y-0 left-0"
-                      style={{
-                        width: `${theta * 100}%`,
-                        backgroundColor: barColor,
-                      }}
-                    />
-                    <span className="tabular relative w-7 shrink-0 text-right font-mono text-[11px] text-muted-foreground">
-                      {rank}
-                    </span>
-                    <span
-                      className="tabular relative inline-flex h-6 w-12 shrink-0 items-center justify-center rounded font-mono text-xs"
-                      style={{ backgroundColor: bg, color: fg }}
-                    >
-                      {theta.toFixed(2)}
-                    </span>
-                    <span
-                      className="relative truncate"
-                      title={skill.label_english ?? skill.label}
-                    >
-                      {displaySkillLabel(skill.label_english ?? skill.label)}
-                    </span>
-                    <span className="relative ml-auto shrink-0 text-xs text-muted-foreground">
-                      {skill.primary_benchmark}
-                    </span>
-                    <ExternalLink className="relative h-3 w-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
+          {showAll ? (
+            <ul className="mt-3 space-y-1">{ranked.map(renderRow)}</ul>
+          ) : (
+            <>
+              <h3 className="mt-4 text-sm font-semibold">Strongest 10</h3>
+              <ul className="mt-2 space-y-1">{ranked.slice(0, 10).map(renderRow)}</ul>
+              <h3 className="mt-5 text-sm font-semibold">Weakest 10</h3>
+              <ul className="mt-2 space-y-1">{ranked.slice(-10).map(renderRow)}</ul>
+            </>
+          )}
+          <button
+            type="button"
+            onClick={() => setShowAll((v) => !v)}
+            className="mt-4 text-sm font-medium text-brand hover:underline"
+          >
+            {showAll ? 'Show the strongest and weakest 10 only' : `Show all ${ranked.length} skills`}
+          </button>
         </div>
       </div>
     </div>

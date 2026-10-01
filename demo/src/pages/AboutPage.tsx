@@ -42,6 +42,15 @@ function Figure({
 
 const linkCls = 'text-brand hover:underline'
 
+const CONTENTS: Array<[string, string]> = [
+  ['how', 'How it works'],
+  ['why', 'Why profiles'],
+  ['predict', 'Predictions'],
+  ['numbers', 'Reading the numbers'],
+  ['data', 'Data and credits'],
+  ['cite', 'Citation'],
+]
+
 function Citation() {
   const [copied, setCopied] = useState(false)
   const copy = () => {
@@ -86,6 +95,13 @@ export function AboutPage() {
   return (
     <article className="page py-12 leading-7 text-foreground">
       <h1 className="text-3xl font-semibold tracking-tight">Method</h1>
+      <nav aria-label="On this page" className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+        {CONTENTS.map(([id, label]) => (
+          <a key={id} href={`#${id}`} className="text-brand hover:underline">
+            {label}
+          </a>
+        ))}
+      </nav>
 
       <p className="mt-5 max-w-[68ch] text-[15px] leading-7 text-foreground/90">
         SkillEval replaces the single benchmark score with a skill profile:
@@ -94,14 +110,14 @@ export function AboutPage() {
         across five public benchmarks.
       </p>
 
-      <section className="mt-10">
+      <section id="how" className="scroll-mt-20 mt-10">
         <h2 className="text-xl font-semibold tracking-tight">
           How it works
         </h2>
         <PipelineDiagram />
       </section>
 
-      <section className="mt-10">
+      <section id="why" className="scroll-mt-20 mt-10">
         <h2 className="text-xl font-semibold tracking-tight">
           Why profiles, not a single score
         </h2>
@@ -140,7 +156,7 @@ export function AboutPage() {
         </figure>
       </section>
 
-      <section className="mt-10">
+      <section id="predict" className="scroll-mt-20 mt-10">
         <h2 className="text-xl font-semibold tracking-tight">
           Do the profiles predict performance?
         </h2>
@@ -158,7 +174,7 @@ export function AboutPage() {
         />
       </section>
 
-      <section className="mt-10 max-w-[68ch]">
+      <section id="numbers" className="scroll-mt-20 mt-10 max-w-[68ch]">
         <h2 className="text-xl font-semibold tracking-tight">
           Reading the numbers
         </h2>
@@ -181,7 +197,7 @@ export function AboutPage() {
         </p>
       </section>
 
-      <section className="mt-10 max-w-[68ch]">
+      <section id="data" className="scroll-mt-20 mt-10 max-w-[68ch]">
         <h2 className="text-xl font-semibold tracking-tight">
           Data and credits
         </h2>
