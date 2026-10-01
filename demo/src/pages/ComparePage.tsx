@@ -62,7 +62,7 @@ function ModelPicker({
 
   return (
     <div ref={boxRef} className="relative">
-      <div className="flex h-full min-h-[120px] flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-surface/60 p-4">
+      <div className="flex h-full min-h-[120px] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-surface/60 p-4">
         <Plus className="h-4 w-4 text-muted-foreground" />
         <div className="relative w-full max-w-[240px]">
           <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
@@ -178,17 +178,13 @@ export function ComparePage() {
   const excludeSet = useMemo(() => new Set(ids), [ids])
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-10">
-      <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-        Head to head
-      </div>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight">
-        Compare models
-      </h1>
+    <div className="page py-10">
+     <div className="max-w-4xl">
+      <h1 className="text-3xl font-semibold tracking-tight">Compare models</h1>
       <p className="mt-3 max-w-[68ch] text-[15px] leading-7 text-foreground/90">
-        Pick two or three models to see their skill fingerprints side by side
-        and the skills where they diverge most. The selection lives in the
-        URL, so a comparison can be shared as a link.
+        Pick two or three models to see their skill profiles side by side and
+        the skills where they differ most. The selection is kept in the page
+        address, so a comparison can be shared as a link.
       </p>
 
       {error ? (
@@ -196,7 +192,7 @@ export function ComparePage() {
           Error loading data: {error}
         </div>
       ) : loading ? (
-        <div className="mt-8 h-72 animate-pulse rounded-xl bg-muted" />
+        <div className="mt-8 h-72 animate-pulse rounded-lg bg-muted" />
       ) : (
         <>
           {/* slots */}
@@ -211,7 +207,7 @@ export function ComparePage() {
             {selected.map((m, i) => (
               <div
                 key={m.id}
-                className="flex min-h-[120px] flex-col items-center justify-center gap-1.5 rounded-xl border border-border bg-card p-4"
+                className="flex min-h-[120px] flex-col items-center justify-center gap-1.5 rounded-lg border border-border bg-card p-4"
               >
                 <span
                   className="h-2.5 w-2.5 rounded-full"
@@ -256,26 +252,22 @@ export function ComparePage() {
               />
             </div>
           ) : suggestion ? (
-            <div className="mt-8 rounded-xl border border-border bg-surface p-5 text-sm">
-              <span className="text-muted-foreground">
-                Not sure where to start?{' '}
-              </span>
+            <p className="mt-8 text-sm text-muted-foreground">
+              Example:{' '}
               <button
                 type="button"
                 onClick={() => setIds([suggestion.a.id, suggestion.b.id])}
                 className="font-medium text-brand hover:underline"
               >
-                Try {suggestion.a.name} vs {suggestion.b.name}
+                {suggestion.a.name} and {suggestion.b.name}
               </button>
-              <span className="text-muted-foreground">
-                {' '}
-                (the strongest model overall against the best one at 13B or
-                under).
-              </span>
-            </div>
+              , the model with the highest mean mastery and the best one with at
+              most 13B parameters.
+            </p>
           ) : null}
         </>
       )}
+     </div>
     </div>
   )
 }

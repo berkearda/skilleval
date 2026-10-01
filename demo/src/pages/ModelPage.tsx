@@ -35,8 +35,7 @@ function formatParams(p: number | null): string {
   return `${(p * 1000).toFixed(0)}M`
 }
 
-const kicker =
-  'text-xs font-medium uppercase tracking-wider text-muted-foreground'
+const kicker = 'text-xs font-medium text-muted-foreground'
 
 /** Save the model's 100-skill profile as a CSV file, built in the browser. */
 function downloadProfile(model: Model, skills: Skill[]) {
@@ -114,7 +113,7 @@ export function ModelPage() {
 
   if (error) {
     return (
-      <div className="mx-auto max-w-3xl px-6 py-10">
+      <div className="page py-10">
         <div className="rounded-md border border-destructive bg-destructive/10 p-4 text-sm text-destructive">
           Error loading data: {error}
         </div>
@@ -123,14 +122,14 @@ export function ModelPage() {
   }
   if (loading) {
     return (
-      <div className="mx-auto max-w-5xl px-6 py-10">
-        <div className="h-72 animate-pulse rounded-xl bg-muted" />
+      <div className="page py-10">
+        <div className="h-72 animate-pulse rounded-lg bg-muted" />
       </div>
     )
   }
   if (!model) {
     return (
-      <div className="mx-auto max-w-3xl px-6 py-16">
+      <div className="page py-16">
         <h1 className="text-2xl font-semibold tracking-tight">
           Model not found
         </h1>
@@ -158,19 +157,18 @@ export function ModelPage() {
     : null
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-8">
-      <Link
-        to="/leaderboard"
-        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <ArrowLeft className="h-3.5 w-3.5" />
-        Back to leaderboard
-      </Link>
+    <div className="page py-8">
+      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+        <Link to="/leaderboard" className="hover:text-foreground">
+          Leaderboard
+        </Link>
+        <span className="mx-2">/</span>
+        <span className="break-all">{model.name}</span>
+      </nav>
 
       {/* header */}
-      <header className="mt-6 border-b border-border pb-6">
-        <div className={kicker}>Model</div>
-        <h1 className="mt-2 break-words text-2xl font-semibold tracking-tight sm:text-3xl">
+      <header className="border-b border-border pb-6">
+        <h1 className="break-words text-2xl font-semibold tracking-tight sm:text-3xl">
           {model.name}
         </h1>
         <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
@@ -185,7 +183,7 @@ export function ModelPage() {
             {model.family}
           </span>
           <MetaStat label="Tier" value={model.tier} />
-          <MetaStat label="Params" value={formatParams(model.params)} />
+          <MetaStat label="Size" value={formatParams(model.params)} />
           <MetaStat
             label="Accuracy"
             value={
@@ -194,7 +192,7 @@ export function ModelPage() {
                 : '—'
             }
           />
-          <MetaStat label="Mean θ" value={meanTheta.toFixed(3)} />
+          <MetaStat label="Mean mastery" value={meanTheta.toFixed(3)} />
           {hfUrl ? (
             <a
               href={hfUrl}
@@ -208,7 +206,7 @@ export function ModelPage() {
           ) : null}
           <Link
             to={`/compare?m=${model.id}`}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 text-xs font-medium text-brand-foreground shadow-sm transition-colors hover:bg-brand/90"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-brand px-3 py-1.5 text-xs font-medium text-brand-foreground transition-colors hover:bg-brand/90"
           >
             <GitCompareArrows className="h-3.5 w-3.5" />
             Compare with...
@@ -216,7 +214,7 @@ export function ModelPage() {
           <button
             type="button"
             onClick={() => downloadProfile(model, skills)}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-sm transition-colors hover:bg-surface-elevated"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-surface-elevated"
           >
             <Download className="h-3.5 w-3.5" />
             Download profile (CSV)
@@ -227,7 +225,7 @@ export function ModelPage() {
       {/* fingerprint + ranked skills */}
       <div className="mt-8 flex flex-col gap-8 lg:flex-row">
         <div className="shrink-0 lg:sticky lg:top-20 lg:self-start">
-          <div className="flex flex-col items-center rounded-xl border border-border bg-card p-6">
+          <div className="flex flex-col items-center rounded-lg border border-border bg-card p-6">
             <ModelFingerprint
               model={model}
               orderedSkills={orderedSkills}
@@ -235,8 +233,8 @@ export function ModelPage() {
               size={240}
             />
             <p className="mt-3 max-w-[240px] text-center text-[11px] leading-4 text-muted-foreground">
-              The skill fingerprint: one spoke per skill in grid order, length
-              and color by mastery, benchmark sectors on the rim.
+              One spoke per skill; longer and darker means higher mastery. The
+              outer ring marks each skill's benchmark.
             </p>
           </div>
         </div>
@@ -246,7 +244,7 @@ export function ModelPage() {
             All {ranked.length} skills, ranked by mastery
           </h2>
           <p className="mt-1 text-xs text-muted-foreground">
-            Mastery θ runs from 0 to 1. It is the model's estimated level on a
+            Mastery runs from 0 to 1. It is the model's estimated level on a
             skill, not the share of that skill's items it answered correctly.
           </p>
           <ul className="mt-3 space-y-1">

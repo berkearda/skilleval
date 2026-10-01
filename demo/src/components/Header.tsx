@@ -9,7 +9,7 @@ const navItems = [
   { to: '/leaderboard', label: 'Leaderboard' },
   { to: '/skills', label: 'Skills' },
   { to: '/compare', label: 'Compare' },
-  { to: '/about', label: 'Methodology' },
+  { to: '/about', label: 'Method' },
 ]
 
 const linkCls = ({ isActive }: { isActive: boolean }) =>
@@ -25,7 +25,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80">
-      <div className="mx-auto flex max-w-screen-2xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+      <div className="page flex items-center justify-between gap-3 py-3">
         <Link to="/" onClick={close} className="flex items-baseline gap-2">
           <span className="font-display text-base font-semibold tracking-tight">
             SkillEval
@@ -42,12 +42,6 @@ export function Header() {
               </NavLink>
             ))}
           </nav>
-          <Link
-            to="/leaderboard"
-            className="ml-2 hidden rounded-md bg-brand px-3 py-1.5 text-sm font-medium text-brand-foreground transition-colors hover:bg-brand/90 lg:inline-flex"
-          >
-            Explore all 3,811 models
-          </Link>
           <div className="ml-1 sm:ml-2">
             <ThemeToggle />
           </div>
@@ -67,7 +61,7 @@ export function Header() {
         <nav
           id="mobile-nav"
           aria-label="Main"
-          className="flex flex-col border-t border-border px-4 py-2 md:hidden"
+          className="page flex flex-col border-t border-border py-2 md:hidden"
         >
           {navItems.map((item) => (
             <NavLink

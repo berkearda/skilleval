@@ -11,7 +11,7 @@ export function ExampleItemCard({ item }: ExampleItemCardProps) {
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
           {item.subtask ? (
-            <div className="text-xs uppercase tracking-wide text-muted-foreground">
+            <div className="text-xs font-medium text-muted-foreground">
               {item.subtask.replace(/_/g, ' ')}
             </div>
           ) : null}

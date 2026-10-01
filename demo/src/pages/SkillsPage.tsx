@@ -61,11 +61,8 @@ export function SkillsPage() {
   const total = groups.reduce((n, g) => n + g.skills.length, 0)
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-10">
-      <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-        Taxonomy
-      </div>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight">
+    <div className="page py-10">
+      <h1 className="text-3xl font-semibold tracking-tight">
         All 100 skills
       </h1>
       <p className="mt-3 max-w-[68ch] text-[15px] leading-7 text-foreground/90">
@@ -99,7 +96,7 @@ export function SkillsPage() {
       ) : loading ? (
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-64 animate-pulse rounded-xl bg-muted" />
+            <div key={i} className="h-64 animate-pulse rounded-lg bg-muted" />
           ))}
         </div>
       ) : (

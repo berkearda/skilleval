@@ -16,8 +16,8 @@ const AboutPage = lazy(() => import('@/pages/AboutPage').then((m) => ({ default:
 
 function PageFallback() {
   return (
-    <div className="mx-auto max-w-6xl px-6 py-12">
-      <div className="h-64 animate-pulse rounded-xl bg-muted" />
+    <div className="page py-12">
+      <div className="h-64 animate-pulse rounded-lg bg-muted" />
     </div>
   )
 }

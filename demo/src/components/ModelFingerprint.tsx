@@ -130,7 +130,7 @@ export function ModelFingerprint({
         className="fill-muted-foreground"
         style={{ fontSize: size * 0.05 }}
       >
-        mean θ
+        mean
       </text>
     </svg>
   )

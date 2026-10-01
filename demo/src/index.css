@@ -1,5 +1,3 @@
-@import '@fontsource-variable/space-grotesk';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -78,37 +76,24 @@
     font-feature-settings: "tnum" 1;
   }
   html {
+    /* reserve the scrollbar's space on every page, so the content does not
+       shift sideways between short and long pages */
+    scrollbar-gutter: stable;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
       "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
-  /* Display face: headings and the wordmark carry the site's identity. */
   h1,
   h2,
   .font-display {
-    font-family: "Space Grotesk Variable", ui-sans-serif, system-ui,
-      sans-serif;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
   }
 }
 
-/* Hero mosaic: cells flash bright as the resolve wave reaches them, and a
-   scan line sweeps across the grid once while the model "fits". */
-@keyframes cellflash {
-  from {
-    filter: brightness(1.8);
-  }
-  to {
-    filter: brightness(1);
-  }
-}
-@keyframes scanwipe {
-  from {
-    transform: translateX(-52px);
-    opacity: 0.9;
-  }
-  to {
-    transform: translateX(300px);
-    opacity: 0;
+@layer components {
+  /* One page width for the header, every page and the footer, so all of
+     them start at the same left edge. */
+  .page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6;
   }
 }
 

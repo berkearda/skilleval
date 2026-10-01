@@ -31,7 +31,6 @@ import { RowExpansion } from '@/components/RowExpansion'
 import { CompareModal, CompareTray } from '@/components/CompareOverlay'
 import { ModelFilters } from '@/components/ModelFilters'
 import { SkillCell } from '@/components/SkillCell'
-import { BenchmarkBadge } from '@/components/BenchmarkBadge'
 
 interface ModelSkillTableProps {
   models: Model[]
@@ -443,8 +442,8 @@ export function ModelSkillTable({
       </div>
 
       {/* Benchmark jump bar */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-border bg-background px-6 py-1.5">
-        <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+      <div className="flex flex-wrap items-center gap-2 bg-background py-1.5">
+        <span className="text-xs font-medium text-muted-foreground">
           Jump to
         </span>
         {groups.map((g) => (
@@ -463,7 +462,7 @@ export function ModelSkillTable({
         ))}
       </div>
 
-      <div className="relative flex-1 border-t border-border">
+      <div className="relative flex-1 overflow-hidden rounded-md border border-border">
       {/* contain:strict isolates the scroller's layout/paint from the page;
           without it Chrome repaints the full grid every scroll frame and
           scrolling visibly lags. Size comes from the wrapper, so size
@@ -670,7 +669,7 @@ const TableHeader = memo(function TableHeader({
           width={COL_W.name}
         />
         <PinnedHeaderCell
-          label="Acc"
+          label="Acc."
           k={{ kind: 'acc' }}
           sort={sort}
           onToggle={onToggleSort}
@@ -678,7 +677,7 @@ const TableHeader = memo(function TableHeader({
           align="right"
         />
         <PinnedHeaderCell
-          label="Mean θ"
+          label="Mean"
           k={{ kind: 'mean' }}
           sort={sort}
           onToggle={onToggleSort}
@@ -691,15 +690,29 @@ const TableHeader = memo(function TableHeader({
       <div className="flex flex-col">
         {/* Top: group bands */}
         <div className="flex" style={{ height: GROUP_HEADER_H }}>
-          {groups.map((g) => (
-            <div
-              key={g.benchmark}
-              style={{ width: g.skills.length * COL_W.skill }}
-              title={`${g.benchmark} (${g.skills.length} skills)`}
-            >
-              <BenchmarkBadge benchmark={g.benchmark} count={g.skills.length} />
-            </div>
-          ))}
+          {groups.map((g) => {
+            const color = getBenchmarkColor(g.benchmark)
+            return (
+              <div
+                key={g.benchmark}
+                className="flex h-full items-center"
+                style={{
+                  width: g.skills.length * COL_W.skill,
+                  backgroundColor: `${color}1a`,
+                  boxShadow: `inset 0 -2px 0 0 ${color}`,
+                }}
+                title={`${g.benchmark} (${g.skills.length} skills)`}
+              >
+                {/* the label stays in view while scrolling through the group */}
+                <span
+                  className="sticky whitespace-nowrap px-2 text-xs font-semibold"
+                  style={{ left: pinnedTotalW, color }}
+                >
+                  {g.benchmark} · {g.skills.length} skills
+                </span>
+              </div>
+            )
+          })}
         </div>
         {/* Bottom: individual skill columns */}
         <div className="flex" style={{ height: SKILL_HEADER_H }}>
@@ -750,7 +763,7 @@ function PinnedHeaderCell({
       type="button"
       onClick={() => onToggle(k)}
       className={cn(
-        'flex h-full items-center gap-1 border-r border-b border-border px-2 text-xs font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-accent',
+        'flex h-full items-center gap-1 border-r border-b border-border px-2 text-xs font-semibold text-foreground transition-colors hover:bg-accent',
         align === 'right' && 'justify-end',
         align === 'center' && 'justify-center'
       )}
@@ -802,8 +815,10 @@ function SkillHeaderCell({
         width,
         height: SKILL_HEADER_H,
         borderLeft: isGroupStart ? '1px solid hsl(var(--border))' : undefined,
+        // a light tint per benchmark, so the column groups read as bands
+        backgroundColor: isSorted ? undefined : `${getBenchmarkColor(skill.primary_benchmark)}0d`,
       }}
-      title={skill.label}
+      title={`${skill.label} (${skill.primary_benchmark}, ${skill.n_items} items)`}
     >
       <button
         type="button"
@@ -811,7 +826,7 @@ function SkillHeaderCell({
         className="flex w-full flex-1 flex-col items-center justify-end gap-1 overflow-hidden text-[10px] font-medium leading-tight text-foreground"
       >
         <span
-          className="line-clamp-3 w-full px-0.5 text-center"
+          className="line-clamp-4 w-full px-0.5 text-center"
           style={{ wordBreak: 'break-word', whiteSpace: 'normal' }}
         >
           {displaySkillLabel(skill.label)}

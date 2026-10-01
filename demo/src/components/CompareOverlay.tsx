@@ -23,8 +23,8 @@ export function CompareTray({
 }) {
   if (models.length === 0) return null
   return (
-    <div className="fixed bottom-5 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 shadow-lg">
-      <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+    <div className="fixed bottom-5 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 shadow-lg">
+      <span className="text-xs font-medium text-muted-foreground">
         Compare
       </span>
       {models.map((m, i) => (
@@ -123,7 +123,7 @@ export function CompareView({
         {models.map((m, i) => (
           <div
             key={m.id}
-            className="flex flex-col items-center rounded-xl border border-border bg-surface p-4"
+            className="flex flex-col items-center rounded-lg border border-border bg-surface p-4"
           >
             <ModelFingerprint
               model={m}
@@ -150,7 +150,7 @@ export function CompareView({
       </div>
 
       {/* divergence dot tracks */}
-      <h3 className="mt-6 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+      <h3 className="mt-6 text-sm font-semibold text-foreground">
         Where they differ most
       </h3>
       <ul className="mt-3 space-y-2.5">
@@ -231,15 +231,12 @@ export function CompareModal({
         onClick={onClose}
       />
       <div
-        className="relative max-h-[88vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-border bg-card p-6 shadow-2xl"
+        className="relative max-h-[88vh] w-full max-w-3xl overflow-y-auto rounded-lg border border-border bg-card p-6 shadow-xl"
         style={{ animation: 'riseup 200ms ease-out' }}
       >
         <div className="flex items-start justify-between">
           <div>
-            <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Skill profiles
-            </div>
-            <h2 className="mt-1 text-xl font-semibold tracking-tight">
+            <h2 className="text-xl font-semibold tracking-tight">
               {models.map((m) => m.name).join('  vs  ')}
             </h2>
           </div>

@@ -50,16 +50,11 @@ export function TablePage() {
   return (
     // Subtract header (~65px) and footer (~52px) so the table fills the
     // remaining viewport without forcing page-level vertical scroll.
-    <div className="flex h-[calc(100vh-117px)] flex-col overflow-hidden">
-      <div className="border-b border-border bg-background px-6 py-3">
+    <div className="page flex h-[calc(100vh-61px)] flex-col overflow-hidden pb-4">
+      <div className="pb-2 pt-6">
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <div>
-            <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Leaderboard
-            </div>
-            <h1 className="text-xl font-semibold tracking-tight">
-              Model by skill mastery
-            </h1>
+            <h1 className="text-2xl font-semibold tracking-tight">Leaderboard</h1>
           </div>
           <p className="text-sm text-muted-foreground tabular">
             {models.length > 0 && skills.length > 0

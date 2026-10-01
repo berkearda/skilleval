@@ -7,7 +7,7 @@ interface StatCardProps {
 function StatCard({ label, value, hint }: StatCardProps) {
   return (
     <div className="flex-1 rounded-md border border-border bg-surface px-4 py-3">
-      <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+      <div className="text-xs font-medium text-muted-foreground">
         {label}
       </div>
       <div className="tabular mt-1 text-2xl font-semibold tabular-nums text-foreground">
@@ -39,7 +39,7 @@ export function SkillStatsRow({
         hint={nItems === 1 ? 'only one item' : undefined}
       />
       <StatCard
-        label="Mean discrimination α of its items"
+        label="Mean item discrimination"
         value={alphaMean.toFixed(3)}
       />
       <StatCard

@@ -5,6 +5,7 @@ import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { displaySkillLabel } from '@/lib/labels'
 import { BenchmarkBadge } from '@/components/BenchmarkBadge'
+import { getBenchmarkColor } from '@/lib/colors'
 import { SkillStatsRow } from '@/components/SkillStatsRow'
 import { TopLLMsChart } from '@/components/TopLLMsChart'
 import { ExampleItemCard } from '@/components/ExampleItemCard'
@@ -60,9 +61,40 @@ function BackLink({ className = '' }: { className?: string }) {
   )
 }
 
+/** Which benchmarks the items needing this skill come from. */
+function BenchmarkMix({ counts }: { counts: Record<string, number> }) {
+  const entries = Object.entries(counts)
+    .filter(([, n]) => n > 0)
+    .sort((a, b) => b[1] - a[1])
+  const total = entries.reduce((s, [, n]) => s + n, 0)
+  if (total === 0) return null
+  return (
+    <div className="max-w-2xl">
+      <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-muted">
+        {entries.map(([b, n]) => (
+          <div
+            key={b}
+            style={{ width: `${(100 * n) / total}%`, backgroundColor: getBenchmarkColor(b) }}
+            title={`${b}: ${n.toLocaleString()} items`}
+          />
+        ))}
+      </div>
+      <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted-foreground">
+        {entries.map(([b, n]) => (
+          <span key={b} className="inline-flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-sm" style={{ backgroundColor: getBenchmarkColor(b) }} />
+            {b}
+            <span className="tabular text-foreground">{n.toLocaleString()}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function NotFound({ rawId }: { rawId: string | undefined }) {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="page py-16">
       <h1 className="text-2xl font-semibold tracking-tight">Skill not found</h1>
       <p className="mt-3 text-muted-foreground">
         No skill matches the id <code className="rounded bg-muted px-1.5 py-0.5 text-sm">{rawId ?? '(missing)'}</code>.
@@ -77,7 +109,7 @@ function NotFound({ rawId }: { rawId: string | undefined }) {
 
 function SkillDetailSkeleton() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-8">
+    <div className="page py-8">
       <div className="mb-6">
         <div className="h-4 w-32 animate-pulse rounded bg-muted" />
       </div>
@@ -133,7 +165,7 @@ export function SkillDetailPage() {
 
   if (error) {
     return (
-      <div className="mx-auto max-w-3xl px-6 py-10">
+      <div className="page py-10">
         <div className="rounded-md border border-destructive bg-destructive/10 p-4 text-sm text-destructive">
           Error loading data: {error}
         </div>
@@ -163,17 +195,18 @@ export function SkillDetailPage() {
   const examples = skill.example_items ?? []
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-8">
-      <div className="mb-6">
-        <BackLink />
-      </div>
+    <div className="page py-8">
+      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+        <Link to="/skills" className="hover:text-foreground">
+          Skills
+        </Link>
+        <span className="mx-2">/</span>
+        <span>Skill #{skill.id}</span>
+      </nav>
 
       {/* Header */}
       <header className="border-b border-border pb-6">
-        <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          Skill #{skill.id}
-        </div>
-        <h1 className="mt-2 break-words text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
+        <h1 className="break-words text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
           {heading}
         </h1>
         {skill.label_english && skill.label !== skill.label_english ? (
@@ -204,13 +237,23 @@ export function SkillDetailPage() {
         />
       </section>
 
-      {/* Top-10 LLMs chart */}
+      {/* where the items come from */}
+      {skill.items_by_benchmark ? (
+        <section className="mt-8">
+          <h2 className="text-sm font-semibold">Where its items come from</h2>
+          <div className="mt-3">
+            <BenchmarkMix counts={skill.items_by_benchmark} />
+          </div>
+        </section>
+      ) : null}
+
+      {/* top 10 models */}
       <section className="mt-10">
         <h2 className="text-lg font-semibold tracking-tight">
-          Top-10 LLMs on this skill
+          Top 10 models on this skill
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Ranked by per-skill mastery θ; full range [0, 1].
+          Ranked by mastery on this skill, from 0 to 1.
         </p>
         <p className="mt-1 max-w-[68ch] text-sm text-muted-foreground">
           Differences smaller than the estimation noise are not meaningful; read

@@ -144,7 +144,7 @@ export function ModelFilters({
   return (
     <div className="bg-background">
       {/* Row 1: controls */}
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 py-3">
         {/* Search */}
         <div className="relative w-64">
           <Search
@@ -156,13 +156,13 @@ export function ModelFilters({
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search model..."
-            className="h-9 w-full rounded-md border border-input bg-background pl-8 pr-3 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            className="h-9 w-full rounded-md border border-input bg-background pl-8 pr-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           />
         </div>
 
         {/* Family chips */}
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <span className="text-xs font-medium text-muted-foreground">
             Family
           </span>
           {FAMILY_LIST.map((fam) => {
@@ -176,7 +176,7 @@ export function ModelFilters({
                 className={cn(
                   'h-7 rounded-full border px-2.5 text-xs font-medium transition-colors',
                   active
-                    ? 'text-white shadow-sm'
+                    ? 'text-white'
                     : 'border-border bg-background text-foreground hover:bg-accent'
                 )}
                 style={
@@ -194,7 +194,7 @@ export function ModelFilters({
 
         {/* Tier checkboxes */}
         <div className="flex flex-wrap items-center gap-3">
-          <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <span className="text-xs font-medium text-muted-foreground">
             Tier
           </span>
           {TIER_LIST.map((tier) => {
@@ -224,7 +224,7 @@ export function ModelFilters({
       </div>
 
       {/* Row 2: applied-filter chip strip + count */}
-      <div className="flex flex-wrap items-center gap-1.5 border-t border-border bg-background px-6 py-2 text-xs">
+      <div className="flex flex-wrap items-center gap-1.5 border-t border-border bg-background py-2 text-xs">
         <span className="text-muted-foreground tabular">
           {visibleCount.toLocaleString()} of {totalCount.toLocaleString()} models
         </span>

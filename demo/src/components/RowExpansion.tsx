@@ -35,7 +35,7 @@ function formatParams(p: number | null): string {
   return `${(p * 1000).toFixed(0)}M`
 }
 
-const kicker = 'text-xs font-medium uppercase tracking-wider text-muted-foreground'
+const kicker = 'text-xs font-medium text-muted-foreground'
 
 function MetaStat({ label, value }: { label: string; value: string }) {
   return (
@@ -101,7 +101,7 @@ export function RowExpansion({
               : '—'
           }
         />
-        <MetaStat label="Mean θ" value={meanTheta.toFixed(3)} />
+        <MetaStat label="Mean mastery" value={meanTheta.toFixed(3)} />
         <Link
           to={`/model/${model.id}`}
           className="inline-flex items-center gap-1 text-sm text-brand hover:underline"
@@ -192,7 +192,7 @@ export function RowExpansion({
             className={
               inCompare
                 ? 'inline-flex items-center gap-1.5 rounded-lg border border-brand bg-brand/10 px-3 py-1.5 text-xs font-medium text-brand transition-colors hover:bg-brand/15'
-                : 'inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-sm transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50'
+                : 'inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50'
             }
           >
             {inCompare ? (

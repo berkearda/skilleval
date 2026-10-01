@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { Check, Copy } from 'lucide-react'
 import { PipelineDiagram } from '@/components/PipelineDiagram'
+import { AUTHORS, BIBTEX, PAPER_TITLE } from '@/lib/citation'
 import { WeakBeatsStrongChart } from '@/components/WeakBeatsStrongChart'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { useWeakBeatsStrong } from '@/hooks/useWeakBeatsStrong'
@@ -17,7 +21,7 @@ function Figure({
   maxWidth?: number
 }) {
   return (
-    <figure className="mt-4">
+    <figure className="mt-4 max-w-4xl">
       {/* Figures come from the paper and are rendered on white; keep a white
           card in both themes so dark mode looks intentional. */}
       <div className="rounded-lg border border-border bg-white p-4 sm:p-6">
@@ -38,18 +42,50 @@ function Figure({
 
 const linkCls = 'text-brand hover:underline'
 
+function Citation() {
+  const [copied, setCopied] = useState(false)
+  const copy = () => {
+    void navigator.clipboard?.writeText(BIBTEX).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1600)
+    })
+  }
+  return (
+    <section id="cite" className="mt-10 max-w-4xl scroll-mt-20">
+      <h2 className="text-xl font-semibold tracking-tight">Citation</h2>
+      <p className="mt-3 max-w-[68ch] text-[15px] leading-7 text-foreground/90">
+        {AUTHORS.map((a) => a.name).join(', ')}. <em>{PAPER_TITLE}</em>. 2026. The
+        paper is forthcoming; until then, please cite it as follows.
+      </p>
+      <div className="relative mt-3 rounded-lg border border-border bg-card">
+        <pre className="whitespace-pre-wrap break-words p-4 pr-24 font-mono text-xs leading-5 text-foreground">
+          {BIBTEX}
+        </pre>
+        <button
+          type="button"
+          onClick={copy}
+          className="absolute right-2 top-2 inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1 text-xs text-foreground transition-colors hover:bg-surface-elevated"
+        >
+          {copied ? <Check className="h-3.5 w-3.5 text-brand" /> : <Copy className="h-3.5 w-3.5 text-muted-foreground" />}
+          {copied ? 'Copied' : 'Copy'}
+        </button>
+      </div>
+    </section>
+  )
+}
+
 export function AboutPage() {
-  usePageTitle('Methodology · SkillEval')
+  usePageTitle('Method · SkillEval')
   const { data: wbsData, error: wbsError } = useWeakBeatsStrong()
   const wbs = wbsData?.wbs
+  // the router does not scroll to #anchors by itself (footer and home link to #cite)
+  const { hash } = useLocation()
+  useEffect(() => {
+    if (hash) document.getElementById(hash.slice(1))?.scrollIntoView()
+  }, [hash])
   return (
-    <article className="mx-auto max-w-4xl px-6 py-12 leading-7 text-foreground">
-      <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-        Methodology
-      </div>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight">
-        About SkillEval
-      </h1>
+    <article className="page py-12 leading-7 text-foreground">
+      <h1 className="text-3xl font-semibold tracking-tight">Method</h1>
 
       <p className="mt-5 max-w-[68ch] text-[15px] leading-7 text-foreground/90">
         SkillEval replaces the single benchmark score with a skill profile:
@@ -85,7 +121,7 @@ export function AboutPage() {
             </>
           )}
         </p>
-        <figure className="mt-4">
+        <figure className="mt-4 max-w-4xl">
           {wbsData ? (
             <WeakBeatsStrongChart wbs={wbsData.wbs} skills={wbsData.skills} />
           ) : wbsError ? (
@@ -167,6 +203,8 @@ export function AboutPage() {
           GPQA authors ask that they not be posted in plain text.
         </p>
       </section>
+
+      <Citation />
     </article>
   )
 }

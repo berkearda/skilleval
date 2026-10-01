@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, GitCompareArrows, RotateCcw } from 'lucide-react'
 import { PipelineDiagram } from '@/components/PipelineDiagram'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import { usePageTitle } from '@/hooks/usePageTitle'
+import { AFFILIATIONS, AUTHORS, DATA_URL, PAPER_TITLE, REPO_URL } from '@/lib/citation'
+import type { Skill } from '@/lib/types'
 import {
   getFamilyColor,
   getMasteryColor,
@@ -102,153 +103,59 @@ function ProfileSparkline({
   )
 }
 
-/** Deterministic per-cell pseudo-random in [0,1): no Math.random so frames
- * are reproducible. */
-function cellRand(i: number, tick: number): number {
-  const x = Math.sin(i * 127.1 + tick * 311.7) * 43758.5453
-  return x - Math.floor(x)
-}
-
-const NOISE_TICKS = 9 // response samples streamed in while flickering
-const NOISE_MS = 150 // per flicker frame: fast, like data arriving
-const RESOLVE_MS = 520 // per-cell color transition
-
-/** The hero visual tells the method's story ONCE: raw correct/incorrect
- * responses stream in as fast binary flicker (real Bernoulli draws from each
- * cell's actual theta, so strong rows read denser even as noise), then a
- * scan line sweeps the grid and the cells resolve left-to-right into the
- * mastery heatmap, flashing as the wave reaches them. It then settles for
- * good, with a small replay control. Static when reduced motion is set. */
+/** A real slice of the mastery matrix: the nine models with the highest mean
+ * mastery (rows) on 14 of the 100 skills (columns), on the site's colour scale. */
 function MatrixMosaic({
   models,
+  skills,
   darkMode,
 }: {
   models: RankedModel[]
+  skills: Skill[]
   darkMode: boolean
 }) {
   const rows = models.slice(0, 9)
   const cols = Array.from({ length: 14 }, (_, i) => i * 7 + 2)
-
-  const reduced = useMemo(
-    () =>
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-    []
-  )
-  const [resolved, setResolved] = useState(reduced)
-  const [tick, setTick] = useState(0)
-  const [run, setRun] = useState(0)
-  const hasData = rows.length > 0
-
-  useEffect(() => {
-    if (reduced || !hasData) return
-    let alive = true
-    let t: ReturnType<typeof setTimeout>
-    const step = (i: number) => {
-      if (!alive) return
-      if (i < NOISE_TICKS) {
-        setTick(i)
-        t = setTimeout(() => step(i + 1), NOISE_MS)
-      } else {
-        setResolved(true) // settle; no loop
-      }
-    }
-    t = setTimeout(() => step(0), 350)
-    return () => {
-      alive = false
-      clearTimeout(t)
-    }
-  }, [reduced, hasData, run])
-
-  if (!hasData) {
-    return (
-      <div className="h-[210px] w-[300px] animate-pulse rounded-lg bg-muted" />
-    )
+  if (rows.length === 0) {
+    return <div className="h-[210px] w-[277px] animate-pulse rounded-lg bg-muted" />
   }
-
-  const onColor = darkMode ? 'hsl(220 18% 72%)' : 'hsl(222 32% 32%)'
-  const offColor = darkMode ? 'hsl(222 18% 15%)' : 'hsl(220 28% 89%)'
-
+  const label = new Map(skills.map((s) => [s.id, s.label]))
+  const ramp = [0, 0.25, 0.5, 0.75, 1].map((t) => getMasteryColor(t, darkMode)).join(', ')
   return (
-    <div aria-hidden>
-      <div className="relative overflow-hidden rounded-md p-px">
-        <div
-          className="grid gap-[3px]"
-          style={{ gridTemplateColumns: `repeat(${cols.length}, 17px)` }}
-        >
-          {rows.flatMap((m, r) =>
-            cols.map((c, ci) => {
-              const theta = m.theta[c] ?? 0
-              const i = r * cols.length + ci
-              const correct = cellRand(i, tick) < theta
-              const delay = ci * 60 + r * 16
-              return (
-                <span
-                  key={`${r}-${c}`}
-                  className="h-[17px] w-[17px] rounded-[3px]"
-                  style={{
-                    backgroundColor: resolved
-                      ? getMasteryColor(theta, darkMode)
-                      : correct
-                        ? onColor
-                        : offColor,
-                    transition: `background-color ${RESOLVE_MS}ms ease`,
-                    transitionDelay: resolved ? `${delay}ms` : '0ms',
-                    animation:
-                      resolved && !reduced
-                        ? `cellflash 480ms ${delay}ms ease-out`
-                        : 'none',
-                  }}
-                />
-              )
-            })
-          )}
-        </div>
-        {/* scan line: sweeps once as the model "fits" */}
-        {resolved && !reduced ? (
-          <span
-            className="pointer-events-none absolute inset-y-0 w-12"
-            style={{
-              background:
-                'linear-gradient(90deg, transparent, hsl(var(--brand) / 0.30), transparent)',
-              animation: 'scanwipe 1.4s ease-out forwards',
-            }}
-          />
-        ) : null}
+    <figure className="w-[277px]">
+      <div
+        className="grid gap-[3px]"
+        style={{ gridTemplateColumns: `repeat(${cols.length}, 17px)` }}
+      >
+        {rows.flatMap((m) =>
+          cols.map((c) => {
+            const theta = m.theta[c] ?? 0
+            return (
+              <span
+                key={`${m.id}-${c}`}
+                className="h-[17px] w-[17px] rounded-[3px]"
+                style={{ backgroundColor: getMasteryColor(theta, darkMode) }}
+                title={`${m.name} · ${label.get(c) ?? `skill ${c}`}: ${theta.toFixed(2)}`}
+              />
+            )
+          })
+        )}
       </div>
-      <div className="relative mt-2 h-4 text-right text-[11px] text-muted-foreground">
-        <span
-          className="absolute inset-0 whitespace-nowrap transition-opacity duration-500"
-          style={{ opacity: resolved ? 0 : 1 }}
-        >
-          simulated right-or-wrong answers arriving
+      <figcaption className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
+        <span>Top 9 models × 14 of the 100 skills</span>
+        <span className="flex items-center gap-1.5">
+          0
+          <span className="h-2 w-14 rounded-sm" style={{ background: `linear-gradient(90deg, ${ramp})` }} />
+          1
         </span>
-        <span
-          className="absolute inset-0 flex items-center justify-end gap-2 whitespace-nowrap transition-opacity duration-500"
-          style={{ opacity: resolved ? 1 : 0 }}
-        >
-          resolved: a slice of the real mastery matrix
-          <button
-            type="button"
-            onClick={() => {
-              setResolved(false)
-              setRun((n) => n + 1)
-            }}
-            className="pointer-events-auto text-muted-foreground transition-colors hover:text-brand"
-            aria-label="Replay the animation"
-            title="Replay"
-          >
-            <RotateCcw className="h-3 w-3" />
-          </button>
-        </span>
-      </div>
-    </div>
+      </figcaption>
+    </figure>
   )
 }
 
 export function HomePage() {
-  usePageTitle('SkillEval: skill-level mastery for every language model')
-  const { models, loading } = useSkillEvalData()
+  usePageTitle('SkillEval: interpretable ability profiles of LLMs')
+  const { models, skills, loading } = useSkillEvalData()
   const darkMode = useDarkMode()
 
   const top = useMemo<RankedModel[]>(() => {
@@ -289,92 +196,92 @@ export function HomePage() {
     return `${top[0].id},${bestSmall.id}`
   }, [top, models])
 
-  const stats = [
-    { value: '3,811', label: 'open-weights models' },
-    { value: '100', label: 'skills' },
-    { value: '9,523', label: 'items' },
-    { value: '5', label: 'benchmarks' },
-  ]
 
 
   return (
     <div>
-      {/* Hero: full-bleed blue wash band with a data-true matrix mosaic */}
-      <div className="border-b border-border bg-gradient-to-b from-brand/[0.08] via-brand/[0.03] to-transparent">
-        <section className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-12 sm:py-16 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-[60ch]">
-            <div className="text-xs font-medium uppercase tracking-wider text-brand">
-              Item-response leaderboard
-            </div>
-            <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.06] sm:text-[3.4rem]">
-              Skill-level mastery for every language model.
+      <div className="border-b border-border bg-gradient-to-b from-brand/[0.06] via-brand/[0.02] to-transparent">
+        <section className="page flex flex-col gap-10 py-12 sm:py-14 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-[46rem]">
+            <h1 className="text-balance text-3xl font-semibold leading-tight sm:text-[2.5rem]">
+              {PAPER_TITLE}
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              SkillEval estimates how 3,811 models master 100 academic skills
-              with a cognitive-diagnostic item-response model. One profile per
-              model, not one score.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2">
-              {stats.map((s, i) => (
-                <span key={s.label} className="flex items-center gap-3 text-sm">
-                  <span>
-                    <span className="tabular font-semibold text-foreground">
-                      {s.value}
-                    </span>{' '}
-                    <span className="text-muted-foreground">{s.label}</span>
+            <p className="mt-5 text-[15px] leading-6 text-foreground">
+              {AUTHORS.map((a, i) => (
+                <Fragment key={a.name}>
+                  {/* a name never breaks; the space after its comma can */}
+                  <span className="whitespace-nowrap">
+                    {a.name}
+                    <sup className="ml-px text-[10px] text-muted-foreground">{a.affiliation}</sup>
+                    {i < AUTHORS.length - 1 ? ',' : ''}
                   </span>
-                  {i < stats.length - 1 ? (
-                    <span aria-hidden className="h-3.5 w-px bg-border" />
-                  ) : null}
+                  {i < AUTHORS.length - 1 ? ' ' : ''}
+                </Fragment>
+              ))}
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {AFFILIATIONS.map((a, i) => (
+                <span key={a} className="mr-4">
+                  <sup className="mr-0.5 text-[10px]">{i + 1}</sup>
+                  {a}
                 </span>
               ))}
-            </div>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                to="/leaderboard"
-                className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-medium text-brand-foreground shadow-sm transition-colors hover:bg-brand/90"
-              >
-                View full leaderboard
-                <ArrowRight className="h-4 w-4" />
+            </p>
+            <p className="mt-6 max-w-[62ch] text-[15px] leading-7 text-foreground/90">
+              SkillEval profiles 3,811 open language models on 100 named skills.
+              The profiles come from a cognitive diagnosis model fitted to the
+              models' answers to 9,523 items from MATH, BBH, GPQA, MuSR and
+              IFEval.
+            </p>
+            <nav
+              className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium"
+              aria-label="Paper resources"
+            >
+              <span className="text-muted-foreground">Paper (forthcoming)</span>
+              <a href={REPO_URL} className="text-brand hover:underline">
+                Code
+              </a>
+              <a href={DATA_URL} className="text-brand hover:underline">
+                Data
+              </a>
+              <Link to="/about#cite" className="text-brand hover:underline">
+                Citation
               </Link>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent"
-              >
-                How it works
+              <Link to="/leaderboard" className="text-brand hover:underline">
+                Leaderboard
               </Link>
-            </div>
+            </nav>
           </div>
-          <div className="hidden lg:block">
-            <MatrixMosaic models={top} darkMode={darkMode} />
+          <div className="hidden shrink-0 lg:block">
+            <MatrixMosaic models={top} skills={skills} darkMode={darkMode} />
           </div>
         </section>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 pb-14">
+      <div className="page pb-14">
       {/* Compact leaderboard preview */}
       <section className="mt-12">
         <div className="flex items-baseline justify-between">
           <h2 className="text-xl font-semibold tracking-tight">
-            Top models by overall mastery
+            Top 12 models by mean mastery
           </h2>
           <Link
             to="/leaderboard"
             className="text-sm font-medium text-brand transition-colors hover:underline"
           >
-            See the full 3,811 × 100 grid →
+            Full leaderboard
           </Link>
         </div>
-        <div className="mt-4 overflow-x-auto rounded-xl border border-border bg-card">
+        <div className="mt-4 overflow-x-auto rounded-lg border border-border bg-card">
           <table className="w-full text-sm tabular">
             <thead>
-              <tr className="border-b border-border bg-surface text-left text-xs uppercase tracking-wide text-muted-foreground">
+              <tr className="border-b border-border bg-surface text-left text-xs text-muted-foreground">
                 <th className="w-12 px-3 py-2 text-center font-semibold">#</th>
                 <th className="px-3 py-2 font-semibold">Model</th>
                 <th className="hidden w-24 px-3 py-2 font-semibold md:table-cell">Family</th>
-                <th className="hidden w-20 px-3 py-2 text-right font-semibold md:table-cell">Params</th>
-                <th className="hidden w-20 px-3 py-2 text-right font-semibold sm:table-cell">Acc</th>
-                <th className="w-24 px-3 py-2 text-right font-semibold">Mean θ</th>
+                <th className="hidden w-20 px-3 py-2 text-right font-semibold md:table-cell">Size</th>
+                <th className="hidden w-24 px-3 py-2 text-right font-semibold sm:table-cell">Accuracy</th>
+                <th className="w-28 px-3 py-2 text-right font-semibold">Mean mastery</th>
                 <th className="hidden w-[120px] px-3 py-2 font-semibold sm:table-cell">Profile</th>
               </tr>
             </thead>
@@ -448,7 +355,7 @@ export function HomePage() {
                           title="Fraction of 9,523 items answered correctly"
                         >
                           {m.accuracy != null
-                            ? `${(m.accuracy * 100).toFixed(2)}%`
+                            ? `${(m.accuracy * 100).toFixed(1)}%`
                             : '—'}
                         </td>
                         <td className="px-3 py-2.5 text-right">
@@ -481,23 +388,21 @@ export function HomePage() {
           </table>
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
-          Ranked by mean θ over all 100 skills. Mastery estimates carry sampling
+          Ranked by mean mastery over all 100 skills. Mastery estimates carry sampling
           noise, so small gaps between adjacent ranks are not meaningful. All
           models are open-weights; the Other family groups models outside the
           six major families, mostly community fine-tunes and merges.
         </p>
-        <div className="mt-4 flex items-center gap-2.5 rounded-xl border border-border bg-surface px-4 py-3">
-          <GitCompareArrows className="h-4 w-4 shrink-0 text-brand" />
-          <p className="text-sm text-foreground/90">
-            Any two models, head to head:{' '}
-            <Link
-              to={comparePair ? `/compare?m=${comparePair}` : '/compare'}
-              className="font-medium text-brand hover:underline"
-            >
-              compare skill fingerprints →
-            </Link>
-          </p>
-        </div>
+        <p className="mt-3 text-sm text-foreground/90">
+          To see two or three models side by side, open{' '}
+          <Link
+            to={comparePair ? `/compare?m=${comparePair}` : '/compare'}
+            className="font-medium text-brand hover:underline"
+          >
+            Compare
+          </Link>
+          .
+        </p>
       </section>
 
       {/* How it works */}
@@ -509,7 +414,7 @@ export function HomePage() {
             to="/about"
             className="text-sm font-medium text-brand transition-colors hover:underline"
           >
-            Read the methodology →
+            Read the method
           </Link>
         </div>
       </section>

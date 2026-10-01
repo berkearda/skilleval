@@ -29,6 +29,8 @@ export interface Skill {
   alpha_mean: number
   theta_variance_across_LLMs: number
   example_items: ExampleItem[]
+  /** Items needing this skill, per benchmark (scripts/build_site_data.py). */
+  items_by_benchmark?: Record<string, number>
   // Optional fields present on non-English-origin clusters (e.g. skill 67).
   label_english?: string
   language?: string

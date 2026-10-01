@@ -22,9 +22,6 @@ function useDarkMode(): boolean {
   return dark
 }
 
-const kicker =
-  'text-[11px] font-medium uppercase tracking-wider text-muted-foreground'
-
 function StageCard({
   step,
   title,
@@ -44,7 +41,8 @@ function StageCard({
         </span>
         <h3 className="text-sm font-semibold text-foreground">{title}</h3>
       </div>
-      <div className="mt-3 flex flex-1 items-center justify-center">
+      {/* fixed height, so pictures and captions line up across the four cards */}
+      <div className="mt-3 flex h-[150px] items-center justify-center">
         {children}
       </div>
       <p className="mt-3 text-[12px] leading-4 text-muted-foreground">{foot}</p>
@@ -70,7 +68,7 @@ const EXAMPLE_SKILLS = [
 function ItemVisual() {
   return (
     <div className="w-full max-w-[220px] rounded-md border border-border bg-background p-2.5">
-      <div className={kicker}>MATH item #165</div>
+      <div className="text-[11px] text-muted-foreground">MATH · item #165</div>
       <p className="mt-1 font-mono text-[11px] leading-4 text-foreground">
         Find the sum of the squares of the solutions to 2x² + 4x − 1 = 0.
       </p>
@@ -193,7 +191,7 @@ export function PipelineDiagram() {
       <StageCard
         step="3"
         title="Fit the diagnostic model"
-        foot="Mastery θ is learned for every model and skill, together with the layers that turn item text into item parameters."
+        foot="Mastery is learned for every model and skill, together with the layers that turn item text into item parameters."
       >
         <ModelVisual />
       </StageCard>

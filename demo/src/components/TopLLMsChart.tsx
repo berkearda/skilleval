@@ -46,7 +46,7 @@ export function TopLLMsChart({ models, skillId, darkMode }: TopLLMsChartProps) {
             {m.name}
           </Link>
           <span className="tabular text-right font-mono text-xs text-foreground sm:order-4">
-            {theta.toFixed(3)}
+            {theta.toFixed(2)}
           </span>
           <div className="relative order-last col-span-2 col-start-2 h-2.5 rounded-full bg-muted sm:order-3 sm:col-span-1 sm:col-start-auto">
             <div
