@@ -48,20 +48,16 @@ export function TablePage() {
   const darkMode = useDarkMode()
 
   return (
-    // Subtract header (~65px) and footer (~52px) so the table fills the
-    // remaining viewport without forcing page-level vertical scroll.
-    <div className="page flex h-[calc(100vh-61px)] flex-col overflow-hidden pb-4">
-      <div className="pb-2 pt-6">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Leaderboard</h1>
-          </div>
-          <p className="text-sm text-muted-foreground tabular">
+    // Fills the space the shell leaves under the header (App.tsx); only the
+    // table scrolls.
+    <div className="page flex min-h-0 flex-1 flex-col pb-4">
+      <div className="pt-6">
+        <h1 className="text-2xl font-semibold tracking-tight">Leaderboard</h1>
+          <p className="mt-1 text-sm text-muted-foreground tabular">
             {models.length > 0 && skills.length > 0
-              ? `${models.length.toLocaleString()} models · ${skills.length} skills · fixed snapshot of the paper's model`
-              : "3,811 models · 100 skills · fixed snapshot of the paper's model"}
+              ? `Mastery of ${models.length.toLocaleString()} models on ${skills.length} skills, from 0 to 1. A fixed snapshot of the paper's model.`
+              : "Mastery of 3,811 models on 100 skills, from 0 to 1. A fixed snapshot of the paper's model."}
           </p>
-        </div>
       </div>
 
       {error ? (

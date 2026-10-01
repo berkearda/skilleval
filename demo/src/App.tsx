@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 
@@ -22,12 +22,20 @@ function PageFallback() {
   )
 }
 
-function App() {
+function Shell() {
+  // The leaderboard fills the window and scrolls inside its table, so the page
+  // itself never moves (and the title cannot slide under the header).
+  const fill = useLocation().pathname === '/leaderboard'
   return (
-    <BrowserRouter basename="/skilleval">
-      <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <div
+        className={
+          fill
+            ? 'flex h-[100dvh] flex-col overflow-hidden bg-background text-foreground'
+            : 'flex min-h-screen flex-col bg-background text-foreground'
+        }
+      >
         <Header />
-        <main className="flex-1">
+        <main className={fill ? 'flex min-h-0 flex-1 flex-col' : 'flex-1'}>
           <Suspense fallback={<PageFallback />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -43,8 +51,15 @@ function App() {
             </Routes>
           </Suspense>
         </main>
-        <Footer />
+        {fill ? null : <Footer />}
       </div>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter basename="/skilleval">
+      <Shell />
     </BrowserRouter>
   )
 }

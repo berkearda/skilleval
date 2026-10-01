@@ -1,12 +1,8 @@
-import { Search, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Check, ChevronDown, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import {
-  FAMILY_LIST,
-  TIER_LIST,
-  getFamilyColor,
-} from '@/lib/colors'
+import { FAMILY_LIST, TIER_LIST, getFamilyColor } from '@/lib/colors'
 
-type Density = 'compact' | 'regular' | 'relaxed'
 type ValueMode = 'abs' | 'rel'
 
 interface ModelFiltersProps {
@@ -18,60 +14,112 @@ interface ModelFiltersProps {
   onToggleTier: (tier: string) => void
   visibleCount: number
   totalCount: number
-  density: Density
-  onDensityChange: (d: Density) => void
   valueMode: ValueMode
   onValueModeChange: (m: ValueMode) => void
   onClearAll: () => void
 }
 
-function DensityControl({
-  value,
-  onChange,
+// The size tiers as they occur in the data (parameters in billions).
+const TIER_HINT: Record<string, string> = {
+  Small: 'under 4B',
+  Mid: '7B to 14B',
+  Large: '27B and up',
+  Other: 'size unknown or in between',
+}
+
+/** A button that opens a short checklist; several options can be ticked. */
+function MultiSelect({
+  label,
+  options,
+  selected,
+  onToggle,
+  hint,
+  dot,
 }: {
-  value: Density
-  onChange: (d: Density) => void
+  label: string
+  options: readonly string[]
+  selected: Set<string>
+  onToggle: (o: string) => void
+  hint?: Record<string, string>
+  dot?: (o: string) => string
 }) {
-  const opts: Array<[Density, string]> = [
-    ['compact', 'Compact'],
-    ['regular', 'Regular'],
-    ['relaxed', 'Relaxed'],
-  ]
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onDown = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  const summary =
+    selected.size === 0 ? 'All' : selected.size === 1 ? [...selected][0] : `${selected.size} selected`
+
   return (
-    <div className="inline-flex items-center rounded-md border border-border p-0.5">
-      {opts.map(([v, label]) => (
-        <button
-          key={v}
-          type="button"
-          onClick={() => onChange(v)}
-          aria-pressed={value === v}
-          className={cn(
-            'rounded px-2.5 py-1 text-xs font-medium transition-colors duration-150',
-            value === v
-              ? 'bg-surface-elevated text-foreground'
-              : 'text-muted-foreground hover:text-foreground'
-          )}
-        >
-          {label}
-        </button>
-      ))}
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className={cn(
+          'inline-flex h-9 items-center gap-1.5 rounded-md border border-input bg-background px-3 text-sm transition-colors hover:bg-surface-elevated',
+          selected.size > 0 && 'border-brand/60'
+        )}
+      >
+        <span className="text-muted-foreground">{label}:</span>
+        <span className="text-foreground">{summary}</span>
+        <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
+      </button>
+      {open ? (
+        <div className="absolute left-0 top-full z-40 mt-1 min-w-[13rem] rounded-md border border-border bg-popover py-1 shadow-md">
+          {options.map((o) => {
+            const on = selected.has(o)
+            return (
+              <button
+                key={o}
+                type="button"
+                onClick={() => onToggle(o)}
+                className="flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm hover:bg-accent"
+              >
+                <span
+                  className={cn(
+                    'flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border',
+                    on ? 'border-brand bg-brand text-brand-foreground' : 'border-input'
+                  )}
+                >
+                  {on ? <Check className="h-3 w-3" /> : null}
+                </span>
+                {dot ? (
+                  <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: dot(o) }} />
+                ) : null}
+                <span className="text-foreground">{o}</span>
+                {hint?.[o] ? <span className="ml-auto pl-3 text-xs text-muted-foreground">{hint[o]}</span> : null}
+              </button>
+            )
+          })}
+        </div>
+      ) : null}
     </div>
   )
 }
 
-function ValueModeControl({
-  value,
-  onChange,
-}: {
-  value: ValueMode
-  onChange: (m: ValueMode) => void
-}) {
+function ValueModeControl({ value, onChange }: { value: ValueMode; onChange: (m: ValueMode) => void }) {
   const opts: Array<[ValueMode, string, string]> = [
-    ['abs', 'Absolute', 'Raw mastery theta in [0, 1]'],
-    ['rel', 'Relative', 'Theta minus the population mean on each skill'],
+    ['abs', 'Mastery', 'Mastery on each skill, from 0 to 1'],
+    ['rel', 'vs. average', 'Mastery minus the average of all models on that skill'],
   ]
   return (
-    <div className="inline-flex items-center rounded-md border border-border p-0.5">
+    <div className="inline-flex h-9 items-center rounded-md border border-input p-0.5">
       {opts.map(([v, label, hint]) => (
         <button
           key={v}
@@ -80,10 +128,8 @@ function ValueModeControl({
           aria-pressed={value === v}
           title={hint}
           className={cn(
-            'rounded px-2.5 py-1 text-xs font-medium transition-colors duration-150',
-            value === v
-              ? 'bg-brand text-brand-foreground'
-              : 'text-muted-foreground hover:text-foreground'
+            'h-full rounded px-2.5 text-sm transition-colors duration-150',
+            value === v ? 'bg-surface-elevated font-medium text-foreground' : 'text-muted-foreground hover:text-foreground'
           )}
         >
           {label}
@@ -93,36 +139,7 @@ function ValueModeControl({
   )
 }
 
-function FilterChip({
-  label,
-  color,
-  onRemove,
-}: {
-  label: string
-  color?: string
-  onRemove: () => void
-}) {
-  return (
-    <span
-      className="inline-flex items-center gap-1 rounded-full border border-border bg-surface px-2 py-0.5"
-      style={color ? { borderColor: color } : undefined}
-    >
-      {color && (
-        <span className="h-2 w-2 rounded-full" style={{ backgroundColor: color }} />
-      )}
-      <span className="text-foreground">{label}</span>
-      <button
-        type="button"
-        onClick={onRemove}
-        aria-label={`Remove ${label} filter`}
-        className="text-muted-foreground hover:text-foreground"
-      >
-        <X className="h-3 w-3" />
-      </button>
-    </span>
-  )
-}
-
+/** One row of controls: search, family, size, value mode, and the count. */
 export function ModelFilters({
   search,
   onSearchChange,
@@ -132,129 +149,47 @@ export function ModelFilters({
   onToggleTier,
   visibleCount,
   totalCount,
-  density,
-  onDensityChange,
   valueMode,
   onValueModeChange,
   onClearAll,
 }: ModelFiltersProps) {
-  const hasAnyFilter =
-    search.trim() !== '' || selectedFamilies.size > 0 || selectedTiers.size > 0
+  const hasAnyFilter = search.trim() !== '' || selectedFamilies.size > 0 || selectedTiers.size > 0
 
   return (
-    <div className="bg-background">
-      {/* Row 1: controls */}
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 py-3">
-        {/* Search */}
-        <div className="relative w-64">
-          <Search
-            className="pointer-events-none absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
-            aria-hidden
-          />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search model..."
-            className="h-9 w-full rounded-md border border-input bg-background pl-8 pr-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-          />
-        </div>
-
-        {/* Family chips */}
-        <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-xs font-medium text-muted-foreground">
-            Family
-          </span>
-          {FAMILY_LIST.map((fam) => {
-            const active = selectedFamilies.has(fam)
-            const color = getFamilyColor(fam)
-            return (
-              <button
-                key={fam}
-                type="button"
-                onClick={() => onToggleFamily(fam)}
-                className={cn(
-                  'h-7 rounded-full border px-2.5 text-xs font-medium transition-colors',
-                  active
-                    ? 'text-white'
-                    : 'border-border bg-background text-foreground hover:bg-accent'
-                )}
-                style={
-                  active
-                    ? { backgroundColor: color, borderColor: color }
-                    : undefined
-                }
-                aria-pressed={active}
-              >
-                {fam}
-              </button>
-            )
-          })}
-        </div>
-
-        {/* Tier checkboxes */}
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="text-xs font-medium text-muted-foreground">
-            Tier
-          </span>
-          {TIER_LIST.map((tier) => {
-            const checked = selectedTiers.has(tier)
-            return (
-              <label
-                key={tier}
-                className="flex cursor-pointer select-none items-center gap-1.5 text-sm"
-              >
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  onChange={() => onToggleTier(tier)}
-                  className="h-4 w-4 rounded border-input accent-foreground"
-                />
-                <span>{tier}</span>
-              </label>
-            )
-          })}
-        </div>
-
-        {/* Value mode + density controls */}
-        <div className="ml-auto flex items-center gap-2">
-          <ValueModeControl value={valueMode} onChange={onValueModeChange} />
-          <DensityControl value={density} onChange={onDensityChange} />
-        </div>
+    <div className="flex flex-wrap items-center gap-2 py-3">
+      <div className="relative w-full sm:w-64">
+        <Search
+          className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+          aria-hidden
+        />
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => onSearchChange(e.target.value)}
+          placeholder="Search models"
+          className="h-9 w-full rounded-md border border-input bg-background pl-8 pr-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+        />
       </div>
-
-      {/* Row 2: applied-filter chip strip + count */}
-      <div className="flex flex-wrap items-center gap-1.5 border-t border-border bg-background py-2 text-xs">
-        <span className="text-muted-foreground tabular">
-          {visibleCount.toLocaleString()} of {totalCount.toLocaleString()} models
-        </span>
-        {hasAnyFilter && <span className="text-border">·</span>}
-        {search.trim() && (
-          <FilterChip
-            label={`Search: ${search.trim()}`}
-            onRemove={() => onSearchChange('')}
-          />
-        )}
-        {[...selectedFamilies].map((f) => (
-          <FilterChip
-            key={f}
-            label={f}
-            color={getFamilyColor(f)}
-            onRemove={() => onToggleFamily(f)}
-          />
-        ))}
-        {[...selectedTiers].map((t) => (
-          <FilterChip key={t} label={t} onRemove={() => onToggleTier(t)} />
-        ))}
-        {hasAnyFilter && (
-          <button
-            type="button"
-            onClick={onClearAll}
-            className="ml-1 rounded px-1.5 py-0.5 text-muted-foreground hover:text-foreground"
-          >
-            Clear all
+      <MultiSelect
+        label="Family"
+        options={FAMILY_LIST}
+        selected={selectedFamilies}
+        onToggle={onToggleFamily}
+        dot={getFamilyColor}
+      />
+      <MultiSelect label="Size" options={TIER_LIST} selected={selectedTiers} onToggle={onToggleTier} hint={TIER_HINT} />
+      <ValueModeControl value={valueMode} onChange={onValueModeChange} />
+      <div className="ml-auto flex items-center gap-3 text-sm text-muted-foreground">
+        {hasAnyFilter ? (
+          <button type="button" onClick={onClearAll} className="text-brand hover:underline">
+            Clear filters
           </button>
-        )}
+        ) : null}
+        <span className="tabular">
+          {visibleCount === totalCount
+            ? `${totalCount.toLocaleString()} models`
+            : `${visibleCount.toLocaleString()} of ${totalCount.toLocaleString()} models`}
+        </span>
       </div>
     </div>
   )
