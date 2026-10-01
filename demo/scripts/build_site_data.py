@@ -14,6 +14,8 @@ Run from the repository root, after `python tools/download_data.py`:
    plain text), nor is any item that shares a 30-character passage with a GPQA prompt; MATH items with
    Asymptote drawings are skipped. Up to three items per skill.
 
+   Each skill also gets items_by_benchmark: how many of the items needing it come from each benchmark.
+
 2. Weak-beats-strong (public/data/weak_beats_strong.json): the held-out items that some model with
    at most 13B parameters answers while the strongest single model fails, overall and per skill.
    Same split, strongest model, size rule and 10-item minimum as the paper's figure
@@ -189,6 +191,11 @@ def main():
         chosen = (shown + [int(i) for i in pool])[:PER_SKILL]
         s["example_items"] = [{"item_idx": int(i), "benchmark": items[i]["benchmark"],
                                "subtask": items[i]["subtask"], "text": texts[i]} for i in chosen]
+        need = np.where(Q[:, k] > 0)[0]
+        counts = {}
+        for i in need:
+            counts[items[i]["benchmark"]] = counts.get(items[i]["benchmark"], 0) + 1
+        s["items_by_benchmark"] = dict(sorted(counts.items(), key=lambda kv: -kv[1]))
     skills_path.write_text(json.dumps(skills, ensure_ascii=False))  # same layout as before: one line
     n = sum(len(s["example_items"]) for s in skills)
     print(f"example items: {n} across {sum(1 for s in skills if s['example_items'])} skills "
