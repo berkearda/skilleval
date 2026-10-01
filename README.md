@@ -11,8 +11,9 @@ route each question to a cheaper model that can answer it, and to profile new mo
 ![Overview of SkillEval](assets/overview.png)
 
 - **Demo website:** source in [`demo/`](demo/); not online yet
-- **Skill list, Q-matrix and the list of evaluated LLMs:** in [`release/`](release/); the trained model and the per-LLM
-  mastery profiles will be released with the paper
+- **Skill list, Q-matrix and the list of evaluated LLMs:** in [`release/`](release/)
+- **Skill profiles of all 3,811 LLMs:** in [`demo/public/data/theta_matrix.json`](demo/public/data/theta_matrix.json);
+  the trained model will be released with the paper
 - **Paper:** forthcoming
 
 ## Repository layout
@@ -73,8 +74,9 @@ from the Hugging Face Hub at a pinned revision, checks their SHA-256 and writes 
 | `qmatrix_v2_K100.npy` | The Q-matrix |
 
 These are the files the paper's model was trained on. The Q-matrix is also in `release/qmatrix_K100.csv`: one
-row per item with the ids of its skills (0 to 99, as in `skill_list.csv`). The trained model and the per-LLM
-mastery profiles will be released with the paper.
+row per item with the ids of its skills (0 to 99, as in `skill_list.csv`). The mastery profile of each LLM over the
+100 skills, from the main model, is in `demo/public/data/theta_matrix.json`. The trained model will be released with
+the paper.
 
 Files that quote GPQA questions are not included, because the GPQA authors ask that its questions not be
 posted in plain text. The human-evaluation sheets in `cdm_exploration/experiments/human_eval/` keep the
