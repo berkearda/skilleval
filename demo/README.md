@@ -1,7 +1,8 @@
 # SkillEval demo site
 
 Interactive view of the SkillEval skill profiles: a model-by-skill table, a page per skill and per model,
-and a comparison view. The site is not online yet.
+and a comparison view. It is live at https://berkearda.github.io/skilleval/; every push to `main` that changes
+`demo/` publishes it again (`.github/workflows/deploy-demo.yml`).
 
 ## Data
 

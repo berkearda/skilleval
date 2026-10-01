@@ -10,7 +10,7 @@ route each question to a cheaper model that can answer it, and to profile new mo
 
 ![Overview of SkillEval](assets/overview.png)
 
-- **Demo website:** source in [`demo/`](demo/); not online yet
+- **Demo website:** [berkearda.github.io/skilleval](https://berkearda.github.io/skilleval/) (source in [`demo/`](demo/))
 - **Skill list, Q-matrix and the list of evaluated LLMs:** in [`release/`](release/)
 - **Skill profiles of all 3,811 LLMs:** in [`demo/public/data/theta_matrix.json`](demo/public/data/theta_matrix.json);
   the trained model will be released with the paper
