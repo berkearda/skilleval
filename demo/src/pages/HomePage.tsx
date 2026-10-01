@@ -144,7 +144,6 @@ function MatrixMosaic({
     if (reduced || !hasData) return
     let alive = true
     let t: ReturnType<typeof setTimeout>
-    setResolved(false)
     const step = (i: number) => {
       if (!alive) return
       if (i < NOISE_TICKS) {
@@ -222,7 +221,7 @@ function MatrixMosaic({
           className="absolute inset-0 whitespace-nowrap transition-opacity duration-500"
           style={{ opacity: resolved ? 0 : 1 }}
         >
-          raw right-or-wrong responses streaming in
+          simulated right-or-wrong answers arriving
         </span>
         <span
           className="absolute inset-0 flex items-center justify-end gap-2 whitespace-nowrap transition-opacity duration-500"
@@ -231,7 +230,10 @@ function MatrixMosaic({
           resolved: a slice of the real mastery matrix
           <button
             type="button"
-            onClick={() => setRun((n) => n + 1)}
+            onClick={() => {
+              setResolved(false)
+              setRun((n) => n + 1)
+            }}
             className="pointer-events-auto text-muted-foreground transition-colors hover:text-brand"
             aria-label="Replay the animation"
             title="Replay"
@@ -363,17 +365,17 @@ export function HomePage() {
             See the full 3,811 × 100 grid →
           </Link>
         </div>
-        <div className="mt-4 overflow-hidden rounded-xl border border-border bg-card">
+        <div className="mt-4 overflow-x-auto rounded-xl border border-border bg-card">
           <table className="w-full text-sm tabular">
             <thead>
               <tr className="border-b border-border bg-surface text-left text-xs uppercase tracking-wide text-muted-foreground">
                 <th className="w-12 px-3 py-2 text-center font-semibold">#</th>
                 <th className="px-3 py-2 font-semibold">Model</th>
-                <th className="w-24 px-3 py-2 font-semibold">Family</th>
-                <th className="w-20 px-3 py-2 text-right font-semibold">Params</th>
-                <th className="w-20 px-3 py-2 text-right font-semibold">Acc</th>
+                <th className="hidden w-24 px-3 py-2 font-semibold md:table-cell">Family</th>
+                <th className="hidden w-20 px-3 py-2 text-right font-semibold md:table-cell">Params</th>
+                <th className="hidden w-20 px-3 py-2 text-right font-semibold sm:table-cell">Acc</th>
                 <th className="w-24 px-3 py-2 text-right font-semibold">Mean θ</th>
-                <th className="w-[120px] px-3 py-2 font-semibold">Profile</th>
+                <th className="hidden w-[120px] px-3 py-2 font-semibold sm:table-cell">Profile</th>
               </tr>
             </thead>
             <tbody>
@@ -408,10 +410,10 @@ export function HomePage() {
                             </span>
                           )}
                         </td>
-                        <td className="px-3 py-2.5">
+                        <td className="max-w-[11rem] px-3 py-2.5 sm:max-w-none">
                           <Link
                             to={`/model/${m.id}`}
-                            className="flex items-center gap-2 font-medium transition-colors hover:text-brand"
+                            className="flex min-w-0 items-center gap-2 font-medium transition-colors hover:text-brand"
                             title={`Open the model page for ${m.name}`}
                           >
                             <span
@@ -421,7 +423,7 @@ export function HomePage() {
                             <span className="truncate">{m.name}</span>
                           </Link>
                         </td>
-                        <td className="px-3 py-2.5">
+                        <td className="hidden px-3 py-2.5 md:table-cell">
                           <span
                             className="inline-flex h-5 items-center rounded-full border px-2 text-[10px] font-semibold"
                             style={{
@@ -438,11 +440,11 @@ export function HomePage() {
                             {m.family}
                           </span>
                         </td>
-                        <td className="px-3 py-2.5 text-right font-mono text-xs">
+                        <td className="hidden px-3 py-2.5 text-right font-mono text-xs md:table-cell">
                           {formatParams(m.params)}
                         </td>
                         <td
-                          className="px-3 py-2.5 text-right font-mono text-xs"
+                          className="hidden px-3 py-2.5 text-right font-mono text-xs sm:table-cell"
                           title="Fraction of 9,523 items answered correctly"
                         >
                           {m.accuracy != null
@@ -463,9 +465,9 @@ export function HomePage() {
                             {m.meanTheta.toFixed(3)}
                           </span>
                         </td>
-                        <td className="px-3 py-2.5">
+                        <td className="hidden px-3 py-2.5 sm:table-cell">
                           <Link
-                            to="/leaderboard"
+                            to={`/model/${m.id}`}
                             title="100-skill mastery profile"
                             className="inline-block"
                           >
@@ -482,8 +484,7 @@ export function HomePage() {
           Ranked by mean θ over all 100 skills. Mastery estimates carry sampling
           noise, so small gaps between adjacent ranks are not meaningful. All
           models are open-weights; the Other family groups models outside the
-          six major families, mostly community fine-tunes and merges. Snapshot
-          2026-05-22.
+          six major families, mostly community fine-tunes and merges.
         </p>
         <div className="mt-4 flex items-center gap-2.5 rounded-xl border border-border bg-surface px-4 py-3">
           <GitCompareArrows className="h-4 w-4 shrink-0 text-brand" />

@@ -46,10 +46,7 @@ export function useSkillEvalData(): SkillEvalData {
 
   useEffect(() => {
     let cancelled = false
-    if (cachedModels && cachedSkills) {
-      setLoading(false)
-      return
-    }
+    if (cachedModels && cachedSkills) return
     loadAll()
       .then(({ models, skills }) => {
         if (cancelled) return

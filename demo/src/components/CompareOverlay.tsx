@@ -1,14 +1,14 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { GitCompareArrows, X } from 'lucide-react'
 import type { Model, Skill } from '@/lib/types'
 import { displaySkillLabel } from '@/lib/labels'
 import { ModelFingerprint } from '@/components/ModelFingerprint'
+import { COMPARE_COLORS } from '@/lib/compare'
 
 // Compare 2-3 selected models: side-by-side fingerprints, a lead summary,
 // and the skills where the selection diverges most, as 0-1 dot tracks.
 
-export const COMPARE_COLORS = ['hsl(221 70% 50%)', '#D55E00', '#009E73']
 
 export function CompareTray({
   models,
@@ -117,8 +117,8 @@ export function CompareView({
 
       {/* fingerprints */}
       <div
-        className="mt-4 grid gap-4"
-        style={{ gridTemplateColumns: `repeat(${models.length}, 1fr)` }}
+        className="mt-4 grid gap-4 sm:[grid-template-columns:var(--cols)]"
+        style={{ '--cols': `repeat(${models.length}, minmax(0, 1fr))` } as React.CSSProperties}
       >
         {models.map((m, i) => (
           <div
@@ -210,9 +210,7 @@ export function CompareModal({
   darkMode: boolean
   onClose: () => void
 }) {
-  const [mounted, setMounted] = useState(false)
   useEffect(() => {
-    setMounted(true)
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
@@ -228,16 +226,13 @@ export function CompareModal({
       aria-label="Model comparison"
     >
       <div
-        className="absolute inset-0 bg-black/45 backdrop-blur-[2px] transition-opacity"
-        style={{ opacity: mounted ? 1 : 0 }}
+        className="absolute inset-0 bg-black/45 backdrop-blur-[2px]"
+        style={{ animation: 'fadein 200ms ease-out' }}
         onClick={onClose}
       />
       <div
-        className="relative max-h-[88vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-border bg-card p-6 shadow-2xl transition-all duration-200"
-        style={{
-          opacity: mounted ? 1 : 0,
-          transform: mounted ? 'translateY(0)' : 'translateY(10px)',
-        }}
+        className="relative max-h-[88vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-border bg-card p-6 shadow-2xl"
+        style={{ animation: 'riseup 200ms ease-out' }}
       >
         <div className="flex items-start justify-between">
           <div>

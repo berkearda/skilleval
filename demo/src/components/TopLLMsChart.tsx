@@ -1,14 +1,5 @@
 import { useMemo } from 'react'
-import {
-  Bar,
-  BarChart,
-  Cell,
-  LabelList,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts'
+import { Link } from 'react-router-dom'
 import type { Model } from '@/lib/types'
 import { getMasteryColor } from '@/lib/colors'
 
@@ -18,118 +9,53 @@ interface TopLLMsChartProps {
   darkMode: boolean
 }
 
-interface ChartRow {
-  name: string
-  displayName: string
-  theta: number
-  family: string
-  tier: string
-  params: number | null
-}
-
-function truncate(s: string, n: number): string {
-  if (s.length <= n) return s
-  return `${s.slice(0, n - 1)}…`
-}
-
 function formatParams(p: number | null): string {
-  if (p == null) return 'n/a'
-  if (p >= 1_000) return `${(p / 1_000).toFixed(1)}B params`
-  return `${p}M params`
+  if (p == null) return ''
+  if (p >= 1) return `${p.toFixed(p >= 10 ? 0 : 1)}B`
+  return `${(p * 1000).toFixed(0)}M`
 }
 
+/** The ten models with the highest mastery on one skill, as bars on the full
+ * 0-1 scale: near-identical values should look near-identical. Plain HTML, so
+ * it stays readable on a phone. */
 export function TopLLMsChart({ models, skillId, darkMode }: TopLLMsChartProps) {
-  const data = useMemo<ChartRow[]>(() => {
-    const scored = models
-      .map((m) => ({
-        name: m.name,
-        displayName: truncate(m.name, 36),
-        theta: m.theta?.[skillId] ?? 0,
-        family: m.family,
-        tier: m.tier,
-        params: m.params,
-      }))
-      .sort((a, b) => b.theta - a.theta)
-      .slice(0, 10)
-    // Recharts vertical bar charts render top-to-bottom in array order.
-    // We want highest at top, so keep descending order.
-    return scored
-  }, [models, skillId])
-
-  const axisColor = darkMode ? '#94a3b8' : '#64748b'
-  const gridColor = darkMode ? '#1f2937' : '#e2e8f0'
+  const rows = useMemo(
+    () =>
+      models
+        .map((m) => ({ m, theta: m.theta?.[skillId] ?? 0 }))
+        .sort((a, b) => b.theta - a.theta)
+        .slice(0, 10),
+    [models, skillId]
+  )
 
   return (
-    <div className="h-[420px] w-full">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          layout="vertical"
-          data={data}
-          margin={{ top: 12, right: 56, left: 8, bottom: 12 }}
-          barCategoryGap={6}
+    <ol className="space-y-2.5 sm:space-y-1.5">
+      {rows.map(({ m, theta }, i) => (
+        <li
+          key={m.id}
+          className="grid grid-cols-[1.5rem_minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 text-sm sm:grid-cols-[1.5rem_minmax(0,17rem)_minmax(0,1fr)_3.5rem]"
         >
-          <XAxis
-            type="number"
-            domain={[0, 1]}
-            tickFormatter={(v: number) => v.toFixed(1)}
-            stroke={axisColor}
-            tick={{ fill: axisColor, fontSize: 11 }}
-          />
-          <YAxis
-            type="category"
-            dataKey="displayName"
-            width={260}
-            stroke={axisColor}
-            tick={{ fill: axisColor, fontSize: 11 }}
-            interval={0}
-          />
-          <Tooltip
-            cursor={{ fill: gridColor, opacity: 0.4 }}
-            contentStyle={{
-              backgroundColor: darkMode ? '#0f172a' : '#ffffff',
-              border: `1px solid ${gridColor}`,
-              borderRadius: 6,
-              fontSize: 12,
-              color: darkMode ? '#f8fafc' : '#0f172a',
-            }}
-            labelStyle={{ color: darkMode ? '#f8fafc' : '#0f172a' }}
-            formatter={((value: unknown, _name: unknown, item: unknown) => {
-              const row = (item as { payload?: ChartRow } | undefined)?.payload
-              const num = typeof value === 'number' ? value : Number(value)
-              return [
-                `θ = ${Number.isFinite(num) ? num.toFixed(3) : '—'}`,
-                row
-                  ? `${row.family} · ${row.tier} · ${formatParams(row.params)}`
-                  : '',
-              ] as [string, string]
-            }) as never}
-            labelFormatter={((_label: unknown, payload: unknown) => {
-              const arr = payload as Array<{ payload?: ChartRow }> | undefined
-              return arr?.[0]?.payload?.name ?? ''
-            }) as never}
-          />
-          <Bar dataKey="theta" isAnimationActive={false}>
-            {data.map((row, i) => (
-              // Absolute ramp color: near-identical thetas must look
-              // near-identical, not stretched across the whole scale.
-              <Cell key={i} fill={getMasteryColor(row.theta, darkMode)} />
-            ))}
-            <LabelList
-              dataKey="theta"
-              position="right"
-              formatter={(v: unknown) => {
-                if (typeof v !== 'number') return ''
-                return v.toFixed(3)
-              }}
-              style={{
-                fill: darkMode ? '#e2e8f0' : '#0f172a',
-                fontSize: 11,
-                fontVariantNumeric: 'tabular-nums',
-              }}
+          <span className="tabular text-right font-mono text-xs text-muted-foreground sm:order-1">
+            {i + 1}
+          </span>
+          <Link
+            to={`/model/${m.id}`}
+            className="truncate text-foreground transition-colors hover:text-brand sm:order-2"
+            title={`${m.name}${m.params != null ? ` · ${formatParams(m.params)}` : ''} · ${m.family}`}
+          >
+            {m.name}
+          </Link>
+          <span className="tabular text-right font-mono text-xs text-foreground sm:order-4">
+            {theta.toFixed(3)}
+          </span>
+          <div className="relative order-last col-span-2 col-start-2 h-2.5 rounded-full bg-muted sm:order-3 sm:col-span-1 sm:col-start-auto">
+            <div
+              className="absolute inset-y-0 left-0 rounded-full"
+              style={{ width: `${theta * 100}%`, backgroundColor: getMasteryColor(theta, darkMode) }}
             />
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+          </div>
+        </li>
+      ))}
+    </ol>
   )
 }

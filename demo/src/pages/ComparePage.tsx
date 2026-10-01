@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom'
 import { Plus, Search, X } from 'lucide-react'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import { usePageTitle } from '@/hooks/usePageTitle'
-import { COMPARE_COLORS, CompareView } from '@/components/CompareOverlay'
+import { CompareView } from '@/components/CompareOverlay'
+import { COMPARE_COLORS } from '@/lib/compare'
 import { getFamilyColor } from '@/lib/colors'
 import type { Model, Skill } from '@/lib/types'
 
@@ -200,13 +201,12 @@ export function ComparePage() {
         <>
           {/* slots */}
           <div
-            className="mt-7 grid gap-4"
-            style={{
-              gridTemplateColumns: `repeat(${Math.min(
-                MAX_MODELS,
-                selected.length + 1
-              )}, 1fr)`,
-            }}
+            className="mt-7 grid gap-4 sm:[grid-template-columns:var(--cols)]"
+            style={
+              {
+                '--cols': `repeat(${Math.min(MAX_MODELS, selected.length + 1)}, minmax(0, 1fr))`,
+              } as React.CSSProperties
+            }
           >
             {selected.map((m, i) => (
               <div
