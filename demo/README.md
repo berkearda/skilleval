@@ -10,6 +10,8 @@ and a comparison view. The site is not online yet.
 - `public/data/skills.json`: the 100 skills with the names listed in `../release/skill_list.csv`, their primary
   benchmark, item counts and up to three example items each. GPQA questions are not included, because the GPQA
   authors ask that its questions not be posted in plain text.
+- `public/data/home.json`: what the Home page shows (top 12 models, the Compare example, the grid's 14 skills), so
+  the first visit does not download the full matrix.
 - `public/data/weak_beats_strong.json`: the held-out items that some model with at most 13B parameters answers while
   the strongest single model fails, overall and per skill (the Methodology page's chart).
 - `public/figures/`: the paper's benchmark-prediction figure.

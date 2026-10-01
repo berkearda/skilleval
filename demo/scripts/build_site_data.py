@@ -16,6 +16,11 @@ Run from the repository root, after `python tools/download_data.py`:
 
    Each skill also gets items_by_benchmark: how many of the items needing it come from each benchmark.
 
+3. Home page (public/data/home.json): the 12 models with the highest mean mastery, the pair the
+   Compare link opens (that model and the best one with at most 13B parameters) and the 14 skills of the
+   grid picture, read from the site's own theta_matrix.json and skills.json. It spares the Home page the
+   full 3.6 MB matrix.
+
 2. Weak-beats-strong (public/data/weak_beats_strong.json): the held-out items that some model with
    at most 13B parameters answers while the strongest single model fails, overall and per skill.
    Same split, strongest model, size rule and 10-item minimum as the paper's figure
@@ -171,6 +176,26 @@ def weak_beats_strong(R, Q, llms):
     }
 
 
+def home_data(models, skills):
+    """What the Home page shows, computed exactly as HomePage.tsx used to compute it."""
+    means = [sum(m["theta"]) / len(m["theta"]) for m in models]
+    order = sorted(range(len(models)), key=lambda i: -means[i])  # stable, like Array.prototype.sort
+    keys = ("id", "name", "family", "tier", "params", "accuracy", "theta")
+    top = [dict({k: models[i][k] for k in keys}, meanTheta=means[i]) for i in order[:12]]
+    best_small = None
+    for m, mu in zip(models, means):
+        if m["params"] is None or m["params"] > 13:
+            continue
+        if best_small is None or mu > best_small[1]:
+            best_small = (m, mu)
+    compare = None
+    if best_small and best_small[0]["id"] != top[0]["id"]:
+        compare = f'{top[0]["id"]},{best_small[0]["id"]}'
+    label = {s["id"]: s["label"] for s in skills}
+    mosaic = [{"id": c, "label": label[c]} for c in (i * 7 + 2 for i in range(14))]
+    return {"top": top, "compare": compare, "mosaic_skills": mosaic}
+
+
 def main():
     items = json.loads((CDM / "response_matrix_v2_full_items.json").read_text())
     llms = json.loads((CDM / "response_matrix_v2_full_llms.json").read_text())
@@ -201,6 +226,11 @@ def main():
     print(f"example items: {n} across {sum(1 for s in skills if s['example_items'])} skills "
           f"(none for {sum(1 for s in skills if not s['example_items'])} skills whose items are all GPQA "
           f"or unusable)")
+
+    models = json.loads((SITE / "theta_matrix.json").read_text())
+    home = home_data(models, skills)
+    (SITE / "home.json").write_text(json.dumps(home, ensure_ascii=False))
+    print(f"home page data: top {len(home['top'])} models, compare pair {home['compare']}")
 
     wbs = weak_beats_strong(R, Q, llms)
     (SITE / "weak_beats_strong.json").write_text(json.dumps(wbs, indent=1) + "\n")
