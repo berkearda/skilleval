@@ -1,15 +1,9 @@
 import { Fragment, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useSkillEvalData } from '@/hooks/useSkillEvalData'
+import { useHomeData } from '@/hooks/useHomeData'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { AFFILIATIONS, AUTHORS, DATA_URL, PAPER_TITLE, REPO_URL } from '@/lib/citation'
-import type { Skill } from '@/lib/types'
-import {
-  getFamilyColor,
-  getMasteryColor,
-  getMasteryTextColor,
-  rgbToRgba,
-} from '@/lib/colors'
+import { getFamilyColor, getMasteryColor } from '@/lib/colors'
 
 interface RankedModel {
   id: number
@@ -110,7 +104,7 @@ function MatrixMosaic({
   darkMode,
 }: {
   models: RankedModel[]
-  skills: Skill[]
+  skills: { id: number; label: string }[]
   darkMode: boolean
 }) {
   const rows = models.slice(0, 9)
@@ -154,48 +148,13 @@ function MatrixMosaic({
 
 export function HomePage() {
   usePageTitle('SkillEval: interpretable ability profiles of LLMs')
-  const { models, skills, loading } = useSkillEvalData()
+  const { data, loading } = useHomeData()
   const darkMode = useDarkMode()
 
-  const top = useMemo<RankedModel[]>(() => {
-    return models
-      .map((m) => {
-        let sum = 0
-        for (const v of m.theta) sum += v
-        return {
-          id: m.id,
-          name: m.name,
-          family: m.family,
-          tier: m.tier,
-          params: m.params,
-          accuracy: m.accuracy,
-          theta: m.theta,
-          meanTheta: m.theta.length ? sum / m.theta.length : 0,
-        }
-      })
-      .sort((a, b) => b.meanTheta - a.meanTheta)
-      .slice(0, 12)
-  }, [models])
-
-  // Pre-seeded comparison: the strongest model vs the best one at <=13B,
-  // which is the weak-beats-strong story in one click.
-  const comparePair = useMemo(() => {
-    if (top.length === 0) return null
-    let bestSmall: RankedModel | null = null
-    for (const m of models) {
-      if (m.params == null || m.params > 13) continue
-      let sum = 0
-      for (const v of m.theta) sum += v
-      const mean = m.theta.length ? sum / m.theta.length : 0
-      if (!bestSmall || mean > bestSmall.meanTheta) {
-        bestSmall = { ...m, meanTheta: mean } as RankedModel
-      }
-    }
-    if (!bestSmall || bestSmall.id === top[0].id) return null
-    return `${top[0].id},${bestSmall.id}`
-  }, [top, models])
-
-
+  const top: RankedModel[] = data?.top ?? []
+  const skills = data?.mosaic_skills ?? []
+  // the strongest model and the best one with at most 13B parameters
+  const comparePair = data?.compare ?? null
 
   return (
     <div>
@@ -280,7 +239,6 @@ export function HomePage() {
               <tr className="border-b border-border bg-surface text-left text-xs text-muted-foreground">
                 <th className="w-12 px-3 py-2 text-center font-semibold">#</th>
                 <th className="px-3 py-2 font-semibold">Model</th>
-                <th className="hidden w-24 px-3 py-2 font-semibold md:table-cell">Family</th>
                 <th className="hidden w-20 px-3 py-2 text-right font-semibold md:table-cell">Size</th>
                 <th className="hidden w-24 px-3 py-2 text-right font-semibold sm:table-cell">Accuracy</th>
                 <th className="w-28 px-3 py-2 text-right font-semibold">Mean mastery</th>
@@ -332,23 +290,6 @@ export function HomePage() {
                             <span className="truncate">{m.name}</span>
                           </Link>
                         </td>
-                        <td className="hidden px-3 py-2.5 md:table-cell">
-                          <span
-                            className="inline-flex h-5 items-center rounded-full border px-2 text-[10px] font-semibold"
-                            style={{
-                              color: getFamilyColor(m.family),
-                              borderColor: `${getFamilyColor(m.family)}55`,
-                              backgroundColor: `${getFamilyColor(m.family)}14`,
-                            }}
-                            title={
-                              m.family === 'Other'
-                                ? 'Open-weights model outside the six major families (community fine-tunes and merges)'
-                                : `${m.family} family`
-                            }
-                          >
-                            {m.family}
-                          </span>
-                        </td>
                         <td className="hidden px-3 py-2.5 text-right font-mono text-xs md:table-cell">
                           {formatParams(m.params)}
                         </td>
@@ -360,19 +301,8 @@ export function HomePage() {
                             ? `${(m.accuracy * 100).toFixed(1)}%`
                             : '—'}
                         </td>
-                        <td className="px-3 py-2.5 text-right">
-                          <span
-                            className="inline-flex min-w-[3.5rem] justify-end rounded px-1.5 py-0.5 font-mono text-xs font-semibold"
-                            style={{
-                              backgroundColor: rgbToRgba(
-                                getMasteryColor(m.meanTheta, darkMode),
-                                0.7
-                              ),
-                              color: getMasteryTextColor(m.meanTheta, darkMode),
-                            }}
-                          >
-                            {m.meanTheta.toFixed(3)}
-                          </span>
+                        <td className="tabular px-3 py-2.5 text-right font-mono text-xs font-semibold text-foreground">
+                          {m.meanTheta.toFixed(3)}
                         </td>
                         <td className="hidden px-3 py-2.5 sm:table-cell">
                           <Link
@@ -390,10 +320,9 @@ export function HomePage() {
           </table>
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
-          Ranked by mean mastery over all 100 skills. Mastery estimates carry sampling
-          noise, so small gaps between adjacent ranks are not meaningful. All
-          models are open-weights; the Other family groups models outside the
-          six major families, mostly community fine-tunes and merges.
+          Ranked by mean mastery over all 100 skills. Mastery estimates carry
+          sampling noise, so small gaps between adjacent ranks are not
+          meaningful. All models are open-weights.
         </p>
         <p className="mt-3 text-sm text-foreground/90">
           To see two or three models side by side, open{' '}
