@@ -33,3 +33,15 @@ export interface Skill {
   label_english?: string
   language?: string
 }
+
+/** public/data/weak_beats_strong.json, written by scripts/build_site_data.py. */
+export interface WeakBeatsStrong {
+  rule: string
+  n_test_items: number
+  n_items: number
+  pct: number
+  strongest_model: string
+  n_small_models: number
+  min_test_items_per_skill: number
+  skills: { id: number; n: number; wbs: number; pct: number }[]
+}

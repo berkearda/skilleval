@@ -34,16 +34,16 @@ export function SkillStatsRow({
   return (
     <div className="flex flex-col gap-3 sm:flex-row">
       <StatCard
-        label="Items in cluster"
+        label="Items needing this skill"
         value={nItems.toLocaleString()}
-        hint={nItems === 1 ? 'singleton cluster' : undefined}
+        hint={nItems === 1 ? 'only one item' : undefined}
       />
       <StatCard
-        label="Discriminability (α mean)"
+        label="Mean discrimination α of its items"
         value={alphaMean.toFixed(3)}
       />
       <StatCard
-        label="Mastery variance across LLMs"
+        label="Mastery variance across models"
         value={thetaVariance.toFixed(4)}
       />
     </div>

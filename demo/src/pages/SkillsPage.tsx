@@ -69,9 +69,10 @@ export function SkillsPage() {
         All 100 skills
       </h1>
       <p className="mt-3 max-w-[68ch] text-[15px] leading-7 text-foreground/90">
-        The 9,523 benchmark items cluster into 100 named skills, grouped here
-        by their source benchmark and sorted by item count. Every skill links
-        to its detail page with the top-ranked models and example items.
+        Each of the 9,523 benchmark items needs one or more of these 100
+        skills. They are grouped by the benchmark most of their items come
+        from and sorted by item count. Every skill links to its page with the
+        top models and example items.
       </p>
 
       {/* search */}

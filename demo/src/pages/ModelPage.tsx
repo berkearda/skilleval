@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, ExternalLink, GitCompareArrows } from 'lucide-react'
+import { ArrowLeft, Download, ExternalLink, GitCompareArrows } from 'lucide-react'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
 import { usePageTitle } from '@/hooks/usePageTitle'
 import { displaySkillLabel } from '@/lib/labels'
@@ -11,7 +11,7 @@ import {
   getMasteryTextColor,
   rgbToRgba,
 } from '@/lib/colors'
-import type { Skill } from '@/lib/types'
+import type { Model, Skill } from '@/lib/types'
 
 function useDarkMode(): boolean {
   const [dark, setDark] = useState<boolean>(
@@ -37,6 +37,22 @@ function formatParams(p: number | null): string {
 
 const kicker =
   'text-xs font-medium uppercase tracking-wider text-muted-foreground'
+
+/** Save the model's 100-skill profile as a CSV file, built in the browser. */
+function downloadProfile(model: Model, skills: Skill[]) {
+  const cell = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v)
+  const rows = [['skill_id', 'skill_name', 'primary_benchmark', 'mastery_theta']]
+  for (const s of [...skills].sort((a, b) => a.id - b.id)) {
+    rows.push([String(s.id), s.label, s.primary_benchmark, String(model.theta[s.id])])
+  }
+  const csv = rows.map((r) => r.map(cell).join(',')).join('\n') + '\n'
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }))
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `skilleval_profile_${(model.hf_id ?? model.name).replace(/[^A-Za-z0-9._-]+/g, '_')}.csv`
+  a.click()
+  URL.revokeObjectURL(url)
+}
 
 function MetaStat({ label, value }: { label: string; value: string }) {
   return (
@@ -197,6 +213,14 @@ export function ModelPage() {
             <GitCompareArrows className="h-3.5 w-3.5" />
             Compare with...
           </Link>
+          <button
+            type="button"
+            onClick={() => downloadProfile(model, skills)}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground shadow-sm transition-colors hover:bg-surface-elevated"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Download profile (CSV)
+          </button>
         </div>
       </header>
 
@@ -221,6 +245,10 @@ export function ModelPage() {
           <h2 className="text-lg font-semibold tracking-tight">
             All {ranked.length} skills, ranked by mastery
           </h2>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Mastery θ runs from 0 to 1. It is the model's estimated level on a
+            skill, not the share of that skill's items it answered correctly.
+          </p>
           <ul className="mt-3 space-y-1">
             {ranked.map(({ skill, theta, rank }) => {
               const bg = getMasteryColor(theta, darkMode)

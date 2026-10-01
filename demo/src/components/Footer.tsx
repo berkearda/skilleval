@@ -2,9 +2,13 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Check, Copy } from 'lucide-react'
 
+// BibTeX "Last, First" names, in the paper's author order; replace the entry with
+// the arXiv one once the paper is public.
+const AUTHORS = ['Arda, Berke']
+
 const BIBTEX = `@misc{skilleval,
   title        = {SkillEval: Skill-Level Evaluation of Language Models with Cognitive Diagnosis Models},
-  author       = {Arda, Berke},
+  author       = {${AUTHORS.join(' and ')}},
   year         = {2026},
   howpublished = {\\url{https://github.com/berkearda/skilleval}},
   note         = {Code and data; paper forthcoming}
@@ -74,9 +78,24 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 border-t border-border pt-4 text-xs text-muted-foreground tabular">
-          Snapshot 2026-05-22. 3,811 models, 100 skills, 9,523 items across MATH,
-          BBH, GPQA, MuSR, IFEval.
+        <div className="mt-6 border-t border-border pt-4 text-xs leading-5 text-muted-foreground tabular">
+          Mastery profiles from the paper's main model, a fixed snapshot. Answers
+          of 3,811 models to 9,523 items from MATH, BBH, GPQA, MuSR and IFEval,
+          from the{' '}
+          <a
+            href="https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard"
+            className="underline-offset-2 hover:text-foreground hover:underline"
+          >
+            Open LLM Leaderboard
+          </a>{' '}
+          v2 via{' '}
+          <a
+            href="https://huggingface.co/datasets/linggm/RouterEval"
+            className="underline-offset-2 hover:text-foreground hover:underline"
+          >
+            RouterEval
+          </a>
+          . Code under the MIT licence.
         </div>
       </div>
     </footer>

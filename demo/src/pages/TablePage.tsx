@@ -63,8 +63,8 @@ export function TablePage() {
           </div>
           <p className="text-sm text-muted-foreground tabular">
             {models.length > 0 && skills.length > 0
-              ? `${models.length.toLocaleString()} models · ${skills.length} skills · updated 2026-05-22`
-              : '3,811 models · 100 skills · updated 2026-05-22'}
+              ? `${models.length.toLocaleString()} models · ${skills.length} skills · fixed snapshot of the paper's model`
+              : "3,811 models · 100 skills · fixed snapshot of the paper's model"}
           </p>
         </div>
       </div>

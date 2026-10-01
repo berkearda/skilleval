@@ -12,7 +12,7 @@ export function ExampleItemCard({ item }: ExampleItemCardProps) {
         <div className="min-w-0 flex-1">
           {item.subtask ? (
             <div className="text-xs uppercase tracking-wide text-muted-foreground">
-              {item.subtask}
+              {item.subtask.replace(/_/g, ' ')}
             </div>
           ) : null}
           <div className="mt-1 text-xs text-muted-foreground">

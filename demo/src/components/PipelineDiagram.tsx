@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { ArrowDown, ArrowRight } from 'lucide-react'
 import { getMasteryColor } from '@/lib/colors'
 
@@ -60,21 +61,29 @@ function Connector() {
   )
 }
 
-// Stage 1: an item with its skill tags.
+// Stage 1: a real item (MATH, item #165) with the two skills the Q-matrix gives it.
+const EXAMPLE_SKILLS = [
+  { id: 6, label: 'find values from equations' },
+  { id: 39, label: 'determine values from mathematical expressions' },
+]
+
 function ItemVisual() {
   return (
-    <div className="w-full max-w-[210px] rounded-md border border-border bg-background p-2.5">
-      <div className={kicker}>Item</div>
+    <div className="w-full max-w-[220px] rounded-md border border-border bg-background p-2.5">
+      <div className={kicker}>MATH item #165</div>
       <p className="mt-1 font-mono text-[11px] leading-4 text-foreground">
-        Solve x² − 5x + 6 = 0 for both roots.
+        Find the sum of the squares of the solutions to 2x² + 4x − 1 = 0.
       </p>
       <div className="mt-2 flex flex-wrap gap-1">
-        <span className="rounded-full bg-brand/10 px-1.5 py-0.5 text-[10px] font-medium text-brand">
-          quadratic formula
-        </span>
-        <span className="rounded-full bg-brand/10 px-1.5 py-0.5 text-[10px] font-medium text-brand">
-          symbolic algebra
-        </span>
+        {EXAMPLE_SKILLS.map((s) => (
+          <Link
+            key={s.id}
+            to={`/skill/${s.id}`}
+            className="rounded-md bg-brand/10 px-1.5 py-1 text-[10px] font-medium leading-3 text-brand hover:bg-brand/20"
+          >
+            {s.label}
+          </Link>
+        ))}
       </div>
     </div>
   )
@@ -120,17 +129,19 @@ function MatrixVisual() {
   )
 }
 
-// Stage 3: the model.
+// Stage 3: the model, as in the paper: p = sigmoid(f(alpha_j (theta_m - d_j) * q_j)).
 function ModelVisual() {
   return (
     <div className="text-center">
-      <code className="whitespace-nowrap rounded-md border border-border bg-background px-2 py-1.5 font-mono text-[10px] text-foreground">
-        p(correct) = σ(α<sub>s</sub>(θ<sub>m</sub> − β<sub>s</sub>))
+      <code className="inline-block rounded-md border border-border bg-background px-2 py-1.5 font-mono text-[10px] leading-4 text-foreground">
+        p(correct) =
+        <br />
+        σ(f(α<sub>j</sub>(θ<sub>m</sub> − d<sub>j</sub>) ⊙ q<sub>j</sub>))
       </code>
       <div className="mt-2 text-[11px] leading-4 text-muted-foreground">
-        an encoder reads the item text to set
-        <br />
-        difficulty β<sub>s</sub> and discrimination α<sub>s</sub>
+        α<sub>j</sub>, d<sub>j</sub>: item j's discrimination and per-skill
+        difficulty, from its text · q<sub>j</sub>: its skills · f: more mastery
+        never lowers p
       </div>
     </div>
   )
@@ -166,7 +177,7 @@ export function PipelineDiagram() {
       <StageCard
         step="1"
         title="Tag items with skills"
-        foot="9,523 items from MATH, BBH, GPQA, MuSR, and IFEval, clustered into 100 named skills."
+        foot="An LLM lists the skills each of the 9,523 items needs; similar skills are grouped into 100 named skills."
       >
         <ItemVisual />
       </StageCard>
@@ -174,7 +185,7 @@ export function PipelineDiagram() {
       <StageCard
         step="2"
         title="Collect responses"
-        foot="3,811 models answer every item; a held-out slice of the matrix is kept for validation."
+        foot="3,811 models answer every item of MATH, BBH, GPQA, MuSR and IFEval; 20% of the items are held out to test the predictions."
       >
         <MatrixVisual />
       </StageCard>
@@ -182,7 +193,7 @@ export function PipelineDiagram() {
       <StageCard
         step="3"
         title="Fit the diagnostic model"
-        foot="Mastery θ is learned per model and per skill, jointly with the item parameters."
+        foot="Mastery θ is learned for every model and skill, together with the layers that turn item text into item parameters."
       >
         <ModelVisual />
       </StageCard>

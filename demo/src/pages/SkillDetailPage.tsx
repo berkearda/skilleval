@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { useSkillEvalData } from '@/hooks/useSkillEvalData'
+import { usePageTitle } from '@/hooks/usePageTitle'
 import { displaySkillLabel } from '@/lib/labels'
 import { BenchmarkBadge } from '@/components/BenchmarkBadge'
 import { SkillStatsRow } from '@/components/SkillStatsRow'
@@ -50,11 +51,11 @@ function descriptionDuplicatesLabel(
 function BackLink({ className = '' }: { className?: string }) {
   return (
     <Link
-      to="/leaderboard"
+      to="/skills"
       className={`inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground ${className}`}
     >
       <ArrowLeft className="h-3.5 w-3.5" />
-      Back to leaderboard
+      All skills
     </Link>
   )
 }
@@ -127,6 +128,8 @@ export function SkillDetailPage() {
     if (!Number.isFinite(n) || n < 0 || n > 99) return null
     return n
   }, [id])
+  const titled = skillId == null ? undefined : skills.find((s) => s.id === skillId)
+  usePageTitle(titled ? `${displaySkillLabel(titled.label)} · SkillEval` : 'Skill · SkillEval')
 
   if (error) {
     return (
@@ -168,7 +171,7 @@ export function SkillDetailPage() {
       {/* Header */}
       <header className="border-b border-border pb-6">
         <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          Skill {skill.id} of 100
+          Skill #{skill.id}
         </div>
         <h1 className="mt-2 break-words text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
           {heading}
@@ -225,23 +228,20 @@ export function SkillDetailPage() {
       {/* Example items */}
       <section className="mt-10">
         <h2 className="text-lg font-semibold tracking-tight">Example items</h2>
-        {isSmallCluster ? (
+        {examples.length > 0 ? (
           <p className="mt-1 text-sm text-muted-foreground">
-            Only {examples.length} example item{examples.length === 1 ? '' : 's'}{' '}
-            available. This is a small cluster ({skill.n_items.toLocaleString()}{' '}
-            item{skill.n_items === 1 ? '' : 's'}).
+            {isSmallCluster
+              ? `This skill has only ${skill.n_items} item${skill.n_items === 1 ? '' : 's'}.`
+              : `Showing ${Math.min(examples.length, 3)} of the ${skill.n_items.toLocaleString()} items that need this skill.`}
+            {examples.length < Math.min(3, skill.n_items) ? ' GPQA questions are not shown.' : ''}
           </p>
-        ) : (
-          <p className="mt-1 text-sm text-muted-foreground">
-            Showing {Math.min(examples.length, 3)} of {skill.n_items.toLocaleString()} items in this cluster.
-          </p>
-        )}
+        ) : null}
 
         {examples.length === 0 ? (
           <div className="mt-4 rounded-md border border-dashed border-border p-6 text-sm text-muted-foreground">
             {skill.primary_benchmark === 'GPQA'
               ? 'GPQA questions are not shown: the GPQA authors ask that its questions not be posted in plain text.'
-              : 'No example items available for this cluster.'}
+              : 'No example items can be shown for this skill.'}
           </div>
         ) : (
           <div className="mt-4 flex flex-col gap-3">
